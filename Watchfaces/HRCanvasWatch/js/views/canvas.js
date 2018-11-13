@@ -754,7 +754,7 @@ define({
 			
 			if (motionSensor.isAvailable()) {
 				motionSensor.setOptions({
-					sampleInterval : 100,
+					sampleInterval : 50,
 					maxBatchCount : 1000
 				});
 				motionSensor.setChangeListener();

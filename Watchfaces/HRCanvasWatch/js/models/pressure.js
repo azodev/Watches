@@ -107,6 +107,7 @@ define({
         	var refferencePressure = 1013.25;
         	var text = '';
         	var altitude = null;
+        	var temperature = 20;
         	
         
         
@@ -160,7 +161,8 @@ define({
         }
         function updateAltitudeValue(){
         	//reference = 1007;
-			altitude = -8727 * Math.log(averagePressure / refferencePressure);
+			//altitude = -8727 * Math.log(averagePressure / refferencePressure);
+        	altitude = ((Math.pow(refferencePressure/averagePressure,1/5.257)-1)*(temperature+273.15)/0.0065);
 			if (altitude === '-0') {
 				altitude = '0';
 			}
@@ -222,6 +224,9 @@ define({
         function setReferencePressure(reff){
         	refferencePressure = reff; 
         }
+        function setTemperature(t){
+        	temperature = t;
+        }
         /**
          * Returns sensor value.
          *
@@ -271,6 +276,7 @@ define({
         	if (weatherInfo.detail) {
         		weatherInformation = weatherInfo.detail;
         		setReferencePressure (weatherInformation.main.pressure);
+        		setTemperature (weatherInformation.main.temp);
         	}
         }
         /**
