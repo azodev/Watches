@@ -1,0 +1,42 @@
+{
+   "coord":{
+      "lon":2.206042,
+      "lat":48.810603
+   },
+   "weather":[
+      {
+         "id":803,
+         "main":"Clouds",
+         "description":"broken clouds",
+         "icon":"04d"
+      }
+   ],
+   "base":"stations",
+   "main":{
+      "temp":10,
+      "pressure":1001,
+      "humidity":53,
+      "temp_min":10,
+      "temp_max":10
+   },
+   "visibility":10000,
+   "wind":{
+      "speed":4.1,
+      "deg":240
+   },
+   "clouds":{
+      "all":75
+   },
+   "dt":1540915200,
+   "sys":{
+      "type":1,
+      "id":5617,
+      "message":0.2079,
+      "country":"FR",
+      "sunrise":1540881334,
+      "sunset":1540917199
+   },
+   "id":6455391,
+   "name":"Chaville",
+   "cod":200
+}

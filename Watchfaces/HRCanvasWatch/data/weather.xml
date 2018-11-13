@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+  <coord>
+    <lon>2.2</lon>
+    <lat>48.8</lat>
+  </coord>
+  <weather>
+    <id>803</id>
+    <main>Clouds</main>
+    <description>broken clouds</description>
+    <icon>04d</icon>
+  </weather>
+  <base>stations</base>
+  <main>
+    <temp>10</temp>
+    <pressure>1001</pressure>
+    <humidity>53</humidity>
+    <temp_min>10</temp_min>
+    <temp_max>10</temp_max>
+  </main>
+  <visibility>10000</visibility>
+  <wind>
+    <speed>4.1</speed>
+    <deg>240</deg>
+  </wind>
+  <clouds>
+    <all>75</all>
+  </clouds>
+  <dt>1540915200</dt>
+  <sys>
+    <type>1</type>
+    <id>5617</id>
+    <message>0.2079</message>
+    <country>FR</country>
+    <sunrise>1540881334</sunrise>
+    <sunset>1540917199</sunset>
+  </sys>
+  <id>6455391</id>
+  <name>Chaville</name>
+  <cod>200</cod>
+</root>

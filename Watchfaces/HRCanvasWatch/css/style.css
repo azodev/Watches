@@ -1,0 +1,65 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow-y: hidden;
+}
+
+#container {
+    display: -webkit-flex;
+    -webkit-align-items: center;
+    width: 100%;
+    height: 100%
+}
+
+#canvas-layout {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+#canvas-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.particles-js-canvas-el{
+	position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+@font-face {
+    font-family: 'artill_clean_icons';
+    src: url('../data/artill_clean_icons.otf');
+}
+
+
+
+@font-face {
+    font-family: 'FutureNow';
+    src: url('../data/FutureNow.ttf');
+}
+
+@font-face {
+    font-family: 'KillTheNoise';
+    src: url('../data/KillTheNoise.otf');
+}
+
+@media (-tizen-geometric-shape: circle) {
+
+
+
+
+    .btn-apply, .btn-erase {
+        color: transparent;
+    }
+
+    .ui-popup .ui-popup-content {
+        text-align: center;
+    }
+
+
+}
