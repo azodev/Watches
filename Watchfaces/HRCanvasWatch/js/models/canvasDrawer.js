@@ -578,11 +578,13 @@ define({
 			calculateRadialGradientPosition(motionAcceleration.accelerationIncludingGravity);
 			radialGradient = context.createRadialGradient(radialGradientCoords.x, radialGradientCoords.y, 0.000, 180.000, 180.000, 180.000);
 			radialGradient.addColorStop(0.000, 'rgb(0, 0, 0)');
-			radialGradient.addColorStop(0.705, 'rgb(40, 40, 40)');
+			radialGradient.addColorStop(0.705, 'rgb(30, 30, 30)');
 			radialGradient.addColorStop(0.83, 'rgb(55, 55, 55)');
-			radialGradient.addColorStop(0.85, 'rgb(65, 65, 65)');
-			radialGradient.addColorStop(0.872, 'rgb(94, 88, 68)');
-			radialGradient.addColorStop(0.917, 'rgb(43, 43, 43)');
+			//radialGradient.addColorStop(0.85, 'rgb(65, 65, 65)');
+			radialGradient.addColorStop(0.85, 'rgb(73, 62, 48)');
+			//radialGradient.addColorStop(0.872, 'rgb(94, 88, 68)');
+			radialGradient.addColorStop(0.882, 'rgb(99, 84, 65)');
+			radialGradient.addColorStop(0.927, 'rgb(43, 43, 43)');
 			gradientLinear = context.createLinearGradient(gradientCoords.x1, gradientCoords.y1, gradientCoords.x2, gradientCoords.y2);
 			gradientLinear.addColorStop(0, "rgb(255, 210, 49)");
 			gradientLinear.addColorStop(1, "rgb(255, 153, 51)");
