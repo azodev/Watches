@@ -555,9 +555,9 @@ define({
 			};
 		}
 		function calculateGradientPosition(motionAcceleration) {
-			dx = -motionAcceleration.x * 100;
-			dy = motionAcceleration.y * 100;
-			gradientAngle = Math.atan2(dx, dy) * (180 / Math.PI) + 180; //
+			dx = -motionAcceleration.x *1000;
+			dy = motionAcceleration.y *1000;
+			gradientAngle = Math.atan2(dy, dx) * (180 / Math.PI) + 180; //
 			gradientCoords.x1 = 360 / 2 + Math.cos(gradientAngle) * maxLength * 0.5;
 			gradientCoords.y1 = 360 / 2 + Math.sin(gradientAngle) * maxLength * 0.5;
 			// the end of the gradient subtracted from the center
@@ -587,7 +587,7 @@ define({
 			radialGradient.addColorStop(0.927, 'rgb(43, 43, 43)');
 			gradientLinear = context.createLinearGradient(gradientCoords.x1, gradientCoords.y1, gradientCoords.x2, gradientCoords.y2);
 			gradientLinear.addColorStop(0, "rgb(255, 210, 49)");
-			gradientLinear.addColorStop(1, "rgb(255, 153, 51)");
+			gradientLinear.addColorStop(1, "rgb(237, 142, 47)");
 			//gradientLinear.addColorStop(0, "#69d7db");
 			//gradientLinear.addColorStop(1, "#203fc9");
 		}
