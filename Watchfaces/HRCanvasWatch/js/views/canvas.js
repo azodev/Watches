@@ -591,10 +591,10 @@ define({
 			case "Ambient":
 				// Normal -> Ambient
 				console.error('activateMode ambiant');
-				if (motionSensor.isAvailable()) {
+				if (motionSensor.isAvailable() && motionSensor.isStarted()) {
 					motionSensor.stop();
 				}
-				if (pressureSensor.isAvailable()) {
+				if (pressureSensor.isAvailable() && pressureSensor.isStarted()) {
 					pressureSensor.stop();
 				}
 				isAmbientMode = true;
@@ -606,10 +606,10 @@ define({
 				then = Date.now();
 				startTime = then;
 				frame = 0;
-				if (motionSensor.isAvailable()) {
+				if (motionSensor.isAvailable() && !motionSensor.isStarted()) {
 					motionSensor.start();
 				}
-				if (pressureSensor.isAvailable()) {
+				if (pressureSensor.isAvailable() && !pressureSensor.isStarted()) {
 					pressureSensor.start();
 				}
 				isAmbientMode = false;

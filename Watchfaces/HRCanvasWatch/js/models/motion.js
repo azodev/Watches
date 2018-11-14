@@ -96,6 +96,7 @@ define({
     			sampleInterval : 100,
     			maxBatchCount : 1000
     		};
+        	var isEnable = false;
 
 
         	
@@ -110,6 +111,7 @@ define({
          */
         function onSensorStartSuccess() {
             e.fire('start');
+            isEnable = true;
         }
 
         /**
@@ -175,9 +177,14 @@ define({
         function start() {
             motionSensor.start(onSensorStartSuccess, onSensorStartError);
             console.log( 'start motion sensor');
+            
         }
         function stop(){
         	motionSensor.stop();
+        	isEnable = false;
+        }
+        function isStarted(){
+        	return isEnable;
         }
         /**
          * Sets sensor change listener.
@@ -266,6 +273,7 @@ define({
             init: init,
             start: start,
             stop: stop,
+            isStarted : isStarted,
             isAvailable: isAvailable,
             setChangeListener: setChangeListener,
             getSensorValue: getSensorValue,

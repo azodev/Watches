@@ -108,6 +108,7 @@ define({
         	var text = '';
         	var altitude = null;
         	var temperature = 20;
+        	var isEnable = false;
         	
         
         
@@ -120,6 +121,7 @@ define({
          */
         function onSensorStartSuccess() {
             e.fire('start');
+            isEnable = true;
         }
 
         /**
@@ -197,9 +199,14 @@ define({
         function start() {
             pressureSensor.start(onSensorStartSuccess, onSensorStartError);
             console.log( 'start pressure sensor');
+            
         }
         function stop(){
         	pressureSensor.stop();
+        	isEnable = false;
+        }
+        function isStarted(){
+        	return isEnable;
         }
 
         /**
@@ -328,6 +335,7 @@ define({
             init: init,
             start: start,
             stop: stop,
+            isStarted : isStarted,
             isAvailable: isAvailable,
             setChangeListener: setChangeListener,
             getAverageSensorValue: getAverageSensorValue,
