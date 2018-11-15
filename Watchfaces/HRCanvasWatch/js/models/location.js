@@ -194,7 +194,7 @@ define({
 
 		function doFallback() {
 			//event.fire('error', 'doFallback');
-			tizen.humanactivitymonitor.start(CONTEXT_TYPE, succcessFallback, errorFallback, optionGPS);
+			locationSensor.start(CONTEXT_TYPE, succcessFallback, errorFallback, optionGPS);
 		}
 
 		function errorCallback(err) {
@@ -240,7 +240,7 @@ define({
 		 * @public
 		 */
 		function stop() {
-			tizen.humanactivitymonitor.stop(CONTEXT_TYPE);
+			locationSensor.stop(CONTEXT_TYPE);
 			console.error( 'stop location sensor');
 			if (locationWatcher !== null) {
 				navigator.geolocation.clearWatch(locationWatcher);

@@ -95,7 +95,7 @@ define({
 			context.lineWidth = width;
 			context.strokeStyle = "rgba(10, 10, 10,0.3)";
 
-			for (i = 20; i < 360; i = i + 30) {
+			for (i = 30; i < 360; i = i + 30) {
 				x = i;
 
 				if (options.motion !== null) {
@@ -136,7 +136,7 @@ define({
 			}
 			x = 0;
 			y = 0;
-			for (i = 20; i < 360; i = i + 30) {
+			for (i = 30; i < 360; i = i + 30) {
 				y = i;
 
 				// a = position du centre courbe ; b = curve horizontale b =

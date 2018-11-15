@@ -339,7 +339,6 @@ define({
 				'models.weather.found' : updateForecast,
 				'models.location.distanceChange' : onDistanceChange,
 				'views.main.triggerLocationUpdate': function() {
-					weatherFound = false;
 					onUpdateTriggered(true);
 				}
 			});

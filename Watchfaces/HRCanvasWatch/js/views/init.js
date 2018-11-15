@@ -84,7 +84,7 @@ define({
          * @private
          */
         function bindEvents() {
-            event.on({'core.systeminfo.battery.low': onLowBattery});
+            //event.on({'core.systeminfo.battery.low': onLowBattery});
             
             window.addEventListener('resize', onWindowResize);
             

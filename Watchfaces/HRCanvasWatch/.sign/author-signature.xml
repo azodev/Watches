@@ -564,7 +564,7 @@
 </Reference>
 <Reference URI="js%2Fmodels%2FcanvasDrawer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>io82LhBXXOGIdXpQZvOvZhwREwyxvE2Z5pKQgAVe4Kk=</DigestValue>
+<DigestValue>PQ09MyYI8FWc9TT5B9fuJozFbM9EmQHIaKy/0GCnMmg=</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2FheartRate.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -572,7 +572,7 @@
 </Reference>
 <Reference URI="js%2Fmodels%2Flocation.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>cNVf6hNnsVtANZLHvnw1JRjq+OLgnNY4oYkD1h7moG4=</DigestValue>
+<DigestValue>pE7IyyKGnq8JrduoRWIzVWf8/JnGDue0d57KKyfAAJQ=</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2Fmotion.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -592,7 +592,7 @@
 </Reference>
 <Reference URI="js%2Fmodels%2Fweather.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>xrRea+qQNCtKqo6nkdM8UjnnnsCwkTj4jOxM/at/Jvg=</DigestValue>
+<DigestValue>0inc0gNMlHk3iIzZxOYoEMPynjlIhPVlVuwLs+ro5Xg=</DigestValue>
 </Reference>
 <Reference URI="js%2Ftau-config.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -604,7 +604,7 @@
 </Reference>
 <Reference URI="js%2Fviews%2Finit.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>FebotawqktEmAOEf4R+VwrKh8IyOYzpWjLu9Q9yeVUg=</DigestValue>
+<DigestValue>c9PMVwJOIU5S9GIfqlYtcF/ks5VxE1TOkrp0j2zaYiQ=</DigestValue>
 </Reference>
 <Reference URI="js%2Fviews%2Fmain.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -1647,11 +1647,11 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-WvF2v2AsqiH2VyXg44YNKFzhUWYpM0vk1ebEFwOMupg6xLXDvJZ8NdeGyfkhO4cMloguDzsgrbXI
-yKyyJnqVrpiygKGpXwrO3Ge1PBkaiSmOUjQbUs8QpdOcCoX40BNKVbeBjeoGzKxq5+7sv6c4fCAC
-AECS9DBBJ6qVxqps70jIHuw+ZyVYmIsenOAMxDiU4xIE+PR+rGteSzqM2XKlwlUAf70JAfkuvvpc
-2hGjbZ3I8G/XmRk7J8zab690MzWJ1ag+zcW214+FFaX5UjmENNCdRdzd5NRlLTuxfv0gCWgXaoj2
-WhYcvQjKe5ZZ12h+yDPqzPM3mQpIuh6w3VMrEg==
+RGVUb/2PIEIEi1UpRRrqYAoq4WfKVtgXAQXV27GzTHJd89/qk0xcQs0TUFykdT029dOtDowN14x/
+tto6hDmfrwYsIxEBoB0K7o+heyh30OJh2+1Ihp7HmkzuQUqNwPdY+xi5kYdtMnbyK5JWVVeDlCg3
+3UN35HLZesWBKHPurNrBQTJJgu8fYpLNiUlfE+Fic59q38G29H0MjgeFzd6Wr7eZUDRZU7w1oaLN
+/EKKj3juU9KZ/Z3upWef88IXQutBTzk1rB8cvamDl+TssMAGUUms7t/w5R2IAzKKpC9u97k0Q5xm
+hJipFp114YCNnaHlzddFpFaX1RycVY/DrogPjQ==
 </SignatureValue>
 <KeyInfo>
 <X509Data>
