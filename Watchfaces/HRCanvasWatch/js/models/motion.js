@@ -54,7 +54,7 @@ define({
 		 * @private
 		 * @const {number}
 		 */
-		MAX_LENGTH = 7,
+		MAX_LENGTH = 30,
 
 		/**
 		 * Reference to the sensor service.
@@ -152,24 +152,24 @@ define({
 		function updateAverageMotion(currentMotion) {
 
 			try {
-				previousMotions.push(currentMotion);
+				previousMotions.push(currentMotion.accelerationIncludingGravity);
 				initialValue = 0;
 				len = previousMotions.length;
 				if (len <= MAX_LENGTH) {
 					// nothing to shift yet, recalculate whole average
 					averageMotion.accelerationIncludingGravity.x = previousMotions.reduce(function(accumulator, currentValue) {
-						return accumulator + currentValue.accelerationIncludingGravity.x;
+						return accumulator + currentValue.x;
 					},initialValue) / len;
 					averageMotion.accelerationIncludingGravity.y = previousMotions.reduce(function(accumulator, currentValue) {
-						return accumulator + currentValue.accelerationIncludingGravity.y;
+						return accumulator + currentValue.y;
 					},initialValue) / len;
 				} else {
 					// add the new item and subtract the one shifted out
 					firstElement = previousMotions.shift();
-					console.log(firstElement.accelerationIncludingGravity.x);
-					console.log(firstElement.accelerationIncludingGravity.y);
-					averageMotion.accelerationIncludingGravity.x += (currentMotion.accelerationIncludingGravity.x - firstElement.accelerationIncludingGravity.x) / len;
-					averageMotion.accelerationIncludingGravity.y += (currentMotion.accelerationIncludingGravity.y - firstElement.accelerationIncludingGravity.y) / len;
+					console.log(firstElement.x);
+					console.log(firstElement.y);
+					averageMotion.accelerationIncludingGravity.x += (currentMotion.accelerationIncludingGravity.x - firstElement.x) / len;
+					averageMotion.accelerationIncludingGravity.y += (currentMotion.accelerationIncludingGravity.y - firstElement.y) / len;
 				}
 				console.log(len);
 				console.log(averageMotion.accelerationIncludingGravity.x);
