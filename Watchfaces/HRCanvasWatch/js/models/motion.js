@@ -18,253 +18,255 @@
 
 /**
  * Sensor model.
- *
+ * 
  * @requires {@link core/event}
  * @requires {@link core/window}
  * @namespace models/motion
  * @memberof models
  */
 define({
-    name: 'models/motion',
-    requires: [
-        'core/event',
-        'core/window'
-    ],
-    def: function modelsMotion(e, window) {
-        'use strict';
+	name : 'models/motion',
+	requires : [ 'core/event', 'core/window' ],
+	def : function modelsMotion(e, window) {
+		'use strict';
 
-        /**
-         * Name of the sensor type.
-         *
-         * @private
-         * @const {string}
-         */
-        var 
-        event = e,
-        
-        SENSOR_TYPE = 'ACCELERATION',
+		/**
+		 * Name of the sensor type.
+		 * 
+		 * @private
+		 * @const {string}
+		 */
+		var event = e,
 
-            /**
-             * Error type name.
-             *
-             * @private
-             * @const {string}
-             */
-            ERROR_TYPE_NOT_SUPPORTED = 'NotSupportedError',
+		SENSOR_TYPE = 'ACCELERATION',
 
-            /**
-             * Maximum size of the previousMotions array.
-             *
-             * @private
-             * @const {number}
-             */
-            MAX_LENGTH = 7,
+		/**
+		 * Error type name.
+		 * 
+		 * @private
+		 * @const {string}
+		 */
+		ERROR_TYPE_NOT_SUPPORTED = 'NotSupportedError',
 
-            /**
-             * Reference to the sensor service.
-             *
-             * @private
-             * @type {SensorService}
-             */
-            sensorService = null,
+		/**
+		 * Maximum size of the previousMotions array.
+		 * 
+		 * @private
+		 * @const {number}
+		 */
+		MAX_LENGTH = 7,
 
-            /**
-             * Reference to the motion sensor.
-             *
-             * @private
-             * @type {MotionSensor}
-             */
-            motionSensor = null,
+		/**
+		 * Reference to the sensor service.
+		 * 
+		 * @private
+		 * @type {SensorService}
+		 */
+		sensorService = null,
 
-            /**
-             * Array of registered motions.
-             *
-             * @private
-             * @type {number[]}
-             */
-            previousMotions = [],
-            len = 0,
+		/**
+		 * Reference to the motion sensor.
+		 * 
+		 * @private
+		 * @type {MotionSensor}
+		 */
+		motionSensor = null,
 
-            /**
-             * Average pressure.
-             *
-             * @private
-             * @type {number}
-             */
-            averageMotion = {accelerationIncludingGravity : {x:0,y:0}},
-            firstElement = {accelerationIncludingGravity : {x:0,y:0}},
+		/**
+		 * Array of registered motions.
+		 * 
+		 * @private
+		 * @type {number[]}
+		 */
+		previousMotions = [], len = 0,
 
-            /**
-             * Current motion.
-             *
-             * @private
-             * @type {number}
-             */
-            currentMotion = {accelerationIncludingGravity : {x:null,y:null}};
-        	var options = {
-    			sampleInterval : 100,
-    			maxBatchCount : 1000
-    		};
-        	var isEnable = false;
+		/**
+		 * Average pressure.
+		 * 
+		 * @private
+		 * @type {number}
+		 */
+		averageMotion = {
+			accelerationIncludingGravity : {
+				x : 0,
+				y : 0
+			}
+		}, firstElement = {
+			accelerationIncludingGravity : {
+				x : 0,
+				y : 0
+			}
+		},
 
+		/**
+		 * Current motion.
+		 * 
+		 * @private
+		 * @type {number}
+		 */
+		currentMotion = {
+			accelerationIncludingGravity : {
+				x : null,
+				y : null
+			}
+		};
+		var options = {
+			sampleInterval : 100,
+			maxBatchCount : 1000
+		};
+		var isEnable = false;
+		var initialValue = 0;
 
-        	
-        
-        
-        
-        /**
-         * Performs action on start sensor success.
-         *
-         * @private
-         * @fires models.motion.start
-         */
-        function onSensorStartSuccess() {
-            e.fire('start');
-            isEnable = true;
-        }
+		/**
+		 * Performs action on start sensor success.
+		 * 
+		 * @private
+		 * @fires models.motion.start
+		 */
+		function onSensorStartSuccess() {
+			e.fire('start');
+			isEnable = true;
+		}
 
-        /**
-         * Performs action on start sensor error.
-         *
-         * @private
-         * @param {Error} e
-         * @fires models.motion.error
-         */
-        function onSensorStartError(e) {
-            console.error('Motion sensor start error: ', e);
-            e.fire('error', e);
-        }
+		/**
+		 * Performs action on start sensor error.
+		 * 
+		 * @private
+		 * @param {Error}
+		 *            e
+		 * @fires models.motion.error
+		 */
+		function onSensorStartError(e) {
+			console.error('Motion sensor start error: ', e);
+			e.fire('error', e);
+		}
 
-        /**
-         * Updates the average motion value.
-         *
-         * @private
-         * @param {number} currentPressure
-         * @returns {number}
-         */
-        function updateAverageMotion(currentMotion) {
-           
-            try {
-            	 previousMotions.push(currentMotion);
+		/**
+		 * Updates the average motion value.
+		 * 
+		 * @private
+		 * @param {number}
+		 *            currentPressure
+		 * @returns {number}
+		 */
+		function updateAverageMotion(currentMotion) {
 
-                 len = previousMotions.length;
-            	if (len <= MAX_LENGTH) {
-                    // nothing to shift yet, recalculate whole average
-                    averageMotion.accelerationIncludingGravity.x = previousMotions.reduce(
-                    		function sum(a, b) {
-                    				return a + b.accelerationIncludingGravity.x;
-                    		}) / len;
-                    averageMotion.accelerationIncludingGravity.y = previousMotions.reduce(function sum(a, b) {
-                        return a + b.accelerationIncludingGravity.y;
-                    }) / len;
-                } else {
-                    // add the new item and subtract the one shifted out
-                	firstElement = previousMotions.shift();
-                    averageMotion.accelerationIncludingGravity.x += (
-                    		currentMotion.accelerationIncludingGravity.x - firstElement.accelerationIncludingGravity.x
-                    ) / len;
-                    averageMotion.accelerationIncludingGravity.y += (
-                    		currentMotion.accelerationIncludingGravity.y - firstElement.accelerationIncludingGravity.y
-                    ) / len;
-                }
-                return averageMotion;
+			try {
+				previousMotions.push(currentMotion);
+				initialValue = 0;
+				len = previousMotions.length;
+				if (len <= MAX_LENGTH) {
+					// nothing to shift yet, recalculate whole average
+					averageMotion.accelerationIncludingGravity.x = previousMotions.reduce(function(accumulator, currentValue) {
+						return accumulator + currentValue.accelerationIncludingGravity.x;
+					},initialValue) / len;
+					averageMotion.accelerationIncludingGravity.y = previousMotions.reduce(function(accumulator, currentValue) {
+						return accumulator + currentValue.accelerationIncludingGravity.y;
+					},initialValue) / len;
+				} else {
+					// add the new item and subtract the one shifted out
+					firstElement = previousMotions.shift();
+					console.log(firstElement.accelerationIncludingGravity.x);
+					console.log(firstElement.accelerationIncludingGravity.y);
+					averageMotion.accelerationIncludingGravity.x += (currentMotion.accelerationIncludingGravity.x - firstElement.accelerationIncludingGravity.x) / len;
+					averageMotion.accelerationIncludingGravity.y += (currentMotion.accelerationIncludingGravity.y - firstElement.accelerationIncludingGravity.y) / len;
+				}
+				console.log(len);
+				console.log(averageMotion.accelerationIncludingGravity.x);
+				console.log(averageMotion.accelerationIncludingGravity.y);
+				return averageMotion;
 			} catch (exept) {
-				 e.fire('error',  	exept.message);
-				 averageMotion = currentMotion;
+				e.fire('error', exept.message);
+				averageMotion = currentMotion;
 			}
-            
-        }
 
+		}
 
-        /**
-         * Performs action on sensor change.
-         *
-         * @private
-         * @param {object} data
-         */
-        function onSensorChange(SensorAccelerationData) {
-        	
-        	currentMotion.accelerationIncludingGravity = {
-					x : SensorAccelerationData.x,
-					y : SensorAccelerationData.y
+		/**
+		 * Performs action on sensor change.
+		 * 
+		 * @private
+		 * @param {object}
+		 *            data
+		 */
+		function onSensorChange(SensorAccelerationData) {
+
+			currentMotion.accelerationIncludingGravity = {
+				x : SensorAccelerationData.x,
+				y : SensorAccelerationData.y
 			};
-        	updateAverageMotion(currentMotion);
-            e.fire('change',  	getSensorValueAvg());
-        }
-        function setCurrentMotionValue(data) {
-        	currentMotion.accelerationIncludingGravity.x =data.x;
-        	currentMotion.accelerationIncludingGravity.x =data.y;
-        	updateAverageMotion(currentMotion);
-        }
+			updateAverageMotion(currentMotion);
+			e.fire('change', getSensorValueAvg());
+		}
+		function setCurrentMotionValue(data) {
+			currentMotion.accelerationIncludingGravity.x = data.x;
+			currentMotion.accelerationIncludingGravity.x = data.y;
+			//updateAverageMotion(currentMotion);
+		}
 
-        /**
-         * Starts motion sensor.
-         *
-         * @memberof models/motion
-         * @public
-         */
-        function start() {
-            motionSensor.start(onSensorStartSuccess, onSensorStartError);
-            console.log( 'start motion sensor');
-            
-        }
-        function stop(){
-        	motionSensor.stop();
-        	isEnable = false;
-        }
-        function isStarted(){
-        	return isEnable;
-        }
-        /**
-         * Sets sensor change listener.
-         *
-         * @memberof models/motion
-         * @public
-         */
-        function setChangeListener() {
-        	try{
-        		 motionSensor.setChangeListener(onSensorChange,options.sampleInterval,options.maxBatchCount);
-        	}
-        	catch (e) {
-        		motionSensor.setChangeListener(onSensorChange);
+		/**
+		 * Starts motion sensor.
+		 * 
+		 * @memberof models/motion
+		 * @public
+		 */
+		function start() {
+			motionSensor.start(onSensorStartSuccess, onSensorStartError);
+			console.log('start motion sensor');
+
+		}
+		function stop() {
+			motionSensor.stop();
+			isEnable = false;
+		}
+		function isStarted() {
+			return isEnable;
+		}
+		/**
+		 * Sets sensor change listener.
+		 * 
+		 * @memberof models/motion
+		 * @public
+		 */
+		function setChangeListener() {
+			try {
+				motionSensor.setChangeListener(onSensorChange, options.sampleInterval, options.maxBatchCount);
+			} catch (e) {
+				motionSensor.setChangeListener(onSensorChange);
 			}
-           
-            //
-        }
-        function setOptions(options){
-        	options = options;
-        }
 
-        /**
-         * Returns sensor value.
-         *
-         * @memberof models/motion
-         * @public
-         * @returns {number}
-         */
-        function getSensorValue() {
-            return currentMotion;
-        }
-        function getSensorValueAvg() {
-            return averageMotion;
-        }
+			//
+		}
+		function setOptions(options) {
+			options = options;
+		}
 
-        
+		/**
+		 * Returns sensor value.
+		 * 
+		 * @memberof models/motion
+		 * @public
+		 * @returns {number}
+		 */
+		function getSensorValue() {
+			return currentMotion;
+		}
+		function getSensorValueAvg() {
+			return averageMotion;
+		}
 
-       
-        /**
-         * Returns true if motion sensor is available, false otherwise.
-         *
-         * @memberof models/motion
-         * @public
-         * @returns {boolean}
-         */
-        function isAvailable() {
-            return !!motionSensor;
-        }
-        
-        
-        /**
+		/**
+		 * Returns true if motion sensor is available, false otherwise.
+		 * 
+		 * @memberof models/motion
+		 * @public
+		 * @returns {boolean}
+		 */
+		function isAvailable() {
+			return !!motionSensor;
+		}
+
+		/**
 		 * Registers event listeners.
 		 * 
 		 * @memberof models/location
@@ -272,43 +274,43 @@ define({
 		 */
 		function bindEvents() {
 
-			
-			 
 		}
-        function init() {
-        	bindEvents();
-            sensorService = tizen.sensorservice ||
-                (window.webapis && window.webapis.sensorservice) ||
-                null;
-            if (!sensorService) {
-                e.fire('error', {type: 'notavailable'});
-            } else {
-                try {
-                    motionSensor = sensorService
-                        .getDefaultSensor(SENSOR_TYPE);
-                    motionSensor
-                        .getMotionSensorData(setCurrentMotionValue);
-                } catch (error) {
-                    if (error.type === ERROR_TYPE_NOT_SUPPORTED) {
-                        e.fire('error', {type: 'notsupported'});
-                    } else {
-                        e.fire('error', {type: 'unknown'});
-                    }
-                }
-            }
-        }
+		function init() {
+			bindEvents();
+			sensorService = tizen.sensorservice || (window.webapis && window.webapis.sensorservice) || null;
+			if (!sensorService) {
+				e.fire('error', {
+					type : 'notavailable'
+				});
+			} else {
+				try {
+					motionSensor = sensorService.getDefaultSensor(SENSOR_TYPE);
+					motionSensor.getMotionSensorData(setCurrentMotionValue);
+				} catch (error) {
+					if (error.type === ERROR_TYPE_NOT_SUPPORTED) {
+						e.fire('error', {
+							type : 'notsupported'
+						});
+					} else {
+						e.fire('error', {
+							type : 'unknown'
+						});
+					}
+				}
+			}
+		}
 
-        return {
-            init: init,
-            start: start,
-            stop: stop,
-            isStarted : isStarted,
-            isAvailable: isAvailable,
-            setChangeListener: setChangeListener,
-            getSensorValue: getSensorValue,
-            getSensorValueAvg: getSensorValueAvg,
-            setOptions: setOptions
-        };
-    }
+		return {
+			init : init,
+			start : start,
+			stop : stop,
+			isStarted : isStarted,
+			isAvailable : isAvailable,
+			setChangeListener : setChangeListener,
+			getSensorValue : getSensorValue,
+			getSensorValueAvg : getSensorValueAvg,
+			setOptions : setOptions
+		};
+	}
 
 });
