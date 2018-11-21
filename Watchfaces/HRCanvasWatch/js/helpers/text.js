@@ -17,9 +17,9 @@
 /* global define */
 
 /**
- * Date helper module.
+ * text helper module.
  * 
- * @namespace helpers/date
+ * @namespace helpers/text
  * @memberof helpers
  */
 

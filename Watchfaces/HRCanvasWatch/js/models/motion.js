@@ -83,7 +83,16 @@ define({
              * @type {number[]}
              */
             previousMotions = [],
+            len = 0,
 
+            /**
+             * Average pressure.
+             *
+             * @private
+             * @type {number}
+             */
+            averageMotion = {accelerationIncludingGravity : {x:0,y:0}},
+            firstElement = {accelerationIncludingGravity : {x:0,y:0}},
 
             /**
              * Current motion.
@@ -133,23 +142,37 @@ define({
          * @param {number} currentPressure
          * @returns {number}
          */
-        function updateAveragePressure(currentPressure) {
-            previousPressures.push(currentPressure);
+        function updateAverageMotion(currentMotion) {
+           
+            try {
+            	 previousMotions.push(currentMotion);
 
-            var len = previousPressures.length;
-
-            if (len <= MAX_LENGTH) {
-                // nothing to shift yet, recalculate whole average
-                averagePressure = previousPressures.reduce(function sum(a, b) {
-                    return a + b;
-                }) / len;
-            } else {
-                // add the new item and subtract the one shifted out
-                averagePressure += (
-                    currentPressure - previousPressures.shift()
-                ) / len;
-            }
-            return averagePressure;
+                 len = previousMotions.length;
+            	if (len <= MAX_LENGTH) {
+                    // nothing to shift yet, recalculate whole average
+                    averageMotion.accelerationIncludingGravity.x = previousMotions.reduce(
+                    		function sum(a, b) {
+                    				return a + b.accelerationIncludingGravity.x;
+                    		}) / len;
+                    averageMotion.accelerationIncludingGravity.y = previousMotions.reduce(function sum(a, b) {
+                        return a + b.accelerationIncludingGravity.y;
+                    }) / len;
+                } else {
+                    // add the new item and subtract the one shifted out
+                	firstElement = previousMotions.shift();
+                    averageMotion.accelerationIncludingGravity.x += (
+                    		currentMotion.accelerationIncludingGravity.x - firstElement.accelerationIncludingGravity.x
+                    ) / len;
+                    averageMotion.accelerationIncludingGravity.y += (
+                    		currentMotion.accelerationIncludingGravity.y - firstElement.accelerationIncludingGravity.y
+                    ) / len;
+                }
+                return averageMotion;
+			} catch (exept) {
+				 e.fire('error',  	exept.message);
+				 averageMotion = currentMotion;
+			}
+            
         }
 
 
@@ -165,7 +188,13 @@ define({
 					x : SensorAccelerationData.x,
 					y : SensorAccelerationData.y
 			};
-            e.fire('change',  	getSensorValue());
+        	updateAverageMotion(currentMotion);
+            e.fire('change',  	getSensorValueAvg());
+        }
+        function setCurrentMotionValue(data) {
+        	currentMotion.accelerationIncludingGravity.x =data.x;
+        	currentMotion.accelerationIncludingGravity.x =data.y;
+        	updateAverageMotion(currentMotion);
         }
 
         /**
@@ -216,6 +245,9 @@ define({
         function getSensorValue() {
             return currentMotion;
         }
+        function getSensorValueAvg() {
+            return averageMotion;
+        }
 
         
 
@@ -230,10 +262,7 @@ define({
         function isAvailable() {
             return !!motionSensor;
         }
-        function setCurrentMotionValue(data) {
-        	currentMotion.accelerationIncludingGravity.x =data.x;
-        	currentMotion.accelerationIncludingGravity.x =data.y;
-        }
+        
         
         /**
 		 * Registers event listeners.
@@ -277,6 +306,7 @@ define({
             isAvailable: isAvailable,
             setChangeListener: setChangeListener,
             getSensorValue: getSensorValue,
+            getSensorValueAvg: getSensorValueAvg,
             setOptions: setOptions
         };
     }

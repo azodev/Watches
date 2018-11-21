@@ -12,11 +12,11 @@
 </Reference>
 <Reference URI="author-signature.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>eFdeHXMjYTxKi0TgzGA0SB2kVMCvdwh9dlmjSP46vJw=</DigestValue>
+<DigestValue>dC1Z0CgtXrT30ISLvG7T3nvxJiRekN6cxi2qVx0EjPQ=</DigestValue>
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>SgXJy9cvQnvJeNEAZa1a3xK/RgBx33kqmeZKOUEVNyQ=</DigestValue>
+<DigestValue>/iN/ru7zuyQ841LPj/PqZhcw8At6MfqND1b2WNcfEvM=</DigestValue>
 </Reference>
 <Reference URI="css%2Fstyle.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -558,9 +558,13 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>Qqcr2Z36i5tzks3L+rFfMhHuiXQPoEer8qm2k3T57WQ=</DigestValue>
 </Reference>
+<Reference URI="js%2Fhelpers%2Fshape.js">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>cHUe0oGa8u5nOpSpwD+R7ruXGlqPp94slCxXEZumALo=</DigestValue>
+</Reference>
 <Reference URI="js%2Fhelpers%2Ftext.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>IpZ+lXnZmeED4arlTxhSH1S2shxntb5WlyoidCyQGSs=</DigestValue>
+<DigestValue>8YM3NxH5d6A5zsr3TTDhxDKbIemsZTsaTLh5rrhrnTo=</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2Fcalories.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -576,11 +580,11 @@
 </Reference>
 <Reference URI="js%2Fmodels%2Flocation.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>pE7IyyKGnq8JrduoRWIzVWf8/JnGDue0d57KKyfAAJQ=</DigestValue>
+<DigestValue>Bp3nzo8D5FKzl3CW2N7EMBznKYVBFvbT35bOXyoi/uw=</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2Fmotion.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>j83n+gPaK4POX4Ttvo7t4X8eHsOmhMxKm41T3fzjPUE=</DigestValue>
+<DigestValue>HtO4Qp3JfGNkKiQAIJHIjzYzrNI5hUJoIjJB2flq/QI=</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2Fpedometer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -596,7 +600,7 @@
 </Reference>
 <Reference URI="js%2Fmodels%2Fweather.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>0inc0gNMlHk3iIzZxOYoEMPynjlIhPVlVuwLs+ro5Xg=</DigestValue>
+<DigestValue>aBDLx/edIHowzevyGpBJv6cdj7AXL/SEDUqsQ5JHcvI=</DigestValue>
 </Reference>
 <Reference URI="js%2Ftau-config.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -612,7 +616,7 @@
 </Reference>
 <Reference URI="js%2Fviews%2Fmain.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>ZTb6ym4w6AQLQJHTc65ImcR6kGShkMHaqS0yTBIe8PI=</DigestValue>
+<DigestValue>SxrQj6r507qLFi7dYhFbAol9bZe7dqTYUt+UfkM1eFg=</DigestValue>
 </Reference>
 <Reference URI="lib%2Fparticules%2Fbower.json">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -1651,11 +1655,11 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-T5JJNYiHvmO+hTjGrF3R6T6BqoFfMPt3TtVdRF0PLFabZKshHOZoDMh/0zzpJgXdUt2hl+T/SEi7
-EVF1smvRDxl51Deyk5HgN9sstf0660QjrA8NYG/ELyOqSnrDyjTMvckYhr5KgKfwleHwRWeopwF4
-E6fYBBDO0OuXq7HFQzKN94cMrnU4YgxmqVI74v28yP/TRHMKV4Xit5AKLiLbwC8DRLxL461/ebEb
-OBvZXOJSuCmNExaqtVq8zKClnczfF8gJdfebGdkhU+D2XZZ/HJrwaha3Yv5fFHpLhlfYZZVEafwH
-V+8YchqNm9q9ez6UvanCdz18xY8sZF2etWOVZw==
+iGY5SUdc6P2Dog8aOorSKjjQEaLimzyLy7RqbxaxR8jLwrarvvWoHG35shM7/EE0K3eb2G+4gZqY
+fIns2kiSSmK213v7f38fmdWRA3cQ3paUH7EhEN433Qz6IWhbuFuqEheyg0RVddzFZQ/0zSP2voF4
+U9ota8cRyDDlG5Dsd4++e3w3F4cPUzkn62VZ/AsE4dVo84lZ/XjiJkojQbtA92hf+yhl3Jp4AAlf
+DokEJkZEhCWOfl4nCSymCYfI9cv5BplWi5O6dF43ZgTI0KzlQSHTVneBOyFMW0smkLJawPuE1u6J
+npK2W14U40Umj5+tSMU50atyibKH51kLUGKmEw==
 </SignatureValue>
 <KeyInfo>
 <X509Data>
@@ -1663,21 +1667,21 @@ V+8YchqNm9q9ez6UvanCdz18xY8sZF2etWOVZw==
 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
-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
+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
-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
+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
-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
+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
 </X509Certificate>
 <X509Certificate>
 MIIDuzCCAqOgAwIBAgICL+cwDQYJKoZIhvcNAQELBQAwgY8xCzAJBgNVBAYTAktSMRQwEgYDVQQI

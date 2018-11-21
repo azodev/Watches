@@ -16,6 +16,7 @@
     <feature name="tizen.org/feature/sensor.gravity"/>
     <icon src="icon.png"/>
     <name>HRCanvasWatch</name>
+    <tizen:privilege name="http://tizen.org/privilege/notification"/>
     <tizen:privilege name="http://tizen.org/privilege/filesystem.read"/>
     <tizen:privilege name="http://tizen.org/privilege/filesystem.write"/>
     <tizen:privilege name="http://tizen.org/privilege/alarm"/>

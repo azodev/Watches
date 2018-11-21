@@ -165,6 +165,7 @@ define({
 				doUpdate();
 			} else {
 				console.error('error : W Cannot decode position');
+				event.fire ('error','error onDistanceChange');
 			}
 		}
 		function onUpdateTriggered (){
@@ -173,6 +174,7 @@ define({
 				doUpdate();
 			} else {
 				console.error('error : W Cannot decode position');
+				event.fire ('error','error onUpdateTriggered');
 			}
 		}
 		function doUpdate(){
@@ -223,10 +225,12 @@ define({
 							console.error('Update Weather: Found');
 						} else {
 							console.error("Status de la réponse: %d (%s)", this.status, this.statusText);
+							event.fire ('error',"Status de la réponse: "+this.statusText);
 						}
 					}
 					else {
 						console.error('Update Weather: error');
+						event.fire ('error',"Status de la réponse: "+this.statusText +"  " +this.status);
 					}
 				}
 
@@ -283,10 +287,12 @@ define({
 							console.error('Update forecast: Found');
 						} else {
 							console.error("Status de la réponse: %d (%s)", this.status, this.statusText);
+							event.fire ('error',"Status de la réponse forcast: "+this.statusText +"  " +this.status);
 						}
 					}
 					else {
 						console.error('Update forecast: error');
+						event.fire ('error',"Status de la réponse forcast2: "+this.statusText +"  " +this.status);
 					}
 				}
 

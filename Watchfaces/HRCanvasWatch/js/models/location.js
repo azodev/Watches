@@ -75,7 +75,7 @@ define({
 		var options = {
 			enableHighAccuracy: true,
 			timeout : 5000,
-			maximumAge : 5000
+			maximumAge : 900000
 		};
 		var optionGPS = {
 			sampleInterval : 2000,  //10000
@@ -137,6 +137,7 @@ define({
 					))
 			{
 				//event.fire('distanceChange', getData());
+				event.fire('error', 'distanceChange');
 				//console.error('distanceChange');
 			}
 		}

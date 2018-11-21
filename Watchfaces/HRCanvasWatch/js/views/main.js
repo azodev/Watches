@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/*global define, document, window*/
+/* global define, document, window*/
 
 /**
  * Main view module.
@@ -72,6 +72,8 @@ define({
 		var lastClickTimeStamp = null, currentClickTimeStamp = null;
 		var newDir, newFile;
 		const CLICK_INTERVAL = 500;
+		 var notification,
+         notificationDict;
 
 		function handleClick(ev) {
 			currentClickTimeStamp = Date.now();
@@ -100,8 +102,9 @@ define({
 				handleClick(this);
 			});
 			event.on({
-			// 'models.location.error': openAlert
-			// 'models.weather.error' : openAlert
+			 'models.location.error': postNotification,
+			 'models.motion.error': postNotification,
+			 'models.weather.error' : postNotification
 
 			});
 
@@ -143,6 +146,27 @@ define({
 		function onOkClick(ev) {
 			// tau.closePopup();
 		}
+		function postNotification(message) {
+	       
+
+	        try {
+	        	if (message && message.detail && message.detail !== 1) {
+	        		// Sets notification dictionary.
+		            notificationDict = {
+		                content: message.detail,
+		                iconPath: "../icon.png",
+		            };
+		            // Creates notification object.
+		            notification = new tizen.StatusNotification("SIMPLE", "Watchface Debug", notificationDict);
+
+		            // Posts notification.
+		            tizen.notification.post(notification);
+	        	}
+	            
+	        } catch (err) {
+	            console.log(err.name + ": " + err.message);
+	        }
+	    }
 		/**
 		 * Initializes module.
 		 * 
