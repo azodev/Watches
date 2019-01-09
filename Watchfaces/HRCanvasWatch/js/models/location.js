@@ -223,7 +223,7 @@ define({
 		 */
 
 		function start() {
-			resetData();
+			//resetData();
 			console.error( 'start location sensor');
 
 			if (locationWatcher === null) {
