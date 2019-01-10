@@ -54,7 +54,7 @@ define({
 		 * @private
 		 * @const {number}
 		 */
-		MAX_LENGTH = 9,
+		MAX_LENGTH = 4,
 
 		/**
 		 * Reference to the sensor service.

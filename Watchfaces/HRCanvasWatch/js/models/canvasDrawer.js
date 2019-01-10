@@ -34,7 +34,7 @@ define({
 
 		var center, event = req.core.event;
 		var radius, centerX, centerY, dxi, dyi, dxf, dyf, textdate, font, align, angle = 0, radiusArc, 
-		indexX = 0, rotate = false, gradient = null, gradientLinear = null, doGradient = false;
+		indexX = 0, rotate = false, gradient = null, gradientLinear = null, doGradient = false, gridGradient = null;
 		var radialGradient = null;
 		var coords = {
 			x : 0,
@@ -72,6 +72,7 @@ define({
 			x : 0,
 			y : 0
 		};
+		var gx, gy, cx, cy ;
 		var gradientAngle = 0;
 		const
 		maxLength = Math.sqrt(360 * 360 + 360 * 360);
@@ -93,9 +94,10 @@ define({
 			x = 0;
 			y = 0;
 			context.lineWidth = width;
-			context.strokeStyle = "rgba(10, 10, 10,0.3)";
+			
+			context.strokeStyle = "rgba(70, 70, 70,0.2)";
 
-			for (i = 30; i < 360; i = i + 30) {
+			for (i = 60; i < 360; i = i + 60) {
 				x = i;
 
 				if (options.motion !== null) {
@@ -114,7 +116,7 @@ define({
 				context.translate(x, y);
 				context.beginPath();
 				context.moveTo(-2, 0);
-				context.quadraticCurveTo(~~center1.x + 3, ~~center1.y, -3, 360);
+				context.quadraticCurveTo(~~center1.x + 6, ~~center1.y, -6, 360);
 				context.stroke();
 				/*context.beginPath();
 				context.moveTo(-1, 0);
@@ -130,13 +132,13 @@ define({
 				context.stroke();*/
 				context.beginPath();
 				context.moveTo(2, 0);
-				context.quadraticCurveTo(~~center1.x - 3, ~~center1.y, 3, 360);
+				context.quadraticCurveTo(~~center1.x - 6, ~~center1.y, 6, 360);
 				context.stroke();
 				context.translate(-x, -y);
 			}
 			x = 0;
 			y = 0;
-			for (i = 30; i < 360; i = i + 30) {
+			for (i = 60; i < 360; i = i + 60) {
 				y = i;
 
 				// a = position du centre courbe ; b = curve horizontale b =
@@ -156,7 +158,7 @@ define({
 				context.translate(x, y);
 				context.beginPath();
 				context.moveTo(0, -2);
-				context.quadraticCurveTo(~~center2.x, ~~center2.y + 3, 360, -3);
+				context.quadraticCurveTo(~~center2.x, ~~center2.y + 6, 360, -6);
 				context.stroke();
 				/*context.beginPath();
 				context.moveTo(0, -1);
@@ -172,7 +174,7 @@ define({
 				context.stroke();*/
 				context.beginPath();
 				context.moveTo(0, -2);
-				context.quadraticCurveTo(~~center2.x, ~~center2.y - 3, 360, 3);
+				context.quadraticCurveTo(~~center2.x, ~~center2.y - 6, 360, 6);
 				context.stroke();
 				context.translate(-x, -y);
 			}
@@ -562,13 +564,16 @@ define({
 		function calculateGradientPosition(motionAcceleration) {
 			dx = -motionAcceleration.x *1000;
 			dy = motionAcceleration.y *1000;
-			gradientAngle = Math.atan2(dy, dx) * (180 / Math.PI) + 180; //
-			gradientCoords.x1 = 360 / 2 + Math.cos(gradientAngle) * maxLength * 0.5;
-			gradientCoords.y1 = 360 / 2 + Math.sin(gradientAngle) * maxLength * 0.5;
+			gradientAngle = Math.atan2(dy, dx) + Math.PI /2; //
+			//gradientCoords.x1 = (360 / 2) + Math.cos(gradientAngle) * maxLength * 0.5;
+			//gradientCoords.y1 = (360 / 2) + Math.sin(gradientAngle) * maxLength * 0.5;
 			// the end of the gradient subtracted from the center
-			gradientCoords.x2 = 360 / 2 - Math.cos(gradientAngle) * maxLength * 0.5;
-			gradientCoords.y2 = 360 / 2 - Math.sin(gradientAngle) * maxLength * 0.5;
-
+			//gradientCoords.x2 = (360 / 2) - Math.cos(gradientAngle) * maxLength * 0.5;
+			//gradientCoords.y2 = (360 / 2) - Math.sin(gradientAngle) * maxLength * 0.5;
+			gx = (360 / 2) * Math.cos(gradientAngle);
+			gy = (360 / 2) * Math.sin(gradientAngle);
+			cx = 360 / 2;
+			cy = 360;
 			return gradientCoords;
 		}
 		function calculateRadialGradientPosition(motionAcceleration) {
@@ -583,18 +588,19 @@ define({
 			calculateRadialGradientPosition(motionAcceleration.accelerationIncludingGravity);
 			radialGradient = context.createRadialGradient(radialGradientCoords.x, radialGradientCoords.y, 0.000, 180.000, 180.000, 180.000);
 			radialGradient.addColorStop(0.000, 'rgb(0, 0, 0)');
-			radialGradient.addColorStop(0.705, 'rgb(55, 55, 55)');
+			radialGradient.addColorStop(0.755, 'rgb(50, 50, 50)');
 			radialGradient.addColorStop(0.83, 'rgb(70, 70, 70)');
 			//radialGradient.addColorStop(0.85, 'rgb(65, 65, 65)');
-			radialGradient.addColorStop(0.85, 'rgb(90, 90, 100)');
+			radialGradient.addColorStop(0.85, 'rgb(80, 80, 100)');
 			//radialGradient.addColorStop(0.872, 'rgb(94, 88, 68)');
-			radialGradient.addColorStop(0.882, 'rgb(104, 104, 135)');
-			radialGradient.addColorStop(0.927, 'rgb(80, 80, 80)');
-			gradientLinear = context.createLinearGradient(gradientCoords.x1, gradientCoords.y1, gradientCoords.x2, gradientCoords.y2);
-			gradientLinear.addColorStop(0, "rgb(20,77,143)");
-			gradientLinear.addColorStop(0.3, "rgb(41,137,216)");
-			gradientLinear.addColorStop(0.6, "rgb(22,114,185)");
-			gradientLinear.addColorStop(1, "rgb(125,185,232)");
+			radialGradient.addColorStop(0.882, 'rgb(125, 185, 232)');
+			radialGradient.addColorStop(0.927, 'rgb(90, 90, 90)');
+			gradientLinear = context.createLinearGradient(cx - gx, cy - gy, cx + gx, cy + gy);
+			//gradientLinear.addColorStop(1, "rgb(20,77,143)");
+			gradientLinear.addColorStop(1, "rgb(41,137,216)");
+			gradientLinear.addColorStop(0.6, "rgb(41,137,216)");
+			gradientLinear.addColorStop(0.3, "rgb(22,114,185)");
+			gradientLinear.addColorStop(0, "rgb(125,185,232)");
 			//gradientLinear.addColorStop(0, "#69d7db");-moz-linear-gradient(left, rgb(255,255,255) 0%, rgb(119,143,163) 11%, rgb(46,100,136) 17%, rgb(186,201,211) 28%, rgb(30,30,30) 90%, rgb(0,1,0) 100%); 
 			//gradientLinear.addColorStop(1, "#203fc9");
 		}

@@ -190,8 +190,8 @@ define({
 			
 			canvasDrawer.roundRect(ctxContent, center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 250, 70, 10, false, true, "#000000", "#000000");
 
-			canvasDrawer.renderCircle(ctxContent, center, watchRadius * 1, "#000000",4);
-			canvasDrawer.renderCircle(ctxContent, center, watchRadius * 0.90, "#000000",3);
+			canvasDrawer.renderCircle(ctxContent, center, watchRadius *1, "#000000",4);
+			//canvasDrawer.renderCircle(ctxContent, center, watchRadius * 0.90, "#000000",3);
 
 			// Draw the dividers
 			// 60 unit divider
@@ -203,7 +203,7 @@ define({
 			// 12 unit divider
 			for (j = 1; j <= 12; j++) {
 				angle = (j - 3) * (Math.PI * 2) / 12;
-				canvasDrawer.renderNeedle(ctxContent, angle,  0.90, 1, 5, "#c4c4c4");
+				canvasDrawer.renderNeedle(ctxContent, angle,  0.90, 1, 3, "#c4c4c4");
 			}
 			
 
