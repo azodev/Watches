@@ -54,7 +54,7 @@ define({
 		 * @private
 		 * @const {number}
 		 */
-		MAX_LENGTH = 30,
+		MAX_LENGTH = 9,
 
 		/**
 		 * Reference to the sensor service.
@@ -166,14 +166,9 @@ define({
 				} else {
 					// add the new item and subtract the one shifted out
 					firstElement = previousMotions.shift();
-					console.log(firstElement.x);
-					console.log(firstElement.y);
 					averageMotion.accelerationIncludingGravity.x += (currentMotion.accelerationIncludingGravity.x - firstElement.x) / len;
 					averageMotion.accelerationIncludingGravity.y += (currentMotion.accelerationIncludingGravity.y - firstElement.y) / len;
 				}
-				console.log(len);
-				console.log(averageMotion.accelerationIncludingGravity.x);
-				console.log(averageMotion.accelerationIncludingGravity.y);
 				return averageMotion;
 			} catch (exept) {
 				e.fire('error', exept.message);

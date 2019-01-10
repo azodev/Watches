@@ -588,7 +588,7 @@ define({
 			gradientLinear = context.createLinearGradient(gradientCoords.x1, gradientCoords.y1, gradientCoords.x2, gradientCoords.y2);
 			gradientLinear.addColorStop(0, "rgb(255, 210, 49)");
 			gradientLinear.addColorStop(1, "rgb(237, 142, 47)");
-			//gradientLinear.addColorStop(0, "#69d7db");
+			//gradientLinear.addColorStop(0, "#69d7db");-moz-linear-gradient(left, rgb(255,255,255) 0%, rgb(119,143,163) 11%, rgb(46,100,136) 17%, rgb(186,201,211) 28%, rgb(30,30,30) 90%, rgb(0,1,0) 100%); 
 			//gradientLinear.addColorStop(1, "#203fc9");
 		}
 		function doRadialGradientOrColor(context, color, options) {
