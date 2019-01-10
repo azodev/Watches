@@ -389,9 +389,9 @@ define({
 			canvasDrawer.center = center;
 			canvasDrawer.watchRadius = watchRadius;
 			grdAmbiant = ctxContent.createLinearGradient(0, 0, watchRadius * 2, 0);
-			grdAmbiant.addColorStop(0, "rgb(30,87,153)");
+			grdAmbiant.addColorStop(0, "rgb(20,77,143)");
 			grdAmbiant.addColorStop(0.3, "rgb(41,137,216)");
-			grdAmbiant.addColorStop(0.6, "rgb(32,124,202)");
+			grdAmbiant.addColorStop(0.6, "rgb(22,114,185)");
 			grdAmbiant.addColorStop(1, "rgb(125,185,232)");
 			isAmbientMode = false;
 			//grdAmbiant.addColorStop(0, "#69d7db");
