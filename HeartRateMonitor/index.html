@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8"/>
+    <meta name="description" content="HeartRateMonitor"/>
+    <title>Heart Rate Monitor</title>
+    <link rel="stylesheet" href="lib/tau/wearable/theme/default/tau.css" />
+    <link rel="stylesheet" media="all and (-tizen-geometric-shape: circle)"
+          href="lib/tau/wearable/theme/default/tau.circle.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+</head>
+
+<body>
+
+    <div class="ui-page ui-page-active" id="main">
+        <div class="ui-header">
+            <h2 class="ui-title">Heart Rate Monitor</h2>
+        </div>
+        <div class="ui-content">
+            <div id="heart-rate-value"></div>
+            <div id="heart">
+                <div id="heart-img"></div>
+            </div>
+            <div class="limit-info">
+                Heart rate limit: <span id="limit-info-value"></span>
+            </div>
+            <div id="measuring-info">
+                Measuring...
+            </div>
+        </div>
+        <footer class="ui-footer ui-bottom-button">
+            <a href="#settings-popup" data-rel="popup" class="ui-btn">Settings</a>
+        </footer>
+
+        <div id="settings-popup" class="ui-popup">
+            <div class="ui-popup-content">
+                Set heart rate limit.
+                <div id="settings-heartrate"><input id="settings-heartrate-value" type="text" value="" maxlength="3" disabled/></div>
+                <div id="settings-slider">
+                    <input id="slider" type="range" min="1" max="220" value="" />
+                </div>
+            </div>
+            <div class="ui-popup-footer ui-side-button ui-grid-col-2">
+                <a id="cancel-popup-btn" href="#" class="ui-btn btn-icon-cancel" data-rel="back">Cancel</a>
+                <a id="ok-popup-btn" href="#" class="ui-btn btn-icon-check" data-rel="back">OK</a>
+            </div>
+        </div>
+    </div>
+    <div class="ui-page" id="info">
+        <div class="ui-header">
+            <h2 class="ui-title">HRM Info</h2>
+        </div>
+        <div class="ui-content">
+            <div class="info-text">
+                Try again. Clean the sensor, then attach Gear snugly to top or under side of wrist, not against the bone. Be still and quiet.
+            </div>
+        </div>
+        <footer class="ui-footer ui-bottom-button">
+            <a id="info-back-btn" class="ui-btn">Back</a>
+        </footer>
+    </div>
+
+  <script src="./lib/tau/wearable/js/tau.js"></script>
+  <script src="./js/core/core.js" data-main="./js/app.js"></script>
+
+</body>
+</html>
