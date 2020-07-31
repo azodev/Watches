@@ -775,7 +775,7 @@ define({
 			sysInfo.checkBattery();
 			
 			
-			drawWatchLayout();
+			drawWatchLayout();//git
 			animRequest = window.requestAnimationFrame(drawWatchContent);
 			/*animTimeout = setTimeout(function() {
 				animRequest = window.requestAnimationFrame(drawTimeContent);
