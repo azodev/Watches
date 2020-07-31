@@ -160,7 +160,7 @@ define({
 				positionAquiered = true;
 				event.fire('found', positionAquiered);
 			}
-			console.error('Location succcess');
+			console.log('Location succcess');
 			event.fire('change', getData());
 		}
 		function succcessFallback(pos) {
@@ -182,7 +182,7 @@ define({
 				
 			}
 			locationDataLastGood = locationData;
-			console.error('Location succcess in fallback');
+			console.log('Location succcess in fallback');
 			event.fire('change', getData());
 		}
 		function errorFallback(err) {
@@ -194,7 +194,7 @@ define({
 		}
 
 		function doFallback() {
-			//event.fire('error', 'doFallback');
+			event.fire('error', 'doFallback');
 			locationSensor.start(CONTEXT_TYPE, succcessFallback, errorFallback, optionGPS);
 		}
 
@@ -224,7 +224,7 @@ define({
 
 		function start() {
 			//resetData();
-			console.error( 'start location sensor');
+			console.log( 'start location sensor');
 
 			if (locationWatcher === null) {
 				locationWatcher = navigator.geolocation.watchPosition(successCallback, errorCallback, options);
@@ -242,14 +242,14 @@ define({
 		 */
 		function stop() {
 			locationSensor.stop(CONTEXT_TYPE);
-			console.error( 'stop location sensor');
+			console.log( 'stop location sensor');
 			if (locationWatcher !== null) {
 				navigator.geolocation.clearWatch(locationWatcher);
 				locationWatcher = null;
 			}
 		}
 		function triggerLocationUpdate(ev) {
-			console.error('triggerLocationUpdate');
+			console.log('triggerLocationUpdate');
 			stop();
 			start();
 		}
@@ -260,9 +260,9 @@ define({
 		 * @private
 		 */
 		function bindEvents() {
-			event.on({
-				//'views.main.triggerLocationUpdate' : triggerLocationUpdate
-			});
+			/*event.on({
+				'views.main.triggerLocationUpdate' : triggerLocationUpdate
+			});*/
 
 		}
 

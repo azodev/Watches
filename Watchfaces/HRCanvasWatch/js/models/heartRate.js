@@ -164,7 +164,7 @@ define({
 			if (!started) {
 				started = true;
 				resetData();
-				console.error('Starting HR Sensor');
+				console.log('Starting HR Sensor');
 				heartRateSensor.start(CONTEXT_TYPE, function onChange(heartRateInfo) {
 					handleHeartRateInfo(heartRateInfo);
 					
@@ -183,7 +183,7 @@ define({
 		 * @public
 		 */
 		function stop() {
-//			console.error('Stop HR Sensor function');
+			console.log('Stop HR Sensor function');
 			if (started){
 				heartRateSensor.stop(CONTEXT_TYPE);
 //				console.error('Stopping HR Sensor');

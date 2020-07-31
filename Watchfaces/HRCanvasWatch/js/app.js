@@ -49,7 +49,7 @@ define({
         };
     }
 });
-function write(message) {
+/*function write(message) {
 	tizen.filesystem.resolve("documents", function(dir) {
 		file = dir.resolve("newDir/newFilePath.txt");
 		file.openStream("a", function(fs) {
@@ -72,4 +72,4 @@ function read() {
 			console.error("Error " + e.message);
 		}, "UTF-8");
 	});
-}
+}*/

@@ -72,7 +72,7 @@ define({
 		 * @public
 		 */
 		function start() {
-			console.error('start weather module');
+			console.log('start weather module');
 		}
 		function stop() {
 
@@ -162,6 +162,7 @@ define({
 		function onDistanceChange(){
 			coords = locationModel.getData();
 			if (coords !== 'undefined') {
+				console.log('onDistanceChange update');
 				doUpdate();
 			} else {
 				console.error('error : W Cannot decode position');
@@ -222,7 +223,7 @@ define({
 							// Gets weather string from information
 							weatherFound = true;
 							event.fire('found', weatherInform);
-							console.error('Update Weather: Found');
+							console.log('Update Weather: Found');
 						} else {
 							console.error("Status de la réponse: %d (%s)", this.status, this.statusText);
 							event.fire ('error',"Status de la réponse: "+this.statusText);
@@ -241,7 +242,7 @@ define({
 			xmlHttp.open("GET", url, true);
 
 			xmlHttp.send(null);
-			console.error('do weather request');
+			console.log('weather request done');
 		}
 		function updateForecast() {
 			/**
@@ -284,7 +285,7 @@ define({
 							// Gets weather string from information
 							forecastFound = true;
 							event.fire('forecast_found', forecastInform);
-							console.error('Update forecast: Found');
+							console.log('Update forecast: Found');
 						} else {
 							console.error("Status de la réponse: %d (%s)", this.status, this.statusText);
 							event.fire ('error',"Status de la réponse forcast: "+this.statusText +"  " +this.status);
@@ -303,7 +304,7 @@ define({
 			xmlHttp.open("GET", url, true);
 
 			xmlHttp.send(null);
-			console.error('do forecast request');
+			console.log('forecast request done');
 		}
 
 		/**

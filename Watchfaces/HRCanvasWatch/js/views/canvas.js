@@ -124,7 +124,7 @@ define({
 		 * @private
 		 */
 		function drawWatchLayout() {
-			console.error('DrawLayout');
+			console.log('DrawLayout');
 			// Clear canvas
 			ctxLayout.clearRect(0, 0, ctxLayout.canvas.width, ctxLayout.canvas.height);
 			//
@@ -531,7 +531,7 @@ define({
 		function drawAmbientWatch(e) {
 			// Import the current time
 			getDate();
-			console.error('ambient');
+			console.log('ambient');
 			
 			ctxLayout.clearRect(0, 0, ctxLayout.canvas.width, ctxLayout.canvas.height);
 			ctxContent.clearRect(0, 0, ctxContent.canvas.width, ctxContent.canvas.height);
@@ -575,7 +575,7 @@ define({
 			console.error(event.detail.type);
 		}
 		function onMotionChange(SensorAccelerationData){
-			console.log(SensorAccelerationData.detail);
+			//console.log(SensorAccelerationData.detail);
 			motionFromGyro.accelerationIncludingGravity = SensorAccelerationData.detail.accelerationIncludingGravity;
 			motion = motionFromGyro;
 		}
@@ -592,7 +592,7 @@ define({
 			switch (type) {
 			case "Ambient":
 				// Normal -> Ambient
-				console.error('activateMode ambiant');
+				console.log('activateMode ambiant');
 				if (motionSensor.isAvailable() && motionSensor.isStarted()) {
 					motionSensor.stop();
 				}
@@ -615,7 +615,7 @@ define({
 					pressureSensor.start();
 				}
 				isAmbientMode = false;
-				console.error('activateMode normal');
+				console.log('activateMode normal');
 				
 				
 				
@@ -635,14 +635,14 @@ define({
 		function bindEvents() {
 
 			window.addEventListener("timetick", function (){
-				console.error('timetick');
+				console.log('timetick');
 				if (isAmbientMode) {
 					drawAmbientWatch();
 				}
 			});
 
 			window.addEventListener("ambientmodechanged", function(e) {
-				console.error('ambientmodechanged');
+				console.log('ambientmodechanged event');
 				if (e.detail.ambientMode === true) {
 					// Rendering ambient mode case
 					activateMode("Ambient");
@@ -654,7 +654,7 @@ define({
 			});
 			
 			event.on("visibilitychange", function(e) {
-				console.error('visibilitychange');
+				console.log('visibilitychange event');
 				if (!document.hidden) {
 					if (isAmbientMode === true) {
 						// Rendering ambient mode case
@@ -746,7 +746,7 @@ define({
 			setDefaultVariables();
 	
 			
-			//motionSensor.init();
+			
 			
 			
 			
@@ -775,7 +775,7 @@ define({
 			sysInfo.checkBattery();
 			
 			
-			drawWatchLayout();//git
+			drawWatchLayout();
 			animRequest = window.requestAnimationFrame(drawWatchContent);
 			/*animTimeout = setTimeout(function() {
 				animRequest = window.requestAnimationFrame(drawTimeContent);
