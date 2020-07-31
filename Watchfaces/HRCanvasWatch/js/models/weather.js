@@ -151,7 +151,7 @@ define({
 		function onPositionFound() {
 			
 			coords = locationModel.getData();
-			
+			event.fire ('log','onPositionFound');
 			if (coords !== 'undefined') {
 				doUpdate();
 			} else {

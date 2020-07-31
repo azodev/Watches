@@ -74,6 +74,7 @@ define({
 		 * @private
 		 * @type {object}
 		 */
+		
 		pedometerData = {
 			stepStatus : null,
 			speed : null,
@@ -86,7 +87,8 @@ define({
 		var pData = pedometerData;
 		var pedometerDataLastGood = pedometerData;
 		var started = false;
-		
+		var firstSteps = 0;
+		var lasthour = null;
 
 		/**
 		 * Sets heart rate and time values received from sensor. Returns heart
@@ -99,19 +101,29 @@ define({
 		 * @returns {object}
 		 */
 		function setPedometerData(pedometerInfo) {
-			pData = {
-				stepStatus : pedometerInfo.stepStatus,
-				speed : pedometerInfo.speed,
-				walkingFrequency : pedometerInfo.walkingFrequency,
-				accumulativeTotalStepCount : pedometerInfo.accumulativeTotalStepCount,
-				cumulativeCalorie: pedometerInfo.cumulativeCalorie,
-				cumulativeTotalStepCount: pedometerInfo.cumulativeTotalStepCount,
-				stepCountDifferences: pedometerInfo.stepCountDifferences
-			};
 			
+			if (firstSteps == 0) {
+				firstSteps = pedometerInfo.accumulativeTotalStepCount;
+			}
+			
+			if (lasthour >  tizen.time.getCurrentDateTime().getHours()){
+				firstSteps = pedometerInfo.accumulativeTotalStepCount;
+			}
+			lasthour = tizen.time.getCurrentDateTime().getHours();
+			pData = {
+					stepStatus : pedometerInfo.stepStatus,
+					speed : pedometerInfo.speed,
+					walkingFrequency : pedometerInfo.walkingFrequency,
+					accumulativeTotalStepCount : pedometerInfo.accumulativeTotalStepCount-firstSteps,
+					cumulativeCalorie: pedometerInfo.cumulativeCalorie,
+					cumulativeTotalStepCount: pedometerInfo.cumulativeTotalStepCount,
+					stepCountDifferences: pedometerInfo.stepCountDifferences
+				};
 			pedometerData = pData;
+			
+			
 			pedometerDataLastGood = pData;
-
+			
 			return pData;
 		}
 
@@ -135,11 +147,11 @@ define({
 		function resetData() {
 			pedometerData = {
 				stepStatus : '-',
-				speed : '-',
+				speed : 0,
 				walkingFrequency : '-',
-				accumulativeTotalStepCount : '_',
-				cumulativeCalorie: '-',
-				cumulativeTotalStepCount: '-'
+				accumulativeTotalStepCount : 0,
+				cumulativeCalorie: 0,
+				cumulativeTotalStepCount: 0
 				
 			};
 		}
@@ -156,16 +168,17 @@ define({
 		function handlePedometerInfo(pedometerInfo) {
 			console.log(pedometerInfo);
 			setPedometerData(pedometerInfo);
-			tizen.humanactivitymonitor.unsetAccumulativePedometerListener();
-			started = false;
-			event.fire('change', getData());
+			//pedometerSensor.unsetAccumulativePedometerListener();
+			//started = false;
+			//event.fire('change', getData());
 			
 		}
 		function onchangedCB(pedometerInfo){
 			  console.log("From now on, you will be notified when the pedometer data changes.");
-			pedometerSensor.getHumanActivityData(CONTEXT_TYPE, handlePedometerInfo, onerrorCB);
+			//pedometerSensor.getHumanActivityData(CONTEXT_TYPE, handlePedometerInfo, onerrorCB);
 		}
 		function onerrorCB(error){
+			 event.fire('error',"Error occurs. name:"+error.name + ", message: "+error.message);
 			 console.log("Error occurs. name:"+error.name + ", message: "+error.message);
 		}
 		/**
@@ -175,13 +188,15 @@ define({
 		 * @public
 		 */
 		function start() {
-			resetData();
+			//resetData();
 			console.log('Starting PEDO Sensor');
 			if (started === false){
-				tizen.humanactivitymonitor.setAccumulativePedometerListener(handlePedometerInfo);
+				//pedometerSensor.getHumanActivityData(CONTEXT_TYPE, handlePedometerInfo,onerrorCB);
+				pedometerSensor.setAccumulativePedometerListener(handlePedometerInfo);
+				
 				started = true;
 			}
-			//pedometerSensor.getHumanActivityData(CONTEXT_TYPE, onchangedCB);
+			
 		}
 
 		/**
@@ -191,7 +206,7 @@ define({
 		 * @public
 		 */
 		function stop() {
-			//tizen.humanactivitymonitor.unsetAccumulativePedometerListener();
+			pedometerSensor.unsetAccumulativePedometerListener();
 		}
 
 		/**
@@ -226,7 +241,8 @@ define({
 		return {
 			init : init,
 			start : start,
-			stop : stop
+			stop : stop,
+			getData: getData
 		};
 	}
 });

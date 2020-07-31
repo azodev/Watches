@@ -37,7 +37,7 @@
 
 define({
 	name : 'views/canvas',
-	requires : [ 'helpers/date', 'helpers/text', 'core/event', 'models/settings', 'models/canvasDrawer', 'models/heartRate', 'models/location', 'models/pressure', 'models/weather', 'core/systeminfo', 'models/motion' ],
+	requires : [ 'helpers/date', 'helpers/text', 'core/event', 'models/settings', 'models/canvasDrawer', 'models/heartRate', 'models/location', 'models/pressure', 'models/weather', 'core/systeminfo', 'models/motion', 'models/pedometer' ],
 	def : function viewsPageCanvas(req) {
 		'use strict';
 
@@ -61,7 +61,7 @@ define({
 		var heartRate = req.models.heartRate;
 		var pressureSensor = req.models.pressure;
 		var motionSensor = req.models.motion;
-		var pedometer = req.models.pedometer;
+		var pedometerSensor = req.models.pedometer;
 		var locationModel = req.models.location;
 		var weatherModel = req.models.weather;
 		var gravSensor  = null;
@@ -228,7 +228,7 @@ define({
 				
 			});
 			if (heartRateFound && heartRate.getData().rate !== null) {
-				canvasDrawer.renderText(ctxContent, heartRate.getData().rate, center.x, center.y + (watchRadius * 0.7), 25, "#c9c9c9", {
+				canvasDrawer.renderText(ctxContent, heartRate.getData().rate, center.x, center.y + (watchRadius * 0.65), 25, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'center',
 					gradient : true,
@@ -237,10 +237,27 @@ define({
 				});
 				canvasDrawer.renderCircle(ctxContent, {
 					x : center.x,
-					y : center.y + (watchRadius * 0.7)
+					y : center.y + (watchRadius * 0.65)
 				}, 30, "#000000",2);
 
 			}
+			canvasDrawer.renderText(ctxContent, pedometerSensor.getData().accumulativeTotalStepCount, center.x - (watchRadius * 0.3), center.y + (watchRadius * 0.6), 20, "#c9c9c9", {
+				font : 'FutureNow',
+				align : 'center',
+				gradient : true,
+				motion: motion
+					
+			});
+			//console.log(pedometerSensor.getData().stepCountDifferences[0].StepDifference);
+			/*canvasDrawer.renderText(ctxContent, pedometerSensor.getData().cumulativeTotalStepCount, center.x - (watchRadius * 0.2), center.y + (watchRadius * 0.7), 20, "#c9c9c9", {
+				font : 'FutureNow',
+				align : 'center',
+				gradient : true,
+				motion: motion
+					
+			});*/
+			
+			
 			// Draw the text for date
 			canvasDrawer.renderText(ctxContent, Math.round(batteryLevel) + '%', center.x, center.y - (watchRadius * 0.55), 15, "#c9c9c9", {
 				font : 'FutureNow',
@@ -412,7 +429,7 @@ define({
 
 		}
 		function onPedometerDataChange(pedometerInfo) {
-
+			event.fire ('log','onPedometerDataChange');
 			pedometerValue = {
 				stepStatus : pedometerInfo.detail.stepStatus,
 				speed : pedometerInfo.detail.speed,
@@ -593,12 +610,7 @@ define({
 			case "Ambient":
 				// Normal -> Ambient
 				console.log('activateMode ambiant');
-				if (motionSensor.isAvailable() && motionSensor.isStarted()) {
-					motionSensor.stop();
-				}
-				if (pressureSensor.isAvailable() && pressureSensor.isStarted()) {
-					pressureSensor.stop();
-				}
+				stopSensors();
 				isAmbientMode = true;
 				drawAmbientWatch(null);
 				
@@ -608,12 +620,7 @@ define({
 				then = Date.now();
 				startTime = then;
 				frame = 0;
-				if (motionSensor.isAvailable() && !motionSensor.isStarted()) {
-					motionSensor.start();
-				}
-				if (pressureSensor.isAvailable() && !pressureSensor.isStarted()) {
-					pressureSensor.start();
-				}
+				startSensors();
 				isAmbientMode = false;
 				console.log('activateMode normal');
 				
@@ -631,6 +638,22 @@ define({
 			}
 		}
 		
+		function startSensors(){
+			if (motionSensor.isAvailable() && !motionSensor.isStarted()) {
+				motionSensor.start();
+			}
+			if (pressureSensor.isAvailable() && !pressureSensor.isStarted()) {
+				pressureSensor.start();
+			}
+		}
+		function stopSensors(){
+			if (motionSensor.isAvailable() && motionSensor.isStarted()) {
+				motionSensor.stop();
+			}
+			if (pressureSensor.isAvailable() && pressureSensor.isStarted()) {
+				pressureSensor.stop();
+			}
+		}
 		
 		function bindEvents() {
 
@@ -665,9 +688,12 @@ define({
 					}
 				}
 				else {
-					/*event.fire ('hidden','clearScreen');
-					ctxLayout.clearRect(0, 0, ctxLayout.canvas.width, ctxLayout.canvas.height);
-					canvasLayout.clearRect(0, 0, ctxLayout.canvas.width, ctxLayout.canvas.height);*/
+					if (isAmbientMode !== true) {
+						//event.fire ('hidden','clearScreen');
+						ctxLayout.clearRect(0, 0, ctxLayout.canvas.width, ctxLayout.canvas.height);
+						canvasLayout.clearRect(0, 0, ctxLayout.canvas.width, ctxLayout.canvas.height);
+						stopSensors();
+					}
 				}
 			});
 			event.on({
@@ -684,7 +710,7 @@ define({
 				'models.pressure.change' : onPressureChange,
 				'models.motion.change' : onMotionChange,
 				'models.motion.error' : onMotionError,
-				'models.pedometer.change' : onPedometerDataChange,
+				//'models.pedometer.change' : onPedometerDataChange,
 				'models.weather.found' : onWeatherFound
 			});
 			sysInfo.listenBatteryLowState();
@@ -728,7 +754,7 @@ define({
 		}
 		function mkLocation() {
 			locationModel.start();
-
+			
 			window.setTimeout(function() {
 				locationModel.stop();
 			}, 20000 // stop checking after 15 seconds
@@ -749,15 +775,11 @@ define({
 			startTime = then;
 			bindEvents();
 			setDefaultVariables();
-	
-			
-			
-			
-			
-			
 			
 			mkHR();
 			mkLocation();
+			
+			pedometerSensor.start();
 			
 			if (motionSensor.isAvailable()) {
 				motionSensor.setOptions({

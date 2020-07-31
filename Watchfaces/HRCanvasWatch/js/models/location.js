@@ -187,6 +187,10 @@ define({
 			console.log('Location succcess in fallback');
 			event.fire('change', getData());
 		}
+		function doFallback() {
+			//event.fire('error', 'doFallback');
+			locationSensor.start(CONTEXT_TYPE, succcessFallback, errorFallback, optionGPS);
+		}
 		function errorFallback(err) {
 			errorMsg = err.message;
 			console.error('Location error :'+err.message);
@@ -195,10 +199,7 @@ define({
 			//event.fire('change', getDataLastGood());
 		}
 
-		function doFallback() {
-			event.fire('error', 'doFallback');
-			locationSensor.start(CONTEXT_TYPE, succcessFallback, errorFallback, optionGPS);
-		}
+		
 
 		function errorCallback(err) {
 			switch (err.code) {
@@ -206,7 +207,7 @@ define({
 				//event.fire('error', err.message);
 				// Quick fallback when no suitable cached position exists.
 				doFallback();
-				console.error(err.message);
+				//console.error(err.message);
 				break;
 			default:
 				//event.fire('error', err.message);
@@ -232,7 +233,7 @@ define({
 				locationWatcher = navigator.geolocation.watchPosition(successCallback, errorCallback, options);
 			}
 
-			doFallback();
+			//doFallback();
 
 		}
 

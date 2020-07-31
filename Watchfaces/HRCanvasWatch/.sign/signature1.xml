@@ -14,8 +14,8 @@ RNcfCoyBfg==</DigestValue>
 </Reference>
 <Reference URI="author-signature.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>1M+G+znBMCPLm/462SPuf7JXyXZP9rMogj37tNhLs+hpDMKwJfROm1jpNhZnJxboasTRggJ0s0n7
-i2TBZzAQIA==</DigestValue>
+<DigestValue>Mk0Elo0Bq3al9Ncy1KEn7NaCZ3UECsC/NLGHHY5SNXTHvH9XaXm142WqthrL9ooSk3yoaX4WBxha
+ixb7ANRU+A==</DigestValue>
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -729,8 +729,8 @@ ll4diwlL7w==</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2Flocation.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>6sLMo/hapIv5kzbEzVOrpEMDaCiSUPjot07T/s1J+dYq1YPij82p2eUHK5hjqskVUwvqbT7cgNqE
-pzLw6xrOKw==</DigestValue>
+<DigestValue>oPXUGpwWOvSww+xiGUgFhlTnKqwopC82B9S9GL3sGmpiJBUzmOg35cTKhmesHfnSJsuHd8ntoOis
+1Aywjk1r/g==</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2Fmotion.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -739,8 +739,8 @@ kayGwIdDTw==</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2Fpedometer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>SpMcO1EXRxUW4oFcVIc/rt6s44RBTHKa8VsXwke8ZT9mJ1aOc9Z393DohCwY87d36DDh/nejrcXS
-eAjnwyKLcA==</DigestValue>
+<DigestValue>CvEZ4/wHevELMzJHQqPi6ZxO0UgkRIkmSr4koFNH++1AMcrAIXRCTP5tFEB2qgbmCI9DRIbcJ/cq
+zF1/xRTFwg==</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2Fpressure.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -754,8 +754,8 @@ dcAN0ZyPQw==</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2Fweather.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>Fu5BVev2+emxkBWzy38pLQSHxdzwm039cOKPL5Cr/rXlLuearHSUdvBWWRAGYc0y+Is0YZX+rk/u
-ne1bIlFUPQ==</DigestValue>
+<DigestValue>GhFYcOXzaTr/sUg/MEMD6CRCtDcOTkvt9woZv+IuwRNnH9lW7WtMTm6SOO3SeZehbxYoX0Zh5Cwi
+QLXwW/d6Yg==</DigestValue>
 </Reference>
 <Reference URI="js%2Ftau-config.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -764,8 +764,8 @@ ne1bIlFUPQ==</DigestValue>
 </Reference>
 <Reference URI="js%2Fviews%2Fcanvas.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>cZ72JxEJtO8tEhLmEq3ZS4ENgQi2pUo++jpkGoYJGLITJCVmp/w/QRm3WNplFTe1V6/I4KFMC2vs
-hyzsLH3fGA==</DigestValue>
+<DigestValue>u9chFdnv8qGaaQb8/cIonYzyslDHguG4fTGSzLGbSooDYhBE30H3Gk+SZju6AwnYVQOvyJO3Vism
+slyB+lghZA==</DigestValue>
 </Reference>
 <Reference URI="js%2Fviews%2Finit.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -774,8 +774,8 @@ hyzsLH3fGA==</DigestValue>
 </Reference>
 <Reference URI="js%2Fviews%2Fmain.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>CcvJewGJXMeJB6tKzi/Ds76DXX2AxdlgBXtKqOCnbLi5oY/QCqoA8Au2CG8zLPXo1Po5DtNObfg2
-HxI/TCRPmQ==</DigestValue>
+<DigestValue>ews6z4YPYuaGB+8TGIphfX2Z9ZoCz5fIMI4ARUd28BeYAMNt8OlzUV2LxSzPifmizq+ZD1I5MSmK
+Nitv4DrV3g==</DigestValue>
 </Reference>
 <Reference URI="lib%2Fparticules%2Fbower.json">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -2072,11 +2072,11 @@ GyvKX9Snig==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-CxXFagKitLViG55MeWT+PV9xrw214HKWNFGtBSyU6nGxX9bX/AGJWsG52cwSzFSCbRU7lY4oiT5x
-K7+33puW0Hjcg+ME7ZD9zFw8XZU/Pm5MHHi7cPpTG+Dg08oboRF6dbPHNCkZNwy6Jc3T5yUGLr4K
-faMRCtVlL02zSF3IL789u5Y2qf2o4X+k6+k7vuXasflh/VKEPbEeqe1dEts0lSKDQJa0SR58AUvY
-CE/DM5JpN+6mom4HL9zz5E4Ts1IDwPrxQAA8u3pnd/BICCWKDv0fFIExYY2d/seSlsvIrVRt6dkf
-8zxEk9aL5QpYA5JQ+u+WXV+hUcnPfrmUl/QXEw==
+Lt5+dLMtr1We62aG6sJtGm3i2V93Z8wyV2OMDt7vFJqnPvRcQvAq8vy9E19abpLC7YOioPJbhiI8
+4JkUNiXmvqlL2VnmTv8ABduF1Vl8qI/lK4avXlg6eW87uuAyffu/bp7SkRKnrZGW4e5SkxdPfV/0
+cyaEp0m7XKD4klk2ccuAeqztWJhlzSO95R7Thnee/tFzufWbPR7dlJYk2NzSDL3A4uArdhOp/lqU
+2rLnQ+uyKZyABKQgKM3Vz+RiUwBZ7ql9uqJ5a+BQugS7zEN7XnM46MelShQhuiehKLmkUSlrGDXB
+VNPLQ+OpeumBleVEFfjlnUHrlJ5QPfMLmiacAw==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

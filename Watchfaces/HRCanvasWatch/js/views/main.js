@@ -106,7 +106,9 @@ define({
 			 //'models.location.found': postNotification,
 			 'models.location.distanceChange': postNotification,
 			 'models.motion.error': postNotification,
-			 'views.canvas.hidden': postNotification,
+			 'models.pedometer.error': postNotification,
+			 'views.canvas.log': postNotification,
+			 'models.weather.log' : postNotification,
 			 'models.weather.error' : postNotification
 
 			});
