@@ -103,7 +103,10 @@ define({
 			});
 			event.on({
 			 'models.location.error': postNotification,
+			 //'models.location.found': postNotification,
+			 'models.location.distanceChange': postNotification,
 			 'models.motion.error': postNotification,
+			 'views.canvas.hidden': postNotification,
 			 'models.weather.error' : postNotification
 
 			});

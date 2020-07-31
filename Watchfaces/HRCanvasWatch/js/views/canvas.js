@@ -525,7 +525,7 @@ define({
 		 */
 		function updateAltitudeValue(value) {
 			// reference = settings.get('pressure');
-			altitude = parseFloat(value).toFixed(0);
+			altitude = parseFloat(value).toFixed(1);
 		}
 
 		function drawAmbientWatch(e) {
@@ -663,6 +663,11 @@ define({
 						// Rendering normal case
 						activateMode("Normal");
 					}
+				}
+				else {
+					/*event.fire ('hidden','clearScreen');
+					ctxLayout.clearRect(0, 0, ctxLayout.canvas.width, ctxLayout.canvas.height);
+					canvasLayout.clearRect(0, 0, ctxLayout.canvas.width, ctxLayout.canvas.height);*/
 				}
 			});
 			event.on({

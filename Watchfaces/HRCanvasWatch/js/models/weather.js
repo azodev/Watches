@@ -171,12 +171,15 @@ define({
 		}
 		function onUpdateTriggered (){
 			coords = locationModel.getData();
-			if (coords !== 'undefined' && coords.latitude !== null) {
-				doUpdate();
-			} else {
-				console.error('error : W Cannot decode position');
-				event.fire ('error','error onUpdateTriggered');
+			if (locationModel.getPositionAquiered){
+				if (coords !== 'undefined' && coords.latitude !== null) {
+					doUpdate();
+				} else {
+					console.error('error : W Cannot decode position');
+					//event.fire ('error','error onUpdateTriggered');
+				}
 			}
+			
 		}
 		function doUpdate(){
 			weatherFound = false;

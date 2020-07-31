@@ -14,8 +14,8 @@ RNcfCoyBfg==</DigestValue>
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>gSLLILmU5EXql5/BBneVYkrYz9LgXoT0rr4BQdA0ZOXwRcp6/xZ5G7XAQVzT2G6833GC/pxfQb5G
-sbaKABdaJQ==</DigestValue>
+<DigestValue>hpzhts1ZLu0d7slY4GC2mSyU7C6sB8ld2dgZnoVIdjXz3wAiGeak7Dipi2s0q8LdIIayJoL2R7+T
+jbUKHzqu5A==</DigestValue>
 </Reference>
 <Reference URI="css%2Fstyle.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -702,6 +702,11 @@ hUx1JHzUoQ==</DigestValue>
 <DigestValue>7Su2DjBUPZ5ORMOTCSnaPJPIRyMZyIuKGhKcTVkH/MDH2H+iUmFpVE8T4MRhd/aOX3Ky+ilc+S4q
 uoowPhkRgQ==</DigestValue>
 </Reference>
+<Reference URI="js%2Fmodels%2Fcalendar.js">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
+<DigestValue>z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGl
+ODJ6+SfaPg==</DigestValue>
+</Reference>
 <Reference URI="js%2Fmodels%2Fcalories.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
 <DigestValue>z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGl
@@ -719,8 +724,8 @@ ll4diwlL7w==</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2Flocation.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>151b+BlEpAlpYkKT+2p/O1ji38wsDlJTVsEDwf7Mu16J4z3GLRMFtyw4QI7YJpn/pl4mMgOcTqZm
-qrrgblCZDw==</DigestValue>
+<DigestValue>6sLMo/hapIv5kzbEzVOrpEMDaCiSUPjot07T/s1J+dYq1YPij82p2eUHK5hjqskVUwvqbT7cgNqE
+pzLw6xrOKw==</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2Fmotion.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -744,8 +749,8 @@ dcAN0ZyPQw==</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2Fweather.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>F1zD0t+qtiWAc9hoMxu8ewaifFQrNErgyg7wf0oxgCfUZMMRD6BEKdUStO3BlINUnWg3sxo8rSjF
-KzVKs+wH0w==</DigestValue>
+<DigestValue>Fu5BVev2+emxkBWzy38pLQSHxdzwm039cOKPL5Cr/rXlLuearHSUdvBWWRAGYc0y+Is0YZX+rk/u
+ne1bIlFUPQ==</DigestValue>
 </Reference>
 <Reference URI="js%2Ftau-config.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -754,8 +759,8 @@ KzVKs+wH0w==</DigestValue>
 </Reference>
 <Reference URI="js%2Fviews%2Fcanvas.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>+0UA8jgBGaCAcD7borLI5F/aa+O+AvqAMcoHgPpGlJoJEKVDTyZrw1br9L4AC7aSMbKL9fDLMH1U
-RG4pYUd3DQ==</DigestValue>
+<DigestValue>cZ72JxEJtO8tEhLmEq3ZS4ENgQi2pUo++jpkGoYJGLITJCVmp/w/QRm3WNplFTe1V6/I4KFMC2vs
+hyzsLH3fGA==</DigestValue>
 </Reference>
 <Reference URI="js%2Fviews%2Finit.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -764,8 +769,8 @@ RG4pYUd3DQ==</DigestValue>
 </Reference>
 <Reference URI="js%2Fviews%2Fmain.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>Y9EWMNBvCxP/13a0T4xcGk5D5R/njU0IbGrRcfYylZtGblYHyKNs45YPjwcjdTehsZiV8L91HiqG
-xAjsfV44WA==</DigestValue>
+<DigestValue>CcvJewGJXMeJB6tKzi/Ds76DXX2AxdlgBXtKqOCnbLi5oY/QCqoA8Au2CG8zLPXo1Po5DtNObfg2
+HxI/TCRPmQ==</DigestValue>
 </Reference>
 <Reference URI="lib%2Fparticules%2Fbower.json">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -2062,11 +2067,11 @@ QY10fG1EWQ==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-rMHDTO8Z0/cf3+oxy/MniPIPHA9/MA4dJj4qGCziSy2h2op+FpuLs3DI/VchYNb47CjZ5ufVyqLE
-verZ60inB73MMsSsjvNmpqjEKpowodu5LMfv4p00e21iB4+XI/DUzIXVqpi+4jgdTVn3jxkfFDn9
-VvGd7EdsuzlHYlTpvMwuAADjA9z9y7huC1OImZOTbY/RDxAjHZsjZMgXOm4psOXFGVbGm8HOpuPT
-PLSz/Zvo/s307FPu5k/I3HbJ+1HgmfICaFBXfn08YEjfKqVQBvdvLV4RNCgZJ3HP2444cX+xU1ZN
-bMARwWIjbJ6/pIX8CDqW+szx0Z2Cs0a+gDmCnA==
+t6Gj43U0WRMC5PUOwhjzvnyxVunrwd5lKQLyCnYngMBDfbjL0sQBUKxyYHTE5T/BsrkJqtmP8orU
+QWnvgMTsEo6L8YwoPnf35hfolwQ6xqLzYo6iFcw75Q10wrV1JjJKxtPgSjSLsPTlounajrhzlBBu
+6GTp4dosI//9msKBGIoJZlhHrHWzux7/JwsHeMNVMQVHZd7eXKM9xR+tksxNO5IBaBE851VVUHY2
+pje3i+1jTu4auzS7TfzQkfGrpTLjV7KRDvdP+FzE/DBc9lmPc6toi7HOqwwtcjyXpe5ofKUOE3Mz
+NBXhjXUcFOFw1vussxOLZMASY38/2/OeZ3Uqpw==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

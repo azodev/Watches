@@ -137,7 +137,7 @@ define({
 					))
 			{
 				//event.fire('distanceChange', getData());
-				event.fire('error', 'distanceChange');
+				event.fire('distanceChange', 'distanceChange');
 				//console.error('distanceChange');
 			}
 		}
@@ -166,6 +166,7 @@ define({
 		function succcessFallback(pos) {
 			if (pos.gpsInfo) {
 				crd = pos.gpsInfo[0];
+				date = new Date(pos.timestamp);
 				locationData = {
 					latitude : crd.latitude,
 					longitude : crd.longitude,
@@ -174,7 +175,8 @@ define({
 					timestamp : crd.timestamp,
 					date : getTime(crd.timestamp)
 				};
-				
+				analyzeCoords(crd);
+				locationDataLastGood = locationData;
 				if (!positionAquiered){
 					positionAquiered = true;
 					event.fire('found', positionAquiered);
@@ -201,13 +203,13 @@ define({
 		function errorCallback(err) {
 			switch (err.code) {
 			case err.TIMEOUT:
-				event.fire('error', err.message);
+				//event.fire('error', err.message);
 				// Quick fallback when no suitable cached position exists.
 				doFallback();
 				console.error(err.message);
 				break;
 			default:
-				event.fire('error', err.message);
+				//event.fire('error', err.message);
 				console.error(err.message);
 			}
 
@@ -230,7 +232,7 @@ define({
 				locationWatcher = navigator.geolocation.watchPosition(successCallback, errorCallback, options);
 			}
 
-			//doFallback();
+			doFallback();
 
 		}
 
