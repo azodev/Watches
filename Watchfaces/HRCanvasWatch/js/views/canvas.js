@@ -118,7 +118,9 @@ define({
 		var motion = null;
 		var motionFromGyro = {accelerationIncludingGravity : {x:null,y:null}}; 
 		
-		
+		var max_particles = 500;
+		var particles = [];
+		var init_num = null;
 		const CLICK_INTERVAL = 1000;
 		var lastClickTimeStamp = null, currentClickTimeStamp = null;
 		
@@ -135,16 +137,21 @@ define({
 		function handleDoubleClick(canvas,ev) {
 			
 			var pos = getMousePosition(canvas,ev);
-			console.log(canvas);
-			console.log(ev);
+			//console.log(canvas);
+			//console.log(ev);
 			console.log(pos);
-			triggerCanvasDoubleClick(ev);
+			//center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 250, 70
+			if ((pos.x >= center.x - (watchRadius * 0.70) && pos.x <= (center.x - (watchRadius * 0.70)+250)  )  && (pos.y  >= center.y + (watchRadius * 0.06)  && pos.y <= (center.y + (watchRadius * 0.06))+70 )   ){
+				triggerCanvasDoubleClick(ev);
+			}
+			
 		}
 		function handleSingleClick(ev) {
 			console.log('handleSingleClick');
 		}
 		function triggerCanvasDoubleClick(ev) {
 			console.log('handleDoubleClick');
+			
 			event.fire('triggerCanvasDoubleClick', ev);
 		}
 		function getMousePosition(canvas, event) { 
@@ -220,9 +227,16 @@ define({
 			}
 			// Clear canvas
 			ctxContent.clearRect(0, 0, ctxContent.canvas.width, ctxContent.canvas.height);
+			particles = particles.filter(function(p) {
+			    return p.move()
+			  })
+			  if(particles.length < init_num){
+			    popolate(1)
+			  }
+			clear();
 			canvasDrawer.renderBackground(ctxContent,ctxContent.canvas.width, ctxContent.canvas.height, "black",{gradient:true,motion:motion});
-			canvasDrawer.renderGrid (ctxContent,  "#000000",2,{motion:motion});
-			
+			//canvasDrawer.renderGrid (ctxContent,  "#000000",2,{motion:motion});
+			//weather
 			canvasDrawer.roundRect(ctxContent, center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 250, 70, 10, false, true, "#000000", "#000000");
 
 			canvasDrawer.renderCircle(ctxContent, center, watchRadius *1, "#000000",4);
@@ -283,14 +297,7 @@ define({
 				motion: motion
 					
 			});
-			//console.log(pedometerSensor.getData().stepCountDifferences[0].StepDifference);
-			/*canvasDrawer.renderText(ctxContent, pedometerSensor.getData().cumulativeTotalStepCount, center.x - (watchRadius * 0.2), center.y + (watchRadius * 0.7), 20, "#c9c9c9", {
-				font : 'FutureNow',
-				align : 'center',
-				gradient : true,
-				motion: motion
-					
-			});*/
+			
 			
 			
 			// Draw the text for date
@@ -324,14 +331,10 @@ define({
 				font : 'FutureNow',
 				align : 'right'
 			});
-			/*animTimeout = setTimeout(function() {
-				animRequest = window.requestAnimationFrame(drawWatchContent);
-			}, nextMove);*/
+			
 
 			animRequest = requestAnimationFrame(drawWatchContent);
-			// }, nextMove);
-			// canvasDrawer.loop(ctxContent,ctxContent.canvas.width,
-			// ctxContent.canvas.height);
+	
 
 		}
 		function drawTimeContent(){
@@ -810,6 +813,25 @@ define({
 			);
 		}
 		
+		
+		
+		function clear(){
+			  ctxContent.globalAlpha=0.05;
+			  ctxContent.fillStyle='#000155';
+			  ctxContent.fillStyle='#000021'; // Alien
+			  ctxContent.fillRect(0, 0, canvasContent.width, canvasContent.height);
+			  ctxContent.globalAlpha=1;
+			}
+		function popolate(num){
+			  for (var i = 0; i < num; i++) {
+			    setTimeout(
+			      function(){
+			        particles.push(new ParticleAlien(ctxContent, i))
+			      }.bind(this)
+			    ,i*20)
+			  }
+			  return particles.length
+			}
 		function init() {
 			nextMove = 1000 / fps;
 			then = Date.now();
@@ -831,6 +853,10 @@ define({
 				motionSensor.start();
 			}
 			
+			weatherInterval = window.setInterval(function(e) {
+				event.fire('triggerCanvasDoubleClick',e);
+			},intervals.weather
+			);			
 			
 			if (pressureSensor.isAvailable()) {
 				pressureSensor.setOptions({
@@ -844,6 +870,13 @@ define({
 			
 			
 			drawWatchLayout();
+			
+			
+			
+			init_num  = popolate(max_particles);
+			
+			
+			
 			animRequest = window.requestAnimationFrame(drawWatchContent);
 			/*animTimeout = setTimeout(function() {
 				animRequest = window.requestAnimationFrame(drawTimeContent);
@@ -857,3 +890,53 @@ define({
 	}
 
 });
+class ParticleAlien{
+	  constructor(canvas, progress){
+	    let random = Math.random();
+	    this.progress = 0;
+	    this.canvas = canvas;
+
+	    this.x = (360/2)  + (Math.random()*200 - Math.random()*200)
+	    this.y = (360/2) + (Math.random()*200 - Math.random()*200)
+	    this.s = Math.random() * 1;
+	    this.a = 0
+	    this.w = 360
+	    this.h = 360
+	    this.radius = random > .2 ? Math.random()*1 : Math.random()*3
+	    this.color  = random > .2 ? "#2E4765" : "#BDDAF0"
+	    this.radius = random > .8 ? Math.random()*2 : this.radius
+	    this.color  = random > .8 ? "#2E4765" : this.color
+
+	    // this.color  = random > .1 ? "#ffae00" : "#f0ff00" // Alien
+	    this.variantx1 = Math.random()*300
+	    this.variantx2 = Math.random()*400
+	    this.varianty1 = Math.random()*100
+	    this.varianty2 = Math.random()*120
+	  }
+
+	  render(){
+	    this.canvas.beginPath();
+	    this.canvas.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+	    this.canvas.lineWidth = 2;
+	    this.canvas.fillStyle = this.color;
+	    this.canvas.fill();
+	    this.canvas.closePath();
+	  }
+
+	  move(){
+	    this.x += Math.cos(this.a) * this.s;
+	    this.y += Math.sin(this.a) * this.s;
+	    this.a += Math.random() * 0.8 - 0.4;
+
+	    if(this.x < 0 || this.x > this.w - this.radius){
+	      return false;
+	    }
+
+	    if(this.y < 0 || this.y > this.h - this.radius){
+	      return false;
+	    }
+	    this.render();
+	    this.progress++;
+	    return true;
+	  }
+}

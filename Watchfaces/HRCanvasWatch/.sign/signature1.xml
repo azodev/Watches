@@ -14,8 +14,8 @@ RNcfCoyBfg==</DigestValue>
 </Reference>
 <Reference URI="author-signature.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>Sqv8UD9MwQUiALcdyqkUVCUjmf8hQdLAD00lNPDmFDuuWGe1QVSLpSk1gw5sXIl/61+IewwisVZB
-FlFRzRl9Mg==</DigestValue>
+<DigestValue>oElTg5KRgd/JmiKTeOA5GyjZMsNerzZ2Y38XH7/PvDw3MuLkn02F1ZqrT9cLJIe0Wv8qhzmDNsGv
+/Q0CuVa3tQ==</DigestValue>
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -719,8 +719,8 @@ ODJ6+SfaPg==</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2FcanvasDrawer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>nO3IiQxR9IQ5RBRrbaoBc2X5sSUpSOjlbHvY67RxI7x/XrFnMGEylI2QiCYKXvy5al2d6QQWIvYD
-9oljJBmd7g==</DigestValue>
+<DigestValue>I99Khq9/nCss6xMUFJ48Rfeso07ZMYQww0wN08Uu+rPVBCQa5ZOiVWiKFXWmt3rfN+rwh1VhymLO
+6QD5QxJZ+g==</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2FheartRate.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -754,8 +754,8 @@ dcAN0ZyPQw==</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2Fweather.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>clWC2Vfp7Ho0mpNVuo4dQ8GLY3sL9N/3BmC2VTszyaTlSBD6+CqOXB4JSTps26veZz3vA3roQNK7
-Yh4ALiAjkA==</DigestValue>
+<DigestValue>NexuxPZ6iQ/YRTcv/HQNXbsjjJnyVz7M4ptd0RG+SOwmAn0o4VlLSaf0Rq3sJH5QCMo6dfD003d2
+DO9f7MIEYg==</DigestValue>
 </Reference>
 <Reference URI="js%2Ftau-config.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -764,8 +764,8 @@ Yh4ALiAjkA==</DigestValue>
 </Reference>
 <Reference URI="js%2Fviews%2Fcanvas.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>WxDleCWmEbk2opBbMN/U5lljhIICspb5Eb/wszAPFthQvxu9cPCuo5Tl/j0roZG/6XLsXFxFlMJO
-J+te/yWl9Q==</DigestValue>
+<DigestValue>FEcm4vIUTzVEp+w8/ol9v4i7RnB9xWJUoizqWka1gWT3j7grn9Idw3XGkyvNWAtTj0sGvXF9rJW3
+nfWSCxGZrQ==</DigestValue>
 </Reference>
 <Reference URI="js%2Fviews%2Finit.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -776,61 +776,6 @@ J+te/yWl9Q==</DigestValue>
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
 <DigestValue>Op7UOrP5dCRXzO6Y7WPy3xbHPjsw4YS9Tv9vbVT/3UuG+XWyWWOVmdnwuBb0oYqAPxdg0n6z4SJB
 5CWvXYT8pg==</DigestValue>
-</Reference>
-<Reference URI="lib%2Fparticules%2Fbower.json">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>xnBFoCZgOBVGTo97agsv+sLGlUiI6lOyCBLnbAjEe81k6djbXpAGUVV90IwmBxYDN11OL8NlRvYR
-SmzfPXqBwg==</DigestValue>
-</Reference>
-<Reference URI="lib%2Fparticules%2Fdemo%2Fcss%2Fstyle.css">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>sUG/XYSzI1MGTpbhtQM011lgVz/JfEMoqWxRtx5VKBqr6xGkbYnEMz9TpH9GFnGX0Yav7R27D+28
-PFCFzrF7hQ==</DigestValue>
-</Reference>
-<Reference URI="lib%2Fparticules%2Fdemo%2Findex.html">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>gDOlWjmJEJP3Yyqv24GYaYJaxnmSYHt6lLCAmA2Np7QOcNcExsswk7it2giON+JnT7+0QcPNbogK
-QWPL0j8zjA==</DigestValue>
-</Reference>
-<Reference URI="lib%2Fparticules%2Fdemo%2Fjs%2Fapp.js">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>TLl2RRMZB2FJz1uhmQl/i25rkHY3QUqYWTQJ4gGImKPo/Q6cTQDZWrvt2ItS8xg8N/TWQ+71yfP0
-uQ/kh5ePsQ==</DigestValue>
-</Reference>
-<Reference URI="lib%2Fparticules%2Fdemo%2Fjs%2Flib%2Fstats.js">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>owSreYubvRWB+KrJDqCzsSpq4unH3WSEbNQM4LvQmbPVR2Sr/7a6xVnCV3cP8MaoOxKzH4/yQUqV
-lwV/fwg1vw==</DigestValue>
-</Reference>
-<Reference URI="lib%2Fparticules%2Fdemo%2Fparticles.json">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>KRd23OXb9UczARvTJ9ElVVBHnN1OVW8jnSO6fn8YX+rygTF1cTj8Lol0w/w7I4Y/KQC1DZgMw4we
-3NAHyJfi8w==</DigestValue>
-</Reference>
-<Reference URI="lib%2Fparticules%2Fpackage.json">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>2Rzki6PXlnbU/DY6BQZAIo6sDbiBnBxt5kZO7VYK3IK7Ubv5FJelOaFzjW/iAqWT7w4NSiTHsgI8
-VmJcBsRFiw==</DigestValue>
-</Reference>
-<Reference URI="lib%2Fparticules%2Fparticles.conf.js">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>WH35vk6XYnIdL3V3t3Xniy/7XkjHN5tL3v+QVVmwRs+jp/5xkVYLpkmBA84jNS4YwFmQHqpMDO3S
-5/ArLhsaxA==</DigestValue>
-</Reference>
-<Reference URI="lib%2Fparticules%2Fparticles.js">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>5VBVTS18ccRvtvHpIPXjrYJVSB07tQ/70lDXfSLyxUo1QT7vB09AJkNrklSyLxCHWlCZfBKW8uRV
-6lst0SfO0Q==</DigestValue>
-</Reference>
-<Reference URI="lib%2Fparticules%2Fparticles.min.js">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>Kef5sc7gfTacR7TZKelcrRs15ipf7+t+n7Zh6mKNJbmW+/RRdCW9nwfLn4YX0s2nO6Kv5Y2ChqgI
-akaC6PW09A==</DigestValue>
-</Reference>
-<Reference URI="lib%2Fparticules%2Fparticlesjs-config.json">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>tMcrNnr/IJFTwvwKpSFt5TwS4ql8vOUn8qgN5EGbcZ6QXcmk67/LNQ1HgUvmZotpowidkJrbasZt
-HlIPx2ycgQ==</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2FLICENSE.Flora">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -2072,11 +2017,11 @@ GyvKX9Snig==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-YGDLGtchf7U1n2pegkrZqopfCHD6U2qVRzsqpdktPG7kgypS0BLAnUO/B8EQbaJnB4mqFobpVnRo
-9mjiZ4LcNGljxzZkysOyfAeq48XtGeL0jUgCi9RzdCSwsIs604qycS3VuhVpqI5xurPacv9ePNQn
-2kipA5C6Hd2Zsvupnj+SfnSXywEeDrcOdnOkvNGY7mBn6e+NckF6xfGF8iZr6fOYUhUfmAtVv8q7
-g37ew9SdTs/0zWQI7jv6/+L957LDMua+/N99SxK0FpwmeK4VZV30El6ox7Aq5SmeVT0pAFM3jTJ0
-SPDu4X4ls8kwNP7ULpzuKRCInZYxVUwKNWZyAQ==
+lezz2lYaqkdHm/02NtO0JMJ3BHIQqImh9pfY/F15kGIYm7C+6yKCUVYMj4tOb2cAr73K8Al0kBZU
+oKi57QOni+wNjY8HJEMqlk3z5xh41JLFQFxinAZlDu1xwk54ipewhL9J8VHWQ+MeyTgn8ucl+iTo
+fs/W3Tz32WTJoccSzajkV3x4FKLD9wn9c3judWwCQUBCtLizwdfRn4slvEqg2WcVwwg7ES1dgaa/
+g268ZIMe3KPxN5o7/jhqxHfKLzR2l2Qe2rLyat0/F9CVBsAG1YiSb7B3hhQZIm94Y3PhZYCfjP+R
+Y6dfqU/Mn3XbBK24sJhYukiurWh5/BV3Ra7SFA==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

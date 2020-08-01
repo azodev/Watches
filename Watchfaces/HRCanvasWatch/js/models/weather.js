@@ -42,8 +42,8 @@ define({
 		var locationModel = req.models.location;
 		var dateHelper = req.helpers.date;
 		var API_KEY = 'd55f0db13b03c0b85b3f8be4814025df';
-		var API_URL_WEATHER = 'http://api.openweathermap.org/data/2.5/weather?';
-		var API_URL_FORECAST = 'http://api.openweathermap.org/data/2.5/forecast?';
+		var API_URL_WEATHER = 'https://api.openweathermap.org/data/2.5/weather?';
+		var API_URL_FORECAST = 'https://api.openweathermap.org/data/2.5/forecast?';
 		var DEBUG_URL = "./data/weather.json";
 		var MAPPING_FILE = "./data/mapping.json";
 		var apiParams = {
@@ -243,6 +243,7 @@ define({
 			// event.fire('error', API_URL_WEATHER+outArray.join('&'));
 			// console.error(API_URL_WEATHER+outArray.join('&'));
 			url = API_URL_WEATHER + outArray.join('&');
+			console.log(url);
 			xmlHttp.open("GET", url, true);
 
 			xmlHttp.send(null);
