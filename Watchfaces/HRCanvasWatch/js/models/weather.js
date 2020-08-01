@@ -151,6 +151,7 @@ define({
 		function onPositionFound() {
 			
 			coords = locationModel.getData();
+			console.log('onPositionFound');
 			event.fire ('log','onPositionFound');
 			if (coords !== 'undefined') {
 				doUpdate();
@@ -169,9 +170,9 @@ define({
 				event.fire ('error','error onDistanceChange');
 			}
 		}
-		function onUpdateTriggered (){
+		function onUpdateTriggered (e){
 			coords = locationModel.getData();
-			if (locationModel.getPositionAquiered){
+			if (locationModel.getPositionAquiered() === true){
 				if (coords !== 'undefined' && coords.latitude !== null) {
 					doUpdate();
 				} else {
@@ -193,7 +194,7 @@ define({
 					outArray.push(key + '=' + encodeURIComponent(apiParams[key]));
 				}
 			}
-
+			console.log('doUpdate');
 			updateWeather();
 		}  
 		/**
@@ -276,11 +277,7 @@ define({
 										hour >= sunriseHour
 										&& hour < sunsetHour
 										) ? true : false;
-								/*console.error(sunriseHour);
-								console.error(sunsetHour);
-								console.error(hour);
-								console.error(day);
-								console.error(forecastInform.list[i].weather[0].id);*/
+								
 								forecastInform.list[i].day = day;
 							}
 							forecastInform.lastWeatherCallDate = now;
@@ -340,7 +337,9 @@ define({
 		 */
 		function bindEvents() {
 			tizen.time.setTimezoneChangeListener(function() {
+				console.log('TimezoneChange');
 				onPositionFound(true);
+				
 			});
 			event.on({
 				'models.location.found' : function() {
@@ -348,8 +347,9 @@ define({
 				},
 				'models.weather.found' : updateForecast,
 				'models.location.distanceChange' : onDistanceChange,
-				'views.main.triggerLocationUpdate': function() {
-					onUpdateTriggered(true);
+				'views.canvas.triggerCanvasDoubleClick': function(e) {
+					console.log('weatherUpdateTriggered');
+					onUpdateTriggered(e);
 				}
 			});
 

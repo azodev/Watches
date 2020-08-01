@@ -166,7 +166,7 @@ define({
 		 * @fires models.pedometer.change
 		 */
 		function handlePedometerInfo(pedometerInfo) {
-			console.log(pedometerInfo);
+			//console.log(pedometerInfo);
 			setPedometerData(pedometerInfo);
 			//pedometerSensor.unsetAccumulativePedometerListener();
 			//started = false;

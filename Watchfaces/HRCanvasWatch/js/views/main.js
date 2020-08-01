@@ -69,12 +69,13 @@ define({
 		 * @memberof views/main
 		 * @private
 		 */
-		var lastClickTimeStamp = null, currentClickTimeStamp = null;
-		var newDir, newFile;
-		const CLICK_INTERVAL = 500;
-		 var notification,
-         notificationDict;
 
+		var newDir, newFile;
+
+		var notification, notificationDict;
+/*
+		const CLICK_INTERVAL = 500;
+		var lastClickTimeStamp = null, currentClickTimeStamp = null;
 		function handleClick(ev) {
 			currentClickTimeStamp = Date.now();
 			if (lastClickTimeStamp !== null && currentClickTimeStamp - lastClickTimeStamp <= CLICK_INTERVAL) {
@@ -87,37 +88,38 @@ define({
 
 		function handleDoubleClick(ev) {
 
-			triggerCanvasClick(ev);
+			triggerCanvasDoubleClick(ev);
 		}
 		function handleSingleClick(ev) {
 			console.log('handleSingleClick');
 		}
-
-		
-
+		function triggerCanvasDoubleClick(e) {
+			event.fire('triggerCanvasDoubleClick', e);
+		}
+*/
 		function bindEvents() {
-			alertElement.addEventListener('popuphide', onPopupHide);
-			alertOk.addEventListener('click', onOkClick);
+			// alertElement.addEventListener('popuphide', onPopupHide);
+			// alertOk.addEventListener('click', onOkClick);
+			/*
 			document.getElementById('canvas-layout').addEventListener('click', function() {
 				handleClick(this);
-			});
+			});*/
+			
 			event.on({
-			 'models.location.error': postNotification,
-			 //'models.location.found': postNotification,
-			 'models.location.distanceChange': postNotification,
-			 'models.motion.error': postNotification,
-			 'models.pedometer.error': postNotification,
-			 'views.canvas.log': postNotification,
-			 'models.weather.log' : postNotification,
-			 'models.weather.error' : postNotification
+				'models.location.error' : postNotification,
+				// 'models.location.found': postNotification,
+				'models.location.distanceChange' : postNotification,
+				'models.location.log' : postNotification,
+				'models.motion.error' : postNotification,
+				'models.pedometer.error' : postNotification,
+				'views.canvas.log' : postNotification,
+				'models.weather.log' : postNotification,
+				'models.weather.error' : postNotification
 
 			});
 
 		}
-		function triggerCanvasClick(ev) {
-			event.fire('triggerLocationUpdate', true);
-			// //event.fire('canvasClick', true);
-		}
+
 		/**
 		 * Handles popupHide event on popup element.
 		 * 
@@ -139,7 +141,7 @@ define({
 				write('\n' + message.detail);
 				// alertMessage.innerHTML = 'Alerte';
 			} else {
-				//alertMessage.innerHTML = '';
+				// alertMessage.innerHTML = '';
 			}
 			// tau.openPopup(alertElement);
 		}
@@ -152,26 +154,25 @@ define({
 			// tau.closePopup();
 		}
 		function postNotification(message) {
-	       
 
-	        try {
-	        	if (message && message.detail && message.detail !== 1) {
-	        		// Sets notification dictionary.
-		            notificationDict = {
-		                content: message.detail,
-		                iconPath: "../icon.png",
-		            };
-		            // Creates notification object.
-		            notification = new tizen.StatusNotification("SIMPLE", "Watchface Debug", notificationDict);
+			try {
+				if (message && message.detail && message.detail !== 1) {
+					// Sets notification dictionary.
+					notificationDict = {
+						content : message.detail,
+						iconPath : "../icon.png",
+					};
+					// Creates notification object.
+					notification = new tizen.UserNotification("SIMPLE", "Watchface Debug", notificationDict);
 
-		            // Posts notification.
-		            tizen.notification.post(notification);
-	        	}
-	            
-	        } catch (err) {
-	            console.log(err.name + ": " + err.message);
-	        }
-	    }
+					// Posts notification.
+					tizen.notification.post(notification);
+				}
+
+			} catch (err) {
+				console.log(err.name + ": " + err.message);
+			}
+		}
 		/**
 		 * Initializes module.
 		 * 

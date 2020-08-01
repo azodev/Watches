@@ -74,14 +74,14 @@ define({
 		var errorMsg = '';
 		var options = {
 			enableHighAccuracy: true,
-			timeout : 5000,
+			timeout : 10000,
 			maximumAge : 900000
 		};
 		var optionGPS = {
-			sampleInterval : 2000,  //10000
-			callbackInterval : 5000  // 20000
+			sampleInterval : 1000,  //10000
+			callbackInterval : 120000  // 20000
 		};
-
+		var fallbackSensor =false;
 		/**
 		 * Returns last received motion data.
 		 * 
@@ -159,9 +159,11 @@ define({
 			if (!positionAquiered){
 				positionAquiered = true;
 				event.fire('found', positionAquiered);
+				event.fire('log', 'positionAquiered');
 			}
 			console.log('Location succcess');
 			event.fire('change', getData());
+			stop();
 		}
 		function succcessFallback(pos) {
 			if (pos.gpsInfo) {
@@ -180,15 +182,23 @@ define({
 				if (!positionAquiered){
 					positionAquiered = true;
 					event.fire('found', positionAquiered);
+					event.fire('log', 'positionAquiered fallback');
 				}
 				
+				console.log('Location succcess in fallback');
+				event.fire('change', getData());
+				stop();
 			}
-			locationDataLastGood = locationData;
-			console.log('Location succcess in fallback');
-			event.fire('change', getData());
+			else {
+				console.error('Location fallback gpsInfo issue');
+				event.fire('error', 'gpsInfo issue');
+			}
+			
 		}
 		function doFallback() {
 			//event.fire('error', 'doFallback');
+			console.warn('doFallback');
+			fallbackSensor = true;
 			locationSensor.start(CONTEXT_TYPE, succcessFallback, errorFallback, optionGPS);
 		}
 		function errorFallback(err) {
@@ -204,13 +214,13 @@ define({
 		function errorCallback(err) {
 			switch (err.code) {
 			case err.TIMEOUT:
-				//event.fire('error', err.message);
+				event.fire('error', err.message);
 				// Quick fallback when no suitable cached position exists.
 				doFallback();
 				//console.error(err.message);
 				break;
 			default:
-				//event.fire('error', err.message);
+				event.fire('error', err.message);
 				console.error(err.message);
 			}
 
@@ -244,11 +254,16 @@ define({
 		 * @public
 		 */
 		function stop() {
-			locationSensor.stop(CONTEXT_TYPE);
+			
+			
 			console.log( 'stop location sensor');
 			if (locationWatcher !== null) {
 				navigator.geolocation.clearWatch(locationWatcher);
 				locationWatcher = null;
+			}
+			if (fallbackSensor){
+				locationSensor.stop(CONTEXT_TYPE);
+				fallbackSensor =false;
 			}
 		}
 		function triggerLocationUpdate(ev) {
@@ -264,7 +279,7 @@ define({
 		 */
 		function bindEvents() {
 			/*event.on({
-				'views.main.triggerLocationUpdate' : triggerLocationUpdate
+				'views.main.triggerCanvasDoubleClick' : triggerLocationUpdate
 			});*/
 
 		}

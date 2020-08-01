@@ -97,7 +97,7 @@ define({
 			
 			context.strokeStyle = "rgba(70, 70, 70,0.2)";
 
-			for (i = 60; i < 360; i = i + 60) {
+			for (i = 30; i < 360; i = i + 30) {
 				x = i;
 
 				if (options.motion !== null) {
@@ -115,8 +115,8 @@ define({
 				// courbe ; c et d x et y du endpoint
 				context.translate(x, y);
 				context.beginPath();
-				context.moveTo(-2, 0);
-				context.quadraticCurveTo(~~center1.x + 6, ~~center1.y, -6, 360);
+				context.moveTo(-3, 0);
+				context.quadraticCurveTo(~~center1.x + 3, ~~center1.y, -3, 360);
 				context.stroke();
 				/*context.beginPath();
 				context.moveTo(-1, 0);
@@ -131,14 +131,14 @@ define({
 				context.quadraticCurveTo(~~center1.x - 1, ~~center1.y, 1, 360);
 				context.stroke();*/
 				context.beginPath();
-				context.moveTo(2, 0);
-				context.quadraticCurveTo(~~center1.x - 6, ~~center1.y, 6, 360);
+				context.moveTo(3, 0);
+				context.quadraticCurveTo(~~center1.x - 3, ~~center1.y, 3, 360);
 				context.stroke();
 				context.translate(-x, -y);
 			}
 			x = 0;
 			y = 0;
-			for (i = 60; i < 360; i = i + 60) {
+			for (i = 30; i < 360; i = i + 30) {
 				y = i;
 
 				// a = position du centre courbe ; b = curve horizontale b =
@@ -157,8 +157,8 @@ define({
 				}
 				context.translate(x, y);
 				context.beginPath();
-				context.moveTo(0, -2);
-				context.quadraticCurveTo(~~center2.x, ~~center2.y + 6, 360, -6);
+				context.moveTo(0, -3);
+				context.quadraticCurveTo(~~center2.x, ~~center2.y + 3, 360, -3);
 				context.stroke();
 				/*context.beginPath();
 				context.moveTo(0, -1);
@@ -173,8 +173,8 @@ define({
 				context.quadraticCurveTo(~~center2.x, ~~center2.y - 1, 360, 1);
 				context.stroke();*/
 				context.beginPath();
-				context.moveTo(0, -2);
-				context.quadraticCurveTo(~~center2.x, ~~center2.y - 6, 360, 6);
+				context.moveTo(0, -3);
+				context.quadraticCurveTo(~~center2.x, ~~center2.y - 3, 360, 3);
 				context.stroke();
 				context.translate(-x, -y);
 			}

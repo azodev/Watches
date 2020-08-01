@@ -118,6 +118,41 @@ define({
 		var motion = null;
 		var motionFromGyro = {accelerationIncludingGravity : {x:null,y:null}}; 
 		
+		
+		const CLICK_INTERVAL = 1000;
+		var lastClickTimeStamp = null, currentClickTimeStamp = null;
+		
+		function handleClick(canvas,ev) {
+			currentClickTimeStamp = Date.now();
+			if (lastClickTimeStamp !== null && currentClickTimeStamp - lastClickTimeStamp <= CLICK_INTERVAL) {
+				handleDoubleClick(canvas,ev);
+			} else {
+				handleSingleClick(canvas,ev);
+			}
+			lastClickTimeStamp = currentClickTimeStamp;
+		}
+
+		function handleDoubleClick(canvas,ev) {
+			
+			var pos = getMousePosition(canvas,ev);
+			console.log(canvas);
+			console.log(ev);
+			console.log(pos);
+			triggerCanvasDoubleClick(ev);
+		}
+		function handleSingleClick(ev) {
+			console.log('handleSingleClick');
+		}
+		function triggerCanvasDoubleClick(ev) {
+			console.log('handleDoubleClick');
+			event.fire('triggerCanvasDoubleClick', ev);
+		}
+		function getMousePosition(canvas, event) { 
+            var rect = canvas.getBoundingClientRect(); 
+            var x = event.clientX - rect.left; 
+            var y = event.clientY - rect.top; 
+            return {x:x,y:y} ;
+        } 
 		/**
 		 * Draws the basic layout of the watch
 		 * 
@@ -656,7 +691,9 @@ define({
 		}
 		
 		function bindEvents() {
-
+			document.getElementById('canvas-layout').addEventListener('click', function(e) {
+				handleClick(this,e);
+			});
 			window.addEventListener("timetick", function (){
 				console.log('timetick');
 				if (isAmbientMode) {
@@ -691,7 +728,7 @@ define({
 					if (isAmbientMode !== true) {
 						//event.fire ('hidden','clearScreen');
 						ctxLayout.clearRect(0, 0, ctxLayout.canvas.width, ctxLayout.canvas.height);
-						canvasLayout.clearRect(0, 0, ctxLayout.canvas.width, ctxLayout.canvas.height);
+						ctxContent.clearRect(0, 0, ctxContent.canvas.width, ctxContent.canvas.height);
 						stopSensors();
 					}
 				}
@@ -754,21 +791,25 @@ define({
 		}
 		function mkLocation() {
 			locationModel.start();
-			
-			window.setTimeout(function() {
+			loopLocation();
+			/*window.setTimeout(function() {
 				locationModel.stop();
-			}, 20000 // stop checking after 15 seconds
-			);
+			}, 20000 // stop checking after 20 seconds
+			);*/
 
+			
+		}
+		function loopLocation(){
 			locationInterval = window.setInterval(function() {
 				locationModel.start();
 				window.setTimeout(function() {
 					locationModel.stop();
-				}, 20000 // stop checking after 10 seconds
+				}, 30000 // stop checking after 30 seconds
 				);
 			}, intervals.location // check every 2 min
 			);
 		}
+		
 		function init() {
 			nextMove = 1000 / fps;
 			then = Date.now();
