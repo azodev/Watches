@@ -660,6 +660,9 @@ define({
 				frame = 0;
 				startSensors();
 				isAmbientMode = false;
+				clear();
+				particles = [];
+				init_num  = popolate(max_particles);
 				console.log('activateMode normal');
 				
 				
