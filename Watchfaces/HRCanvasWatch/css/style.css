@@ -43,11 +43,12 @@ html, body {
     src: url('../data/FutureNow.ttf');
 }
 
+/*
 @font-face {
     font-family: 'KillTheNoise';
     src: url('../data/KillTheNoise.otf');
 }
-
+*/
 @media (-tizen-geometric-shape: circle) {
 
 

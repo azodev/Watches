@@ -4,8 +4,8 @@ NOTICE__DEL__PKJ6amrlawESpHPaQtps/BYuGeC3Uhkc84vog9melXb1Vqca76AFokwlnkYACLPbn6l
 RNcfCoyBfg==
 config.xml__DEL__hpzhts1ZLu0d7slY4GC2mSyU7C6sB8ld2dgZnoVIdjXz3wAiGeak7Dipi2s0q8LdIIayJoL2R7+T
 jbUKHzqu5A==
-css/style.css__DEL__rYBUZrvraOJ2KixVqsETybEngWinbYzKhgTEP4JxdoA/+Xsq5z5VLeB7qtHquGwzh2Vb7KncIzDr
-tj8K/ZKoZQ==
+css/style.css__DEL__6JhgKP04CSAhRnc7a9kQdtK/WtNS1I1rT2gWxpQt4dZoZxd8sdlXqpR87NR3R26TT0chT7/+4NiM
+o5X2VQCA/A==
 data/Cybrpnuk2.ttf__DEL__FsQz7LY/tSf+3HqVB5V5EFSMa4RpfaNoU34qXRa78fgdUfBDz0J7olFvFqGNGmgdCoAHT3LO8QLq
 PT1ziEguBA==
 data/FutureNow.ttf__DEL__DDMeLXs3dgCipVEGS35Xqu1WWKTb0s88CSpflU18S+UBZZVwpKSQhJ9SzKYLg3hQIo4YaN+o8Ueh
@@ -282,12 +282,12 @@ js/models/calendar.js__DEL__z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXy
 ODJ6+SfaPg==
 js/models/calories.js__DEL__z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGl
 ODJ6+SfaPg==
-js/models/canvasDrawer.js__DEL__I99Khq9/nCss6xMUFJ48Rfeso07ZMYQww0wN08Uu+rPVBCQa5ZOiVWiKFXWmt3rfN+rwh1VhymLO
-6QD5QxJZ+g==
+js/models/canvasDrawer.js__DEL__CoEHhGr51S1sNX/WwgBp87SBBBo9flQSLy1eU0mWGmP9BDnXT9blCoR8Ah0jKvO/D9PIELqtOH1k
+dspw0nKVVw==
 js/models/heartRate.js__DEL__DzOk/KxERWzk2LkhYY6QBtoqbrWItldvrpMS16S1Y21Zp7Ch5v2aazUguWMygsqY6Klas4NHyWLZ
 ll4diwlL7w==
-js/models/location.js__DEL__OZaajsFald32vlplkta0Cerr5TIQ2ZYnz0gk+EOsiejb/uz1kat/dJWe8MO16GwyF35wLfTi3cg0
-JEJyZPn83Q==
+js/models/location.js__DEL__sEYSMLv/7xLzFUMA8LustpmSDh1hjgtJnMKk+cuurH3eDkegBDSfW2U2QBihHNyuP3tOjw4O6IUQ
+FxifejoGSg==
 js/models/motion.js__DEL__lIVvBXNIlI1SoHm9QTWB3Bzq0uHqvJtAoIPmw32jFZm4C5ou7syM2L6SIoX2biLyLjEHMsCnSEBm
 kayGwIdDTw==
 js/models/pedometer.js__DEL__GhmHCi0LRNsO8RomQf2Uisc3tQfaJjv7WcnN36gGrJuwL/IrSvqK2C70mAm2ZELLryNhL1hSGgtY
@@ -300,8 +300,8 @@ js/models/weather.js__DEL__NexuxPZ6iQ/YRTcv/HQNXbsjjJnyVz7M4ptd0RG+SOwmAn0o4VlLS
 DO9f7MIEYg==
 js/tau-config.js__DEL__4uO/1Gq8a3/K23CMOEYjwuGm2wiKcxaToAFNBAwm4x4qZfKY9WXFuZMVHqowYbMzKBuIHRt/Gju+
 7AAC7BcJIw==
-js/views/canvas.js__DEL__FEcm4vIUTzVEp+w8/ol9v4i7RnB9xWJUoizqWka1gWT3j7grn9Idw3XGkyvNWAtTj0sGvXF9rJW3
-nfWSCxGZrQ==
+js/views/canvas.js__DEL__h38vdurEZqZEwGewsZv6NP4XHT9iUOuzj/XQqH4ShVBzWDwzKxNft0ufYnTnc00Aw7em1OyK9xXp
+tcSNfkbTrQ==
 js/views/init.js__DEL__51gnwCoGDehafp654aeXwj9JwSpJYDvl/0AitsmETgUJdbpZujR+GVxJ6be5L4TpZoYALD5vS4QR
 2oTVFZcTVg==
 js/views/main.js__DEL__Op7UOrP5dCRXzO6Y7WPy3xbHPjsw4YS9Tv9vbVT/3UuG+XWyWWOVmdnwuBb0oYqAPxdg0n6z4SJB
@@ -798,5 +798,5 @@ output.txt__DEL__z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuw
 ODJ6+SfaPg==
 version.txt__DEL__jJtvGOhH+xRt5nb2nvtEt+HGe/PG0CnhcMjO6XKTjHZEjeAZ5yuYeNEv9jXlGeLwx2zOOKSyvcob
 EviMmoUiyw==
-author-signature.xml__DEL__oElTg5KRgd/JmiKTeOA5GyjZMsNerzZ2Y38XH7/PvDw3MuLkn02F1ZqrT9cLJIe0Wv8qhzmDNsGv
-/Q0CuVa3tQ==
+author-signature.xml__DEL__MTe6Zusx8tB5d6Oyi/S1c/cgQ6/pDB8RQg9bs2LH9mECKX3nOZ5HqsfURSkms3vkEdr+gAg8LnxB
+GVGQZ41vdQ==

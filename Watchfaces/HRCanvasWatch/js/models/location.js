@@ -159,7 +159,7 @@ define({
 			if (!positionAquiered){
 				positionAquiered = true;
 				event.fire('found', positionAquiered);
-				event.fire('log', 'positionAquiered');
+				//event.fire('log', 'positionAquiered');
 			}
 			console.log('Location succcess');
 			event.fire('change', getData());

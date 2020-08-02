@@ -587,11 +587,12 @@ define({
 			calculateGradientPosition(motionAcceleration.accelerationIncludingGravity);
 			calculateRadialGradientPosition(motionAcceleration.accelerationIncludingGravity);
 			radialGradient = context.createRadialGradient(radialGradientCoords.x, radialGradientCoords.y, 0.000, 180.000, 180.000, 180.000);
-			radialGradient.addColorStop(0.000, 'rgba(0, 0, 0,0.5)');
-			radialGradient.addColorStop(0.755, 'rgba(50, 50, 50,0.5)');
-			radialGradient.addColorStop(0.83, 'rgba(70, 70, 70,0.5)');
+			radialGradient.addColorStop(0.000, 'rgba(0, 0, 0,1)');
+			radialGradient.addColorStop(0.300, 'rgba(0, 0, 0,0.7)');
+			radialGradient.addColorStop(0.755, 'rgba(50, 50, 50,0.3)');
+			radialGradient.addColorStop(0.83, 'rgba(70, 70, 70,0.4)');
 			//radialGradient.addColorStop(0.85, 'rgb(65, 65, 65)');
-			radialGradient.addColorStop(0.85, 'rgba(80, 80, 100,0.5)');
+			radialGradient.addColorStop(0.85, 'rgba(80, 80, 100,0.8)');
 			//radialGradient.addColorStop(0.872, 'rgb(94, 88, 68)');
 			radialGradient.addColorStop(0.882, 'rgba(125, 185, 232,1)');
 			radialGradient.addColorStop(0.927, 'rgba(90, 90, 90,1)');
@@ -661,6 +662,9 @@ define({
 		 * @memberof models/canvasDrawer
 		 * @public
 		 */
+		function getRadialGradientCoords(){
+			return radialGradientCoords;
+		}
 		function init() {
 
 		}
@@ -679,7 +683,8 @@ define({
 			renderTextGradient : renderTextGradient,
 			renderBackground : renderBackground,
 			processMotion : processMotion,
-			renderGrid : renderGrid
+			renderGrid : renderGrid,
+			getRadialGradientCoords : getRadialGradientCoords
 		};
 	}
 });

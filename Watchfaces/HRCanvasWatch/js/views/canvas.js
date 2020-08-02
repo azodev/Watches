@@ -118,9 +118,15 @@ define({
 		var motion = null;
 		var motionFromGyro = {accelerationIncludingGravity : {x:null,y:null}}; 
 		
-		var max_particles = 500;
+		var max_particles = 1000;
 		var particles = [];
-		var init_num = null;
+		var frequency = 10;
+		var init_num = max_particles;
+		var max_time = frequency * max_particles;
+		var time_to_recreate = false;
+		var gravCenter = {x:180, y:180};
+		var clickPos = null;
+		
 		const CLICK_INTERVAL = 1000;
 		var lastClickTimeStamp = null, currentClickTimeStamp = null;
 		
@@ -136,12 +142,12 @@ define({
 
 		function handleDoubleClick(canvas,ev) {
 			
-			var pos = getMousePosition(canvas,ev);
+			clickPos = getMousePosition(canvas,ev);
 			//console.log(canvas);
 			//console.log(ev);
-			console.log(pos);
+			console.log(clickPos);
 			//center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 250, 70
-			if ((pos.x >= center.x - (watchRadius * 0.70) && pos.x <= (center.x - (watchRadius * 0.70)+250)  )  && (pos.y  >= center.y + (watchRadius * 0.06)  && pos.y <= (center.y + (watchRadius * 0.06))+70 )   ){
+			if ((clickPos.x >= center.x - (watchRadius * 0.70) && clickPos.x <= (center.x - (watchRadius * 0.70)+250)  )  && (clickPos.y  >= center.y + (watchRadius * 0.06)  && clickPos.y <= (center.y + (watchRadius * 0.06))+70 )   ){
 				triggerCanvasDoubleClick(ev);
 			}
 			
@@ -155,9 +161,9 @@ define({
 			event.fire('triggerCanvasDoubleClick', ev);
 		}
 		function getMousePosition(canvas, event) { 
-            var rect = canvas.getBoundingClientRect(); 
-            var x = event.clientX - rect.left; 
-            var y = event.clientY - rect.top; 
+            let rect = canvas.getBoundingClientRect(); 
+            let x = event.clientX - rect.left; 
+            let y = event.clientY - rect.top; 
             return {x:x,y:y} ;
         } 
 		/**
@@ -226,14 +232,25 @@ define({
 				canvasDrawer.processMotion(motionFromGyro,ctxContent);
 			}
 			// Clear canvas
-			ctxContent.clearRect(0, 0, ctxContent.canvas.width, ctxContent.canvas.height);
-			particles = particles.filter(function(p) {
-			    return p.move()
-			  })
-			  if(particles.length < init_num){
-			    popolate(1)
+			//ctxContent.clearRect(0, 0, ctxContent.canvas.width, ctxContent.canvas.height);
+			gravCenter = canvasDrawer.getRadialGradientCoords();
+			
+			//canvasDrawer.getRadialGradientCoords();
+			particles = particles.filter(function (p) {
+				
+				p.setPoA(gravCenter);
+				return p.move();
+				});
+			  // Recreate particles
+			  if (time_to_recreate) {
+			    if (particles.length < init_num) {popolate(1);}
 			  }
 			clear();
+			
+			
+			
+			
+			
 			canvasDrawer.renderBackground(ctxContent,ctxContent.canvas.width, ctxContent.canvas.height, "black",{gradient:true,motion:motion});
 			//canvasDrawer.renderGrid (ctxContent,  "#000000",2,{motion:motion});
 			//weather
@@ -662,7 +679,7 @@ define({
 				isAmbientMode = false;
 				clear();
 				particles = [];
-				init_num  = popolate(max_particles);
+				popolate(max_particles);
 				console.log('activateMode normal');
 				
 				
@@ -820,20 +837,31 @@ define({
 		
 		function clear(){
 			  ctxContent.globalAlpha=0.05;
-			  ctxContent.fillStyle='#000155';
-			  ctxContent.fillStyle='#000021'; // Alien
+			  
+			  ctxContent.fillStyle='#281945'; // Alien
 			  ctxContent.fillRect(0, 0, canvasContent.width, canvasContent.height);
 			  ctxContent.globalAlpha=1;
 			}
-		function popolate(num){
+		function popolate(num) {
 			  for (var i = 0; i < num; i++) {
 			    setTimeout(
-			      function(){
-			        particles.push(new ParticleAlien(ctxContent, i))
-			      }.bind(this)
-			    ,i*20)
+			    function (x) {
+			      return function () {
+			        // Add particle
+			        particles.push(new Particle(ctxContent));
+			      };
+			    }(i),
+			    frequency * i);
 			  }
-			  return particles.length
+			  return particles.length;
+			}
+
+			function createSphera() {
+			  let radius = 200;
+			  let center = {
+			    x: 360 / 2,
+			    y: 360 / 2 };
+
 			}
 		function init() {
 			nextMove = 1000 / fps;
@@ -876,8 +904,10 @@ define({
 			
 			
 			
-			init_num  = popolate(max_particles);
-			
+			popolate(max_particles);
+			setTimeout(function () {
+				  time_to_recreate = true;
+				}.bind(this), max_time);
 			
 			
 			animRequest = window.requestAnimationFrame(drawWatchContent);
@@ -899,22 +929,22 @@ class ParticleAlien{
 	    this.progress = 0;
 	    this.canvas = canvas;
 
-	    this.x = (360/2)  + (Math.random()*200 - Math.random()*200)
-	    this.y = (360/2) + (Math.random()*200 - Math.random()*200)
+	    this.x = (360/2)  + (Math.random()*200 - Math.random()*200);
+	    this.y = (360/2) + (Math.random()*200 - Math.random()*200);
 	    this.s = Math.random() * 1;
-	    this.a = 0
-	    this.w = 360
-	    this.h = 360
-	    this.radius = random > .2 ? Math.random()*1 : Math.random()*3
-	    this.color  = random > .2 ? "#2E4765" : "#BDDAF0"
-	    this.radius = random > .8 ? Math.random()*2 : this.radius
-	    this.color  = random > .8 ? "#2E4765" : this.color
+	    this.a = 0;
+	    this.w = 360;
+	    this.h = 360;
+	    this.radius = random > .2 ? Math.random()*1 : Math.random()*3;
+	    this.color  = random > .2 ? "#2E4765" : "#BDDAF0";
+	    this.radius = random > .8 ? Math.random()*2 : this.radius;
+	    this.color  = random > .8 ? "#2E4765" : this.color;
 
 	    // this.color  = random > .1 ? "#ffae00" : "#f0ff00" // Alien
-	    this.variantx1 = Math.random()*300
-	    this.variantx2 = Math.random()*400
-	    this.varianty1 = Math.random()*100
-	    this.varianty2 = Math.random()*120
+	    this.variantx1 = Math.random()*300;
+	    this.variantx2 = Math.random()*400;
+	    this.varianty1 = Math.random()*100;
+	    this.varianty2 = Math.random()*120;
 	  }
 
 	  render(){
@@ -937,6 +967,91 @@ class ParticleAlien{
 
 	    if(this.y < 0 || this.y > this.h - this.radius){
 	      return false;
+	    }
+	    this.render();
+	    this.progress++;
+	    return true;
+	  }
+}
+class Particle {
+	  constructor(canvas) {
+	    let random = Math.random();
+	    this.progress = 0;
+	    this.canvas = canvas;
+	    this.center = {
+	      x: 360 / 2,
+	      y: 360 / 2 };
+
+	    this.point_of_attraction = {
+	      x: 360 / 2,
+	      y: 360 / 2 };
+
+
+	    
+
+	    if (Math.random() > 0.5) {
+	      this.x = 360 * Math.random();
+	      this.y = Math.random() > 0.5 ? -Math.random() - 100 : 360 + Math.random() + 100;
+	    } else {
+	      this.x = Math.random() > 0.5 ? -Math.random() - 100 : 360 + Math.random() + 100;
+	      this.y = 360 * Math.random();
+
+	    }
+
+	    this.s = Math.random() * 5;//2
+	    this.a = 0;
+	    this.w = 360;
+	    this.h = 360;
+	    this.radius = random > .2 ? Math.random() * 1 : Math.random() * 3;
+	    this.color = random > .2 ? "#694FB9" : "#6094ee";
+	    this.radius = random > .8 ? Math.random() * 2.2 : this.radius;
+	    this.color = random > .8 ? "#3CFBFF" : this.color;
+	  }
+	  setPoA(coords){
+		  this.point_of_attraction.x = coords.x;
+		  this.point_of_attraction.y = coords.y;
+	  }
+	  calculateDistance(v1, v2) {
+	    let x = Math.abs(v1.x - v2.x);
+	    let y = Math.abs(v1.y - v2.y);
+	    return Math.sqrt(x * x + y * y);
+	  }
+
+	  render() {
+	    this.canvas.beginPath();
+	    this.canvas.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+	    this.canvas.lineWidth = 2;
+	    this.canvas.fillStyle = this.color;
+	    this.canvas.fill();
+	    this.canvas.closePath();
+	  }
+
+	  move() {
+
+	    let p1 = {
+	      x: this.x,
+	      y: this.y };
+
+
+	    let distance = this.calculateDistance(p1, this.point_of_attraction);
+	    let force = Math.max(50, 1 + distance);
+
+	    let attr_x = (this.point_of_attraction.x - this.x) / force;
+	    let attr_y = (this.point_of_attraction.y - this.y) / force;
+
+	    this.x += Math.cos(this.a) * this.s + attr_x;
+	    this.y += Math.sin(this.a) * this.s + attr_y;
+	    this.a += Math.random() > 0.5 ? Math.random() * 0.9 - 0.45 : Math.random() * 0.4 - 0.2;
+	    if (distance < 100 + Math.random() * 100) {
+	      //return false;
+	    	//this.canvas.globalAlpha = 0.5;
+	    }
+	    if (distance < 50 + Math.random() * 50) {
+
+	      //this.canvas.globalAlpha = 0.10;
+	    } else
+	    {
+	      //this.canvas.globalAlpha = 0.8;
 	    }
 	    this.render();
 	    this.progress++;
