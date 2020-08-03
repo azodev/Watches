@@ -76,6 +76,7 @@ define({
 			'sampleInterval' : 1000
 		};
 		var started = false;
+		var found = false;
 		/**
 		 * Sets heart rate and time values received from sensor. Returns heart
 		 * rate data.
@@ -120,6 +121,7 @@ define({
 		 * @private
 		 */
 		function resetData() {
+			found = false;
 			if (heartRateDataLastGood.rate !== null ){
 				heartRateData = heartRateDataLastGood;
 			}
@@ -148,6 +150,8 @@ define({
 //				console.error('HR found :'+getData().rate);
 				event.fire('change', getData());
 				event.fire('HRFound', true);
+				found = true;
+				stop();
 			}
 			
 		}
@@ -163,6 +167,7 @@ define({
 //			console.error('Start HR Sensor function');
 			if (!started) {
 				started = true;
+				
 				resetData();
 				console.log('Starting HR Sensor');
 				heartRateSensor.start(CONTEXT_TYPE, function onChange(heartRateInfo) {

@@ -263,10 +263,13 @@ define({
 		 * @param {Boolean}
 		 *            [stroke = true] Whether to stroke the rectangle.
 		 */
-		function roundRect(context, x, y, width, height, radius, fill, stroke, strokeColor, fillColor) {
+		function roundRect(context, x, y, width, height, radius, fill, stroke, strokeColor, fillColor,alpha) {
 			context.save();
 			if (typeof stroke === 'undefined') {
 				stroke = true;
+			}
+			if (typeof alpha === 'undefined') {
+				alpha = 1;
 			}
 			if (typeof radius === 'undefined') {
 				radius = 5;
@@ -312,6 +315,7 @@ define({
 			}
 			if (gradientLinear !== null) {
 				strokeColor = gradientLinear;
+				context.globalAlpha = alpha;
 			}
 			if (stroke) {
 				context.strokeStyle = strokeColor;
@@ -588,14 +592,14 @@ define({
 			calculateRadialGradientPosition(motionAcceleration.accelerationIncludingGravity);
 			radialGradient = context.createRadialGradient(radialGradientCoords.x, radialGradientCoords.y, 0.000, 180.000, 180.000, 180.000);
 			radialGradient.addColorStop(0.000, 'rgba(0, 0, 0,1)');
-			radialGradient.addColorStop(0.300, 'rgba(0, 0, 0,0.7)');
-			radialGradient.addColorStop(0.755, 'rgba(50, 50, 50,0.3)');
-			radialGradient.addColorStop(0.83, 'rgba(70, 70, 70,0.4)');
-			//radialGradient.addColorStop(0.85, 'rgb(65, 65, 65)');
-			radialGradient.addColorStop(0.85, 'rgba(80, 80, 100,0.8)');
-			//radialGradient.addColorStop(0.872, 'rgb(94, 88, 68)');
-			radialGradient.addColorStop(0.882, 'rgba(125, 185, 232,1)');
-			radialGradient.addColorStop(0.927, 'rgba(90, 90, 90,1)');
+			radialGradient.addColorStop(0.300, 'rgba(0, 0, 0,0.6)');
+			radialGradient.addColorStop(0.755, 'rgba(39,41,42,0.3)');
+			radialGradient.addColorStop(0.83, 'rgba(39,41,42,0.4)');
+			radialGradient.addColorStop(0.85, 'rgba(39,41,42,0.9)');
+			//radialGradient.addColorStop(0.9, 'rgb(56,83,104)');
+			//radialGradient.addColorStop(0.957, 'rgb(95,117,134)');
+			radialGradient.addColorStop(0.98, 'rgba(115,134,149,1)');
+			radialGradient.addColorStop(1, 'rgba(171,182,191,1)');
 			gradientLinear = context.createLinearGradient(cx - gx, cy - gy, cx + gx, cy + gy);
 			//gradientLinear.addColorStop(1, "rgb(20,77,143)");
 			gradientLinear.addColorStop(1, "rgb(41,137,216)");

@@ -127,6 +127,8 @@ define({
 		var gravCenter = {x:180, y:180};
 		var clickPos = null;
 		
+		var drawTicks = false;
+		
 		const CLICK_INTERVAL = 1000;
 		var lastClickTimeStamp = null, currentClickTimeStamp = null;
 		
@@ -236,6 +238,8 @@ define({
 			gravCenter = canvasDrawer.getRadialGradientCoords();
 			
 			//canvasDrawer.getRadialGradientCoords();
+			
+			
 			particles = particles.filter(function (p) {
 				
 				p.setPoA(gravCenter);
@@ -253,80 +257,35 @@ define({
 			
 			canvasDrawer.renderBackground(ctxContent,ctxContent.canvas.width, ctxContent.canvas.height, "black",{gradient:true,motion:motion});
 			//canvasDrawer.renderGrid (ctxContent,  "#000000",2,{motion:motion});
-			//weather
-			canvasDrawer.roundRect(ctxContent, center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 250, 70, 10, false, true, "#000000", "#000000");
-
-			canvasDrawer.renderCircle(ctxContent, center, watchRadius *1, "#000000",4);
-			//canvasDrawer.renderCircle(ctxContent, center, watchRadius * 0.90, "#000000",3);
-
-			// Draw the dividers
-			// 60 unit divider
-			for (i = 1; i <= 60; i++) {
-				angle = (i - 15) * (Math.PI * 2) / 60;
-				 canvasDrawer.renderNeedle(ctxContent, angle, 0.96, 1.0, 1, "#c4c4c4");
-			}
-
-			// 12 unit divider
-			for (j = 1; j <= 12; j++) {
-				angle = (j - 3) * (Math.PI * 2) / 12;
-				canvasDrawer.renderNeedle(ctxContent, angle,  0.90, 1, 3, "#c4c4c4");
-			}
-			
-
-
-			canvasDrawer.renderText(ctxContent,datetime.getDate()+"/"+(datetime.getMonth()+1)+"/"+datetime.getFullYear(), center.x + 108, center.y - 50, 25, "#c9c9c9", {
-				font : 'FutureNow',
-				align : 'right',
-				gradient : true,
-				motion: motion
-				
-			});
-			canvasDrawer.renderTimeBis(ctxContent, dateArray, center.x + 33, center.y - 23, 53, "#c9c9c9", {
-				gradient : true,
-				motion: motion
-				
-			});
-			canvasDrawer.renderText(ctxContent, dateArray.second, center.x + 135, center.y - 16, 25, "#c9c9c9", {
-				font : 'FutureNow',
-				align : 'center',
-				gradient : true,
-				motion: motion
-				
-			});
-			if (heartRateFound && heartRate.getData().rate !== null) {
-				canvasDrawer.renderText(ctxContent, heartRate.getData().rate, center.x, center.y + (watchRadius * 0.65), 25, "#c9c9c9", {
-					font : 'FutureNow',
-					align : 'center',
-					gradient : true,
-					motion: motion
-						
-				});
-				canvasDrawer.renderCircle(ctxContent, {
-					x : center.x,
-					y : center.y + (watchRadius * 0.65)
-				}, 30, "#000000",2);
-
-			}
-			canvasDrawer.renderText(ctxContent, pedometerSensor.getData().accumulativeTotalStepCount, center.x - (watchRadius * 0.3), center.y + (watchRadius * 0.6), 20, "#c9c9c9", {
-				font : 'FutureNow',
-				align : 'center',
-				gradient : true,
-				motion: motion
-					
-			});
+			/*if (drawTicks === true){
+				canvasDrawer.renderCircle(ctxContent, center, watchRadius *1, "#000000",4);
+				//canvasDrawer.renderCircle(ctxContent, center, watchRadius * 0.90, "#000000",3);
+	
+				// Draw the dividers
+				// 60 unit divider
+				for (i = 1; i <= 60; i++) {
+					angle = (i - 15) * (Math.PI * 2) / 60;
+					 canvasDrawer.renderNeedle(ctxContent, angle, 0.96, 1.0, 1, "#c4c4c4");
+				}
+	
+				// 12 unit divider
+				for (j = 1; j <= 12; j++) {
+					angle = (j - 3) * (Math.PI * 2) / 12;
+					canvasDrawer.renderNeedle(ctxContent, angle,  0.90, 1, 3, "#c4c4c4");
+				}
+			}*/
 			
 			
 			
-			// Draw the text for date
+			// Battery
 			canvasDrawer.renderText(ctxContent, Math.round(batteryLevel) + '%', center.x, center.y - (watchRadius * 0.55), 15, "#c9c9c9", {
 				font : 'FutureNow',
 				align : 'center',
 				gradient : true,
 				motion: motion
 			});
-
-			//displayFps();
-			drawWeather();
+			
+			
 			canvasDrawer.renderTextGradient(ctxContent, 'Altitude :', center.x - (watchRadius * 0.71), center.y - (watchRadius * 0.17), 13, "#c9c9c9", {
 				font : 'FutureNow',
 				align : 'left',
@@ -348,6 +307,62 @@ define({
 				font : 'FutureNow',
 				align : 'right'
 			});
+			
+			
+			
+			
+			canvasDrawer.renderText(ctxContent,datetime.getDate()+"/"+(datetime.getMonth()+1)+"/"+datetime.getFullYear(), center.x + 108, center.y - 50, 25, "#c9c9c9", {
+				font : 'FutureNow',
+				align : 'right',
+				gradient : true,
+				motion: motion
+				
+			});
+			canvasDrawer.renderTimeBis(ctxContent, dateArray, center.x + 33, center.y - 23, 53, "#c9c9c9", {
+				gradient : true,
+				motion: motion
+				
+			});
+			canvasDrawer.renderText(ctxContent, dateArray.second, center.x + 135, center.y - 16, 25, "#c9c9c9", {
+				font : 'FutureNow',
+				align : 'center',
+				gradient : true,
+				motion: motion
+				
+			});
+			
+			//weather
+			canvasDrawer.roundRect(ctxContent, center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 250, 70, 10, false, true, "#000000", "#000000");
+			drawWeather();
+			if (heartRateFound && heartRate.getData().rate !== null) {
+				canvasDrawer.renderText(ctxContent, heartRate.getData().rate, center.x, center.y + (watchRadius * 0.65), 25, "#c9c9c9", {
+					font : 'FutureNow',
+					align : 'center',
+					gradient : true,
+					motion: motion
+						
+				});
+				canvasDrawer.renderCircle(ctxContent, {
+					x : center.x,
+					y : center.y + (watchRadius * 0.65)
+				}, 30, "#000000",1);
+
+			}
+			canvasDrawer.renderText(ctxContent, pedometerSensor.getData().accumulativeTotalStepCount, center.x - (watchRadius * 0.3), center.y + (watchRadius * 0.6), 20, "#c9c9c9", {
+				font : 'FutureNow',
+				align : 'center',
+				gradient : true,
+				motion: motion
+					
+			});
+			
+			
+			
+			
+
+			//displayFps();
+			
+			
 			
 
 			animRequest = requestAnimationFrame(drawWatchContent);
@@ -678,8 +693,8 @@ define({
 				startSensors();
 				isAmbientMode = false;
 				clear();
-				particles = [];
-				popolate(max_particles);
+				//particles = [];
+				//popolate(max_particles);
 				console.log('activateMode normal');
 				
 				
@@ -752,6 +767,7 @@ define({
 						//event.fire ('hidden','clearScreen');
 						ctxLayout.clearRect(0, 0, ctxLayout.canvas.width, ctxLayout.canvas.height);
 						ctxContent.clearRect(0, 0, ctxContent.canvas.width, ctxContent.canvas.height);
+						
 						stopSensors();
 					}
 				}
@@ -838,7 +854,7 @@ define({
 		function clear(){
 			  ctxContent.globalAlpha=0.05;
 			  
-			  ctxContent.fillStyle='#281945'; // Alien
+			  ctxContent.fillStyle='#000'; // Alien
 			  ctxContent.fillRect(0, 0, canvasContent.width, canvasContent.height);
 			  ctxContent.globalAlpha=1;
 			}
@@ -1046,10 +1062,7 @@ class Particle {
 	      //return false;
 	    	//this.canvas.globalAlpha = 0.5;
 	    }
-	    if (distance < 50 + Math.random() * 50) {
-
-	      //this.canvas.globalAlpha = 0.10;
-	    } else
+	     else
 	    {
 	      //this.canvas.globalAlpha = 0.8;
 	    }

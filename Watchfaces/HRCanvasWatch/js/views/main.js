@@ -160,10 +160,13 @@ define({
 					// Sets notification dictionary.
 					notificationDict = {
 						content : message.detail,
-						iconPath : "../icon.png",
+						images: {
+					        /* Path to the notification icon */
+					        iconPath: '/icon.png'
+					    }
 					};
 					// Creates notification object.
-					notification = new tizen.UserNotification("SIMPLE", "Watchface Debug", notificationDict);
+					notification = new tizen.UserNotification("SIMPLE", "AZO Watch", notificationDict);
 
 					// Posts notification.
 					tizen.notification.post(notification);
@@ -184,6 +187,8 @@ define({
 			alertMessage = document.getElementById('alert-message');
 			alertOk = document.getElementById('alert-ok');
 			bindEvents();
+			var appControl = new tizen.ApplicationControl('http://tizen.org/appcontrol/operation/create_content',
+                    null, 'image/png', null, null);
 			// console.error(tizen.systeminfo.getCapabilities() );
 		}
 

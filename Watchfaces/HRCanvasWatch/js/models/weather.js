@@ -55,10 +55,7 @@ define({
 		var coords;
 		var outArray = [];
 		var mapping = {};
-		var xmlHttp, weatherInform, forecastInform,
-		// elWeatherIcon = document.querySelector("#weather-icon"),
-		// elWeatherText = document.querySelector("#weather-text"),
-		weatherIcon, weatherText;
+		var xmlHttp, weatherInform, forecastInform,	weatherIcon, weatherText;
 		var url;
 		var day = true;
 		var now = Math.round(Date.now() / 1000);
@@ -83,7 +80,6 @@ define({
 		}
 		function decodeMapping() {
 			xmlHttp = new XMLHttpRequest();
-
 			xmlHttp.overrideMimeType("application/json");
 			xmlHttp.onreadystatechange = function() {
 				if (this.readyState === XMLHttpRequest.DONE) {
@@ -96,9 +92,7 @@ define({
 					}
 				}
 			};
-
 			xmlHttp.open("GET", MAPPING_FILE, false);
-
 			xmlHttp.send(null);
 			/*
 			xmlHttp = new XMLHttpRequest();

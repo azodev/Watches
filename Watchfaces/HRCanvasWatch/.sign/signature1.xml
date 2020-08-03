@@ -14,8 +14,8 @@ RNcfCoyBfg==</DigestValue>
 </Reference>
 <Reference URI="author-signature.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>MTe6Zusx8tB5d6Oyi/S1c/cgQ6/pDB8RQg9bs2LH9mECKX3nOZ5HqsfURSkms3vkEdr+gAg8LnxB
-GVGQZ41vdQ==</DigestValue>
+<DigestValue>EUkhJWEJDU2sD8cRRJT3oD7mg90MLIzx66566cjvN+U9XDy9TfWRybrz/YXmw3qCrCGl8tH8Z5U3
+sNJsavrprA==</DigestValue>
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -79,8 +79,8 @@ VcWXr7yt2Q==</DigestValue>
 </Reference>
 <Reference URI="icon.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>7v8uUDCaUkFQS8VbLACv58P7nTshBPPfkW9Bh2VpWZLePydBjo3zxskI1lma4LJu4W3G7qsE/iOJ
-WdhbnZpbuw==</DigestValue>
+<DigestValue>FeE6WhYRiG+33ogOxHQt5Nlv50ZlqItTQ7tdXIJnaKniwYMsu/97at71Qi13U9frvbrmuCfjN4/l
+yl/idrrp/w==</DigestValue>
 </Reference>
 <Reference URI="image%2Fflat_white%2F0.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -719,13 +719,13 @@ ODJ6+SfaPg==</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2FcanvasDrawer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>CoEHhGr51S1sNX/WwgBp87SBBBo9flQSLy1eU0mWGmP9BDnXT9blCoR8Ah0jKvO/D9PIELqtOH1k
-dspw0nKVVw==</DigestValue>
+<DigestValue>rP4oP2DY0BOS6Nx6qfUA/CGIT1tcfU26ype+C6AMMJ08NMwOPToXW2LUqKA98ZK3gahPsQujcKpR
+or3YfEPkMg==</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2FheartRate.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>DzOk/KxERWzk2LkhYY6QBtoqbrWItldvrpMS16S1Y21Zp7Ch5v2aazUguWMygsqY6Klas4NHyWLZ
-ll4diwlL7w==</DigestValue>
+<DigestValue>vpy9idxppe5VUrTfdmanUzxLgXWtFT7CrYNy1zy6U3YN5XbNCYfqePpmgjndERIutKrJARMoyDXE
+UGptSVn3tg==</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2Flocation.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -754,8 +754,8 @@ dcAN0ZyPQw==</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2Fweather.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>NexuxPZ6iQ/YRTcv/HQNXbsjjJnyVz7M4ptd0RG+SOwmAn0o4VlLSaf0Rq3sJH5QCMo6dfD003d2
-DO9f7MIEYg==</DigestValue>
+<DigestValue>yxWaPc/FKqSZ9K5GW8Phnyn8L1Z/k73v8iTLtjIdUzXTG+fHRneLX5ClkzNu6uYndGVQI1V40K5/
+Eb/6S6E0IA==</DigestValue>
 </Reference>
 <Reference URI="js%2Ftau-config.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -764,8 +764,8 @@ DO9f7MIEYg==</DigestValue>
 </Reference>
 <Reference URI="js%2Fviews%2Fcanvas.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>h38vdurEZqZEwGewsZv6NP4XHT9iUOuzj/XQqH4ShVBzWDwzKxNft0ufYnTnc00Aw7em1OyK9xXp
-tcSNfkbTrQ==</DigestValue>
+<DigestValue>0ZD9rNW2ell1+hZkmjQRuREtY7QG6kStR2qokYmFSega1iXhznBqkbF63huyHC72ESFNRIGc8hsw
+YBSxVmuoIw==</DigestValue>
 </Reference>
 <Reference URI="js%2Fviews%2Finit.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -774,8 +774,8 @@ tcSNfkbTrQ==</DigestValue>
 </Reference>
 <Reference URI="js%2Fviews%2Fmain.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>Op7UOrP5dCRXzO6Y7WPy3xbHPjsw4YS9Tv9vbVT/3UuG+XWyWWOVmdnwuBb0oYqAPxdg0n6z4SJB
-5CWvXYT8pg==</DigestValue>
+<DigestValue>jUEYr8C/AcvtT4SQkQNFFNJOwItr/2k+uRAVa6InhQxSSvqBpdmomrM/s2woEMaw/m5JUrer/2Bg
+1YBZARMT0w==</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2FLICENSE.Flora">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -786,16 +786,6 @@ upc4DKODmg==</DigestValue>
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
 <DigestValue>D5GZtcDaprdU+4GVc2y9RxaRoD2z9d4sZExDsH1h2aTXrofihyFab3UH9P8iPGIpQjT2LBIa23Ah
 htOm4/Gbew==</DigestValue>
-</Reference>
-<Reference URI="lib%2Ftau%2Fwearable%2Fjs%2Ftau.js">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>TRB/ZmGxb6UQlKsT6T7v4YS03KQsNTqFcw62KwJyfkEqPi0mMwnI7it3oI3z8iOwmB3W61D7LWk5
-TKIioSromA==</DigestValue>
-</Reference>
-<Reference URI="lib%2Ftau%2Fwearable%2Fjs%2Ftau.min.js">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>rI5FVFXmSOfy8EyXchom6TIm09FFJzqb6iNIkqWoySX9ewMjbFTTx/uR/c9VYvHZTbe2TxpQHHz9
-xB3n5NVqjg==</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fblue%2Fimages%2FActionbar%2Fb_more_option.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -2017,11 +2007,11 @@ GyvKX9Snig==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-FyufUKKPT4hcsCHIWI0LWU8QO8N6DasBzRW0H1g1ATN7wF/aDPXd0D39m0eDanSt0iHqdAhq9zUw
-n4roZZVPHTcW7VQjk7ArMEoxSWsJw6SsDQqxXWLegs9EJQOK+VfoI3mFLvmNQ1nkaSFGmQlx9+Yo
-pLeGE52Zln+0laxqLbLkaKNb6dBMnw8QhSfq0CyQSxbaBRJ9/xQvQLq4nSPtXFdw9GmftbTEm0eO
-0AaXEjqeCwly1KYJ/Qxwg78NYNwF6z4xqfcSP7fobUMCjn1mlZtwPIR6vz+Ng8EFZxicQEqCx9cU
-e3Nng5x3ciQpYC88ryPKcUSC77oG633MUyeUfw==
+W7O5T+26NCPxOYiS5gMQ9c8wAxtrj/o5TLNjMybFb0sCIh0nIfmhD0xXZzPOvd/8Ox/UV+jRVxHe
+LZxXKWLKPuTE1KWJTqfHAkK/zEsLtVAJcDeeicGbTDzMFCgTAbfhjvhDw41jMl8MMnHzIfdjleKy
+ztW4MHoAI1rCq6xXgspZ68XM0fKSuWdrJHw80Gv4jsKWomCkSb4e1y73ksxZrBuDHnOcTg8gMTp2
+tiE+PTejWMeOEVm2XN9wTRm/g9aRI11KtyJ8be/sYvnqIi7fZ8o5fFGYkNt1KCIfC9ec+40A/jf1
+r/OGGjqSMBk5tlh9XUf3n0A+ynzQvzeDNJKMZg==
 </SignatureValue>
 <KeyInfo>
 <X509Data>
