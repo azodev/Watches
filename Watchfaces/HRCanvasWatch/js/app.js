@@ -42,6 +42,8 @@ define({
          */
         function init() {
             console.log('app::init');
+            
+
         }
 
         return {

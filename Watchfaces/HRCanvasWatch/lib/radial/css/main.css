@@ -1,0 +1,13 @@
+div.info {
+	margin: 0px 0;
+}
+
+div.info * {
+	color: white;
+	text-shadow: 1px 1px 0 #000000D0;
+	font-size: 8px;
+}
+
+#icons {
+	display: none;
+}
