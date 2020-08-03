@@ -58,8 +58,6 @@ define({
 		 */
 		var dateHelper = req.helpers.date;
 		var textHelper = req.helpers.text;
-		console.log('canvas');
-		console.log(req);
 		var event = req.core.event;
 		var heartRate = req.models.heartRate;
 		var pressureSensor = req.models.pressure;

@@ -20,7 +20,6 @@ define({
          * @private
          * @type {Module}
          */
-        console.log(req);
         var event = req;
 
         var svgMenu = null;   
