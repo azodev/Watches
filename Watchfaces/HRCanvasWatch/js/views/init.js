@@ -21,8 +21,7 @@
  *
  * @module    views/init
  * @requires  {@link core/event}
- * @requires  {@link views/main} * 
- * @requires  {@link models/heartRate}
+ * @requires  {@link views/main} 
  * @namespace views/init
  * @memberof  views
  */
@@ -47,10 +46,6 @@ define({
         var event = req.core.event;
 
             
-
-
-
-        
 
         /**
          * Handles resize event.

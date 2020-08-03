@@ -37,6 +37,7 @@ function RadialMenu(params) {
 RadialMenu.prototype.open = function () {
     var self = this;
     if (!self.currentMenu) {
+    	document.getElementById('container').style.display = "none";
         self.currentMenu = self.createMenu('menu inner', self.menuItems);
         self.holder.appendChild(self.currentMenu);
 

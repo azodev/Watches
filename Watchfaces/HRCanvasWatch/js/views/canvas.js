@@ -31,13 +31,14 @@
  * @requires {@link models/location}
  * @requires {@link models/weather}
  * @requires {@link core/systeminfo}
+ * @requires {@link models/radialmenu}
  * @namespace views/canvas
- * @memberof views/canvas
+ * @memberof views
  */
 
 define({
 	name : 'views/canvas',
-	requires : [ 'helpers/date', 'helpers/text', 'core/event', 'models/settings', 'models/canvasDrawer', 'models/heartRate', 'models/location', 'models/pressure', 'models/weather', 'core/systeminfo', 'models/motion', 'models/pedometer' ],
+	requires : [ 'core/event','models/radial', 'helpers/date', 'helpers/text',  'models/settings', 'models/canvasDrawer', 'models/heartRate', 'models/location', 'models/pressure', 'models/weather', 'core/systeminfo', 'models/motion', 'models/pedometer' ],
 	def : function viewsPageCanvas(req) {
 		'use strict';
 
@@ -57,6 +58,8 @@ define({
 		 */
 		var dateHelper = req.helpers.date;
 		var textHelper = req.helpers.text;
+		console.log('canvas');
+		console.log(req);
 		var event = req.core.event;
 		var heartRate = req.models.heartRate;
 		var pressureSensor = req.models.pressure;
@@ -64,6 +67,7 @@ define({
 		var pedometerSensor = req.models.pedometer;
 		var locationModel = req.models.location;
 		var weatherModel = req.models.weather;
+		var radialmenu = req.models.radial;
 		var gravSensor  = null;
 
 		var canvasDrawer = req.models.canvasDrawer;
@@ -131,7 +135,7 @@ define({
 		
 		const CLICK_INTERVAL = 1000;
 		var lastClickTimeStamp = null, currentClickTimeStamp = null;
-		var svgMenu = null;
+		
 		
 		function handleClick(canvas,ev) {
 			currentClickTimeStamp = Date.now();
@@ -148,7 +152,7 @@ define({
 			clickPos = getMousePosition(canvas,ev);
 			//console.log(canvas);
 			//console.log(ev);
-			console.log(clickPos);
+			
 			//center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 250, 70
 			if ((clickPos.x >= center.x - (watchRadius * 0.70) && clickPos.x <= (center.x - (watchRadius * 0.70)+250)  )  && (clickPos.y  >= center.y + (watchRadius * 0.06)  && clickPos.y <= (center.y + (watchRadius * 0.06))+70 )   ){
 				triggerCanvasDoubleClick(ev);
@@ -160,8 +164,8 @@ define({
 		}
 		function triggerCanvasDoubleClick(ev) {
 			console.log('handleDoubleClick');
-			document.getElementById('container').style.display = "none";
-			svgMenu.open();
+			
+			radialmenu.getMenu().open();
 			event.fire('triggerCanvasDoubleClick', ev);
 		}
 		function getMousePosition(canvas, event) { 
@@ -927,108 +931,7 @@ define({
 				  time_to_recreate = true;
 				}.bind(this), max_time);
 			
-			var menuItems = [
-                             {
-                                 id   : 'walk',
-                                 title: 'Walk',
-                                 icon: '#walk'
-                             },
-                             {
-                                 id   : 'run',
-                                 title: 'Run',
-                                 icon: '#run'
-                             },
-                             {
-                                 id   : 'drive',
-                                 title: 'Drive',
-                                 icon: '#drive'
-                             },
-                             
-                             {
-                                 id   : 'more',
-                                 title: 'More...',
-                                 icon: '#more',
-                                 items: [
-                                     {
-                                         id   : 'eat',
-                                         title: 'Eat',
-                                         icon: '#eat'
-                                     },
-                                     {
-                                         id   : 'sleep',
-                                         title: 'Sleep',
-                                         icon: '#sleep'
-                                     },
-                                     {
-                                         id   : 'shower',
-                                         title: 'Take Shower',
-                                         icon: '#shower'
-                                     },
-                                     {
-                                         id   : 'workout',
-                                         icon : '#workout',
-                                         title: 'Work Out'
-                                     }
-                                 ]
-                             },
-                             {
-                                 id: 'weapon',
-                                 title: 'Weapon...',
-                                 icon: '#weapon',
-                                 items: [
-                                     {
-                                         id: 'firearm',
-                                         icon: '#firearm',
-                                         title: 'Firearm...',
-                                         items: [
-                                             {
-                                                 id: 'glock',
-                                                 title: 'Glock 22'
-                                             },
-                                             {
-                                                 id: 'beretta',
-                                                 title: 'Beretta M9'
-                                             },
-                                             {
-                                                 id: 'tt',
-                                                 title: 'TT'
-                                             },
-                                             {
-                                                 id: 'm16',
-                                                 title: 'M16 A2'
-                                             },
-                                             {
-                                                 id: 'ak47',
-                                                 title: 'AK 47'
-                                             }
-                                         ]
-                                     },
-                                     {
-                                         id: 'knife',
-                                         icon: '#knife',
-                                         title: 'Knife'
-                                     },
-                                     {
-                                         id: 'machete',
-                                         icon: '#machete',
-                                         title: 'Machete'
-                                     }, {
-                                         id: 'grenade',
-                                         icon: '#grenade',
-                                         title: 'Grenade'
-                                     }
-                                 ]
-                             }
-                         ];
-            svgMenu = new RadialMenu({
-                parent      : document.body,
-                size        : 360,
-                closeOnClick: true,
-                menuItems   : menuItems,
-                onClick     : function (item) {
-                    console.log('You have clicked:', item.id, item.title);
-                }
-            });
+			
 			animRequest = window.requestAnimationFrame(drawWatchContent);
 			/*animTimeout = setTimeout(function() {
 				animRequest = window.requestAnimationFrame(drawTimeContent);
