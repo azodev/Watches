@@ -14,8 +14,8 @@ RNcfCoyBfg==</DigestValue>
 </Reference>
 <Reference URI="author-signature.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>pi31dsXlA0rRTMDkTAjORt9QcvyCw4cL+IHUxjA6pT3L3aClZyuE5zlYVpv+IRZ2nDVPYRMIPQvn
-WBE4ssE3MQ==</DigestValue>
+<DigestValue>2n3z6R4m/nncLpluVbZKsRxRq+gHquRP/CLX+FN6XC2Dv/F/xXvsZlJZoc5DPmx3o0FS0C7i3sgA
+D6l9HP+iRQ==</DigestValue>
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -744,8 +744,8 @@ dcAN0ZyPQw==</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2Fweather.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>yxWaPc/FKqSZ9K5GW8Phnyn8L1Z/k73v8iTLtjIdUzXTG+fHRneLX5ClkzNu6uYndGVQI1V40K5/
-Eb/6S6E0IA==</DigestValue>
+<DigestValue>D0OttC5HgHyXj5UKJ+Q666j+xlUeBQQxzd72Na11FU+UCaBmJVmwFFfHQoJFYt+pKF7sPHsn6niO
+jlAgJ1CoYg==</DigestValue>
 </Reference>
 <Reference URI="js%2Ftau-config.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -754,8 +754,8 @@ Eb/6S6E0IA==</DigestValue>
 </Reference>
 <Reference URI="js%2Fviews%2Fcanvas.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>YDxAVVtYGLKo4fE0AycCfsfxq7rpECOoPcEHXNWfh+s3J/nVamZjYCFZqXDMarWoOoSayvNR/trY
-O3GgKaWIuA==</DigestValue>
+<DigestValue>HzI+SHCizlVzY6Lqp3HXJcABdWIB+Hsba5y7eivV+geKctMOZb2kHLskBWbRPu9cqhS5y/miWeE2
+NNXWFFNYJg==</DigestValue>
 </Reference>
 <Reference URI="js%2Fviews%2Finit.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -769,8 +769,8 @@ gIoLoeNNMA==</DigestValue>
 </Reference>
 <Reference URI="js%2Fviews%2Fradial.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>9LFxaJfe3VZqDFTGAoLN7RFdNjA/UCpefFcZg3Eel3hwkp1TNERXGlSt9RN06Vbe9VYBIx2S5dVu
-1tsw2XUycw==</DigestValue>
+<DigestValue>2gdlmVmM1VxNnRreMaGCzDzErczNzCg8LkoLgHCldZ1mlC/HcdXv89/0Q8n5mJIcuDvwL4UO59k8
+oD9QOVbebg==</DigestValue>
 </Reference>
 <Reference URI="lib%2Fradial%2Fcss%2FRadialMenu.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -2022,11 +2022,11 @@ GyvKX9Snig==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-H48jYb1PATJ4KcX2SmHBrmXds9CkIbV+VCgj0ZcoWN771spKZELplXgwRzy9deVsn2+sXyNxZMzu
-y3kUY2pxICw1DKJVxAgQughU0O1Y+ImS5HLHU28NS/m1OI8JV43Vf3ubeZVp5os5mxBEAiwU7XIr
-VELtmzl7wfTzaEKSKjUrknQz/YQNprbbevdlxq5s/VPmEzLenxDemwdnFzB2+N5e1A2CgI+XcEXJ
-C9NxhbqzkV1VMDNzjTUVFKjvetivnsE4P+OisCuYfkekDySZ1K0jHHNK3jdpkKFvNd+4J8uPzwc5
-GrmcvEjcC7mhiuli9d2MR2GyyHBAUMDQIPCfGQ==
+nEb4SnRL+c0IhUaDUzB9Bg1xn/tPyiAsqmPkyKD9zghJJklhrmNHkwxB7f5q/VFpSG378RR44k/t
+KsBq7Z6qSNdUbEUNrExvJS/A2utrdqdm0cXxbqfKYz+9KYTxjR3/noYAv/2RlqmZlZXMc0vgLKs8
+rbclY+kJfYAVJpjFL1+Bk2BLtNbbBBRTjReNUuefAWQnR/1+017FdGgy2vJ0rXZme50l9XU4qopq
+OmwakJEhHpucWlHAjR+ZL7L4+XvnhXEd8RBpQ0+TS92BjWJQ0KUEc/Z2meXmwIe8gbK+/o1iWEj2
+d4URqYbFQlKeFJg+1Vvw6gxBdixurBxlEreK5g==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

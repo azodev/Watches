@@ -38,7 +38,7 @@
 
 define({
 	name : 'views/canvas',
-	requires : [ 'core/event','models/radial', 'helpers/date', 'helpers/text',  'models/settings', 'models/canvasDrawer', 'models/heartRate', 'models/location', 'models/pressure', 'models/weather', 'core/systeminfo', 'models/motion', 'models/pedometer' ],
+	requires : [ 'core/event','views/radial', 'helpers/date', 'helpers/text',  'models/settings', 'models/canvasDrawer', 'models/heartRate', 'models/location', 'models/pressure', 'models/weather', 'core/systeminfo', 'models/motion', 'models/pedometer' ],
 	def : function viewsPageCanvas(req) {
 		'use strict';
 
@@ -67,7 +67,7 @@ define({
 		var pedometerSensor = req.models.pedometer;
 		var locationModel = req.models.location;
 		var weatherModel = req.models.weather;
-		var radialmenu = req.models.radial;
+		var radialmenu = req.views.radial;
 		var gravSensor  = null;
 
 		var canvasDrawer = req.models.canvasDrawer;

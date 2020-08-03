@@ -21,7 +21,7 @@ define({
          * @type {Module}
          */
         console.log(req);
-        //var event = req.core.event;
+        var event = req;
 
         var svgMenu = null;   
         var menuItems = null;
@@ -157,6 +157,9 @@ define({
                 menuItems   : menuItems,
                 onClick     : function (item) {
                     console.log('You have clicked:', item.id, item.title);
+                    if (item.id == 'run'){
+                    	event.fire('run',true);
+                    }
                 }
             });
         }

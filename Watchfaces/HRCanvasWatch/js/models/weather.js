@@ -345,6 +345,10 @@ define({
 				'views.canvas.triggerCanvasDoubleClick': function(e) {
 					console.log('weatherUpdateTriggered');
 					onUpdateTriggered(e);
+				},
+				'views.radial.run': function(e) {
+					console.log('weatherUpdateTriggered');
+					onUpdateTriggered(e);
 				}
 			});
 
