@@ -40,7 +40,7 @@ RadialMenu.prototype.open = function () {
     	document.getElementById('container').style.display = "none";
         self.currentMenu = self.createMenu('menu inner', self.menuItems);
         self.holder.appendChild(self.currentMenu);
-
+        
         // wait DOM commands to apply and then set class to allow transition to take effect
         RadialMenu.nextTick(function () {
             self.currentMenu.setAttribute('class', 'menu');
@@ -89,21 +89,34 @@ RadialMenu.prototype.createHolder = function () {
     self.parent.appendChild(self.holder);
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 RadialMenu.prototype.showNestedMenu = function (item) {
     var self = this;
     self.parentMenu.push(self.currentMenu);
     self.parentItems.push(self.levelItems);
     self.currentMenu = self.createMenu('menu inner', item.items, true);
     self.holder.appendChild(self.currentMenu);
-
+    RadialMenu.cleanButtons(null);
     // wait DOM commands to apply and then set class to allow transition to take effect
     RadialMenu.nextTick(function () {
         self.getParentMenu().setAttribute('class', 'menu outer');
         self.currentMenu.setAttribute('class', 'menu');
     });
 };
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+RadialMenu.cleanButtons = function (item){
+	document.querySelectorAll("svg.menu > g > path").forEach(function(el) {
+		  el.setAttribute('class', '');
+    });
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+RadialMenu.prototype.highlightButton = function (itemid,color){
+	document.querySelector("svg.menu > g[data-id="+itemid+"] > path").setAttribute('class', color);
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+RadialMenu.prototype.darkenButton = function (itemid){
+	document.querySelector("svg.menu > g[data-id="+itemid+"] > path").setAttribute('class', '');
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 RadialMenu.prototype.returnToParentMenu = function () {
     var self = this;

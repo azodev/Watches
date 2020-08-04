@@ -157,15 +157,18 @@ define({
                 onClick     : function (item) {
                 	console.log("svg.menu > g[data-id="+item.id+"] > g");
                 	console.log(document.querySelector("svg.menu > g[data-id="+item.id+"] > path"));
-                	
-                	document.querySelector("svg.menu > g[data-id="+item.id+"] > path").setAttribute('class', 'selected');//('fill', '#F9A602D0');
+                	document.querySelectorAll("svg.menu > g > path").forEach(function(el) {
+                		  el.setAttribute('class', '');
+                	});
+                	svgMenu.highlightButton(item.id,'selected_blue');//('fill', '#F9A602D0');
                 	
                     console.log('You have clicked:', item.id, item.title);
                     if (item.id == 'update'){
                     	event.fire('update',true);
                     	setTimeout(function(){
+                    		svgMenu.darkenButton(item.id);
                     		svgMenu.close();
-                    		document.querySelector("svg.menu > g[data-id="+item.id+"] > path").setAttribute('class', '');
+                    		
                     		}, 200);
                     }
                 }
