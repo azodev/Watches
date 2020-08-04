@@ -593,8 +593,9 @@ define({
 			return gradientCoords;
 		}
 		function calculateRadialGradientPosition(motionAcceleration) {
-			radialGradientCoords.x = Math.round(radialGradientCoordsD.x - (motionAcceleration.x * 8));
-			radialGradientCoords.y = Math.round(radialGradientCoordsD.y - (motionAcceleration.y * 8))+20;
+			radialGradientCoords.x = Math.min(Math.round(radialGradientCoordsD.x - (motionAcceleration.x * 16)),250);
+			radialGradientCoords.y = Math.min(Math.round(radialGradientCoordsD.y - (motionAcceleration.y * 16))+50,300);
+			
 			return radialGradientCoords;
 		}
 		function processMotion(motionAcceleration, context) {
@@ -605,13 +606,13 @@ define({
 			radialGradient = context.createRadialGradient(radialGradientCoords.x, radialGradientCoords.y, 0.000, 180.000, 180.000, 180.000);
 			radialGradient.addColorStop(0.000, 'rgba(0, 0, 0,1)');
 			radialGradient.addColorStop(0.300, 'rgba(0, 0, 0,0.2)');
-			radialGradient.addColorStop(0.755, 'rgba(39,41,42,0.3)');
+			radialGradient.addColorStop(0.755, 'rgba(30,30,30,0.3)');
 			radialGradient.addColorStop(0.83, 'rgba(39,41,42,0.4)');
-			radialGradient.addColorStop(0.85, 'rgba(39,41,42,0.8)');
+			radialGradient.addColorStop(0.85, 'rgba(39,41,42,0.7)');
 			//radialGradient.addColorStop(0.9, 'rgb(56,83,104)');
 			//radialGradient.addColorStop(0.957, 'rgb(95,117,134)');
-			radialGradient.addColorStop(0.98, 'rgba(115,134,149,0.9)');
-			radialGradient.addColorStop(1, 'rgba(171,182,191,0.9)');
+			radialGradient.addColorStop(0.98, 'rgba(115,134,149,0.8)');
+			radialGradient.addColorStop(1, 'rgba(171,182,191,0.8)');
 			gradientLinear = context.createLinearGradient(cx - gx, cy - gy, cx + gx, cy + gy);
 			//gradientLinear.addColorStop(1, "rgb(20,77,143)");
 			gradientLinear.addColorStop(1, "rgb(41,137,216)");
