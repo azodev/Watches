@@ -5,6 +5,7 @@ div.menuHolder {
     margin: 0px;
     background-color:#2C4253;
     z-index:3;
+    font-family: FutureNow;
 }
 
 svg.icons {

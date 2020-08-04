@@ -282,7 +282,7 @@ define({
 			
 			
 			// Battery
-			canvasDrawer.renderText(ctxContent, Math.round(batteryLevel) + '%', center.x, center.y - (watchRadius * 0.55), 15, "#c9c9c9", {
+			canvasDrawer.renderText(ctxContent, Math.round(batteryLevel) + '%', center.x, center.y - (watchRadius * 0.55), 17, "#c9c9c9", {
 				font : 'FutureNow',
 				align : 'center',
 				gradient : true,
@@ -290,24 +290,24 @@ define({
 			});
 			
 			
-			canvasDrawer.renderTextGradient(ctxContent, 'Altitude :', center.x - (watchRadius * 0.71), center.y - (watchRadius * 0.17), 13, "#c9c9c9", {
+			canvasDrawer.renderTextGradient(ctxContent, 'Altitude :', center.x - (watchRadius * 0.77), center.y - (watchRadius * 0.17), 14, "#c9c9c9", {
 				font : 'FutureNow',
 				align : 'left',
 				gradient : true,
 				motion: motion
 			});
-			canvasDrawer.renderText(ctxContent, altitude, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.17), 13, "#c9c9c9", {
+			canvasDrawer.renderText(ctxContent, altitude, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.17), 14, "#c9c9c9", {
 				font : 'FutureNow',
 				align : 'right'
 			});
-			canvasDrawer.renderTextGradient(ctxContent, 'Pressure :', center.x - (watchRadius * 0.71), center.y - (watchRadius * 0.07), 13, "#c9c9c9", {
+			canvasDrawer.renderTextGradient(ctxContent, 'Pressure :', center.x - (watchRadius * 0.77), center.y - (watchRadius * 0.09), 14, "#c9c9c9", {
 				font : 'FutureNow',
 				align : 'left',
 				gradient : true,
 				motion: motion
 			});
 
-			canvasDrawer.renderText(ctxContent, pressure, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.07), 13, "#c9c9c9", {
+			canvasDrawer.renderText(ctxContent, pressure, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.09), 14, "#c9c9c9", {
 				font : 'FutureNow',
 				align : 'right'
 			});
