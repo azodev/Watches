@@ -128,7 +128,7 @@ define({
 		var time_to_recreate = false;
 		var gravCenter = {x:180, y:180};
 		var clickPos = null;
-		
+		var radialButton = null;
 		var drawTicks = false;
 		
 		const CLICK_INTERVAL = 1000;
@@ -150,21 +150,23 @@ define({
 			clickPos = getMousePosition(canvas,ev);
 			//console.log(canvas);
 			//console.log(ev);
-			
+			console.log(clickPos);
 			//center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 250, 70
-			if ((clickPos.x >= center.x - (watchRadius * 0.70) && clickPos.x <= (center.x - (watchRadius * 0.70)+250)  )  && (clickPos.y  >= center.y + (watchRadius * 0.06)  && clickPos.y <= (center.y + (watchRadius * 0.06))+70 )   ){
-				triggerCanvasDoubleClick(ev);
+			//if ((clickPos.x >= center.x - (watchRadius * 0.70) && clickPos.x <= (center.x - (watchRadius * 0.70)+250)  )  && (clickPos.y  >= center.y + (watchRadius * 0.06)  && clickPos.y <= (center.y + (watchRadius * 0.06))+70 )   ){
+			if ((clickPos.x >= center.x - 50 && clickPos.x <= center.x + 50  )  && (clickPos.y  >= center.y + 70  && clickPos.y <= center.y + 150    )){
+				
+				openRadialMenu(ev);
 			}
 			
 		}
 		function handleSingleClick(ev) {
 			console.log('handleSingleClick');
 		}
-		function triggerCanvasDoubleClick(ev) {
+		function openRadialMenu(ev) {
 			console.log('handleDoubleClick');
 			
 			radialmenu.getMenu().open();
-			event.fire('triggerCanvasDoubleClick', ev);
+			event.fire('openRadialMenu', ev);
 		}
 		function getMousePosition(canvas, event) { 
             let rect = canvas.getBoundingClientRect(); 
@@ -186,6 +188,7 @@ define({
 				font : 'FutureNow',
 				align : 'center'
 			});
+			
 		}
 		function displayFps() {
 			elapsed = now - then;
@@ -282,7 +285,7 @@ define({
 			
 			
 			// Battery
-			canvasDrawer.renderText(ctxContent, Math.round(batteryLevel) + '%', center.x, center.y - (watchRadius * 0.55), 17, "#c9c9c9", {
+			canvasDrawer.renderText(ctxContent, Math.round(batteryLevel) + '%', center.x+94, center.y - (watchRadius * 0.4), 17, "#c9c9c9", {
 				font : 'FutureNow',
 				align : 'center',
 				gradient : true,
@@ -338,27 +341,51 @@ define({
 			//weather
 			canvasDrawer.roundRect(ctxContent, center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 250, 70, 10, false, true, "#000000", "#000000");
 			drawWeather();
+			
+			
+			
 			if (heartRateFound && heartRate.getData().rate !== null) {
-				canvasDrawer.renderText(ctxContent, heartRate.getData().rate, center.x, center.y + (watchRadius * 0.65), 25, "#c9c9c9", {
+				
+				canvasDrawer.renderCircle(ctxContent, {
+					x : center.x - (watchRadius * 0.45),
+					y :  center.y - (watchRadius * 0.40)
+				}, 30, "#000000",1.5,true);
+				canvasDrawer.renderText(ctxContent, heartRate.getData().rate, center.x - (watchRadius * 0.45), center.y - (watchRadius * 0.40), 25, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'center',
 					gradient : true,
 					motion: motion
 						
 				});
-				canvasDrawer.renderCircle(ctxContent, {
-					x : center.x,
-					y : center.y + (watchRadius * 0.65)
-				}, 30, "#000000",1);
 
 			}
-			canvasDrawer.renderText(ctxContent, pedometerSensor.getData().accumulativeTotalStepCount, center.x - (watchRadius * 0.3), center.y + (watchRadius * 0.6), 20, "#c9c9c9", {
-				font : 'FutureNow',
-				align : 'center',
-				gradient : true,
-				motion: motion
-					
-			});
+			
+			if (pedometerSensor.getActive() === true){
+				canvasDrawer.renderText(ctxContent, pedometerSensor.getData().accumulativeTotalStepCount, center.x - (watchRadius * 0.3), center.y + (watchRadius * 0.6), 20, "#c9c9c9", {
+					font : 'FutureNow',
+					align : 'center',
+					gradient : true,
+					motion: motion
+						
+				});
+			}
+			
+			canvasDrawer.renderCircle(ctxContent, {
+				x : center.x,
+				y : center.y + (watchRadius * 0.65)
+			}, 30, "#000000",2);
+			canvasDrawer.roundRect(ctxContent, center.x - 16, center.y + 102 , 13, 13, 3, false, true, "#000000", "#000000");
+			canvasDrawer.roundRect(ctxContent, center.x + 3, center.y + 102, 13, 13, 3, false, true, "#000000", "#000000");
+			canvasDrawer.roundRect(ctxContent, center.x - 16, center.y + 120, 13, 13, 3, false, true, "#000000", "#000000");
+			canvasDrawer.roundRect(ctxContent, center.x + 3, center.y + 120, 13, 13, 3, false, true, "#000000", "#000000");
+			/*
+			radialButton = new Image();
+			radialButton.onload = function() {
+				
+				ctxContent.drawImage(radialButton,center.x, center.y + (watchRadius * 0.65),30,30);
+			}
+			radialButton.src = "image/app.svg";
+			*/
 			
 			
 			
@@ -893,7 +920,8 @@ define({
 			mkHR();
 			mkLocation();
 			
-			pedometerSensor.start();
+			
+			//pedometerSensor.start();
 			
 			if (motionSensor.isAvailable()) {
 				motionSensor.setOptions({

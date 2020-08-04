@@ -51,6 +51,7 @@ define({
         };
     }
 });
+
 /*function write(message) {
 	tizen.filesystem.resolve("documents", function(dir) {
 		file = dir.resolve("newDir/newFilePath.txt");

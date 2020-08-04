@@ -76,6 +76,7 @@ define({
 		var gradientAngle = 0;
 		const
 		maxLength = Math.sqrt(360 * 360 + 360 * 360);
+		var opacity = false;
 
 		/**
 		 * Renders a circle with specific center, radius, and color
@@ -182,12 +183,15 @@ define({
 			context.restore();
 
 		}
-		function renderCircle(context, center, radius, color, width) {
+		function renderCircle(context, center, radius, color, width,opacity) {
 			context.save();
 			context.beginPath();
 			context.lineWidth = width;
 			if (gradientLinear !== null) {
 				color = gradientLinear;
+			}
+			if (typeof opacity === 'undefined') {
+				opacity = false;
 			}
 			/*
 			context.shadowOffsetX = 0;
@@ -198,8 +202,16 @@ define({
 			*/
 			context.strokeStyle = color;
 			context.arc(center.x, center.y, radius, 0, 2 * Math.PI);
+			if (opacity == true){
+				context.fillStyle = '#000000';
+				context.globalAlpha = 0.6;
+			    context.fill();
+			    context.globalAlpha = 1;
+			}
+			
 			context.stroke();
 			context.closePath();
+			
 			context.restore();
 		}
 		function renderBackground(context, width, height, color, options) {
@@ -592,14 +604,14 @@ define({
 			calculateRadialGradientPosition(motionAcceleration.accelerationIncludingGravity);
 			radialGradient = context.createRadialGradient(radialGradientCoords.x, radialGradientCoords.y, 0.000, 180.000, 180.000, 180.000);
 			radialGradient.addColorStop(0.000, 'rgba(0, 0, 0,1)');
-			radialGradient.addColorStop(0.300, 'rgba(0, 0, 0,0.3)');
+			radialGradient.addColorStop(0.300, 'rgba(0, 0, 0,0.2)');
 			radialGradient.addColorStop(0.755, 'rgba(39,41,42,0.3)');
 			radialGradient.addColorStop(0.83, 'rgba(39,41,42,0.4)');
-			radialGradient.addColorStop(0.85, 'rgba(39,41,42,0.9)');
+			radialGradient.addColorStop(0.85, 'rgba(39,41,42,0.8)');
 			//radialGradient.addColorStop(0.9, 'rgb(56,83,104)');
 			//radialGradient.addColorStop(0.957, 'rgb(95,117,134)');
-			radialGradient.addColorStop(0.98, 'rgba(115,134,149,1)');
-			radialGradient.addColorStop(1, 'rgba(171,182,191,1)');
+			radialGradient.addColorStop(0.98, 'rgba(115,134,149,0.9)');
+			radialGradient.addColorStop(1, 'rgba(171,182,191,0.9)');
 			gradientLinear = context.createLinearGradient(cx - gx, cy - gy, cx + gx, cy + gy);
 			//gradientLinear.addColorStop(1, "rgb(20,77,143)");
 			gradientLinear.addColorStop(1, "rgb(41,137,216)");

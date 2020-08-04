@@ -37,12 +37,14 @@ function RadialMenu(params) {
 RadialMenu.prototype.open = function () {
     var self = this;
     if (!self.currentMenu) {
-    	document.getElementById('container').style.display = "none";
+    	//document.getElementById('container').style.display = "none";
+    	document.querySelector('.menuHolder').style.display = "-webkit-flex";
         self.currentMenu = self.createMenu('menu inner', self.menuItems);
         self.holder.appendChild(self.currentMenu);
         
         // wait DOM commands to apply and then set class to allow transition to take effect
         RadialMenu.nextTick(function () {
+        	
             self.currentMenu.setAttribute('class', 'menu');
         });
     }
@@ -63,6 +65,7 @@ RadialMenu.prototype.close = function () {
             self.currentMenu.remove();
             self.currentMenu = null;
             document.getElementById('container').style.display = "-webkit-flex";
+            document.querySelector('.menuHolder').style.display = "none";
         });
     }
 };
@@ -241,7 +244,7 @@ RadialMenu.prototype.createMenu = function (classValue, levelItems, nested) {
     if (nested) {
         self.createCenter(svg, 'Close', '#return', 8);
     } else {
-        self.createCenter(svg, 'Close', '#close', 7);
+        self.createCenter(svg, 'Close', '#close', 10);
     }
 
     svg.addEventListener('mousedown', function (event) {
@@ -462,7 +465,7 @@ RadialMenu.prototype.createText = function (x, y, title) {
     text.setAttribute('text-anchor', 'middle');
     text.setAttribute('x', RadialMenu.numberToString(x));
     text.setAttribute('y', RadialMenu.numberToString(y));
-    text.setAttribute('font-size', '19%');
+    text.setAttribute('font-size', '17%');
     text.innerHTML = title;
     return text;
 };
@@ -513,13 +516,38 @@ RadialMenu.prototype.addIconSymbols = function () {
 
     var closeSymbol = document.createElementNS('http://www.w3.org/2000/svg', 'symbol');
     closeSymbol.setAttribute('id', 'close');
-    closeSymbol.setAttribute('viewBox', '0 0 41.756 41.756');
+    closeSymbol.setAttribute('viewBox', '0 0 512 512');
+    closeSymbol.setAttribute('enable-background', 'new 0 0 512 512');
 
     var closePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    closePath.setAttribute('d', "M27.948,20.878L40.291,8.536c1.953-1.953,1.953-5.119,0-7.071c-1.951-1.952-5.119-1.952-7.07,0L20.878,13.809L8.535,1.465" +
-        "c-1.951-1.952-5.119-1.952-7.07,0c-1.953,1.953-1.953,5.119,0,7.071l12.342,12.342L1.465,33.22c-1.953,1.953-1.953,5.119,0,7.071" +
-        "C2.44,41.268,3.721,41.755,5,41.755c1.278,0,2.56-0.487,3.535-1.464l12.343-12.342l12.343,12.343" +
-        "c0.976,0.977,2.256,1.464,3.535,1.464s2.56-0.487,3.535-1.464c1.953-1.953,1.953-5.119,0-7.071L27.948,20.878z");
+    closePath.setAttribute('d', "M189.217,0H33.38C14.97,0,0,14.982,0,33.391v155.826c0,18.41,14.982,33.391,33.391,33.391h155.826" +
+				"c18.41,0,33.391-14.982,33.391-33.391V33.391C222.609,14.982,207.627,0,189.217,0z M200.348,189.217"+
+				"c0,6.133-4.998,11.13-11.13,11.13H33.391c-6.133,0-11.13-4.998-11.13-11.13V33.391c0-6.133,4.986-11.13,11.119-11.13h155.837"+
+				"c6.133,0,11.13,4.998,11.13,11.13V189.217z");
+    closeSymbol.appendChild(closePath);
+    svg.appendChild(closeSymbol);
+    self.holder.appendChild(svg);
+    closePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    closePath.setAttribute('d', "M478.609,0H322.783c-18.41,0-33.391,14.982-33.391,33.391v155.826"+
+				"c0,18.41,14.982,33.391,33.391,33.391h155.826c18.41,0,33.391-14.982,33.391-33.391V33.391C512,14.982,497.018,0,478.609,0z"+
+				"M489.739,189.217c0,6.133-4.986,11.13-11.13,11.13H322.783c-6.144,0-11.13-4.998-11.13-11.13V33.391"+
+				"c0-6.133,4.986-11.13,11.13-11.13h155.826c6.144,0,11.13,4.998,11.13,11.13V189.217z");
+    closeSymbol.appendChild(closePath);
+    svg.appendChild(closeSymbol);
+    self.holder.appendChild(svg);
+    closePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    closePath.setAttribute('d', "M189.217,289.391H33.38C14.97,289.391,0,304.373,0,322.783v155.826"+
+				"C0,497.018,14.982,512,33.391,512h155.826c18.41,0,33.391-14.982,33.391-33.391V322.783"+
+				"C222.609,304.373,207.627,289.391,189.217,289.391z M200.348,478.609c0,6.144-4.998,11.13-11.13,11.13H33.391"+
+				"c-6.133,0-11.13-4.986-11.13-11.13V322.783c0-6.144,4.986-11.13,11.119-11.13h155.837c6.133,0,11.13,4.986,11.13,11.13V478.609z");
+    closeSymbol.appendChild(closePath);
+    svg.appendChild(closeSymbol);
+    self.holder.appendChild(svg);
+    closePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    closePath.setAttribute('d', "M478.609,289.391H322.783c-18.41,0-33.391,14.982-33.391,33.391v155.826"+
+				"c0,18.41,14.982,33.391,33.391,33.391h155.826c18.41,0,33.391-14.982,33.391-33.391V322.783"+
+				"C512,304.373,497.018,289.391,478.609,289.391z M489.739,478.609c0,6.144-4.986,11.13-11.13,11.13H322.783"+
+				"c-6.144,0-11.13-4.986-11.13-11.13V322.783c0-6.144,4.986-11.13,11.13-11.13h155.826c6.144,0,11.13,4.986,11.13,11.13V478.609z");
     closeSymbol.appendChild(closePath);
     svg.appendChild(closeSymbol);
 

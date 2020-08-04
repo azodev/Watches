@@ -89,7 +89,7 @@ define({
 		var started = false;
 		var firstSteps = 0;
 		var lasthour = null;
-
+		var isActive = false;
 		/**
 		 * Sets heart rate and time values received from sensor. Returns heart
 		 * rate data.
@@ -100,6 +100,9 @@ define({
 		 *            pedometerInfo
 		 * @returns {object}
 		 */
+		function getActive(){
+			return isActive;
+		}
 		function setPedometerData(pedometerInfo) {
 			
 			if (firstSteps == 0) {
@@ -195,6 +198,7 @@ define({
 				pedometerSensor.setAccumulativePedometerListener(handlePedometerInfo);
 				
 				started = true;
+				isActive= true;
 			}
 			
 		}
@@ -207,6 +211,7 @@ define({
 		 */
 		function stop() {
 			pedometerSensor.unsetAccumulativePedometerListener();
+			isActive = false;
 		}
 
 		/**
@@ -242,7 +247,8 @@ define({
 			init : init,
 			start : start,
 			stop : stop,
-			getData: getData
+			getData: getData,
+			getActive: getActive
 		};
 	}
 });

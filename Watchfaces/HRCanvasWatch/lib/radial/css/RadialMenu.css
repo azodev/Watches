@@ -1,11 +1,14 @@
 div.menuHolder {
     user-select: none;
     -moz-user-select: none;
-    position: relative;
+    position: absolute;
     margin: 0px;
-    background-color:#2C4253;
+    /*background-color:#2C4253;*/
+    
     z-index:3;
+    display:none;
     font-family: FutureNow;
+    
 }
 
 svg.icons {
@@ -18,6 +21,7 @@ svg.menu {
     transition: 0.2s;
     z-index:3;
     transition-timing-function: ease-out;
+    
 }
 
 svg.menu.inner {
@@ -33,12 +37,14 @@ svg.menu.outer {
 }
 
 svg.menu > g > path {
-    fill: #00000080;
+    fill: #1E2E3A;
+    opacity:0.9;
 }
 
 svg.menu > g.sector > path {
     cursor: pointer;
     transition: 0.1s;
+    
 }
 
 svg.menu > g.sector > text,
@@ -60,7 +66,7 @@ svg.menu > g.sector.selected > path {
     
 }
 
-path.selected_blue {
+svg.menu > g > path.selected_blue {
 	fill: #096EB5;
 	transition: fill 0.1s ease;
 }
@@ -71,7 +77,8 @@ svg.menu > g.center:hover > circle {
 
 svg.menu > g.center > circle {
     cursor: pointer;
-    fill: #00000080;
+    fill: #0F171D;
+    opacity:0.9;
 }
 
 svg.menu > g.center > text,

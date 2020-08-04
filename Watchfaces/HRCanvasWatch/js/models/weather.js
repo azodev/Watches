@@ -342,10 +342,7 @@ define({
 				},
 				'models.weather.found' : updateForecast,
 				'models.location.distanceChange' : onDistanceChange,
-				'views.canvas.triggerCanvasDoubleClick': function(e) {
-					console.log('weatherUpdateTriggered');
-					//onUpdateTriggered(e);
-				},
+				
 				'views.radial.update': function(e) {
 					console.log('weatherUpdateTriggered');
 					onUpdateTriggered(e);

@@ -58,9 +58,9 @@ define({
             bindEvents();
             menuItems = [
                              {
-                                 id   : 'walk',
-                                 title: 'Walk',
-                                 icon: '#walk'
+                                 id   : 'events',
+                                 title: 'Events',
+                                 icon: '#events'
                              },
                              {
                                  id   : 'update',
@@ -68,9 +68,9 @@ define({
                                  icon: '#update'
                              },
                              {
-                                 id   : 'drive',
-                                 title: 'Drive',
-                                 icon: '#drive'
+                                 id   : 'altitude',
+                                 title: 'Altitude',
+                                 icon: '#altitude'
                              },
                              
                              {
@@ -101,56 +101,30 @@ define({
                                  ]
                              },
                              {
-                                 id: 'weapon',
-                                 title: 'Weapon...',
-                                 icon: '#weapon',
+                                 id: 'colors',
+                                 title: 'Colors...',
+                                 icon: '#colors',
                                  items: [
+                                     
                                      {
-                                         id: 'firearm',
-                                         icon: '#firearm',
-                                         title: 'Firearm...',
-                                         items: [
-                                             {
-                                                 id: 'glock',
-                                                 title: 'Glock 22'
-                                             },
-                                             {
-                                                 id: 'beretta',
-                                                 title: 'Beretta M9'
-                                             },
-                                             {
-                                                 id: 'tt',
-                                                 title: 'TT'
-                                             },
-                                             {
-                                                 id: 'm16',
-                                                 title: 'M16 A2'
-                                             },
-                                             {
-                                                 id: 'ak47',
-                                                 title: 'AK 47'
-                                             }
-                                         ]
+                                         id: 'blue',
+                                         icon: '#blue',
+                                         title: 'Ice'
                                      },
                                      {
-                                         id: 'knife',
-                                         icon: '#knife',
-                                         title: 'Knife'
-                                     },
-                                     {
-                                         id: 'machete',
-                                         icon: '#machete',
-                                         title: 'Machete'
+                                         id: 'fire',
+                                         icon: '#fire',
+                                         title: 'Fire'
                                      }, {
-                                         id: 'grenade',
-                                         icon: '#grenade',
-                                         title: 'Grenade'
+                                         id: 'hisakura',
+                                         icon: '#hisakura',
+                                         title: 'Hisakura'
                                      }
                                  ]
                              }
                          ];
             svgMenu = new RadialMenu({
-                parent      : document.body,
+                parent      : document.querySelector('#container'),
                 size        : 360,
                 closeOnClick: false,
                 menuItems   : menuItems,
