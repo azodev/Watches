@@ -62,8 +62,8 @@ RadialMenu.prototype.close = function () {
         RadialMenu.setClassAndWaitForTransition(self.currentMenu, 'menu inner').then(function () {
             self.currentMenu.remove();
             self.currentMenu = null;
+            document.getElementById('container').style.display = "-webkit-flex";
         });
-        document.getElementById('container').style.display = "-webkit-flex";
     }
 };
 

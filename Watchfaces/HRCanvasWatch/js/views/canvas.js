@@ -825,10 +825,10 @@ define({
 //			console.error('mkHR');
 			hrInterval = window.setInterval(function() {
 //				console.error('hrInterval loop');
-				if (!doNotMkHR) {
+				//if (!doNotMkHR) {
 					heartRate.start();
-					checkHR();
-				}
+					//checkHR();
+				//}
 
 			}, intervals.heartRate);
 		}

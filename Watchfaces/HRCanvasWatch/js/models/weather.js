@@ -92,7 +92,7 @@ define({
 					}
 				}
 			};
-			xmlHttp.open("GET", MAPPING_FILE, false);
+			xmlHttp.open("GET", MAPPING_FILE, true);
 			xmlHttp.send(null);
 			/*
 			xmlHttp = new XMLHttpRequest();
@@ -344,9 +344,9 @@ define({
 				'models.location.distanceChange' : onDistanceChange,
 				'views.canvas.triggerCanvasDoubleClick': function(e) {
 					console.log('weatherUpdateTriggered');
-					onUpdateTriggered(e);
+					//onUpdateTriggered(e);
 				},
-				'views.radial.run': function(e) {
+				'views.radial.update': function(e) {
 					console.log('weatherUpdateTriggered');
 					onUpdateTriggered(e);
 				}

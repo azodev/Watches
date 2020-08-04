@@ -63,9 +63,9 @@ define({
                                  icon: '#walk'
                              },
                              {
-                                 id   : 'run',
-                                 title: 'Run',
-                                 icon: '#run'
+                                 id   : 'update',
+                                 title: 'Update',
+                                 icon: '#update'
                              },
                              {
                                  id   : 'drive',
@@ -152,12 +152,21 @@ define({
             svgMenu = new RadialMenu({
                 parent      : document.body,
                 size        : 360,
-                closeOnClick: true,
+                closeOnClick: false,
                 menuItems   : menuItems,
                 onClick     : function (item) {
+                	console.log("svg.menu > g[data-id="+item.id+"] > g");
+                	console.log(document.querySelector("svg.menu > g[data-id="+item.id+"] > path"));
+                	
+                	document.querySelector("svg.menu > g[data-id="+item.id+"] > path").setAttribute('class', 'selected');//('fill', '#F9A602D0');
+                	
                     console.log('You have clicked:', item.id, item.title);
-                    if (item.id == 'run'){
-                    	event.fire('run',true);
+                    if (item.id == 'update'){
+                    	event.fire('update',true);
+                    	setTimeout(function(){
+                    		svgMenu.close();
+                    		document.querySelector("svg.menu > g[data-id="+item.id+"] > path").setAttribute('class', '');
+                    		}, 200);
                     }
                 }
             });
