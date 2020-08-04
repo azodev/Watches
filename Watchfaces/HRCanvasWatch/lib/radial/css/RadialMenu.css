@@ -62,7 +62,7 @@ svg.menu > g.sector.selected > path {
 
 path.selected_blue {
 	fill: #096EB5;
-	/*transition: fill 0.2s ease;*/
+	transition: fill 0.1s ease;
 }
 
 svg.menu > g.center:hover > circle {
