@@ -594,7 +594,7 @@ define({
 		}
 		function calculateRadialGradientPosition(motionAcceleration) {
 			radialGradientCoords.x = Math.min(Math.round(radialGradientCoordsD.x - (motionAcceleration.x * 16)),250);
-			radialGradientCoords.y = Math.min(Math.round(radialGradientCoordsD.y - (motionAcceleration.y * 16))+50,300);
+			radialGradientCoords.y = Math.min(Math.round(radialGradientCoordsD.y - (motionAcceleration.y * 16))+40,300);
 			
 			return radialGradientCoords;
 		}
