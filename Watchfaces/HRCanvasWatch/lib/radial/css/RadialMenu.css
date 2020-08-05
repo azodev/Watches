@@ -37,7 +37,7 @@ svg.menu.outer {
 }
 
 svg.menu > g > path {
-    fill: #1E2E3A;
+    /*fill: #1E2E3A;*/
     opacity:0.9;
 }
 
@@ -65,12 +65,30 @@ svg.menu > g.sector.selected > path {
     fill: #32CD32D0 !important;
     
 }
-
-svg.menu > g > path.selected_blue {
+svg.menu > g > path.ice {
+    fill: #1E2E3A;
+    opacity:0.9;
+}
+svg.menu > g > path.selected.ice {
 	fill: #096EB5;
 	transition: fill 0.1s ease;
 }
-
+svg.menu > g > path.fire {
+	fill: #9e5c15;
+	transition: fill 0.1s ease;
+}
+svg.menu > g > path.selected.fire {
+	fill: #db7e1a;
+	transition: fill 0.1s ease;
+}
+svg.menu > g > path.hisakura {
+	fill: #e09bb9;
+	transition: fill 0.1s ease;
+}
+svg.menu > g > path.selected.hisakura {
+	fill: #ed77aa;
+	transition: fill 0.1s ease;
+}
 svg.menu > g.center:hover > circle {
     fill: #F9A602D0;
 }

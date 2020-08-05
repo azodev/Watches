@@ -24,6 +24,7 @@ define({
 
         var svgMenu = null;   
         var menuItems = null;
+        var theme = 'ice';
         /**
          * Handles resize event.
          *
@@ -33,7 +34,9 @@ define({
          */
         
 
-        
+        function changeTheme(theme){
+			theme = theme;
+		}
 
         /**
          * Registers event listeners.
@@ -42,7 +45,9 @@ define({
          * @private
          */
         function bindEvents() {
-           
+           event.on ({
+        	   //'views.radial.changeTheme' : changeTheme
+           });
             
         }
 
@@ -132,46 +137,31 @@ define({
                 	//console.log("svg.menu > g[data-id="+item.id+"] > g");
                 	//console.log(document.querySelector("svg.menu > g[data-id="+item.id+"] > path"));
                 	document.querySelectorAll("svg.menu > g > path").forEach(function(el) {
-                		  el.setAttribute('class', '');
+                		
+              		  el.setAttribute('class', svgMenu.getTheme());
                 	});
-                	svgMenu.highlightButton(item.id,'selected_blue');//('fill', '#F9A602D0');
+                	svgMenu.highlightButton(item.id,'selected '+svgMenu.getTheme());//('fill', '#F9A602D0');
                 	
                     console.log('You have clicked:', item.id, item.title);
                     if (item.id == 'update'){
                     	event.fire('update',true);
                     	setTimeout(function(){
-                    		svgMenu.darkenButton(item.id);
+                    		svgMenu.darkenButton(item.id,item.id);
                     		svgMenu.close();
                     		
                     		}, 200);
                     }
-                    else if (item.id == 'fire'){
-                    	
+                    else if (item.id == 'fire' || item.id == 'hisakura' || item.id == 'ice'){
+                    	changeTheme(item.id);
+                    	svgMenu.setTheme(item.id);
                     	event.fire('changeTheme',item.id);
                     	setTimeout(function(){
-                    		svgMenu.darkenButton(item.id);
+                    		svgMenu.darkenButton(item.id,item.id);
                     		svgMenu.close();
                     		
                     		}, 200);
                     }
-                    else if (item.id == 'hisakura'){
-                    	
-                    	event.fire('changeTheme',item.id);
-                    	setTimeout(function(){
-                    		svgMenu.darkenButton(item.id);
-                    		svgMenu.close();
-                    		
-                    		}, 200);
-                    }
-                    else if (item.id == 'ice'){
-                    	
-                    	event.fire('changeTheme',item.id);
-                    	setTimeout(function(){
-                    		svgMenu.darkenButton(item.id);
-                    		svgMenu.close();
-                    		
-                    		}, 200);
-                    }
+                    
                 }
             });
         }

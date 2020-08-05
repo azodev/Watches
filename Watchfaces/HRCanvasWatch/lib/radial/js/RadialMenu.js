@@ -6,7 +6,7 @@ var MIN_SECTORS  = 3;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function RadialMenu(params) {
     var self = this;
-
+    self.theme = 'ice';
     self.parent  = params.parent  || [];
 
     self.size      = params.size    || DEFAULT_SIZE;
@@ -99,7 +99,7 @@ RadialMenu.prototype.showNestedMenu = function (item) {
     self.parentItems.push(self.levelItems);
     self.currentMenu = self.createMenu('menu inner', item.items, true);
     self.holder.appendChild(self.currentMenu);
-    RadialMenu.cleanButtons(null);
+    RadialMenu.cleanButtons(self.theme);
     // wait DOM commands to apply and then set class to allow transition to take effect
     RadialMenu.nextTick(function () {
         self.getParentMenu().setAttribute('class', 'menu outer');
@@ -107,18 +107,27 @@ RadialMenu.prototype.showNestedMenu = function (item) {
     });
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-RadialMenu.cleanButtons = function (item){
+RadialMenu.cleanButtons = function (theme){
 	document.querySelectorAll("svg.menu > g > path").forEach(function(el) {
-		  el.setAttribute('class', '');
+			
+		  el.setAttribute('class', theme);
     });
+}
+RadialMenu.prototype.setTheme = function (theme){
+	 var self = this;
+	 self.theme = theme;
+}
+RadialMenu.prototype.getTheme = function (){
+	 var self = this;
+	 return self.theme ;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 RadialMenu.prototype.highlightButton = function (itemid,color){
 	document.querySelector("svg.menu > g[data-id="+itemid+"] > path").setAttribute('class', color);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-RadialMenu.prototype.darkenButton = function (itemid){
-	document.querySelector("svg.menu > g[data-id="+itemid+"] > path").setAttribute('class', '');
+RadialMenu.prototype.darkenButton = function (itemid,theme){
+	document.querySelector("svg.menu > g[data-id="+itemid+"] > path").setAttribute('class', theme);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 RadialMenu.prototype.returnToParentMenu = function () {
@@ -399,6 +408,7 @@ RadialMenu.prototype.appendSectorPath = function (startAngleDeg, endAngleDeg, sv
 
     var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.setAttribute('d', self.createSectorCmds(startAngleDeg, endAngleDeg));
+    path.setAttribute('class',self.theme);
     g.appendChild(path);
 
     if (item) {
