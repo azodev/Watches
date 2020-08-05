@@ -130,7 +130,7 @@ define({
 		var clickPos = null;
 		var radialButton = null;
 		var drawTicks = false;
-		
+		var particleColors = ["#694FB9","#6094ee","#3CFBFF"];
 		const CLICK_INTERVAL = 1000;
 		var lastClickTimeStamp = null, currentClickTimeStamp = null;
 		
@@ -817,6 +817,7 @@ define({
 				'models.pressure.change' : onPressureChange,
 				'models.motion.change' : onMotionChange,
 				'models.motion.error' : onMotionError,
+				'views.radial.changeTheme' : changeTheme,
 				//'models.pedometer.change' : onPedometerDataChange,
 				'models.weather.found' : onWeatherFound
 			});
@@ -895,7 +896,7 @@ define({
 			    function (x) {
 			      return function () {
 			        // Add particle
-			        particles.push(new Particle(ctxContent));
+			        particles.push(new Particle(ctxContent,particleColors));
 			      };
 			    }(i),
 			    frequency * i);
@@ -903,13 +904,23 @@ define({
 			  return particles.length;
 			}
 
-			function createSphera() {
-			  let radius = 200;
-			  let center = {
-			    x: 360 / 2,
-			    y: 360 / 2 };
-
+		function changeTheme(ev){
+			switch ( ev.detail){
+			case 'fire':
+				particleColors = ["#ff5a02","#f8b500","#f9eac2"];
+			    break;
+			case 'hisakura':
+				particleColors = ["#ff5151","#fc7b7b","#f9d9d9"];
+			    break;
+			  default:
+				  particleColors = ["#694FB9","#6094ee","#3CFBFF"];
 			}
+			//time_to_recreate = true;
+			
+			particles = [];
+			popolate(max_particles);
+			
+		}
 		function init() {
 			nextMove = 1000 / fps;
 			then = Date.now();
@@ -933,7 +944,7 @@ define({
 			}
 			
 			weatherInterval = window.setInterval(function(e) {
-				event.fire('triggerCanvasDoubleClick',e);
+				event.fire('updateWeather',e);
 			},intervals.weather
 			);			
 			

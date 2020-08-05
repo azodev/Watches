@@ -107,8 +107,8 @@ define({
                                  items: [
                                      
                                      {
-                                         id: 'blue',
-                                         icon: '#blue',
+                                         id: 'ice',
+                                         icon: '#ice',
                                          title: 'Ice'
                                      },
                                      {
@@ -129,8 +129,8 @@ define({
                 closeOnClick: false,
                 menuItems   : menuItems,
                 onClick     : function (item) {
-                	console.log("svg.menu > g[data-id="+item.id+"] > g");
-                	console.log(document.querySelector("svg.menu > g[data-id="+item.id+"] > path"));
+                	//console.log("svg.menu > g[data-id="+item.id+"] > g");
+                	//console.log(document.querySelector("svg.menu > g[data-id="+item.id+"] > path"));
                 	document.querySelectorAll("svg.menu > g > path").forEach(function(el) {
                 		  el.setAttribute('class', '');
                 	});
@@ -139,6 +139,33 @@ define({
                     console.log('You have clicked:', item.id, item.title);
                     if (item.id == 'update'){
                     	event.fire('update',true);
+                    	setTimeout(function(){
+                    		svgMenu.darkenButton(item.id);
+                    		svgMenu.close();
+                    		
+                    		}, 200);
+                    }
+                    else if (item.id == 'fire'){
+                    	
+                    	event.fire('changeTheme',item.id);
+                    	setTimeout(function(){
+                    		svgMenu.darkenButton(item.id);
+                    		svgMenu.close();
+                    		
+                    		}, 200);
+                    }
+                    else if (item.id == 'hisakura'){
+                    	
+                    	event.fire('changeTheme',item.id);
+                    	setTimeout(function(){
+                    		svgMenu.darkenButton(item.id);
+                    		svgMenu.close();
+                    		
+                    		}, 200);
+                    }
+                    else if (item.id == 'ice'){
+                    	
+                    	event.fire('changeTheme',item.id);
                     	setTimeout(function(){
                     		svgMenu.darkenButton(item.id);
                     		svgMenu.close();

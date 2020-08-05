@@ -1,5 +1,5 @@
 class Particle {
-	  constructor(canvas) {
+	  constructor(canvas,colors) {
 	    let random = Math.random();
 	    this.progress = 0;
 	    this.canvas = canvas;
@@ -10,10 +10,15 @@ class Particle {
 	    this.point_of_attraction = {
 	      x: 360 / 2,
 	      y: 360 / 2 };
-
-
-	    
-
+	    /*if (typeof colors !== 'undefined'){
+	    	this.colors = ;
+	    }
+	    else {
+	    	this.colors = colors;
+	    }
+	    	
+	    */
+	    this.colors = colors;
 	    if (Math.random() > 0.5) {
 	      this.x = 360 * Math.random();
 	      this.y = Math.random() > 0.5 ? -Math.random() - 100 : 360 + Math.random() + 100;
@@ -28,9 +33,9 @@ class Particle {
 	    this.w = 360;
 	    this.h = 360;
 	    this.radius = random > .2 ? Math.random() * 1 : Math.random() * 3;
-	    this.color = random > .2 ? "#694FB9" : "#6094ee";
+	    this.color = random > .2 ? this.colors[0] : this.colors[1];
 	    this.radius = random > .8 ? Math.random() * 2.2 : this.radius;
-	    this.color = random > .8 ? "#3CFBFF" : this.color;
+	    this.color = random > .8 ? this.colors[2] : this.color;
 	  }
 	  setPoA(coords){
 		  this.point_of_attraction.x = coords.x;
