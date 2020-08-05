@@ -78,6 +78,7 @@ define({
 		maxLength = Math.sqrt(360 * 360 + 360 * 360);
 		var opacity = false;
 		var theme= 'ice';
+		var grdAmbiant = null;
 
 		/**
 		 * Renders a circle with specific center, radius, and color
@@ -595,7 +596,7 @@ define({
 		}
 		function calculateRadialGradientPosition(motionAcceleration) {
 			radialGradientCoords.x = Math.min(Math.round(radialGradientCoordsD.x - (motionAcceleration.x * 16)),250);
-			radialGradientCoords.y = Math.min(Math.round(radialGradientCoordsD.y - (motionAcceleration.y * 16))+40,300);
+			radialGradientCoords.y = Math.min(Math.round(radialGradientCoordsD.y - ((motionAcceleration.y-3.2) * 16)),300);
 			
 			return radialGradientCoords;
 		}
@@ -608,18 +609,18 @@ define({
 			radialGradient = context.createRadialGradient(radialGradientCoords.x, radialGradientCoords.y, 0.000, 180.000, 180.000, 180.000);
 			radialGradient.addColorStop(0.000, 'rgba(0, 0, 0,1)');
 			radialGradient.addColorStop(0.300, 'rgba(0, 0, 0,0.2)');
-			radialGradient.addColorStop(0.755, 'rgba(30,30,30,0.3)');
-			radialGradient.addColorStop(0.83, 'rgba(39,41,42,0.4)');
-			radialGradient.addColorStop(0.85, 'rgba(39,41,42,0.7)');
-			radialGradient.addColorStop(0.98, 'rgba(115,134,149,0.8)');
-			radialGradient.addColorStop(1, 'rgba(160,160,160,0.8)');
+			radialGradient.addColorStop(0.755, 'rgba(0,0,0,0.3)');
+			radialGradient.addColorStop(0.83, 'rgba(20,20,20,0.3)');
+			radialGradient.addColorStop(0.91, 'rgba(39,41,42,1)');
+			//radialGradient.addColorStop(0.98, 'rgba(80,80,80,1)');
+			radialGradient.addColorStop(1, 'rgba(130,130,130,1)');
 			gradientLinear = context.createLinearGradient(cx - gx, cy - gy, cx + gx, cy + gy);
 			
 			if (theme== 'ice'){
-				gradientLinear.addColorStop(1, "rgb(41,137,216)");
+				gradientLinear.addColorStop(1, "rgb(28,35,155)");
 				gradientLinear.addColorStop(0.6, "rgb(41,137,216)");
 				gradientLinear.addColorStop(0.3, "rgb(22,114,185)");
-				gradientLinear.addColorStop(0, "rgb(125,185,232)");
+				gradientLinear.addColorStop(0, "rgb(192,221,243)");
 			}
 			else if (theme== 'fire'){
 				gradientLinear.addColorStop(1, "rgb(255,90,2)");
@@ -635,6 +636,32 @@ define({
 			}
 			
 		}
+		
+		function getAmbiantGradient(ctxContent){
+			
+			grdAmbiant = ctxContent.createLinearGradient(0, 0, 360, 0);
+			if (theme== 'ice'){
+				grdAmbiant.addColorStop(1, "rgb(28,98,155)");
+				grdAmbiant.addColorStop(0.6, "rgb(41,137,216)");
+				grdAmbiant.addColorStop(0.3, "rgb(22,114,185)");
+				grdAmbiant.addColorStop(0, "rgb(192,221,243)");
+			}
+			else if (theme== 'fire'){
+				grdAmbiant.addColorStop(1, "rgb(255,90,2)");
+				grdAmbiant.addColorStop(0.6, "rgb(255,150,53)");
+				grdAmbiant.addColorStop(0.3, "rgb(248,181,0)");
+				grdAmbiant.addColorStop(0, "rgb(249,234,194)");
+			}
+			else {
+				grdAmbiant.addColorStop(1, "rgb(255,81,81)");
+				grdAmbiant.addColorStop(0.6, "rgb(252,123,123)");
+				grdAmbiant.addColorStop(0.3, "rgb(254,144,144)");
+				grdAmbiant.addColorStop(0, "rgb(249,217,217)");
+			}
+			return grdAmbiant;
+		}
+		
+		
 		function doRadialGradientOrColor(context, color, options) {
 			if (typeof options.gradient !== 'undefined') {
 				context.fillStyle = radialGradient;
@@ -697,6 +724,9 @@ define({
 		}
 		function init() {
 			bindEvents();
+			if (tizen.preference.exists('theme')) {
+				theme = tizen.preference.getValue('theme');
+			}
 		}
 		function changeTheme(ev){
 			theme = ev.detail;
@@ -724,7 +754,8 @@ define({
 			processMotion : processMotion,
 			renderGrid : renderGrid,
 			getRadialGradientCoords : getRadialGradientCoords,
-			changeTheme:changeTheme
+			changeTheme:changeTheme,
+			getAmbiantGradient:getAmbiantGradient
 		};
 	}
 });
