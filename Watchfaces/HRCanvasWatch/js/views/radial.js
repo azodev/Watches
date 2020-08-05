@@ -48,6 +48,11 @@ define({
            event.on ({
         	   //'views.radial.changeTheme' : changeTheme
            });
+           /*window.addEventListener('tizenhwkey', function(ev) {
+               if (ev.keyName === 'back') {
+            	   svgMenu.close();
+               }
+           });*/
             
         }
 
@@ -128,11 +133,15 @@ define({
                                  ]
                              }
                          ];
+            if (tizen.preference.exists('theme')) {
+				theme = tizen.preference.getValue('theme');
+			}
             svgMenu = new RadialMenu({
                 parent      : document.querySelector('#container'),
                 size        : 360,
                 closeOnClick: false,
                 menuItems   : menuItems,
+                theme       : theme,
                 onClick     : function (item) {
                 	//console.log("svg.menu > g[data-id="+item.id+"] > g");
                 	//console.log(document.querySelector("svg.menu > g[data-id="+item.id+"] > path"));
@@ -154,6 +163,7 @@ define({
                     else if (item.id == 'fire' || item.id == 'hisakura' || item.id == 'ice'){
                     	changeTheme(item.id);
                     	svgMenu.setTheme(item.id);
+                    	tizen.preference.setValue('theme', item.id);
                     	event.fire('changeTheme',item.id);
                     	setTimeout(function(){
                     		svgMenu.darkenButton(item.id,item.id);

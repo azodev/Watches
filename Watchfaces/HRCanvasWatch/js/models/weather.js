@@ -282,7 +282,7 @@ define({
 							event.fire('forecast_found', forecastInform);
 							console.log('Update forecast: Found');
 						} else {
-							console.error("Status de la réponse: %d (%s)", this.status, this.statusText);
+							console.error("Status de la réponse: "+this.status+" "+this.statusText );
 							event.fire ('error',"Status de la réponse forcast: "+this.statusText +"  " +this.status);
 						}
 					}

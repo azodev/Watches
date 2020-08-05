@@ -3,8 +3,8 @@ div.menuHolder {
     -moz-user-select: none;
     position: absolute;
     margin: 0px;
-    /*background-color:#2C4253;*/
-    
+    background-color:#000000;
+    opacity:0.9;
     z-index:3;
     display:none;
     font-family: FutureNow;
@@ -18,7 +18,7 @@ svg.icons {
 svg.menu {
     position: absolute;
     overflow: visible;
-    transition: 0.2s;
+    transition: 0.3s;
     z-index:3;
     transition-timing-function: ease-out;
     

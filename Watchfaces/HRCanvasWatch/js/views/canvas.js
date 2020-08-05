@@ -133,6 +133,7 @@ define({
 		var particleColors = ["#694FB9","#6094ee","#3CFBFF"];
 		const CLICK_INTERVAL = 1000;
 		var lastClickTimeStamp = null, currentClickTimeStamp = null;
+		var theme = 'ice';
 		
 		
 		function handleClick(canvas,ev) {
@@ -263,6 +264,7 @@ define({
 			
 			
 			canvasDrawer.renderBackground(ctxContent,ctxContent.canvas.width, ctxContent.canvas.height, "black",{gradient:true,motion:motion});
+			canvasDrawer.renderCircle(ctxContent, center, watchRadius -2, "#000000",5);
 			//canvasDrawer.renderGrid (ctxContent,  "#000000",2,{motion:motion});
 			/*if (drawTicks === true){
 				canvasDrawer.renderCircle(ctxContent, center, watchRadius *1, "#000000",4);
@@ -446,7 +448,7 @@ define({
 				weatherIcon = weatherModel.getMapping();
 			}
 
-			canvasDrawer.renderText(ctxContent, weatherIcon, center.x - (watchRadius * 0.58), center.y + (watchRadius * 0.12), 48, "#c9c9c9", {
+			canvasDrawer.renderText(ctxContent, weatherIcon, center.x - (watchRadius * 0.58), center.y + (watchRadius * 0.12), 52, "#c9c9c9", {
 				font : 'artill_clean_icons',
 				align : 'center',
 					gradient : true,
@@ -506,11 +508,9 @@ define({
 			watchRadius = canvasLayout.width / 2;
 			canvasDrawer.center = center;
 			canvasDrawer.watchRadius = watchRadius;
-			grdAmbiant = ctxContent.createLinearGradient(0, 0, watchRadius * 2, 0);
-			grdAmbiant.addColorStop(0, "rgb(20,77,143)");
-			grdAmbiant.addColorStop(0.3, "rgb(41,137,216)");
-			grdAmbiant.addColorStop(0.6, "rgb(22,114,185)");
-			grdAmbiant.addColorStop(1, "rgb(125,185,232)");
+			grdAmbiant = canvasDrawer.getAmbiantGradient(ctxContent);
+			//grdAmbiant = ctxContent.createLinearGradient(0, 0, watchRadius * 2, 0);
+			
 			isAmbientMode = false;
 			//grdAmbiant.addColorStop(0, "#69d7db");
 			//grdAmbiant.addColorStop(1, "#203fc9");
@@ -903,20 +903,24 @@ define({
 			  }
 			  return particles.length;
 			}
-
-		function changeTheme(ev){
-			switch ( ev.detail){
-			case 'fire':
-				particleColors = ["#ff5a02","#f8b500","#f9eac2"];
-			    break;
-			case 'hisakura':
-				particleColors = ["#ff5151","#fc7b7b","#f9d9d9"];
-			    break;
-			  default:
-				  particleColors = ["#694FB9","#6094ee","#3CFBFF"];
-			}
-			//time_to_recreate = true;
+		function changeParticlesColor(theme){
+			switch ( theme){
+				case 'fire':
+					particleColors = ["#ff5a02","#f8b500","#f9eac2"];
+				    break;
+				case 'hisakura':
+					particleColors = ["#ff5151","#fc7b7b","#f9d9d9"];
+				    break;
+				  default:
+					  particleColors = ["#694FB9","#6094ee","#3CFBFF"];
+				}
 			
+		}
+		function changeTheme(ev){
+			changeParticlesColor(ev.detail);
+			
+			//time_to_recreate = true;
+			grdAmbiant = canvasDrawer.getAmbiantGradient(ctxContent);
 			particles = [];
 			popolate(max_particles);
 			
@@ -930,7 +934,10 @@ define({
 			
 			mkHR();
 			mkLocation();
-			
+			if (tizen.preference.exists('theme')) {
+				theme = tizen.preference.getValue('theme');
+			}
+			changeParticlesColor(theme);
 			
 			//pedometerSensor.start();
 			

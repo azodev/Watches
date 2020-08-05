@@ -595,7 +595,7 @@ define({
 			return gradientCoords;
 		}
 		function calculateRadialGradientPosition(motionAcceleration) {
-			radialGradientCoords.x = Math.min(Math.round(radialGradientCoordsD.x - (motionAcceleration.x * 16)),250);
+			radialGradientCoords.x = Math.min(Math.round(radialGradientCoordsD.x + (motionAcceleration.x * 16)),300);
 			radialGradientCoords.y = Math.min(Math.round(radialGradientCoordsD.y - ((motionAcceleration.y-3.2) * 16)),300);
 			
 			return radialGradientCoords;
@@ -641,10 +641,10 @@ define({
 			
 			grdAmbiant = ctxContent.createLinearGradient(0, 0, 360, 0);
 			if (theme== 'ice'){
-				grdAmbiant.addColorStop(1, "rgb(28,98,155)");
-				grdAmbiant.addColorStop(0.6, "rgb(41,137,216)");
-				grdAmbiant.addColorStop(0.3, "rgb(22,114,185)");
-				grdAmbiant.addColorStop(0, "rgb(192,221,243)");
+				grdAmbiant.addColorStop(1, "rgb(45,87,255)");
+				grdAmbiant.addColorStop(0.6, "rgb(68,106,255)");
+				grdAmbiant.addColorStop(0.3, "rgb(145,214,242)");
+				grdAmbiant.addColorStop(0, "rgb(154,231,244)");
 			}
 			else if (theme== 'fire'){
 				grdAmbiant.addColorStop(1, "rgb(255,90,2)");

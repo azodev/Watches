@@ -79,7 +79,7 @@ define({
 		};
 		var optionGPS = {
 			sampleInterval : 1000,  //10000
-			callbackInterval : 120000  // 20000
+			callbackInterval : 10000  // 20000
 		};
 		var fallbackSensor =false;
 		/**
@@ -166,6 +166,7 @@ define({
 			stop();
 		}
 		function succcessFallback(pos) {
+			console.log(pos);
 			if (pos.gpsInfo) {
 				crd = pos.gpsInfo[0];
 				date = new Date(pos.timestamp);
@@ -278,9 +279,9 @@ define({
 		 * @private
 		 */
 		function bindEvents() {
-			/*event.on({
-				'views.main.triggerCanvasDoubleClick' : triggerLocationUpdate
-			});*/
+			event.on({
+				'views.radial.update' : triggerLocationUpdate
+			});
 
 		}
 
