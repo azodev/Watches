@@ -206,7 +206,7 @@ define({
 			context.arc(center.x, center.y, radius, 0, 2 * Math.PI);
 			if (opacity == true){
 				context.fillStyle = '#000000';
-				context.globalAlpha = 0.6;
+				context.globalAlpha = 0.5;
 			    context.fill();
 			    context.globalAlpha = 1;
 			}

@@ -78,10 +78,15 @@ define({
                                  icon: '#update'
                              },
                              {
+                                 id   : 'exercise',
+                                 title: 'GymRun',
+                                 icon: '#exercise'
+                             },
+                             /*{
                                  id   : 'altitude',
                                  title: 'Altitude',
                                  icon: '#altitude'
-                             },
+                             },*/
                              
                              {
                                  id   : 'more',
@@ -89,11 +94,11 @@ define({
                                  icon: '#more',
                                  items: [
                                      {
-                                         id   : 'eat',
-                                         title: 'Eat',
-                                         icon: '#eat'
+                                         id   : 'timer',
+                                         title: 'Timer',
+                                         icon: '#timer'
                                      },
-                                     {
+                                     /*{
                                          id   : 'sleep',
                                          title: 'Sleep',
                                          icon: '#sleep'
@@ -102,7 +107,7 @@ define({
                                          id   : 'shower',
                                          title: 'Take Shower',
                                          icon: '#shower'
-                                     },
+                                     },*/
                                      {
                                          id   : 'workout',
                                          icon : '#workout',
@@ -171,10 +176,83 @@ define({
                     		
                     		}, 200);
                     }
+                    else if (item.id == 'events'){
+                    	 
+                    	/*var app = tizen.application.getCurrentApplication();*/
+                    	var appControl = new tizen.ApplicationControl("com.samsung.w-calendar2.appcontrol.daily")  ;
+                    	var appControlReplyCallback = {
+                    		     // callee sent a reply
+                    		     onsuccess: function(data) {
+                    		         console.log(data);
+                    		     },
+                    		     // callee returned failure
+                    		     onfailure: function() {
+                    		         console.log('The launch application control failed');
+                    		     }
+                    		 };
+                    	//tizen.application.getAppsInfo(onListInstalledApps);com.samsung.w-calendar2
+                    	 // let's assume that application "targetApp0.main" has been installed com.samsung.w-calendar2.appcontrol.daily
+                    	/*var appInfo = tizen.application.getAppInfo("com.samsung.w-calendar2.appcontrol.daily");
+                    	 console.log(appInfo);
+                    	 
+                    	 //svgMenu.darkenButton(item.id,item.id);
+                    	 */
+                    	  tizen.application.launchAppControl(
+                    			 appControl,
+                    		     'com.samsung.w-calendar2',
+                    		     function() {console.log("launch application control succeed"); },
+                    		     function(e) {console.log("launch application control failed. reason: " + e.message); },
+                    		     appControlReplyCallback );
+                    	//tizen.application.launch("com.samsung.w-calendar2", onsuccess,onfail);
+                    	setTimeout(function(){
+                    		svgMenu.darkenButton(item.id,item.id);
+                    		svgMenu.close();
+                    		
+                    		}, 200);	     
+                    }
+                    else if (item.id == 'timer'){
+                    	tizen.application.launch("com.samsung.timer-wc1", onsuccess,onfail);
+                    	setTimeout(function(){
+                    		svgMenu.darkenButton(item.id,item.id);
+                    		svgMenu.close();
+                    		
+                    		}, 200);	  
+                    }
+                    else if (item.id == 'exercise'){
+                    	tizen.application.launch("GymRunWear.TizenCompanionApp", onsuccess,onfail);
+                    	setTimeout(function(){
+                    		svgMenu.darkenButton(item.id,item.id);
+                    		svgMenu.close();
+                    		
+                    		}, 200);	  
+                    }
+                    else if (item.id == 'workout'){
+                    	tizen.application.launch("com.samsung.shealth.exercise", onsuccess,onfail);
+                    	setTimeout(function(){
+                    		svgMenu.darkenButton(item.id,item.id);
+                    		svgMenu.close();
+                    		
+                    		}, 200);	  
+                    }
                     
                 }
             });
         }
+        
+        function onsuccess() {
+        	
+   	     	console.log("The application has launched successfully");
+   	 	}
+        function onfail(e){
+        	console.error(e);
+        }
+        function onListInstalledApps(appsInfo) {
+			var appId = null;
+			console.log(appsInfo);
+			for (var i = 0; i<appsInfo.length; i++ ){
+				console.log(appsInfo[i].id);
+			}
+		}
         function getMenu (){
         	return svgMenu;
         }

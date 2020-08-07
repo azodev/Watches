@@ -31,7 +31,7 @@
  * @requires {@link models/location}
  * @requires {@link models/weather}
  * @requires {@link core/systeminfo}
- * @requires {@link models/radialmenu}
+ * @requires {@link models/calendar}
  * @namespace views/canvas
  * @memberof views
  */
@@ -148,20 +148,19 @@ define({
 
 		function handleDoubleClick(canvas,ev) {
 			
+			console.log('handleDoubleClick');
+			
+		}
+		function handleSingleClick(canvas,ev) {
+			console.log('handleSingleClick');
 			clickPos = getMousePosition(canvas,ev);
-			//console.log(canvas);
-			//console.log(ev);
+			
 			console.log(clickPos);
-			//center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 250, 70
 			//if ((clickPos.x >= center.x - (watchRadius * 0.70) && clickPos.x <= (center.x - (watchRadius * 0.70)+250)  )  && (clickPos.y  >= center.y + (watchRadius * 0.06)  && clickPos.y <= (center.y + (watchRadius * 0.06))+70 )   ){
-			if ((clickPos.x >= center.x - 50 && clickPos.x <= center.x + 50  )  && (clickPos.y  >= center.y + 70  && clickPos.y <= center.y + 150    )){
+			if ((clickPos.x >= center.x - 50 && clickPos.x <= center.x + 50  )  && (clickPos.y  >= center.y - 155  && clickPos.y <= center.y - 80   )){
 				
 				openRadialMenu(ev);
 			}
-			
-		}
-		function handleSingleClick(ev) {
-			console.log('handleSingleClick');
 		}
 		function openRadialMenu(ev) {
 			console.log('handleDoubleClick');
@@ -349,10 +348,10 @@ define({
 			if (heartRateFound && heartRate.getData().rate !== null) {
 				
 				canvasDrawer.renderCircle(ctxContent, {
-					x : center.x - (watchRadius * 0.45),
-					y :  center.y - (watchRadius * 0.40)
-				}, 30, "#000000",1.5,true);
-				canvasDrawer.renderText(ctxContent, heartRate.getData().rate, center.x - (watchRadius * 0.45), center.y - (watchRadius * 0.40), 25, "#c9c9c9", {
+					x : center.x ,
+					y :  center.y + (watchRadius * 0.67)
+				}, 25, "#000000",1.5,true);
+				canvasDrawer.renderText(ctxContent, heartRate.getData().rate, center.x , center.y + (watchRadius * 0.67), 25, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'center',
 					gradient : true,
@@ -374,12 +373,12 @@ define({
 			
 			canvasDrawer.renderCircle(ctxContent, {
 				x : center.x,
-				y : center.y + (watchRadius * 0.65)
-			}, 30, "#000000",2);
-			canvasDrawer.roundRect(ctxContent, center.x - 16, center.y + 102 , 13, 13, 3, false, true, "#000000", "#000000");
-			canvasDrawer.roundRect(ctxContent, center.x + 3, center.y + 102, 13, 13, 3, false, true, "#000000", "#000000");
-			canvasDrawer.roundRect(ctxContent, center.x - 16, center.y + 120, 13, 13, 3, false, true, "#000000", "#000000");
-			canvasDrawer.roundRect(ctxContent, center.x + 3, center.y + 120, 13, 13, 3, false, true, "#000000", "#000000");
+				y : center.y - (watchRadius * 0.65)
+			}, 28, "#000000",2,true);
+			canvasDrawer.roundRect(ctxContent, center.x - 16, center.y - 114 , 13, 13, 3, false, true, "#000000", "#000000");
+			canvasDrawer.roundRect(ctxContent, center.x + 3, center.y - 114, 13, 13, 3, false, true, "#000000", "#000000");
+			canvasDrawer.roundRect(ctxContent, center.x - 16, center.y - 132, 13, 13, 3, false, true, "#000000", "#000000");
+			canvasDrawer.roundRect(ctxContent, center.x + 3, center.y - 132, 13, 13, 3, false, true, "#000000", "#000000");
 			/*
 			radialButton = new Image();
 			radialButton.onload = function() {
@@ -448,7 +447,7 @@ define({
 				weatherIcon = weatherModel.getMapping();
 			}
 
-			canvasDrawer.renderText(ctxContent, weatherIcon, center.x - (watchRadius * 0.58), center.y + (watchRadius * 0.12), 52, "#c9c9c9", {
+			canvasDrawer.renderText(ctxContent, weatherIcon, center.x - (watchRadius * 0.58), center.y + (watchRadius * 0.14), 52, "#c9c9c9", {
 				font : 'artill_clean_icons',
 				align : 'center',
 					gradient : true,
@@ -730,7 +729,7 @@ define({
 				
 				
 				
-				drawWatchLayout();
+				//drawWatchLayout();
 				/*animRequest = window.requestAnimationFrame(function() {
 					drawWatchContent();
 				});
@@ -966,7 +965,7 @@ define({
 			sysInfo.checkBattery();
 			
 			
-			drawWatchLayout();
+			//drawWatchLayout();
 			
 			
 			
