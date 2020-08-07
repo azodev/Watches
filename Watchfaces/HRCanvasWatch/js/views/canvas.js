@@ -373,12 +373,12 @@ define({
 			
 			canvasDrawer.renderCircle(ctxContent, {
 				x : center.x,
-				y : center.y - (watchRadius * 0.65)
+				y : center.y - 119
 			}, 28, "#000000",2,true);
-			canvasDrawer.roundRect(ctxContent, center.x - 16, center.y - 114 , 13, 13, 3, false, true, "#000000", "#000000");
-			canvasDrawer.roundRect(ctxContent, center.x + 3, center.y - 114, 13, 13, 3, false, true, "#000000", "#000000");
-			canvasDrawer.roundRect(ctxContent, center.x - 16, center.y - 132, 13, 13, 3, false, true, "#000000", "#000000");
-			canvasDrawer.roundRect(ctxContent, center.x + 3, center.y - 132, 13, 13, 3, false, true, "#000000", "#000000");
+			canvasDrawer.roundRect(ctxContent, center.x - 16, center.y - 116 , 13, 13, 3, false, true, "#000000", "#000000");
+			canvasDrawer.roundRect(ctxContent, center.x + 3, center.y - 116, 13, 13, 3, false, true, "#000000", "#000000");
+			canvasDrawer.roundRect(ctxContent, center.x - 16, center.y - 134, 13, 13, 3, false, true, "#000000", "#000000");
+			canvasDrawer.roundRect(ctxContent, center.x + 3, center.y - 134, 13, 13, 3, false, true, "#000000", "#000000");
 			/*
 			radialButton = new Image();
 			radialButton.onload = function() {
@@ -414,17 +414,18 @@ define({
 
 				weatherIcon = weatherModel.getMapping(weatherValue.weather[0].id, weatherValue.day);
 
-				canvasDrawer.renderText(ctxContent, 'Temp', center.x - (watchRadius * 0.38), center.y + (watchRadius * 0.15), 14, "#c9c9c9", {
+				canvasDrawer.renderText(ctxContent, 'Temp', center.x - (watchRadius * 0.38), center.y + (watchRadius * 0.15), 15, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'center',
 						gradient : true,
 						motion: motion
 				});
-				canvasDrawer.renderText(ctxContent, roundCoord(weatherValue.main.temp, 1) + "°", center.x - (watchRadius * 0.38), center.y + (watchRadius * 0.25), 15, "#c9c9c9", {
+				canvasDrawer.renderText(ctxContent, roundCoord(weatherValue.main.temp, 1) + "°", center.x - (watchRadius * 0.38), center.y + (watchRadius * 0.24), 16, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'center'
 				});
-				canvasDrawer.renderTextGradient(ctxContent, textHelper.truncateBis(weatherValue.name, 26, '...'), center.x - (watchRadius * 0.48), center.y + (watchRadius * 0.33), 12, "#c9c9c9", {
+				//city weatherValue.name
+				canvasDrawer.renderTextGradient(ctxContent, textHelper.truncateBis(weatherValue.name, 12, '...'), center.x - (watchRadius * 0.65), center.y + (watchRadius * 0.33), 13, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'left',
 					gradient : true
@@ -436,9 +437,10 @@ define({
 				 * 0.30), 14, "#c9c9c9", { font : 'FutureNow', align : 'center'
 				 * });
 				 */
-				canvasDrawer.renderText(ctxContent, textHelper.truncate(weatherValue.weather[0].main, 2), center.x - (watchRadius * 0.55), center.y + (watchRadius * 0.40), 14, "#c9c9c9", {
+				//weather text
+				canvasDrawer.renderText(ctxContent, textHelper.truncate(weatherValue.weather[0].main, 2), center.x - (watchRadius * 0.65), center.y + (watchRadius * 0.40), 14, "#c9c9c9", {
 					font : 'FutureNow',
-					align : 'center',
+					align : 'left',
 					gradient : true,
 					motion: motion
 				});
@@ -456,24 +458,24 @@ define({
 
 			if (weatherModel.isForecastFound()) {
 				forecastValue = weatherModel.getForecast();
-				forecastIndexX = center.x;
+				forecastIndexX = center.x-18;
 				for (var i = 0; i < 5; i++) {
 					forecastHour = new Date(forecastValue.list[i].dt * 1000).getHours();
-					canvasDrawer.renderText(ctxContent, forecastHour + "h", forecastIndexX, center.y + (watchRadius * 0.12), 13, "#c9c9c9", {
+					canvasDrawer.renderText(ctxContent, forecastHour + "h", forecastIndexX, center.y + (watchRadius * 0.15), 15, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'center'
 					});
-					canvasDrawer.renderText(ctxContent, weatherModel.getMapping(forecastValue.list[i].weather[0].id, forecastValue.list[i].day), forecastIndexX, center.y + (watchRadius * 0.16), 25,
+					canvasDrawer.renderText(ctxContent, weatherModel.getMapping(forecastValue.list[i].weather[0].id, forecastValue.list[i].day), forecastIndexX, center.y + (watchRadius * 0.22), 30,
 							"#c9c9c9", {
 								font : 'artill_clean_icons',
 								align : 'center',gradient : true,
 								motion: motion
 							});
-					canvasDrawer.renderText(ctxContent, ~~(forecastValue.list[i].main.temp) + "°", forecastIndexX + 3, center.y + (watchRadius * 0.28), 13, "#c9c9c9", {
+					canvasDrawer.renderText(ctxContent, ~~(forecastValue.list[i].main.temp) + "°", forecastIndexX + 3, center.y + (watchRadius * 0.36), 15, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'center'
 					});
-					forecastIndexX = forecastIndexX + 25;
+					forecastIndexX = forecastIndexX + 30;
 				}
 			}
 
@@ -787,6 +789,7 @@ define({
 					if (isAmbientMode === true) {
 						// Rendering ambient mode case
 						activateMode("Ambient");
+						
 					} else {
 						// Rendering normal case
 						activateMode("Normal");

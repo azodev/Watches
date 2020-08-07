@@ -237,7 +237,6 @@ define({
 			// event.fire('error', API_URL_WEATHER+outArray.join('&'));
 			// console.error(API_URL_WEATHER+outArray.join('&'));
 			url = API_URL_WEATHER + outArray.join('&');
-			console.log(url);
 			xmlHttp.open("GET", url, true);
 
 			xmlHttp.send(null);

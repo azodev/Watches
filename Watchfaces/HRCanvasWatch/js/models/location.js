@@ -166,7 +166,6 @@ define({
 			stop();
 		}
 		function succcessFallback(pos) {
-			console.log(pos);
 			if (pos.gpsInfo) {
 				crd = pos.gpsInfo[0];
 				date = new Date(pos.timestamp);
