@@ -28,7 +28,7 @@ class Particle {
 
 	    }
 
-	    this.s = Math.random() * 5;//2
+	    this.s = Math.random() * 6;//2
 	    this.a = 0;
 	    this.w = 360;
 	    this.h = 360;

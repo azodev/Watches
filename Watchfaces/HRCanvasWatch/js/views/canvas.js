@@ -120,7 +120,7 @@ define({
 		var motion = null;
 		var motionFromGyro = {accelerationIncludingGravity : {x:null,y:null}}; 
 		
-		var max_particles = 1000;
+		var max_particles = 750;
 		var particles = [];
 		var frequency = 10;
 		var init_num = max_particles;
@@ -134,6 +134,12 @@ define({
 		const CLICK_INTERVAL = 1000;
 		var lastClickTimeStamp = null, currentClickTimeStamp = null;
 		var theme = 'ice';
+		var forecastDisplayed = false; 
+		var forecastMode = false; 
+		var wShape = null, aShape1=null, aShape2=null, aShape3=null, aShape4=null; 
+		var secondsPassed = 0;
+		var oldTimeStamp = 0;
+		var weatherSectionAnimating = false;
 		
 		
 		function handleClick(canvas,ev) {
@@ -160,6 +166,46 @@ define({
 			if ((clickPos.x >= center.x - 50 && clickPos.x <= center.x + 50  )  && (clickPos.y  >= center.y - 155  && clickPos.y <= center.y - 80   )){
 				
 				openRadialMenu(ev);
+			}
+			else if ((clickPos.x >= center.x - (watchRadius * 0.70) && clickPos.x <= (center.x - (watchRadius * 0.70)+100)  )  && (clickPos.y  >= center.y + (watchRadius * 0.06)  && clickPos.y <= (center.y + (watchRadius * 0.06))+70 )  && !forecastDisplayed  ){
+				//forecastDisplayed = true; 
+				animateWeatherSection();
+			}
+			else if ((clickPos.x >= center.x - (watchRadius * 0.70) && clickPos.x <= (center.x - (watchRadius * 0.70)+250)  )  && (clickPos.y  >= center.y + (watchRadius * 0.06)  && clickPos.y <= (center.y + (watchRadius * 0.06))+70 )  && forecastDisplayed ){
+				
+				animateWeatherSection();
+				
+			}
+		}
+		function animateWeatherSection(){
+			//weatherSectionAnimating = true;
+			wShape.animate();
+		}
+		function handleWeatherSectionAnimation(){
+			if (wShape.isAnimating()){
+				if (!forecastDisplayed){
+					wShape.growRight(secondsPassed,100,250,0.5);
+					if (!wShape.isAnimating()){
+						toogleForecast();
+					}
+				}
+				else {
+					wShape.shrinkRight(secondsPassed,250,100,1);
+					
+					if (!wShape.isAnimating()){
+						toogleForecast();
+					}
+				}
+			}
+			
+			
+		}
+		function toogleForecast(){
+			if  (!forecastDisplayed){
+				forecastDisplayed = true;
+			}
+			else {
+				forecastDisplayed = false;
 			}
 		}
 		function openRadialMenu(ev) {
@@ -227,11 +273,16 @@ define({
 		 * 
 		 * @private
 		 */
-		function drawWatchContent() {
+		function drawWatchContent(timeStamp) {
 			isAmbientMode = false;
 			getDate();
 			now = Date.now();
-
+			secondsPassed = (timeStamp - oldTimeStamp) / 1000;
+			//secondsPassed = Math.min(secondsPassed, 0.1);
+		    oldTimeStamp = timeStamp;
+		    
+		    handleWeatherSectionAnimation();
+		    
 			// if enough time has elapsed, draw the next frame
 
 			date = datetime.getDate();
@@ -340,8 +391,14 @@ define({
 			});
 			
 			//weather
-			canvasDrawer.roundRect(ctxContent, center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 250, 70, 10, false, true, "#000000", "#000000");
-			drawWeather();
+			//
+			/*if (forecastDisplayed){
+				canvasDrawer.roundRect(ctxContent, wShape,10, false, true, "#000000", "#000000");
+			}else {
+				canvasDrawer.roundRect(ctxContent, wShape,10, false, true, "#000000", "#000000");
+			}*/
+			canvasDrawer.roundRect(ctxContent, wShape,10, false, true, "#000000", "#000000");
+			drawWeather(forecastDisplayed);
 			
 			
 			
@@ -375,10 +432,10 @@ define({
 				x : center.x,
 				y : center.y - 119
 			}, 28, "#000000",2,true);
-			canvasDrawer.roundRect(ctxContent, center.x - 16, center.y - 116 , 13, 13, 3, false, true, "#000000", "#000000");
-			canvasDrawer.roundRect(ctxContent, center.x + 3, center.y - 116, 13, 13, 3, false, true, "#000000", "#000000");
-			canvasDrawer.roundRect(ctxContent, center.x - 16, center.y - 134, 13, 13, 3, false, true, "#000000", "#000000");
-			canvasDrawer.roundRect(ctxContent, center.x + 3, center.y - 134, 13, 13, 3, false, true, "#000000", "#000000");
+			canvasDrawer.roundRect(ctxContent, aShape1, 3, false, true, "#000000", "#000000");
+			canvasDrawer.roundRect(ctxContent, aShape2, 3, false, true, "#000000", "#000000");
+			canvasDrawer.roundRect(ctxContent, aShape3, 3, false, true, "#000000", "#000000");
+			canvasDrawer.roundRect(ctxContent, aShape4, 3, false, true, "#000000", "#000000");
 			/*
 			radialButton = new Image();
 			radialButton.onload = function() {
@@ -401,13 +458,9 @@ define({
 	
 
 		}
-		function drawTimeContent(){
-			
-			
-			
-			
-			animRequest = requestAnimationFrame(drawTimeContent);
-		}
+		
+		
+		
 		
 		function drawWeather() {
 			if (weatherModel.isWeatherFound()) {
@@ -425,7 +478,7 @@ define({
 					align : 'center'
 				});
 				//city weatherValue.name
-				canvasDrawer.renderTextGradient(ctxContent, textHelper.truncateBis(weatherValue.name, 12, '...'), center.x - (watchRadius * 0.65), center.y + (watchRadius * 0.33), 13, "#c9c9c9", {
+				canvasDrawer.renderTextGradient(ctxContent, textHelper.truncateBis('Boulogne-Billancourt', 12, '...'), center.x - (watchRadius * 0.65), center.y + (watchRadius * 0.33), 12, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'left',
 					gradient : true
@@ -456,7 +509,7 @@ define({
 					motion: motion
 			});
 
-			if (weatherModel.isForecastFound()) {
+			if (weatherModel.isForecastFound() && forecastDisplayed) {
 				forecastValue = weatherModel.getForecast();
 				forecastIndexX = center.x-18;
 				for (var i = 0; i < 5; i++) {
@@ -465,7 +518,7 @@ define({
 						font : 'FutureNow',
 						align : 'center'
 					});
-					canvasDrawer.renderText(ctxContent, weatherModel.getMapping(forecastValue.list[i].weather[0].id, forecastValue.list[i].day), forecastIndexX, center.y + (watchRadius * 0.22), 30,
+					canvasDrawer.renderText(ctxContent, weatherModel.getMapping(forecastValue.list[i].weather[0].id, forecastValue.list[i].day), forecastIndexX, center.y + (watchRadius * 0.22), 31,
 							"#c9c9c9", {
 								font : 'artill_clean_icons',
 								align : 'center',gradient : true,
@@ -967,7 +1020,20 @@ define({
 			}
 			sysInfo.checkBattery();
 			
+			//wShape= new Shape(center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 250, 70);
+			if (forecastDisplayed){
+				wShape= new Shape(center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 250, 70);
+			}
+			else {
+				wShape= new Shape(center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 100, 70);
+			}
 			
+		
+			
+			aShape1= new Shape(center.x - 16, center.y - 116 , 13, 13);
+			aShape2= new Shape(center.x + 3, center.y - 116, 13, 13);
+			aShape3= new Shape(center.x - 16, center.y - 134, 13, 13);
+			aShape4= new Shape(center.x + 3, center.y - 134, 13, 13);
 			//drawWatchLayout();
 			
 			
@@ -975,13 +1041,11 @@ define({
 			popolate(max_particles);
 			setTimeout(function () {
 				  time_to_recreate = true;
-				}.bind(this), max_time);
+				}, max_time);
 			
 			
 			animRequest = window.requestAnimationFrame(drawWatchContent);
-			/*animTimeout = setTimeout(function() {
-				animRequest = window.requestAnimationFrame(drawTimeContent);
-			}, 1000);*/
+			
 			
 		}
 

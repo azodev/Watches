@@ -277,7 +277,7 @@ define({
 		 * @param {Boolean}
 		 *            [stroke = true] Whether to stroke the rectangle.
 		 */
-		function roundRect(context, x, y, width, height, radius, fill, stroke, strokeColor, fillColor,alpha) {
+		function roundRect(context, shape, radius, fill, stroke, strokeColor, fillColor,alpha) {
 			context.save();
 			if (typeof stroke === 'undefined') {
 				stroke = true;
@@ -313,15 +313,15 @@ define({
 			context.shadowColor = "rgb(150, 150, 150)";
 			context.shadowBlur = 5;
 			*/
-			context.moveTo(x + radius.tl, y);
-			context.lineTo(x + width - radius.tr, y);
-			context.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
-			context.lineTo(x + width, y + height - radius.br);
-			context.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
-			context.lineTo(x + radius.bl, y + height);
-			context.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
-			context.lineTo(x, y + radius.tl);
-			context.quadraticCurveTo(x, y, x + radius.tl, y);
+			context.moveTo(shape.getX() + radius.tl, shape.getY());
+			context.lineTo(shape.getX() +  shape.getWidth() - radius.tr, shape.getY());
+			context.quadraticCurveTo(shape.getX() + shape.getWidth(), shape.getY(), shape.getX() + shape.getWidth(), shape.getY() + radius.tr);
+			context.lineTo(shape.getX() + shape.getWidth(), shape.getY() + shape.getHeight() - radius.br);
+			context.quadraticCurveTo(shape.getX() + shape.getWidth(), shape.getY() + shape.getHeight(), shape.getX() + shape.getWidth() - radius.br, shape.getY() + shape.getHeight());
+			context.lineTo(shape.getX() + radius.bl, shape.getY() + shape.getHeight());
+			context.quadraticCurveTo(shape.getX(), shape.getY() + shape.getHeight(), shape.getX(), shape.getY() + shape.getHeight() - radius.bl);
+			context.lineTo(shape.getX(), shape.getY() + radius.tl);
+			context.quadraticCurveTo(shape.getX(), shape.getY(), shape.getX() + radius.tl, shape.getY());
 			context.closePath();
 			if (fill) {
 				context.fillStyle = fillColor;
