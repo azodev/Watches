@@ -38,7 +38,7 @@
 
 define({
 	name : 'views/canvas',
-	requires : [ 'core/event','views/radial', 'helpers/date', 'helpers/text',  'models/settings', 'models/canvasDrawer', 'models/heartRate', 'models/location', 'models/pressure', 'models/weather', 'core/systeminfo', 'models/motion', 'models/pedometer' ],
+	requires : [ 'core/event','views/radial', 'helpers/date', 'helpers/text',  'models/settings', 'models/canvasDrawer', 'models/heartRate', 'models/location', 'models/pressure', 'models/weather', 'core/systeminfo', 'models/motion', 'models/pedometer','models/calendar' ],
 	def : function viewsPageCanvas(req) {
 		'use strict';
 
@@ -140,7 +140,7 @@ define({
 		var secondsPassed = 0;
 		var oldTimeStamp = 0;
 		var weatherSectionAnimating = false;
-		
+		var wCoords=null;
 		
 		function handleClick(canvas,ev) {
 			currentClickTimeStamp = Date.now();
@@ -167,12 +167,12 @@ define({
 				
 				openRadialMenu(ev);
 			}
-			else if ((clickPos.x >= center.x - (watchRadius * 0.70) && clickPos.x <= (center.x - (watchRadius * 0.70)+100)  )  && (clickPos.y  >= center.y + (watchRadius * 0.06)  && clickPos.y <= (center.y + (watchRadius * 0.06))+70 )  && !forecastDisplayed  ){
+			else if ((clickPos.x >= center.x - (watchRadius * 0.70) && clickPos.x <= (center.x - (watchRadius * 0.70)+100)  )  && (clickPos.y  >= center.y + (watchRadius * 0.06)  && clickPos.y <= (center.y + (watchRadius * 0.06))+70 )  && !forecastMode  ){
 				//forecastDisplayed = true; 
 				animateWeatherSection();
 			}
-			else if ((clickPos.x >= center.x - (watchRadius * 0.70) && clickPos.x <= (center.x - (watchRadius * 0.70)+250)  )  && (clickPos.y  >= center.y + (watchRadius * 0.06)  && clickPos.y <= (center.y + (watchRadius * 0.06))+70 )  && forecastDisplayed ){
-				
+			else if ((clickPos.x >= center.x - (watchRadius * 0.70) && clickPos.x <= (center.x - (watchRadius * 0.70)+250)  )  && (clickPos.y  >= center.y + (watchRadius * 0.06)  && clickPos.y <= (center.y + (watchRadius * 0.06))+70 )  && forecastMode ){
+				forecastDisplayed = false;
 				animateWeatherSection();
 				
 			}
@@ -183,29 +183,30 @@ define({
 		}
 		function handleWeatherSectionAnimation(){
 			if (wShape.isAnimating()){
-				if (!forecastDisplayed){
-					wShape.growRight(secondsPassed,100,250,0.5);
+				if (!forecastMode){
+					wShape.growRight(secondsPassed,100,250,0.2);
 					if (!wShape.isAnimating()){
-						toogleForecast();
+						toogleForecastMode();
+						forecastDisplayed = true;
 					}
 				}
 				else {
-					wShape.shrinkRight(secondsPassed,250,100,1);
+					wShape.shrinkRight(secondsPassed,250,100,0.2);
 					
 					if (!wShape.isAnimating()){
-						toogleForecast();
+						toogleForecastMode();
 					}
 				}
 			}
 			
 			
 		}
-		function toogleForecast(){
-			if  (!forecastDisplayed){
-				forecastDisplayed = true;
+		function toogleForecastMode(){
+			if  (!forecastMode){
+				forecastMode = true;
 			}
 			else {
-				forecastDisplayed = false;
+				forecastMode = false;
 			}
 		}
 		function openRadialMenu(ev) {
@@ -260,6 +261,7 @@ define({
 		}
 		function getDate() {
 			datetime = tizen.time.getCurrentDateTime();
+			
 			hour = datetime.getHours();
 			minute = datetime.getMinutes();
 			second = datetime.getSeconds();
@@ -277,6 +279,7 @@ define({
 			isAmbientMode = false;
 			getDate();
 			now = Date.now();
+			
 			secondsPassed = (timeStamp - oldTimeStamp) / 1000;
 			//secondsPassed = Math.min(secondsPassed, 0.1);
 		    oldTimeStamp = timeStamp;
@@ -453,8 +456,10 @@ define({
 			
 			
 			
-
-			animRequest = requestAnimationFrame(drawWatchContent);
+			//setInterval(function (){
+				animRequest = requestAnimationFrame(drawWatchContent);
+			//},25);
+			
 	
 
 		}
@@ -463,35 +468,52 @@ define({
 		
 		
 		function drawWeather() {
+			if (forecastMode){
+				wCoords = { text1 : {x:center.x - (watchRadius * 0.38),y:center.y + (watchRadius * 0.15),size: 15},
+						   temp : {x:center.x - (watchRadius * 0.38),y:center.y + (watchRadius * 0.24),size: 16},
+						   city : {x:center.x - (watchRadius * 0.65),y:center.y + (watchRadius * 0.33),size: 12},
+						   text2: {x:center.x - (watchRadius * 0.65),y:center.y + (watchRadius * 0.40),size: 14},
+						   icon : {x:center.x - (watchRadius * 0.58),y:center.y + (watchRadius * 0.14),size: 52}
+				};
+			}
+			else {
+				wCoords = { text1 : {x:center.x - (watchRadius * 0.32),y:center.y + (watchRadius * 0.14),size: 21},
+						   temp : {x:center.x - (watchRadius * 0.30),y:center.y + (watchRadius * 0.26),size: 22},
+						   city : {x:center.x - (watchRadius * 0.65),y:center.y + (watchRadius * 0.33),size: 12},
+						   text2: {x:center.x - (watchRadius * 0.66),y:center.y + (watchRadius * 0.39),size: 20},
+						   icon : {x:center.x - (watchRadius * 0.57),y:center.y + (watchRadius * 0.15),size: 64}
+				};
+			}
 			if (weatherModel.isWeatherFound()) {
 
 				weatherIcon = weatherModel.getMapping(weatherValue.weather[0].id, weatherValue.day);
-
-				canvasDrawer.renderText(ctxContent, 'Temp', center.x - (watchRadius * 0.38), center.y + (watchRadius * 0.15), 15, "#c9c9c9", {
+				
+				canvasDrawer.renderText(ctxContent, 'Temp', wCoords.text1.x, wCoords.text1.y, wCoords.text1.size, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'center',
 						gradient : true,
 						motion: motion
 				});
-				canvasDrawer.renderText(ctxContent, roundCoord(weatherValue.main.temp, 1) + "°", center.x - (watchRadius * 0.38), center.y + (watchRadius * 0.24), 16, "#c9c9c9", {
+				canvasDrawer.renderText(ctxContent, roundCoord(weatherValue.main.temp, 1) + "°", wCoords.temp.x, wCoords.temp.y, wCoords.temp.size, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'center'
 				});
-				//city weatherValue.name
-				canvasDrawer.renderTextGradient(ctxContent, textHelper.truncateBis('Boulogne-Billancourt', 12, '...'), center.x - (watchRadius * 0.65), center.y + (watchRadius * 0.33), 12, "#c9c9c9", {
-					font : 'FutureNow',
-					align : 'left',
-					gradient : true
-				});
-				/*
-				 * canvasDrawer.renderText(ctxContent,
-				 * dateHelper.fancyTimeFormat((now/1000)-weatherValue.lastWeatherCallDate),
-				 * center.x + (watchRadius * 0.45), center.y + (watchRadius *
-				 * 0.30), 14, "#c9c9c9", { font : 'FutureNow', align : 'center'
-				 * });
-				 */
-				//weather text
-				canvasDrawer.renderText(ctxContent, textHelper.truncate(weatherValue.weather[0].main, 2), center.x - (watchRadius * 0.65), center.y + (watchRadius * 0.40), 14, "#c9c9c9", {
+				if (forecastMode){
+					//city weatherValue.name
+					canvasDrawer.renderTextGradient(ctxContent, textHelper.truncateBis(weatherValue.name, 12, '...'), wCoords.city.x, wCoords.city.y, wCoords.city.size, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'left',
+						gradient : true
+					});
+					/*
+					  canvasDrawer.renderText(ctxContent,
+					  dateHelper.fancyTimeFormat((now/1000)-weatherValue.lastWeatherCallDate),
+					  center.x + (watchRadius * 0.45), center.y + (watchRadius *  0.30), 14, "#c9c9c9", { font : 'FutureNow', align : 'center'  });*/
+					 
+					//weather text
+					
+				}
+				canvasDrawer.renderText(ctxContent, textHelper.truncate(weatherValue.weather[0].main, 2), wCoords.text2.x, wCoords.text2.y, wCoords.text2.size, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'left',
 					gradient : true,
@@ -502,7 +524,7 @@ define({
 				weatherIcon = weatherModel.getMapping();
 			}
 
-			canvasDrawer.renderText(ctxContent, weatherIcon, center.x - (watchRadius * 0.58), center.y + (watchRadius * 0.14), 52, "#c9c9c9", {
+			canvasDrawer.renderText(ctxContent, weatherIcon, wCoords.icon.x,wCoords.icon.y, wCoords.icon.size, "#c9c9c9", {
 				font : 'artill_clean_icons',
 				align : 'center',
 					gradient : true,
@@ -524,7 +546,7 @@ define({
 								align : 'center',gradient : true,
 								motion: motion
 							});
-					canvasDrawer.renderText(ctxContent, ~~(forecastValue.list[i].main.temp) + "°", forecastIndexX + 3, center.y + (watchRadius * 0.36), 15, "#c9c9c9", {
+					canvasDrawer.renderText(ctxContent, ~~(forecastValue.list[i].main.temp) + "°", forecastIndexX + 3, center.y + (watchRadius * 0.37), 15, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'center'
 					});
@@ -797,12 +819,15 @@ define({
 		}
 		
 		function startSensors(){
-			if (motionSensor.isAvailable() && !motionSensor.isStarted()) {
-				motionSensor.start();
-			}
-			if (pressureSensor.isAvailable() && !pressureSensor.isStarted()) {
-				pressureSensor.start();
-			}
+			setTimeout(function (e){
+				if (motionSensor.isAvailable() && !motionSensor.isStarted()) {
+					motionSensor.start();
+				}
+				if (pressureSensor.isAvailable() && !pressureSensor.isStarted()) {
+					pressureSensor.start();
+				}
+			},500);
+			
 		}
 		function stopSensors(){
 			if (motionSensor.isAvailable() && motionSensor.isStarted()) {

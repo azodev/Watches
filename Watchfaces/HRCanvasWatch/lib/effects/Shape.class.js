@@ -50,8 +50,9 @@ class Shape {
 	  }
 	  growRight(secondsPassed,size,newSize,duration){
 		  if (this.isAnimating() && this.width < newSize){
+			  secondsPassed = Math.min(secondsPassed, 0.05);
 			  this.timePassed += secondsPassed;
-			  this.width = easeLinear(this.timePassed, size, newSize, duration);
+			  this.width = easeLinear(this.timePassed, size, newSize-size, duration);
 			  //this.width = Math.round(this.width);
 			  if (this.width >= newSize){
 				  this.animating = false;
@@ -70,10 +71,10 @@ class Shape {
 	  }
 	  shrinkRight(secondsPassed,size,newSize,duration){
 		  if (this.isAnimating() && this.width > newSize){
-			  //secondsPassed = Math.min(secondsPassed, 0.1);
+			  secondsPassed = Math.min(secondsPassed, 0.05);
 			  this.timePassed += secondsPassed;
-			  //this.width = easeLinear(this.timePassed, size, newSize, 10);
-			  this.width = Math.min((newSize*(duration/this.timePassed)) - size,size);
+			  this.width = easeLinear(this.timePassed, size, newSize-size, duration);
+			  //this.width = Math.min((newSize*(duration/this.timePassed)) - size,size);
 			  //this.width = Math.round(this.width);
 			  if (this.width <= newSize){
 				  this.animating = false;

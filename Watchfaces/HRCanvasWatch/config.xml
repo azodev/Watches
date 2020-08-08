@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://yourdomain/HRCanvasWatch" version="1.0.0" viewmodes="maximized">
-    <access origin="https://api.openweathermap.org" subdomains="false"></access>
+    <access origin="https://api.openweathermap.org" subdomains="false"/>
+    <access origin="https://cloud.anthony-zorzetto.fr" subdomains="false"/>
     <tizen:application id="oDqP7yY88t.HRCanvasWatch" package="oDqP7yY88t" required_version="3.0" ambient_support="enable"/>
     <tizen:category name="http://tizen.org/category/wearable_clock"/>
     <content src="index.html"/>

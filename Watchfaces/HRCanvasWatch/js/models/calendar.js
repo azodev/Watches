@@ -44,7 +44,9 @@ define({
 		var started = false;
 		var found = false;
 		var calendar = null;
-
+		var xmlHttp = null;
+		var json = null;
+		var start, now, end;
 		/**
 		 * Returns last received motion data.
 		 * 
@@ -110,8 +112,66 @@ define({
 			//tizen.account.getAccounts(getAccountsSuccess, error);
 			/*calendar = tizen.calendar.getDefaultCalendar("EVENT");
 			calendar.find(eventSearchSuccessCallback, errorCallback);*/
+			/*
+			$.ajax({
+	            type: 'post',
+	            url: 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/gmail?export&accept=jcal',
+	            crossDomain: true,
+	            
+	            dataType: 'json',
+	            xhrFields: {
+	                withCredentials: true
+	            },
+	            data: {
+	                username : 'anthony',
+	                password : 'DoubleSMB01.',
+	            },
+	            success: someCallback
+	        });*/
+			
 		}
+		function getNexcloudCalendar(){
+			xmlHttp = new XMLHttpRequest();
+			var credentials= window.btoa('anthony:DoubleSMB01.');
+			//xmlHttp.overrideMimeType("application/json");
+			xmlHttp.onreadystatechange = function() {
+				if (this.readyState === XMLHttpRequest.DONE) {
+					if (this.status === 0 || this.status === 200) {
+						if (xmlHttp.responseText) {
+							// Parses responseText to JSON
+							json = JSON.parse(this.responseText);
+							console.log(json);
+							
+							
+						} else {
+							console.error("Status de la réponse: %d (%s)", this.status, this.statusText);
+							console.log(xmlHttp);
+						}
+					}
+					else {
+						console.error('Update Weather: error');
+						console.error(this.status+" "+this.statusText);
+						
+					}
+				}
 
+			};
+			now = Date.now()/1000 ;
+			
+			
+			start = Math.round((now - 86400));
+			console.log(start);
+			end = Math.round((now + 259200));
+			xmlHttp.open("GET", 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/gmail?export&accept=jcal&expand=1&start='+start+'&end='+end, true);
+			xmlHttp.withCredentials = true;
+			xmlHttp.setRequestHeader("Authorization","Basic "+credentials);
+
+
+			xmlHttp.send(null);
+		} 
+		function someCallback(e){
+			console.log(e);
+		}
 		return {
 			init : init,
 			getData : getData

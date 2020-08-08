@@ -138,9 +138,7 @@ define({
                                  ]
                              }
                          ];
-            if (tizen.preference.exists('theme')) {
-				theme = tizen.preference.getValue('theme');
-			}
+            
             svgMenu = new RadialMenu({
                 parent      : document.querySelector('#container'),
                 size        : 360,
@@ -237,6 +235,10 @@ define({
                     
                 }
             });
+            if (tizen.preference.exists('theme')) {
+				theme = tizen.preference.getValue('theme');
+				svgMenu.setTheme(theme);
+			}
         }
         
         function onsuccess() {
