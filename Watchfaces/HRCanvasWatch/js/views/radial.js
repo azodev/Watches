@@ -93,6 +93,11 @@ define({
                                  title: 'More...',
                                  icon: '#more',
                                  items: [
+									{
+									    id   : 'altitude',
+									    title: 'Altitude',
+									    icon: '#altitude'
+									},
                                      {
                                          id   : 'timer',
                                          title: 'Timer',
@@ -210,6 +215,14 @@ define({
                     }
                     else if (item.id == 'timer'){
                     	tizen.application.launch("com.samsung.timer-wc1", onsuccess,onfail);
+                    	setTimeout(function(){
+                    		svgMenu.darkenButton(item.id,item.id);
+                    		svgMenu.close();
+                    		
+                    		}, 200);	  
+                    }
+                    else if (item.id == 'altitude'){
+                    	tizen.application.launch("com.samsung.alti-barometer", onsuccess,onfail);
                     	setTimeout(function(){
                     		svgMenu.darkenButton(item.id,item.id);
                     		svgMenu.close();

@@ -3,8 +3,8 @@ div.menuHolder {
     -moz-user-select: none;
     position: absolute;
     margin: 0px;
-    background-color:#000000;
-    opacity:0.9;
+    /*background-image: radial-gradient(180px at 0px 0px , #000000 0%, #000000 14px, rgba(0, 0, 0, 0.3) 18px, rgba(0, 0, 0, 0) 19px);*/
+    /*opacity:0.9;*/
     z-index:3;
     display:none;
     font-family: FutureNow;
@@ -20,8 +20,9 @@ svg.menu {
     overflow: visible;
     transition: 0.3s;
     z-index:4;
-    opacity:0.9;
+    opacity:0.95;
     transition-timing-function: ease-out;
+    
     
 }
 
@@ -36,15 +37,18 @@ svg.menu.outer {
     opacity: 0;
     visibility: hidden;
 }
-
+svg.menu > g.sector {
+	
+}
 svg.menu > g > path {
     /*fill: #1E2E3A;*/
-    opacity:0.9;
+    opacity:0.95;
+    
 }
 
 svg.menu > g.sector > path {
-    cursor: pointer;
-    transition: 0.1s;
+    cursor: pointer; 
+    transition: 0.1s; 
     
 }
 
@@ -54,6 +58,7 @@ svg.menu > g.sector > use {
     fill: white;
     text-shadow: 1px 1px 0 #000000A0;
 }
+/*
 svg.menu > g.sector:hover > path {
     fill: #F9A602D0	;
     transition: fill 0.1s ease;
@@ -61,22 +66,27 @@ svg.menu > g.sector:hover > path {
 }
 
 svg.menu > g.sector.selected > path {
-    /*fill: #F9A602D0;*/
-    /*fill: #009900D0 !important;*/
+    fill: #F9A602D0;
+    fill: #009900D0 !important;
     fill: #32CD32D0 !important;
     
 }
+*/
 svg.menu > g > path.ice {
     fill: #1E2E3A;
-    opacity:0.9;
+    transition: fill 0.1s ease;
 }
 svg.menu > g > path.selected.ice {
 	fill: #096EB5;
 	transition: fill 0.1s ease;
 }
+
 svg.menu > g > path.fire {
-	fill: #9e5c15;
-	transition: fill 0.1s ease;
+	fill: #B23E01;
+	/*fill: radial-gradient(circle at 50%, #9e5c15, #db7e1a 80%, #fff 100%);*/
+	
+	/*fill: url(#RadialGradient1);*/
+	
 }
 svg.menu > g > path.selected.fire {
 	fill: #db7e1a;
@@ -84,7 +94,7 @@ svg.menu > g > path.selected.fire {
 }
 svg.menu > g > path.hisakura {
 	fill: #e09bb9;
-	transition: fill 0.1s ease;
+	
 }
 svg.menu > g > path.selected.hisakura {
 	fill: #ed77aa;

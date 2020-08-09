@@ -60,12 +60,14 @@ RadialMenu.prototype.close = function () {
             parentMenu.remove();
         }
         self.parentItems = [];
-
+        
         RadialMenu.setClassAndWaitForTransition(self.currentMenu, 'menu inner').then(function () {
+        	
             self.currentMenu.remove();
             self.currentMenu = null;
-            document.getElementById('container').style.display = "-webkit-flex";
+            //document.getElementById('container').style.display = "-webkit-flex";
             document.querySelector('.menuHolder').style.display = "none";
+            
         });
     }
 };
@@ -229,7 +231,8 @@ RadialMenu.prototype.createMenu = function (classValue, levelItems, nested) {
     svg.setAttribute('viewBox', '-50 -50 100 100');
     svg.setAttribute('width', self.size);
     svg.setAttribute('height', self.size);
-
+    //svg.setAttribute('style', 'fill: url(#RadialGradient1)');
+    
     var angleStep   = 360 / self.sectorCount;
     var angleShift  = angleStep / 2 + 270;
 
@@ -388,7 +391,7 @@ RadialMenu.prototype.createUseTag = function (x, y, link) {
     use.setAttribute('y', RadialMenu.numberToString(y));
     use.setAttribute('width', '10');
     use.setAttribute('height', '10');
-    use.setAttribute('fill', 'white');
+   // use.setAttribute('fill', 'white');
     use.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', link);
     return use;
 };
