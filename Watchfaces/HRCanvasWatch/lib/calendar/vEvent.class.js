@@ -1,21 +1,22 @@
 class vEvent {
 	constructor(array){
-		this.eventArray = array[1];
 		let i;
 		this.location = null;
-		for ( i=0 ;i<this.eventArray.length ; i++ ){
-			switch (this.eventArray[i][0]) {
+		for ( i=0 ;i<array[1].length ; i++ ){
+			switch (array[1][i][0]) {
 			case 'summary':
-				this.title     = this.eventArray[i][3];
+				this.title     = array[1][i][3];
 				break;
 			case 'dtstart':
-				this.startDate = new Date(this.eventArray[i][3]);
+				this.startDate = new Date(array[1][i][3]);
 				break;
 			case 'dtend':
-				this.endDate   = new Date(this.eventArray[i][3]);
+				this.endDate   = new Date(array[1][i][3]);
 				break;
 			case 'location':
-				this.location  = this.eventArray[i][3];
+				this.location  = array[1][i][3];
+				break;
+			case 'uid':
 				break;
 			default:
 				break;

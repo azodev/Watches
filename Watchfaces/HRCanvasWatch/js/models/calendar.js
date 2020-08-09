@@ -52,6 +52,8 @@ define({
 		var hasEvents = false;
 		var calendarNames = [];
 		var totalCall;
+		var e, dup;
+		var BreakException = {};
 		var credentials= window.btoa('anthony:DoubleSMB01.');
 		/**
 		 * Returns last received motion data.
@@ -73,7 +75,7 @@ define({
 		function bindEvents() {
 			event.on({
 				'views.radial.update' : function() {
-					accessCalendars();
+					accessCalendars(['gmail']);
 				}
 			});
 		}
@@ -100,6 +102,20 @@ define({
 			getNexcloudCalendar2("alten");
 			
 			
+		}
+		function isDuplicate (vEvent, vEvents){
+			dup = false;
+			try {
+				vEvents.forEach(function(el){
+					if (el.title == vEvent.title && el.startDate.toString() == vEvent.startDate.toString() && el.endDate.toString() == vEvent.endDate.toString()) {
+						throw BreakException;
+					}
+				});
+			}
+			catch (e) {
+				  dup= true;
+				}
+			return dup;
 		}
 		function hasVEvents(){
 			return (vEvents.length> 0)?true:false;
@@ -134,7 +150,8 @@ define({
 							json = JSON.parse(this.responseText);
 							calendar = json[2];
 							for (i=0;i<calendar.length;i++){
-								vEvents.push (new vEvent(calendar[i]));
+								e = new vEvent(calendar[i]);
+								if (!isDuplicate(e,vEvents)) vEvents.push (e);
 								vEvents.sort(function (a,b){return a.startDate - b.startDate});
 							}
 							console.log('cal success');
@@ -189,7 +206,8 @@ define({
 							json = JSON.parse(this.responseText);
 							calendar = json[2];
 							for (i=0;i<calendar.length;i++){
-								vEvents.push (new vEvent(calendar[i]));
+								e = new vEvent(calendar[i]);
+								if (!isDuplicate(e,vEvents)) vEvents.push (e);
 								vEvents.sort(function (a,b){return a.startDate - b.startDate});
 								
 							}
