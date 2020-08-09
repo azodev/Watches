@@ -599,8 +599,8 @@ wUjoxSIrAQ==</DigestValue>
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>fHXeDcLTxWcFFKww/ilXrGhoDg9Hncy05lIIeyraCo4QgmeNn8FcWbAACPNHZX5YIcrFGXMiEULz
-LApoClIEOg==</DigestValue>
+<DigestValue>Q6BBXlk9AkGuaLLvxpE8s7a29uJPnCUqMvbY94ZNRY3j7KlQSAIrLc2HPDLY8pBlj2C+odjgMfQz
+gjz48jcG4A==</DigestValue>
 </Reference>
 <Reference URI="input.txt">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -694,8 +694,8 @@ uoowPhkRgQ==</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2Fcalendar.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>ALbyCBO74boKR04rwiEbtfJtB/fMF3tollW3FEdh3jOaTk7EXMhpZYvH0HsYPOSN8jVokuRRey3a
-FRINSK4WnA==</DigestValue>
+<DigestValue>oaUbyy+MNcy15oupU3q4+IR8XGfidAh+RVh5+MBhJ4+xLxsB4GA4l4hc7pOD2qQ4DWXzWs+xkVNn
+N+N39Bx52A==</DigestValue>
 </Reference>
 <Reference URI="js%2Fmodels%2Fcalories.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -749,8 +749,8 @@ jxCTtM1OAw==</DigestValue>
 </Reference>
 <Reference URI="js%2Fviews%2Fcanvas.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>9IjrllPgsYeV7NnZu6adGlOGqlIvWqYqkhpb+H1dhTdavP9Nsy4glQVkwnXzcvQcSqoLUur1lLMF
-Nqi7WTyYHQ==</DigestValue>
+<DigestValue>AixDA0EnuCl+J2ZhyPUDTyHkum+p0v2gItf/xTe6yFE3zeJUFOWMUk+sjzu7WskbIHO6Ek/U7m9L
+D/7lwm3xDw==</DigestValue>
 </Reference>
 <Reference URI="js%2Fviews%2Finit.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -766,6 +766,11 @@ gIoLoeNNMA==</DigestValue>
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
 <DigestValue>wKPOh0b6dcMZjfjKMOM+5h3ItqGA4ElTVBw18ObmpIOjzax3yXiTTxaatN388q8myjj2ACkgn2u9
 7bKn7B02rA==</DigestValue>
+</Reference>
+<Reference URI="lib%2Fcalendar%2FvEvent.class.js">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
+<DigestValue>EZBUuiVPUL66gO8CxSzc9IXHPXdP7twuzKLDe5LewFzY8sTxR/3N7K0tWJbQo5IrpX7VsgHv1b7X
+O556kttCNA==</DigestValue>
 </Reference>
 <Reference URI="lib%2Fdateadd.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -2042,11 +2047,11 @@ QY10fG1EWQ==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-eF2Oyug3xSuTjjWJpXLlGFTNhEOCpIKat2vcamxCjsXZ+vGyRGbXd9s6hNn2afY3PIiQ1QOSgO8m
-U6a1vMjKzlmwflrdUIjvdfEXC5AF3Yoj6+sv1JoDq/t5FuVQoV3S8GgXZvenCGHB6Tv3qaomUbkI
-20U/cgjDLNpsFJNQo8qGKWkLKE6wVmdnofY38ecKoJPI0ehVjeriPlU/nwoWu+dku6lzwUVnXTgi
-WAYTe3F+QczWpK1+R1spc/iPu28z1Agjbj6FXtoF5aC47oJQSNuU78alHdSxxE0tD2FjxUDwwqU7
-+v9ylNObnA2QbpAMuFfj8F9RJimb1TgRrHZOVw==
+eXc6lLo2X/8zkQP4pSYXyTQjVBL3Gb1yh+WhVHoxn/yuMfuHMLWs2rfVuXGnD19ECWaxJ7aY6NaT
+iKfNco9u356IJrh8C9FLg7tJCWkFBSyczT4jCYGSnvKW9sfIMZTVa12bGcWwZMaEmcxLUT14HKM8
+pFlAYiIiRoy4ZjfQY3nR7V0kZQ9LQLl7akyMPJGlmjSJMZgmTHYdf10TTjttGKFeQlIn0/xgiyz4
+ABe2VFLpTBGnrqFq8dZ4Qmw3a23bjkrDm8ETnK26GZXWATd9pXeR5Wk/LtobaHsmTXUrIx5VDdzi
+Evh0TO0gV4+T6izymFCv1G3FomHoWZnm0Ltyqg==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

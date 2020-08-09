@@ -38,7 +38,20 @@
 
 define({
 	name : 'views/canvas',
-	requires : [ 'core/event','views/radial', 'helpers/date', 'helpers/text',  'models/settings', 'models/canvasDrawer', 'models/heartRate', 'models/location', 'models/pressure', 'models/weather', 'core/systeminfo', 'models/motion', 'models/pedometer','models/calendar' ],
+	requires : [ 'core/event',
+	             'core/systeminfo', 
+	             'views/radial', 
+	             'helpers/date', 
+	             'helpers/text',  
+	             'models/motion',
+	             'models/settings', 
+	             'models/canvasDrawer', 
+	             'models/heartRate', 
+	             'models/location', 
+	             'models/pressure', 
+	             'models/weather', 
+	             'models/pedometer',
+	             'models/calendar' ],
 	def : function viewsPageCanvas(req) {
 		'use strict';
 
@@ -65,6 +78,7 @@ define({
 		var pedometerSensor = req.models.pedometer;
 		var locationModel = req.models.location;
 		var weatherModel = req.models.weather;
+		var calendarModel = req.models.calendar;
 		var radialmenu = req.views.radial;
 		var gravSensor  = null;
 
@@ -136,10 +150,10 @@ define({
 		var theme = 'ice';
 		var forecastDisplayed = false; 
 		var forecastMode = false; 
-		var wShape = null, aShape1=null, aShape2=null, aShape3=null, aShape4=null,appDrawerShape; 
+		var wShape , aShape1, aShape2, aShape3, aShape4,appDrawerShape, calendarShape; 
 		var secondsPassed = 0;
 		var oldTimeStamp = 0;
-		var weatherSectionAnimating = false;
+		var calendarDisplay = true;
 		var wCoords=null;
 		
 		function handleClick(canvas,ev) {
@@ -167,9 +181,12 @@ define({
 				openRadialMenu(ev);
 			}
 			else if (wShape.isInSurface(clickPos,0)   ){
-				//forecastDisplayed = true; 
+				
 				if (forecastMode){
 					forecastDisplayed = false;
+				}
+				else {
+					calendarDisplay= false;
 				}
 				animateWeatherSection();
 			}
@@ -192,6 +209,7 @@ define({
 					wShape.shrinkRight(secondsPassed,250,100,0.2);
 					
 					if (!wShape.isAnimating()){
+						calendarDisplay = true;
 						toogleForecastMode();
 					}
 				}
@@ -401,11 +419,26 @@ define({
 			canvasDrawer.roundRect(ctxContent, wShape,10, false, true, "#000000", "#000000");
 			drawWeather(forecastDisplayed);
 			
-			
+			if (calendarDisplay) {
+				canvasDrawer.roundRect(ctxContent, calendarShape,10, false, true, "#000000", "#000000");
+				//if (calendarModel.hasVEvents()){
+					canvasDrawer.renderText(ctxContent, 'Events', calendarShape.getCoords().x+50, calendarShape.getCoords().y+20, 25, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'center',
+							gradient : true,
+							motion: motion
+					});
+					canvasDrawer.renderText(ctxContent, calendarModel.getVEvents().length , calendarShape.getCoords().x+50, calendarShape.getCoords().y+50, 30, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'center'
+					});
+				//}
+				
+			}
 			
 			if (heartRateFound && heartRate.getData().rate !== null) {
 				
-				canvasDrawer.renderCircle(ctxContent, new Circle(center.x,center.y + (watchRadius * 0.67),25), "#000000",1.5,true);
+				canvasDrawer.renderCircle(ctxContent, new Circle(center.x,center.y + (watchRadius * 0.67),28), "#000000",1.5,true);
 				canvasDrawer.renderText(ctxContent, heartRate.getData().rate, center.x , center.y + (watchRadius * 0.67), 25, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'center',
@@ -417,7 +450,7 @@ define({
 			}
 			
 			if (pedometerSensor.getActive() === true){
-				canvasDrawer.renderText(ctxContent, pedometerSensor.getData().accumulativeTotalStepCount, center.x - (watchRadius * 0.3), center.y + (watchRadius * 0.6), 20, "#c9c9c9", {
+				canvasDrawer.renderText(ctxContent, pedometerSensor.getData().accumulativeTotalStepCount, center.x - (watchRadius * 0.3), center.y + (watchRadius * 0.6), 22, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'center',
 					gradient : true,
@@ -469,8 +502,8 @@ define({
 				};
 			}
 			else {
-				wCoords = { text1 : {x:center.x - (watchRadius * 0.32),y:center.y + (watchRadius * 0.14),size: 21},
-						   temp : {x:center.x - (watchRadius * 0.30),y:center.y + (watchRadius * 0.26),size: 22},
+				wCoords = { text1 : {x:center.x - (watchRadius * 0.32),y:center.y + (watchRadius * 0.16),size: 21},
+						   temp : {x:center.x - (watchRadius * 0.30),y:center.y + (watchRadius * 0.28),size: 22},
 						   city : {x:center.x - (watchRadius * 0.65),y:center.y + (watchRadius * 0.33),size: 12},
 						   text2: {x:center.x - (watchRadius * 0.66),y:center.y + (watchRadius * 0.39),size: 20},
 						   icon : {x:center.x - (watchRadius * 0.57),y:center.y + (watchRadius * 0.15),size: 64}
@@ -545,6 +578,7 @@ define({
 					forecastIndexX = forecastIndexX + 30;
 				}
 			}
+			
 
 		}
 
@@ -1035,20 +1069,21 @@ define({
 			}
 			sysInfo.checkBattery();
 			
+			calendarModel.accessCalendars(['gmail']);
+			
 			//wShape= new Shape(center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 250, 70);
 			if (forecastDisplayed){
-				wShape= new Shape(center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 250, 70);
+				wShape= new Shape(center.x - 126, center.y + (watchRadius * 0.06), 250, 70);
 			}
 			else {
-				wShape= new Shape(center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 100, 70);
+				wShape= new Shape(center.x - 126, center.y + (watchRadius * 0.06), 100, 70);
 			}
-			
-			
+			calendarShape = new Shape(center.x + 26, center.y + (watchRadius * 0.06), 100, 70);
 			
 			aShape1= new Shape(center.x - 16, center.y - 116 , 13, 13);
 			aShape2= new Shape(center.x + 3, center.y - 116, 13, 13);
 			aShape3= new Shape(center.x - 16, center.y - 134, 13, 13);
-			aShape4= new Shape(center.x + 3, center.y - 134, 13, 13);
+			aShape4= new Shape(center.x + 3, center.y - 134, 13, 13); 
 			//drawWatchLayout();
 
 			appDrawerShape = new Circle(center.x,center.y-119,28);

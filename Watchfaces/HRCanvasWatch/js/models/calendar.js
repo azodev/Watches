@@ -44,9 +44,15 @@ define({
 		var started = false;
 		var found = false;
 		var calendar = null;
-		var xmlHttp = null;
+		var xmlHttps = [], xmlHttp2 = null;
 		var json = null;
+		var i,y;
 		var start, now, end;
+		var vEvents =[];
+		var hasEvents = false;
+		var calendarNames = [];
+		var totalCall;
+		var credentials= window.btoa('anthony:DoubleSMB01.');
 		/**
 		 * Returns last received motion data.
 		 * 
@@ -54,9 +60,7 @@ define({
 		 * @private
 		 * @returns {object}
 		 */
-		function getData() {
-			return calendarData;
-		}
+		
 
 
 		
@@ -67,7 +71,11 @@ define({
 		 * @private
 		 */
 		function bindEvents() {
-
+			event.on({
+				'views.radial.update' : function() {
+					accessCalendars();
+				}
+			});
 		}
 
 		/**
@@ -76,105 +84,137 @@ define({
 		 * @memberof models/calendar
 		 * @public
 		 */
-	
-		function errorCallback(response)
-		{
-		  console.log("The following error occurred: " + response.name);
+		function getVEvents(){
+			return vEvents;
 		}
-
-		/* Defines the success callback. */
-		function updateEventsSuccess()
-		{
-		  console.log("Successfully updated !");
+		function createAjaxes(){
+			xmlHttps.push(new XMLHttpRequest() );
 		}
-
-		/* Defines the event success callback. */
-		function eventSearchSuccessCallback(events)
-		{
-			console.log(events);
-
-		  /* Updates the first two existing events. */
-			//calendar.updateBatch(events.slice(0, 2), updateEventsSuccess, errorCallback);
-		}
-
-		/* Gets a list of available calendars. */
-		function getAccountsSuccess(acc){
-			console.log(acc);
-		}
-		function error(e){
+		function accessCalendars(names){
+			y=0;
+			calendarNames = names;
+			xmlHttps = [];
+			calendarNames.forEach(createAjaxes ) 
+			totalCall = calendarNames.length - 1;
+			getNexcloudCalendar();
+			getNexcloudCalendar2("alten-1");
+			
 			
 		}
+		function hasVEvents(){
+			return (vEvents.length> 0)?true:false;
+		}
+		/* Defines the event success callback. */
+		
 		function init() {
 			bindEvents();
-            /*calendar = tizen.calendar.getDefaultCalendar('EVENT');
-            calendar.find(eventSearchSuccessCallback, errorCallback);
-            console.log(calendar);*/
-			//tizen.account.getAccounts(getAccountsSuccess, error);
-			/*calendar = tizen.calendar.getDefaultCalendar("EVENT");
-			calendar.find(eventSearchSuccessCallback, errorCallback);*/
-			/*
-			$.ajax({
-	            type: 'post',
-	            url: 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/gmail?export&accept=jcal',
-	            crossDomain: true,
-	            
-	            dataType: 'json',
-	            xhrFields: {
-	                withCredentials: true
-	            },
-	            data: {
-	                username : 'anthony',
-	                password : 'DoubleSMB01.',
-	            },
-	            success: someCallback
-	        });*/
+			
 			
 		}
 		function getNexcloudCalendar(){
-			xmlHttp = new XMLHttpRequest();
-			var credentials= window.btoa('anthony:DoubleSMB01.');
+			
+			
+			now = Date.now()/1000 ;
+			start = Math.round((now-3600)+y); //Math.round((now - 86400));
+			//console.log(start);
+			end = Math.round((now + 86400)+y);
+			//xmlHttp = new XMLHttpRequest();
+			console.log(y);
+			xmlHttps[y].open("GET", 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/'+calendarNames[y]+'?export&accept=jcal&expand=1&start='+start+'&end='+end, true);
+			xmlHttps[y].withCredentials = true;
+			xmlHttps[y].setRequestHeader("Authorization","Basic "+credentials);
+			
+			xmlHttps[y].send();
+			
 			//xmlHttp.overrideMimeType("application/json");
-			xmlHttp.onreadystatechange = function() {
+			xmlHttps[y].onreadystatechange = function() {
 				if (this.readyState === XMLHttpRequest.DONE) {
 					if (this.status === 0 || this.status === 200) {
-						if (xmlHttp.responseText) {
+						if (xmlHttps[y].responseText) {
 							// Parses responseText to JSON
 							json = JSON.parse(this.responseText);
-							console.log(json);
-							
+							calendar = json[2];
+							for (i=0;i<calendar.length;i++){
+								vEvents.push (new vEvent(calendar[i]));
+								vEvents.sort(function (a,b){return a.startDate - b.startDate});
+							}
+							console.log('cal success');
+							if( y < totalCall ){
+				                y++;
+				                getNexcloudCalendar();
+				            }
+							else return;
 							
 						} else {
 							console.error("Status de la réponse: %d (%s)", this.status, this.statusText);
-							console.log(xmlHttp);
+							if( y < totalCall ){
+				                y++;
+				                getNexcloudCalendar();
+				            }
+							else return;
 						}
 					}
 					else {
-						console.error('Update Weather: error');
+						console.error('Update calendar: error');
 						console.error(this.status+" "+this.statusText);
-						
+						if( y < totalCall ){
+			                y++;
+			                getNexcloudCalendar();
+			              }
+						else return;
 					}
 				}
-
 			};
-			now = Date.now()/1000 ;
-			
-			
-			start = Math.round((now - 86400));
-			console.log(start);
-			end = Math.round((now + 259200));
-			xmlHttp.open("GET", 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/gmail?export&accept=jcal&expand=1&start='+start+'&end='+end, true);
-			xmlHttp.withCredentials = true;
-			xmlHttp.setRequestHeader("Authorization","Basic "+credentials);
-
-
-			xmlHttp.send(null);
 		} 
+		
+		function getNexcloudCalendar2(name){
+			
+			
+			now = Date.now()/1000 ;
+			start = Math.round((now-3600)); //Math.round((now - 86400));
+			//console.log(start);
+			end = Math.round((now + 86400));
+			xmlHttp2 = new XMLHttpRequest();
+			xmlHttp2.open("GET", 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/'+name+'?export&accept=jcal&expand=1&start='+start+'&end='+end, true);
+			xmlHttp2.withCredentials = true;
+			xmlHttp2.setRequestHeader("Authorization","Basic "+credentials);
+			
+			xmlHttp2.send(null);
+			
+			//xmlHttp.overrideMimeType("application/json");
+			xmlHttp2.onreadystatechange = function() {
+				if (this.readyState === XMLHttpRequest.DONE) {
+					if (this.status === 0 || this.status === 200) {
+						if (xmlHttp2.responseText) {
+							// Parses responseText to JSON
+							json = JSON.parse(this.responseText);
+							calendar = json[2];
+							for (i=0;i<calendar.length;i++){
+								vEvents.push (new vEvent(calendar[i]));
+								vEvents.sort(function (a,b){return a.startDate - b.startDate});
+							}
+						} else {
+							console.error("Status de la réponse: %d (%s)", this.status, this.statusText);
+						}
+					}
+					else {
+						console.error('Update calendar: error');
+						console.error(this.status+" "+this.statusText);
+					}
+				}
+			};
+		} 
+		
+		
 		function someCallback(e){
 			console.log(e);
 		}
 		return {
 			init : init,
-			getData : getData
+			getVEvents : getVEvents,
+			accessCalendars : accessCalendars,
+			hasVEvents : hasVEvents 
+			
 		};
 	}
 });
