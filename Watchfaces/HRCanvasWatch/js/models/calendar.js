@@ -46,8 +46,8 @@ define({
 		var calendar = null;
 		var xmlHttps = [], xmlHttp2 = null;
 		var json = null;
-		var i,y;
-		var start, now, end;
+		var i,y,z;
+		var start, now, end,month,day,year;
 		var vEvents =[];
 		var hasEvents = false;
 		var calendarNames = [];
@@ -55,6 +55,8 @@ define({
 		var e, dup;
 		var BreakException = {};
 		var credentials= window.btoa('anthony:DoubleSMB01.');
+		var myEvents = [];
+		var template = {'day':null,'events':null};
 		/**
 		 * Returns last received motion data.
 		 * 
@@ -62,8 +64,39 @@ define({
 		 * @private
 		 * @returns {object}
 		 */
-		
+		function isDay(el,date) {
+			  return el.day === date;
+			}
+		function formatDate(date) {
+		        month = '' + (date.getMonth() + 1);
+		        day = '' + date.getDate();
+		        year = date.getFullYear();
 
+		    if (month.length < 2) 
+		        month = '0' + month;
+		    if (day.length < 2) 
+		        day = '0' + day;
+
+		    return [year, month, day].join('-');
+		}
+		function processDaysEvents(){
+			myEvents = [];
+			vEvents.forEach(function(ev){
+				//if (typeof myEvents[formatDate(ev.startDate)] !== 'undefined') {
+				/*if (myEvents.length == 0){
+					myEvents.push({'day':formatDate(ev.startDate),'events':[]});
+				}*/
+				if (myEvents.map(function(o) { return o.day; }).indexOf(formatDate(ev.startDate)) == -1){
+					myEvents.push({'day':formatDate(ev.startDate),'events':[]});
+				}
+				
+				for (z= 0 ; z< myEvents.length; z++){
+					if (myEvents[z].day == formatDate(ev.startDate)){
+						myEvents[z].events.push(ev);
+					}
+				}
+			});
+		}
 
 		
 		/**
@@ -98,8 +131,9 @@ define({
 			xmlHttps = [];
 			calendarNames.forEach(createAjaxes ) 
 			totalCall = calendarNames.length - 1;
-			getNexcloudCalendar();
+			getNexcloudCalendar();  
 			getNexcloudCalendar2("alten");
+			
 			
 			
 		}
@@ -153,6 +187,7 @@ define({
 								e = new vEvent(calendar[i]);
 								if (!isDuplicate(e,vEvents)) vEvents.push (e);
 								vEvents.sort(function (a,b){return a.startDate - b.startDate});
+								processDaysEvents();
 							}
 							console.log('cal success');
 							if( y < totalCall ){
@@ -189,7 +224,7 @@ define({
 			now = Date.now()/1000 ;
 			start = Math.round((now-3600)); //Math.round((now - 86400));
 			//console.log(start);
-			end = Math.round((now + 86400));
+			end = Math.round((now + 886400));
 			xmlHttp2 = new XMLHttpRequest();
 			xmlHttp2.open("GET", 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/'+name+'?export&accept=jcal&expand=1&start='+start+'&end='+end, true);
 			xmlHttp2.withCredentials = true;
@@ -209,6 +244,7 @@ define({
 								e = new vEvent(calendar[i]);
 								if (!isDuplicate(e,vEvents)) vEvents.push (e);
 								vEvents.sort(function (a,b){return a.startDate - b.startDate});
+								processDaysEvents();
 								
 							}
 							console.log(vEvents);
@@ -232,7 +268,8 @@ define({
 			init : init,
 			getVEvents : getVEvents,
 			accessCalendars : accessCalendars,
-			hasVEvents : hasVEvents 
+			hasVEvents : hasVEvents,
+			formatDate : formatDate
 			
 		};
 	}
