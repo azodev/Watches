@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://yourdomain/HRCanvasWatch" version="1.0.0" viewmodes="maximized">
-    <access origin="https://api.openweathermap.org" subdomains="false"/>
-    <access origin="https://cloud.anthony-zorzetto.fr" subdomains="false"/>
-    <tizen:application id="oDqP7yY88t.HRCanvasWatch" package="oDqP7yY88t" required_version="3.0" ambient_support="enable"/>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="https://www.anthony-zorzetto.fr/ParticlesWatch" version="1.0.0" viewmodes="maximized">
+    <access origin="https://api.openweathermap.org" subdomains="false"></access>
+    <access origin="https://cloud.anthony-zorzetto.fr" subdomains="false"></access>
+    <tizen:application id="EjC5Z9GjZ7.ParticlesWatch" package="EjC5Z9GjZ7" required_version="3.0" ambient_support="enable"/>
     <tizen:category name="http://tizen.org/category/wearable_clock"/>
     <content src="index.html"/>
     <feature name="tizen.org/feature/humanactivitymonitor"/>
@@ -20,7 +20,7 @@
     <feature name="http://tizen.org/feature/sensor.pedometer"/>
     <feature name="http://tizen.org/feature/web.service"/>
     <icon src="icon.png"/>
-    <name>HRCanvasWatch</name>
+    <name>ParticlesWatch</name>
     <tizen:privilege name="http://tizen.org/privilege/application.info"/>
     <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
     <tizen:privilege name="http://tizen.org/privilege/account.read"/>

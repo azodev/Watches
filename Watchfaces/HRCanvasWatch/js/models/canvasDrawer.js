@@ -185,7 +185,7 @@ define({
 			context.restore();
 
 		}
-		function renderCircle(context, center, radius, color, width,opacity) {
+		function renderCircle(context, CircleShape, color, width,opacity) {
 			context.save();
 			context.beginPath();
 			context.lineWidth = width;
@@ -203,7 +203,7 @@ define({
 			context.shadowBlur = 5;
 			*/
 			context.strokeStyle = color;
-			context.arc(center.x, center.y, radius, 0, 2 * Math.PI);
+			context.arc(CircleShape.getCenter().x, CircleShape.getCenter().y, CircleShape.getRadius(), 0, 2 * Math.PI);
 			if (opacity == true){
 				context.fillStyle = '#000000';
 				context.globalAlpha = 0.5;
@@ -596,8 +596,8 @@ define({
 		}
 		function calculateRadialGradientPosition(motionAcceleration) {
 			radialGradientCoords.x = Math.min(Math.round(radialGradientCoordsD.x + (motionAcceleration.x * 16)),250);
-			radialGradientCoords.y = Math.min(Math.round(radialGradientCoordsD.y - ((motionAcceleration.y-3.2) * 16)),300);
-			
+			radialGradientCoords.y = Math.min(Math.round(radialGradientCoordsD.y - ((motionAcceleration.y) * 16)),250)+80;
+			//console.log(radialGradientCoords.y);
 			return radialGradientCoords;
 		}
 		function processMotion(motionAcceleration, context) {
@@ -613,7 +613,7 @@ define({
 			radialGradient.addColorStop(0.83, 'rgba(20,20,20,0.3)');
 			radialGradient.addColorStop(0.91, 'rgba(39,41,42,1)');
 			//radialGradient.addColorStop(0.98, 'rgba(80,80,80,1)');
-			radialGradient.addColorStop(1, 'rgba(130,130,130,1)');
+			radialGradient.addColorStop(1, 'rgba(120,120,120,1)');
 			gradientLinear = context.createLinearGradient(cx - gx, cy - gy, cx + gx, cy + gy);
 			
 			if (theme== 'ice'){

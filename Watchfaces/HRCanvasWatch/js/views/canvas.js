@@ -136,7 +136,7 @@ define({
 		var theme = 'ice';
 		var forecastDisplayed = false; 
 		var forecastMode = false; 
-		var wShape = null, aShape1=null, aShape2=null, aShape3=null, aShape4=null; 
+		var wShape = null, aShape1=null, aShape2=null, aShape3=null, aShape4=null,appDrawerShape; 
 		var secondsPassed = 0;
 		var oldTimeStamp = 0;
 		var weatherSectionAnimating = false;
@@ -162,20 +162,18 @@ define({
 			clickPos = getMousePosition(canvas,ev);
 			
 			console.log(clickPos);
-			//if ((clickPos.x >= center.x - (watchRadius * 0.70) && clickPos.x <= (center.x - (watchRadius * 0.70)+250)  )  && (clickPos.y  >= center.y + (watchRadius * 0.06)  && clickPos.y <= (center.y + (watchRadius * 0.06))+70 )   ){
-			if ((clickPos.x >= center.x - 50 && clickPos.x <= center.x + 50  )  && (clickPos.y  >= center.y - 155  && clickPos.y <= center.y - 80   )){
+			if (appDrawerShape.isInSurface(clickPos,10)){
 				
 				openRadialMenu(ev);
 			}
-			else if ((clickPos.x >= center.x - (watchRadius * 0.70) && clickPos.x <= (center.x - (watchRadius * 0.70)+100)  )  && (clickPos.y  >= center.y + (watchRadius * 0.06)  && clickPos.y <= (center.y + (watchRadius * 0.06))+70 )  && !forecastMode  ){
+			else if (wShape.isInSurface(clickPos,0)   ){
 				//forecastDisplayed = true; 
+				if (forecastMode){
+					forecastDisplayed = false;
+				}
 				animateWeatherSection();
 			}
-			else if ((clickPos.x >= center.x - (watchRadius * 0.70) && clickPos.x <= (center.x - (watchRadius * 0.70)+250)  )  && (clickPos.y  >= center.y + (watchRadius * 0.06)  && clickPos.y <= (center.y + (watchRadius * 0.06))+70 )  && forecastMode ){
-				forecastDisplayed = false;
-				animateWeatherSection();
-				
-			}
+			
 		}
 		function animateWeatherSection(){
 			//weatherSectionAnimating = true;
@@ -317,7 +315,7 @@ define({
 			
 			
 			canvasDrawer.renderBackground(ctxContent,ctxContent.canvas.width, ctxContent.canvas.height, "black",{gradient:true,motion:motion});
-			canvasDrawer.renderCircle(ctxContent, center, watchRadius -2, "#000000",5);
+			canvasDrawer.renderCircle(ctxContent,  new Circle(center.x,center.y,watchRadius -2) , "#000000",5);
 			//canvasDrawer.renderGrid (ctxContent,  "#000000",2,{motion:motion});
 			/*if (drawTicks === true){
 				canvasDrawer.renderCircle(ctxContent, center, watchRadius *1, "#000000",4);
@@ -407,10 +405,7 @@ define({
 			
 			if (heartRateFound && heartRate.getData().rate !== null) {
 				
-				canvasDrawer.renderCircle(ctxContent, {
-					x : center.x ,
-					y :  center.y + (watchRadius * 0.67)
-				}, 25, "#000000",1.5,true);
+				canvasDrawer.renderCircle(ctxContent, new Circle(center.x,center.y + (watchRadius * 0.67),25), "#000000",1.5,true);
 				canvasDrawer.renderText(ctxContent, heartRate.getData().rate, center.x , center.y + (watchRadius * 0.67), 25, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'center',
@@ -431,10 +426,7 @@ define({
 				});
 			}
 			
-			canvasDrawer.renderCircle(ctxContent, {
-				x : center.x,
-				y : center.y - 119
-			}, 28, "#000000",2,true);
+			canvasDrawer.renderCircle(ctxContent, appDrawerShape, "#000000",2,true);
 			canvasDrawer.roundRect(ctxContent, aShape1, 3, false, true, "#000000", "#000000");
 			canvasDrawer.roundRect(ctxContent, aShape2, 3, false, true, "#000000", "#000000");
 			canvasDrawer.roundRect(ctxContent, aShape3, 3, false, true, "#000000", "#000000");
@@ -738,10 +730,8 @@ define({
 				gradient : true
 			});
 			if (heartRateFound && heartRate.getData().rate !== null) {
-				canvasDrawer.renderCircle(ctxContent, {
-					x : center.x,
-					y : center.y + (watchRadius * 0.60)
-				}, 45, grdAmbiant,2);
+				
+				canvasDrawer.renderCircle(ctxContent, new Circle(center.x,center.y + (watchRadius * 0.60),45), grdAmbiant,2);
 
 				
 				canvasDrawer.renderText(ctxContent, heartRate.getData().rate, center.x, center.y + (watchRadius * 0.60), 30, grdAmbiant, {
@@ -1053,15 +1043,15 @@ define({
 				wShape= new Shape(center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 100, 70);
 			}
 			
-		
+			
 			
 			aShape1= new Shape(center.x - 16, center.y - 116 , 13, 13);
 			aShape2= new Shape(center.x + 3, center.y - 116, 13, 13);
 			aShape3= new Shape(center.x - 16, center.y - 134, 13, 13);
 			aShape4= new Shape(center.x + 3, center.y - 134, 13, 13);
 			//drawWatchLayout();
-			
-			
+
+			appDrawerShape = new Circle(center.x,center.y-119,28);
 			
 			popolate(max_particles);
 			setTimeout(function () {
