@@ -97,7 +97,7 @@ define({
 			calendarNames.forEach(createAjaxes ) 
 			totalCall = calendarNames.length - 1;
 			getNexcloudCalendar();
-			getNexcloudCalendar2("alten-1");
+			getNexcloudCalendar2("alten");
 			
 			
 		}
@@ -119,7 +119,6 @@ define({
 			//console.log(start);
 			end = Math.round((now + 86400)+y);
 			//xmlHttp = new XMLHttpRequest();
-			console.log(y);
 			xmlHttps[y].open("GET", 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/'+calendarNames[y]+'?export&accept=jcal&expand=1&start='+start+'&end='+end, true);
 			xmlHttps[y].withCredentials = true;
 			xmlHttps[y].setRequestHeader("Authorization","Basic "+credentials);
@@ -192,7 +191,9 @@ define({
 							for (i=0;i<calendar.length;i++){
 								vEvents.push (new vEvent(calendar[i]));
 								vEvents.sort(function (a,b){return a.startDate - b.startDate});
+								
 							}
+							console.log(vEvents);
 						} else {
 							console.error("Status de la réponse: %d (%s)", this.status, this.statusText);
 						}
