@@ -71,6 +71,7 @@ define({
 		 * @type {MotionSensor}
 		 */
 		motionSensor = null,
+		gyroscopeSensor = null,
 
 		/**
 		 * Array of registered motions.
@@ -116,7 +117,7 @@ define({
 		};
 		var isEnable = false;
 		var initialValue = 0;
-
+		var elem  = null;
 		/**
 		 * Performs action on start sensor success.
 		 * 
@@ -163,11 +164,15 @@ define({
 					averageMotion.accelerationIncludingGravity.y = previousMotions.reduce(function(accumulator, currentValue) {
 						return accumulator + currentValue.y;
 					},initialValue) / len;
+					averageMotion.accelerationIncludingGravity.z = previousMotions.reduce(function(accumulator, currentValue) {
+						return accumulator + currentValue.z;
+					},initialValue) / len;
 				} else {
 					// add the new item and subtract the one shifted out
 					firstElement = previousMotions.shift();
 					averageMotion.accelerationIncludingGravity.x += (currentMotion.accelerationIncludingGravity.x - firstElement.x) / len;
 					averageMotion.accelerationIncludingGravity.y += (currentMotion.accelerationIncludingGravity.y - firstElement.y) / len;
+					averageMotion.accelerationIncludingGravity.z += (currentMotion.accelerationIncludingGravity.z - firstElement.z) / len;
 				}
 				return averageMotion;
 			} catch (exept) {
@@ -185,17 +190,25 @@ define({
 		 *            data
 		 */
 		function onSensorChange(SensorAccelerationData) {
-
+			
 			currentMotion.accelerationIncludingGravity = {
 				x : SensorAccelerationData.x,
-				y : SensorAccelerationData.y
+				y : SensorAccelerationData.y,
+				z : SensorAccelerationData.z
 			};
 			updateAverageMotion(currentMotion);
+			/*elem.style.transform =
+			    " rotateZ(" + ( currentMotion.accelerationIncludingGravity.z - 180 ) + "deg) " +
+			    " rotateX(" + currentMotion.accelerationIncludingGravity.x + "deg) " +
+			    " rotateY(" + ( -currentMotion.accelerationIncludingGravity.y ) + "deg)";
+			*/
+			//gyroscopeSensor.getGyroscopeRotationVectorSensorData(onGetSuccessCB, onerrorCB);
 			e.fire('change', getSensorValueAvg());
 		}
 		function setCurrentMotionValue(data) {
 			currentMotion.accelerationIncludingGravity.x = data.x;
-			currentMotion.accelerationIncludingGravity.x = data.y;
+			currentMotion.accelerationIncludingGravity.y = data.y;
+			currentMotion.accelerationIncludingGravity.z = data.z;
 			//updateAverageMotion(currentMotion);
 		}
 
@@ -213,6 +226,7 @@ define({
 		function stop() {
 			motionSensor.stop();
 			isEnable = false;
+			//e.fire('reset', true);
 		}
 		function isStarted() {
 			return isEnable;
@@ -226,8 +240,11 @@ define({
 		function setChangeListener() {
 			try {
 				motionSensor.setChangeListener(onSensorChange, options.sampleInterval, options.maxBatchCount);
+				//gyroscopeSensor.setChangeListener(onGetSuccessCB, options.sampleInterval, options.maxBatchCount);
+				//gyroscopeSensor.getGyroscopeSensorData(onGetSuccessCB, onerrorCB);
 			} catch (e) {
 				motionSensor.setChangeListener(onSensorChange);
+				//gyroscopeSensor.setChangeListener(onGetSuccessCB);
 			}
 
 			//
@@ -274,7 +291,7 @@ define({
 			bindEvents();
 			sensorService = tizen.sensorservice || (window.webapis && window.webapis.sensorservice) || null;
 			if (!sensorService) {
-				e.fire('error', {
+				event.fire('error', {
 					type : 'notavailable'
 				});
 			} else {
@@ -283,16 +300,52 @@ define({
 					motionSensor.getMotionSensorData(setCurrentMotionValue);
 				} catch (error) {
 					if (error.type === ERROR_TYPE_NOT_SUPPORTED) {
-						e.fire('error', {
+						event.fire('error', {
 							type : 'notsupported'
 						});
 					} else {
-						e.fire('error', {
+						event.fire('error', {
 							type : 'unknown'
 						});
 					}
 				}
 			}
+			elem = document.querySelector("div.menuHolder"); 
+		
+			//gyroscopeSensor = tizen.sensorservice.getDefaultSensor("GYROSCOPE_ROTATION_VECTOR");
+			//gyroscopeSensor.start(onsuccessCB);
+			
+		}
+		function onGetSuccessCB(sensorData)
+		{
+			
+		  /*console.log("######## Get the gyroscope sensor data ########");*/
+		  /*console.log("x: " + sensorData.x);
+		  console.log("y: " + sensorData.y);
+		  console.log("z: " + sensorData.z);*/
+			/*console.log("x: " + sensorData.x);
+			  console.log("y: " + sensorData.y);
+			  console.log("z: " + sensorData.z);*/
+			/*setTimeout(function (e){
+				elem.style.transform = 
+					" rotateZ(" + ( sensorData.z - 180 ) + "deg) " +
+			    " rotateX(" + sensorData.x + "deg) " +
+			    " rotateY(" + ( -sensorData.y ) + "deg)";
+			},50);*/
+				  
+			
+			
+		}
+
+		function onerrorCB(error)
+		{
+		  console.log("Error occurred");
+		}
+
+		function onsuccessCB()
+		{
+		  //console.log("Sensor start");
+		  gyroscopeSensor.getGyroscopeRotationVectorSensorData(onGetSuccessCB, onerrorCB);
 		}
 
 		return {
@@ -304,7 +357,8 @@ define({
 			setChangeListener : setChangeListener,
 			getSensorValue : getSensorValue,
 			getSensorValueAvg : getSensorValueAvg,
-			setOptions : setOptions
+			setOptions : setOptions,
+			onsuccessCB : onsuccessCB
 		};
 	}
 

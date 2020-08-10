@@ -8,7 +8,7 @@ div.menuHolder {
     z-index:3;
     display:none;
     font-family: FutureNow;
-    
+    transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
 }
 
 svg.icons {
@@ -93,7 +93,7 @@ svg.menu > g > path.selected.fire {
 	transition: fill 0.1s ease;
 }
 svg.menu > g > path.hisakura {
-	fill: #e09bb9;
+	fill: #9c6c81;
 	
 }
 svg.menu > g > path.selected.hisakura {

@@ -25,6 +25,7 @@ define({
         var svgMenu = null;   
         var menuItems = null;
         var theme = 'ice';
+        var isOpen = false;
         /**
          * Handles resize event.
          *
@@ -162,22 +163,15 @@ define({
                     console.log('You have clicked:', item.id, item.title);
                     if (item.id == 'update'){
                     	event.fire('update',true);
-                    	setTimeout(function(){
-                    		svgMenu.darkenButton(item.id,item.id);
-                    		svgMenu.close();
-                    		
-                    		}, 200);
+                    	closeMenuProperly(item);
+                    	
                     }
                     else if (item.id == 'fire' || item.id == 'hisakura' || item.id == 'ice'){
                     	changeTheme(item.id);
                     	svgMenu.setTheme(item.id);
                     	tizen.preference.setValue('theme', item.id);
                     	event.fire('changeTheme',item.id);
-                    	setTimeout(function(){
-                    		svgMenu.darkenButton(item.id,item.id);
-                    		svgMenu.close();
-                    		
-                    		}, 200);
+                    	closeMenuProperly(item);
                     }
                     else if (item.id == 'events'){
                     	 
@@ -207,43 +201,23 @@ define({
                     		     function(e) {console.log("launch application control failed. reason: " + e.message); },
                     		     appControlReplyCallback );
                     	//tizen.application.launch("com.samsung.w-calendar2", onsuccess,onfail);
-                    	setTimeout(function(){
-                    		svgMenu.darkenButton(item.id,item.id);
-                    		svgMenu.close();
-                    		
-                    		}, 200);	     
+                    	  closeMenuProperly(item);     
                     }
                     else if (item.id == 'timer'){
                     	tizen.application.launch("com.samsung.timer-wc1", onsuccess,onfail);
-                    	setTimeout(function(){
-                    		svgMenu.darkenButton(item.id,item.id);
-                    		svgMenu.close();
-                    		
-                    		}, 200);	  
+                    	closeMenuProperly(item);
                     }
                     else if (item.id == 'altitude'){
                     	tizen.application.launch("com.samsung.alti-barometer", onsuccess,onfail);
-                    	setTimeout(function(){
-                    		svgMenu.darkenButton(item.id,item.id);
-                    		svgMenu.close();
-                    		
-                    		}, 200);	  
+                    	closeMenuProperly(item);	  
                     }
                     else if (item.id == 'exercise'){
                     	tizen.application.launch("GymRunWear.TizenCompanionApp", onsuccess,onfail);
-                    	setTimeout(function(){
-                    		svgMenu.darkenButton(item.id,item.id);
-                    		svgMenu.close();
-                    		
-                    		}, 200);	  
+                    	closeMenuProperly(item);	  
                     }
                     else if (item.id == 'workout'){
                     	tizen.application.launch("com.samsung.shealth.exercise", onsuccess,onfail);
-                    	setTimeout(function(){
-                    		svgMenu.darkenButton(item.id,item.id);
-                    		svgMenu.close();
-                    		
-                    		}, 200);	  
+                    	closeMenuProperly(item); 
                     }
                     
                 }
@@ -253,11 +227,23 @@ define({
 				svgMenu.setTheme(theme);
 			}
         }
-        
+        function closeMenuProperly(item){
+        	setTimeout(function(){
+	        	svgMenu.darkenButton(item.id,item.id);
+	        	isOpen = false;
+	    		svgMenu.close();
+        	},200);
+        }
         function onsuccess() {
         	
    	     	console.log("The application has launched successfully");
    	 	}
+        function setOpen(){
+        	isOpen = true;
+        }
+        function getOpen(){
+        	return isOpen;
+        } 
         function onfail(e){
         	console.error(e);
         }
@@ -273,7 +259,10 @@ define({
         }
         return {
             init: init,
-            getMenu : getMenu
+            getMenu : getMenu,
+            setOpen : setOpen,
+            getOpen : getOpen
+            
         };
     }
 });

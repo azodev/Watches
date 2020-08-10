@@ -145,7 +145,9 @@ define({
 		var radialButton = null;
 		var drawTicks = false;
 		var particleColors = ["#694FB9","#6094ee","#3CFBFF"];
-		const CLICK_INTERVAL = 1000;
+		var deg = {x:0,y:0}; 
+		var elem;
+		const CLICK_INTERVAL = 300;
 		var lastClickTimeStamp = null, currentClickTimeStamp = null;
 		var theme = 'ice';
 		var forecastDisplayed = false; 
@@ -153,7 +155,12 @@ define({
 		var wShape , aShape1, aShape2, aShape3, aShape4,appDrawerShape, calendarShape; 
 		var secondsPassed = 0;
 		var oldTimeStamp = 0;
-		var calendarDisplay = true;
+		var miniCalendarDisplayed = true, miniWeatherDisplayed= true;
+		var widgetFullScreenDiplayed = false; 
+		var baroDisplayed = true;
+		var timeDisplayed = true;
+		var heartRateDisplayed=true;
+		
 		var wCoords=null;
 		
 		function handleClick(canvas,ev) {
@@ -179,6 +186,7 @@ define({
 			if (appDrawerShape.isInSurface(clickPos,10)){
 				
 				openRadialMenu(ev);
+				radialmenu.setOpen();
 			}
 			else if (wShape.isInSurface(clickPos,0)   ){
 				
@@ -186,7 +194,7 @@ define({
 					forecastDisplayed = false;
 				}
 				else {
-					calendarDisplay= false;
+					miniCalendarDisplayed= false;
 				}
 				animateWeatherSection();
 			}
@@ -209,7 +217,7 @@ define({
 					wShape.shrinkRight(secondsPassed,250,100,0.2);
 					
 					if (!wShape.isAnimating()){
-						calendarDisplay = true;
+						miniCalendarDisplayed = true;
 						toogleForecastMode();
 					}
 				}
@@ -305,7 +313,9 @@ define({
 			// if enough time has elapsed, draw the next frame
 
 			date = datetime.getDate();
-
+			/*if (motionSensor.isAvailable()) {
+				onMotionChangeNew();
+			}*/
 			// nextMove = 1000 - dateHelper.getDate().getMilliseconds();
 			if (motion !== null) 		{
 				canvasDrawer.processMotion(motionFromGyro,ctxContent);
@@ -315,11 +325,24 @@ define({
 			gravCenter = canvasDrawer.getRadialGradientCoords();
 			
 			//canvasDrawer.getRadialGradientCoords();
+			if (radialmenu.getOpen()){ 
+				deg.x = (gravCenter.y - 190)*1.4;
+				deg.y = (gravCenter.x - 180)*1.4;
+				if (deg.x <= -30 ) deg.x = -30;
+				if (deg.x >= 30 ) deg.x = 30;
+				if (deg.y <= -30 ) deg.y = -30;
+				if (deg.y >= 30 ) deg.y = 30;
+				
+				elem = document.querySelector("div.menuHolder"); 
+				elem.style.transform =
+				    "perspective(2000px) rotateX(" + deg.x + "deg) " +
+				    " rotateY(" + deg.y + "deg)";
+			}
 			
 			
 			particles = particles.filter(function (p) {
 				
-				p.setPoA(gravCenter);
+				p.setPoA(gravCenter); 
 				return p.move();
 				});
 			  // Recreate particles
@@ -355,109 +378,111 @@ define({
 			
 			
 			
-			// Battery
-			canvasDrawer.renderText(ctxContent, Math.round(batteryLevel) + '%', center.x+94, center.y - (watchRadius * 0.4), 17, "#c9c9c9", {
-				font : 'FutureNow',
-				align : 'center',
-				gradient : true,
-				motion: motion
-			});
-			
-			
-			canvasDrawer.renderTextGradient(ctxContent, 'Altitude :', center.x - (watchRadius * 0.77), center.y - (watchRadius * 0.17), 14, "#c9c9c9", {
-				font : 'FutureNow',
-				align : 'left',
-				gradient : true,
-				motion: motion
-			});
-			canvasDrawer.renderText(ctxContent, altitude, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.17), 14, "#c9c9c9", {
-				font : 'FutureNow',
-				align : 'right'
-			});
-			canvasDrawer.renderTextGradient(ctxContent, 'Pressure :', center.x - (watchRadius * 0.77), center.y - (watchRadius * 0.09), 14, "#c9c9c9", {
-				font : 'FutureNow',
-				align : 'left',
-				gradient : true,
-				motion: motion
-			});
+			if (!widgetFullScreenDiplayed){
+				if (baroDisplayed){
+					canvasDrawer.renderTextGradient(ctxContent, 'Altitude :', center.x - (watchRadius * 0.77), center.y - (watchRadius * 0.17), 14, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'left',
+						gradient : true,
+						motion: motion
+					});
+					canvasDrawer.renderText(ctxContent, altitude, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.17), 14, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'right'
+					});
+					canvasDrawer.renderTextGradient(ctxContent, 'Pressure :', center.x - (watchRadius * 0.77), center.y - (watchRadius * 0.09), 14, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'left',
+						gradient : true,
+						motion: motion
+					});
 
-			canvasDrawer.renderText(ctxContent, pressure, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.09), 14, "#c9c9c9", {
-				font : 'FutureNow',
-				align : 'right'
-			});
-			
-			
-			
-			
-			canvasDrawer.renderText(ctxContent,datetime.getDate()+"/"+(datetime.getMonth()+1)+"/"+datetime.getFullYear(), center.x + 108, center.y - 50, 25, "#c9c9c9", {
-				font : 'FutureNow',
-				align : 'right',
-				gradient : true,
-				motion: motion
+					canvasDrawer.renderText(ctxContent, pressure, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.09), 14, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'right'
+					});
+				}
 				
-			});
-			canvasDrawer.renderTimeBis(ctxContent, dateArray, center.x + 33, center.y - 23, 53, "#c9c9c9", {
-				gradient : true,
-				motion: motion
 				
-			});
-			canvasDrawer.renderText(ctxContent, dateArray.second, center.x + 135, center.y - 16, 25, "#c9c9c9", {
-				font : 'FutureNow',
-				align : 'center',
-				gradient : true,
-				motion: motion
-				
-			});
-			
-			//weather
-			//
-			/*if (forecastDisplayed){
-				canvasDrawer.roundRect(ctxContent, wShape,10, false, true, "#000000", "#000000");
-			}else {
-				canvasDrawer.roundRect(ctxContent, wShape,10, false, true, "#000000", "#000000");
-			}*/
-			canvasDrawer.roundRect(ctxContent, wShape,10, false, true, "#000000", "#000000");
-			drawWeather(forecastDisplayed);
-			
-			if (calendarDisplay) {
-				canvasDrawer.roundRect(ctxContent, calendarShape,10, false, true, "#000000", "#000000");
-				//if (calendarModel.hasVEvents()){
-					canvasDrawer.renderText(ctxContent, 'Events', calendarShape.getCoords().x+50, calendarShape.getCoords().y+20, 25, "#c9c9c9", {
+				if (timeDisplayed){
+					// Battery
+					canvasDrawer.renderText(ctxContent, Math.round(batteryLevel) + '%', center.x+94, center.y - (watchRadius * 0.4), 17, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'center',
-							gradient : true,
-							motion: motion
+						gradient : true,
+						motion: motion
 					});
-					canvasDrawer.renderText(ctxContent, calendarModel.getVEvents().length , calendarShape.getCoords().x+50, calendarShape.getCoords().y+50, 30, "#c9c9c9", {
+					canvasDrawer.renderText(ctxContent,datetime.getDate()+"/"+(datetime.getMonth()+1)+"/"+datetime.getFullYear(), center.x + 108, center.y - 50, 25, "#c9c9c9", {
 						font : 'FutureNow',
-						align : 'center'
+						align : 'right',
+						gradient : true,
+						motion: motion
+						
 					});
-				//}
-				
-			}
-			
-			if (heartRateFound && heartRate.getData().rate !== null) {
-				
-				canvasDrawer.renderCircle(ctxContent, new Circle(center.x,center.y + (watchRadius * 0.67),28), "#000000",1.5,true);
-				canvasDrawer.renderText(ctxContent, heartRate.getData().rate, center.x , center.y + (watchRadius * 0.67), 25, "#c9c9c9", {
-					font : 'FutureNow',
-					align : 'center',
-					gradient : true,
-					motion: motion
+					canvasDrawer.renderTimeBis(ctxContent, dateArray, center.x + 33, center.y - 23, 53, "#c9c9c9", {
+						gradient : true,
+						motion: motion
 						
-				});
+					});
+					canvasDrawer.renderText(ctxContent, dateArray.second, center.x + 135, center.y - 16, 25, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'center',
+						gradient : true,
+						motion: motion
+						
+					});
+				}
+				
+				
+				
+				if (miniWeatherDisplayed){
+					canvasDrawer.roundRect(ctxContent, wShape,10, false, true, "#000000", "#000000");
+					drawWeather(forecastDisplayed);
+				}
+				
+				
+				if (miniCalendarDisplayed) {
+					canvasDrawer.roundRect(ctxContent, calendarShape,10, false, true, "#000000", "#000000");
+					//if (calendarModel.hasVEvents()){
+						canvasDrawer.renderText(ctxContent, 'Events', calendarShape.getCoords().x+50, calendarShape.getCoords().y+20, 25, "#c9c9c9", {
+							font : 'FutureNow',
+							align : 'center',
+								gradient : true,
+								motion: motion
+						});
+						canvasDrawer.renderText(ctxContent, calendarModel.getVEvents().length , calendarShape.getCoords().x+50, calendarShape.getCoords().y+50, 30, "#c9c9c9", {
+							font : 'FutureNow',
+							align : 'center'
+						});
+					//}
+					
+				}
+				
+				if (heartRateDisplayed &&  heartRateFound && heartRate.getData().rate !== null) {
+					
+					canvasDrawer.renderCircle(ctxContent, new Circle(center.x,center.y + (watchRadius * 0.67),28), "#000000",1.5,true);
+					canvasDrawer.renderText(ctxContent, heartRate.getData().rate, center.x , center.y + (watchRadius * 0.67), 25, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'center',
+						gradient : true,
+						motion: motion
+							
+					});
 
+				}
+				
+				if (pedometerSensor.getActive() === true){
+					canvasDrawer.renderText(ctxContent, pedometerSensor.getData().accumulativeTotalStepCount, center.x - (watchRadius * 0.3), center.y + (watchRadius * 0.6), 22, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'center',
+						gradient : true,
+						motion: motion
+							
+					});
+				}
 			}
 			
-			if (pedometerSensor.getActive() === true){
-				canvasDrawer.renderText(ctxContent, pedometerSensor.getData().accumulativeTotalStepCount, center.x - (watchRadius * 0.3), center.y + (watchRadius * 0.6), 22, "#c9c9c9", {
-					font : 'FutureNow',
-					align : 'center',
-					gradient : true,
-					motion: motion
-						
-				});
-			}
+			
 			
 			canvasDrawer.renderCircle(ctxContent, appDrawerShape, "#000000",2,true);
 			canvasDrawer.roundRect(ctxContent, aShape1, 3, false, true, "#000000", "#000000");
@@ -787,14 +812,23 @@ define({
 		 * @private
 		 */
 		function onDeviceMotion(event) {
-			if (!isAmbientMode) 			motion = event;
+			if (!isAmbientMode) 			{
+				motion = event;
+				
+			}
 		}
 		function onMotionError(event){
 			console.error(event.detail.type);
 		}
 		function onMotionChange(SensorAccelerationData){
 			//console.log(SensorAccelerationData.detail);
+			//motionFromGyro.accelerationIncludingGravity = getSensorValueAvg();
 			motionFromGyro.accelerationIncludingGravity = SensorAccelerationData.detail.accelerationIncludingGravity;
+			motion = motionFromGyro;
+		}
+		function onMotionChangeNew(){
+			
+			motionFromGyro.accelerationIncludingGravity = motionSensor.getSensorValueAvg().accelerationIncludingGravity;
 			motion = motionFromGyro;
 		}
 		
@@ -1097,6 +1131,14 @@ define({
 			animRequest = window.requestAnimationFrame(drawWatchContent);
 			
 			
+/*
+			window.addEventListener("deviceorientation", function(e) {
+			  // remember to use vendor-prefixed transform property
+			  elem.style.transform =
+			    " rotateZ(" + ( e.alpha - 180 ) + "deg) " +
+			    " rotateX(" + e.beta + "deg) " +
+			    " rotateY(" + ( -e.gamma ) + "deg)";
+			},true);*/
 		}
 
 		return {

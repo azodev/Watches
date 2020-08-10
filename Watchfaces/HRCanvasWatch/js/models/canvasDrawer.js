@@ -583,6 +583,7 @@ define({
 			dx = -motionAcceleration.x *1000;
 			dy = motionAcceleration.y *1000;
 			gradientAngle = Math.atan2(dy, dx) + Math.PI /2; //
+			//console.log(gradientAngle);
 			//gradientCoords.x1 = (360 / 2) + Math.cos(gradientAngle) * maxLength * 0.5;
 			//gradientCoords.y1 = (360 / 2) + Math.sin(gradientAngle) * maxLength * 0.5;
 			// the end of the gradient subtracted from the center
@@ -595,10 +596,13 @@ define({
 			return gradientCoords;
 		}
 		function calculateRadialGradientPosition(motionAcceleration) {
-			radialGradientCoords.x = Math.min(Math.round(radialGradientCoordsD.x + (motionAcceleration.x * 16)),250);
-			radialGradientCoords.y = Math.min(Math.round(radialGradientCoordsD.y - ((motionAcceleration.y) * 16)),250)+80;
-			//console.log(radialGradientCoords.y);
+			radialGradientCoords.x = Math.min(Math.round(radialGradientCoordsD.x + (motionAcceleration.x * 4)),250);
+			radialGradientCoords.y = Math.min(Math.round(radialGradientCoordsD.y - ((motionAcceleration.y) * 4)),250)+30;
+			//console.log('x: '+motionAcceleration.x+' y: '+motionAcceleration.y);
 			return radialGradientCoords;
+		}
+		function resetRadialGradientPosition(){
+			radialGradientCoords = radialGradientCoordsD;
 		}
 		function processMotion(motionAcceleration, context) {
 			// console.log(motionAcceleration);
@@ -612,7 +616,7 @@ define({
 			radialGradient.addColorStop(0.755, 'rgba(0,0,0,0.3)');
 			radialGradient.addColorStop(0.83, 'rgba(20,20,20,0.3)');
 			radialGradient.addColorStop(0.91, 'rgba(39,41,42,1)');
-			//radialGradient.addColorStop(0.98, 'rgba(80,80,80,1)');
+			//radialGradient.addColorStop(0.98, 'rgba(80,80,80,1)'); 
 			radialGradient.addColorStop(1, 'rgba(120,120,120,1)');
 			gradientLinear = context.createLinearGradient(cx - gx, cy - gy, cx + gx, cy + gy);
 			
@@ -629,10 +633,10 @@ define({
 				gradientLinear.addColorStop(0, "rgb(249,234,194)");
 			}
 			else {
-				gradientLinear.addColorStop(1, "rgb(255,81,81)");
+				gradientLinear.addColorStop(1, "rgb(229,72,72)");
 				gradientLinear.addColorStop(0.6, "rgb(252,123,123)");
 				gradientLinear.addColorStop(0.3, "rgb(254,144,144)");
-				gradientLinear.addColorStop(0, "rgb(249,217,217)");
+				gradientLinear.addColorStop(0, "rgb(251,232,232)");
 			}
 			
 		}
@@ -653,10 +657,10 @@ define({
 				grdAmbiant.addColorStop(0, "rgb(249,234,194)");
 			}
 			else {
-				grdAmbiant.addColorStop(1, "rgb(255,81,81)");
+				grdAmbiant.addColorStop(1, "rgb(229,72,72)");
 				grdAmbiant.addColorStop(0.6, "rgb(252,123,123)");
 				grdAmbiant.addColorStop(0.3, "rgb(254,144,144)");
-				grdAmbiant.addColorStop(0, "rgb(249,217,217)");
+				grdAmbiant.addColorStop(0, "rgb(251,232,232)");
 			}
 			return grdAmbiant;
 		}
@@ -733,8 +737,8 @@ define({
 		}
 		function bindEvents() {
 			event.on({
-				'views.radial.changeTheme' : changeTheme
-				
+				'views.radial.changeTheme' : changeTheme,
+				'models.motion.reset': resetRadialGradientPosition
 			});
 
 		}
