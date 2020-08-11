@@ -326,8 +326,8 @@ define({
 			
 			//canvasDrawer.getRadialGradientCoords();
 			if (radialmenu.getOpen()){ 
-				deg.x = (gravCenter.y - 190)*1.4;
-				deg.y = (gravCenter.x - 180)*1.4;
+				deg.x = (gravCenter.y - 180)*1.6;
+				deg.y = (gravCenter.x - 180)*1.6;
 				if (deg.x <= -30 ) deg.x = -30;
 				if (deg.x >= 30 ) deg.x = 30;
 				if (deg.y <= -30 ) deg.y = -30;
@@ -530,8 +530,8 @@ define({
 				wCoords = { text1 : {x:center.x - (watchRadius * 0.32),y:center.y + (watchRadius * 0.16),size: 21},
 						   temp : {x:center.x - (watchRadius * 0.30),y:center.y + (watchRadius * 0.28),size: 22},
 						   city : {x:center.x - (watchRadius * 0.65),y:center.y + (watchRadius * 0.33),size: 12},
-						   text2: {x:center.x - (watchRadius * 0.66),y:center.y + (watchRadius * 0.39),size: 20},
-						   icon : {x:center.x - (watchRadius * 0.57),y:center.y + (watchRadius * 0.15),size: 64}
+						   text2: {x:center.x - (watchRadius * 0.66),y:center.y + (watchRadius * 0.39),size: 18},
+						   icon : {x:center.x - (watchRadius * 0.57),y:center.y + (watchRadius * 0.14),size: 62}
 				};
 			}
 			if (weatherModel.isWeatherFound()) {
@@ -563,7 +563,7 @@ define({
 					//weather text
 					
 				}
-				canvasDrawer.renderText(ctxContent, textHelper.truncateBis(weatherValue.weather[0].main, 8,''), wCoords.text2.x, wCoords.text2.y, wCoords.text2.size, "#c9c9c9", {
+				canvasDrawer.renderText(ctxContent, textHelper.truncateBis(weatherValue.weather[0].main, 8,'...'), wCoords.text2.x, wCoords.text2.y, wCoords.text2.size, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'left',
 					gradient : true,
@@ -1103,7 +1103,7 @@ define({
 			}
 			sysInfo.checkBattery();
 			
-			calendarModel.accessCalendars(['gmail']);
+			//calendarModel.accessCalendars(['gmail']);
 			
 			//wShape= new Shape(center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 250, 70);
 			if (forecastDisplayed){

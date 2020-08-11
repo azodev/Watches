@@ -132,9 +132,11 @@ define({
 			nowDate = new Date();
 			calendarNames.forEach(createAjaxes ) 
 			totalCall = calendarNames.length - 1;
-			//fetchNextCloudCalendar();
+			//fetchNextCloudCalendar(); 
 			//getNexcloudCalendar();  
-			getNexcloudCalendar2("alten");
+			//getNexcloudCalendar2("alten"); 
+			//fetchNextCloudCalendar();
+			doPromise(true);
 			
 			
 			
@@ -168,25 +170,41 @@ define({
 			start = Math.round((now-3600)+y); //Math.round((now - 86400));
 			//console.log(start);
 			end = Math.round((now + 86400)+y);
-			console.log(window.navigator.userAgent);
-			var headers = {'Content-Type': 'application/json'};
-			var cred = new PasswordCredential({
-				  id: 'anthony',
-				  password: 'DoubleSMB01.',
-				});
-			fetch('https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/'+calendarNames[0]+'?export&accept=jcal&expand=1&start='+start+'&end='+end,
-				{ 
-				//credentials:cred,
-				mode:'cors',
-				//method: "GET",
-				headers: headers
-				})
-				.then(function (e){
-					console.log(e);
-				}, 
-				function(f){
-					console.log(f);
-				} );
+
+			let uri = 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/gmail?export&accept=jcal&expand=1&start='+start+'&end='+end+'&rand='+Math.random();
+            
+            let h = new Headers();
+            h.append('Accept', 'application/json');
+            let encoded = window.btoa('anthony:DoubleSMB01.');
+            let auth = 'Basic ' + encoded;
+            h.append('Authorization', auth );
+            console.log( auth );
+            
+            let req = new Request(uri, {
+                method: 'GET',
+                headers: h,
+                credentials: 'include'
+            });
+            //credentials: 'same-origin'
+            
+            fetch(req)
+            .then( (response)=>{
+                if(response.ok){
+                    return response.json();
+                }else{
+                	console.log(response);
+                    throw new Error('BAD HTTP stuff');
+                }
+            })
+            .then( (jsonData) =>{
+                console.log(jsonData);
+               
+            })
+            .catch( (err) =>{
+                console.log('ERROR:', err.message);
+            });
+			
+			
 		}
 		function getNexcloudCalendar(){
 			
@@ -218,7 +236,6 @@ define({
 								processDaysEvents();
 								
 							}
-							document.execCommand("ClearAuthenticationCache");
 							console.log('cal success');
 							if( y < totalCall ){
 				                y++;
@@ -229,7 +246,6 @@ define({
 						} else {
 							console.error("Status de la réponse: %d (%s)", this.status, this.statusText);
 							event.fire('error','Cal: '+calendar[i]+" "+this.status);
-							document.execCommand("ClearAuthenticationCache");
 							if( y < totalCall ){
 				                y++;
 				                getNexcloudCalendar();
@@ -242,7 +258,6 @@ define({
 						console.error('Update calendar: error');
 						event.fire('error','Cal: '+calendar[i]+" "+this.status);
 						console.error(this.status+" "+this.statusText);
-						document.execCommand("ClearAuthenticationCache");
 						if( y < totalCall ){
 			                y++;
 			                getNexcloudCalendar();
@@ -252,7 +267,88 @@ define({
 				}
 			};
 		} 
-		
+		function wasRequestSuccessful(status) {
+			return status >= 200 && status < 300;
+		}
+		function doPromise(auth){
+			var p1 = new Promise((resolve, reject) => {
+				
+				now = Date.now()/1000 ;
+				start = Math.round((now-3600)); //Math.round((now - 86400));
+				//console.log(start);
+				end = Math.round((now + 86400)); 
+				const  xhr = new XMLHttpRequest();
+				if (auth===true){
+					
+					xhr.open("GET", 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/alten?export&expand=1&accept=jcal&start='+start+'&end='+end,true);
+					xhr.withCredentials = true;
+					xhr.setRequestHeader("Authorization","Basic "+credentials);
+
+				}
+				else {
+					xhr.open("GET", 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/alten?export&expand=1&accept=jcal&start='+start+'&end='+end,true);
+					xhr.withCredentials = false;
+					
+				} 
+				
+				xhr.onreadystatechange = () => {
+					if (xhr.readyState !== 4) {
+						return;
+					}
+					
+
+					if (!wasRequestSuccessful(xhr.status)) {
+						if (xhr.status >= 400 && xhr.status < 500) {
+							reject(null);
+							return;
+						}
+						if (xhr.status >= 500 && xhr.status < 600) {
+							reject(null);
+							return;
+						}
+
+						reject(null);
+						return;
+					}
+
+					if (xhr.status === 207) {
+						responseBody = this._parseMultiStatusResponse(responseBody);
+						if (parseInt(assignHeaders['Depth'], 10) === 0 && method === 'PROPFIND') {
+							responseBody = responseBody[Object.keys(responseBody)[0]];
+						}
+					}
+
+					resolve(xhr.responseText);
+				};
+
+				xhr.onerror = () => reject(null);
+
+				xhr.onabort = () => reject(null);
+				xhr.send();
+			});
+			p1.then(handleResponse)
+			.catch(
+					// Promesse rejetée
+						function() { 
+							if (auth)
+								getNexcloudCalendar3('alten');
+						});
+			
+		}
+		function handleResponse(responseText){
+			console.log('calendar');
+			json = JSON.parse(responseText);
+			calendar = json[2];
+			for (i=0;i<calendar.length;i++){
+				e = new vEvent(calendar[i]);
+				if (!isDuplicate(e,vEvents)) vEvents.push (e);
+				vEvents.sort(function (a,b){return a.startDate - b.startDate});
+				vEvents = vEvents.filter (filterFinishedVEvents);
+				processDaysEvents();
+				
+			}
+			console.log(vEvents);
+		}
 		function getNexcloudCalendar2(name){
 			
 			
@@ -260,14 +356,14 @@ define({
 			start = Math.round((now-3600)); //Math.round((now - 86400));
 			//console.log(start);
 			end = Math.round((now + 86400));
-			var  xmlHttp2 = new XMLHttpRequest();
-			xmlHttp2.open("GET", 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/'+name+'?export&accept=jcal&expand=1&start='+start+'&end='+end, true);
+			xmlHttp2 = new XMLHttpRequest();
+			xmlHttp2.open("GET", 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/'+name+'?export&accept=jcal&expand=1&start='+start+'&end='+end,true);
 			xmlHttp2.withCredentials = true;
 			xmlHttp2.setRequestHeader("Authorization","Basic "+credentials);
 			
 			xmlHttp2.send();
 			
-			xmlHttp2.overrideMimeType("application/json");
+			//xmlHttp2.overrideMimeType("application/json");
 			xmlHttp2.onreadystatechange = function() {
 				if (this.readyState === XMLHttpRequest.DONE) {
 					if (this.status === 0 || this.status === 200) {
@@ -283,15 +379,52 @@ define({
 								processDaysEvents();
 								
 							}
-							document.execCommand("ClearAuthenticationCache");
 							console.log(vEvents);
 						} else {
-							document.execCommand("ClearAuthenticationCache");
 							console.error("Status de la réponse: %d (%s)", this.status, this.statusText);
 						}
 					}
 					else {
-						document.execCommand("ClearAuthenticationCache");
+						console.error('Update calendar: error');
+						console.error(this.status+" "+this.statusText);
+					}
+				}
+			};
+		} 
+		function getNexcloudCalendar3(name){
+			
+			
+			now = Date.now()/1000 ;
+			start = Math.round((now-3600)); //Math.round((now - 86400));
+			//console.log(start);
+			end = Math.round((now + 86400));
+			xmlHttp2 = new XMLHttpRequest();
+			xmlHttp2.open("GET", 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/'+name+'?export&expand=1&accept=jcal&start='+start+'&end='+end,true);
+
+			xmlHttp2.send();
+			
+			//xmlHttp2.overrideMimeType("application/json");
+			xmlHttp2.onreadystatechange = function() {
+				if (this.readyState === XMLHttpRequest.DONE) {
+					if (this.status === 0 || this.status === 200) {
+						if (xmlHttp2.responseText) {
+							// Parses responseText to JSON
+							json = JSON.parse(this.responseText);
+							calendar = json[2];
+							for (i=0;i<calendar.length;i++){
+								e = new vEvent(calendar[i]);
+								if (!isDuplicate(e,vEvents)) vEvents.push (e);
+								vEvents.sort(function (a,b){return a.startDate - b.startDate});
+								vEvents = vEvents.filter (filterFinishedVEvents);
+								processDaysEvents();
+								
+							}
+							console.log(vEvents);
+						} else {
+							console.error("Status de la réponse: %d (%s)", this.status, this.statusText);
+						}
+					}
+					else {
 						console.error('Update calendar: error');
 						console.error(this.status+" "+this.statusText);
 					}
