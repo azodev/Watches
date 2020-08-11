@@ -171,14 +171,15 @@ define({
 			console.log(window.navigator.userAgent);
 			var headers = {'Content-Type': 'application/json'};
 			var cred = new PasswordCredential({
-				  idName: 'anthony',
+				  id: 'anthony',
 				  password: 'DoubleSMB01.',
-				  name: 'anthony',
 				});
 			fetch('https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/'+calendarNames[0]+'?export&accept=jcal&expand=1&start='+start+'&end='+end,
 				{ 
-				credentials:cred,
-				//mode:'cors'
+				//credentials:cred,
+				mode:'cors',
+				//method: "GET",
+				headers: headers
 				})
 				.then(function (e){
 					console.log(e);
@@ -260,7 +261,7 @@ define({
 			//console.log(start);
 			end = Math.round((now + 86400));
 			var  xmlHttp2 = new XMLHttpRequest();
-			xmlHttp2.open("GET", 'https://anthony@cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/'+name+'?export&accept=jcal&expand=1&start='+start+'&end='+end, true);
+			xmlHttp2.open("GET", 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/'+name+'?export&accept=jcal&expand=1&start='+start+'&end='+end, true);
 			xmlHttp2.withCredentials = true;
 			xmlHttp2.setRequestHeader("Authorization","Basic "+credentials);
 			
