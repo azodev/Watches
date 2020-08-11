@@ -326,7 +326,7 @@ define({
 			
 			//canvasDrawer.getRadialGradientCoords();
 			if (radialmenu.getOpen()){ 
-				deg.x = (gravCenter.y - 180)*1.6;
+				deg.x = (gravCenter.y - 200)*1.6;
 				deg.y = (gravCenter.x - 180)*1.6;
 				if (deg.x <= -30 ) deg.x = -30;
 				if (deg.x >= 30 ) deg.x = 30;
@@ -335,7 +335,7 @@ define({
 				
 				elem = document.querySelector("div.menuHolder"); 
 				elem.style.transform =
-				    "perspective(800px) rotateX(" + deg.x + "deg) " +
+				    "perspective(800px) rotateX(" + -deg.x + "deg) " +
 				    " rotateY(" + -deg.y + "deg)";
 			}
 			
