@@ -335,8 +335,8 @@ define({
 				
 				elem = document.querySelector("div.menuHolder"); 
 				elem.style.transform =
-				    "perspective(2000px) rotateX(" + deg.x + "deg) " +
-				    " rotateY(" + deg.y + "deg)";
+				    "perspective(800px) rotateX(" + deg.x + "deg) " +
+				    " rotateY(" + -deg.y + "deg)";
 			}
 			
 			

@@ -147,7 +147,7 @@ define({
             
             svgMenu = new RadialMenu({
                 parent      : document.querySelector('#container'),
-                size        : 360,
+                size        : 340,
                 closeOnClick: false,
                 menuItems   : menuItems,
                 theme       : theme,

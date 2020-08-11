@@ -115,7 +115,8 @@ define({
 				'models.pedometer.error' : postNotification,
 				'views.canvas.log' : postNotification,
 				'models.weather.log' : postNotification,
-				'models.weather.error' : postNotification
+				'models.weather.error' : postNotification,
+				'models.calendar.error' : postNotification
 
 			});
 

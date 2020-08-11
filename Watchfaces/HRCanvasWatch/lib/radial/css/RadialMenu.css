@@ -3,12 +3,14 @@ div.menuHolder {
     -moz-user-select: none;
     position: absolute;
     margin: 0px;
+    top:10px;
+    left:10px;
     /*background-image: radial-gradient(180px at 0px 0px , #000000 0%, #000000 14px, rgba(0, 0, 0, 0.3) 18px, rgba(0, 0, 0, 0) 19px);*/
     /*opacity:0.9;*/
     z-index:3;
     display:none;
     font-family: FutureNow;
-    transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+    transform: perspective(3000px) rotateY(0deg) rotateX(0deg);
 }
 
 svg.icons {

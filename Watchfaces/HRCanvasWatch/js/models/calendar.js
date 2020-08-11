@@ -198,6 +198,7 @@ define({
 							
 						} else {
 							console.error("Status de la réponse: %d (%s)", this.status, this.statusText);
+							event.fire('error','Cal: '+calendar[i]+" "+this.status);
 							if( y < totalCall ){
 				                y++;
 				                getNexcloudCalendar();
@@ -207,6 +208,7 @@ define({
 					}
 					else {
 						console.error('Update calendar: error');
+						event.fire('error','Cal: '+calendar[i]+" "+this.status);
 						console.error(this.status+" "+this.statusText);
 						if( y < totalCall ){
 			                y++;
