@@ -47,7 +47,7 @@ define({
 		var xmlHttps = [], xmlHttp2 = null;
 		var json = null;
 		var i,y,z;
-		var start, now, end,month,day,year;
+		var start, now, end,month,day,year,nowDate;
 		var vEvents =[];
 		var hasEvents = false;
 		var calendarNames = [];
@@ -91,7 +91,7 @@ define({
 				}
 				
 				for (z= 0 ; z< myEvents.length; z++){
-					if (myEvents[z].day == formatDate(ev.startDate)){
+					if (myEvents[z].day == formatDate(ev.startDate) ){
 						myEvents[z].events.push(ev);
 					}
 				}
@@ -129,9 +129,11 @@ define({
 			y=0;
 			calendarNames = names;
 			xmlHttps = [];
+			nowDate = new Date();
 			calendarNames.forEach(createAjaxes ) 
 			totalCall = calendarNames.length - 1;
-			getNexcloudCalendar();  
+			//fetchNextCloudCalendar();
+			//getNexcloudCalendar();  
 			getNexcloudCalendar2("alten");
 			
 			
@@ -161,6 +163,30 @@ define({
 			
 			
 		}
+		function fetchNextCloudCalendar(){
+			now = Date.now()/1000 ;
+			start = Math.round((now-3600)+y); //Math.round((now - 86400));
+			//console.log(start);
+			end = Math.round((now + 86400)+y);
+			console.log(window.navigator.userAgent);
+			var headers = {'Content-Type': 'application/json'};
+			var cred = new PasswordCredential({
+				  idName: 'anthony',
+				  password: 'DoubleSMB01.',
+				  name: 'anthony',
+				});
+			fetch('https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/'+calendarNames[0]+'?export&accept=jcal&expand=1&start='+start+'&end='+end,
+				{ 
+				credentials:cred,
+				//mode:'cors'
+				})
+				.then(function (e){
+					console.log(e);
+				}, 
+				function(f){
+					console.log(f);
+				} );
+		}
 		function getNexcloudCalendar(){
 			
 			
@@ -175,7 +201,7 @@ define({
 			
 			xmlHttps[y].send();
 			
-			//xmlHttp.overrideMimeType("application/json");
+			xmlHttps[y].overrideMimeType("application/json");
 			xmlHttps[y].onreadystatechange = function() {
 				if (this.readyState === XMLHttpRequest.DONE) {
 					if (this.status === 0 || this.status === 200) {
@@ -187,8 +213,11 @@ define({
 								e = new vEvent(calendar[i]);
 								if (!isDuplicate(e,vEvents)) vEvents.push (e);
 								vEvents.sort(function (a,b){return a.startDate - b.startDate});
+								vEvents = vEvents.filter (filterFinishedVEvents);
 								processDaysEvents();
+								
 							}
+							document.execCommand("ClearAuthenticationCache");
 							console.log('cal success');
 							if( y < totalCall ){
 				                y++;
@@ -199,17 +228,20 @@ define({
 						} else {
 							console.error("Status de la réponse: %d (%s)", this.status, this.statusText);
 							event.fire('error','Cal: '+calendar[i]+" "+this.status);
+							document.execCommand("ClearAuthenticationCache");
 							if( y < totalCall ){
 				                y++;
 				                getNexcloudCalendar();
 				            }
 							else return;
+							
 						}
 					}
 					else {
 						console.error('Update calendar: error');
 						event.fire('error','Cal: '+calendar[i]+" "+this.status);
 						console.error(this.status+" "+this.statusText);
+						document.execCommand("ClearAuthenticationCache");
 						if( y < totalCall ){
 			                y++;
 			                getNexcloudCalendar();
@@ -226,15 +258,15 @@ define({
 			now = Date.now()/1000 ;
 			start = Math.round((now-3600)); //Math.round((now - 86400));
 			//console.log(start);
-			end = Math.round((now + 886400));
-			xmlHttp2 = new XMLHttpRequest();
-			xmlHttp2.open("GET", 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/'+name+'?export&accept=jcal&expand=1&start='+start+'&end='+end, true);
+			end = Math.round((now + 86400));
+			var  xmlHttp2 = new XMLHttpRequest();
+			xmlHttp2.open("GET", 'https://anthony@cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/'+name+'?export&accept=jcal&expand=1&start='+start+'&end='+end, true);
 			xmlHttp2.withCredentials = true;
 			xmlHttp2.setRequestHeader("Authorization","Basic "+credentials);
 			
-			xmlHttp2.send(null);
+			xmlHttp2.send();
 			
-			//xmlHttp.overrideMimeType("application/json");
+			xmlHttp2.overrideMimeType("application/json");
 			xmlHttp2.onreadystatechange = function() {
 				if (this.readyState === XMLHttpRequest.DONE) {
 					if (this.status === 0 || this.status === 200) {
@@ -246,22 +278,28 @@ define({
 								e = new vEvent(calendar[i]);
 								if (!isDuplicate(e,vEvents)) vEvents.push (e);
 								vEvents.sort(function (a,b){return a.startDate - b.startDate});
+								vEvents = vEvents.filter (filterFinishedVEvents);
 								processDaysEvents();
 								
 							}
+							document.execCommand("ClearAuthenticationCache");
 							console.log(vEvents);
 						} else {
+							document.execCommand("ClearAuthenticationCache");
 							console.error("Status de la réponse: %d (%s)", this.status, this.statusText);
 						}
 					}
 					else {
+						document.execCommand("ClearAuthenticationCache");
 						console.error('Update calendar: error');
 						console.error(this.status+" "+this.statusText);
 					}
 				}
 			};
 		} 
-		
+		function filterFinishedVEvents(event){
+			return   (nowDate <= event.endDate);
+		}
 		
 		function someCallback(e){
 			console.log(e);

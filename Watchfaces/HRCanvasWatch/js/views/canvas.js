@@ -563,7 +563,7 @@ define({
 					//weather text
 					
 				}
-				canvasDrawer.renderText(ctxContent, textHelper.truncate(weatherValue.weather[0].main, 2), wCoords.text2.x, wCoords.text2.y, wCoords.text2.size, "#c9c9c9", {
+				canvasDrawer.renderText(ctxContent, textHelper.truncateBis(weatherValue.weather[0].main, 8,''), wCoords.text2.x, wCoords.text2.y, wCoords.text2.size, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'left',
 					gradient : true,
