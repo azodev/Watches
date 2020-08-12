@@ -284,7 +284,7 @@ define({
 			}
 		}
 		function getDate() {
-			datetime = tizen.time.getCurrentDateTime();
+			datetime = new Date();
 			
 			hour = datetime.getHours();
 			minute = datetime.getMinutes();
@@ -1091,7 +1091,13 @@ define({
 			weatherInterval = window.setInterval(function(e) {
 				event.fire('updateWeather',e);
 			},intervals.weather
-			);			
+			);	
+			
+			window.setInterval(function(e) {
+				event.fire('filterEvents',e);
+			},300000
+			);	
+			
 			
 			if (pressureSensor.isAvailable()) {
 				pressureSensor.setOptions({

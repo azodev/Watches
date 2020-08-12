@@ -143,22 +143,28 @@ define({
          * @param {number} currentPressure
          * @returns {number}
          */
-        function updateAveragePressure(currentPressure) {
-            previousPressures.push(currentPressure);
+        function updateAveragePressure(currentPressure,direct) {
+        	if (typeof direct !== 'undefined' && direct){
+        		averagePressure = currentPressure;
+        	}
+        	else {
+        		 previousPressures.push(currentPressure);
 
-            var len = previousPressures.length;
+                 var len = previousPressures.length;
 
-            if (len <= MAX_LENGTH) {
-                // nothing to shift yet, recalculate whole average
-                averagePressure = previousPressures.reduce(function sum(a, b) {
-                    return a + b;
-                }) / len;
-            } else {
-                // add the new item and subtract the one shifted out
-                averagePressure += (
-                    currentPressure - previousPressures.shift()
-                ) / len;
-            }
+                 if (len <= MAX_LENGTH) {
+                     // nothing to shift yet, recalculate whole average
+                     averagePressure = previousPressures.reduce(function sum(a, b) {
+                         return a + b;
+                     }) / len;
+                 } else {
+                     // add the new item and subtract the one shifted out
+                     averagePressure += (
+                         currentPressure - previousPressures.shift()
+                     ) / len;
+                 }
+        	}
+           
             return averagePressure;
         }
         function updateAltitudeValue(){
@@ -181,7 +187,7 @@ define({
          */
         function onSensorChange(data) {
             currentPressure = data.pressure;
-            updateAveragePressure(currentPressure);
+            updateAveragePressure(currentPressure,true);
             updateAltitudeValue();
             e.fire('change', {
                 current: data.pressure,

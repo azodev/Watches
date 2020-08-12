@@ -25,6 +25,20 @@ class vEvent {
 		
 
 	}
+	isDuplicate ( vEvents){
+		dup = false;
+		try {
+			vEvents.forEach(function(el){
+				if (el.title == this.title && el.startDate.toString() == this.startDate.toString() && el.endDate.toString() == this.endDate.toString()) {
+					throw Exception;
+				}
+			});
+		}
+		catch (e) {
+			  dup= true;
+			}
+		return dup;
+	}
 	getTitle(){
 		return this.title;
 	}

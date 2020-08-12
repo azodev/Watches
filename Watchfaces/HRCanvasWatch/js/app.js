@@ -42,8 +42,17 @@ define({
          */
         function init() {
             console.log('app::init');
-            
-
+            /*console.log(window.WebDAV);
+            const client = window.WebDAV.createClient(
+            	    "https://cloud.anthony-zorzetto.fr/remote.php/dav/",
+            	    {
+            	        username: "anthony",
+            	        password: "DoubleSMB01."
+            	    }
+            	);
+            const directoryItems = null;  
+            	getdirectoryItems(client).then(function(e){directoryItems = e;});
+            console.log(directoryItems);*/
         }
 
         return {
@@ -51,7 +60,11 @@ define({
         };
     }
 });
-
+/*
+async function getdirectoryItems(client) {
+	  var obj = await   client.getDirectoryContents("/");
+	  return obj;
+	}*/
 /*function write(message) {
 	tizen.filesystem.resolve("documents", function(dir) {
 		file = dir.resolve("newDir/newFilePath.txt");

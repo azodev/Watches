@@ -82,10 +82,6 @@ define({
 		function processDaysEvents(){
 			myEvents = [];
 			vEvents.forEach(function(ev){
-				//if (typeof myEvents[formatDate(ev.startDate)] !== 'undefined') {
-				/*if (myEvents.length == 0){
-					myEvents.push({'day':formatDate(ev.startDate),'events':[]});
-				}*/
 				if (myEvents.map(function(o) { return o.day; }).indexOf(formatDate(ev.startDate)) == -1){
 					myEvents.push({'day':formatDate(ev.startDate),'events':[]});
 				}
@@ -108,8 +104,9 @@ define({
 		function bindEvents() {
 			event.on({
 				'views.radial.update' : function() {
-					accessCalendars(['gmail']);
-				}
+					accessCalendars();
+				},
+				'views.canvas.filterEvents' : handleFilterForFinishedEvents
 			});
 		}
 
@@ -122,9 +119,7 @@ define({
 		function getVEvents(){
 			return vEvents;
 		}
-		function createAjaxes(){
-			xmlHttps.push(new XMLHttpRequest() );
-		}
+		
 		function accessCalendars(names){
 			y=0;
 			calendarNames = names;
@@ -206,67 +201,7 @@ define({
 			
 			
 		}
-		function getNexcloudCalendar(){
-			
-			
-			now = Date.now()/1000 ;
-			start = Math.round((now-3600)+y); //Math.round((now - 86400));
-			//console.log(start);
-			end = Math.round((now + 86400)+y);
-			//xmlHttp = new XMLHttpRequest();
-			xmlHttps[y].open("GET", 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/'+calendarNames[y]+'?export&accept=jcal&expand=1&start='+start+'&end='+end, true);
-			xmlHttps[y].withCredentials = true;
-			xmlHttps[y].setRequestHeader("Authorization","Basic "+credentials);
-			
-			xmlHttps[y].send();
-			
-			xmlHttps[y].overrideMimeType("application/json");
-			xmlHttps[y].onreadystatechange = function() {
-				if (this.readyState === XMLHttpRequest.DONE) {
-					if (this.status === 0 || this.status === 200) {
-						if (xmlHttps[y].responseText) {
-							// Parses responseText to JSON
-							json = JSON.parse(this.responseText);
-							calendar = json[2];
-							for (i=0;i<calendar.length;i++){
-								e = new vEvent(calendar[i]);
-								if (!isDuplicate(e,vEvents)) vEvents.push (e);
-								vEvents.sort(function (a,b){return a.startDate - b.startDate});
-								vEvents = vEvents.filter (filterFinishedVEvents);
-								processDaysEvents();
-								
-							}
-							console.log('cal success');
-							if( y < totalCall ){
-				                y++;
-				                getNexcloudCalendar();
-				            }
-							else return;
-							
-						} else {
-							console.error("Status de la réponse: %d (%s)", this.status, this.statusText);
-							event.fire('error','Cal: '+calendar[i]+" "+this.status);
-							if( y < totalCall ){
-				                y++;
-				                getNexcloudCalendar();
-				            }
-							else return;
-							
-						}
-					}
-					else {
-						console.error('Update calendar: error');
-						event.fire('error','Cal: '+calendar[i]+" "+this.status);
-						console.error(this.status+" "+this.statusText);
-						if( y < totalCall ){
-			                y++;
-			                getNexcloudCalendar();
-			              }
-						else return;
-					}
-				}
-			};
-		} 
+		
 		function wasRequestSuccessful(status) {
 			return status >= 200 && status < 300;
 		}
@@ -280,7 +215,7 @@ define({
 				const  xhr = new XMLHttpRequest();
 				if (auth===true){
 					
-					xhr.open("GET", 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/alten?export&expand=1&accept=jcal&start='+start+'&end='+end,true);
+					xhr.open("GET", 'https://cloud.anthony-zorzetto.fr/clrs/alten.json',true);
 					xhr.withCredentials = true;
 					xhr.setRequestHeader("Authorization","Basic "+credentials);
 
@@ -341,56 +276,17 @@ define({
 			calendar = json[2];
 			for (i=0;i<calendar.length;i++){
 				e = new vEvent(calendar[i]);
-				if (!isDuplicate(e,vEvents)) vEvents.push (e);
+				if (!e.isDuplicate(vEvents)) vEvents.push (e);
 				vEvents.sort(function (a,b){return a.startDate - b.startDate});
-				vEvents = vEvents.filter (filterFinishedVEvents);
+				handleFilterForFinishedEvents();
 				processDaysEvents();
 				
 			}
 			console.log(vEvents);
 		}
-		function getNexcloudCalendar2(name){
-			
-			
-			now = Date.now()/1000 ;
-			start = Math.round((now-3600)); //Math.round((now - 86400));
-			//console.log(start);
-			end = Math.round((now + 86400));
-			xmlHttp2 = new XMLHttpRequest();
-			xmlHttp2.open("GET", 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/'+name+'?export&accept=jcal&expand=1&start='+start+'&end='+end,true);
-			xmlHttp2.withCredentials = true;
-			xmlHttp2.setRequestHeader("Authorization","Basic "+credentials);
-			
-			xmlHttp2.send();
-			
-			//xmlHttp2.overrideMimeType("application/json");
-			xmlHttp2.onreadystatechange = function() {
-				if (this.readyState === XMLHttpRequest.DONE) {
-					if (this.status === 0 || this.status === 200) {
-						if (xmlHttp2.responseText) {
-							// Parses responseText to JSON
-							json = JSON.parse(this.responseText);
-							calendar = json[2];
-							for (i=0;i<calendar.length;i++){
-								e = new vEvent(calendar[i]);
-								if (!isDuplicate(e,vEvents)) vEvents.push (e);
-								vEvents.sort(function (a,b){return a.startDate - b.startDate});
-								vEvents = vEvents.filter (filterFinishedVEvents);
-								processDaysEvents();
-								
-							}
-							console.log(vEvents);
-						} else {
-							console.error("Status de la réponse: %d (%s)", this.status, this.statusText);
-						}
-					}
-					else {
-						console.error('Update calendar: error');
-						console.error(this.status+" "+this.statusText);
-					}
-				}
-			};
-		} 
+		function handleFilterForFinishedEvents(){
+			vEvents = vEvents.filter (filterFinishedVEvents);
+		}
 		function getNexcloudCalendar3(name){
 			
 			
@@ -413,9 +309,9 @@ define({
 							calendar = json[2];
 							for (i=0;i<calendar.length;i++){
 								e = new vEvent(calendar[i]);
-								if (!isDuplicate(e,vEvents)) vEvents.push (e);
+								if (!e.isDuplicate(vEvents)) vEvents.push (e);
 								vEvents.sort(function (a,b){return a.startDate - b.startDate});
-								vEvents = vEvents.filter (filterFinishedVEvents);
+								handleFilterForFinishedEvents();
 								processDaysEvents();
 								
 							}
