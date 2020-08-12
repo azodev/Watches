@@ -26,17 +26,23 @@ class vEvent {
 
 	}
 	isDuplicate ( vEvents){
-		dup = false;
+		let dup = false;
+		console.log(vEvents);
 		try {
-			vEvents.forEach(function(el){
-				if (el.title == this.title && el.startDate.toString() == this.startDate.toString() && el.endDate.toString() == this.endDate.toString()) {
-					throw Exception;
-				}
-			});
+			if (vEvents.length > 0){
+				vEvents.forEach(function(el){
+					if (el.title == this.title && el.startDate.toString() == this.startDate.toString() && el.endDate.toString() == this.endDate.toString()) {
+						throw Exception;
+					}
+				});
+			}
+			
 		}
 		catch (e) {
+			  console.log(e);
 			  dup= true;
 			}
+		console.log('not dup');
 		return dup;
 	}
 	getTitle(){

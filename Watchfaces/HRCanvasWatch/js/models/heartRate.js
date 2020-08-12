@@ -165,20 +165,36 @@ define({
 		function start() {
 			
 //			console.error('Start HR Sensor function');
+			/*if (!started) {
+				started = true;
+				
+				resetData();
+				console.log('Starting HR Sensor');
+				heartRateSensor.start(CONTEXT_TYPE, handleHeartRateInfo, function onError(error) {
+					console.error('error: ', error.message);
+					// event.fire('HRFound', false);
+				}, options);
+			}*/
+			
+			doStart().then(function (){
+				console.log('promise ok');
+			}).catch(function (){
+				console.log('promise error');
+			});
+			
+		}
+		
+		async function doStart(){
 			if (!started) {
 				started = true;
 				
 				resetData();
 				console.log('Starting HR Sensor');
-				heartRateSensor.start(CONTEXT_TYPE, function onChange(heartRateInfo) {
-					handleHeartRateInfo(heartRateInfo);
-					
-				}, function onError(error) {
+				await heartRateSensor.start(CONTEXT_TYPE, handleHeartRateInfo, function onError(error) {
 					console.error('error: ', error.message);
 					// event.fire('HRFound', false);
 				}, options);
 			}
-			
 		}
 
 		/**

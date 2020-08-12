@@ -108,7 +108,7 @@ define({
 
 		var pressure = 0;
 		var altitude = 0;
-		var locationInterval = null, pedometerInterval = null, hrInterval = null, weatherInterval = null, hrIntervalStop = null;
+		var locationInterval = null, pedometerInterval = null, hrInterval = null, weatherInterval = null, hrIntervalStop = null, pressureInterval = null;
 		var errorMsg = '';
 		var animTimeout, animRequest;
 		
@@ -128,7 +128,7 @@ define({
 			location : 120000,
 			heartRate : 10000,
 			weather : 3600000,
-			pressure : 11000
+			pressure : 60000
 		};
 		var grd,grdAmbiant, angle, i, j, startTime, now, then, elapsed, sinceStart, frame = 0, currentFps, isAmbientMode, rotate = false;
 		var motion = null;
@@ -156,7 +156,7 @@ define({
 		var secondsPassed = 0;
 		var oldTimeStamp = 0;
 		var miniCalendarDisplayed = true, miniWeatherDisplayed= true;
-		var widgetFullScreenDiplayed = false; 
+		var widgetFullScreenDiplayed = false, backendLoaded = false; 
 		var baroDisplayed = true;
 		var timeDisplayed = true;
 		var heartRateDisplayed=true;
@@ -198,11 +198,31 @@ define({
 				}
 				animateWeatherSection();
 			}
+			else if (calendarShape.isInSurface(clickPos,0)){
+				console.log('Click fade');
+				//canvasDrawer.startFade();
+				//canvasDrawer.startShow();
+			}
 			
 		}
 		function animateWeatherSection(){
 			//weatherSectionAnimating = true;
 			wShape.animate();
+		}
+		function handleWatchFadingAnimation(){
+			if (canvasDrawer.isFading()){
+				canvasDrawer.fade(secondsPassed,1);
+			}
+			
+		}
+		function handleWatchShowingAnimation(){
+			if (canvasDrawer.isShowing()){
+				canvasDrawer.show(secondsPassed,1);
+				if (!canvasDrawer.isShowing()){
+					//backendLoaded = true;
+				}
+			}
+			
 		}
 		function handleWeatherSectionAnimation(){
 			if (wShape.isAnimating()){
@@ -309,7 +329,8 @@ define({
 		    oldTimeStamp = timeStamp;
 		    
 		    handleWeatherSectionAnimation();
-		    
+		    handleWatchFadingAnimation();
+		    handleWatchShowingAnimation();
 			// if enough time has elapsed, draw the next frame
 
 			date = datetime.getDate();
@@ -356,7 +377,7 @@ define({
 			
 			
 			canvasDrawer.renderBackground(ctxContent,ctxContent.canvas.width, ctxContent.canvas.height, "black",{gradient:true,motion:motion});
-			canvasDrawer.renderCircle(ctxContent,  new Circle(center.x,center.y,watchRadius -2) , "#000000",5);
+			canvasDrawer.renderCircle(ctxContent,  new Circle(center.x,center.y,watchRadius -2) , "#000000",5,true);
 			//canvasDrawer.renderGrid (ctxContent,  "#000000",2,{motion:motion});
 			/*if (drawTicks === true){
 				canvasDrawer.renderCircle(ctxContent, center, watchRadius *1, "#000000",4);
@@ -378,7 +399,12 @@ define({
 			
 			
 			
-			if (!widgetFullScreenDiplayed){
+			if (!widgetFullScreenDiplayed && backendLoaded){
+				canvasDrawer.renderCircle(ctxContent, appDrawerShape, "#000000",2,true);
+				canvasDrawer.roundRect(ctxContent, aShape1, 3, false, true, "#000000", "#000000");
+				canvasDrawer.roundRect(ctxContent, aShape2, 3, false, true, "#000000", "#000000");
+				canvasDrawer.roundRect(ctxContent, aShape3, 3, false, true, "#000000", "#000000");
+				canvasDrawer.roundRect(ctxContent, aShape4, 3, false, true, "#000000", "#000000");
 				if (baroDisplayed){
 					canvasDrawer.renderTextGradient(ctxContent, 'Altitude :', center.x - (watchRadius * 0.77), center.y - (watchRadius * 0.17), 14, "#c9c9c9", {
 						font : 'FutureNow',
@@ -457,10 +483,10 @@ define({
 					//}
 					
 				}
-				
+				canvasDrawer.renderCircle(ctxContent, new Circle(center.x,center.y + (watchRadius * 0.67),28), "#000000",1.5,true);
 				if (heartRateDisplayed &&  heartRateFound && heartRate.getData().rate !== null) {
 					
-					canvasDrawer.renderCircle(ctxContent, new Circle(center.x,center.y + (watchRadius * 0.67),28), "#000000",1.5,true);
+					
 					canvasDrawer.renderText(ctxContent, heartRate.getData().rate, center.x , center.y + (watchRadius * 0.67), 25, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'center',
@@ -484,11 +510,7 @@ define({
 			
 			
 			
-			canvasDrawer.renderCircle(ctxContent, appDrawerShape, "#000000",2,true);
-			canvasDrawer.roundRect(ctxContent, aShape1, 3, false, true, "#000000", "#000000");
-			canvasDrawer.roundRect(ctxContent, aShape2, 3, false, true, "#000000", "#000000");
-			canvasDrawer.roundRect(ctxContent, aShape3, 3, false, true, "#000000", "#000000");
-			canvasDrawer.roundRect(ctxContent, aShape4, 3, false, true, "#000000", "#000000");
+			
 			/*
 			radialButton = new Image();
 			radialButton.onload = function() {
@@ -522,7 +544,7 @@ define({
 				wCoords = { text1 : {x:center.x - (watchRadius * 0.38),y:center.y + (watchRadius * 0.15),size: 15},
 						   temp : {x:center.x - (watchRadius * 0.38),y:center.y + (watchRadius * 0.24),size: 16},
 						   city : {x:center.x - (watchRadius * 0.65),y:center.y + (watchRadius * 0.33),size: 12},
-						   text2: {x:center.x - (watchRadius * 0.65),y:center.y + (watchRadius * 0.40),size: 14},
+						   text2: {x:center.x - (watchRadius * 0.67),y:center.y + (watchRadius * 0.40),size: 13},
 						   icon : {x:center.x - (watchRadius * 0.58),y:center.y + (watchRadius * 0.14),size: 52}
 				};
 			}
@@ -530,7 +552,7 @@ define({
 				wCoords = { text1 : {x:center.x - (watchRadius * 0.32),y:center.y + (watchRadius * 0.16),size: 21},
 						   temp : {x:center.x - (watchRadius * 0.30),y:center.y + (watchRadius * 0.28),size: 22},
 						   city : {x:center.x - (watchRadius * 0.65),y:center.y + (watchRadius * 0.33),size: 12},
-						   text2: {x:center.x - (watchRadius * 0.66),y:center.y + (watchRadius * 0.39),size: 18},
+						   text2: {x:center.x - (watchRadius * 0.67),y:center.y + (watchRadius * 0.39),size: 18},
 						   icon : {x:center.x - (watchRadius * 0.57),y:center.y + (watchRadius * 0.14),size: 62}
 				};
 			}
@@ -561,9 +583,9 @@ define({
 					  center.x + (watchRadius * 0.45), center.y + (watchRadius *  0.30), 14, "#c9c9c9", { font : 'FutureNow', align : 'center'  });*/
 					 
 					//weather text
-					
 				}
-				canvasDrawer.renderText(ctxContent, textHelper.truncateBis(weatherValue.weather[0].main, 8,'...'), wCoords.text2.x, wCoords.text2.y, wCoords.text2.size, "#c9c9c9", {
+				
+				canvasDrawer.renderText(ctxContent, textHelper.truncateBis(weatherValue.weather[0].main, (!forecastMode)?8:12,'...'), wCoords.text2.x, wCoords.text2.y, wCoords.text2.size, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'left',
 					gradient : true,
@@ -877,12 +899,17 @@ define({
 		}
 		
 		function startSensors(){
+			
+			if (motionSensor.isAvailable() && !motionSensor.isStarted()) {
+				motionSensor.start();
+			}
 			setTimeout(function (e){
-				if (motionSensor.isAvailable() && !motionSensor.isStarted()) {
-					motionSensor.start();
-				}
 				if (pressureSensor.isAvailable() && !pressureSensor.isStarted()) {
 					pressureSensor.start();
+					pressureInterval = window.setInterval(function(e) {
+						pressureSensor.start();
+					},intervals.pressure
+					);
 				}
 			},500);
 			
@@ -893,6 +920,7 @@ define({
 			}
 			if (pressureSensor.isAvailable() && pressureSensor.isStarted()) {
 				pressureSensor.stop();
+				window.clearInterval(pressureInterval);
 			}
 		}
 		
@@ -914,6 +942,7 @@ define({
 					activateMode("Ambient");
 				} else {
 					// Rendering normal case
+					canvasDrawer.startShow(); 
 					activateMode("Normal");
 
 				}
@@ -928,6 +957,7 @@ define({
 						
 					} else {
 						// Rendering normal case
+						canvasDrawer.startShow(); 
 						activateMode("Normal");
 					}
 				}
@@ -1001,11 +1031,6 @@ define({
 		function mkLocation() {
 			locationModel.start();
 			loopLocation();
-			/*window.setTimeout(function() {
-				locationModel.stop();
-			}, 20000 // stop checking after 20 seconds
-			);*/
-
 			
 		}
 		function loopLocation(){
@@ -1050,7 +1075,8 @@ define({
 					particleColors = ["#ff5151","#fc7b7b","#f9d9d9"];
 				    break;
 				  default:
-					  particleColors = ["#694FB9","#6094ee","#3CFBFF"];
+					particleColors = ["#694FB9","#6094ee","#3CFBFF"];
+				  	break;
 				}
 			
 		}
@@ -1068,25 +1094,55 @@ define({
 			then = Date.now();
 			startTime = then;
 			bindEvents();
-			setDefaultVariables();
 			
-			mkHR();
-			mkLocation();
 			if (tizen.preference.exists('theme')) {
 				theme = tizen.preference.getValue('theme');
 			}
+			
+			setDefaultVariables();
 			changeParticlesColor(theme);
 			
-			//pedometerSensor.start();
+			const loader = new Promise((resolve, reject)=> {
 			
-			if (motionSensor.isAvailable()) {
-				motionSensor.setOptions({
-					sampleInterval : 50,
-					maxBatchCount : 1000
-				});
-				motionSensor.setChangeListener();
-				motionSensor.start();
-			}
+			//pedometerSensor.start();
+				mkHR();
+				mkLocation();
+				
+				if (motionSensor.isAvailable()) {
+					motionSensor.setOptions({
+						sampleInterval : 10,
+						maxBatchCount : 1000
+					});
+					motionSensor.setChangeListener();
+					motionSensor.start();
+				}
+				if (pressureSensor.isAvailable()) {
+					pressureSensor.setOptions({
+						sampleInterval : 1000,
+						maxBatchCount : intervals.pressure
+					});
+					pressureSensor.setChangeListener();
+					pressureSensor.start();
+				}
+				sysInfo.checkBattery();
+				calendarModel.accessCalendars();
+				
+				
+				setTimeout(() => {
+				    resolve('loaded');
+				  }, 500);
+			});
+			loader.then (function (resolve){
+				backendLoaded = true;
+				
+				canvasDrawer.startShow(); 
+			});
+			
+			
+			pressureInterval = window.setInterval(function(e) {
+				pressureSensor.start();
+			},intervals.pressure
+			);
 			
 			weatherInterval = window.setInterval(function(e) {
 				event.fire('updateWeather',e);
@@ -1097,17 +1153,6 @@ define({
 				event.fire('filterEvents',e);
 			},300000
 			);	
-			
-			
-			if (pressureSensor.isAvailable()) {
-				pressureSensor.setOptions({
-					sampleInterval : 1000,
-					maxBatchCount : intervals.pressure
-				});
-				pressureSensor.setChangeListener();
-				pressureSensor.start();
-			}
-			sysInfo.checkBattery();
 			
 			//calendarModel.accessCalendars(['gmail']);
 			
@@ -1133,20 +1178,10 @@ define({
 				  time_to_recreate = true;
 				}, max_time);
 			
-			
 			animRequest = window.requestAnimationFrame(drawWatchContent);
-			
-			
-/*
-			window.addEventListener("deviceorientation", function(e) {
-			  // remember to use vendor-prefixed transform property
-			  elem.style.transform =
-			    " rotateZ(" + ( e.alpha - 180 ) + "deg) " +
-			    " rotateX(" + e.beta + "deg) " +
-			    " rotateY(" + ( -e.gamma ) + "deg)";
-			},true);*/
-		}
 
+		}
+		
 		return {
 			init : init
 		};

@@ -79,7 +79,7 @@ define({
 
 		    return [year, month, day].join('-');
 		}
-		function processDaysEvents(){
+		function buildDaysEvents(){
 			myEvents = [];
 			vEvents.forEach(function(ev){
 				if (myEvents.map(function(o) { return o.day; }).indexOf(formatDate(ev.startDate)) == -1){
@@ -120,18 +120,18 @@ define({
 			return vEvents;
 		}
 		
-		function accessCalendars(names){
-			y=0;
-			calendarNames = names;
-			xmlHttps = [];
+		function accessCalendars(){
+			
 			nowDate = new Date();
-			//calendarNames.forEach(createAjaxes ) 
-			//totalCall = calendarNames.length - 1;
-			//fetchNextCloudCalendar(); 
-			//getNexcloudCalendar();  
-			//getNexcloudCalendar2("alten"); 
-			//fetchNextCloudCalendar();
-			doPromise(true);
+			
+			doPromise('alten').then( function (){
+				doPromise('gmail');
+			}
+					
+			).then(function(){
+				handleFilterForFinishedEvents();
+				
+			});
 			
 			
 			
@@ -205,26 +205,18 @@ define({
 		function wasRequestSuccessful(status) {
 			return status >= 200 && status < 300;
 		}
-		function doPromise(auth){
-			var p1 = new Promise((resolve, reject) => {
+		function doPromise(name){
+			let p1 = new Promise((resolve, reject) => {
 				
 				now = Date.now()/1000 ;
 				start = Math.round((now-3600)); //Math.round((now - 86400));
 				//console.log(start);
 				end = Math.round((now + 86400)); 
 				const  xhr = new XMLHttpRequest();
-				if (auth===true){
-					
-					xhr.open("GET", 'https://cloud.anthony-zorzetto.fr/clrs/alten.json',true);
-					xhr.withCredentials = true;
-					xhr.setRequestHeader("Authorization","Basic "+credentials);
+				xhr.open("GET", 'https://cloud.anthony-zorzetto.fr/clrs/'+name+'.json',true);
 
-				}
-				else {
-					xhr.open("GET", 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/alten?export&expand=1&accept=jcal&start='+start+'&end='+end,true);
-					xhr.withCredentials = false;
-					
-				} 
+
+
 				
 				xhr.onreadystatechange = () => {
 					if (xhr.readyState !== 4) {
@@ -246,51 +238,41 @@ define({
 						return;
 					}
 
-					if (xhr.status === 207) {
-						responseBody = this._parseMultiStatusResponse(responseBody);
-						if (parseInt(assignHeaders['Depth'], 10) === 0 && method === 'PROPFIND') {
-							responseBody = responseBody[Object.keys(responseBody)[0]];
-						}
-					}
-
+					
 					resolve(xhr.responseText);
 				};
 
-				xhr.onerror = () => reject(null);
+				xhr.onerror = () => reject('error');
 
-				xhr.onabort = () => reject(null);
+				xhr.onabort = () => reject('aborted');
 				xhr.send();
 			});
 			p1.then(handleResponse)
+			
 			.catch(
 					// Promesse rejetée
-						function() { 
-							if (auth)
-								getNexcloudCalendar3('alten');
+					
+						function(message) {
+							console.log(message);
 						});
-			
+			return p1;
 		}
+		
 		function handleResponse(responseText){
 			console.log('calendar');
 			json = JSON.parse(responseText);
-			console.log(json);
 			calendar = json[2];
 			for (i=0;i<calendar.length;i++){
 				e = new vEvent(calendar[i]);
-				if (!e.isDuplicate(vEvents)) vEvents.push (e);
+				if (!isDuplicate(e,vEvents)) vEvents.push (e);
 				vEvents.sort(function (a,b){return a.startDate - b.startDate});
-				handleFilterForFinishedEvents();
-				processDaysEvents();
-				
 			}
-			console.log(vEvents);
 		}
 		function handleFilterForFinishedEvents(){
 			vEvents = vEvents.filter (filterFinishedVEvents);
+			buildDaysEvents();
 		}
 		function getNexcloudCalendar3(name){
-			
-			
 			now = Date.now()/1000 ;
 			start = Math.round((now-3600)); //Math.round((now - 86400));
 			//console.log(start);
@@ -313,7 +295,7 @@ define({
 								if (!e.isDuplicate(vEvents)) vEvents.push (e);
 								vEvents.sort(function (a,b){return a.startDate - b.startDate});
 								handleFilterForFinishedEvents();
-								processDaysEvents();
+								buildDaysEvents();
 								
 							}
 							console.log(vEvents);

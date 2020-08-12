@@ -54,7 +54,7 @@ define({
 		 * @private
 		 * @const {number}
 		 */
-		MAX_LENGTH = 3,
+		MAX_LENGTH = 4,
 
 		/**
 		 * Reference to the sensor service.
@@ -197,12 +197,7 @@ define({
 				z : SensorAccelerationData.z
 			};
 			updateAverageMotion(currentMotion);
-			/*elem.style.transform =
-			    " rotateZ(" + ( currentMotion.accelerationIncludingGravity.z - 180 ) + "deg) " +
-			    " rotateX(" + currentMotion.accelerationIncludingGravity.x + "deg) " +
-			    " rotateY(" + ( -currentMotion.accelerationIncludingGravity.y ) + "deg)";
-			*/
-			//gyroscopeSensor.getGyroscopeRotationVectorSensorData(onGetSuccessCB, onerrorCB);
+
 			e.fire('change', getSensorValueAvg());
 		}
 		function setCurrentMotionValue(data) {
@@ -294,16 +289,19 @@ define({
 				event.fire('error', {
 					type : 'notavailable'
 				});
-			} else {
+			} 
+			else {
 				try {
 					motionSensor = sensorService.getDefaultSensor(SENSOR_TYPE);
 					motionSensor.getMotionSensorData(setCurrentMotionValue);
-				} catch (error) {
+				} 
+				catch (error) {
 					if (error.type === ERROR_TYPE_NOT_SUPPORTED) {
 						event.fire('error', {
 							type : 'notsupported'
 						});
-					} else {
+					} 
+					else {
 						event.fire('error', {
 							type : 'unknown'
 						});
@@ -312,41 +310,10 @@ define({
 			}
 			elem = document.querySelector("div.menuHolder"); 
 		
-			//gyroscopeSensor = tizen.sensorservice.getDefaultSensor("GYROSCOPE_ROTATION_VECTOR");
-			//gyroscopeSensor.start(onsuccessCB);
-			
-		}
-		function onGetSuccessCB(sensorData)
-		{
-			
-		  /*console.log("######## Get the gyroscope sensor data ########");*/
-		  /*console.log("x: " + sensorData.x);
-		  console.log("y: " + sensorData.y);
-		  console.log("z: " + sensorData.z);*/
-			/*console.log("x: " + sensorData.x);
-			  console.log("y: " + sensorData.y);
-			  console.log("z: " + sensorData.z);*/
-			/*setTimeout(function (e){
-				elem.style.transform = 
-					" rotateZ(" + ( sensorData.z - 180 ) + "deg) " +
-			    " rotateX(" + sensorData.x + "deg) " +
-			    " rotateY(" + ( -sensorData.y ) + "deg)";
-			},50);*/
-				  
-			
-			
-		}
 
-		function onerrorCB(error)
-		{
-		  console.log("Error occurred");
+			
 		}
-
-		function onsuccessCB()
-		{
-		  //console.log("Sensor start");
-		  gyroscopeSensor.getGyroscopeRotationVectorSensorData(onGetSuccessCB, onerrorCB);
-		}
+		
 
 		return {
 			init : init,
@@ -357,8 +324,7 @@ define({
 			setChangeListener : setChangeListener,
 			getSensorValue : getSensorValue,
 			getSensorValueAvg : getSensorValueAvg,
-			setOptions : setOptions,
-			onsuccessCB : onsuccessCB
+			setOptions : setOptions
 		};
 	}
 

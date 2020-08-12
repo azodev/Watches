@@ -189,7 +189,7 @@ define({
 				}
 			}
 			console.log('doUpdate');
-			updateWeather();
+			//updateWeather();
 			updateWeatherP();
 		}  
 		/**
@@ -241,7 +241,7 @@ define({
 			xmlHttp.send(null);
 			console.log('weather request done');
 		}
-		async function myFetch() {
+		async function fetchWeather() {
 			url = API_URL_WEATHER + outArray.join('&');
 			let response = await fetch(url);
 			
@@ -254,13 +254,72 @@ define({
 			  }
 		}
 		function updateWeatherP(){
-			myFetch().then((json) => {
-				console.log(myBlob);
+			fetchWeather().then((json) => {
+				
+				weatherInform = json;
+
+				now = Math.round(Date.now() / 1000);
+				
+				day = (now >= weatherInform.sys.sunrise && now <= weatherInform.sys.sunset) ? true : false;
+				// Gets icon code from information
+				weatherInform.day = day;
+				weatherInform.lastWeatherCallDate = now;
+				//console.debug(weatherInform);
+				// Gets weather string from information
+				weatherFound = true;
+				event.fire('found', weatherInform);
+				console.log('Update Weather: Found');
 				  
 				}).catch(e => {
-			  console.log('There has been a problem with your fetch operation: ' + e.message);
+					console.log('There has been a problem with your fetch operation: ' + e.message);
 			});
 		}
+		async function fetchForecast() {
+			url = API_URL_FORECAST + outArray.join('&');
+			let response = await fetch(url);
+			
+			  if (!response.ok) {
+			    throw new Error('HTTP error! status: '+response.status);
+			  } else {
+				  return await response.json();
+			   
+			  }
+		}
+		function updateForecastP(){
+			fetchForecast().then((json) => {
+				forecastInform = json;
+				
+				//day = (now >= forecastInform.sys.sunrise && now <= forecastInform.sys.sunset) ? true : false;
+				// Gets icon code from information
+				//weatherInform.day = day;
+				
+				let sunriseHour = dateHelper.roundMinutes(new Date( weatherInform.sys.sunrise*1000)).getHours();
+				let sunsetHour = dateHelper.roundMinutes(new Date( weatherInform.sys.sunset*1000)).getHours();
+				for (let i = 0; i < forecastInform.list.length ; i++ ){
+					hour = new Date( forecastInform.list[i].dt * 1000).getHours();
+					
+					day = (
+							hour >= sunriseHour
+							&& hour < sunsetHour
+							) ? true : false;
+					
+					forecastInform.list[i].day = day;
+				}
+				forecastInform.lastWeatherCallDate = now;
+				//console.debug(forecastInform);
+				// Gets weather string from information
+				forecastFound = true;
+				event.fire('forecast_found', forecastInform);
+				console.log('Update forecast: Found');
+				  
+				}).catch(e => {
+					console.error('Update forecast: error');
+					console.log('There has been a problem with your fetch operation: ' + e.message);
+			});
+		}
+		
+		
+		
 		function updateForecast() {
 			/**
 			 * xmlHttp - XMLHttpRequest object for get information about weather
@@ -358,7 +417,7 @@ define({
 				'models.location.found' : function() {
 					onPositionFound(true);
 				},
-				'models.weather.found' : updateForecast,
+				'models.weather.found' : updateForecastP,
 				'models.location.distanceChange' : onDistanceChange,
 				'views.main.updateWeather':onUpdateTriggered,
 				'views.radial.update': function(e) {

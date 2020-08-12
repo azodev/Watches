@@ -34,7 +34,7 @@ define({
 
 		var center, event = req.core.event;
 		var radius, centerX, centerY, dxi, dyi, dxf, dyf, textdate, font, align, angle = 0, radiusArc, 
-		indexX = 0, rotate = false, gradient = null, gradientLinear = null, doGradient = false, gridGradient = null;
+		indexX = 0, rotate = false, gradient = null, gradientLinear = null, doGradient = false, gridGradient = null , watchOpacity = 1, animating = false, fading = false,showing = false;
 		var radialGradient = null;
 		var coords = {
 			x : 0,
@@ -79,6 +79,7 @@ define({
 		var opacity = false;
 		var theme= 'ice';
 		var grdAmbiant = null;
+		var timePassed = 0;
 
 		/**
 		 * Renders a circle with specific center, radius, and color
@@ -91,6 +92,56 @@ define({
 		 * @param {string}
 		 *            color - the color of the circle
 		 */
+		function setOpacity(opacity){
+			watchOpacity = opacity;
+		}
+		function startFade(){
+			fading = true;
+			timePassed = 0;
+			watchOpacity = 1;
+			console.log('Start fade');
+			
+		} 
+		function isFading(){
+			return fading;
+		}
+		function fade(secondsPassed, duration ){
+			if (fading === true){
+				secondsPassed = Math.min(secondsPassed, 0.05);
+				timePassed += secondsPassed;
+				setOpacity(1- ( timePassed/duration));
+				if (watchOpacity <= 0) {
+					fading = false;
+					watchOpacity = 0;
+					timePassed = 0;
+				}
+			}
+		}
+		function startShow(){
+			showing = true;
+			timePassed = 0;
+			watchOpacity = 0;
+			console.log('Start show');
+			
+		} 
+		function isShowing(){
+			return showing;
+		}
+		function show(secondsPassed, duration ){
+			if (showing === true){
+				console.log(watchOpacity);
+				secondsPassed = Math.min(secondsPassed, 0.05);
+				timePassed += secondsPassed;
+				setOpacity( ( timePassed/duration));
+				console.log(watchOpacity);
+				if (watchOpacity >= 1) {
+					showing = false;
+					watchOpacity = 1;
+					timePassed = 0;
+				}
+			}
+		}
+		
 		function renderGrid(context, color, width, options) {
 			context.save();
 
@@ -185,15 +236,15 @@ define({
 			context.restore();
 
 		}
-		function renderCircle(context, CircleShape, color, width,opacity) {
+		function renderCircle(context, CircleShape, color, width,exclude) {
 			context.save();
 			context.beginPath();
 			context.lineWidth = width;
 			if (gradientLinear !== null) {
 				color = gradientLinear;
 			}
-			if (typeof opacity === 'undefined') {
-				opacity = false;
+			if (typeof exclude === 'undefined') {
+				let exclude = false;
 			}
 			/*
 			context.shadowOffsetX = 0;
@@ -204,11 +255,14 @@ define({
 			*/
 			context.strokeStyle = color;
 			context.arc(CircleShape.getCenter().x, CircleShape.getCenter().y, CircleShape.getRadius(), 0, 2 * Math.PI);
-			if (opacity == true){
+			/*if (opacity == true){
 				context.fillStyle = '#000000';
 				context.globalAlpha = 0.5;
 			    context.fill();
 			    context.globalAlpha = 1;
+			}*/
+			if (!exclude){
+				context.globalAlpha = watchOpacity;
 			}
 			
 			context.stroke();
@@ -329,8 +383,9 @@ define({
 			}
 			if (gradientLinear !== null) {
 				strokeColor = gradientLinear;
-				context.globalAlpha = alpha;
+				//context.globalAlpha = alpha;
 			}
+			context.globalAlpha = watchOpacity;
 			if (stroke) {
 				context.strokeStyle = strokeColor;
 				context.stroke();
@@ -431,6 +486,7 @@ define({
 			context.textAlign = align;
 			context.textBaseline = "middle";
 			doGradientOrColor(context, color, options);
+			context.globalAlpha = watchOpacity;
 			context.fillText(text, x, y);
 			// context.closePath();
 			context.restore();
@@ -458,7 +514,7 @@ define({
 
 			context.font = textSize + 'px "' + font + '"';
 			doGradientOrColor(context, color, options);
-
+			context.globalAlpha = watchOpacity;
 			context.textAlign = align;
 			context.textBaseline = "middle";
 			context.fillText(text, x, y);
@@ -502,7 +558,6 @@ define({
 			textdate = (date.second < 10) ? '0' + date.second : date.second;
 			indexX += textSize;
 			context.fillText(textdate, indexX, y);
-
 			context.closePath();
 			context.restore();
 		}
@@ -525,7 +580,7 @@ define({
 			context.textAlign = "right";
 			context.textBaseline = "middle";
 			doGradientOrColor(context, color, options);
-
+			context.globalAlpha = watchOpacity;
 			indexX += x;
 			textdate = date.hour;
 			context.fillText(textdate, indexX, y);
@@ -545,8 +600,9 @@ define({
 			textdate = (date.minute < 10) ? '0' + date.minute : date.minute;
 			indexX += textSize * 0.8;
 			context.fillText(textdate, indexX, y);
+			
 			context.closePath();
-
+			
 			context.restore();
 		}
 		function renderWeather(context, text, x, y, textSize, color) {
@@ -557,6 +613,7 @@ define({
 			context.textBaseline = "middle";
 			context.fillStyle = color;
 			context.fillText(text, x, y);
+			context.globalAlpha = watchOpacity;
 			context.closePath();
 			context.restore();
 		}
@@ -759,7 +816,14 @@ define({
 			renderGrid : renderGrid,
 			getRadialGradientCoords : getRadialGradientCoords,
 			changeTheme:changeTheme,
-			getAmbiantGradient:getAmbiantGradient
+			getAmbiantGradient:getAmbiantGradient,
+			setOpacity:setOpacity,
+			startFade:startFade,
+			fade:fade,
+			isFading:isFading,
+			startShow:startShow,
+			show:show,
+			isShowing:isShowing
 		};
 	}
 });

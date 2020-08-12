@@ -194,6 +194,7 @@ define({
                 average: averagePressure,
                 altitude: altitude
             });
+            stop();
         }
 
         /**
@@ -210,6 +211,7 @@ define({
         function stop(){
         	pressureSensor.stop();
         	isEnable = false;
+        	console.log( 'stop pressure sensor');
         }
         function isStarted(){
         	return isEnable;
