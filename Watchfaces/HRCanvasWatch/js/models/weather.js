@@ -190,6 +190,7 @@ define({
 			}
 			console.log('doUpdate');
 			updateWeather();
+			updateWeatherP();
 		}  
 		/**
 		 * Updates weather icon, status and text.
@@ -234,13 +235,31 @@ define({
 				}
 
 			};
-			// event.fire('error', API_URL_WEATHER+outArray.join('&'));
-			// console.error(API_URL_WEATHER+outArray.join('&'));
 			url = API_URL_WEATHER + outArray.join('&');
 			xmlHttp.open("GET", url, true);
 
 			xmlHttp.send(null);
 			console.log('weather request done');
+		}
+		async function myFetch() {
+			url = API_URL_WEATHER + outArray.join('&');
+			let response = await fetch(url);
+			
+			  if (!response.ok) {
+			    throw new Error('HTTP error! status: '+response.status);
+			  } else {
+				  return await response.json();
+			    c
+			   
+			  }
+		}
+		function updateWeatherP(){
+			myFetch().then((json) => {
+				console.log(myBlob);
+				  
+				}).catch(e => {
+			  console.log('There has been a problem with your fetch operation: ' + e.message);
+			});
 		}
 		function updateForecast() {
 			/**

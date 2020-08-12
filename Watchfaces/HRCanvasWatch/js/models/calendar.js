@@ -125,8 +125,8 @@ define({
 			calendarNames = names;
 			xmlHttps = [];
 			nowDate = new Date();
-			calendarNames.forEach(createAjaxes ) 
-			totalCall = calendarNames.length - 1;
+			//calendarNames.forEach(createAjaxes ) 
+			//totalCall = calendarNames.length - 1;
 			//fetchNextCloudCalendar(); 
 			//getNexcloudCalendar();  
 			//getNexcloudCalendar2("alten"); 
@@ -273,6 +273,7 @@ define({
 		function handleResponse(responseText){
 			console.log('calendar');
 			json = JSON.parse(responseText);
+			console.log(json);
 			calendar = json[2];
 			for (i=0;i<calendar.length;i++){
 				e = new vEvent(calendar[i]);
