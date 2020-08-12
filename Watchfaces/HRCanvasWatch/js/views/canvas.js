@@ -400,7 +400,7 @@ define({
 			
 			
 			if (!widgetFullScreenDiplayed && backendLoaded){
-				canvasDrawer.renderCircle(ctxContent, appDrawerShape, "#000000",2,true);
+				canvasDrawer.renderCircle(ctxContent, appDrawerShape, "#000000",2,false);
 				canvasDrawer.roundRect(ctxContent, aShape1, 3, false, true, "#000000", "#000000");
 				canvasDrawer.roundRect(ctxContent, aShape2, 3, false, true, "#000000", "#000000");
 				canvasDrawer.roundRect(ctxContent, aShape3, 3, false, true, "#000000", "#000000");
@@ -483,7 +483,7 @@ define({
 					//}
 					
 				}
-				canvasDrawer.renderCircle(ctxContent, new Circle(center.x,center.y + (watchRadius * 0.67),28), "#000000",1.5,true);
+				canvasDrawer.renderCircle(ctxContent, new Circle(center.x,center.y + (watchRadius * 0.67),28), "#000000",1.5,false);
 				if (heartRateDisplayed &&  heartRateFound && heartRate.getData().rate !== null) {
 					
 					
@@ -812,7 +812,7 @@ define({
 			});
 			if (heartRateFound && heartRate.getData().rate !== null) {
 				
-				canvasDrawer.renderCircle(ctxContent, new Circle(center.x,center.y + (watchRadius * 0.60),45), grdAmbiant,2);
+				canvasDrawer.renderCircle(ctxContent, new Circle(center.x,center.y + (watchRadius * 0.60),45), grdAmbiant,2,false);
 
 				
 				canvasDrawer.renderText(ctxContent, heartRate.getData().rate, center.x, center.y + (watchRadius * 0.60), 30, grdAmbiant, {
