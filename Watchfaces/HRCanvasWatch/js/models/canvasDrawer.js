@@ -129,11 +129,9 @@ define({
 		}
 		function show(secondsPassed, duration ){
 			if (showing === true){
-				console.log(watchOpacity);
 				secondsPassed = Math.min(secondsPassed, 0.05);
 				timePassed += secondsPassed;
 				setOpacity( ( timePassed/duration));
-				console.log(watchOpacity);
 				if (watchOpacity >= 1) {
 					showing = false;
 					watchOpacity = 1;

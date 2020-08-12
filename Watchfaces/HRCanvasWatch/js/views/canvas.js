@@ -198,9 +198,9 @@ define({
 				}
 				animateWeatherSection();
 			}
-			else if (calendarShape.isInSurface(clickPos,0)){
+			else if (calendarShape.isInSurface(clickPos,0) && !forecastDisplayed){
 				console.log('Click fade');
-				//canvasDrawer.startFade();
+				canvasDrawer.startFade();
 				//canvasDrawer.startShow();
 			}
 			
