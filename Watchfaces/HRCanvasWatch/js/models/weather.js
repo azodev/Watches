@@ -146,7 +146,7 @@ define({
 			
 			coords = locationModel.getData();
 			console.log('onPositionFound');
-			event.fire ('log','onPositionFound');
+			//event.fire ('log','onPositionFound');
 			if (coords !== 'undefined') {
 				doUpdate();
 			} else {

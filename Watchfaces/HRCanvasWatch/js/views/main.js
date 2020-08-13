@@ -107,7 +107,7 @@ define({
 			});*/
 			
 			event.on({
-				'models.location.error' : postNotification,
+				//'models.location.error' : postNotification,
 				// 'models.location.found': postNotification,
 				'models.location.distanceChange' : postNotification,
 				'models.location.log' : postNotification,

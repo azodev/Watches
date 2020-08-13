@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="HR Canvas Watch" />
     <title>HR Canvas Watch</title>
-    <link rel="stylesheet" href="lib/tau/wearable/theme/default/tau.css"/>
-    <link rel="stylesheet" media="all and (-tizen-geometric-shape: circle)" href="lib/tau/wearable/theme/default/tau.circle.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" href="lib/radial/css/main.css">
     <link rel="stylesheet" href="lib/radial/css/RadialMenu.css">
@@ -24,7 +22,17 @@
        		<canvas id="canvas-layout"></canvas>
         	<canvas id="canvas-content"></canvas>
     </div>
+    <div id="calendar"></div>
     
+    <div class="event">
+    	<div class="dates">
+    		<span class="start"></span>
+    		<span class="end"></span>
+    	</div>
+    	<div class="title"></div>
+    	
+    	<div class="location"></div>
+    </div>
      <!--  script src="./lib/web/index.js" ></script-->
     <script src="./js/core/core.js" data-main="./js/app.js" ></script>
     <svg id="icons"   >

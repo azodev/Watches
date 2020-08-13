@@ -164,6 +164,7 @@ define({
 		var wCoords=null;
 		
 		function handleClick(canvas,ev) {
+			navigator.vibrate(0);
 			currentClickTimeStamp = Date.now();
 			if (lastClickTimeStamp !== null && currentClickTimeStamp - lastClickTimeStamp <= CLICK_INTERVAL) {
 				handleDoubleClick(canvas,ev);
@@ -259,7 +260,6 @@ define({
 			}
 		}
 		function openRadialMenu(ev) {
-			console.log('handleDoubleClick');
 			
 			radialmenu.getMenu().open();
 			event.fire('openRadialMenu', ev);
@@ -361,7 +361,7 @@ define({
 				
 				elem = document.querySelector("div.menuHolder"); 
 				elem.style.transform =
-				    "perspective(800px) rotateX(" + -deg.x + "deg) " + 
+				    "perspective(700px) rotateX(" + -deg.x + "deg) " + 
 				    " rotateY(" + deg.y + "deg)";
 			}
 			
@@ -529,13 +529,13 @@ define({
 			
 			
 
-			displayFps();
+			//displayFps();
 			
 			
 			
-			setTimeout(function (){
+			//setTimeout(function (){
 				animRequest = requestAnimationFrame(drawWatchContent);
-			},25);
+			//},25);
 			
 	
 
@@ -804,7 +804,7 @@ define({
 			// Import the current time
 			getDate();
 			console.log('ambient');
-			
+			canvasDrawer.setOpacity(1);
 			ctxLayout.clearRect(0, 0, ctxLayout.canvas.width, ctxLayout.canvas.height);
 			ctxContent.clearRect(0, 0, ctxContent.canvas.width, ctxContent.canvas.height);
 			canvasDrawer.renderTimeBis(ctxContent, dateArray, center.x - 20 +textHelper.getRandomInt(-10,10), center.y+ textHelper.getRandomInt(-10,10), 100, grdAmbiant,{
@@ -885,8 +885,6 @@ define({
 				startSensors();
 				isAmbientMode = false;
 				clear();
-				//particles = [];
-				//popolate(max_particles);
 				console.log('activateMode normal');
 				
 				
@@ -946,6 +944,9 @@ define({
 				console.log('ambientmodechanged event');
 				if (e.detail.ambientMode === true) {
 					// Rendering ambient mode case
+					if (radialmenu.getOpen()){
+						radialmenu.closeMenu();
+					}
 					activateMode("Ambient");
 				} else {
 					// Rendering normal case
@@ -961,6 +962,10 @@ define({
 				if (!document.hidden) {
 					if (isAmbientMode === true) {
 						// Rendering ambient mode case
+						
+						if (radialmenu.getOpen()){
+							radialmenu.closeMenu();
+						}
 						activateMode("Ambient");
 						
 					} else {

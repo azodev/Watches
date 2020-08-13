@@ -230,9 +230,12 @@ define({
         function closeMenuProperly(item){
         	setTimeout(function(){
 	        	svgMenu.darkenButton(item.id,item.id);
-	        	isOpen = false;
-	    		svgMenu.close();
+	        	closeMenu();
         	},200);
+        }
+        function closeMenu(){
+        	isOpen = false;
+    		svgMenu.close();
         }
         function onsuccess() {
         	
@@ -261,7 +264,8 @@ define({
             init: init,
             getMenu : getMenu,
             setOpen : setOpen,
-            getOpen : getOpen
+            getOpen : getOpen,
+            closeMenu : closeMenu
             
         };
     }
