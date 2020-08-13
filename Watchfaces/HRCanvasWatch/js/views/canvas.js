@@ -529,13 +529,13 @@ define({
 			
 			
 
-			//displayFps();
+			displayFps();
 			
 			
 			
-			//setInterval(function (){
+			setTimeout(function (){
 				animRequest = requestAnimationFrame(drawWatchContent);
-			//},25);
+			},25);
 			
 	
 
@@ -908,7 +908,7 @@ define({
 			if (motionSensor.isAvailable() && !motionSensor.isStarted()) {
 				motionSensor.start();
 			}
-			setTimeout(function (e){
+			/*
 				if (pressureSensor.isAvailable() && !pressureSensor.isStarted()) {
 					pressureSensor.start();
 					pressureInterval = window.setInterval(function(e) {
@@ -916,17 +916,19 @@ define({
 					},intervals.pressure
 					);
 				}
-			},500);
+			*/
 			
 		}
 		function stopSensors(){
 			if (motionSensor.isAvailable() && motionSensor.isStarted()) {
 				motionSensor.stop();
 			}
+			/*
 			if (pressureSensor.isAvailable() && pressureSensor.isStarted()) {
 				pressureSensor.stop();
 				window.clearInterval(pressureInterval);
 			}
+			*/
 		}
 		
 		function bindEvents() {
@@ -964,7 +966,7 @@ define({
 					} else {
 						// Rendering normal case
 						canvasDrawer.startShow(); 
-						activateMode("Normal");
+						activateMode("Normal"); 
 					}
 				}
 				else {
@@ -972,8 +974,11 @@ define({
 						//event.fire ('hidden','clearScreen');
 						ctxLayout.clearRect(0, 0, ctxLayout.canvas.width, ctxLayout.canvas.height);
 						ctxContent.clearRect(0, 0, ctxContent.canvas.width, ctxContent.canvas.height);
-						
+						canvasDrawer.setOpacity(0);
 						stopSensors();
+					}
+					else {
+						canvasDrawer.setOpacity(1);
 					}
 				}
 			});
