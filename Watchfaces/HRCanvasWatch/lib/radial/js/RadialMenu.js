@@ -60,11 +60,17 @@ RadialMenu.prototype.close = function () {
             parentMenu.remove();
         }
         self.parentItems = [];
-        
+        var customEvent = new window.CustomEvent('RadialMenu.closing', {
+            detail: 'closing',
+            cancelable: true
+        });
+        window.dispatchEvent(customEvent)
         RadialMenu.setClassAndWaitForTransition(self.currentMenu, 'menu inner').then(function () {
         	
             self.currentMenu.remove();
             self.currentMenu = null;
+           
+           
             //document.getElementById('container').style.display = "-webkit-flex";
             document.querySelector('.menuHolder').style.display = "none";
             

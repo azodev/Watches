@@ -107,7 +107,7 @@ define({
 		}
 		function fade(secondsPassed, duration ){
 			if (fading === true){
-				secondsPassed = Math.min(secondsPassed, 0.05);
+				secondsPassed = Math.min(secondsPassed, 0.1);
 				timePassed += secondsPassed;
 				setOpacity(1- ( timePassed/duration));
 				if (watchOpacity <= 0) {
@@ -129,7 +129,7 @@ define({
 		}
 		function show(secondsPassed, duration ){
 			if (showing === true){
-				secondsPassed = Math.min(secondsPassed, 0.05);
+				secondsPassed = Math.min(secondsPassed, 0.1);
 				timePassed += secondsPassed;
 				setOpacity( ( timePassed/duration));
 				if (watchOpacity >= 1) {

@@ -184,8 +184,9 @@ define({
 			
 			console.log(clickPos);
 			if (appDrawerShape.isInSurface(clickPos,10)){
-				
+				canvasDrawer.startFade();
 				openRadialMenu(ev);
+				
 				radialmenu.setOpen();
 			}
 			else if (wShape.isInSurface(clickPos,0)   ){
@@ -205,19 +206,23 @@ define({
 			}
 			
 		}
+		function triggerShowWatch(){
+			
+			canvasDrawer.startShow();
+		}
 		function animateWeatherSection(){
 			//weatherSectionAnimating = true;
 			wShape.animate();
 		}
 		function handleWatchFadingAnimation(){
 			if (canvasDrawer.isFading()){
-				canvasDrawer.fade(secondsPassed,1);
+				canvasDrawer.fade(secondsPassed,0.5);
 			}
 			
 		}
 		function handleWatchShowingAnimation(){
 			if (canvasDrawer.isShowing()){
-				canvasDrawer.show(secondsPassed,1);
+				canvasDrawer.show(secondsPassed,0.5);
 				if (!canvasDrawer.isShowing()){
 					//backendLoaded = true;
 				}
@@ -942,8 +947,9 @@ define({
 					activateMode("Ambient");
 				} else {
 					// Rendering normal case
-					canvasDrawer.startShow(); 
+					
 					activateMode("Normal");
+					canvasDrawer.startShow(); 
 
 				}
 			});
@@ -986,6 +992,8 @@ define({
 				'models.motion.change' : onMotionChange,
 				'models.motion.error' : onMotionError,
 				'views.radial.changeTheme' : changeTheme,
+				'views.radial.close' : triggerShowWatch,
+				'RadialMenu.closing' : triggerShowWatch,
 				//'models.pedometer.change' : onPedometerDataChange,
 				'models.weather.found' : onWeatherFound
 			});
