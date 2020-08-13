@@ -27,6 +27,26 @@ html, body {
     height: 100%;
     z-index: 1;
 }
+#calendar{
+	top:0px;
+	left:0px;
+	display:  -webkit-flex;
+  width: 210px;
+  height: 180px;
+  margin-left: 75px ;
+  margin-top: 80px;
+  --aug-border: 5px;
+  --aug-inset: 5px;
+  padding: 10px; /* mind the gap */
+  text-align: center;
+  --aug-border-bg: #5da1c6;
+  --aug-inset-bg: #5da1c6;
+   transform-origin: 100% 50%;
+    transform: perspective(700px) rotateY(20deg); 
+    position: absolute;
+    z-index: 3;
+}
+
 
 @font-face {
     font-family: 'artill_clean_icons';
