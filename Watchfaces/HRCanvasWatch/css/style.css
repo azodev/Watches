@@ -12,7 +12,7 @@ html, body {
     height: 100%;
     position: absolute;
     z-index:1;
-}
+} 
 
 #canvas-layout {
     position: absolute;
@@ -27,24 +27,59 @@ html, body {
     height: 100%;
     z-index: 1;
 }
+#cal_holder{
+	position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    display:  none;
+}
+#cal_holder.on {
+	display: -webkit-flex;
+}
 #calendar{
 	top:0px;
 	left:0px;
-	display:  -webkit-flex;
-  width: 210px;
-  height: 180px;
-  margin-left: 75px ;
-  margin-top: 80px;
-  --aug-border: 5px;
-  --aug-inset: 5px;
-  padding: 10px; /* mind the gap */
-  text-align: center;
-  --aug-border-bg: #5da1c6;
-  --aug-inset-bg: #5da1c6;
-   transform-origin: 100% 50%;
-    transform: perspective(700px) rotateY(20deg); 
-    position: absolute;
+	
+    margin-left: 50px ; 
+    margin-top: 80px;
+	position: absolute;
+	width: 250px;
+  	height: 180px;
+  
+    padding: 10px; /* mind the gap */
     z-index: 3;
+    opacity:0;
+    transition: 5s;
+    transition-timing-function: ease;
+    visibility: hidden;
+  --aug-border: 3px;
+  --aug-inset: 3px;
+  --aug-border-bg: linear-gradient(purple, cyan);
+  --aug-inset-bg: #000000;
+  --aug-inset-opacity: 0.9; 
+  --aug-b-width: 60%;
+  --aug-t-width: 60%;
+  --aug-b-height: 5px;
+  --aug-t-height: 5px;
+  --aug-bl: 5px;
+  --aug-tl: 5px;
+  --aug-br: 5px;
+  --aug-tr: 5px;
+   /*transform-origin: 100px 50%;*/
+    /*transform: perspective(700px) rotateY(15deg); */
+    
+   
+    
+    /*transform: perspective(700px) rotateY(0deg); */
+}
+#calendar.visible {
+    /*transition-duration: 5s, 5s;
+    transition-property: opacity, transform;
+    transition-timing-function: ease;*/
+	transform: perspective(700px) rotateY(15deg); 
+	opacity:1;
+	visibility: visible;
 }
 
 

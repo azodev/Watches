@@ -203,6 +203,8 @@ define({
 			else if (calendarShape.isInSurface(clickPos,0) && !forecastDisplayed){
 				console.log('Click fade');
 				canvasDrawer.startFade();
+				document.querySelector("#cal_holder").setAttribute('class', 'on');
+				document.querySelector("#calendar").setAttribute('class', 'visible');
 				//canvasDrawer.startShow();
 			}
 			
@@ -933,6 +935,12 @@ define({
 			document.getElementById('canvas-layout').addEventListener('click', function(e) {
 				handleClick(this,e);
 			});
+			document.querySelector("#calendar").addEventListener('click', function(e) {
+				this.setAttribute('class', '');
+				canvasDrawer.startShow();
+				document.querySelector("#cal_holder").setAttribute('class', '');
+			});
+			
 			window.addEventListener("timetick", function (){
 				console.log('timetick');
 				if (isAmbientMode) {
