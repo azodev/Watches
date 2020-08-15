@@ -82,6 +82,7 @@ define({
 			callbackInterval : 10000  // 20000
 		};
 		var fallbackSensor =false;
+		var running = false;
 		/**
 		 * Returns last received motion data.
 		 * 
@@ -239,11 +240,11 @@ define({
 			//resetData();
 			console.log( 'start location sensor');
 
-			if (locationWatcher === null) {
+			if (!running) {
 				locationWatcher = navigator.geolocation.watchPosition(successCallback, errorCallback, options);
 			}
-
-			//doFallback();
+				
+			running = true;
 
 		}
 
@@ -265,6 +266,7 @@ define({
 				locationSensor.stop(CONTEXT_TYPE);
 				fallbackSensor =false;
 			}
+			running = false;
 		}
 		function triggerLocationUpdate(ev) {
 			console.log('triggerLocationUpdate');

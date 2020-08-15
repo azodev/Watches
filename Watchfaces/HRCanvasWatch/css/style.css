@@ -1,3 +1,20 @@
+* {
+  outline: none;
+}
+img {
+  border: 0;
+  /* 1 */
+
+  -ms-interpolation-mode: bicubic;
+  /* 2 */
+
+}
+/*
+ * Corrects overflow displayed oddly in IE 9.
+ */
+svg:not(:root) {
+  overflow: hidden;
+}
 html, body {
     width: 100%;
     height: 100%;
@@ -50,8 +67,8 @@ html, body {
     padding: 10px; /* mind the gap */
     z-index: 3;
     opacity:0;
-    transition: 5s;
-    transition-timing-function: ease;
+    transition: opacity 5s ease;
+    
     visibility: hidden;
   --aug-border: 3px;
   --aug-inset: 3px;
@@ -73,7 +90,7 @@ html, body {
     
     /*transform: perspective(700px) rotateY(0deg); */
 }
-#calendar.visible {
+#calendar.on {
     /*transition-duration: 5s, 5s;
     transition-property: opacity, transform;
     transition-timing-function: ease;*/

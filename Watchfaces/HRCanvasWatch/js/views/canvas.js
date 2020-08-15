@@ -203,8 +203,9 @@ define({
 			else if (calendarShape.isInSurface(clickPos,0) && !forecastDisplayed){
 				console.log('Click fade');
 				canvasDrawer.startFade();
-				document.querySelector("#cal_holder").setAttribute('class', 'on');
-				document.querySelector("#calendar").setAttribute('class', 'visible');
+				
+				document.querySelector("#cal_holder").classList.add('on');
+				document.querySelector("#calendar").classList.add('on');
 				//canvasDrawer.startShow();
 			}
 			
@@ -936,9 +937,9 @@ define({
 				handleClick(this,e);
 			});
 			document.querySelector("#calendar").addEventListener('click', function(e) {
-				this.setAttribute('class', '');
+				this.classList.remove('on');
 				canvasDrawer.startShow();
-				document.querySelector("#cal_holder").setAttribute('class', '');
+				document.querySelector("#cal_holder").classList.remove('on');
 			});
 			
 			window.addEventListener("timetick", function (){
@@ -1062,10 +1063,10 @@ define({
 		function loopLocation(){
 			locationInterval = window.setInterval(function() {
 				locationModel.start();
-				window.setTimeout(function() {
+				/*window.setTimeout(function() {
 					locationModel.stop();
 				}, 30000 // stop checking after 30 seconds
-				);
+				);*/
 			}, intervals.location // check every 2 min
 			);
 		}
@@ -1143,20 +1144,20 @@ define({
 					motionSensor.start();
 				}
 				if (pressureSensor.isAvailable()) {
-					pressureSensor.setOptions({
+					/*pressureSensor.setOptions({
 						sampleInterval : 1000,
 						maxBatchCount : intervals.pressure
 					});
-					pressureSensor.setChangeListener();
+					pressureSensor.setChangeListener();*/
 					pressureSensor.start();
 				}
 				sysInfo.checkBattery();
 				calendarModel.accessCalendars();
 				
 				
-				setTimeout(() => {
-				    resolve('loaded');
-				  }, 500);
+				
+				resolve('loaded');
+				  
 			});
 			loader.then (function (resolve){
 				backendLoaded = true;

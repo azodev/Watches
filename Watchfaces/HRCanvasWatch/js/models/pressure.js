@@ -120,7 +120,7 @@ define({
          * @fires models.pressure.start
          */
         function onSensorStartSuccess() {
-            e.fire('start');
+        	setChangeListener();
             isEnable = true;
         }
 
@@ -294,6 +294,10 @@ define({
         		setTemperature (weatherInformation.main.temp);
         	}
         }
+        function triggerUpdate(){
+        	if (!isEnable) start();
+        	
+        }
         /**
          * Initializes module.
          *
@@ -308,10 +312,11 @@ define({
 		 * @private
 		 */
 		function bindEvents() {
-
+				
 			event.on({ 
 				'models.location.found': onPositionFound,
-				'models.weather.found': onWeatherFound
+				'models.weather.found': onWeatherFound,
+				'views.radial.update' : triggerUpdate
 				});
 			 
 		}
