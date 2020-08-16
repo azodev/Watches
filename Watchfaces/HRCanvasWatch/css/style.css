@@ -53,10 +53,13 @@ html, body {
     width: 100%;
     height: 100%;
     z-index: 3;
-    display:  none;
+    visibility:  visible;
+    transition:0.1s;
+    /*display:none;*/
 }
 #cal_holder.on {
-	display: -webkit-flex;
+	visibility:  visible;
+	transition:0.1s;
 }
 #calendar{
 	top:0px;
@@ -65,15 +68,15 @@ html, body {
     margin-left: 50px ; 
     margin-top: 80px;
 	position: absolute;
-	width: 250px;
-  	height: 180px;
+	width: 280px;
+  	height: 200px;
   
     padding: 10px; /* mind the gap */
     z-index: 3;
-    opacity:0;
-    transition: opacity 5s ease;
+    opacity:0.5;
+    transition: opacity 1s ease, transform 2s ease;
     
-    visibility: hidden;
+    visibility: visible;
   --aug-border: 3px;
   --aug-inset: 3px;
   --aug-border-bg: linear-gradient(purple, cyan);
@@ -88,18 +91,17 @@ html, body {
   --aug-br: 5px;
   --aug-tr: 5px;
    /*transform-origin: 100px 50%;*/
-    /*transform: perspective(700px) rotateY(15deg); */
+    transform: perspective(700px) rotateY(0deg); 
     
    
     
     /*transform: perspective(700px) rotateY(0deg); */
 }
 #calendar.on {
-    /*transition-duration: 5s, 5s;
-    transition-property: opacity, transform;
-    transition-timing-function: ease;*/
+
 	transform: perspective(700px) rotateY(15deg); 
 	opacity:1;
+	transition:0.1s;
 	visibility: visible;
 }
 

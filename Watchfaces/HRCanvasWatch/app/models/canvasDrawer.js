@@ -107,7 +107,7 @@ define({
 		}
 		function fade(secondsPassed, duration ){
 			if (fading === true){
-				secondsPassed = Math.min(secondsPassed, 0.1);
+				//secondsPassed = Math.min(secondsPassed, 0.1);
 				timePassed += secondsPassed;
 				setOpacity(1- ( timePassed/duration));
 				if (watchOpacity <= 0) {
@@ -129,7 +129,7 @@ define({
 		}
 		function show(secondsPassed, duration ){
 			if (showing === true){
-				secondsPassed = Math.min(secondsPassed, 0.1);
+				//secondsPassed = Math.min(secondsPassed, 0.1);
 				timePassed += secondsPassed;
 				setOpacity( ( timePassed/duration));
 				if (watchOpacity >= 1) {
@@ -790,6 +790,18 @@ define({
 		function changeTheme(ev){
 			theme = ev.detail;
 		}
+		function setClassAndWaitForTransition (node, newClass) {
+		    return new Promise(function (resolve) {
+		        function handler(event) {
+		            if (event.target == node && event.propertyName == 'visibility') {
+		                node.removeEventListener('transitionend', handler);
+		                resolve();
+		            }
+		        }
+		        node.addEventListener('transitionend', handler);
+		        node.setAttribute('class', newClass);
+		    });
+		}
 		function bindEvents() {
 			event.on({
 				'views.radial.changeTheme' : changeTheme,
@@ -821,7 +833,8 @@ define({
 			isFading:isFading,
 			startShow:startShow,
 			show:show,
-			isShowing:isShowing
+			isShowing:isShowing,
+			setClassAndWaitForTransition:setClassAndWaitForTransition
 		};
 	}
 });

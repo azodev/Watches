@@ -68,11 +68,11 @@ define({
             // bind events to page elements
             bindEvents();
             menuItems = [
-                             {
+                             /*{
                                  id   : 'events',
                                  title: 'Events',
                                  icon: '#events'
-                             },
+                             },*/
                              {
                                  id   : 'update',
                                  title: 'Update',
@@ -83,6 +83,11 @@ define({
                                  title: 'GymRun',
                                  icon: '#exercise'
                              },
+                             {
+                                 id   : 'timer',
+                                 title: 'Timer',
+                                 icon: '#timer'
+                             },
                              /*{
                                  id   : 'altitude',
                                  title: 'Altitude',
@@ -90,30 +95,56 @@ define({
                              },*/
                              
                              {
-                                 id   : 'more',
-                                 title: 'More...',
-                                 icon: '#more',
+                                 id   : 'settings',
+                                 title: 'Settings...',
+                                 icon: '#settings',
                                  items: [
-									{
+									/*{
 									    id   : 'altitude',
 									    title: 'Altitude',
 									    icon: '#altitude'
-									},
+									},*/
+                                     
                                      {
-                                         id   : 'timer',
-                                         title: 'Timer',
-                                         icon: '#timer'
-                                     },
-                                     /*{
-                                         id   : 'sleep',
-                                         title: 'Sleep',
-                                         icon: '#sleep'
+                                         id: 'colors',
+                                         title: 'Colors...',
+                                         icon: '#colors',
+                                         items: [
+                                             
+                                             {
+                                                 id: 'ice',
+                                                 icon: '#ice',
+                                                 title: 'Ice'
+                                             },
+                                             {
+                                                 id: 'fire',
+                                                 icon: '#fire',
+                                                 title: 'Fire'
+                                             }, {
+                                                 id: 'hisakura',
+                                                 icon: '#hisakura',
+                                                 title: 'Hisakura'
+                                             }
+                                         ]
                                      },
                                      {
-                                         id   : 'shower',
-                                         title: 'Take Shower',
-                                         icon: '#shower'
-                                     },*/
+                                         id: 'effects',
+                                         title: 'Effects...',
+                                         icon: '#effects',
+                                         items: [
+                                             
+                                             {
+                                                 id: 'attraction',
+                                                 icon: '#attraction',
+                                                 title: 'Attraction'
+                                             },
+                                             {
+                                                 id: 'repulsion',
+                                                 icon: '#repulsion',
+                                                 title: 'Repulsion'
+                                             }
+                                         ]
+                                     },
                                      {
                                          id   : 'workout',
                                          icon : '#workout',
@@ -121,28 +152,7 @@ define({
                                      }
                                  ]
                              },
-                             {
-                                 id: 'colors',
-                                 title: 'Colors...',
-                                 icon: '#colors',
-                                 items: [
-                                     
-                                     {
-                                         id: 'ice',
-                                         icon: '#ice',
-                                         title: 'Ice'
-                                     },
-                                     {
-                                         id: 'fire',
-                                         icon: '#fire',
-                                         title: 'Fire'
-                                     }, {
-                                         id: 'hisakura',
-                                         icon: '#hisakura',
-                                         title: 'Hisakura'
-                                     }
-                                 ]
-                             }
+                             
                          ];
             
             svgMenu = new RadialMenu({
@@ -171,6 +181,11 @@ define({
                     	svgMenu.setTheme(item.id);
                     	tizen.preference.setValue('theme', item.id);
                     	event.fire('changeTheme',item.id);
+                    	closeMenuProperly(item);
+                    }
+                    else if (item.id == 'attraction' || item.id == 'repulsion' ){
+                    	event.fire('changeEffect',item.id);
+                    	tizen.preference.setValue('effect', item.id);
                     	closeMenuProperly(item);
                     }
                     else if (item.id == 'events'){

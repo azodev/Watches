@@ -134,9 +134,9 @@ define({
 		var motion = null;
 		var motionFromGyro = {accelerationIncludingGravity : {x:null,y:null}}; 
 		
-		var max_particles = 750;
+		var max_particles = 300;
 		var particles = [];
-		var frequency = 10;
+		var frequency = 5;
 		var init_num = max_particles;
 		var max_time = frequency * max_particles;
 		var time_to_recreate = false;
@@ -162,6 +162,8 @@ define({
 		var heartRateDisplayed=true;
 		
 		var wCoords=null;
+		var effect = 'attraction';
+		
 		
 		function handleClick(canvas,ev) {
 			navigator.vibrate(0);
@@ -190,7 +192,7 @@ define({
 				
 				radialmenu.setOpen();
 			}
-			else if (wShape.isInSurface(clickPos,0)   ){
+			else if (wShape.isInSurface(clickPos,0) && !radialmenu.getOpen()  ){
 				
 				if (forecastMode){
 					forecastDisplayed = false;
@@ -200,12 +202,29 @@ define({
 				}
 				animateWeatherSection();
 			}
-			else if (calendarShape.isInSurface(clickPos,0) && !forecastDisplayed){
+			else if (calendarShape.isInSurface(clickPos,0) && !forecastDisplayed && !radialmenu.getOpen() ){
 				console.log('Click fade');
 				canvasDrawer.startFade();
+				let holder = document.querySelector("#cal_holder");
+				let calendar = document.querySelector("#calendar");
+				holder.style.display = "flex";
+				canvasDrawer.setClassAndWaitForTransition(holder,'on').then(function () {
+					holder.style.display = "flex";
+					calendar.classList.add('on');
+		            
+		            
+		        });
+				/*
+			
+				holder.addEventListener("transitionend", function(eve) {
+					document.querySelector("#calendar").classList.add('on');
+					holder.removeEventListener('transitionend',eve);
+					}, false);
+				holder.classList.add('on');
+				 */
 				
-				document.querySelector("#cal_holder").classList.add('on');
-				document.querySelector("#calendar").classList.add('on');
+				
+				
 				//canvasDrawer.startShow();
 			}
 			
@@ -355,8 +374,8 @@ define({
 			
 			//canvasDrawer.getRadialGradientCoords();
 			if (radialmenu.getOpen()){ 
-				deg.x = (gravCenter.y - 190)*1.6;
-				deg.y = (gravCenter.x - 180)*1.6;
+				deg.x = (gravCenter.y - 190)*1.4;
+				deg.y = (gravCenter.x - 180)*1.4;
 				if (deg.x <= -30 ) deg.x = -30;
 				if (deg.x >= 30 ) deg.x = 30;
 				if (deg.y <= -30 ) deg.y = -30;
@@ -376,8 +395,9 @@ define({
 				});
 			  // Recreate particles
 			  if (time_to_recreate) {
-			    if (particles.length < init_num) {popolate(1);}
+			    if (particles.length < init_num) {popolate((init_num-particles.length)/4,effect);}
 			  }
+			  //console.log(particles.length );
 			clear();
 			
 			
@@ -414,24 +434,24 @@ define({
 				canvasDrawer.roundRect(ctxContent, aShape3, 3, false, true, "#000000", "#000000");
 				canvasDrawer.roundRect(ctxContent, aShape4, 3, false, true, "#000000", "#000000");
 				if (baroDisplayed){
-					canvasDrawer.renderTextGradient(ctxContent, 'Altitude :', center.x - (watchRadius * 0.77), center.y - (watchRadius * 0.17), 14, "#c9c9c9", {
+					canvasDrawer.renderTextGradient(ctxContent, 'Altitude', center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.30), 16, "#c9c9c9", {
 						font : 'FutureNow',
-						align : 'left',
+						align : 'right',
 						gradient : true,
 						motion: motion
 					});
-					canvasDrawer.renderText(ctxContent, altitude, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.17), 14, "#c9c9c9", {
+					canvasDrawer.renderText(ctxContent, altitude, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.23), 16, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'right'
 					});
-					canvasDrawer.renderTextGradient(ctxContent, 'Pressure :', center.x - (watchRadius * 0.77), center.y - (watchRadius * 0.09), 14, "#c9c9c9", {
+					canvasDrawer.renderTextGradient(ctxContent, 'Pressure', center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.16), 16, "#c9c9c9", {
 						font : 'FutureNow',
-						align : 'left',
+						align : 'right',
 						gradient : true,
 						motion: motion
 					});
 
-					canvasDrawer.renderText(ctxContent, pressure, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.09), 14, "#c9c9c9", {
+					canvasDrawer.renderText(ctxContent, pressure, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.09), 16, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'right'
 					});
@@ -936,10 +956,27 @@ define({
 			document.getElementById('canvas-layout').addEventListener('click', function(e) {
 				handleClick(this,e);
 			});
-			document.querySelector("#calendar").addEventListener('click', function(e) {
-				this.classList.remove('on');
+			let calendar = document.querySelector("#calendar");
+			let holder = document.querySelector("#cal_holder");
+			calendar.addEventListener('click', function(e) {
+				//this.classList.remove('on');
 				canvasDrawer.startShow();
-				document.querySelector("#cal_holder").classList.remove('on');
+				
+				/*calendar.addEventListener("transitionend", function(eve) {
+					holder.classList.remove('on');
+					calendar.removeEventListener('transitionend',eve);
+					}, false);
+				calendar.classList.remove('on');*/
+				let holder = document.querySelector("#cal_holder");
+				let calendar = document.querySelector("#calendar");
+				holder.style.display = "flex";
+				canvasDrawer.setClassAndWaitForTransition(holder,'on').then(function () {
+					holder.style.display = "flex";
+					calendar.classList.add('on');
+		            
+		            
+		        });
+				
 			});
 			
 			window.addEventListener("timetick", function (){
@@ -984,6 +1021,9 @@ define({
 					}
 				}
 				else {
+					if (radialmenu.getOpen()){
+						radialmenu.closeMenu();
+					}
 					if (isAmbientMode !== true) {
 						//event.fire ('hidden','clearScreen');
 						ctxLayout.clearRect(0, 0, ctxLayout.canvas.width, ctxLayout.canvas.height);
@@ -1011,6 +1051,7 @@ define({
 				'models.motion.change' : onMotionChange,
 				'models.motion.error' : onMotionError,
 				'views.radial.changeTheme' : changeTheme,
+				'views.radial.changeEffect' : changeEffect,
 				'views.radial.close' : triggerShowWatch,
 				'RadialMenu.closing' : triggerShowWatch,
 				//'models.pedometer.change' : onPedometerDataChange,
@@ -1080,13 +1121,19 @@ define({
 			  ctxContent.fillRect(0, 0, canvasContent.width, canvasContent.height);
 			  ctxContent.globalAlpha=1;
 			}
-		function popolate(num) {
+		function popolate(num,effect) {
 			  for (var i = 0; i < num; i++) {
 			    setTimeout(
 			    function (x) {
 			      return function () {
 			        // Add particle
-			        particles.push(new Particle(ctxContent,particleColors));
+			    	if (effect == 'attraction'){
+			    		particles.push(new Particle(ctxContent,particleColors));
+			    	}  
+			    	else {
+			    		particles.push(new ParticleAlien(ctxContent,particleColors));
+			    	}
+			        
 			      };
 			    }(i),
 			    frequency * i);
@@ -1113,7 +1160,15 @@ define({
 			//time_to_recreate = true;
 			grdAmbiant = canvasDrawer.getAmbiantGradient(ctxContent);
 			particles = [];
-			popolate(max_particles);
+			popolate(max_particles,effect);
+			
+		}
+		function changeEffect(ev){
+			effect = ev.detail;
+			
+			//time_to_recreate = true;
+			particles = [];
+			popolate(max_particles,effect);
 			
 		}
 		function init() {
@@ -1124,6 +1179,15 @@ define({
 			
 			if (tizen.preference.exists('theme')) {
 				theme = tizen.preference.getValue('theme');
+			}
+			else {
+				tizen.preference.setValue('theme',theme);
+			}
+			if (tizen.preference.exists('effect')) {
+				theme = tizen.preference.getValue('effect');
+			}
+			else{
+				tizen.preference.setValue('effect',effect);
 			}
 			
 			setDefaultVariables();
@@ -1200,7 +1264,7 @@ define({
 
 			appDrawerShape = new Circle(center.x,center.y-119,28);
 			
-			popolate(max_particles);
+			popolate(max_particles,effect);
 			setTimeout(function () {
 				  time_to_recreate = true;
 				}, max_time);

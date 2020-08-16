@@ -72,14 +72,8 @@ class Particle {
 	    this.x += Math.cos(this.a) * this.s + attr_x;
 	    this.y += Math.sin(this.a) * this.s + attr_y;
 	    this.a += Math.random() > 0.5 ? Math.random() * 0.9 - 0.45 : Math.random() * 0.4 - 0.2;
-	    if (distance < 100 + Math.random() * 100) {
-	      //return false;
-	    	//this.canvas.globalAlpha = 0.5;
-	    }
-	     else
-	    {
-	      //this.canvas.globalAlpha = 0.8;
-	    }
+	    if (this.x > this.point_of_attraction.x -15 && this.x < this.point_of_attraction.x +15 && 
+	    		this.y > this.point_of_attraction.y -15 && this.y < this.point_of_attraction.y +15) return false;
 	    this.render();
 	    this.progress++;
 	    return true;
