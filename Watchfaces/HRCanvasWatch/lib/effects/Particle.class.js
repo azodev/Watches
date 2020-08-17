@@ -36,6 +36,7 @@ class Particle {
 	    this.color = random > .2 ? this.colors[0] : this.colors[1];
 	    this.radius = random > .8 ? Math.random() * 2.2 : this.radius;
 	    this.color = random > .8 ? this.colors[2] : this.color;
+	    this.radius = this.radius*1.2;
 	  }
 	  setPoA(coords){
 		  this.point_of_attraction.x = coords.x;

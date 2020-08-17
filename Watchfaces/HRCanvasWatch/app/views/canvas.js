@@ -134,9 +134,9 @@ define({
 		var motion = null;
 		var motionFromGyro = {accelerationIncludingGravity : {x:null,y:null}}; 
 		
-		var max_particles = 300;
+		var max_particles = 700;
 		var particles = [];
-		var frequency = 5;
+		var frequency = 3;
 		var init_num = max_particles;
 		var max_time = frequency * max_particles;
 		var time_to_recreate = false;
@@ -326,8 +326,8 @@ define({
 				currentFps = Math.round(1000 / (sinceStart / ++frame) * 100) / 100;
 
 				// $results.text("Elapsed time= " + Math.round(sinceStart / 1000
-				// * 100) / 100 + " secs @ " + currentFps + " fps.");
-				canvasDrawer.renderText(ctxContent, currentFps, center.x, center.y - (watchRadius * 0.45), 15, "#c9c9c9", {
+				// * 100) / 100 + " secs @ " + currentFps + " fps.");  currentFps
+				canvasDrawer.renderText(ctxContent, particles.length, center.x, center.y - (watchRadius * 0.45), 15, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'center'
 				});
@@ -555,7 +555,7 @@ define({
 			
 			
 
-			//displayFps();
+			displayFps();
 			
 			
 			
@@ -1163,15 +1163,24 @@ define({
 			//time_to_recreate = true;
 			grdAmbiant = canvasDrawer.getAmbiantGradient(ctxContent);
 			particles = [];
+			time_to_recreate = false;
 			popolate(max_particles,effect);
+			
+			setTimeout(function () {
+				  time_to_recreate = true;
+				}, max_time);
 			
 		}
 		function changeEffect(ev){
 			effect = ev.detail;
+			time_to_recreate = false;
 			
-			//time_to_recreate = true;
 			particles = [];
 			popolate(max_particles,effect);
+			setTimeout(function () {
+				  time_to_recreate = true;
+				}, max_time);
+			
 			
 		}
 		function init() {
