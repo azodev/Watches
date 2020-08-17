@@ -790,12 +790,13 @@ define({
 		function changeTheme(ev){
 			theme = ev.detail;
 		}
-		function setClassAndWaitForTransition (node, newClass) {
+		function setClassAndWaitForTransition (node, newClass,prop) {
 		    return new Promise(function (resolve) {
 		        function handler(event) {
-		        	console.log(event);
-		        	console.log(event.propertyName);
-		            if (event.target == node && event.propertyName == 'visibility') {
+		        	
+		            if (event.target == node && event.propertyName == prop) {
+		            	console.log(event);
+			        	console.log(event.propertyName);
 		                node.removeEventListener('transitionend', handler);
 		                resolve();
 		            }

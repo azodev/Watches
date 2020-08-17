@@ -47,7 +47,7 @@ define({
          */
         function bindEvents() {
            event.on ({
-        	   //'views.radial.changeTheme' : changeTheme
+        	   'RadialMenu.closing' : setClose
            });
            /*window.addEventListener('tizenhwkey', function(ev) {
                if (ev.keyName === 'back') {
@@ -258,6 +258,9 @@ define({
    	 	}
         function setOpen(){
         	isOpen = true;
+        }
+        function setClose(){
+        	isOpen = false;
         }
         function getOpen(){
         	return isOpen;

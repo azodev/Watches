@@ -160,6 +160,8 @@ define({
 		var baroDisplayed = true;
 		var timeDisplayed = true;
 		var heartRateDisplayed=true;
+		var holder = document.querySelector("#cal_holder");
+		var calendar = document.querySelector("#calendar");
 		
 		var wCoords=null;
 		var effect = 'attraction';
@@ -205,12 +207,10 @@ define({
 			else if (calendarShape.isInSurface(clickPos,0) && !forecastDisplayed && !radialmenu.getOpen() ){
 				console.log('Click fade');
 				canvasDrawer.startFade();
-				var holder = document.querySelector("#cal_holder");
-				var calendar = document.querySelector("#calendar");
 				
-				canvasDrawer.setClassAndWaitForTransition(holder,'on').then(function () {
+				canvasDrawer.setClassAndWaitForTransition(holder,'on','opacity').then(function () {
 					console.log('transition holder');
-					canvasDrawer.setClassAndWaitForTransition(calendar,'on').then(function () {
+					canvasDrawer.setClassAndWaitForTransition(calendar,'on','opacity').then(function () {
 						console.log('transition calendar');
 					});
 		            
@@ -970,7 +970,14 @@ define({
 					calendar.removeEventListener('transitionend',eve);
 					}, false);
 				calendar.classList.remove('on');*/
-				
+				canvasDrawer.setClassAndWaitForTransition(calendar,'','opacity').then(function () {
+					console.log('transition calendar');
+					canvasDrawer.setClassAndWaitForTransition(holder,'','opacity').then(function () {
+						console.log('transition holder');
+					});
+		            
+		            
+		        });
 				
 				
 			});

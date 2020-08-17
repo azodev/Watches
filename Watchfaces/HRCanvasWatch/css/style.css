@@ -50,8 +50,8 @@ html, body {
 }
 #cal_holder{
 	position: relative;
-    width: 100%;
-    height: 100%;
+    width: 0%;
+    height: 0%;
     z-index: 3;
     visibility:  hidden;
     transition: opacity 0.1s ease;
@@ -60,6 +60,8 @@ html, body {
     -moz-user-select: none;
 }
 #cal_holder.on {
+	width: 100%;
+    height: 100%;
 	position: absolute;
 	visibility:  visible;
 	transition: opacity 0.1s ease;
@@ -73,7 +75,7 @@ html, body {
     
     padding: 10px; /* mind the gap */
     z-index: 3;
-    opacity:0.1;
+    opacity:0;
     transition: opacity 1s ease, transform 2s ease;
     visibility: hidden;
   --aug-border: 3px;
