@@ -795,13 +795,10 @@ define({
 		        function handler(event) {
 		        	
 		            if (event.target == node && event.propertyName == prop) {
-		            	console.log(event);
-			        	console.log(event.propertyName);
 		                node.removeEventListener('transitionend', handler);
 		                resolve();
 		            }
 		        }
-		        console.log(node);
 		        node.addEventListener('transitionend', handler);
 		        node.setAttribute('class', newClass);
 		    });
@@ -812,6 +809,41 @@ define({
 				'models.motion.reset': resetRadialGradientPosition
 			});
 
+		}
+		function easeInOutQuad(t){
+			t/=0.5;
+			if(t<1)return t*t/2;
+			t--;
+			return (t*(t-2)-1)/2;
+		}
+		function scrollTop (elem,size,duration) {
+		    // cancel if already on tope
+			const init_scroll = elem.scrollTop;
+		    //if (init_scroll > size) return;
+		    console.log(elem.scrollTop);
+		    console.log(size);
+		    
+		    const cosParameter =  size /2;
+		    let scrollCount = 0, oldTimestamp = null;
+		    let prev = 0;
+		    function step (newTimestamp) {
+		        if (oldTimestamp !== null) {
+		            // if duration is 0 scrollCount will be Infinity
+		            scrollCount += Math.PI * (newTimestamp - oldTimestamp) / duration;
+		             
+		            if (scrollCount >= Math.PI) return elem.scrollTop = init_scroll+size;
+		            //if (prev >=  init_scroll-size - cosParameter * Math.cos(scrollCount))  return false;
+		            
+		            elem.scrollTop = init_scroll+cosParameter - cosParameter * Math.cos(scrollCount);
+		            //
+		            prev = elem.scrollTop;
+		            //console.log(cosParameter - cosParameter * Math.cos(scrollCount));
+		            //console.log(elem.scrollTop);
+		        }
+		        oldTimestamp = newTimestamp;
+		        window.requestAnimationFrame(step);
+		    }
+		    window.requestAnimationFrame(step);
 		}
 		return {
 			init : init,
@@ -838,7 +870,8 @@ define({
 			startShow:startShow,
 			show:show,
 			isShowing:isShowing,
-			setClassAndWaitForTransition:setClassAndWaitForTransition
+			setClassAndWaitForTransition:setClassAndWaitForTransition,
+			scrollTop:scrollTop
 		};
 	}
 });

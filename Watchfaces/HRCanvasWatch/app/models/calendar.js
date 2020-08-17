@@ -160,7 +160,7 @@ define({
 			
 			
 		}
-		function fetchNextCloudCalendar(){
+		/*function fetchNextCloudCalendar(){
 			now = Date.now()/1000 ;
 			start = Math.round((now-3600)+y); //Math.round((now - 86400));
 			//console.log(start);
@@ -201,7 +201,7 @@ define({
 			
 			
 		}
-		
+		*/
 		function wasRequestSuccessful(status) {
 			return status >= 200 && status < 300;
 		}
@@ -262,18 +262,22 @@ define({
 			console.log('calendar');
 			json = JSON.parse(responseText);
 			calendar = json[2];
+			console.log(json);
 			for (i=0;i<calendar.length;i++){
 				e = new vEvent(calendar[i]);
 				if (!isDuplicate(e,vEvents)) vEvents.push (e);
 				vEvents.sort(function (a,b){return a.startDate - b.startDate});
 			}
+			
 		}
 		function handleFilterForFinishedEvents(){
 			vEvents = vEvents.filter (filterFinishedVEvents);
 			buildDaysEvents();
+			console.log(vEvents);  
+			console.log(myEvents);
 		}
  
-		function filterFinishedVEvents(event){
+		function filterFinishedVEvents(event){ 
 			return   (nowDate <= event.endDate);
 		}
 		function createHtml(){

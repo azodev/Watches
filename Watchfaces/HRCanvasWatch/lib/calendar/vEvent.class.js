@@ -2,6 +2,7 @@ class vEvent {
 	constructor(array){
 		let i;
 		this.location = null;
+		this.fullDay = false
 		for ( i=0 ;i<array[1].length ; i++ ){
 			switch (array[1][i][0]) {
 			case 'summary':

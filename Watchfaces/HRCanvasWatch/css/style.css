@@ -54,33 +54,41 @@ html, body {
     height: 0%;
     z-index: 3;
     visibility:  hidden;
-    transition: opacity 0.1s ease;
+    transition: opacity 0.1s ;
     opacity:0.5;
     user-select: none;
     -moz-user-select: none;
+    font-family: 'FutureNow';
 }
 #cal_holder.on {
 	width: 100%;
     height: 100%;
 	position: absolute;
 	visibility:  visible;
-	transition: opacity 0.1s ease;
+	transition: opacity 0.1s ;
 	transition:0.1s;
 	opacity:1;
+}
+#overflower{
+	width: 100%;
+    height: 100%;
+    overflow:hidden;
 }
 #calendar{
 	position: relative;
 	width: 280px;
-  	height: 200px;
-    
+  	height: 250px;
     padding: 10px; /* mind the gap */
     z-index: 3;
     opacity:0;
-    transition: opacity 1s ease, transform 2s ease;
+    /*transition: opacity 1s ease, transform 1s ease;*/
+    transition-property: opacity, transform;
+transition-duration: 0.5s;
+transition-timing-function: linear;
     visibility: hidden;
   --aug-border: 3px;
   --aug-inset: 3px;
-  --aug-border-bg: linear-gradient(purple, cyan);
+  --aug-border-bg: linear-gradient(to right, purple, cyan);
   --aug-inset-bg: #000000;
   --aug-inset-opacity: 0.9; 
   --aug-b-width: 60%;
@@ -92,26 +100,108 @@ html, body {
   --aug-br: 5px;
   --aug-tr: 5px;
    /*transform-origin: 100px 50%;*/
-    transform: perspective(700px) rotateY(0deg); 
+    transform: perspective(700px) rotateY(90deg); 
     
-   
+   scroll-behavior: smooth;
     
     /*transform: perspective(700px) rotateY(0deg); */
 }
+ 
+
+
 #calendar.on {
 	top:0px;
 	left:0px;
 	
     margin-left: 50px ; 
-    margin-top: 80px;
+    margin-top: 60px;
 	position: absolute;
+	transition-property: opacity, transform;
+	transition-duration: 0.5s;
+	transition-timing-function: linear;
 	transform: perspective(700px) rotateY(15deg); 
 	opacity:1;
-	transition: opacity 1s ease, transform 2s ease;
+	  --aug-inset-opacity: 0.8;
+	    
 	visibility: visible;
 }
 
+#up, #down{
+	
+  position: absolute;
+margin-left: 140px;
+  
+  width: 80px;
+  height: 40px;
+  padding: 10px;
+  font-size: 25px;
+  text-align:center;
+  white-space: nowrap;
+  background: #13242c;
+  --aug-border: 1px;
+  --aug-border-bg: #5da1c6;
+  --aug-tl: 10px;
+  --aug-tr: 10px;
+  --aug-bl: 10px;
+  --aug-br: 10px;
+  text-shadow: 0 0 20px #fefcfe;
+  z-index:4;
+  opacity:0;
 
+}
+#up {
+	top:7px;
+}
+#down{
+ 	bottom:7px;
+}
+#down.off, #up.down {
+	opacity:0;
+
+}
+
+#calendar .event {
+
+	position: relative;
+	padding: 10px;
+	margin: 5px auto;
+	--aug-inset: 3px;
+	--aug-inset-bg: rgba(0, 0, 0, 0.25);
+	--aug-border: 2px;
+	--aug-border-bg: rgba(255, 215, 0, 0.53);
+	--aug-tl: 5px;
+	--aug-br: 5px;
+	--aug-bl: 10px;
+	--aug-tr: 10px;
+
+	height: 40px;
+	width: 250px;
+}
+#calendar .day{
+  background-color: rgba(255, 215, 0, 0.53);
+  color: #ffffff;
+  height: 22px;
+  width: 150px;
+  margin:5px;
+  position: relative;
+  /*left: 25px;
+  bottom: 20px;*/
+  --aug-tl: 3px;
+  --aug-br: 3px;
+  --aug-bl: 5px;
+  --aug-tr: 5px;
+  font-size: 14px;
+  text-align: right;
+  padding-top: 5px;
+  padding-right:10px;
+	
+}
+#calendar .day_events  > .event{
+	margin-top: -5px;
+}
+#calendar .day_events  > .event ~ .event {
+	margin-top: 5px;
+}
 @font-face {
     font-family: 'artill_clean_icons';
     src: url('../data/artill_clean_icons.otf');

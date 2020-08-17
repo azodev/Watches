@@ -162,6 +162,9 @@ define({
 		var heartRateDisplayed=true;
 		var holder = document.querySelector("#cal_holder");
 		var calendar = document.querySelector("#calendar");
+		var up = document.getElementById ('up');
+		var down = document.getElementById ('down');
+		var calendarY = 0;
 		
 		var wCoords=null;
 		var effect = 'attraction';
@@ -212,6 +215,9 @@ define({
 					console.log('transition holder');
 					canvasDrawer.setClassAndWaitForTransition(calendar,'on','opacity').then(function () {
 						console.log('transition calendar');
+						//document.getElementById ('up').classList.remove('off');
+						//document.getElementById ('down').classList.remove('off');
+						widgetFullScreenDiplayed = true;
 					});
 		            
 		            
@@ -388,8 +394,15 @@ define({
 				elem.style.transform =
 				    "perspective(700px) rotateX(" + -deg.x + "deg) " + 
 				    " rotateY(" + deg.y + "deg)";
+				
+				
 			}
-			
+			if (widgetFullScreenDiplayed ===true){
+				deg.x = (gravCenter.y - 180)*1.4;
+				if (deg.x <= -30 ) deg.x = -30; 
+				if (deg.x >= 30 ) deg.x = 30;
+				document.querySelector("#calendar.on").style.transform =    "perspective(700px) rotateX(" + -deg.x + "deg) " +    " rotateY(15deg)"; 
+			}
 			
 			particles = particles.filter(function (p) {
 				
@@ -430,7 +443,7 @@ define({
 			
 			
 			
-			if (!widgetFullScreenDiplayed && backendLoaded){
+			if (backendLoaded){
 				canvasDrawer.renderCircle(ctxContent, appDrawerShape, "#000000",2,false);
 				canvasDrawer.roundRect(ctxContent, aShape1, 3, false, true, "#000000", "#000000");
 				canvasDrawer.roundRect(ctxContent, aShape2, 3, false, true, "#000000", "#000000");
@@ -959,27 +972,36 @@ define({
 			document.getElementById('canvas-layout').addEventListener('click', function(e) {
 				handleClick(this,e);
 			});
-			let calendar = document.querySelector("#calendar");
-			let holder = document.querySelector("#cal_holder");
+			calendar = document.querySelector("#calendar");
+			holder = document.querySelector("#cal_holder");
+			up = document.getElementById ('up');
+			down = document.getElementById ('down');
 			calendar.addEventListener('click', function(e) {
-				//this.classList.remove('on');
+				widgetFullScreenDiplayed = false;
 				canvasDrawer.startShow();
-				
-				/*calendar.addEventListener("transitionend", function(eve) {
-					holder.classList.remove('on');
-					calendar.removeEventListener('transitionend',eve);
-					}, false);
-				calendar.classList.remove('on');*/
+				//up.classList.add('off');
+				//down.classList.add('off');
 				canvasDrawer.setClassAndWaitForTransition(calendar,'','opacity').then(function () {
 					console.log('transition calendar');
+					calendar.style.transform =    "perspective(700px) rotateX(0deg) rotateY(90deg)"; 
 					canvasDrawer.setClassAndWaitForTransition(holder,'','opacity').then(function () {
 						console.log('transition holder');
 					});
-		            
-		            
 		        });
-				
-				
+			});
+			
+			up.addEventListener('click', function(e) {
+				console.log('up'); 
+				calendarY = document.getElementById ('overflower').scrollTop-80;
+				console.log(document.getElementById ('overflower').scrollTop);
+				//document.getElementById ('overflower').scrollTop = calendarY;
+				canvasDrawer.scrollTop(document.getElementById ('overflower'),-100,500); 
+			});
+			down.addEventListener('click', function(e) {
+				console.log('down');
+				calendarY = document.getElementById ('overflower').scrollTop+80;
+				//document.getElementById ('overflower').scrollTop = calendarY+80;
+				canvasDrawer.scrollTop(document.getElementById ('overflower'),100,500); 
 			});
 			
 			window.addEventListener("timetick", function (){
