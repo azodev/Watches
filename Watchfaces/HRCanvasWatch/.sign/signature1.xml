@@ -129,8 +129,8 @@ PbtTzhEDkg==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2Fmotion.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>EOkpZzlRnfXhOIXKJoTu6nyp/pdsp0x5ZKH/YpLi16/K4lrtvlEG0mSNXd12/zuU63MRwmNDDMMi
-lLhRVpiUzg==</DigestValue>
+<DigestValue>ssqx83w/jKbF/am4STw65Q64yO83mxVWvXGuUL7fN+3w6K28iRhHh7pW5J0odDjZy57OTSue6eAA
+ZMfsBb6pGw==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2Fpedometer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -159,8 +159,8 @@ QgFh0b+TCA==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Fcanvas.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>XxVZdrmhOgv7xrkPT+ojSPOBZHzZix5qv+XIzoo9TQhYWWhA++qVsq8maO3m6I/AMpuEZ+hxjGxl
-b5VINSGkQw==</DigestValue>
+<DigestValue>DpPFiNrwPU97T3Z+w8m5VAcNNv2fqiZ0fvyl4lgPgw+vPEIbwXnN8K4QP7APNWPskzwHhRNcrciG
+SBhW8DbPeA==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Finit.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -174,13 +174,13 @@ xWO1g1j3sg==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Fradial.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>mKuVLtOW4PXYcsaa2VoS/s9XseLBnkEavRwRHzSN4qDQvEBnURdTutRyfxIdhWcacksgx1IPHGPW
-AT7+LvNZWQ==</DigestValue>
+<DigestValue>K4Kkf3lt/S6IZL8oYPWSTS5u9AAb0aob9ZOqwi2TI39XKEfLwN8hlaO5XDYyKnNrC5cXzoJ0Idrr
+M3BpBmW/Vg==</DigestValue>
 </Reference>
 <Reference URI="author-signature.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>Iy4v7fzMVIzP273pXE15IfsNpy7tB6MymrBXUNcsqBIzTwQy2h2WwWtyx2YfdW6xBXjHPViGiTaB
-fYZTQUN+Mw==</DigestValue>
+<DigestValue>KR3zylwrREkOfaZIVecw4EwPo7LxCk3xOjyVwANGjIWdqhrW5i12OV+XhsQZUeIzyZomddEFU6VA
+gXRUTPpWnA==</DigestValue>
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -774,8 +774,8 @@ wUjoxSIrAQ==</DigestValue>
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>PbgOeqtAgd8TP5520qCGAbAfARqi1eu2Fdv/IhVuKUXn77M0ezTL/0381o5MTLtWNaypuzAFVP0v
-pGiXfUC/UA==</DigestValue>
+<DigestValue>CsbC5hjLGwIBk2VzE3NvK+JvIHdevqBcp7PRoo3c/nSj3j22A24wbK+W8jgNASIjUJZvwoCv6bQM
+nmFIhWIh4g==</DigestValue>
 </Reference>
 <Reference URI="input.txt">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -791,6 +791,11 @@ ODJ6+SfaPg==</DigestValue>
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
 <DigestValue>iMRvAPzxhpZLc601Oe7gWjayjZRSEYOLDs3JzcQCltKoZhLfrupGXamnOX2i+3dR9WM7FbzYvkx2
 rJBADjAZbQ==</DigestValue>
+</Reference>
+<Reference URI="lib%2Feffects%2FFlower.class.js">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
+<DigestValue>H2CrLidiw475ipmrpsGzr6iB+MNsT2NYfmiH8t7UCwDasMvEXfO2+FLwwWSzcG2twSRmfMe8qX+K
+t8pNojyfqA==</DigestValue>
 </Reference>
 <Reference URI="lib%2Feffects%2FParticle.class.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -852,11 +857,11 @@ GyvKX9Snig==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-EQ1TomWnebp7QawlHS53QGbWAyGoN4dA4xdvFWitjnQvES2JCllHigOm+Ak+G1JKPkc8/SWrsSC0
-GZRKlICQaZbSq1qRR6EBmdwpxmxOcEMVFqOu+2DC4Q6E4G60jjOqaXAI/FbTqLi8nuiqG0YRtRNF
-b12QqXIxazn9vn9LtnYIxIwyBSTsIKWtFpR/pgKG+xuCWUoiHsF9IqY8AXLcrhMv2gxEdFSUo9mJ
-/QpBCoYtOgbJkWQOFBQGVlXyT0lg/ZhvaaEhDdr1z56mGuJv1j94Xrf5VXXRm4ObKwbsSOyFWvNY
-x/4NZCzrZTtV8VCf50+zALyKgKVAiquW2QGOqA==
+X3j3ggCQ7fqQILPdUOrG+vgTaFpQZSc4uG6kJ221I0PwLcFtAohWwTSHsnii488xNUgEvfv/rXT6
+A9oRior/Bs15RT+u/h7NhlkYSzxVm93wcUlzg137vMeMrNkWu5PjqLFg3N32ZTbWw4azDZNmVQmh
+0kDNtCDEycC3vwBVFRBm0cZZ+09DfODbLyKbWOeMgs/hFWfOSrJM34ZRE7r/Q92jrseL7oLYF2DB
+Z5wsW/nGVhi+xnJAksItc1U5YxkmfOAvAaxwRS/kFdJH8IMnY03Nfg0y9yKo5wZ85z9zyXYb3Jyk
+uOFlakA0aachXfCzrGHYOe9QCMPCBKFlP16Weg==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

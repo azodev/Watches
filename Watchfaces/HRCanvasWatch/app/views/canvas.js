@@ -1133,6 +1133,9 @@ define({
 			    	if (effect == 'attraction'){
 			    		particles.push(new Particle(ctxContent,particleColors));
 			    	}  
+			    	else if (effect == 'flower'){
+			    		particles.push(new Flower(ctxContent,particleColors));
+			    	}
 			    	else {
 			    		particles.push(new ParticleAlien(ctxContent,particleColors));
 			    	}
@@ -1213,7 +1216,7 @@ define({
 				
 				if (motionSensor.isAvailable()) {
 					motionSensor.setOptions({
-						sampleInterval : 10,
+						sampleInterval : 5,
 						maxBatchCount : 1000
 					});
 					motionSensor.setChangeListener();

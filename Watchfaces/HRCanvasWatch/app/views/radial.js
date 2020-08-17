@@ -143,6 +143,12 @@ define({
                                                  icon: '#repulsion',
                                                  title: 'Repulsion'
                                              }
+                                             ,
+                                             {
+                                                 id: 'flower',
+                                                 icon: '#flower',
+                                                 title: 'Flower'
+                                             }
                                          ]
                                      },
                                      {
@@ -183,7 +189,7 @@ define({
                     	event.fire('changeTheme',item.id);
                     	closeMenuProperly(item);
                     }
-                    else if (item.id == 'attraction' || item.id == 'repulsion' ){
+                    else if (item.id == 'attraction' || item.id == 'repulsion' || item.id == 'flower'){
                     	event.fire('changeEffect',item.id);
                     	tizen.preference.setValue('effect', item.id);
                     	closeMenuProperly(item);
