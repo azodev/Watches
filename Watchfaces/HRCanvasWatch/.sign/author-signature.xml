@@ -789,8 +789,8 @@ rJBADjAZbQ==</DigestValue>
 </Reference>
 <Reference URI="lib%2Feffects%2FFlower.class.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>H2CrLidiw475ipmrpsGzr6iB+MNsT2NYfmiH8t7UCwDasMvEXfO2+FLwwWSzcG2twSRmfMe8qX+K
-t8pNojyfqA==</DigestValue>
+<DigestValue>cPHT7H5igVEjaeA6ShYMswzUZVH4KN1XY0bLoma0IAfCWzDa5MPWe/19DpazeQbToi4MRJSsnt7X
+1T1BjOA6kg==</DigestValue>
 </Reference>
 <Reference URI="lib%2Feffects%2FParticle.class.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -852,11 +852,11 @@ QY10fG1EWQ==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-RtJHoATmHeK8YSL/YVtB3vImcFbGA5kG8a1gv44Tu+cc3qU/nHay9/HZbEB6sjBv3RS5KiMqXSMZ
-FVVHva3RQ1BdX+8N5KRMc5Uc3FFbdteHui+LDRh0HGO42QVV7YGO6OSPmnpdxcjjwSSAQHdMb8Ob
-h/FB/3GCPOxBLcxdDHi73asuHINDBF4q9tu7uUIs5vpxsguWtlTXluVjOBeJKQpx1tVSGRdadTlZ
-NGWfL+etG2pZtqx3A6fqToYRXuWQmNXtYtn5YAtlbQwAOZggAzFtx7IUKvE2EqtVY5o/6Pyd/YHo
-lz4DO88cnWcDibCh7D1zY+Uhy2+GKOlJWWqMUw==
+RThab5YWJOHb2GgMxmJh9DoVTNZjATr2/kVKiDe4Zi/I/jSHFiOQebCBSkM1lIGmOToUTeMX9nmo
+326ZknSKosobdVHAqJnEsqcHPPx0s0bdmZXhYnE4T9RRnBCzrwBUFDQsv9jasIzwqAsz5Synnwki
+mT3hAHy4tqMoEurqxzfhwgPdk6fu1EWUGbJ958d+z2AEXZzqZRSHe+7z118yrV+xetTNQ0uiwcWo
+68hE5DFnecQzhOMs/Z5t3IcCWoH5OFGUVKa1ucPwW8D72xpmJ81nOE//vl88P9jTO0O3oKIaBjTH
+5V7TVif+bPle9lYN8Z1STm4/SDf9JpUnKnXL/g==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

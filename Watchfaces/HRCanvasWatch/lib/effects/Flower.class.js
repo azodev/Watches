@@ -2,6 +2,8 @@ class Flower extends Particle {
 	  constructor(canvas,colors) {
 		  super(canvas,colors);
 		  let random = Math.random();
+		  this.j= 0;
+		  this.fa=  0;
 		  this.radius = random > .2 ? Math.random() * 1 : Math.random() * 3;
 		    this.color = random > .2 ? this.colors[0] : this.colors[2];
 		    this.radius = random > .8 ? Math.random() * 2.2 : this.radius;
@@ -21,21 +23,55 @@ class Flower extends Particle {
 	  render() {
 	    this.canvas.beginPath();
 	    if (this.radius >= 3){
-	    	this.canvas.arc(this.x, this.y+3, this.radius, 0, 2 * Math.PI);
+	    	let x;
+	    	let y;
+	    	this.j ++;
+	    	this.fa=  this.j * (Math.PI * 2) / 5;
+	    	x = 5 * Math.cos(this.fa) +this.x;
+	    	y = 5 * Math.sin(this.fa) +this.y;
+	    	this.canvas.arc(x, y, this.radius, 0, 2 * Math.PI);
 		    this.canvas.lineWidth = 2;
 		    this.canvas.fillStyle = this.color;
 		    this.canvas.fill();
 		    
-		    this.canvas.arc(this.x-3, this.y-2, this.radius, 0, 2 * Math.PI);
+		    this.j ++;
+	    	this.fa=  this.j * (Math.PI * 2) / 5;
+	    	x = 5 * Math.cos(this.fa) +this.x;
+	    	y = 5 * Math.sin(this.fa) +this.y;
+		    this.canvas.arc(x, y, this.radius, 0, 2 * Math.PI);
 		    this.canvas.lineWidth = 2;
 		    this.canvas.fillStyle = this.color;
 		    this.canvas.fill();
 		    
-		    this.canvas.arc(this.x+3, this.y-2, this.radius, 0, 2 * Math.PI);
+		    this.j ++;
+	    	this.fa=  this.j * (Math.PI * 2) / 5;
+	    	x = 5 * Math.cos(this.fa)+this.x;
+	    	y = 5 * Math.sin(this.fa) +this.y;
+		    this.canvas.arc(x, y, this.radius, 0, 2 * Math.PI);
 		    this.canvas.lineWidth = 2;
 		    this.canvas.fillStyle = this.color;
 		    this.canvas.fill();
 		    
+		    this.j ++;
+	    	this.fa=  this.j * (Math.PI * 2) / 5;
+	    	x = 5 * Math.cos(this.fa)+this.x;
+	    	y = 5 * Math.sin(this.fa) +this.y;
+		    this.canvas.arc(x, y, this.radius, 0, 2 * Math.PI);
+		    this.canvas.lineWidth = 2;
+		    this.canvas.fillStyle = this.color;
+		    this.canvas.fill();
+		    this.j ++;
+	    	this.fa=  this.j * (Math.PI * 2) / 5;
+	    	x = 5 * Math.cos(this.fa)+this.x;
+	    	y = 5 * Math.sin(this.fa) +this.y;
+		    this.canvas.arc(x, y, this.radius, 0, 2 * Math.PI);
+		    this.canvas.lineWidth = 2;
+		    this.canvas.fillStyle = this.color;
+		    this.canvas.fill();
+		    
+		    this.fa = 0;
+		    this.j = this.j+0.05;
+		    //if (this.j > 5) this.j = 0.05;
 	    }
 	    else{
 	    	this.canvas.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
