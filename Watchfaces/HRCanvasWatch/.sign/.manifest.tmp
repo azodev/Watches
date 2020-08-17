@@ -42,8 +42,8 @@ app/models/calendar.js__DEL__azGvKcezqj+I0++1IRlc3Vo9ImRXYeQWFPXdHtvgunIkPCRJic2
 G39isOJx0w==
 app/models/calories.js__DEL__z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGl
 ODJ6+SfaPg==
-app/models/canvasDrawer.js__DEL__g/2rbSp6EsCcLdeQlj1Pypq2dWSfC5y3CEzVonXI4pVKkPZ/U/U2HZbSs1oBuaBd9TAQc/o9Z03S
-P2TV+5dE9w==
+app/models/canvasDrawer.js__DEL__SK6d2zndveX3iMUWafGjGSUDOYSzshZ5xD8tI4IY9C6ezclw76Y6cat1O5pwAEePqLIXWWRlIA9h
+LTUgqPomcQ==
 app/models/heartRate.js__DEL__5+Tp4ZIx7Q+eRmEm5h4CVoNqTcopx8cDg2Ty7GS8Ud2XK/eqWl8gbYqpY6b82Z8iOk4p0BL2Y42r
 LAnoGi1kBw==
 app/models/location.js__DEL__2SdFP1nRN2h7zj+YuDAhEEwlo27X9GqJpVyU4jbLEEgY6QH+PS/OSAR0XgbChmLVcaQ+eIkRxsWu
@@ -60,8 +60,8 @@ app/models/weather.js__DEL__XToHcfAf1BezW1c8vLf6o1UYJJhi5pjqZe9dm88dod3j48+VThet
 QgFh0b+TCA==
 app/tau-config.js__DEL__4uO/1Gq8a3/K23CMOEYjwuGm2wiKcxaToAFNBAwm4x4qZfKY9WXFuZMVHqowYbMzKBuIHRt/Gju+
 7AAC7BcJIw==
-app/views/canvas.js__DEL__2BSgk+WRctEyU2CFVnUIsrAJ+ODNvXfeOBlqg7OTwqs5gcJY41S9V+9jyViQ52BBJJ0tM+hVsVh6
-QzLkw0cnJQ==
+app/views/canvas.js__DEL__h95xmjleBgGZTdL1Ku4QtAO/ZLxkD1KcTDsW54f3J2h76eaQq+dlILLPkQzt8Og7TTfY/5gZR/lm
+L5t+aQSEDA==
 app/views/init.js__DEL__LVuK5g7WotAFrCgZAMNnprcXc75a0AVl0ry9BnaKSEyMsmarmc2oCjPLFGIS5OnCoAc5qCYIp/iT
 3lvGUd+HoQ==
 app/views/main.js__DEL__cLq/heU73SFSnnWB6R6gDzJI6sqH+z1SMoL1K+NLjntqRNqH9vCk1psDeur52R0ommmen2kLZAnZ
@@ -72,8 +72,8 @@ config.xml__DEL__lCDDBFVBZ2IxWUSEwn9la2M/9WY+JT836VbaTjULPZV31jLle1Lh06vJn36ZNmT
 C08ioH4l8Q==
 css/augmented.css__DEL__DZJ0Z/5xGRIIMN5L7uPxpc7+sd+DAWQfN5PfPbf2RA4DNSA/1apoHetFOJL374XWkJSAEcluhFgZ
 KuvT366BWQ==
-css/style.css__DEL__97muigijdqSMDJT5nx2G7uYjBqZ+IQNBH8M0a4vkweF9fgh7sSp3wTkq8PLj3wJh5N15c8rJNbWM
-cb2xUBpAxg==
+css/style.css__DEL__xp45dWyNWbmzfivFm009U0o8tRNuUFQyUluOT6aoZ2blzKtzg+mlyysbwwpC6qMa8tc4zbXZmmad
+9drJEugTjQ==
 data/FutureNow.ttf__DEL__DDMeLXs3dgCipVEGS35Xqu1WWKTb0s88CSpflU18S+UBZZVwpKSQhJ9SzKYLg3hQIo4YaN+o8Ueh
 YcJJknHOug==
 data/artill_clean_icons.otf__DEL__bKdOXi1HIZZyl6/6ggDCU6dg4uamn8NJOcRWGaUyCu9y68PoePMr8UbjvfFGm/v9H9fMGAPnn5BP
@@ -320,8 +320,8 @@ lib/radial/css/RadialMenu.css__DEL__qW8RrF8NvwsQiA2XK5hesO7DuFSeRsEIQFwwB/4iBmCR
 JdgfJRRWeg==
 lib/radial/css/main.css__DEL__/PP4VmzNXSMqOT52ErP9AgwpQr3g5EO8qeOMMpY6N60TUrSuTquSRIjGJE0Mng2n1O+//qdElii9
 8p7wwiVSug==
-lib/radial/js/RadialMenu.js__DEL__RgAjz6W+lbuB5fDKJvOJer0wpxFekndSTMUbC+daWRGEN9Q3H4UMz6BY8aRls9VeZo/XV/R5z7Dd
-hhlhhW1bEA==
+lib/radial/js/RadialMenu.js__DEL__r/Vu+XZP0wLYTROUqXuaoOAbS0IDNZYg1W2tCeymqWmBnOkLWmM5ix5Bqgw67QoKaaHNKOvpwsF/
+WDWs751mDg==
 lib/radial/js/main.js__DEL__8GWGSGJr/EB3gt2+l7nHckbN5a9zlscIu4ih7OAQyRdxdZHA4ZtTj25ncF1K0DAFmGhHQHn5qqmy
 Wf+XsDtqzg==
 lib/shapes/Circle.class.js__DEL__Gr/1Ms3Zgn8WaDmc98aQsyFsDdGSZln4MRvSVreYuBaLAGyXxdNrVaDJ5OckbiFhEN+WBK9nXff9
@@ -332,5 +332,5 @@ output.txt__DEL__z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuw
 ODJ6+SfaPg==
 version.txt__DEL__jJtvGOhH+xRt5nb2nvtEt+HGe/PG0CnhcMjO6XKTjHZEjeAZ5yuYeNEv9jXlGeLwx2zOOKSyvcob
 EviMmoUiyw==
-author-signature.xml__DEL__0qAqDbX7RQx9Jh0ICmWQvJb9TNBBYjksaJqOdsNntCQg/DhylIYzXLHMbCGEu+hZoREe+TpEvCxY
-AX5a0Kn+PA==
+author-signature.xml__DEL__eB1VmhBEXhAIAhpPo59DFWHwCoQk9tITh56akJ8PGueON1K3CNVnt0ie/WUgLr9+ZfZ+UKpjYEQO
+jXH/sQ/6LQ==

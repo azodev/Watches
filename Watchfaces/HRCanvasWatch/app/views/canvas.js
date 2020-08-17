@@ -205,15 +205,18 @@ define({
 			else if (calendarShape.isInSurface(clickPos,0) && !forecastDisplayed && !radialmenu.getOpen() ){
 				console.log('Click fade');
 				canvasDrawer.startFade();
-				let holder = document.querySelector("#cal_holder");
-				let calendar = document.querySelector("#calendar");
-				holder.style.display = "flex";
+				var holder = document.querySelector("#cal_holder");
+				var calendar = document.querySelector("#calendar");
+				
 				canvasDrawer.setClassAndWaitForTransition(holder,'on').then(function () {
-					holder.style.display = "flex";
-					calendar.classList.add('on');
+					console.log('transition holder');
+					canvasDrawer.setClassAndWaitForTransition(calendar,'on').then(function () {
+						console.log('transition calendar');
+					});
 		            
 		            
 		        });
+				
 				/*
 			
 				holder.addEventListener("transitionend", function(eve) {
@@ -967,15 +970,8 @@ define({
 					calendar.removeEventListener('transitionend',eve);
 					}, false);
 				calendar.classList.remove('on');*/
-				let holder = document.querySelector("#cal_holder");
-				let calendar = document.querySelector("#calendar");
-				holder.style.display = "flex";
-				canvasDrawer.setClassAndWaitForTransition(holder,'on').then(function () {
-					holder.style.display = "flex";
-					calendar.classList.add('on');
-		            
-		            
-		        });
+				
+				
 				
 			});
 			

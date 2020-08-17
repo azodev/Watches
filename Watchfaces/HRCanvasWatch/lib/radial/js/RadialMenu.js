@@ -623,7 +623,9 @@ RadialMenu.degToRad = function (deg) {
 RadialMenu.setClassAndWaitForTransition = function (node, newClass) {
     return new Promise(function (resolve) {
         function handler(event) {
+        	
             if (event.target == node && event.propertyName == 'visibility') {
+            	
                 node.removeEventListener('transitionend', handler);
                 resolve();
             }

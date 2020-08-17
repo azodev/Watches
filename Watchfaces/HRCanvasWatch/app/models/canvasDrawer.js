@@ -793,11 +793,14 @@ define({
 		function setClassAndWaitForTransition (node, newClass) {
 		    return new Promise(function (resolve) {
 		        function handler(event) {
+		        	console.log(event);
+		        	console.log(event.propertyName);
 		            if (event.target == node && event.propertyName == 'visibility') {
 		                node.removeEventListener('transitionend', handler);
 		                resolve();
 		            }
 		        }
+		        console.log(node);
 		        node.addEventListener('transitionend', handler);
 		        node.setAttribute('class', newClass);
 		    });
