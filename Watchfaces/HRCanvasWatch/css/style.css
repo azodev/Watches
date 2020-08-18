@@ -100,7 +100,7 @@ html, body {
   --aug-br: 10px;
   --aug-tr: 10px; 
    /*transform-origin: 100px 50%;*/
-    transform: perspective(700px) rotateY(90deg); 
+    transform: perspective(700px) rotateY(90deg) rotateZ(90deg); 
     
    scroll-behavior: smooth;
     
@@ -208,7 +208,7 @@ html, body {
 	height : 10px;
 	float:left;
 }
-.event .title {
+.event .title { 
 	min-height: 20px;
 	width: 205px;
 	position: relative;
@@ -216,7 +216,7 @@ html, body {
 	margin-left:55px;
 	font-size:15px;
 	color: #ffffff;
-	text-shadow: 0 0 10px cyan;
+	/*text-shadow: 0 0 10px cyan;*/
 }
 .event .location {
 	min-height: 15px;

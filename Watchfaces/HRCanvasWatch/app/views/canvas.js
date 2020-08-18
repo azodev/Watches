@@ -971,27 +971,31 @@ define({
 			}
 			*/
 		}
-		
+		function closeCalendarMenu(){
+			widgetFullScreenDiplayed = false;
+			calendar = document.querySelector("#calendar");
+			holder = document.querySelector("#cal_holder");
+			canvasDrawer.setClassAndWaitForTransition(calendar,'','opacity').then(function () {
+				console.log('transition calendar');
+				calendar.style.transform =    "perspective(700px) rotateX(0deg) rotateY(90deg) rotateZ(90deg)"; 
+				canvasDrawer.setClassAndWaitForTransition(holder,'','opacity').then(function () {
+					console.log('transition holder');
+				});
+	        });
+		}
 		function bindEvents() {
 			document.getElementById('canvas-layout').addEventListener('click', function(e) {
 				handleClick(this,e);
 			});
-			calendar = document.querySelector("#calendar");
-			holder = document.querySelector("#cal_holder");
+			
 			up = document.getElementById ('up');
 			down = document.getElementById ('down');
 			calendar.addEventListener('click', function(e) {
-				widgetFullScreenDiplayed = false;
+				
 				canvasDrawer.startShow();
 				//up.classList.add('off');
 				//down.classList.add('off');
-				canvasDrawer.setClassAndWaitForTransition(calendar,'','opacity').then(function () {
-					console.log('transition calendar');
-					calendar.style.transform =    "perspective(700px) rotateX(0deg) rotateY(90deg)"; 
-					canvasDrawer.setClassAndWaitForTransition(holder,'','opacity').then(function () {
-						console.log('transition holder');
-					});
-		        });
+				closeCalendarMenu();
 			});
 			
 			up.addEventListener('click', function(e) {
@@ -1022,6 +1026,7 @@ define({
 					if (radialmenu.getOpen()){
 						radialmenu.closeMenu();
 					}
+					closeCalendarMenu();
 					activateMode("Ambient");
 				} else {
 					// Rendering normal case
@@ -1041,6 +1046,7 @@ define({
 						if (radialmenu.getOpen()){
 							radialmenu.closeMenu();
 						}
+						closeCalendarMenu();
 						activateMode("Ambient");
 						
 					} else {
@@ -1053,6 +1059,7 @@ define({
 					if (radialmenu.getOpen()){
 						radialmenu.closeMenu();
 					}
+					closeCalendarMenu();
 					if (isAmbientMode !== true) {
 						//event.fire ('hidden','clearScreen');
 						ctxLayout.clearRect(0, 0, ctxLayout.canvas.width, ctxLayout.canvas.height);
