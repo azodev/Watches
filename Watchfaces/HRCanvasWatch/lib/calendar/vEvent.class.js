@@ -2,7 +2,7 @@ class vEvent {
 	constructor(array){
 		let i;
 		this.location = null;
-		this.fullDay = false
+		this.fullDay = false;
 		for ( i=0 ;i<array[1].length ; i++ ){
 			switch (array[1][i][0]) {
 			case 'summary':
@@ -54,5 +54,13 @@ class vEvent {
 	}
 	getLocation(){
 		return this.location;
+	}
+	getTimefromDate(date){
+		let  hour = '' + date.getHours();
+        let minutes = date.getMinutes();
+
+        if (minutes.length < 2) 
+        month = '0' + month;
+    return [hour,minutes].join('h');
 	}
 }

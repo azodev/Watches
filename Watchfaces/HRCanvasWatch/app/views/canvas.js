@@ -398,7 +398,7 @@ define({
 				
 			}
 			if (widgetFullScreenDiplayed ===true){
-				deg.x = (gravCenter.y - 180)*1.4;
+				deg.x = (gravCenter.y - 190)*1.2; 
 				if (deg.x <= -30 ) deg.x = -30; 
 				if (deg.x >= 30 ) deg.x = 30;
 				document.querySelector("#calendar.on").style.transform =    "perspective(700px) rotateX(" + -deg.x + "deg) " +    " rotateY(15deg)"; 
@@ -1238,7 +1238,7 @@ define({
 				
 				if (motionSensor.isAvailable()) {
 					motionSensor.setOptions({
-						sampleInterval : 5,
+						sampleInterval : 10,
 						maxBatchCount : 1000
 					});
 					motionSensor.setChangeListener();

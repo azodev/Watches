@@ -82,15 +82,22 @@ define({
 		function buildDaysEvents(){
 			myEvents = [];
 			vEvents.forEach(function(ev){
-				if (myEvents.map(function(o) { return o.day; }).indexOf(formatDate(ev.startDate)) == -1){
-					myEvents.push({'day':formatDate(ev.startDate),'events':[]});
+				if (myEvents.map(function(o) { return o.date; }).indexOf(formatDate(ev.startDate)) == -1){
+					myEvents.push(new DayEvents(formatDate(ev.startDate),[]));
+					
 				}
 				
 				for (z= 0 ; z< myEvents.length; z++){
-					if (myEvents[z].day == formatDate(ev.startDate) ){
+					if (myEvents[z].date == formatDate(ev.startDate) ){
 						myEvents[z].events.push(ev);
 					}
 				}
+			});
+		}
+		function fillCalendar(){
+			document.getElementById('overflower').innerHTML = '';
+			myEvents.forEach(function(ev){
+				ev.processHtml();
 			});
 		}
 
@@ -125,13 +132,13 @@ define({
 			nowDate = new Date();
 			
 			doPromise('alten').then( function (){
-				doPromise('gmail');
+				doPromise('gmail').then(function(){
+					handleFilterForFinishedEvents();
+					
+				});
 			}
 					
-			).then(function(){
-				handleFilterForFinishedEvents();
-				
-			});
+			);
 			
 			
 			
@@ -275,6 +282,7 @@ define({
 			buildDaysEvents();
 			console.log(vEvents);  
 			console.log(myEvents);
+			fillCalendar();
 		}
  
 		function filterFinishedVEvents(event){ 
