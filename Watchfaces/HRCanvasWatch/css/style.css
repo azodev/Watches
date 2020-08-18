@@ -81,6 +81,8 @@ html, body {
     padding: 10px; /* mind the gap */
     z-index: 3;
     opacity:0;
+    margin-left: 40px ; 
+    margin-top: 55px;
     /*transition: opacity 1s ease, transform 1s ease;*/
     transition-property: opacity, transform;
 	transition-duration: 0.5s;
@@ -169,18 +171,26 @@ html, body {
 	--aug-inset-bg: rgba(0, 0, 0, 0.25);
 	--aug-border: 2px;
 	--aug-border-bg: linear-gradient(to right, gold, cyan);
+	background-color:transparent;
 	--aug-tl: 5px;
 	--aug-br: 5px;
 	--aug-bl: 10px;
 	--aug-tr: 10px;
-
+	z-index:5;
 	min-height: 40px;
 	width: 95%;
+	color:white;
+	transition:background-color 0.5s ease; 
+}
+#calendar .event.click {
+    background-color: white;
+    color:black;
+	transition:background-color 0.5s ease, color 0.5s ease;  
 }
 .dates {
 	height: 30px;
 	width: 50px;
-	font-size:15px;
+	font-size:15px; 
 	top: 3px;
 	left:5px;
 	color: #ffffff;
@@ -201,7 +211,7 @@ html, body {
 }
 .dates.fd{
 	--aug-inset-bg: linear-gradient(to right, gold, cyan);
-}
+} 
 .dates span{
 	position:relative;
 	width : 40px;
@@ -215,7 +225,6 @@ html, body {
 	margin-top: 0px;
 	margin-left:55px;
 	font-size:15px;
-	color: #ffffff;
 	/*text-shadow: 0 0 10px cyan;*/
 }
 .event .location {
@@ -225,7 +234,6 @@ html, body {
 	margin-top: 0px;
 	margin-left:55px;
 	font-size:13px;
-	color: #ffffff;
 }
 #calendar .day{
   background-color: rgba(0,255,255, 0.53);

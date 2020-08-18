@@ -10,14 +10,14 @@ class ParticleAlien{
 	  	      x: 360 / 2,
 	  	      y: 360 / 2 };
 	    this.s = Math.random() * 3;
-	    this.a = Math.floor(Math.random() * 360);
+	    this.a = 360 *Math.random() * (Math.PI * 2) / 280;
 	    this.w = 360;
 	    this.h = 360;
-	    this.radius = random > .2 ? Math.random()*1 : Math.random()*3;
+	    this.radius = random > .2 ? Math.random()*1 : 1;
 	    this.color  = random > .2 ? this.colors[0] : this.colors[1];
 	    this.radius = random > .8 ? Math.random()*2 : this.radius;
 	    this.color  = random > .8 ? this.colors[2] : this.color;
-	    this.radius = this.radius*1.2;
+	    
 	    // this.color  = random > .1 ? "#ffae00" : "#f0ff00" // Alien
 
 	  }
@@ -40,7 +40,6 @@ class ParticleAlien{
 	  }
 
 	  move(){
-		  
 		  let p1 = {
 			      x: this.x,
 			      y: this.y };
@@ -56,7 +55,7 @@ class ParticleAlien{
 	    this.x += Math.cos(this.a) * this.s + attr_x;
 	    this.y += Math.sin(this.a) * this.s + attr_y;
 	    this.a +=  Math.random() > 0.5 ? Math.random() * 0.9 - 0.45 : Math.random() * 0.4 - 0.2;
-
+	   // this.a += 
 	    
 	    if(this.x < 0 || this.x > this.w - this.radius){
 	      return false;

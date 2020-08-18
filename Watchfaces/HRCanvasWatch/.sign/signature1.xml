@@ -99,8 +99,8 @@ uoowPhkRgQ==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2Fcalendar.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>yj6HLDyOJH9k3QZ6PdSl2OkAPDQPaWqBouQmInl4+/II0m2lIJyu4g1BHDAQ/2KKxaB1HQ5aCq1N
-F5QGRORu8Q==</DigestValue>
+<DigestValue>me50MQijEyC3fisZ6h/9JHukZKpa+eYb64tG2LgT4aU0aAr1IiLJGmr3jI/ny3BdZHt5ZNFh19eT
+p7FALH0SmA==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2Fcalories.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -109,8 +109,8 @@ ODJ6+SfaPg==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2FcanvasDrawer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>0eykwELeyHsnUjtbQK6CilD2AlRRJXpqaRCzokXwSfPeS4YipNGDC5Tx9k+DaSro+EOxSjh/pZQo
-DclYjpw92Q==</DigestValue>
+<DigestValue>r1lAJ4glZWThdb9fuGv3e2XPe0a07kKcdPQBDFotZ0Cnr75uFrkdI7m8qM3+H6V+vyrmSfkhB/YP
+JYveyluE/Q==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2FheartRate.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -154,8 +154,8 @@ QgFh0b+TCA==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Fcanvas.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>e4R4PhFSc/0aV5U8pBMLaOw5f5LAAwJczntHSpHHD/FgwblRV+h0JSxRLs+XvH8Idp3YWLj5yKbA
-7k1kBEYWpA==</DigestValue>
+<DigestValue>YcsmzS4HijyRHGMEJdqa8VQsLCsm09w3LOxvg45IXyCw5Xhtr2sV2JmMDLHR6ts70wqOr8QRNmrY
+B0pQNzlkTw==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Finit.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -174,8 +174,8 @@ WLdhYlPr7Q==</DigestValue>
 </Reference>
 <Reference URI="author-signature.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>mZZ3iOsG4zOqd1j2kI1NBtV++N2SGTQ2PjE9Izhqort20Qj2hR0fa1l1nkhXkFbl2iMIB8nW6TQ2
-qRWQiVgm7w==</DigestValue>
+<DigestValue>N9uOuPyUR6tLOZeyYUWkO4uYBHwbIiaD5aFqRuW+YgxZUeLGHZjPA4rwTFl3WXrGAM/tqfEC6VD/
+fNNGa3qYJw==</DigestValue>
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -189,8 +189,8 @@ KuvT366BWQ==</DigestValue>
 </Reference>
 <Reference URI="css%2Fstyle.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>wngWB8FGwXt1NiU8Ccc8jslj72L2ZaK6+4wwH0BL0Cl4M8aNPEjmVl3LFmqWwByy7j0yC/hVVV+C
-z280QzPP1Q==</DigestValue>
+<DigestValue>aO5ooUeegKY3YjVX7BXEM0enRGpr56UieafTtmwvFG/abLIpcDW4BIhq1dHIP1lGvLC4aeQnmKKU
++VM6KpSWuQ==</DigestValue>
 </Reference>
 <Reference URI="data%2FFutureNow.ttf">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -769,8 +769,8 @@ wUjoxSIrAQ==</DigestValue>
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>bKbpmf8cDmj8jDhd0zK3s1CqJ7OEcUdkBLeFj/cmNQ1Nldj72Ei4ocg7Lj9Vyia8eWWwkR4D2g1X
-sX1WDiRb6A==</DigestValue>
+<DigestValue>lSzHXY4xGwl5wVH7QIBXjgSuluHBop4jC2LzODZlV5dTylhW6nS2T/c/pAWVCozCV9ez9E5/vCUw
++sf4lbyHAw==</DigestValue>
 </Reference>
 <Reference URI="input.txt">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -794,18 +794,23 @@ rJBADjAZbQ==</DigestValue>
 </Reference>
 <Reference URI="lib%2Feffects%2FFlower.class.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>cPHT7H5igVEjaeA6ShYMswzUZVH4KN1XY0bLoma0IAfCWzDa5MPWe/19DpazeQbToi4MRJSsnt7X
-1T1BjOA6kg==</DigestValue>
+<DigestValue>fjiAqF+3R1DElRldvq4a+Kt3XauXkvFHZjGrlHqs5wh6yp5JdJTHcnVklnqyhkfX92o2HVfQdSml
+A0dgYoTtXA==</DigestValue>
 </Reference>
 <Reference URI="lib%2Feffects%2FParticle.class.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>5szgnmCekbGpXKBTTWWsK62gY/fr2nxbdJ/02ACW64h4NrgIMH8SMqfKIpqoPU7HeR97WzJIugfT
-344i46kRaw==</DigestValue>
+<DigestValue>2MZteUeNVc8cyLigV2OTSraZwu0WczaMCJkwJTui53I++EsuvkwJlI1rp5Y7dS6NpOdedvBhMhS+
+j2MrqQdJIQ==</DigestValue>
 </Reference>
 <Reference URI="lib%2Feffects%2FParticleAlien.class.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>CR9uI8Ck+YpvFcrrR7X1LoZY6TvWQHRSdiuZB/rbxfQgx48ptCexqLKJtjiKDpTSjo9yBW3Ya7jP
-xsr5XoicNw==</DigestValue>
+<DigestValue>Mu2TVGpo+Tb6fhWAmr2Jt5bFPYmR95qhNl3ofJZ+0RGt3pei4m8dWtzQctiy6AkKDWf685L9KFKT
+bPJlynw3Lg==</DigestValue>
+</Reference>
+<Reference URI="lib%2Fextra.js">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
+<DigestValue>6ieUMiGKPNqyc4GrxgHFf1wmajPeybBu1FZa+Tblug+Tl4/aKo6mIJuqWK5P3YbmuoncPdM1Kq6L
+Vn7SkzI6Eg==</DigestValue>
 </Reference>
 <Reference URI="lib%2Fradial%2Fcss%2FRadialMenu.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -857,11 +862,11 @@ GyvKX9Snig==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-Oa3FSsGIwXuBSM8tFSAhJyfF0yBdXMqYNC3iNUtffLiFzMx6TTBG7X936mpHUlX6S7txGdxh0Ewv
-E7DaeoB/e88awN3ArYlSvc2n6APypI3otYE0LmAufzdfd82/PIpQF44R11tXZ48RRH6rqLFY7v0h
-WAWy9sFUDf37ZasVp1hjZ+lgVGOBmJGvX3Bs0Pow79fSnn2L0eyvLDR1T1NO0xoj2rFxYEuPmx4Y
-Y/v8p1WPhh9y+7M2wWhG6oh76NrOxDIpejDdcpDrBzI6V6BVb6KVGILvUHd62X62b2CXEZoXOzDb
-wIfft3S3tAAGVdniYrcwNLXr9suHYrUremkALw==
+fkVeGV45I8yFRoET2V3Y7vxn9whGWE0MI0LNebLei0ymPSry6tAMm15Q1rim16MAAMXDfuc0X75H
+tR8O2k+CRVb1Qjh9rYuhKD+AIbRi2fFBUC7fbOi6Us2S5gw48NajhPOwI+CUY2AA8Z6U3wq61m9f
+xPSy9sB5ebDZYNubWDjDW7Ljiv11OhSbkpGrViOdV5L6ib5i3peqjXgiop+CkNwgWGhZCWyds9kM
+MDJNPRzNcTAmlaQRUEzAVCWH0DaLH5Oz2r+PHgP6NH1LfkF6ABX6uiG7ZAo29CMDrt6zXXA0zmfM
+VG/Bm6OjvB4Qc7MXoYrdbJ/zlULEo1OhbtGWeA==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

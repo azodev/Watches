@@ -4,11 +4,12 @@ class Flower extends Particle {
 		  let random = Math.random();
 		  this.j= 0;
 		  this.fa=  0;
-		  this.radius = random > .2 ? Math.random() * 1 : Math.random() * 3;
-		    this.color = random > .2 ? this.colors[0] : this.colors[2];
+		  this.radius = random > .2 ? Math.random() * 1 : 1;
+		    this.color = random > .2 ? this.colors[0] : this.colors[1];
 		    this.radius = random > .8 ? Math.random() * 2.2 : this.radius;
-		    this.color = random > .8 ? this.colors[1] : this.color;
+		    this.color = random > .8 ? this.colors[2] : this.color;
 		    this.radius = this.radius*1.2;
+		    this.s = Math.random() * 4;//2
 	  }
 	  setPoA(coords){
 		  this.point_of_attraction.x = coords.x;
@@ -21,14 +22,14 @@ class Flower extends Particle {
 	  }
 
 	  render() {
-	    this.canvas.beginPath();
-	    if (this.radius >= 3){
+	    this.canvas.beginPath(); 
+	    if (this.radius >= 2.5){
 	    	let x;
 	    	let y;
 	    	this.j ++;
 	    	this.fa=  this.j * (Math.PI * 2) / 5;
-	    	x = 5 * Math.cos(this.fa) +this.x;
-	    	y = 5 * Math.sin(this.fa) +this.y;
+	    	x = 4 * Math.cos(this.fa) +this.x;
+	    	y = 4 * Math.sin(this.fa) +this.y;
 	    	this.canvas.arc(x, y, this.radius, 0, 2 * Math.PI);
 		    this.canvas.lineWidth = 2;
 		    this.canvas.fillStyle = this.color;
@@ -36,8 +37,8 @@ class Flower extends Particle {
 		    
 		    this.j ++;
 	    	this.fa=  this.j * (Math.PI * 2) / 5;
-	    	x = 5 * Math.cos(this.fa) +this.x;
-	    	y = 5 * Math.sin(this.fa) +this.y;
+	    	x = 4 * Math.cos(this.fa) +this.x;
+	    	y = 4 * Math.sin(this.fa) +this.y;
 		    this.canvas.arc(x, y, this.radius, 0, 2 * Math.PI);
 		    this.canvas.lineWidth = 2;
 		    this.canvas.fillStyle = this.color;
@@ -45,8 +46,8 @@ class Flower extends Particle {
 		    
 		    this.j ++;
 	    	this.fa=  this.j * (Math.PI * 2) / 5;
-	    	x = 5 * Math.cos(this.fa)+this.x;
-	    	y = 5 * Math.sin(this.fa) +this.y;
+	    	x = 4 * Math.cos(this.fa)+this.x;
+	    	y = 4 * Math.sin(this.fa) +this.y;
 		    this.canvas.arc(x, y, this.radius, 0, 2 * Math.PI);
 		    this.canvas.lineWidth = 2;
 		    this.canvas.fillStyle = this.color;
@@ -54,16 +55,16 @@ class Flower extends Particle {
 		    
 		    this.j ++;
 	    	this.fa=  this.j * (Math.PI * 2) / 5;
-	    	x = 5 * Math.cos(this.fa)+this.x;
-	    	y = 5 * Math.sin(this.fa) +this.y;
+	    	x = 4 * Math.cos(this.fa)+this.x;
+	    	y = 4* Math.sin(this.fa) +this.y;
 		    this.canvas.arc(x, y, this.radius, 0, 2 * Math.PI);
 		    this.canvas.lineWidth = 2;
 		    this.canvas.fillStyle = this.color;
 		    this.canvas.fill();
 		    this.j ++;
 	    	this.fa=  this.j * (Math.PI * 2) / 5;
-	    	x = 5 * Math.cos(this.fa)+this.x;
-	    	y = 5 * Math.sin(this.fa) +this.y;
+	    	x = 4 * Math.cos(this.fa)+this.x;
+	    	y = 4 * Math.sin(this.fa) +this.y;
 		    this.canvas.arc(x, y, this.radius, 0, 2 * Math.PI);
 		    this.canvas.lineWidth = 2;
 		    this.canvas.fillStyle = this.color;
@@ -79,7 +80,7 @@ class Flower extends Particle {
 		    this.canvas.fillStyle = this.color;
 		    this.canvas.fill();
 	    }
-	    this.canvas.closePath();
+	    this.canvas.closePath(); 
 	  }
 
 	  move() {

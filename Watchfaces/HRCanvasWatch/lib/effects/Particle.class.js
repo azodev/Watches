@@ -32,9 +32,9 @@ class Particle {
 	    this.a = 0;
 	    this.w = 360;
 	    this.h = 360;
-	    this.radius = random > .2 ? Math.random() * 1 : Math.random() * 3;
+	    this.radius = random > .2 ? Math.random() * 1 : 1;
 	    this.color = random > .2 ? this.colors[0] : this.colors[1];
-	    this.radius = random > .8 ? Math.random() * 2.2 : this.radius;
+	    this.radius = random > .8 ? Math.random() * 2 : this.radius;
 	    this.color = random > .8 ? this.colors[2] : this.color;
 	    this.radius = this.radius*1.2;
 	  }

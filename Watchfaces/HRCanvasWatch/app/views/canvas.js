@@ -162,6 +162,7 @@ define({
 		var heartRateDisplayed=true;
 		var holder = document.querySelector("#cal_holder");
 		var calendar = document.querySelector("#calendar");
+		
 		var up = document.getElementById ('up');
 		var down = document.getElementById ('down');
 		var calendarY = 0;
@@ -212,33 +213,25 @@ define({
 				console.log('Click fade');
 				canvasDrawer.startFade();
 				
-				canvasDrawer.setClassAndWaitForTransition(holder,'on','opacity').then(function () {
+				setClassAndWaitForTransition(holder,'on','opacity').then(function () {
 					console.log('transition holder');
-					canvasDrawer.setClassAndWaitForTransition(calendar,'on','opacity').then(function () {
+					holder.setAttribute('class', 'on');
+					setClassAndWaitForTransition(calendar,'on','opacity').then(function () {
 						console.log('transition calendar');
+						calendar.setAttribute('class', 'on');
 						//document.getElementById ('up').classList.remove('off');
 						//document.getElementById ('down').classList.remove('off');
-						
+						/*
 						setTimeout(function (){
-							widgetFullScreenDiplayed = true;
-						},100);
+							
+						},100);*/
+						widgetFullScreenDiplayed = true;
 					});
 		            
 		            
 		        });
 				
-				/*
-			
-				holder.addEventListener("transitionend", function(eve) {
-					document.querySelector("#calendar").classList.add('on');
-					holder.removeEventListener('transitionend',eve);
-					}, false);
-				holder.classList.add('on');
-				 */
 				
-				
-				
-				//canvasDrawer.startShow();
 			}
 			
 		}
@@ -399,17 +392,19 @@ define({
 				    "perspective(700px) rotateX(" + -deg.x + "deg) " + 
 				    " rotateY(" + deg.y + "deg)";
 				
-				 
+				  
 			}
 			if (widgetFullScreenDiplayed ===true){
 				deg.x = (gravCenter.y - 190)*1.2;
 				deg.y = (gravCenter.x - 180)*1.2;
 				if (deg.x <= -20 ) deg.x = -20;
 				if (deg.x >= 20 ) deg.x = 20;
-				if (deg.y <= -20 ) deg.y = -20;
-				if (deg.y >= 20 ) deg.y = 20;
+				if (deg.y <= -20 ) deg.y = -20; 
+				if (deg.y >= 20 ) deg.y = 20; 
 				//document.querySelector("#calendar.on").style.opacity=1;
-				document.querySelector("#calendar.on").style.transform =    "perspective(700px) rotateX(" + -deg.x + "deg) " +    " rotateY(" + deg.y + "deg)"; 
+				let calendarOn = document.querySelector("div#calendar.on");
+				//if (calendarOn.style.opacity < 1) calendarOn.style.opacity = 1;
+				calendarOn.style.transform =    "perspective(700px) rotateX(" + -deg.x + "deg) " +    " rotateY(" + deg.y + "deg)"; 
 			}
 			
 			particles = particles.filter(function (p) {
@@ -979,10 +974,11 @@ define({
 			widgetFullScreenDiplayed = false;
 			calendar = document.querySelector("#calendar");
 			holder = document.querySelector("#cal_holder");
-			canvasDrawer.setClassAndWaitForTransition(calendar,'','opacity').then(function () {
+			setClassAndWaitForTransition(calendar,'','opacity').then(function () {
 				console.log('transition calendar');
+				//calendarOn.style.opacity = 0;
 				//calendar.style.transform =    "perspective(700px) rotateX(0deg) rotateY(90deg) rotateZ(90deg)"; 
-				canvasDrawer.setClassAndWaitForTransition(holder,'','opacity').then(function () {
+				setClassAndWaitForTransition(holder,'','opacity').then(function () {
 					console.log('transition holder');
 				});
 	        });
@@ -995,12 +991,11 @@ define({
 			up = document.getElementById ('up');
 			down = document.getElementById ('down');
 			calendar.addEventListener('click', function(e) {
-				
+				 if (e.target !== this && e.target != document.querySelector("#overflower"))
+					    return;
 				canvasDrawer.startShow();
-				//up.classList.add('off');
-				//down.classList.add('off');
 				closeCalendarMenu();
-			});
+			}); 
 			
 			up.addEventListener('click', function(e) {
 				console.log('up'); 

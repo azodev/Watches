@@ -280,6 +280,17 @@ define({
 			vEvents = vEvents.filter (filterFinishedVEvents);
 			buildDaysEvents();
 			fillCalendar();
+			document.querySelectorAll("#calendar .event").forEach(function (element){
+				console.log('event onclick creation');
+				element.addEventListener('click', function(e) {
+					console.log('click event');
+					setClassAndWaitForTransition(element,'event click','background-color').then(function () {
+						console.log('transition event');
+						element.setAttribute('class', 'event');
+					});
+						
+				});
+			});
 		}
  
 		function filterFinishedVEvents(event){ 
