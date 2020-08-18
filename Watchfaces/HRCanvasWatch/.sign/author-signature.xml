@@ -99,8 +99,8 @@ uoowPhkRgQ==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2Fcalendar.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>me50MQijEyC3fisZ6h/9JHukZKpa+eYb64tG2LgT4aU0aAr1IiLJGmr3jI/ny3BdZHt5ZNFh19eT
-p7FALH0SmA==</DigestValue>
+<DigestValue>OsWaxvXlRBbzKuLx69gpUGRiwr4hbCqrz9NabhiJj/l62kegXssneolqOhcLH9MvOP+DUs+VWf/a
+gNooSCK2rA==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2Fcalories.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -154,8 +154,8 @@ QgFh0b+TCA==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Fcanvas.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>YcsmzS4HijyRHGMEJdqa8VQsLCsm09w3LOxvg45IXyCw5Xhtr2sV2JmMDLHR6ts70wqOr8QRNmrY
-B0pQNzlkTw==</DigestValue>
+<DigestValue>OGzJNQQNBP5UO4w+32o86QDC8ugzTaTakXqGzqeZm/mUWxXSHJ8aHf3LRrMgo5axpT+KEkmXaug5
+u3xuDWyldQ==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Finit.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -184,8 +184,8 @@ KuvT366BWQ==</DigestValue>
 </Reference>
 <Reference URI="css%2Fstyle.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>aO5ooUeegKY3YjVX7BXEM0enRGpr56UieafTtmwvFG/abLIpcDW4BIhq1dHIP1lGvLC4aeQnmKKU
-+VM6KpSWuQ==</DigestValue>
+<DigestValue>7N2jFcBssYjroiGEFBxqNkl6FZrVCASN0GIpYXFu9CKXXx7iVrhvnl0TXIYrYKs6fflA3vcrYPtx
+iYpBnwIb+Q==</DigestValue>
 </Reference>
 <Reference URI="data%2FFutureNow.ttf">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -774,8 +774,8 @@ ODJ6+SfaPg==</DigestValue>
 </Reference>
 <Reference URI="lib%2Fcalendar%2FDayEvents.class.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>RPB9CiE97PA/smIb73af/+i2jakeFh1jVIfzFFSXf6/DDEPLj9zPAoffbHvpHXMw81Cz6lKwB5hR
-cJH/0IE4mw==</DigestValue>
+<DigestValue>rFJNQMmlhWXO1+4VqVgMviEBF9jqhiIOEAOXbgmdhf1MklGirCMOknyGFZKROOHMbe4I7XIb4mKy
+QE83ZiuKow==</DigestValue>
 </Reference>
 <Reference URI="lib%2Fcalendar%2FvEvent.class.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -857,11 +857,11 @@ QY10fG1EWQ==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-Qiarh6MZmXLx8xxBmppuciLSuyAGr5R0CtyyDcneWDtDJJJJJsgo6gUKpH/43FSTYPliHCrp8NLM
-8rfhAXJ8Td9ySfOJqHdsnqkTPsn6yxjWbRfs/UnXq0+5jWBdIEKsc5ztTPnIL1WkhrNAlyhHONpz
-wUEpQ11WW8en+mC0Rwhm0FXqBQXyvqyFBpav1jMBY6NTMYlTSmOk84YKyXilAwdU0DvtgetVEK49
-cvND+bJSHaB+G2Qx3tSfEeLXE9oGKsqGlp5C9A3esdOHuAe3VlpKXSWvUHAiiAHWVZKS3g1qhbgL
-f+nMZp4g26wEwN5TVMJajPZv3eQeJQhCe2BdIQ==
+vPF9nNVUd8lz9swrMun2gpKK6VynEOprkA8ZPlIsOL3ym6O/jSMFN0S1DaK/rU3rAoIIuSQ8iaMZ
+K0FADWR2uwCLJBj5t4HOIFGzXY9NjXuoyo3cTaqPgtzXwhWfgkXClZ3iN/ctGYC8N9z4marUvOjI
+pXNuwKH4K6DH71x4WswRhZszkvX04KSPS8szAHI8miGa+Y7c3gsq1P5vO0mTY7nzglzPmxFxV2hv
+a8zTASDAyFFnEwow1L5qGfWDbZV66wF7dKnS5RbPnQsql8xd4vkFZMIv1jgj3T/v7gIUsiwhB2J/
++BRhCsmGjyd/GrMTBucLg14JOagvjfhcovYYcg==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

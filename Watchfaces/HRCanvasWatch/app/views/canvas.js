@@ -402,7 +402,7 @@ define({
 				if (deg.y <= -20 ) deg.y = -20; 
 				if (deg.y >= 20 ) deg.y = 20; 
 				//document.querySelector("#calendar.on").style.opacity=1;
-				let calendarOn = document.querySelector("div#calendar.on");
+				let calendarOn = document.querySelector("div#calendar");
 				//if (calendarOn.style.opacity < 1) calendarOn.style.opacity = 1;
 				calendarOn.style.transform =    "perspective(700px) rotateX(" + -deg.x + "deg) " +    " rotateY(" + deg.y + "deg)"; 
 			}

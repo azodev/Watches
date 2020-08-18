@@ -55,7 +55,7 @@ html, body {
     z-index: 3;
     visibility:  hidden;
     transition: opacity 0.1s ;
-    opacity:0.5;
+    opacity:0.1;
     user-select: none;
     -moz-user-select: none;
     font-family: 'FutureNow';
@@ -67,7 +67,7 @@ html, body {
 	visibility:  visible;
 	transition: opacity 0.1s ;
 	transition:0.1s;
-	opacity:1;
+	opacity: 1;
 }
 #overflower{
 	width: 100%;
@@ -92,15 +92,15 @@ html, body {
   --aug-inset: 3px;
   --aug-border-bg: linear-gradient(to right, gold, cyan);
   --aug-inset-bg: #000000;
-  --aug-inset-opacity: 0.9; 
+  --aug-inset-opacity: 0.9;  
   --aug-b-width: 60%;
   --aug-t-width: 60%;
   --aug-b-height: 5px;
   --aug-t-height: 5px;
-  --aug-bl: 10px;
-  --aug-tl: 10px;
-  --aug-br: 10px;
-  --aug-tr: 10px; 
+  --aug-bl: 20px;
+  --aug-tl: 20px;
+  --aug-br: 20px;
+  --aug-tr: 20px; 
    /*transform-origin: 100px 50%;*/
     transform: perspective(700px) rotateY(0deg) ; 
     
@@ -171,7 +171,7 @@ html, body {
 	--aug-inset-bg: rgba(0, 0, 0, 0.25);
 	--aug-border: 2px;
 	--aug-border-bg: linear-gradient(to right, gold, cyan);
-	background-color:transparent;
+	background-color:transparent; 
 	--aug-tl: 5px;
 	--aug-br: 5px;
 	--aug-bl: 10px;
@@ -180,15 +180,16 @@ html, body {
 	min-height: 40px;
 	width: 95%;
 	color:white;
-	transition:background-color 0.5s ease; 
+	transition: --aug-inset-bg 0.2s ease, color 0.2s ease; 
 }
 #calendar .event.click {
-    background-color: white;
+    /*background-color: white;*/
     color:black;
-	transition:background-color 0.5s ease, color 0.5s ease;  
+    --aug-inset-bg: rgba(255, 255, 255, 0.50);
+	transition: --aug-inset-bg 0.2s ease, color 0.2s ease;  
 }
 .dates {
-	height: 30px;
+	height: 33px;
 	width: 50px;
 	font-size:15px; 
 	top: 3px;
@@ -215,12 +216,13 @@ html, body {
 .dates span{
 	position:relative;
 	width : 40px;
-	height : 10px;
+	height : 13px;
+	
 	float:left;
 }
 .event .title { 
-	min-height: 20px;
-	width: 205px;
+	min-height: 18px;
+	width: 185px;
 	position: relative;
 	margin-top: 0px;
 	margin-left:55px;
@@ -229,7 +231,7 @@ html, body {
 }
 .event .location {
 	min-height: 15px;
-	width: 205px;
+	width: 185px;
 	position: relative;
 	margin-top: 0px;
 	margin-left:55px;
@@ -245,7 +247,7 @@ html, body {
   position: relative;
   /*left: 25px;
   bottom: 20px;*/
-  --aug-tl: 3px;
+  --aug-tl: 5px;
   --aug-br: 3px;
   --aug-bl: 5px;
   --aug-tr: 5px;

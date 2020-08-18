@@ -284,7 +284,7 @@ define({
 				console.log('event onclick creation');
 				element.addEventListener('click', function(e) {
 					console.log('click event');
-					setClassAndWaitForTransition(element,'event click','background-color').then(function () {
+					setClassAndWaitForTransition(element,'event click','color').then(function () {
 						console.log('transition event');
 						element.setAttribute('class', 'event');
 					});
