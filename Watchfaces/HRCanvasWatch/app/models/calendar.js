@@ -269,7 +269,6 @@ define({
 			console.log('calendar');
 			json = JSON.parse(responseText);
 			calendar = json[2];
-			console.log(json);
 			for (i=0;i<calendar.length;i++){
 				e = new vEvent(calendar[i]);
 				if (!isDuplicate(e,vEvents)) vEvents.push (e);
@@ -280,8 +279,6 @@ define({
 		function handleFilterForFinishedEvents(){
 			vEvents = vEvents.filter (filterFinishedVEvents);
 			buildDaysEvents();
-			console.log(vEvents);  
-			console.log(myEvents);
 			fillCalendar();
 		}
  

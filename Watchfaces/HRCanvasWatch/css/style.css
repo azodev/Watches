@@ -83,12 +83,12 @@ html, body {
     opacity:0;
     /*transition: opacity 1s ease, transform 1s ease;*/
     transition-property: opacity, transform;
-transition-duration: 0.5s;
-transition-timing-function: linear;
+	transition-duration: 0.5s;
+	transition-timing-function: linear;
     visibility: hidden;
   --aug-border: 3px;
   --aug-inset: 3px;
-  --aug-border-bg: linear-gradient(to right, purple, cyan);
+  --aug-border-bg: linear-gradient(to right, gold, cyan);
   --aug-inset-bg: #000000;
   --aug-inset-opacity: 0.9; 
   --aug-b-width: 60%;
@@ -113,8 +113,8 @@ transition-timing-function: linear;
 	top:0px;
 	left:0px;
 	
-    margin-left: 50px ; 
-    margin-top: 60px;
+    margin-left: 40px ; 
+    margin-top: 55px;
 	position: absolute;
 	transition-property: opacity, transform;
 	transition-duration: 0.5s;
@@ -129,7 +129,7 @@ transition-timing-function: linear;
 #up, #down{
 	
   position: absolute;
-margin-left: 140px;
+	margin-left: 140px;
   
   width: 80px;
   height: 40px;
@@ -163,18 +163,18 @@ margin-left: 140px;
 #calendar .event {
 
 	position: relative;
-	padding: 10px;
+	padding: 5px;
 	margin: 5px auto;
 	--aug-inset: 3px;
 	--aug-inset-bg: rgba(0, 0, 0, 0.25);
 	--aug-border: 2px;
-	--aug-border-bg: rgba(255, 215, 0, 0.53);
+	--aug-border-bg: linear-gradient(to right, gold, cyan);
 	--aug-tl: 5px;
 	--aug-br: 5px;
 	--aug-bl: 10px;
 	--aug-tr: 10px;
 
-	height: 40px;
+	min-height: 40px;
 	width: 95%;
 }
 .dates {
@@ -192,33 +192,44 @@ margin-left: 140px;
 	--aug-inset: 2px;
 	--aug-inset-bg: rgba(0, 0, 0, 0.25);
 	--aug-border: 2px;
-	--aug-border-bg: rgba(255, 215, 0, 0.53);
+	--aug-border-bg: linear-gradient(to right, gold, cyan);
 	--aug-tl: 5px;
 	--aug-br: 5px;
 	--aug-bl: 5px;
 	--aug-tr: 5px;
 	
 }
+.dates.fd{
+	--aug-inset-bg: linear-gradient(to right, gold, cyan);
+}
+.dates span{
+	position:relative;
+	width : 40px;
+	height : 10px;
+	float:left;
+}
 .event .title {
-	height: 20px;
-	width: 210px;
-	position:absolute;
-	top: 5px;
-	left:60px;
+	min-height: 20px;
+	width: 205px;
+	position: relative;
+	margin-top: 0px;
+	margin-left:55px;
 	font-size:15px;
 	color: #ffffff;
+	text-shadow: 0 0 10px cyan;
 }
 .event .location {
-	height: 15px;
-	width: 210px;
-	position:absolute;
-	top: 22px;
-	left:60px;
-	font-size:12px;
+	min-height: 15px;
+	width: 205px;
+	position: relative;
+	margin-top: 0px;
+	margin-left:55px;
+	font-size:13px;
 	color: #ffffff;
 }
 #calendar .day{
-  background-color: rgba(255, 215, 0, 0.53);
+  background-color: rgba(0,255,255, 0.53);
+  text-shadow: 0 0 10px #000;
   color: #ffffff;
   height: 22px;
   width: 50%;
@@ -230,7 +241,7 @@ margin-left: 140px;
   --aug-br: 3px;
   --aug-bl: 5px;
   --aug-tr: 5px;
-  font-size: 14px;
+  font-size: 15px;
   text-align: right;
   padding-top: 5px;
   padding-right:10px;

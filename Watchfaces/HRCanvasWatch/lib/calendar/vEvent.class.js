@@ -23,6 +23,7 @@ class vEvent {
 				break;
 			}
 		}
+		this.fullDay = (this.getTimefromDate(this.startDate) == this.getTimefromDate(this.endDate));
 		
 
 	}
@@ -55,12 +56,15 @@ class vEvent {
 	getLocation(){
 		return this.location;
 	}
+	isFullDay(){
+		return this.fullDay;
+	}
 	getTimefromDate(date){
 		let  hour = '' + date.getHours();
         let minutes = date.getMinutes();
-
+        if (minutes == 0) return hour+'h'
         if (minutes.length < 2) 
-        month = '0' + month;
+        	minutes = '0' + minutes;
     return [hour,minutes].join('h');
 	}
 }

@@ -149,7 +149,7 @@ define({
 		var elem;
 		const CLICK_INTERVAL = 300;
 		var lastClickTimeStamp = null, currentClickTimeStamp = null;
-		var theme = 'ice';
+		
 		var forecastDisplayed = false; 
 		var forecastMode = false; 
 		var wShape , aShape1, aShape2, aShape3, aShape4,appDrawerShape, calendarShape; 
@@ -167,6 +167,7 @@ define({
 		var calendarY = 0;
 		
 		var wCoords=null;
+		var theme = 'ice';
 		var effect = 'attraction';
 		
 		
@@ -385,10 +386,10 @@ define({
 			if (radialmenu.getOpen()){ 
 				deg.x = (gravCenter.y - 190)*1.4;
 				deg.y = (gravCenter.x - 180)*1.4;
-				if (deg.x <= -30 ) deg.x = -30;
-				if (deg.x >= 30 ) deg.x = 30;
-				if (deg.y <= -30 ) deg.y = -30;
-				if (deg.y >= 30 ) deg.y = 30;
+				if (deg.x <= -20 ) deg.x = -20;
+				if (deg.x >= 20 ) deg.x = 20;
+				if (deg.y <= -20 ) deg.y = -20;
+				if (deg.y >= 20 ) deg.y = 20;
 				
 				elem = document.querySelector("div.menuHolder"); 
 				elem.style.transform =
@@ -398,10 +399,13 @@ define({
 				
 			}
 			if (widgetFullScreenDiplayed ===true){
-				deg.x = (gravCenter.y - 190)*1.2; 
-				if (deg.x <= -30 ) deg.x = -30; 
-				if (deg.x >= 30 ) deg.x = 30;
-				document.querySelector("#calendar.on").style.transform =    "perspective(700px) rotateX(" + -deg.x + "deg) " +    " rotateY(15deg)"; 
+				deg.x = (gravCenter.y - 190)*1.2;
+				deg.y = (gravCenter.x - 180)*1.2;
+				if (deg.x <= -20 ) deg.x = -20;
+				if (deg.x >= 20 ) deg.x = 20;
+				if (deg.y <= -20 ) deg.y = -20;
+				if (deg.y >= 20 ) deg.y = 20;
+				document.querySelector("#calendar.on").style.transform =    "perspective(700px) rotateX(" + -deg.x + "deg) " +    " rotateY(" + deg.y + "deg)"; 
 			}
 			
 			particles = particles.filter(function (p) {
