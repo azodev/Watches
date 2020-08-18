@@ -218,7 +218,10 @@ define({
 						console.log('transition calendar');
 						//document.getElementById ('up').classList.remove('off');
 						//document.getElementById ('down').classList.remove('off');
-						widgetFullScreenDiplayed = true;
+						
+						setTimeout(function (){
+							widgetFullScreenDiplayed = true;
+						},100);
 					});
 		            
 		            
@@ -396,7 +399,7 @@ define({
 				    "perspective(700px) rotateX(" + -deg.x + "deg) " + 
 				    " rotateY(" + deg.y + "deg)";
 				
-				
+				 
 			}
 			if (widgetFullScreenDiplayed ===true){
 				deg.x = (gravCenter.y - 190)*1.2;
@@ -405,6 +408,7 @@ define({
 				if (deg.x >= 20 ) deg.x = 20;
 				if (deg.y <= -20 ) deg.y = -20;
 				if (deg.y >= 20 ) deg.y = 20;
+				//document.querySelector("#calendar.on").style.opacity=1;
 				document.querySelector("#calendar.on").style.transform =    "perspective(700px) rotateX(" + -deg.x + "deg) " +    " rotateY(" + deg.y + "deg)"; 
 			}
 			
@@ -977,7 +981,7 @@ define({
 			holder = document.querySelector("#cal_holder");
 			canvasDrawer.setClassAndWaitForTransition(calendar,'','opacity').then(function () {
 				console.log('transition calendar');
-				calendar.style.transform =    "perspective(700px) rotateX(0deg) rotateY(90deg) rotateZ(90deg)"; 
+				//calendar.style.transform =    "perspective(700px) rotateX(0deg) rotateY(90deg) rotateZ(90deg)"; 
 				canvasDrawer.setClassAndWaitForTransition(holder,'','opacity').then(function () {
 					console.log('transition holder');
 				});
@@ -1232,12 +1236,11 @@ define({
 				tizen.preference.setValue('theme',theme);
 			}
 			if (tizen.preference.exists('effect')) {
-				theme = tizen.preference.getValue('effect');
+				effect = tizen.preference.getValue('effect');
 			}
 			else{
 				tizen.preference.setValue('effect',effect);
 			}
-			
 			setDefaultVariables();
 			changeParticlesColor(theme);
 			

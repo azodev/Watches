@@ -14,7 +14,9 @@ class DayEvents {
 	        month = '0' + month;
 	    if (day.length < 2) 
 	        day = '0' + day;
-		return date.toString().split(' ')[0]+" "+[day, month, year].join('/');
+	    
+	    
+		return date.toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).split(' ')[0].substring(0,3)+". "+[day, month, year].join('/');
 	}
 	processHtml(){
 		let i = 0;

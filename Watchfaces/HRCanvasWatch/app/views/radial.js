@@ -74,27 +74,6 @@ define({
                                  icon: '#events'
                              },*/
                              {
-                                 id   : 'update',
-                                 title: 'Update',
-                                 icon: '#update'
-                             },
-                             {
-                                 id   : 'exercise',
-                                 title: 'GymRun',
-                                 icon: '#exercise'
-                             },
-                             {
-                                 id   : 'timer',
-                                 title: 'Timer',
-                                 icon: '#timer'
-                             },
-                             /*{
-                                 id   : 'altitude',
-                                 title: 'Altitude',
-                                 icon: '#altitude'
-                             },*/
-                             
-                             {
                                  id   : 'settings',
                                  title: 'Settings...',
                                  icon: '#settings',
@@ -136,7 +115,7 @@ define({
                                              {
                                                  id: 'attraction',
                                                  icon: '#attraction',
-                                                 title: 'Attraction'
+                                                 title: 'BlackHole'
                                              },
                                              {
                                                  id: 'repulsion',
@@ -152,13 +131,35 @@ define({
                                          ]
                                      },
                                      {
-                                         id   : 'workout',
-                                         icon : '#workout',
-                                         title: 'Work Out'
+                                         id   : 'params',
+                                         icon : '#params',
+                                         title: 'Settings'
                                      }
                                  ]
                              },
+
+                             {
+                                 id   : 'update',
+                                 title: 'Update',
+                                 icon: '#update'
+                             },
+                             {
+                                 id   : 'exercise',
+                                 title: 'GymRun',
+                                 icon: '#exercise'
+                             },
+                             {
+                                 id   : 'timer',
+                                 title: 'Timer',
+                                 icon: '#timer'
+                             },
+                             /*{
+                                 id   : 'altitude',
+                                 title: 'Altitude',
+                                 icon: '#altitude'
+                             },*/
                              
+                                                          
                          ];
             
             svgMenu = new RadialMenu({
@@ -208,20 +209,12 @@ define({
                     		         console.log('The launch application control failed');
                     		     }
                     		 };
-                    	//tizen.application.getAppsInfo(onListInstalledApps);com.samsung.w-calendar2
-                    	 // let's assume that application "targetApp0.main" has been installed com.samsung.w-calendar2.appcontrol.daily
-                    	/*var appInfo = tizen.application.getAppInfo("com.samsung.w-calendar2.appcontrol.daily");
-                    	 console.log(appInfo);
-                    	 
-                    	 //svgMenu.darkenButton(item.id,item.id);
-                    	 */
                     	  tizen.application.launchAppControl(
                     			 appControl,
                     		     'com.samsung.w-calendar2',
                     		     function() {console.log("launch application control succeed"); },
                     		     function(e) {console.log("launch application control failed. reason: " + e.message); },
                     		     appControlReplyCallback );
-                    	//tizen.application.launch("com.samsung.w-calendar2", onsuccess,onfail);
                     	  closeMenuProperly(item);     
                     }
                     else if (item.id == 'timer'){
@@ -236,8 +229,8 @@ define({
                     	tizen.application.launch("GymRunWear.TizenCompanionApp", onsuccess,onfail);
                     	closeMenuProperly(item);	  
                     }
-                    else if (item.id == 'workout'){
-                    	tizen.application.launch("com.samsung.shealth.exercise", onsuccess,onfail);
+                    else if (item.id == 'params'){
+                    	tizen.application.launch("com.samsung.clocksetting", onsuccess,onfail);
                     	closeMenuProperly(item); 
                     }
                     
