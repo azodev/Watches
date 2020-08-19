@@ -731,12 +731,19 @@ define({
 				gradientLinear.addColorStop(0.3, "rgb(248,181,0)");
 				gradientLinear.addColorStop(0, "rgb(249,234,194)");
 			}
-			else {
+			else if (theme== 'hisakura') {
 				//radialGradient.addColorStop(0.98, 'rgba(100,35,35,1)'); 
 				gradientLinear.addColorStop(1, "rgb(229,72,72)");
 				gradientLinear.addColorStop(0.6, "rgb(252,123,123)");
 				gradientLinear.addColorStop(0.3, "rgb(254,144,144)");
 				gradientLinear.addColorStop(0, "rgb(251,232,232)");
+			}
+			else if (theme== 'metal') {
+				//radialGradient.addColorStop(0.98, 'rgba(100,35,35,1)'); 
+				gradientLinear.addColorStop(1, "rgb(52,52,54)");
+				gradientLinear.addColorStop(0.6, "rgb(99,100,103)");
+				gradientLinear.addColorStop(0.3, "rgb(190,190,190)");
+				gradientLinear.addColorStop(0, "rgb(244,244,244)");
 			}
 			
 		}
@@ -756,11 +763,18 @@ define({
 				grdAmbiant.addColorStop(0.3, "rgb(248,181,0)");
 				grdAmbiant.addColorStop(0, "rgb(249,234,194)");
 			}
-			else {
+			else if (theme== 'hisakura') {
 				grdAmbiant.addColorStop(1, "rgb(229,72,72)");
 				grdAmbiant.addColorStop(0.6, "rgb(252,123,123)");
 				grdAmbiant.addColorStop(0.3, "rgb(254,144,144)");
 				grdAmbiant.addColorStop(0, "rgb(251,232,232)"); 
+			}
+			else if (theme== 'metal') {
+				//radialGradient.addColorStop(0.98, 'rgba(100,35,35,1)'); 
+				grdAmbiant.addColorStop(1, "rgb(52,52,54)");
+				grdAmbiant.addColorStop(0.6, "rgb(99,100,103)");
+				grdAmbiant.addColorStop(0.3, "rgb(190,190,190)");
+				grdAmbiant.addColorStop(0, "rgb(244,244,244)");
 			}
 			return grdAmbiant;
 		}

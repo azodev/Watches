@@ -205,11 +205,17 @@ define({
 				document.querySelector(":root").style.setProperty('--color1', 'rgb(229,72,72)');
 				document.querySelector(":root").style.setProperty('--color2', 'rgb(251,232,232)');
 				break;		
-			default:
+			case 'ice':
 				//sheet.deleteRule(1);
 				//sheet.insertRule(":root{--color1:blue;--color2:cyan;}",1); 
 				document.querySelector(":root").style.setProperty('--color1', 'rgb(38,55,180)');
 				document.querySelector(":root").style.setProperty('--color2', 'rgb(192,221,243)');
+				break;
+			default:
+				//sheet.deleteRule(1);
+				//sheet.insertRule(":root{--color1:blue;--color2:cyan;}",1); 
+				document.querySelector(":root").style.setProperty('--color1', 'rgb(99,100,103)');
+				document.querySelector(":root").style.setProperty('--color2', 'rgb(240,234,234)');
 				break;
 			}
 			console.log(sheet);
@@ -1237,9 +1243,12 @@ define({
 				case 'hisakura':
 					particleColors = ["#ff5151","#fc7b7b","#f9d9d9"];
 				    break;
-				  default:
+				case 'ice':
 					particleColors = ["#694FB9","#6094ee","#3CFBFF"];
 				  	break;
+				  default:
+						particleColors = ["rgb(99,100,103)","rgb(190,190,190)","rgb(240,234,234)"];
+					  	break;
 				}
 			
 		}

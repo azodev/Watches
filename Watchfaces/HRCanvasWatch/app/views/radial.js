@@ -99,10 +99,16 @@ define({
                                                  id: 'fire',
                                                  icon: '#fire',
                                                  title: 'Fire'
-                                             }, {
+                                             }, 
+                                             {
                                                  id: 'hisakura',
                                                  icon: '#hisakura',
                                                  title: 'Hisakura'
+                                             }, 
+                                             {
+                                                 id: 'metal',
+                                                 icon: '#metal',
+                                                 title: 'Metal'
                                              }
                                          ]
                                      },
@@ -183,7 +189,7 @@ define({
                     	closeMenuProperly(item);
                     	
                     }
-                    else if (item.id == 'fire' || item.id == 'hisakura' || item.id == 'ice'){
+                    else if (item.id == 'fire' || item.id == 'hisakura' || item.id == 'ice' || item.id == 'metal'){
                     	changeTheme(item.id);
                     	svgMenu.setTheme(item.id);
                     	tizen.preference.setValue('theme', item.id);

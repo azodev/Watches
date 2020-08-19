@@ -89,13 +89,17 @@ svg.menu > g > path.selected.ice {
 	fill: #096EB5;
 	transition: fill 0.1s ease;
 }
-
+svg.menu > g > path.metal {
+	fill: rgb(99,100,103);
+	transition: fill 0.1s ease;
+}
+svg.menu > g > path.selected.metal {
+	fill: rgb(190,190,190);
+	transition: fill 0.1s ease;
+}
 svg.menu > g > path.fire {
 	fill: #B23E01;
-	/*fill: radial-gradient(circle at 50%, #9e5c15, #db7e1a 80%, #fff 100%);*/
-	
-	/*fill: url(#RadialGradient1);*/
-	
+	transition: fill 0.1s ease;
 }
 svg.menu > g > path.selected.fire {
 	fill: #db7e1a;
@@ -103,7 +107,7 @@ svg.menu > g > path.selected.fire {
 }
 svg.menu > g > path.hisakura {
 	fill: #9c6c81;
-	
+	transition: fill 0.1s ease;
 }
 svg.menu > g > path.selected.hisakura {
 	fill: #ed77aa;
