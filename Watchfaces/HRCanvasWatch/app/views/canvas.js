@@ -188,6 +188,33 @@ define({
 			console.log('handleDoubleClick');
 			
 		}
+		function changeRootColors(theme){
+			console.log(theme);
+			let sheet  = document.styleSheets[1];
+			
+			switch (theme) {
+			case 'fire':
+				//sheet.deleteRule(1);
+				//sheet.insertRule(":root{--color1:rgb(255,150,53);--color2:rgb(249,234,194);}",1);
+				document.querySelector(":root").style.setProperty('--color1', 'rgb(255,150,53)');
+				document.querySelector(":root").style.setProperty('--color2', 'rgb(249,234,194)');
+				break;
+			case 'hisakura':
+				//sheet.deleteRule(1);
+				//sheet.insertRule(":root{--color1:rgb(229,72,72);--color2:rgb(251,232,232);}",1);
+				document.querySelector(":root").style.setProperty('--color1', 'rgb(229,72,72)');
+				document.querySelector(":root").style.setProperty('--color2', 'rgb(251,232,232)');
+				break;		
+			default:
+				//sheet.deleteRule(1);
+				//sheet.insertRule(":root{--color1:blue;--color2:cyan;}",1); 
+				document.querySelector(":root").style.setProperty('--color1', 'blue');
+				document.querySelector(":root").style.setProperty('--color2', 'cyan');
+				break;
+			}
+			console.log(sheet);
+			console.log(document.querySelector(":root").style);
+		}
 		function handleSingleClick(canvas,ev) {
 			console.log('handleSingleClick');
 			clickPos = getMousePosition(canvas,ev);
@@ -216,16 +243,13 @@ define({
 				setClassAndWaitForTransition(holder,'on','opacity').then(function () {
 					console.log('transition holder');
 					holder.setAttribute('class', 'on');
+					
+					changeRootColors(theme);
 					setClassAndWaitForTransition(calendar,'on','opacity').then(function () {
 						console.log('transition calendar');
+						
 						calendar.setAttribute('class', 'on');
 						holder.setAttribute('class', 'on');  
-						//document.getElementById ('up').classList.remove('off');
-						//document.getElementById ('down').classList.remove('off');
-						/*
-						setTimeout(function (){
-							
-						},100);*/
 						widgetFullScreenDiplayed = true;
 					});
 		            
@@ -236,7 +260,7 @@ define({
 			}
 			else if (hrShape.isInSurface(clickPos,5) && !radialmenu.getOpen()  ){
 				
-				tizen.application.launch("com.samsung.shealth.stress.measure", null,null);
+				tizen.application.launch("com.samsung.shealth", null,null);
 			}
 			
 		}
@@ -452,11 +476,12 @@ define({
 			
 			
 			if (backendLoaded){
+				canvasDrawer.renderCircleShadows(ctxContent, appDrawerShape, {r:30,g:30,b:30,a:0.8},5);
 				canvasDrawer.renderCircle(ctxContent, appDrawerShape, "#000000","rgba(0, 0, 0,0.7)",false,2,false);
-				canvasDrawer.roundRect(ctxContent, aShape1, 3, false, true, "#000000", "rgba(0, 0, 0,0.8)");
-				canvasDrawer.roundRect(ctxContent, aShape2, 3, false, true, "#000000", "rgba(0, 0, 0,0.8)");
-				canvasDrawer.roundRect(ctxContent, aShape3, 3, false, true, "#000000", "rgba(0, 0, 0,0.8)");
-				canvasDrawer.roundRect(ctxContent, aShape4, 3, false, true, "#000000", "rgba(0, 0, 0,0.8)");
+				canvasDrawer.roundRect(ctxContent, aShape1, 3, false, true, null, "rgba(0, 0, 0,0.8)");
+				canvasDrawer.roundRect(ctxContent, aShape2, 3, false, true, null, "rgba(0, 0, 0,0.8)");
+				canvasDrawer.roundRect(ctxContent, aShape3, 3, false, true, null, "rgba(0, 0, 0,0.8)");
+				canvasDrawer.roundRect(ctxContent, aShape4, 3, false, true, null, "rgba(0, 0, 0,0.8)");
 				if (baroDisplayed){
 					canvasDrawer.renderTextGradient(ctxContent, 'Altitude', center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.30), 16, "#c9c9c9", {
 						font : 'FutureNow',
@@ -514,18 +539,22 @@ define({
 				
 				
 				if (miniWeatherDisplayed){
-					canvasDrawer.roundRect(ctxContent, wShape,10, true, false, "#000000", "rgba(0, 0, 0,0.7)");
+					
+					canvasDrawer.roundRectShadows(ctxContent, wShape,10, {r:30,g:30,b:30,a:0.5},5);
+					canvasDrawer.roundRect(ctxContent, wShape,10, true, false, null, "rgba(0, 0, 0,0.7)");
+					
 					drawWeather(forecastDisplayed);
 				}
 				
 				
 				if (miniCalendarDisplayed) {
-					canvasDrawer.roundRect(ctxContent, calendarShape,10, true, false, "#000000", "rgba(0, 0, 0,0.7)");
+					canvasDrawer.roundRectShadows(ctxContent, calendarShape,10, {r:30,g:30,b:30,a:0.5},5);
+					canvasDrawer.roundRect(ctxContent, calendarShape,10, true, false, null, "rgba(0, 0, 0,0.7)");
 					//if (calendarModel.hasVEvents()){
 						canvasDrawer.renderText(ctxContent, 'Events', calendarShape.getCoords().x+50, calendarShape.getCoords().y+20, 25, "#c9c9c9", {
 							font : 'FutureNow',
 							align : 'center',
-								gradient : true,
+								gradient : true, 
 								motion: motion
 						});
 						canvasDrawer.renderText(ctxContent, calendarModel.getVEvents().length , calendarShape.getCoords().x+50, calendarShape.getCoords().y+50, 30, "#c9c9c9", {
@@ -535,6 +564,7 @@ define({
 					//}
 					
 				}
+				canvasDrawer.renderCircleShadows(ctxContent, hrShape, {r:30,g:30,b:30,a:0.8},5);
 				canvasDrawer.renderCircle(ctxContent, hrShape, "#000000","rgba(0, 0, 0,0.7)",false,1.5,false);
 				if (heartRateDisplayed &&  heartRateFound && heartRate.getData().rate !== null) {
 					
@@ -1217,7 +1247,9 @@ define({
 			changeParticlesColor(ev.detail);
 			
 			//time_to_recreate = true;
+			theme = ev.detail;
 			grdAmbiant = canvasDrawer.getAmbiantGradient(ctxContent);
+			changeRootColors(ev.detail);
 			particles = [];
 			time_to_recreate = false;
 			popolate(max_particles,effect);

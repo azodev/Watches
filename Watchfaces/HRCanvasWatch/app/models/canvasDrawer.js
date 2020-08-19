@@ -80,6 +80,7 @@ define({
 		var theme= 'ice';
 		var grdAmbiant = null;
 		var timePassed = 0;
+		var shadow = false;
 
 		/**
 		 * Renders a circle with specific center, radius, and color
@@ -257,8 +258,10 @@ define({
 				context.globalAlpha = watchOpacity;
 			}
 			
-			context.shadowColor = "rgba(150, 150, 150,0.5)";
-			context.shadowBlur = 10;
+			if (shadow){
+				context.shadowColor = "rgb(50, 50, 50)";
+				context.shadowBlur = 10;
+			}
 			
 			context.arc(CircleShape.getCenter().x, CircleShape.getCenter().y, CircleShape.getRadius(), 0, 2 * Math.PI);
 			if (fillColor !== null){
@@ -271,8 +274,26 @@ define({
 			}
 			context.closePath();
 			
+			
+			
+			
 			context.restore();
 		}
+		
+		function renderCircleShadows(context, CircleShape,  strokeColor, offset){
+			let i =1;
+			let color;
+			let alpha =strokeColor.a;
+			for (i=1; i <= offset; i++){
+				alpha = (strokeColor.a - (i/offset)*strokeColor.a);
+				if (alpha >= 0){
+					color = 'rgba('+strokeColor.r+','+strokeColor.g+','+strokeColor.b+','+alpha+')';
+					renderCircle(context, new Circle(CircleShape.getCenter().x,CircleShape.getCenter().y,CircleShape.getRadius()+i), color,null,true,1);
+				}
+			}
+			
+		}
+		
 		function renderBackground(context, width, height, color, options) {
 			context.save();
 			context.beginPath();
@@ -364,11 +385,11 @@ define({
 				}
 			}
 			context.beginPath();
-			
-			context.shadowOffsetX = 0;
-			context.shadowOffsetY = 0;
-			context.shadowColor = "rgba(150, 150, 150,0.5)";
-			context.shadowBlur = 10;
+			context.globalAlpha = watchOpacity;
+			if (shadow){
+				context.shadowColor = "rgb(50, 50, 50)";
+				context.shadowBlur = 10;
+			}
 			
 			context.moveTo(shape.getX() + radius.tl, shape.getY());
 			context.lineTo(shape.getX() +  shape.getWidth() - radius.tr, shape.getY());
@@ -384,11 +405,11 @@ define({
 				context.fillStyle = fillColor;
 				context.fill();
 			}
-			if (gradientLinear !== null) {
+			if (gradientLinear !== null && strokeColor == null) {
 				strokeColor = gradientLinear;
 				//context.globalAlpha = alpha;
 			}
-			context.globalAlpha = watchOpacity;
+			
 			/*if (alpha !== null && alpha <= watchOpacity){
 				context.globalAlpha = alpha;
 			}*/
@@ -399,6 +420,18 @@ define({
 			
 			context.restore();
 		}
+		function roundRectShadows(context, shape, radius,   strokeColor, offset){
+			let i =1;
+			let color;
+			let alpha =strokeColor.a;
+			for (i=1; i <= offset; i++){
+				alpha = (strokeColor.a - (i/offset)*strokeColor.a);
+				color = 'rgba('+strokeColor.r+','+strokeColor.g+','+strokeColor.b+','+alpha+')';
+				roundRect(context, new Shape(shape.getX()-i,shape.getY()-i,shape.getWidth()+(i*2),shape.getHeight()+(i*2)), radius, false, true , color);
+			}
+			
+		}
+		
 
 		/**
 		 * Renders a needle with specific center, angle, start point, end point,
@@ -670,7 +703,7 @@ define({
 		}
 		function processMotion(motionAcceleration, context) {
 			// console.log(motionAcceleration);
-			calculateShadowOffset(motionAcceleration.accelerationIncludingGravity);
+			//calculateShadowOffset(motionAcceleration.accelerationIncludingGravity);
 			calculateGradientPosition(motionAcceleration.accelerationIncludingGravity);
 			calculateRadialGradientPosition(motionAcceleration.accelerationIncludingGravity);
 			
@@ -680,23 +713,26 @@ define({
 			radialGradient.addColorStop(0.755, 'rgba(0,0,0,0.3)');
 			radialGradient.addColorStop(0.83, 'rgba(20,20,20,0.3)');
 			radialGradient.addColorStop(0.91, 'rgba(39,41,42,1)');
-			//radialGradient.addColorStop(0.98, 'rgba(80,80,80,1)'); 
-			radialGradient.addColorStop(1, 'rgba(120,120,120,1)');
+			radialGradient.addColorStop(0.98, 'rgba(70,70,70,1)'); 
+			
 			gradientLinear = context.createLinearGradient(cx - gx, cy - gy, cx + gx, cy + gy);
 			
 			if (theme== 'ice'){
-				gradientLinear.addColorStop(1, "rgb(28,35,155)");
+				//radialGradient.addColorStop(0.98, 'rgba(20,15,90,1)'); 
+				gradientLinear.addColorStop(1, "rgb(38,55,180)");
 				gradientLinear.addColorStop(0.6, "rgb(41,137,216)");
 				gradientLinear.addColorStop(0.3, "rgb(22,114,185)");
 				gradientLinear.addColorStop(0, "rgb(192,221,243)");
 			}
 			else if (theme== 'fire'){
+				//radialGradient.addColorStop(0.98, 'rgba(100,50,2,1)'); 
 				gradientLinear.addColorStop(1, "rgb(255,90,2)");
 				gradientLinear.addColorStop(0.6, "rgb(255,150,53)");
 				gradientLinear.addColorStop(0.3, "rgb(248,181,0)");
 				gradientLinear.addColorStop(0, "rgb(249,234,194)");
 			}
 			else {
+				//radialGradient.addColorStop(0.98, 'rgba(100,35,35,1)'); 
 				gradientLinear.addColorStop(1, "rgb(229,72,72)");
 				gradientLinear.addColorStop(0.6, "rgb(252,123,123)");
 				gradientLinear.addColorStop(0.3, "rgb(254,144,144)");
@@ -709,7 +745,7 @@ define({
 			
 			grdAmbiant = ctxContent.createLinearGradient(0, 0, 360, 0);
 			if (theme== 'ice'){
-				grdAmbiant.addColorStop(1, "rgb(45,87,255)");
+				grdAmbiant.addColorStop(1, "rgb(38,55,180)");
 				grdAmbiant.addColorStop(0.6, "rgb(68,106,255)");
 				grdAmbiant.addColorStop(0.3, "rgb(145,214,242)");
 				grdAmbiant.addColorStop(0, "rgb(154,231,244)");
@@ -724,7 +760,7 @@ define({
 				grdAmbiant.addColorStop(1, "rgb(229,72,72)");
 				grdAmbiant.addColorStop(0.6, "rgb(252,123,123)");
 				grdAmbiant.addColorStop(0.3, "rgb(254,144,144)");
-				grdAmbiant.addColorStop(0, "rgb(251,232,232)");
+				grdAmbiant.addColorStop(0, "rgb(251,232,232)"); 
 			}
 			return grdAmbiant;
 		}
@@ -845,6 +881,7 @@ define({
 		return {
 			init : init,
 			renderCircle : renderCircle,
+			renderCircleShadows : renderCircleShadows ,
 			renderNeedle : renderNeedle,
 			renderText : renderText,
 			renderImage : renderImage,
@@ -852,6 +889,7 @@ define({
 			renderTime : renderTime,
 			renderTimeBis : renderTimeBis,
 			roundRect : roundRect,
+			roundRectShadows:roundRectShadows,
 			drawPulse : drawPulse,
 			renderTextGradient : renderTextGradient,
 			renderBackground : renderBackground,

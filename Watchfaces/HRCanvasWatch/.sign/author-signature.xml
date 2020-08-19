@@ -109,8 +109,8 @@ ODJ6+SfaPg==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2FcanvasDrawer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>N8Y97OjOUGYSVxNn1sLj/5r5XEh7Er/HK4iXVAWFDLauHaL6+7uMWMqH06c9h9/XX07fwMLUBjpT
-3dIb/Nk/2g==</DigestValue>
+<DigestValue>cXWGhWw9L4d63zBVsFad2ksdLKXXgBrCfbP1/2c11h14hYATdBkl+hRs6GQHeTR3llrHhN+HwjF4
+M7FkPYEciw==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2FheartRate.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -154,8 +154,8 @@ QgFh0b+TCA==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Fcanvas.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>fQ/JFbKwteObKb3Ool8ZicwSTLCCUqCOymiKSoStq4fGNwZ11AA8npk9JPWea1zIs01RTExF0xgy
-fChOjjuUmA==</DigestValue>
+<DigestValue>hPeqdO3YdywxpoHxz8OZDbaPLcC2bTy13smLf8O7fIXSoavXLuJ19mJDL48UjjnXri7woXsr7Iaz
+ZLi1Y2Kf8A==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Finit.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -164,8 +164,8 @@ fChOjjuUmA==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Fmain.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>cLq/heU73SFSnnWB6R6gDzJI6sqH+z1SMoL1K+NLjntqRNqH9vCk1psDeur52R0ommmen2kLZAnZ
-xWO1g1j3sg==</DigestValue>
+<DigestValue>ItsoPDjgJdWru8ibZjEnhPdoI9R9kxwSXvN3btAmCah8C2X6IM+F2NZKEg1bL7akwmyReCGjq372
+lJ1vz6ab5Q==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Fradial.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -184,8 +184,8 @@ rM68Mg4zOg==</DigestValue>
 </Reference>
 <Reference URI="css%2Fstyle.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>v+v5sPEcjcf7S6fq8cWAAhZSM23fzuUfbv4DWV8wsi41QnfGp1gIeU9KG+yMIBVw5T0IhvBq8/pD
-YcYJdCcaKg==</DigestValue>
+<DigestValue>8LULqOd8uIJXdIAtFNJUsoSaDlYddS8QRH3SOhbBsKP0Z0w9yRdOBWfTgwDuJvx3v5wcSMn5iB4P
+fY1IF0QUJQ==</DigestValue>
 </Reference>
 <Reference URI="data%2FFutureNow.ttf">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -764,8 +764,8 @@ wUjoxSIrAQ==</DigestValue>
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>lSzHXY4xGwl5wVH7QIBXjgSuluHBop4jC2LzODZlV5dTylhW6nS2T/c/pAWVCozCV9ez9E5/vCUw
-+sf4lbyHAw==</DigestValue>
+<DigestValue>wXGi+2Edg+iKqGBtocJUQYFJyOCGNmMjUbJym3Vqo6+afVfavjWge6jEVzu12VBRPpYjhWvQUINz
+i/nGcBSIbQ==</DigestValue>
 </Reference>
 <Reference URI="input.txt">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -857,11 +857,11 @@ QY10fG1EWQ==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-PD4aobDT3u2edLmuXFDwk12fje5vCeV4qrxdHWWv7RN1r8jLwVqyGNF7BYj31gaDeIirrMmlvHfg
-gb9AphJ0m36ns6soaPxgXJ2bpe/wxQMxpU7ISun1FMvifhCVnSjXHGsB9WfMlBgTRnHb8bnP6uym
-naF+27WcL1pa7qsY7iRg1XnJ99PEjqnxJCUmBs6xRgwpcJgWgtyWQUnxJai4wJrML6A1KhiyPNhy
-qayqpsQgmNQfhQuPRLK082RCMIzuhwEW4zrmNrFwIx5RbLiV+C0Cj3D2GWIK0uqJ9xeY1xJDXWZa
-bLhgBRr2gO/WB3fdxychK6tcwsei96UDkS8RFA==
+etr5hjFgCNQLV1ca8nc885pNkNy7VY4HPhlC8VECUTzbK3iDAZMd5qE3DZyeY4Ho51N0vjcU3Ddp
+Sdbo6gNeuXZ0h1e98e70fGAYaazVzuKJ5sh7lL1icA+VBBiSvuwNo9SaOFG/X0uYj6EDHRHyn+nT
+B6ECsYgpFa2TsfCPJiEmiJY98m/1CXEGW2NVHREKxokugVhjce5WepO/uPe/2lFzLdgt49gKP/u5
+M5YOsDpiCnwdqAc/Ekhsrc2fJzuB+65Iy/K+nKKyEd1BNiPff1Ocv8Xr+cp+VsRMDxvo9WmyV3jv
+BznD7MP76V840bW1cYNUjR+xzP9m37l5o9Wp3g==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

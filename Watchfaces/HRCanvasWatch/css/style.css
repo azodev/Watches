@@ -4,6 +4,10 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+:root {
+	--color1: blue; 
+	--color2: cyan;
+}
 img {
   border: 0;
   /* 1 */
@@ -24,6 +28,7 @@ html, body {
     margin: 0;
     overflow-y: hidden;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    display:block;
 }
 
 #container {
@@ -47,6 +52,9 @@ html, body {
     width: 100%;
     height: 100%;
     z-index: 1;
+    -webkit-transform3d: translate(0,0,0);
+    -moz-transform3d: translate(0,0,0);
+    transform3d: translate(0,0,0);
 }
 #cal_holder{
 	position: relative;
@@ -88,9 +96,9 @@ html, body {
 	transition-duration: 0.5s;
 	transition-timing-function: linear;
     visibility: hidden;
-  --aug-border: 3px;
-  --aug-inset: 3px;
-  --aug-border-bg: linear-gradient(to right, gold, cyan);
+  --aug-border: 2px;
+  --aug-inset: 4px;
+  --aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
   --aug-inset-bg: #000000;
   --aug-inset-opacity: 0.9;  
   --aug-b-width: 60%;
@@ -108,7 +116,15 @@ html, body {
     
     /*transform: perspective(700px) rotateY(0deg); */
 }
- 
+.ice{
+	--aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
+}
+.fire{
+	--aug-border-bg: linear-gradient(to right, rgb(255,150,53), rgb(249,234,194));
+}
+.hisakura{
+	--aug-border-bg: linear-gradient(to right, rgb(229,72,72), rgb(251,232,232));
+} 
 
 
 #calendar.on {
@@ -170,7 +186,7 @@ html, body {
 	--aug-inset: 3px;
 	--aug-inset-bg: rgba(0, 0, 0, 0.25);
 	--aug-border: 2px;
-	--aug-border-bg: linear-gradient(to right, gold, cyan);
+	--aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
 	background-color:transparent; 
 	--aug-tl: 5px;
 	--aug-br: 5px;
@@ -182,6 +198,11 @@ html, body {
 	color:white;
 	transition: --aug-inset-bg 0.2s ease, color 0.2s ease; 
 }
+
+
+
+
+
 #calendar .event.click {
     /*background-color: white;*/
     color:black;
@@ -203,15 +224,19 @@ html, body {
 	--aug-inset: 2px;
 	--aug-inset-bg: rgba(0, 0, 0, 0.25);
 	--aug-border: 2px;
-	--aug-border-bg: linear-gradient(to right, gold, cyan);
+	--aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
 	--aug-tl: 5px;
 	--aug-br: 5px;
 	--aug-bl: 5px;
 	--aug-tr: 5px;
 	
 }
+
+
+
+
 .dates.fd{
-	--aug-inset-bg: linear-gradient(to right, gold, cyan);
+	--aug-inset-bg: linear-gradient(to right, var(--color1), var(--color2));
 } 
 .dates span{
 	position:relative;
@@ -219,7 +244,7 @@ html, body {
 	height : 13px;
 	
 	float:left;
-}
+} 
 .event .title { 
 	min-height: 18px;
 	width: 185px;
@@ -238,7 +263,7 @@ html, body {
 	font-size:13px;
 }
 #calendar .day{
-  background-color: rgba(0,255,255, 0.53);
+  /*background-color: rgba(0,255,255, 0.53);*/
   text-shadow: 0 0 10px #000;
   color: #ffffff;
   height: 22px;
@@ -251,6 +276,7 @@ html, body {
   --aug-br: 3px;
   --aug-bl: 5px;
   --aug-tr: 5px;
+  --aug-inset-bg:  var(--color1);
   font-size: 15px;
   text-align: right;
   padding-top: 5px;

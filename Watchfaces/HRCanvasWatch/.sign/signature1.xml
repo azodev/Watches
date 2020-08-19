@@ -109,8 +109,8 @@ ODJ6+SfaPg==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2FcanvasDrawer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>N8Y97OjOUGYSVxNn1sLj/5r5XEh7Er/HK4iXVAWFDLauHaL6+7uMWMqH06c9h9/XX07fwMLUBjpT
-3dIb/Nk/2g==</DigestValue>
+<DigestValue>cXWGhWw9L4d63zBVsFad2ksdLKXXgBrCfbP1/2c11h14hYATdBkl+hRs6GQHeTR3llrHhN+HwjF4
+M7FkPYEciw==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2FheartRate.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -154,8 +154,8 @@ QgFh0b+TCA==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Fcanvas.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>fQ/JFbKwteObKb3Ool8ZicwSTLCCUqCOymiKSoStq4fGNwZ11AA8npk9JPWea1zIs01RTExF0xgy
-fChOjjuUmA==</DigestValue>
+<DigestValue>hPeqdO3YdywxpoHxz8OZDbaPLcC2bTy13smLf8O7fIXSoavXLuJ19mJDL48UjjnXri7woXsr7Iaz
+ZLi1Y2Kf8A==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Finit.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -164,8 +164,8 @@ fChOjjuUmA==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Fmain.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>cLq/heU73SFSnnWB6R6gDzJI6sqH+z1SMoL1K+NLjntqRNqH9vCk1psDeur52R0ommmen2kLZAnZ
-xWO1g1j3sg==</DigestValue>
+<DigestValue>ItsoPDjgJdWru8ibZjEnhPdoI9R9kxwSXvN3btAmCah8C2X6IM+F2NZKEg1bL7akwmyReCGjq372
+lJ1vz6ab5Q==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Fradial.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -174,8 +174,8 @@ WLdhYlPr7Q==</DigestValue>
 </Reference>
 <Reference URI="author-signature.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>0KPguV8Xm+r9AbnmaVKdhno58asZBLzwogd9yOlp6QikYeKIDXP6431GohFPjYtmjcnjnDQO29sj
-24/DdmhF0w==</DigestValue>
+<DigestValue>/gg/79HCRp7g/Qt/aQomN5DvEOTiJrOOATPZro8TH6VGfNKW4T4T4iEcZjyC1M8CMMZXsnT76x55
+oNzjnH5z4A==</DigestValue>
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -189,8 +189,8 @@ rM68Mg4zOg==</DigestValue>
 </Reference>
 <Reference URI="css%2Fstyle.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>v+v5sPEcjcf7S6fq8cWAAhZSM23fzuUfbv4DWV8wsi41QnfGp1gIeU9KG+yMIBVw5T0IhvBq8/pD
-YcYJdCcaKg==</DigestValue>
+<DigestValue>8LULqOd8uIJXdIAtFNJUsoSaDlYddS8QRH3SOhbBsKP0Z0w9yRdOBWfTgwDuJvx3v5wcSMn5iB4P
+fY1IF0QUJQ==</DigestValue>
 </Reference>
 <Reference URI="data%2FFutureNow.ttf">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -769,8 +769,8 @@ wUjoxSIrAQ==</DigestValue>
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>lSzHXY4xGwl5wVH7QIBXjgSuluHBop4jC2LzODZlV5dTylhW6nS2T/c/pAWVCozCV9ez9E5/vCUw
-+sf4lbyHAw==</DigestValue>
+<DigestValue>wXGi+2Edg+iKqGBtocJUQYFJyOCGNmMjUbJym3Vqo6+afVfavjWge6jEVzu12VBRPpYjhWvQUINz
+i/nGcBSIbQ==</DigestValue>
 </Reference>
 <Reference URI="input.txt">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -862,11 +862,11 @@ GyvKX9Snig==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-Fcoyn+neTJM9BxSbvoU3/SK2Jpg0W4JJNbRUjFKIXLyMoe5YIAl86lS2D7PA6b7SdKadSvAh6AYV
-zsoz8eUTdFMVfAVe6hspdFiclcteMldFGdqKUUiYz6D6xLb5dKHZskN9Mfsmq6Toe5sUWtxANpha
-B+qAY49nQ7VM0OC3SuenIknDaWhZ/RYktMtFh66HkHYCH0G4S89s3mbTvovVJgKMyDh6zm+wsb5W
-pslkaN/VG8+rY3ugJ4vDcV7lcxLRkM3AF0mjHbX0wt9xpUWWwfwLM+4/j3u+sxw5gnO7RfW0m3dz
-Pr1TPxROUClxMWO6jbZ8nPajnZrVTc9JCcKHHw==
+SHW4KuaUIQocCBRQruMsoS94M4xo/ggcMoSAXMAz0ci4WimhcSFKtR1a9FsnNxqJH6DRCljdoZkW
+LusB1xh3pHgef+gdh3CWCHs1RoUw5CQnpTpesZEzaM1jFHWo7b8mcm5LsuS/jUvZZyVu4KJkAmG2
+j3hvquZCF/3D+r0ZSxNsMmH0t+9A/atmHoeGcMdG5Tld0Cd94vxQqJRw3XnXhJBQxNT8ZaqBX+3U
+avAWMahoZvm+lh/yXlok5aAodcMzJV563dhsAuJsl1OZrIBNxqbN9Q7T7RLDws226J8NnPp+yp2r
+v1UC5Vw4JWAhwMfdRBZaGQX76O8cE0rkrvfUKA==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

@@ -105,7 +105,9 @@ define({
 			document.getElementById('canvas-layout').addEventListener('click', function() {
 				handleClick(this);
 			});*/
-			
+			window.addEventListener('mousedown', function(e) {
+		        e.preventDefault();            
+		    })
 			event.on({
 				//'models.location.error' : postNotification,
 				// 'models.location.found': postNotification,
