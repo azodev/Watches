@@ -214,8 +214,8 @@ define({
 			default:
 				//sheet.deleteRule(1);
 				//sheet.insertRule(":root{--color1:blue;--color2:cyan;}",1); 
-				document.querySelector(":root").style.setProperty('--color1', 'rgb(99,100,103)');
-				document.querySelector(":root").style.setProperty('--color2', 'rgb(240,234,234)');
+				document.querySelector(":root").style.setProperty('--color1', 'rgb(149,149,149)');
+				document.querySelector(":root").style.setProperty('--color2', 'rgb(244,244,244)');
 				break;
 			}
 			console.log(sheet);
@@ -1247,7 +1247,7 @@ define({
 					particleColors = ["#694FB9","#6094ee","#3CFBFF"];
 				  	break;
 				  default:
-						particleColors = ["rgb(99,100,103)","rgb(190,190,190)","rgb(240,234,234)"];
+						particleColors = ["rgb(149,149,149)","rgb(190,190,190)","rgb(244,244,244)"];
 					  	break;
 				}
 			

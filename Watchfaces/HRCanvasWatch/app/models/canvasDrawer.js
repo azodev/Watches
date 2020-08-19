@@ -740,8 +740,8 @@ define({
 			}
 			else if (theme== 'metal') {
 				//radialGradient.addColorStop(0.98, 'rgba(100,35,35,1)'); 
-				gradientLinear.addColorStop(1, "rgb(52,52,54)");
-				gradientLinear.addColorStop(0.6, "rgb(99,100,103)");
+				gradientLinear.addColorStop(1, "rgb(101,101,107)");
+				gradientLinear.addColorStop(0.6, "rgb(149,149,149)");
 				gradientLinear.addColorStop(0.3, "rgb(190,190,190)");
 				gradientLinear.addColorStop(0, "rgb(244,244,244)");
 			}
@@ -771,8 +771,8 @@ define({
 			}
 			else if (theme== 'metal') {
 				//radialGradient.addColorStop(0.98, 'rgba(100,35,35,1)'); 
-				grdAmbiant.addColorStop(1, "rgb(52,52,54)");
-				grdAmbiant.addColorStop(0.6, "rgb(99,100,103)");
+				grdAmbiant.addColorStop(1, "rgb(101,101,107)");
+				grdAmbiant.addColorStop(0.6, "rgb(149,149,149)");
 				grdAmbiant.addColorStop(0.3, "rgb(190,190,190)");
 				grdAmbiant.addColorStop(0, "rgb(244,244,244)");
 			}
