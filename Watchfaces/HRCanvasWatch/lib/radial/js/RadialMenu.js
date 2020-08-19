@@ -105,7 +105,7 @@ RadialMenu.prototype.showNestedMenu = function (item) {
     var self = this;
     self.parentMenu.push(self.currentMenu);
     self.parentItems.push(self.levelItems);
-    self.currentMenu = self.createMenu('menu inner', item.items, true);
+    self.currentMenu = self.createMenu('menu innerbis', item.items, true);
     self.holder.appendChild(self.currentMenu);
     RadialMenu.cleanButtons(self.theme);
     // wait DOM commands to apply and then set class to allow transition to take effect
@@ -141,7 +141,7 @@ RadialMenu.prototype.darkenButton = function (itemid,theme){
 RadialMenu.prototype.returnToParentMenu = function () {
     var self = this;
     self.getParentMenu().setAttribute('class', 'menu');
-    RadialMenu.setClassAndWaitForTransition(self.currentMenu, 'menu inner').then(function () {
+    RadialMenu.setClassAndWaitForTransition(self.currentMenu, 'menu innerbis').then(function () {
         self.currentMenu.remove();
         self.currentMenu = self.parentMenu.pop();
         self.levelItems = self.parentItems.pop();

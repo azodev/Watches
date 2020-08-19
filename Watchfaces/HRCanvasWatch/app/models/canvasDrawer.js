@@ -234,11 +234,11 @@ define({
 			context.restore();
 
 		}
-		function renderCircle(context, CircleShape, color, width,exclude) {
+		function renderCircle(context, CircleShape, color, fillColor, stroke, width, exclude) {
 			context.save();
 			context.beginPath();
 			context.lineWidth = width;
-			if (gradientLinear !== null) {
+			if (gradientLinear !== null && color == null) {
 				color = gradientLinear;
 			}
 			if (typeof exclude === 'undefined') {
@@ -251,19 +251,24 @@ define({
 
 			context.shadowBlur = 5;
 			*/
-			context.strokeStyle = color;
-			context.arc(CircleShape.getCenter().x, CircleShape.getCenter().y, CircleShape.getRadius(), 0, 2 * Math.PI);
-			/*if (opacity == true){
-				context.fillStyle = '#000000';
-				context.globalAlpha = 0.5;
-			    context.fill();
-			    context.globalAlpha = 1;
-			}*/
+			
+			
 			if (!exclude){
 				context.globalAlpha = watchOpacity;
 			}
 			
-			context.stroke();
+			context.shadowColor = "rgba(150, 150, 150,0.5)";
+			context.shadowBlur = 10;
+			
+			context.arc(CircleShape.getCenter().x, CircleShape.getCenter().y, CircleShape.getRadius(), 0, 2 * Math.PI);
+			if (fillColor !== null){
+				context.fillStyle = fillColor;
+			    context.fill();
+			}
+			if (stroke){
+				context.strokeStyle = color;
+				context.stroke();
+			}
 			context.closePath();
 			
 			context.restore();
@@ -335,7 +340,7 @@ define({
 				stroke = true;
 			}
 			if (typeof alpha === 'undefined') {
-				alpha = 1;
+				alpha = null;
 			}
 			if (typeof radius === 'undefined') {
 				radius = 5;
@@ -359,12 +364,12 @@ define({
 				}
 			}
 			context.beginPath();
-			/*
+			
 			context.shadowOffsetX = 0;
 			context.shadowOffsetY = 0;
-			context.shadowColor = "rgb(150, 150, 150)";
-			context.shadowBlur = 5;
-			*/
+			context.shadowColor = "rgba(150, 150, 150,0.5)";
+			context.shadowBlur = 10;
+			
 			context.moveTo(shape.getX() + radius.tl, shape.getY());
 			context.lineTo(shape.getX() +  shape.getWidth() - radius.tr, shape.getY());
 			context.quadraticCurveTo(shape.getX() + shape.getWidth(), shape.getY(), shape.getX() + shape.getWidth(), shape.getY() + radius.tr);
@@ -384,6 +389,9 @@ define({
 				//context.globalAlpha = alpha;
 			}
 			context.globalAlpha = watchOpacity;
+			/*if (alpha !== null && alpha <= watchOpacity){
+				context.globalAlpha = alpha;
+			}*/
 			if (stroke) {
 				context.strokeStyle = strokeColor;
 				context.stroke();
@@ -579,6 +587,7 @@ define({
 			context.textBaseline = "middle";
 			doGradientOrColor(context, color, options);
 			context.globalAlpha = watchOpacity;
+			
 			indexX += x;
 			textdate = date.hour;
 			context.fillText(textdate, indexX, y);

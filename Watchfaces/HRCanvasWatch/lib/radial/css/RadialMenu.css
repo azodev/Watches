@@ -22,7 +22,7 @@ svg.icons {
 svg.menu {
     position: absolute;
     overflow: visible;
-    transition: 0.3s;
+    transition: 0.2s;
     z-index:4;
     opacity:0.95;
     transition-timing-function: ease-out; 
@@ -31,13 +31,18 @@ svg.menu {
 }
 
 svg.menu.inner {
-    transform: scale(0.66) rotate(-10deg);
+    transform: translateY(-140px) scale(0.16) rotate(0deg);
+    opacity: 0;
+    visibility: hidden; 
+}
+svg.menu.innerbis {
+    transform:  scale(0.66) rotate(-30deg);
     opacity: 0;
     visibility: hidden; 
 }
 
 svg.menu.outer {
-    transform: scale(1.5) rotate(10deg);
+    transform: scale(1.5) rotate(30deg);
     opacity: 0;
     visibility: hidden;
 }

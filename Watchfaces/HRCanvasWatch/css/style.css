@@ -76,13 +76,13 @@ html, body {
 }
 #calendar{
 	position: relative;
-	width: 280px;
-  	height: 250px;
+	width: 300px;
+  	height: 260px;
     padding: 10px; /* mind the gap */
     z-index: 3;
     opacity:0;
-    margin-left: 40px ; 
-    margin-top: 55px;
+    margin-left: 30px ; 
+    margin-top: 60px;
     /*transition: opacity 1s ease, transform 1s ease;*/
     transition-property: opacity, transform;
 	transition-duration: 0.5s;

@@ -152,7 +152,7 @@ define({
 		
 		var forecastDisplayed = false; 
 		var forecastMode = false; 
-		var wShape , aShape1, aShape2, aShape3, aShape4,appDrawerShape, calendarShape; 
+		var wShape , aShape1, aShape2, aShape3, aShape4,appDrawerShape, calendarShape, hrShape; 
 		var secondsPassed = 0;
 		var oldTimeStamp = 0;
 		var miniCalendarDisplayed = true, miniWeatherDisplayed= true;
@@ -219,6 +219,7 @@ define({
 					setClassAndWaitForTransition(calendar,'on','opacity').then(function () {
 						console.log('transition calendar');
 						calendar.setAttribute('class', 'on');
+						holder.setAttribute('class', 'on');  
 						//document.getElementById ('up').classList.remove('off');
 						//document.getElementById ('down').classList.remove('off');
 						/*
@@ -231,7 +232,11 @@ define({
 		            
 		        });
 				
+			  	
+			}
+			else if (hrShape.isInSurface(clickPos,5) && !radialmenu.getOpen()  ){
 				
+				tizen.application.launch("com.samsung.shealth.stress.measure", null,null);
 			}
 			
 		}
@@ -424,7 +429,7 @@ define({
 			
 			
 			canvasDrawer.renderBackground(ctxContent,ctxContent.canvas.width, ctxContent.canvas.height, "black",{gradient:true,motion:motion});
-			canvasDrawer.renderCircle(ctxContent,  new Circle(center.x,center.y,watchRadius -2) , "#000000",5,true);
+			canvasDrawer.renderCircle(ctxContent,  new Circle(center.x,center.y,watchRadius -2) ,null,null,true,2,true);
 			//canvasDrawer.renderGrid (ctxContent,  "#000000",2,{motion:motion});
 			/*if (drawTicks === true){
 				canvasDrawer.renderCircle(ctxContent, center, watchRadius *1, "#000000",4);
@@ -447,11 +452,11 @@ define({
 			
 			
 			if (backendLoaded){
-				canvasDrawer.renderCircle(ctxContent, appDrawerShape, "#000000",2,false);
-				canvasDrawer.roundRect(ctxContent, aShape1, 3, false, true, "#000000", "#000000");
-				canvasDrawer.roundRect(ctxContent, aShape2, 3, false, true, "#000000", "#000000");
-				canvasDrawer.roundRect(ctxContent, aShape3, 3, false, true, "#000000", "#000000");
-				canvasDrawer.roundRect(ctxContent, aShape4, 3, false, true, "#000000", "#000000");
+				canvasDrawer.renderCircle(ctxContent, appDrawerShape, "#000000","rgba(0, 0, 0,0.7)",false,2,false);
+				canvasDrawer.roundRect(ctxContent, aShape1, 3, false, true, "#000000", "rgba(0, 0, 0,0.8)");
+				canvasDrawer.roundRect(ctxContent, aShape2, 3, false, true, "#000000", "rgba(0, 0, 0,0.8)");
+				canvasDrawer.roundRect(ctxContent, aShape3, 3, false, true, "#000000", "rgba(0, 0, 0,0.8)");
+				canvasDrawer.roundRect(ctxContent, aShape4, 3, false, true, "#000000", "rgba(0, 0, 0,0.8)");
 				if (baroDisplayed){
 					canvasDrawer.renderTextGradient(ctxContent, 'Altitude', center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.30), 16, "#c9c9c9", {
 						font : 'FutureNow',
@@ -509,13 +514,13 @@ define({
 				
 				
 				if (miniWeatherDisplayed){
-					canvasDrawer.roundRect(ctxContent, wShape,10, false, true, "#000000", "#000000");
+					canvasDrawer.roundRect(ctxContent, wShape,10, true, false, "#000000", "rgba(0, 0, 0,0.7)");
 					drawWeather(forecastDisplayed);
 				}
 				
 				
 				if (miniCalendarDisplayed) {
-					canvasDrawer.roundRect(ctxContent, calendarShape,10, false, true, "#000000", "#000000");
+					canvasDrawer.roundRect(ctxContent, calendarShape,10, true, false, "#000000", "rgba(0, 0, 0,0.7)");
 					//if (calendarModel.hasVEvents()){
 						canvasDrawer.renderText(ctxContent, 'Events', calendarShape.getCoords().x+50, calendarShape.getCoords().y+20, 25, "#c9c9c9", {
 							font : 'FutureNow',
@@ -530,7 +535,7 @@ define({
 					//}
 					
 				}
-				canvasDrawer.renderCircle(ctxContent, new Circle(center.x,center.y + (watchRadius * 0.67),28), "#000000",1.5,false);
+				canvasDrawer.renderCircle(ctxContent, hrShape, "#000000","rgba(0, 0, 0,0.7)",false,1.5,false);
 				if (heartRateDisplayed &&  heartRateFound && heartRate.getData().rate !== null) {
 					
 					
@@ -596,11 +601,11 @@ define({
 				};
 			}
 			else {
-				wCoords = { text1 : {x:center.x - (watchRadius * 0.32),y:center.y + (watchRadius * 0.16),size: 21},
+				wCoords = { text1 : {x:center.x - (watchRadius * 0.31),y:center.y + (watchRadius * 0.16),size: 21},
 						   temp : {x:center.x - (watchRadius * 0.30),y:center.y + (watchRadius * 0.28),size: 22},
 						   city : {x:center.x - (watchRadius * 0.65),y:center.y + (watchRadius * 0.33),size: 12},
 						   text2: {x:center.x - (watchRadius * 0.67),y:center.y + (watchRadius * 0.39),size: 18},
-						   icon : {x:center.x - (watchRadius * 0.57),y:center.y + (watchRadius * 0.14),size: 62}
+						   icon : {x:center.x - (watchRadius * 0.56),y:center.y + (watchRadius * 0.14),size: 62}
 				};
 			}
 			if (weatherModel.isWeatherFound()) {
@@ -710,6 +715,22 @@ define({
 			isAmbientMode = false;
 			//grdAmbiant.addColorStop(0, "#69d7db");
 			//grdAmbiant.addColorStop(1, "#203fc9");
+			if (forecastDisplayed){
+				wShape= new Shape(center.x - 126, center.y + (watchRadius * 0.06), 250, 70);
+			}
+			else {
+				wShape= new Shape(center.x - 126, center.y + (watchRadius * 0.06), 100, 70);
+			}
+			calendarShape = new Shape(center.x + 26, center.y + (watchRadius * 0.06), 100, 70);
+			
+			aShape1= new Shape(center.x - 16, center.y - 116 , 13, 13);
+			aShape2= new Shape(center.x + 3, center.y - 116, 13, 13);
+			aShape3= new Shape(center.x - 16, center.y - 134, 13, 13);
+			aShape4= new Shape(center.x + 3, center.y - 134, 13, 13); 
+			//drawWatchLayout();
+
+			appDrawerShape = new Circle(center.x,center.y-119,28);
+			hrShape = new Circle(center.x,center.y + (watchRadius * 0.67),28);
 		}
 
 		/**
@@ -859,7 +880,7 @@ define({
 			});
 			if (heartRateFound && heartRate.getData().rate !== null) {
 				
-				canvasDrawer.renderCircle(ctxContent, new Circle(center.x,center.y + (watchRadius * 0.60),45), grdAmbiant,2,false);
+				canvasDrawer.renderCircle(ctxContent, new Circle(center.x,center.y + (watchRadius * 0.60),45), grdAmbiant,renderCircle,false,2,false);
 
 				
 				canvasDrawer.renderText(ctxContent, heartRate.getData().rate, center.x, center.y + (watchRadius * 0.60), 30, grdAmbiant, {
@@ -1294,21 +1315,6 @@ define({
 			//calendarModel.accessCalendars(['gmail']);
 			
 			//wShape= new Shape(center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 250, 70);
-			if (forecastDisplayed){
-				wShape= new Shape(center.x - 126, center.y + (watchRadius * 0.06), 250, 70);
-			}
-			else {
-				wShape= new Shape(center.x - 126, center.y + (watchRadius * 0.06), 100, 70);
-			}
-			calendarShape = new Shape(center.x + 26, center.y + (watchRadius * 0.06), 100, 70);
-			
-			aShape1= new Shape(center.x - 16, center.y - 116 , 13, 13);
-			aShape2= new Shape(center.x + 3, center.y - 116, 13, 13);
-			aShape3= new Shape(center.x - 16, center.y - 134, 13, 13);
-			aShape4= new Shape(center.x + 3, center.y - 134, 13, 13); 
-			//drawWatchLayout();
-
-			appDrawerShape = new Circle(center.x,center.y-119,28);
 			
 			popolate(max_particles,effect);
 			setTimeout(function () {
