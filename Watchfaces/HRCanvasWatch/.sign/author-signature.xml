@@ -109,8 +109,8 @@ ODJ6+SfaPg==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2FcanvasDrawer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>cXWGhWw9L4d63zBVsFad2ksdLKXXgBrCfbP1/2c11h14hYATdBkl+hRs6GQHeTR3llrHhN+HwjF4
-M7FkPYEciw==</DigestValue>
+<DigestValue>mCtgvHf/+Wq/LLZDUYNHDf+KYnf6Dm8RqTY/nPGC1RAGHc69tmMJioDvdvTRGIf+SsRkHMWifuEl
+lGv136/EEw==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2FheartRate.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -154,8 +154,8 @@ QgFh0b+TCA==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Fcanvas.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>hPeqdO3YdywxpoHxz8OZDbaPLcC2bTy13smLf8O7fIXSoavXLuJ19mJDL48UjjnXri7woXsr7Iaz
-ZLi1Y2Kf8A==</DigestValue>
+<DigestValue>Klqz0o0PfzxeaR6mLlB2hFKk6ERLBtt13jriWSvdUgfCJBnFF/zkUE+f3EK32MdUVJ9yMjB98AlF
+/Li1hNUc4g==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Finit.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -184,8 +184,8 @@ rM68Mg4zOg==</DigestValue>
 </Reference>
 <Reference URI="css%2Fstyle.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>8LULqOd8uIJXdIAtFNJUsoSaDlYddS8QRH3SOhbBsKP0Z0w9yRdOBWfTgwDuJvx3v5wcSMn5iB4P
-fY1IF0QUJQ==</DigestValue>
+<DigestValue>nb3TLsOcAGLV2/y+68jY6GEA1YqdekSl+9oXKGDMuaOYGz0VxXvbcgq3eOpdHWfwpiqMqnpTgFgL
+PMOA3+y3hw==</DigestValue>
 </Reference>
 <Reference URI="data%2FFutureNow.ttf">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -787,10 +787,15 @@ ClcoZAihdw==</DigestValue>
 <DigestValue>iMRvAPzxhpZLc601Oe7gWjayjZRSEYOLDs3JzcQCltKoZhLfrupGXamnOX2i+3dR9WM7FbzYvkx2
 rJBADjAZbQ==</DigestValue>
 </Reference>
+<Reference URI="lib%2Feffects%2FAlien.class.js">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
+<DigestValue>iIdAeTCM80vwpUEtA7qU8w22Dy6OxwF8YYPQHPrTOO/hc9ydItJr30vFogkbmCIntDyWoWVE9v7V
+CtUxeKFUCA==</DigestValue>
+</Reference>
 <Reference URI="lib%2Feffects%2FFlower.class.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>fjiAqF+3R1DElRldvq4a+Kt3XauXkvFHZjGrlHqs5wh6yp5JdJTHcnVklnqyhkfX92o2HVfQdSml
-A0dgYoTtXA==</DigestValue>
+<DigestValue>L3kpcCFSMvrObRGuttzaZgfcipZIyJYq6oI6uUKl0cN0BTdQ3tT0BPPMFoXMB6NR8dz8woZXl6e2
+aWTiqlSUUA==</DigestValue>
 </Reference>
 <Reference URI="lib%2Feffects%2FParticle.class.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -857,11 +862,11 @@ QY10fG1EWQ==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-etr5hjFgCNQLV1ca8nc885pNkNy7VY4HPhlC8VECUTzbK3iDAZMd5qE3DZyeY4Ho51N0vjcU3Ddp
-Sdbo6gNeuXZ0h1e98e70fGAYaazVzuKJ5sh7lL1icA+VBBiSvuwNo9SaOFG/X0uYj6EDHRHyn+nT
-B6ECsYgpFa2TsfCPJiEmiJY98m/1CXEGW2NVHREKxokugVhjce5WepO/uPe/2lFzLdgt49gKP/u5
-M5YOsDpiCnwdqAc/Ekhsrc2fJzuB+65Iy/K+nKKyEd1BNiPff1Ocv8Xr+cp+VsRMDxvo9WmyV3jv
-BznD7MP76V840bW1cYNUjR+xzP9m37l5o9Wp3g==
+XAoms4yKZUG5C4HoAvItFOcTk77zA8ct568Ymp9STjFrQRP16+XKhnhZhZjhj669jTxi6a7669Kl
+INcf1aofx0knjbLukGzRXosVfXzgHQjPxtphFm9XVxTZXKhmdVJqQ8i4X7532h5snaxJMSAHVoXZ
+gsK8aA5k+rWeEMmvVrayFj9taNLXG4nqEEKNp/0WYlNuovSenf0NARA+juXvXNHqFXGyR46CdLmL
+pBB7ZVj7nfSHdU37KC+12+xyJj/y2TRMqUxAZI2NQhYwxjiYUUJyNOvARt7Cy49uCFFZaSaG0Mzs
+jha93aYcYZsxumYA+XOmMi63cjRTyYhhs/HTZg==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

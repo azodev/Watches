@@ -40,8 +40,8 @@ app/models/calendar.js__DEL__OsWaxvXlRBbzKuLx69gpUGRiwr4hbCqrz9NabhiJj/l62kegXss
 gNooSCK2rA==
 app/models/calories.js__DEL__z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGl
 ODJ6+SfaPg==
-app/models/canvasDrawer.js__DEL__cXWGhWw9L4d63zBVsFad2ksdLKXXgBrCfbP1/2c11h14hYATdBkl+hRs6GQHeTR3llrHhN+HwjF4
-M7FkPYEciw==
+app/models/canvasDrawer.js__DEL__mCtgvHf/+Wq/LLZDUYNHDf+KYnf6Dm8RqTY/nPGC1RAGHc69tmMJioDvdvTRGIf+SsRkHMWifuEl
+lGv136/EEw==
 app/models/heartRate.js__DEL__5+Tp4ZIx7Q+eRmEm5h4CVoNqTcopx8cDg2Ty7GS8Ud2XK/eqWl8gbYqpY6b82Z8iOk4p0BL2Y42r
 LAnoGi1kBw==
 app/models/location.js__DEL__2SdFP1nRN2h7zj+YuDAhEEwlo27X9GqJpVyU4jbLEEgY6QH+PS/OSAR0XgbChmLVcaQ+eIkRxsWu
@@ -58,8 +58,8 @@ app/models/weather.js__DEL__XToHcfAf1BezW1c8vLf6o1UYJJhi5pjqZe9dm88dod3j48+VThet
 QgFh0b+TCA==
 app/tau-config.js__DEL__4uO/1Gq8a3/K23CMOEYjwuGm2wiKcxaToAFNBAwm4x4qZfKY9WXFuZMVHqowYbMzKBuIHRt/Gju+
 7AAC7BcJIw==
-app/views/canvas.js__DEL__hPeqdO3YdywxpoHxz8OZDbaPLcC2bTy13smLf8O7fIXSoavXLuJ19mJDL48UjjnXri7woXsr7Iaz
-ZLi1Y2Kf8A==
+app/views/canvas.js__DEL__Klqz0o0PfzxeaR6mLlB2hFKk6ERLBtt13jriWSvdUgfCJBnFF/zkUE+f3EK32MdUVJ9yMjB98AlF
+/Li1hNUc4g==
 app/views/init.js__DEL__LVuK5g7WotAFrCgZAMNnprcXc75a0AVl0ry9BnaKSEyMsmarmc2oCjPLFGIS5OnCoAc5qCYIp/iT
 3lvGUd+HoQ==
 app/views/main.js__DEL__ItsoPDjgJdWru8ibZjEnhPdoI9R9kxwSXvN3btAmCah8C2X6IM+F2NZKEg1bL7akwmyReCGjq372
@@ -70,8 +70,8 @@ config.xml__DEL__lCDDBFVBZ2IxWUSEwn9la2M/9WY+JT836VbaTjULPZV31jLle1Lh06vJn36ZNmT
 C08ioH4l8Q==
 css/augmented.css__DEL__brYSSRl6XSqXawq7QOENWtXp/q8dDM0DYbtnu36omWm7eOP5MkGj7gTHsMUhrPMb79etdOw17OCm
 rM68Mg4zOg==
-css/style.css__DEL__8LULqOd8uIJXdIAtFNJUsoSaDlYddS8QRH3SOhbBsKP0Z0w9yRdOBWfTgwDuJvx3v5wcSMn5iB4P
-fY1IF0QUJQ==
+css/style.css__DEL__nb3TLsOcAGLV2/y+68jY6GEA1YqdekSl+9oXKGDMuaOYGz0VxXvbcgq3eOpdHWfwpiqMqnpTgFgL
+PMOA3+y3hw==
 data/FutureNow.ttf__DEL__DDMeLXs3dgCipVEGS35Xqu1WWKTb0s88CSpflU18S+UBZZVwpKSQhJ9SzKYLg3hQIo4YaN+o8Ueh
 YcJJknHOug==
 data/artill_clean_icons.otf__DEL__bKdOXi1HIZZyl6/6ggDCU6dg4uamn8NJOcRWGaUyCu9y68PoePMr8UbjvfFGm/v9H9fMGAPnn5BP
@@ -312,8 +312,10 @@ lib/calendar/vEvent.class.js__DEL__0GaSPEGfnf1Pu5/azoSHXYIOlsOiRdYwJeWlLBmN09XfM
 ClcoZAihdw==
 lib/dateadd.js__DEL__iMRvAPzxhpZLc601Oe7gWjayjZRSEYOLDs3JzcQCltKoZhLfrupGXamnOX2i+3dR9WM7FbzYvkx2
 rJBADjAZbQ==
-lib/effects/Flower.class.js__DEL__fjiAqF+3R1DElRldvq4a+Kt3XauXkvFHZjGrlHqs5wh6yp5JdJTHcnVklnqyhkfX92o2HVfQdSml
-A0dgYoTtXA==
+lib/effects/Alien.class.js__DEL__iIdAeTCM80vwpUEtA7qU8w22Dy6OxwF8YYPQHPrTOO/hc9ydItJr30vFogkbmCIntDyWoWVE9v7V
+CtUxeKFUCA==
+lib/effects/Flower.class.js__DEL__L3kpcCFSMvrObRGuttzaZgfcipZIyJYq6oI6uUKl0cN0BTdQ3tT0BPPMFoXMB6NR8dz8woZXl6e2
+aWTiqlSUUA==
 lib/effects/Particle.class.js__DEL__2MZteUeNVc8cyLigV2OTSraZwu0WczaMCJkwJTui53I++EsuvkwJlI1rp5Y7dS6NpOdedvBhMhS+
 j2MrqQdJIQ==
 lib/effects/ParticleAlien.class.js__DEL__Mu2TVGpo+Tb6fhWAmr2Jt5bFPYmR95qhNl3ofJZ+0RGt3pei4m8dWtzQctiy6AkKDWf685L9KFKT
@@ -336,5 +338,5 @@ output.txt__DEL__z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuw
 ODJ6+SfaPg==
 version.txt__DEL__jJtvGOhH+xRt5nb2nvtEt+HGe/PG0CnhcMjO6XKTjHZEjeAZ5yuYeNEv9jXlGeLwx2zOOKSyvcob
 EviMmoUiyw==
-author-signature.xml__DEL__/gg/79HCRp7g/Qt/aQomN5DvEOTiJrOOATPZro8TH6VGfNKW4T4T4iEcZjyC1M8CMMZXsnT76x55
-oNzjnH5z4A==
+author-signature.xml__DEL__WH2BWtCgnQwrM3PdOK5RAzQFxqxgkUyqF0mTalpuF/PsNuut2DVWLLWjJphb6d5NKte+f8ZaWw4I
+EZIRERUfJg==

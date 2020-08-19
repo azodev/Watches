@@ -134,7 +134,7 @@ define({
 		var motion = null;
 		var motionFromGyro = {accelerationIncludingGravity : {x:null,y:null}}; 
 		
-		var max_particles = 700;
+		var max_particles = 600;
 		var particles = [];
 		var frequency = 3;
 		var init_num = max_particles;
@@ -910,7 +910,7 @@ define({
 			});
 			if (heartRateFound && heartRate.getData().rate !== null) {
 				
-				canvasDrawer.renderCircle(ctxContent, new Circle(center.x,center.y + (watchRadius * 0.60),45), grdAmbiant,renderCircle,false,2,false);
+				canvasDrawer.renderCircle(ctxContent, new Circle(center.x,center.y + (watchRadius * 0.60),45), grdAmbiant,false,true,2,false);
 
 				
 				canvasDrawer.renderText(ctxContent, heartRate.getData().rate, center.x, center.y + (watchRadius * 0.60), 30, grdAmbiant, {

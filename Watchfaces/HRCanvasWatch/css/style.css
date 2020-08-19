@@ -84,13 +84,13 @@ html, body {
 }
 #calendar{
 	position: relative;
-	width: 300px;
+	width: 290px;
   	height: 260px;
     padding: 10px; /* mind the gap */
     z-index: 3;
     opacity:0;
-    margin-left: 30px ; 
-    margin-top: 60px;
+    margin-left: 35px ; 
+    margin-top: 55px;
     /*transition: opacity 1s ease, transform 1s ease;*/
     transition-property: opacity, transform;
 	transition-duration: 0.5s;
@@ -99,7 +99,7 @@ html, body {
   --aug-border: 2px;
   --aug-inset: 4px;
   --aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
-  --aug-inset-bg: #000000;
+  --aug-inset-bg: radial-gradient(circle, rgba(29,29,29,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%);
   --aug-inset-opacity: 0.9;  
   --aug-b-width: 60%;
   --aug-t-width: 60%;
@@ -116,28 +116,18 @@ html, body {
     
     /*transform: perspective(700px) rotateY(0deg); */
 }
-.ice{
-	--aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
-}
-.fire{
-	--aug-border-bg: linear-gradient(to right, rgb(255,150,53), rgb(249,234,194));
-}
-.hisakura{
-	--aug-border-bg: linear-gradient(to right, rgb(229,72,72), rgb(251,232,232));
-} 
 
 
 #calendar.on {
 	top:0px;
 	left:0px;
 	
-    margin-left: 40px ; 
-    margin-top: 55px;
+
 	position: absolute;
 	transition-property: opacity, transform;
 	transition-duration: 0.5s;
 	transition-timing-function: linear;
-	transform: perspective(700px) rotateY(15deg); 
+	transform: perspective(700px) rotateY(0deg); 
 	opacity:1;
 	  --aug-inset-opacity: 0.8;
 	    

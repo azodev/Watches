@@ -709,10 +709,10 @@ define({
 			
 			radialGradient = context.createRadialGradient(radialGradientCoords.x, radialGradientCoords.y, 0.000, 180.000, 180.000, 180.000);
 			radialGradient.addColorStop(0.000, 'rgba(0, 0, 0,1)');
-			radialGradient.addColorStop(0.300, 'rgba(0, 0, 0,0.2)');
-			radialGradient.addColorStop(0.755, 'rgba(0,0,0,0.3)');
-			radialGradient.addColorStop(0.83, 'rgba(20,20,20,0.3)');
-			radialGradient.addColorStop(0.91, 'rgba(39,41,42,1)');
+			radialGradient.addColorStop(0.300, 'rgba(0, 0, 0,0.3)');
+			radialGradient.addColorStop(0.755, 'rgba(0,0,0,0.4)');
+			radialGradient.addColorStop(0.83, 'rgba(5,5,5,0.4)');
+			radialGradient.addColorStop(0.91, 'rgba(20,20,20,1)');
 			radialGradient.addColorStop(0.98, 'rgba(70,70,70,1)'); 
 			
 			gradientLinear = context.createLinearGradient(cx - gx, cy - gy, cx + gx, cy + gy);
