@@ -340,7 +340,7 @@ define({
 				stroke = true;
 			}
 			if (typeof alpha === 'undefined') {
-				alpha = null;
+				alpha = 1;
 			}
 			if (typeof radius === 'undefined') {
 				radius = 5;
