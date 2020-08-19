@@ -109,8 +109,8 @@ ODJ6+SfaPg==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2FcanvasDrawer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>b7h1V2qvIqAX5Fyp/lEN55kEl8oMlPWGIithqXnAVPDnkPDCrAYz0Iqdr5W9DIahGV4+hdHTDfyj
-XbIZWNI5Xg==</DigestValue>
+<DigestValue>N8Y97OjOUGYSVxNn1sLj/5r5XEh7Er/HK4iXVAWFDLauHaL6+7uMWMqH06c9h9/XX07fwMLUBjpT
+3dIb/Nk/2g==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2FheartRate.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -857,11 +857,11 @@ QY10fG1EWQ==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-uFbJhXrCbVfMBfvpRG5N7sbb1pkKy0vTBjJ0F30gsAOI9Xvi7N6IoTB9nDiMdN0egQIaRI5aI1iP
-i9gn5+ZQl4jfCspQs1xWe96FxOwXD2equhq1bg8Jcz1r3u438hnGUIF/d1EFFdMl5OSOfBxx7TQ+
-xJyCxMX6SWbKJQao6qOzwPBChpnRxe0uI9ZarVUb+IWslxPQNgRB9i2pSO0T0vlzKySRK+Pw5OH4
-DBgXQAj6veG26zRmttSa9KNUyfU3H9ZYHs4ubRi9cuYn+VylE3th8HmehEvNoJ9PIDPLr6QbG6g2
-b/3ibW4hfRWulPWmaujL37S1iomFP2CgP+AHIQ==
+PD4aobDT3u2edLmuXFDwk12fje5vCeV4qrxdHWWv7RN1r8jLwVqyGNF7BYj31gaDeIirrMmlvHfg
+gb9AphJ0m36ns6soaPxgXJ2bpe/wxQMxpU7ISun1FMvifhCVnSjXHGsB9WfMlBgTRnHb8bnP6uym
+naF+27WcL1pa7qsY7iRg1XnJ99PEjqnxJCUmBs6xRgwpcJgWgtyWQUnxJai4wJrML6A1KhiyPNhy
+qayqpsQgmNQfhQuPRLK082RCMIzuhwEW4zrmNrFwIx5RbLiV+C0Cj3D2GWIK0uqJ9xeY1xJDXWZa
+bLhgBRr2gO/WB3fdxychK6tcwsei96UDkS8RFA==
 </SignatureValue>
 <KeyInfo>
 <X509Data>
