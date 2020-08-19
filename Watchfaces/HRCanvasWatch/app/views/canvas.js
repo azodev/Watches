@@ -208,8 +208,8 @@ define({
 			default:
 				//sheet.deleteRule(1);
 				//sheet.insertRule(":root{--color1:blue;--color2:cyan;}",1); 
-				document.querySelector(":root").style.setProperty('--color1', 'blue');
-				document.querySelector(":root").style.setProperty('--color2', 'cyan');
+				document.querySelector(":root").style.setProperty('--color1', 'rgb(38,55,180)');
+				document.querySelector(":root").style.setProperty('--color2', 'rgb(192,221,243)');
 				break;
 			}
 			console.log(sheet);
@@ -443,7 +443,7 @@ define({
 				});
 			  // Recreate particles
 			  if (time_to_recreate) {
-			    if (particles.length < init_num) {popolate((init_num-particles.length)/4,effect);}
+			    if (particles.length < init_num) {popolate((init_num-particles.length)/2,effect);}
 			  }
 			  //console.log(particles.length );
 			clear();
@@ -606,7 +606,7 @@ define({
 			
 			
 
-			displayFps();
+			//displayFps();
 			
 			
 			

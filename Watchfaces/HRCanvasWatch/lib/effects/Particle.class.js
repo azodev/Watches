@@ -19,16 +19,26 @@ class Particle {
 	    	
 	    */
 	    this.colors = colors;
+	    /*
 	    if (Math.random() > 0.5) {
 	      this.x = 360 * Math.random();
-	      this.y = Math.random() > 0.5 ? -Math.random() - 100 : 360 + Math.random() + 100;
+	      this.y = Math.random() > 0.5 ? Math.random() - 180 :  Math.random() + 180;
 	    } else {
-	      this.x = Math.random() > 0.5 ? -Math.random() - 100 : 360 + Math.random() + 100;
+	      this.x = Math.random() > 0.5 ? Math.random() - 180 :  Math.random() + 180;
 	      this.y = 360 * Math.random();
-
 	    }
-
-	    this.s = Math.random() * 6;//2
+	    */
+	    if (Math.random() > 0.5) {
+		      this.x = 360 * Math.random();
+		      this.y = Math.random() > 0.5 ? -Math.random() - 100 : 360 + Math.random() + 100;
+		} else {
+		      this.x = Math.random() > 0.5 ? -Math.random() - 100 : 360 + Math.random() + 100;
+		      this.y = 360 * Math.random();
+		}
+	   // this.x = this.w / 2 + (Math.random() * 200 - Math.random() * 200);
+	    //this.y = this.h / 2 + (Math.random() * 200 - Math.random() * 200);
+	    
+	    this.s = Math.random() * 4;//2
 	    this.a = 0;
 	    this.w = 360;
 	    this.h = 360;
@@ -75,6 +85,14 @@ class Particle {
 	    this.a += Math.random() > 0.5 ? Math.random() * 0.9 - 0.45 : Math.random() * 0.4 - 0.2;
 	    if (this.x > this.point_of_attraction.x -15 && this.x < this.point_of_attraction.x +15 && 
 	    		this.y > this.point_of_attraction.y -15 && this.y < this.point_of_attraction.y +15) return false;
+	    
+	    if (this.x < -100 || this.x > this.w +100 ) {
+	        return false;
+	      }
+
+	      if (this.y < -100 || this.y > this.h+100) {
+	        return false;
+	      }
 	    this.render();
 	    this.progress++;
 	    return true;

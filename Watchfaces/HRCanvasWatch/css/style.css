@@ -5,8 +5,8 @@
   box-sizing: border-box;
 }
 :root {
-	--color1: blue; 
-	--color2: cyan;
+	--color1: rgb(38,55,180); 
+	--color2: rgb(192,221,243);
 }
 img {
   border: 0;
@@ -99,7 +99,8 @@ html, body {
   --aug-border: 2px;
   --aug-inset: 4px;
   --aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
-  --aug-inset-bg: radial-gradient(circle, rgba(29,29,29,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%);
+ /* --aug-inset-bg: radial-gradient(circle, rgba(29,29,29,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%);*/
+  --aug-inset-bg: radial-gradient(  at top right,      var(--color1),      transparent 90%    ),    radial-gradient(      farthest-side at top left,      var(--color2),      transparent 90%    ),    0 0/72px 72px repeating-radial-gradient(#FFFFFF,      #000000 1px,      transparent 1px,      transparent 13px    ), #000011 ;  
   --aug-inset-opacity: 0.9;  
   --aug-b-width: 60%;
   --aug-t-width: 60%;
@@ -210,7 +211,6 @@ html, body {
 	position:absolute;
 	z-index:5;
 	padding: 5px;
-	background-color:#000;
 	--aug-inset: 2px;
 	--aug-inset-bg: rgba(0, 0, 0, 0.25);
 	--aug-border: 2px;
