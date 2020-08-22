@@ -293,7 +293,28 @@ define({
 			}
 			
 		}
-		
+		function createCanvas(properties) {
+			  let canvas = document.getElementById(properties.id);
+			  canvas.width = properties.width;
+			  canvas.height = properties.height;
+			  let context = canvas.getContext('2d');
+			  return {
+			    canvas: canvas,
+			    context: context 
+			    };
+
+		}
+		function maskCanvas(c1,c2,c3) {
+			  c3.context.drawImage(c2.canvas, 0, 0, c2.canvas.width, c2.canvas.height);
+			  c3.context.globalCompositeOperation = 'source-atop';
+			  c3.context.drawImage(c1.canvas, 0, 0);
+			  //blur(c1.context, c1.canvas, 2);
+			}
+		function blur(ctx, canvas, amt) {
+			  ctx.filter = 'blur('+amt+'px)';
+			  ctx.drawImage(canvas, 0, 0);
+			  ctx.filter = 'none';
+			}
 		function renderBackground(context, width, height, color, options) {
 			context.save();
 			context.beginPath();
@@ -920,7 +941,9 @@ define({
 			show:show,
 			isShowing:isShowing,
 			setClassAndWaitForTransition:setClassAndWaitForTransition,
-			scrollTop:scrollTop
+			scrollTop:scrollTop,
+			createCanvas:createCanvas,
+			maskCanvas:maskCanvas
 		};
 	}
 });

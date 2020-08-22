@@ -84,7 +84,7 @@ define({
 
 		var canvasDrawer = req.models.canvasDrawer;
 		var sysInfo = req.core.systeminfo;
-		var canvasLayout, ctxLayout, canvasContent, ctxContent, center, watchRadius, forecastIndexX, forecastHour;
+		var canvasBackground, canvasParticles, canvasContent, canvasFinal,  center, watchRadius, forecastIndexX, forecastHour;
 		var hearRateValue = 0;
 		var locationValue = {
 			latitude : 'Loading',
@@ -136,6 +136,7 @@ define({
 		
 		var max_particles = 600;
 		var particles = [];
+		var flames = [];
 		var frequency = 3;
 		var init_num = max_particles;
 		var max_time = frequency * max_particles;
@@ -341,9 +342,10 @@ define({
 		function drawWatchLayout() {
 			console.log('DrawLayout');
 			// Clear canvas
-			ctxLayout.clearRect(0, 0, ctxLayout.canvas.width, ctxLayout.canvas.height);
+			/**@todo */
+			canvasBackground.context.clearRect(0, 0, canvasBackground.canvas.width, canvasBackground.canvas.height);
 			//
-			canvasDrawer.renderText(ctxLayout, "AZO WATCH v.1", center.x, center.y - (watchRadius * 0.7), 13, "#c9c9c9", {
+			canvasDrawer.renderText(canvasBackground.context, "AZO WATCH v.1", center.x, center.y - (watchRadius * 0.7), 13, "#c9c9c9", {
 				font : 'FutureNow',
 				align : 'center'
 			});
@@ -365,7 +367,7 @@ define({
 
 				// $results.text("Elapsed time= " + Math.round(sinceStart / 1000
 				// * 100) / 100 + " secs @ " + currentFps + " fps.");  currentFps
-				canvasDrawer.renderText(ctxContent, particles.length, center.x, center.y - (watchRadius * 0.45), 15, "#c9c9c9", {
+				canvasDrawer.renderText(canvasContent.context, particles.length, center.x, center.y - (watchRadius * 0.45), 15, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'center'
 				});
@@ -407,10 +409,10 @@ define({
 			}*/
 			// nextMove = 1000 - dateHelper.getDate().getMilliseconds();
 			if (motion !== null) 		{
-				canvasDrawer.processMotion(motionFromGyro,ctxContent);
+				canvasDrawer.processMotion(motionFromGyro,canvasContent.context);
 			}
 			// Clear canvas
-			//ctxContent.clearRect(0, 0, ctxContent.canvas.width, ctxContent.canvas.height);
+			//canvasContent.context.clearRect(0, 0, canvasContent.context.canvas.width, canvasContent.context.canvas.height);
 			gravCenter = canvasDrawer.getRadialGradientCoords();
 			
 			//canvasDrawer.getRadialGradientCoords();
@@ -430,8 +432,8 @@ define({
 				  
 			}
 			if (widgetFullScreenDiplayed ===true){
-				deg.x = (gravCenter.y - 190)*1.2;
-				deg.y = (gravCenter.x - 180)*1.2;
+				deg.x = (gravCenter.y - 190)*1;
+				deg.y = (gravCenter.x - 180)*1;
 				if (deg.x <= -20 ) deg.x = -20;
 				if (deg.x >= 20 ) deg.x = 20;
 				if (deg.y <= -20 ) deg.y = -20; 
@@ -452,61 +454,69 @@ define({
 			    if (particles.length < init_num) {popolate((init_num-particles.length)/2,effect);}
 			  }
 			  //console.log(particles.length );
-			clear();
+			  /*flames = flames.filter(function(p) {
+				    return p.move();
+				  });*/
+			  
+			  clear();
+			
+			 
 			
 			
 			
 			
+			canvasDrawer.renderBackground(canvasParticles.context,canvasParticles.canvas.width, canvasParticles.canvas.height, "black",{gradient:true,motion:motion});
 			
-			canvasDrawer.renderBackground(ctxContent,ctxContent.canvas.width, ctxContent.canvas.height, "black",{gradient:true,motion:motion});
-			canvasDrawer.renderCircle(ctxContent,  new Circle(center.x,center.y,watchRadius -2) ,null,null,true,2,true);
-			//canvasDrawer.renderGrid (ctxContent,  "#000000",2,{motion:motion});
+			canvasDrawer.renderCircle(canvasContent.context,  new Circle(center.x,center.y,watchRadius -2) ,null,null,true,2,true);
+			
+			  
+			  //canvasDrawer.renderGrid (canvasContent.context,  "#000000",2,{motion:motion});
 			/*if (drawTicks === true){
-				canvasDrawer.renderCircle(ctxContent, center, watchRadius *1, "#000000",4);
-				//canvasDrawer.renderCircle(ctxContent, center, watchRadius * 0.90, "#000000",3);
+				canvasDrawer.renderCircle(canvasContent.context, center, watchRadius *1, "#000000",4);
+				//canvasDrawer.renderCircle(canvasContent.context, center, watchRadius * 0.90, "#000000",3);
 	
 				// Draw the dividers
 				// 60 unit divider
 				for (i = 1; i <= 60; i++) {
 					angle = (i - 15) * (Math.PI * 2) / 60;
-					 canvasDrawer.renderNeedle(ctxContent, angle, 0.96, 1.0, 1, "#c4c4c4");
+					 canvasDrawer.renderNeedle(canvasContent.context, angle, 0.96, 1.0, 1, "#c4c4c4");
 				}
 	
 				// 12 unit divider
 				for (j = 1; j <= 12; j++) {
 					angle = (j - 3) * (Math.PI * 2) / 12;
-					canvasDrawer.renderNeedle(ctxContent, angle,  0.90, 1, 3, "#c4c4c4");
+					canvasDrawer.renderNeedle(canvasContent.context, angle,  0.90, 1, 3, "#c4c4c4");
 				}
 			}*/
 			
 			
 			
 			if (backendLoaded){
-				canvasDrawer.renderCircleShadows(ctxContent, appDrawerShape, {r:30,g:30,b:30,a:0.8},5);
-				canvasDrawer.renderCircle(ctxContent, appDrawerShape, "#000000","rgba(0, 0, 0,0.7)",false,2,false);
-				canvasDrawer.roundRect(ctxContent, aShape1, 3, false, true, null, "rgba(0, 0, 0,0.8)");
-				canvasDrawer.roundRect(ctxContent, aShape2, 3, false, true, null, "rgba(0, 0, 0,0.8)");
-				canvasDrawer.roundRect(ctxContent, aShape3, 3, false, true, null, "rgba(0, 0, 0,0.8)");
-				canvasDrawer.roundRect(ctxContent, aShape4, 3, false, true, null, "rgba(0, 0, 0,0.8)");
+				canvasDrawer.renderCircleShadows(canvasContent.context, appDrawerShape, {r:30,g:30,b:30,a:0.8},5);
+				canvasDrawer.renderCircle(canvasContent.context, appDrawerShape, "#000000","rgba(20, 20, 20,0.7)",false,2,false);
+				canvasDrawer.roundRect(canvasContent.context, aShape1, 3, false, true, null, "rgba(0, 0, 0,0.8)");
+				canvasDrawer.roundRect(canvasContent.context, aShape2, 3, false, true, null, "rgba(0, 0, 0,0.8)");
+				canvasDrawer.roundRect(canvasContent.context, aShape3, 3, false, true, null, "rgba(0, 0, 0,0.8)");
+				canvasDrawer.roundRect(canvasContent.context, aShape4, 3, false, true, null, "rgba(0, 0, 0,0.8)");
 				if (baroDisplayed){
-					canvasDrawer.renderTextGradient(ctxContent, 'Altitude', center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.30), 16, "#c9c9c9", {
+					canvasDrawer.renderTextGradient(canvasContent.context, 'Altitude', center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.30), 16, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'right',
 						gradient : true,
 						motion: motion
 					});
-					canvasDrawer.renderText(ctxContent, altitude, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.23), 16, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context, altitude, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.23), 16, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'right'
 					});
-					canvasDrawer.renderTextGradient(ctxContent, 'Pressure', center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.16), 16, "#c9c9c9", {
+					canvasDrawer.renderTextGradient(canvasContent.context, 'Pressure', center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.16), 16, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'right',
 						gradient : true,
 						motion: motion
 					});
 
-					canvasDrawer.renderText(ctxContent, pressure, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.09), 16, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context, pressure, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.09), 16, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'right'
 					});
@@ -515,25 +525,25 @@ define({
 				
 				if (timeDisplayed){
 					// Battery
-					canvasDrawer.renderText(ctxContent, Math.round(batteryLevel) + '%', center.x+94, center.y - (watchRadius * 0.4), 17, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context, Math.round(batteryLevel) + '%', center.x+94, center.y - (watchRadius * 0.4), 17, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'center',
 						gradient : true,
 						motion: motion
 					});
-					canvasDrawer.renderText(ctxContent,datetime.getDate()+"/"+(datetime.getMonth()+1)+"/"+datetime.getFullYear(), center.x + 108, center.y - 50, 25, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context,datetime.getDate()+"/"+(datetime.getMonth()+1)+"/"+datetime.getFullYear(), center.x + 108, center.y - 50, 25, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'right',
 						gradient : true,
 						motion: motion
 						
 					});
-					canvasDrawer.renderTimeBis(ctxContent, dateArray, center.x + 33, center.y - 23, 53, "#c9c9c9", {
+					canvasDrawer.renderTimeBis(canvasContent.context, dateArray, center.x + 33, center.y - 23, 53, "#c9c9c9", {
 						gradient : true,
 						motion: motion
 						
 					});
-					canvasDrawer.renderText(ctxContent, dateArray.second, center.x + 135, center.y - 16, 25, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context, dateArray.second, center.x + 135, center.y - 16, 25, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'center',
 						gradient : true,
@@ -546,36 +556,36 @@ define({
 				
 				if (miniWeatherDisplayed){
 					
-					canvasDrawer.roundRectShadows(ctxContent, wShape,10, {r:30,g:30,b:30,a:0.5},5);
-					canvasDrawer.roundRect(ctxContent, wShape,10, true, false, null, "rgba(0, 0, 0,0.7)");
+					canvasDrawer.roundRectShadows(canvasContent.context, wShape,10, {r:30,g:30,b:30,a:0.5},5);
+					canvasDrawer.roundRect(canvasContent.context, wShape,10, true, false, null, "rgba(20, 20, 20,0.7)");
 					
 					drawWeather(forecastDisplayed);
 				}
 				
 				
 				if (miniCalendarDisplayed) {
-					canvasDrawer.roundRectShadows(ctxContent, calendarShape,10, {r:30,g:30,b:30,a:0.5},5);
-					canvasDrawer.roundRect(ctxContent, calendarShape,10, true, false, null, "rgba(0, 0, 0,0.7)");
+					canvasDrawer.roundRectShadows(canvasContent.context, calendarShape,10, {r:30,g:30,b:30,a:0.5},5);
+					canvasDrawer.roundRect(canvasContent.context, calendarShape,10, true, false, null, "rgba(20, 20, 20,0.7)");
 					//if (calendarModel.hasVEvents()){
-						canvasDrawer.renderText(ctxContent, 'Events', calendarShape.getCoords().x+50, calendarShape.getCoords().y+20, 25, "#c9c9c9", {
+						canvasDrawer.renderText(canvasContent.context, 'Events', calendarShape.getCoords().x+50, calendarShape.getCoords().y+20, 25, "#c9c9c9", {
 							font : 'FutureNow',
 							align : 'center',
 								gradient : true, 
 								motion: motion
 						});
-						canvasDrawer.renderText(ctxContent, calendarModel.getVEvents().length , calendarShape.getCoords().x+50, calendarShape.getCoords().y+50, 30, "#c9c9c9", {
+						canvasDrawer.renderText(canvasContent.context, calendarModel.getVEvents().length , calendarShape.getCoords().x+50, calendarShape.getCoords().y+50, 30, "#c9c9c9", {
 							font : 'FutureNow',
 							align : 'center'
 						});
 					//}
 					
 				}
-				canvasDrawer.renderCircleShadows(ctxContent, hrShape, {r:30,g:30,b:30,a:0.8},5);
-				canvasDrawer.renderCircle(ctxContent, hrShape, "#000000","rgba(0, 0, 0,0.7)",false,1.5,false);
+				canvasDrawer.renderCircleShadows(canvasContent.context, hrShape, {r:30,g:30,b:30,a:0.8},5);
+				canvasDrawer.renderCircle(canvasContent.context, hrShape, "#000000","rgba(20, 20, 20,0.7)",false,1.5,false);
 				if (heartRateDisplayed &&  heartRateFound && heartRate.getData().rate !== null) {
 					
 					
-					canvasDrawer.renderText(ctxContent, heartRate.getData().rate, center.x , center.y + (watchRadius * 0.67), 25, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context, heartRate.getData().rate, center.x , center.y + (watchRadius * 0.67), 25, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'center',
 						gradient : true,
@@ -586,7 +596,7 @@ define({
 				}
 				
 				if (pedometerSensor.getActive() === true){
-					canvasDrawer.renderText(ctxContent, pedometerSensor.getData().accumulativeTotalStepCount, center.x - (watchRadius * 0.3), center.y + (watchRadius * 0.6), 22, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context, pedometerSensor.getData().accumulativeTotalStepCount, center.x - (watchRadius * 0.3), center.y + (watchRadius * 0.6), 22, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'center',
 						gradient : true,
@@ -598,23 +608,14 @@ define({
 			
 			
 			
-			
-			/*
-			radialButton = new Image();
-			radialButton.onload = function() {
-				
-				ctxContent.drawImage(radialButton,center.x, center.y + (watchRadius * 0.65),30,30);
-			}
-			radialButton.src = "image/app.svg";
-			*/
-			
+
 			
 			
 			
 
 			//displayFps();
 			
-			
+			//canvasDrawer.maskCanvas(canvasContent,canvasParticles,canvasFinal);
 			
 			//setTimeout(function (){
 				animRequest = requestAnimationFrame(drawWatchContent);
@@ -648,32 +649,32 @@ define({
 
 				weatherIcon = weatherModel.getMapping(weatherValue.weather[0].id, weatherValue.day);
 				
-				canvasDrawer.renderText(ctxContent, 'Temp', wCoords.text1.x, wCoords.text1.y, wCoords.text1.size, "#c9c9c9", {
+				canvasDrawer.renderText(canvasContent.context, 'Temp', wCoords.text1.x, wCoords.text1.y, wCoords.text1.size, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'center',
 						gradient : true,
 						motion: motion
 				});
-				canvasDrawer.renderText(ctxContent, roundCoord(weatherValue.main.temp, 1) + "°", wCoords.temp.x, wCoords.temp.y, wCoords.temp.size, "#c9c9c9", {
+				canvasDrawer.renderText(canvasContent.context, roundCoord(weatherValue.main.temp, 1) + "°", wCoords.temp.x, wCoords.temp.y, wCoords.temp.size, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'center'
 				});
 				if (forecastMode){
 					//city weatherValue.name
-					canvasDrawer.renderTextGradient(ctxContent, textHelper.truncateBis(weatherValue.name, 12, '...'), wCoords.city.x, wCoords.city.y, wCoords.city.size, "#c9c9c9", {
+					canvasDrawer.renderTextGradient(canvasContent.context, textHelper.truncateBis(weatherValue.name, 12, '...'), wCoords.city.x, wCoords.city.y, wCoords.city.size, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'left',
 						gradient : true
 					});
 					/*
-					  canvasDrawer.renderText(ctxContent,
+					  canvasDrawer.renderText(canvasContent.context,
 					  dateHelper.fancyTimeFormat((now/1000)-weatherValue.lastWeatherCallDate),
 					  center.x + (watchRadius * 0.45), center.y + (watchRadius *  0.30), 14, "#c9c9c9", { font : 'FutureNow', align : 'center'  });*/
 					 
 					//weather text
 				}
 				
-				canvasDrawer.renderText(ctxContent, textHelper.truncateBis(weatherValue.weather[0].main, (!forecastMode)?8:12,'...'), wCoords.text2.x, wCoords.text2.y, wCoords.text2.size, "#c9c9c9", {
+				canvasDrawer.renderText(canvasContent.context, textHelper.truncateBis(weatherValue.weather[0].main, (!forecastMode)?8:12,'...'), wCoords.text2.x, wCoords.text2.y, wCoords.text2.size, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'left',
 					gradient : true,
@@ -684,7 +685,7 @@ define({
 				weatherIcon = weatherModel.getMapping();
 			}
 
-			canvasDrawer.renderText(ctxContent, weatherIcon, wCoords.icon.x,wCoords.icon.y, wCoords.icon.size, "#c9c9c9", {
+			canvasDrawer.renderText(canvasContent.context, weatherIcon, wCoords.icon.x,wCoords.icon.y, wCoords.icon.size, "#c9c9c9", {
 				font : 'artill_clean_icons',
 				align : 'center',
 					gradient : true,
@@ -696,17 +697,17 @@ define({
 				forecastIndexX = center.x-18;
 				for (var i = 0; i < 5; i++) {
 					forecastHour = new Date(forecastValue.list[i].dt * 1000).getHours();
-					canvasDrawer.renderText(ctxContent, forecastHour + "h", forecastIndexX, center.y + (watchRadius * 0.15), 15, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context, forecastHour + "h", forecastIndexX, center.y + (watchRadius * 0.15), 15, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'center'
 					});
-					canvasDrawer.renderText(ctxContent, weatherModel.getMapping(forecastValue.list[i].weather[0].id, forecastValue.list[i].day), forecastIndexX, center.y + (watchRadius * 0.22), 31,
+					canvasDrawer.renderText(canvasContent.context, weatherModel.getMapping(forecastValue.list[i].weather[0].id, forecastValue.list[i].day), forecastIndexX, center.y + (watchRadius * 0.22), 31,
 							"#c9c9c9", {
 								font : 'artill_clean_icons',
 								align : 'center',gradient : true,
 								motion: motion
 							});
-					canvasDrawer.renderText(ctxContent, ~~(forecastValue.list[i].main.temp) + "°", forecastIndexX + 3, center.y + (watchRadius * 0.37), 15, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context, ~~(forecastValue.list[i].main.temp) + "°", forecastIndexX + 3, center.y + (watchRadius * 0.37), 15, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'center'
 					});
@@ -726,27 +727,26 @@ define({
 		 * @private
 		 */
 		function setDefaultVariables() {
-			canvasLayout = document.querySelector("#canvas-layout");
-			ctxLayout = canvasLayout.getContext("2d");
-			canvasContent = document.querySelector("#canvas-content");
-			ctxContent = canvasContent.getContext("2d");
+			canvasParticles = canvasDrawer.createCanvas({id:'canvas-particles',width:360,height:360});
+			canvasContent = canvasDrawer.createCanvas({id:'canvas-content',width:360,height:360});
+			canvasFinal = canvasDrawer.createCanvas({id:'canvas-final',width:360,height:360});
+			
+			//canvasContent.context = canvasContent.getContext("2d");
 
 			// Set the canvases square
-			canvasLayout.width = document.body.clientWidth;
-			canvasLayout.height = canvasLayout.width;
-			canvasContent.width = document.body.clientWidth;
-			canvasContent.height = canvasContent.width;
-
+			//canvasContent.width = document.body.clientWidth;
+			//canvasContent.height = canvasContent.width;
+			
 			center = {
 				x : document.body.clientWidth / 2,
 				y : document.body.clientHeight / 2
 			};
 
-			watchRadius = canvasLayout.width / 2;
+			watchRadius = canvasContent.canvas.width / 2;
 			canvasDrawer.center = center;
 			canvasDrawer.watchRadius = watchRadius;
-			grdAmbiant = canvasDrawer.getAmbiantGradient(ctxContent);
-			//grdAmbiant = ctxContent.createLinearGradient(0, 0, watchRadius * 2, 0);
+			grdAmbiant = canvasDrawer.getAmbiantGradient(canvasContent.context);
+			//grdAmbiant = canvasContent.context.createLinearGradient(0, 0, watchRadius * 2, 0);
 			
 			isAmbientMode = false;
 			//grdAmbiant.addColorStop(0, "#69d7db");
@@ -904,22 +904,24 @@ define({
 			getDate();
 			console.log('ambient');
 			canvasDrawer.setOpacity(1);
-			ctxLayout.clearRect(0, 0, ctxLayout.canvas.width, ctxLayout.canvas.height);
-			ctxContent.clearRect(0, 0, ctxContent.canvas.width, ctxContent.canvas.height);
-			canvasDrawer.renderTimeBis(ctxContent, dateArray, center.x - 20 +textHelper.getRandomInt(-10,10), center.y+ textHelper.getRandomInt(-10,10), 100, grdAmbiant,{
+			//canvasBackground.context.clearRect(0, 0, canvasBackground.canvas.width, canvasBackground.canvas.height);
+			/**@todo */
+			clear();
+			//canvasContent.context.clearRect(0, 0, canvasContent.canvas.width, canvasContent.canvas.height);
+			canvasDrawer.renderTimeBis(canvasContent.context, dateArray, center.x - 20 +textHelper.getRandomInt(-10,10), center.y+ textHelper.getRandomInt(-10,10), 100, grdAmbiant,{
 				align : 'center'
 			});
-			canvasDrawer.renderText(ctxContent,datetime.getDate()+"/"+(datetime.getMonth()+1)+"/"+datetime.getFullYear(), center.x +10 + textHelper.getRandomInt(-10,10), center.y - 80+ textHelper.getRandomInt(-10,20), 25, "#c9c9c9", {
+			canvasDrawer.renderText(canvasContent.context,datetime.getDate()+"/"+(datetime.getMonth()+1)+"/"+datetime.getFullYear(), center.x +10 + textHelper.getRandomInt(-10,10), center.y - 80+ textHelper.getRandomInt(-10,20), 25, "#c9c9c9", {
 				font : 'FutureNow',
 				align : 'center',
 				gradient : true
 			});
 			if (heartRateFound && heartRate.getData().rate !== null) {
 				
-				canvasDrawer.renderCircle(ctxContent, new Circle(center.x,center.y + (watchRadius * 0.60),45), grdAmbiant,false,true,2,false);
+				canvasDrawer.renderCircle(canvasContent.context, new Circle(center.x,center.y + (watchRadius * 0.60),45), grdAmbiant,false,true,2,false);
 
 				
-				canvasDrawer.renderText(ctxContent, heartRate.getData().rate, center.x, center.y + (watchRadius * 0.60), 30, grdAmbiant, {
+				canvasDrawer.renderText(canvasContent.context, heartRate.getData().rate, center.x, center.y + (watchRadius * 0.60), 30, grdAmbiant, {
 					font : 'FutureNow',
 					align : 'center'
 				});
@@ -1041,7 +1043,7 @@ define({
 	        });
 		}
 		function bindEvents() {
-			document.getElementById('canvas-layout').addEventListener('click', function(e) {
+			document.getElementById('canvas-final').addEventListener('click', function(e) {
 				handleClick(this,e);
 			});
 			
@@ -1118,8 +1120,10 @@ define({
 					closeCalendarMenu();
 					if (isAmbientMode !== true) {
 						//event.fire ('hidden','clearScreen');
-						ctxLayout.clearRect(0, 0, ctxLayout.canvas.width, ctxLayout.canvas.height);
-						ctxContent.clearRect(0, 0, ctxContent.canvas.width, ctxContent.canvas.height);
+						//canvasBackground.context.clearRect(0, 0, canvasBackground.context.canvas.width, canvasBackground.context.canvas.height);
+						/**@todo */
+						clear();
+						//canvasContent.context.clearRect(0, 0, canvasContent.canvas.width, canvasContent.canvas.height);
 						canvasDrawer.setOpacity(0);
 						stopSensors();
 					}
@@ -1207,11 +1211,18 @@ define({
 		
 		
 		function clear(){
-			  ctxContent.globalAlpha=0.05;
+			canvasParticles.context.globalAlpha=0.05;
+			canvasParticles.context.fillStyle='#000000';
+			canvasParticles.context.fillRect(0, 0, canvasParticles.canvas.width, canvasParticles.canvas.height);
+			canvasParticles.context.globalAlpha=1;
+			/*  
+			  canvasContent.context.globalAlpha=0.05;
 			  
-			  ctxContent.fillStyle='#000000'; 
-			  ctxContent.fillRect(0, 0, canvasContent.width, canvasContent.height);
-			  ctxContent.globalAlpha=1;
+			  canvasContent.context.fillStyle='#000000'; 
+			  canvasContent.context.fillRect(0, 0, canvasContent.canvas.width, canvasContent.canvas.height);
+			  canvasContent.context.globalAlpha=1;
+			  */
+			canvasContent.context.clearRect(0, 0, canvasContent.canvas.width, canvasContent.canvas.height);
 			}
 		function popolate(num,effect) {
 			  for (var i = 0; i < num; i++) {
@@ -1220,13 +1231,13 @@ define({
 			      return function () {
 			        // Add particle
 			    	if (effect == 'attraction'){
-			    		particles.push(new Particle(ctxContent,particleColors));
+			    		particles.push(new Particle(canvasParticles.context,particleColors));
 			    	}  
 			    	else if (effect == 'flower'){
-			    		particles.push(new Flower(ctxContent,particleColors));
+			    		particles.push(new Flower(canvasParticles.context,particleColors));
 			    	}
 			    	else {
-			    		particles.push(new ParticleAlien(ctxContent,particleColors));
+			    		particles.push(new ParticleAlien(canvasParticles.context,particleColors));
 			    	}
 			        
 			      };
@@ -1234,6 +1245,18 @@ define({
 			    frequency * i);
 			  }
 			  return particles.length;
+			}
+		function doFlame() {
+			  flames.push(  
+					  new Flame(canvasBackground.context, 
+					  { 
+						  x: 360 / 2,
+						  y: 360 / 2 
+					  }
+			  ));
+
+
+			  return flames.length;
 			}
 		function changeParticlesColor(theme){
 			switch ( theme){
@@ -1257,7 +1280,7 @@ define({
 			
 			//time_to_recreate = true;
 			theme = ev.detail;
-			grdAmbiant = canvasDrawer.getAmbiantGradient(ctxContent);
+			grdAmbiant = canvasDrawer.getAmbiantGradient(canvasContent.context);
 			changeRootColors(ev.detail);
 			particles = [];
 			time_to_recreate = false;
@@ -1356,6 +1379,14 @@ define({
 			//calendarModel.accessCalendars(['gmail']);
 			
 			//wShape= new Shape(center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 250, 70);
+			/*setInterval(
+					  function(){
+						  doFlame();
+					  },
+					  frequency+10
+					)
+			*/
+			
 			
 			popolate(max_particles,effect);
 			setTimeout(function () {

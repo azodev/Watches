@@ -7,7 +7,7 @@ div.menuHolder {
     left:10px;
     /*background-image: radial-gradient(180px at 0px 0px , #000000 0%, #000000 14px, rgba(0, 0, 0, 0.3) 18px, rgba(0, 0, 0, 0) 19px);*/
     /*opacity:0.9;*/
-    z-index:3;
+    z-index:10;
     display:none;
     font-family: FutureNow;
     font-size:28px;
@@ -23,7 +23,7 @@ svg.menu {
     position: absolute;
     overflow: visible;
     transition: 0.2s;
-    z-index:4;
+    z-index:11;
     opacity:0.95;
     transition-timing-function: ease-out; 
     

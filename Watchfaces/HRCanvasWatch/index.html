@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="lib/radial/css/RadialMenu.css">
     <script src="lib/radial/js/RadialMenu.js"></script>
     <script src="lib/effects/Particle.class.js"></script>
+    <script src="lib/effects/Flame.class.js"></script>
     <script src="lib/effects/ParticleAlien.class.js"></script>
     <script src="lib/effects/Flower.class.js"></script>
     <script src="lib/shapes/Shape.class.js"></script>
@@ -25,8 +26,9 @@
 
 <body>
     <div id="container">
-       		<canvas id="canvas-layout"></canvas>
+       		<canvas id="canvas-particles"></canvas>
         	<canvas id="canvas-content"></canvas>
+        	<canvas id="canvas-final"></canvas>
         	<div id="cal_holder">
         		<div id="up" augmented-ui="br-round tr-round bl-round tl-round exe">UP</div>
         		<div id="calendar" augmented-ui="tl-clip tr-clip bl-clip br-clip b-clip-x t-clip-x exe">
@@ -41,15 +43,7 @@
     </div>
     
     
-    <div class="event">
-    	<div class="dates">
-    		<span class="start"></span>
-    		<span class="end"></span>
-    	</div>
-    	<div class="title"></div>
-    	
-    	<div class="location"></div>
-    </div>
+    
      <!--  script src="./lib/web/index.js" ></script-->
     <script src="./app/core/core.js" data-main="./app/app.js" ></script>
     <svg id="icons"   >
