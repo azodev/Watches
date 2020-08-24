@@ -2,6 +2,11 @@
 <SignedInfo>
 <CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"></CanonicalizationMethod>
 <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"></SignatureMethod>
+<Reference URI="HRCanvasWatch.wgt">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
+<DigestValue>NAyYf7J/vnTl6+otsmLV3U2i4E0iz/dssQNI13A90B42TS5dix+KPPW2u0PhpbiyPXUMwfuSVueJ
++FHkXbDE0A==</DigestValue>
+</Reference>
 <Reference URI="LICENSE.APLv2">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
 <DigestValue>mPa3m3ePewoVQVvXUMOooJfWUFEctOyBFRiOEVxHBT/nAPV4iVwJcFHJvD37YZfCsToV3iAyc+Gj
@@ -11,11 +16,6 @@ IYiE+G6Q6A==</DigestValue>
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
 <DigestValue>PKJ6amrlawESpHPaQtps/BYuGeC3Uhkc84vog9melXb1Vqca76AFokwlnkYACLPbn6lO0MsYKU6D
 RNcfCoyBfg==</DigestValue>
-</Reference>
-<Reference URI="ParticlesWatch.wgt">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>xXFw9hPu1HHV7+YKkEcYLz7B2Egq4EvxDZSWNO26N5gt/PqMD/lYt1hVpU9BC6KG9U2+uF+39TpO
-QqiKh0IpCA==</DigestValue>
 </Reference>
 <Reference URI="app%2Fapp.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -114,8 +114,8 @@ ODJ6+SfaPg==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2FcanvasDrawer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>KsdMkBRx9q25QD+hWCGsbVuWV+uOKHQQZ84dmwpe2lK8GLp3LSFw4ILk2kKn0846eFg4AvGz6eEv
-MX1mgIlq9Q==</DigestValue>
+<DigestValue>fb8OyTExzarIBMq9bhmsdGEGzhtIuoJb1953dR7YjdewrXcyPBwJtp0JSMy8BB3N3WiauvJP29fn
+sMYgfESnJw==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2FheartRate.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -159,8 +159,8 @@ QgFh0b+TCA==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Fcanvas.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>Rg00QrHZXCpG6MsEkuE3qqcrRzGwdN2hZtHfPm4OZLCPOOUzLzeFE9nBr4J4X6MEPiPRIoB/itjK
-3VBHE4pYgw==</DigestValue>
+<DigestValue>7ARZXTcgADWv/IZga9dAJcXdZs/Rwx7JqnwnqfO1HOnVu0IQ6TQvdibCetHsVIzrkolnzeHBSnD2
+AVSBtHebqQ==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Finit.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -174,8 +174,8 @@ QgFh0b+TCA==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Fradial.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>97RwvJSDmWHDFDt08EgsGJeqowTi2Z3SF3WDC4f1/moMY0HoVlI69C84dfnBDrpb95+aUDjvrmZm
-NN47f3cEng==</DigestValue>
+<DigestValue>5eUEvcrHl9Ju8AMABoSBPc+5kLFHxoz4e8NjRFvufxnOuSE3SRoa0ZGMSU6t1RohA4yw4rTdRqJH
+OAHsAnm+sw==</DigestValue>
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -769,8 +769,8 @@ wUjoxSIrAQ==</DigestValue>
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>ZwLzF5b8rZW4jtllk3X72/T0YiRa7PeWAh2qfGoGHoAkUInaV/5z+cJ72r1s2KoUafhmUTdQbf6U
-KN3V9S7O4A==</DigestValue>
+<DigestValue>nd0fDg/AtLIIU66zQ0I3tYurQ6fTDDGNmu5Q30KpDfYm11D/rJRJxJ+VGt+Kp3lpYm4wBty/D5V5
+yS/GBK8LKA==</DigestValue>
 </Reference>
 <Reference URI="input.txt">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -806,6 +806,11 @@ CtUxeKFUCA==</DigestValue>
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
 <DigestValue>L3kpcCFSMvrObRGuttzaZgfcipZIyJYq6oI6uUKl0cN0BTdQ3tT0BPPMFoXMB6NR8dz8woZXl6e2
 aWTiqlSUUA==</DigestValue>
+</Reference>
+<Reference URI="lib%2Feffects%2FLightSpeed.class.js">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
+<DigestValue>ZXsh2XWq45LJbNrn6aBB7E7auFdqxG4fnF/qjzUaVWnGfvqq9eor0wweQV49GdwCV2nJYMmux0HW
+S35rwpKWlw==</DigestValue>
 </Reference>
 <Reference URI="lib%2Feffects%2FParticle.class.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -872,11 +877,11 @@ QY10fG1EWQ==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-NV/WAMkozrmRsYOARu+8gz3+QwFAwkcNSDEiGLZZZtsylxTMzynLDPX26v3XeXTf6+zaQV+xYUcI
-5gV91EImyl1XW3MGeSPF+KAFq5rT7pkT6sy2iNtW2fn1wx1klODcpjIsa6aVH4Q4vjhpuddRiUME
-iTwRr5QmW4rub5ES6n37TdFL1kIeEVa/AvzZxyRBufrZFEqtNmveCOssf3xo0bHVcFgzfc5FGVaS
-EhbwttmTlkabIqxBkas8RBf4eN82FqsPAGB0SROgB//23PXJ4/l97ivWO3Q8FqdlQcLPSu2U4cRL
-SYJ1IpsQeqpkL61hY/745PAu8G870GdHTSOjTg==
+gOiYFlcFWPSwudQkuu30gnuw85sb/x5VIjcLNKc+sVXCkDW24NND5F6t1KfxT1rmSwliKOrHW8VO
+C1VhFNTdx6igPu+R+nebd0bkX6ZPhnHGI/0pJIpYfIfDqeCJKNJGvuDTJIg9PxwZhR7Q5duDEjBQ
+zpDTAp7At2QVT693VUk3Lp/2JE89pSTNaaGwRZMCTDtL4uBUwGuQrl0C4KgqIVNBlPrsi//INDGN
+DMyN7W8ydFzjcLVJ1swqz0iHKJ5ugW8iTuXo8idOxH2G+d2BJdsJBc+32Nr6le3wsYskLnwAAoEc
+tujukcGPmQht3SDrlzziTsBhYFtS9QW8M0V/aA==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

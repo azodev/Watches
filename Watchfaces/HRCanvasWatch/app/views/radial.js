@@ -133,6 +133,11 @@ define({
                                                  id: 'flower',
                                                  icon: '#flower',
                                                  title: 'Flower'
+                                             },
+                                             {
+                                                 id: 'lightspeed',
+                                                 icon: '#lightspeed',
+                                                 title: 'LightSpeed'
                                              }
                                          ]
                                      },
@@ -196,7 +201,7 @@ define({
                     	event.fire('changeTheme',item.id);
                     	closeMenuProperly(item);
                     }
-                    else if (item.id == 'attraction' || item.id == 'repulsion' || item.id == 'flower'){
+                    else if (item.id == 'attraction' || item.id == 'repulsion' || item.id == 'flower' || item.id == 'lightspeed' ){
                     	event.fire('changeEffect',item.id);
                     	tizen.preference.setValue('effect', item.id);
                     	closeMenuProperly(item);

@@ -219,8 +219,6 @@ define({
 				document.querySelector(":root").style.setProperty('--color2', 'rgb(244,244,244)');
 				break;
 			}
-			console.log(sheet);
-			console.log(document.querySelector(":root").style);
 		}
 		function handleSingleClick(canvas,ev) {
 			console.log('handleSingleClick');
@@ -454,9 +452,9 @@ define({
 			    if (particles.length < init_num) {popolate((init_num-particles.length)/2,effect);}
 			  }
 			  //console.log(particles.length );
-			  /*flames = flames.filter(function(p) {
-				    return p.move();
-				  });*/
+//			  flames = flames.filter(function(p) {
+//				    return p.move();
+//				  });
 			  
 			  clear();
 			
@@ -465,7 +463,7 @@ define({
 			
 			
 			
-			canvasDrawer.renderBackground(canvasParticles.context,canvasParticles.canvas.width, canvasParticles.canvas.height, "black",{gradient:true,motion:motion});
+			canvasDrawer.renderBackground(canvasContent.context,canvasContent.canvas.width, canvasContent.canvas.height, "black",{gradient:true,motion:motion});
 			
 			canvasDrawer.renderCircle(canvasContent.context,  new Circle(center.x,center.y,watchRadius -2) ,null,null,true,2,true);
 			
@@ -727,9 +725,9 @@ define({
 		 * @private
 		 */
 		function setDefaultVariables() {
-			canvasParticles = canvasDrawer.createCanvas({id:'canvas-particles',width:360,height:360});
+			//canvasParticles = canvasDrawer.createCanvas({id:'canvas-particles',width:360,height:360});
 			canvasContent = canvasDrawer.createCanvas({id:'canvas-content',width:360,height:360});
-			canvasFinal = canvasDrawer.createCanvas({id:'canvas-final',width:360,height:360});
+			//canvasFinal = canvasDrawer.createCanvas({id:'canvas-final',width:360,height:360});
 			
 			//canvasContent.context = canvasContent.getContext("2d");
 
@@ -1211,18 +1209,18 @@ define({
 		
 		
 		function clear(){
-			canvasParticles.context.globalAlpha=0.05;
+			/*canvasParticles.context.globalAlpha=0.05;
 			canvasParticles.context.fillStyle='#000000';
 			canvasParticles.context.fillRect(0, 0, canvasParticles.canvas.width, canvasParticles.canvas.height);
-			canvasParticles.context.globalAlpha=1;
-			/*  
+			canvasParticles.context.globalAlpha=1;*/
+			  
 			  canvasContent.context.globalAlpha=0.05;
 			  
 			  canvasContent.context.fillStyle='#000000'; 
 			  canvasContent.context.fillRect(0, 0, canvasContent.canvas.width, canvasContent.canvas.height);
 			  canvasContent.context.globalAlpha=1;
-			  */
-			canvasContent.context.clearRect(0, 0, canvasContent.canvas.width, canvasContent.canvas.height);
+			  
+			//canvasContent.context.clearRect(0, 0, canvasContent.canvas.width, canvasContent.canvas.height);
 			}
 		function popolate(num,effect) {
 			  for (var i = 0; i < num; i++) {
@@ -1231,13 +1229,16 @@ define({
 			      return function () {
 			        // Add particle
 			    	if (effect == 'attraction'){
-			    		particles.push(new Particle(canvasParticles.context,particleColors));
+			    		particles.push(new Particle(canvasContent.context,particleColors));
 			    	}  
 			    	else if (effect == 'flower'){
-			    		particles.push(new Flower(canvasParticles.context,particleColors));
+			    		particles.push(new Flower(canvasContent.context,particleColors));
+			    	}
+			    	else if (effect == 'lightspeed'){
+			    		particles.push(new LightSpeed(canvasContent.context,particleColors));
 			    	}
 			    	else {
-			    		particles.push(new ParticleAlien(canvasParticles.context,particleColors));
+			    		particles.push(new ParticleAlien(canvasContent.context,particleColors));
 			    	}
 			        
 			      };
@@ -1248,7 +1249,7 @@ define({
 			}
 		function doFlame() {
 			  flames.push(  
-					  new Flame(canvasBackground.context, 
+					  new Flame(canvasParticles.context, 
 					  { 
 						  x: 360 / 2,
 						  y: 360 / 2 
@@ -1379,13 +1380,10 @@ define({
 			//calendarModel.accessCalendars(['gmail']);
 			
 			//wShape= new Shape(center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 250, 70);
-			/*setInterval(
+		/*	setInterval(
 					  function(){
 						  doFlame();
-					  },
-					  frequency+10
-					)
-			*/
+					  }, frequency)	;*/
 			
 			
 			popolate(max_particles,effect);

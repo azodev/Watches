@@ -308,7 +308,7 @@ define({
 			  c3.context.drawImage(c2.canvas, 0, 0, c2.canvas.width, c2.canvas.height);
 			  c3.context.globalCompositeOperation = 'source-atop';
 			  c3.context.drawImage(c1.canvas, 0, 0);
-			  //blur(c1.context, c1.canvas, 2);
+			  blur(c1.context, c1.canvas, 2);
 			}
 		function blur(ctx, canvas, amt) {
 			  ctx.filter = 'blur('+amt+'px)';
