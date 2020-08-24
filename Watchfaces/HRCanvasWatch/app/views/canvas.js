@@ -490,8 +490,8 @@ define({
 			
 			
 			if (backendLoaded){
-				canvasDrawer.renderCircleShadows(canvasContent.context, appDrawerShape, {r:30,g:30,b:30,a:0.8},5);
-				canvasDrawer.renderCircle(canvasContent.context, appDrawerShape, "#000000","rgba(20, 20, 20,0.7)",false,2,false);
+				canvasDrawer.renderCircleShadows(canvasContent.context, appDrawerShape, {r:15,g:15,b:15,a:0.7},5);
+				canvasDrawer.renderCircle(canvasContent.context, appDrawerShape, "#000000","rgba(10, 10, 10,0.7)",false,2,false);
 				canvasDrawer.roundRect(canvasContent.context, aShape1, 3, false, true, null, "rgba(0, 0, 0,0.8)");
 				canvasDrawer.roundRect(canvasContent.context, aShape2, 3, false, true, null, "rgba(0, 0, 0,0.8)");
 				canvasDrawer.roundRect(canvasContent.context, aShape3, 3, false, true, null, "rgba(0, 0, 0,0.8)");
@@ -554,16 +554,16 @@ define({
 				
 				if (miniWeatherDisplayed){
 					
-					canvasDrawer.roundRectShadows(canvasContent.context, wShape,10, {r:30,g:30,b:30,a:0.5},5);
-					canvasDrawer.roundRect(canvasContent.context, wShape,10, true, false, null, "rgba(20, 20, 20,0.7)");
+					canvasDrawer.roundRectShadows(canvasContent.context, wShape,10, {r:10,g:10,b:10,a:0.5},5);
+					canvasDrawer.roundRect(canvasContent.context, wShape,10, true, false, null, "rgba(10, 10, 10,0.7)");
 					
 					drawWeather(forecastDisplayed);
 				}
 				
 				
 				if (miniCalendarDisplayed) {
-					canvasDrawer.roundRectShadows(canvasContent.context, calendarShape,10, {r:30,g:30,b:30,a:0.5},5);
-					canvasDrawer.roundRect(canvasContent.context, calendarShape,10, true, false, null, "rgba(20, 20, 20,0.7)");
+					canvasDrawer.roundRectShadows(canvasContent.context, calendarShape,10, {r:10,g:10,b:10,a:0.5},5);
+					canvasDrawer.roundRect(canvasContent.context, calendarShape,10, true, false, null, "rgba(10, 10, 10,0.7)");
 					//if (calendarModel.hasVEvents()){
 						canvasDrawer.renderText(canvasContent.context, 'Events', calendarShape.getCoords().x+50, calendarShape.getCoords().y+20, 25, "#c9c9c9", {
 							font : 'FutureNow',
@@ -578,8 +578,8 @@ define({
 					//}
 					
 				}
-				canvasDrawer.renderCircleShadows(canvasContent.context, hrShape, {r:30,g:30,b:30,a:0.8},5);
-				canvasDrawer.renderCircle(canvasContent.context, hrShape, "#000000","rgba(20, 20, 20,0.7)",false,1.5,false);
+				canvasDrawer.renderCircleShadows(canvasContent.context, hrShape, {r:15,g:15,b:15,a:0.7},5);
+				canvasDrawer.renderCircle(canvasContent.context, hrShape, "#000000","rgba(10, 10, 10,0.7)",false,1.5,false);
 				if (heartRateDisplayed &&  heartRateFound && heartRate.getData().rate !== null) {
 					
 					
@@ -1387,6 +1387,7 @@ define({
 			
 			
 			popolate(max_particles,effect);
+			
 			setTimeout(function () {
 				  time_to_recreate = true;
 				}, max_time);

@@ -191,11 +191,32 @@ define({
 			alertMessage = document.getElementById('alert-message');
 			alertOk = document.getElementById('alert-ok');
 			bindEvents();
-			var appControl = new tizen.ApplicationControl('http://tizen.org/appcontrol/operation/create_content',
-                    null, 'image/png', null, null);
 			// console.error(tizen.systeminfo.getCapabilities() );
+			/*var readPrivilege = "http://tizen.org/privilege/calendar.read";
+	        console.log("permission:" + JSON.stringify(tizen.ppm.checkPermission(readPrivilege)));
+	        if (tizen.ppm.checkPermission(readPrivilege) != "PPM_ALLOW") {
+	        	console.log("requesting permission");
+	        	  tizen.ppm.requestPermission(readPrivilege, readRPSuccess, readRPError);
+	    	} else {
+	    	  console.log("already allowed!");
+	    	}*/
 		}
-
+		function readRPSuccess(){
+			tizen.account.getAccounts(getAccountsSuccess, function(err){console.log(err)});
+		}
+		function readRPError(e){
+			 console.log(e);
+		}
+		function getAccountsSuccess(accounts) {
+		    var account = accounts[0];
+		    console.log(accounts);
+		    if (account) {
+		        /* New calendar can be created and added */
+		        myCalendar = new tizen.Calendar(account.id, 'remote calendar', 'TASK');
+		        tizen.calendar.addCalendar(myCalendar);
+		        console.log('New calendar created with ID=' + myCalendar.id);
+		    }
+		}
 		return {
 			init : init
 		};
