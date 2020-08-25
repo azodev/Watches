@@ -137,9 +137,7 @@ define({
 							Math.abs(locationDataLastGood.longitude -  coords.longitude ) >= 0.05
 					))
 			{
-				//event.fire('distanceChange', getData());
 				event.fire('distanceChange', 'distanceChange');
-				//console.error('distanceChange');
 			}
 		}
 		function successCallback(pos) {

@@ -34,7 +34,7 @@ define({
 
 		var center, event = req.core.event;
 		var radius, centerX, centerY, dxi, dyi, dxf, dyf, textdate, font, align, angle = 0, radiusArc, 
-		indexX = 0, rotate = false, gradient = null, gradientLinear = null, doGradient = false, gridGradient = null , watchOpacity = 1, animating = false, fading = false,showing = false;
+		indexX = 0, rotate = false, gradient = null, gradientLinear = null, doGradient = false, gridGradient = null , watchOpacity = 1, animating = false, fading = false,showing = false,stroke = false;
 		var radialGradient = null;
 		var coords = {
 			x : 0,
@@ -629,9 +629,17 @@ define({
 				if (typeof options.align !== 'undefined') {
 					align = options.align;
 				}
+				if (typeof options.stroke !== 'undefined') {
+					stroke = options.stroke;
+				}
+				if (typeof options.gradient !== 'undefined') {
+					gradient = options.gradient;
+				}
 			} else {
 				font = 'FutureNow';
 				options = {};
+				stroke = false;
+				gradient = false; 
 			}
 			indexX = 0;
 			context.save();
@@ -639,33 +647,65 @@ define({
 			context.font = textSize + 'px "' + font + '"';
 			context.textAlign = "right";
 			context.textBaseline = "middle";
-			doGradientOrColor(context, color, options);
+			
+			if (gradient) doGradientOrColor(context, color, options);
 			context.globalAlpha = watchOpacity;
 			
 			indexX += x;
 			textdate = date.hour;
-			context.fillText(textdate, indexX, y);
+			if (stroke){
+				context.strokeStyle = color;
+				context.strokeText(textdate, indexX, y);
+			}
+			else {
+				context.fillText(textdate, indexX, y);
+			}
+			
 
-			// context.closePath();
-			// context.beginPath();
 			context.textAlign = "center";
-			// doGradientOrColor(context, color, options);
 			textdate = ':';
 			indexX += (textSize * 0.25);
-			context.fillText(textdate, indexX, y);
+			if (stroke){
+				context.strokeStyle = color;
+				context.strokeText(textdate, indexX, y);
+			}
+			else {
+				context.fillText(textdate, indexX, y);
+			}
 
-			// context.closePath();
-			// context.beginPath();
-			// doGradientOrColor(context, color, options);
 			context.textAlign = "center";
 			textdate = (date.minute < 10) ? '0' + date.minute : date.minute;
 			indexX += textSize * 0.8;
-			context.fillText(textdate, indexX, y);
+			if (stroke){
+				context.strokeStyle = color;
+				context.strokeText(textdate, indexX, y);
+			}
+			else {
+				context.fillText(textdate, indexX, y);
+			}
 			
 			context.closePath();
 			
 			context.restore();
 		}
+		function renderTimeBisShadows(context, date, x, y, textSize, strokeColor, offset){
+			let i = 1;
+			let color;
+			let alpha =strokeColor.a;
+			for (i; i <=offset; i++){
+				alpha = (strokeColor.a - (i/offset)*strokeColor.a);
+				color = 'rgba('+strokeColor.r+','+strokeColor.g+','+strokeColor.b+','+alpha+')';
+				
+				renderTimeBis(context, date, x-i, y - i, textSize+ (i+1), color, {
+					stroke: true
+				});
+				
+			}
+			
+		}
+		
+		
+		
 		function renderWeather(context, text, x, y, textSize, color) {
 			context.save();
 			context.beginPath();
@@ -923,6 +963,7 @@ define({
 			renderWeather : renderWeather,
 			renderTime : renderTime,
 			renderTimeBis : renderTimeBis,
+			renderTimeBisShadows:renderTimeBisShadows,
 			roundRect : roundRect,
 			roundRectShadows:roundRectShadows,
 			drawPulse : drawPulse,

@@ -125,12 +125,12 @@ define({
 			date : null
 		};
 		var intervals = {
-			location : 120000,
+			location : 600000,
 			heartRate : 10000,
 			weather : 3600000,
 			pressure : 60000
 		};
-		var grd,grdAmbiant, angle, i, j, startTime, now, then, elapsed, sinceStart, frame = 0, currentFps, isAmbientMode, rotate = false;
+		var grd,grdAmbiant, i, j, startTime, now, then, elapsed, sinceStart, frame = 0, currentFps, isAmbientMode, rotate = false;
 		var motion = null;
 		var motionFromGyro = {accelerationIncludingGravity : {x:null,y:null}}; 
 		
@@ -176,19 +176,20 @@ define({
 		function handleClick(canvas,ev) {
 			navigator.vibrate(0);
 			currentClickTimeStamp = Date.now();
-			if (lastClickTimeStamp !== null && currentClickTimeStamp - lastClickTimeStamp <= CLICK_INTERVAL) {
+			/*if (lastClickTimeStamp !== null && currentClickTimeStamp - lastClickTimeStamp <= CLICK_INTERVAL) {
 				handleDoubleClick(canvas,ev);
 			} else {
-				handleSingleClick(canvas,ev);
-			}
+				
+			}*/
 			lastClickTimeStamp = currentClickTimeStamp;
+			handleSingleClick(canvas,ev);
 		}
 
-		function handleDoubleClick(canvas,ev) {
+		/*function handleDoubleClick(canvas,ev) {
 			
 			console.log('handleDoubleClick');
 			
-		}
+		}*/
 		function changeRootColors(theme){
 			console.log(theme);
 			let sheet  = document.styleSheets[1];
@@ -393,34 +394,25 @@ define({
 			now = Date.now();
 			
 			secondsPassed = (timeStamp - oldTimeStamp) / 1000;
-			//secondsPassed = Math.min(secondsPassed, 0.1);
 		    oldTimeStamp = timeStamp;
 		    
 		    handleWeatherSectionAnimation();
 		    handleWatchFadingAnimation();
 		    handleWatchShowingAnimation();
-			// if enough time has elapsed, draw the next frame
 
 			date = datetime.getDate();
-			/*if (motionSensor.isAvailable()) {
-				onMotionChangeNew();
-			}*/
-			// nextMove = 1000 - dateHelper.getDate().getMilliseconds();
 			if (motion !== null) 		{
 				canvasDrawer.processMotion(motionFromGyro,canvasContent.context);
 			}
-			// Clear canvas
-			//canvasContent.context.clearRect(0, 0, canvasContent.context.canvas.width, canvasContent.context.canvas.height);
 			gravCenter = canvasDrawer.getRadialGradientCoords();
 			
-			//canvasDrawer.getRadialGradientCoords();
 			if (radialmenu.getOpen()){ 
-				deg.x = (gravCenter.y - 190)*1.4;
-				deg.y = (gravCenter.x - 180)*1.4;
-				if (deg.x <= -20 ) deg.x = -20;
-				if (deg.x >= 20 ) deg.x = 20;
-				if (deg.y <= -20 ) deg.y = -20;
-				if (deg.y >= 20 ) deg.y = 20;
+				deg.x = (gravCenter.y - 190)*1.2;
+				deg.y = (gravCenter.x - 180)*1.2;
+				if (deg.x <= -30 ) deg.x = -30;
+				if (deg.x >= 30 ) deg.x = 30;
+				if (deg.y <= -20 ) deg.y = -30;
+				if (deg.y >= 30 ) deg.y = 30;
 				
 				elem = document.querySelector("div.menuHolder"); 
 				elem.style.transform =
@@ -439,24 +431,34 @@ define({
 				//document.querySelector("#calendar.on").style.opacity=1;
 				let calendarOn = document.querySelector("div#calendar");
 				//if (calendarOn.style.opacity < 1) calendarOn.style.opacity = 1;
-				calendarOn.style.transform =    "perspective(700px) rotateX(" + -deg.x + "deg) " +    " rotateY(" + deg.y + "deg)"; 
-			}
-			
-			particles = particles.filter(function (p) {
+				/*
+				calendarOn.style.transform =    
+					"perspective(700px) rotateX(" + -deg.x + "deg) " +    
+					" rotateY(" + deg.y + "deg)";*/
+					
 				
-				p.setPoA(gravCenter); 
-				return p.move();
+			}
+			if (!isAmbientMode){
+				particles = particles.filter(function (p) {
+					
+					p.setPoA(gravCenter); 
+					return p.move();
 				});
+				if (time_to_recreate) {
+				    if (particles.length < init_num) {popolate((init_num-particles.length)/2,effect);}
+				  }
+				  
+			}
+			clear();
+			
 			  // Recreate particles
-			  if (time_to_recreate) {
-			    if (particles.length < init_num) {popolate((init_num-particles.length)/2,effect);}
-			  }
+			  
 			  //console.log(particles.length );
 //			  flames = flames.filter(function(p) {
 //				    return p.move();
 //				  });
 			  
-			  clear();
+			
 			
 			 
 			
@@ -468,24 +470,7 @@ define({
 			canvasDrawer.renderCircle(canvasContent.context,  new Circle(center.x,center.y,watchRadius -2) ,null,null,true,2,true);
 			
 			  
-			  //canvasDrawer.renderGrid (canvasContent.context,  "#000000",2,{motion:motion});
-			/*if (drawTicks === true){
-				canvasDrawer.renderCircle(canvasContent.context, center, watchRadius *1, "#000000",4);
-				//canvasDrawer.renderCircle(canvasContent.context, center, watchRadius * 0.90, "#000000",3);
-	
-				// Draw the dividers
-				// 60 unit divider
-				for (i = 1; i <= 60; i++) {
-					angle = (i - 15) * (Math.PI * 2) / 60;
-					 canvasDrawer.renderNeedle(canvasContent.context, angle, 0.96, 1.0, 1, "#c4c4c4");
-				}
-	
-				// 12 unit divider
-				for (j = 1; j <= 12; j++) {
-					angle = (j - 3) * (Math.PI * 2) / 12;
-					canvasDrawer.renderNeedle(canvasContent.context, angle,  0.90, 1, 3, "#c4c4c4");
-				}
-			}*/
+
 			
 			
 			
@@ -497,6 +482,9 @@ define({
 				canvasDrawer.roundRect(canvasContent.context, aShape3, 3, false, true, null, "rgba(0, 0, 0,0.8)");
 				canvasDrawer.roundRect(canvasContent.context, aShape4, 3, false, true, null, "rgba(0, 0, 0,0.8)");
 				if (baroDisplayed){
+					
+					canvasDrawer.roundRect(canvasContent.context, new Shape(center.x - 112, center.y - 63, 85, 58) ,10, true, false, null, "rgba(5, 5, 5,0.7)"); // 232
+					
 					canvasDrawer.renderTextGradient(canvasContent.context, 'Altitude', center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.30), 16, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'right',
@@ -511,7 +499,7 @@ define({
 						font : 'FutureNow',
 						align : 'right',
 						gradient : true,
-						motion: motion
+						motion: motion 
 					});
 
 					canvasDrawer.renderText(canvasContent.context, pressure, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.09), 16, "#c9c9c9", {
@@ -536,12 +524,14 @@ define({
 						motion: motion
 						
 					});
+					//canvasDrawer.renderTimeBisShadows (canvasContent.context, dateArray, center.x + 33, center.y - 23, 53, {r:40,g:40,b:40,a:0.9},5);
 					canvasDrawer.renderTimeBis(canvasContent.context, dateArray, center.x + 33, center.y - 23, 53, "#c9c9c9", {
 						gradient : true,
-						motion: motion
+						motion: motion,
+						stroke:false
 						
 					});
-					canvasDrawer.renderText(canvasContent.context, dateArray.second, center.x + 135, center.y - 16, 25, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context, dateArray.second, center.x + 138, center.y - 16, 25, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'center',
 						gradient : true,
@@ -554,28 +544,25 @@ define({
 				
 				if (miniWeatherDisplayed){
 					
-					canvasDrawer.roundRectShadows(canvasContent.context, wShape,10, {r:10,g:10,b:10,a:0.5},5);
-					canvasDrawer.roundRect(canvasContent.context, wShape,10, true, false, null, "rgba(10, 10, 10,0.7)");
-					
+					canvasDrawer.roundRectShadows(canvasContent.context, wShape,10, {r:10,g:10,b:10,a:0.7},5);
+					canvasDrawer.roundRect(canvasContent.context, wShape,10, true, false, null, "rgba(5, 5, 5,0.7)");
 					drawWeather(forecastDisplayed);
 				}
 				
 				
 				if (miniCalendarDisplayed) {
-					canvasDrawer.roundRectShadows(canvasContent.context, calendarShape,10, {r:10,g:10,b:10,a:0.5},5);
-					canvasDrawer.roundRect(canvasContent.context, calendarShape,10, true, false, null, "rgba(10, 10, 10,0.7)");
-					//if (calendarModel.hasVEvents()){
-						canvasDrawer.renderText(canvasContent.context, 'Events', calendarShape.getCoords().x+50, calendarShape.getCoords().y+20, 25, "#c9c9c9", {
-							font : 'FutureNow',
-							align : 'center',
-								gradient : true, 
-								motion: motion
-						});
-						canvasDrawer.renderText(canvasContent.context, calendarModel.getVEvents().length , calendarShape.getCoords().x+50, calendarShape.getCoords().y+50, 30, "#c9c9c9", {
-							font : 'FutureNow',
-							align : 'center'
-						});
-					//}
+					canvasDrawer.roundRectShadows(canvasContent.context, calendarShape,10, {r:10,g:10,b:10,a:0.7},5);
+					canvasDrawer.roundRect(canvasContent.context, calendarShape,10, true, false, null, "rgba(5, 5, 5,0.7)");
+					canvasDrawer.renderText(canvasContent.context, 'Events', calendarShape.getCoords().x+50, calendarShape.getCoords().y+20, 25, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'center',
+							gradient : true, 
+							motion: motion
+					});
+					canvasDrawer.renderText(canvasContent.context, calendarModel.getVEvents().length , calendarShape.getCoords().x+50, calendarShape.getCoords().y+50, 30, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'center'
+					});
 					
 				}
 				canvasDrawer.renderCircleShadows(canvasContent.context, hrShape, {r:15,g:15,b:15,a:0.7},5);
@@ -591,6 +578,15 @@ define({
 							
 					});
 
+				}
+				else {
+					canvasDrawer.renderText(canvasContent.context, '-', center.x , center.y + (watchRadius * 0.67), 25, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'center',
+						gradient : true,
+						motion: motion
+							
+					});
 				}
 				
 				if (pedometerSensor.getActive() === true){
@@ -904,8 +900,8 @@ define({
 			canvasDrawer.setOpacity(1);
 			//canvasBackground.context.clearRect(0, 0, canvasBackground.canvas.width, canvasBackground.canvas.height);
 			/**@todo */
-			clear();
-			//canvasContent.context.clearRect(0, 0, canvasContent.canvas.width, canvasContent.canvas.height);
+			//clear();
+			canvasContent.context.clearRect(0, 0, canvasContent.canvas.width, canvasContent.canvas.height);
 			canvasDrawer.renderTimeBis(canvasContent.context, dateArray, center.x - 20 +textHelper.getRandomInt(-10,10), center.y+ textHelper.getRandomInt(-10,10), 100, grdAmbiant,{
 				align : 'center'
 			});
@@ -983,7 +979,7 @@ define({
 				frame = 0;
 				startSensors();
 				isAmbientMode = false;
-				clear();
+				
 				console.log('activateMode normal');
 				
 				
@@ -1028,17 +1024,27 @@ define({
 			*/
 		}
 		function closeCalendarMenu(){
-			widgetFullScreenDiplayed = false;
+			//widgetFullScreenDiplayed = false;
 			calendar = document.querySelector("#calendar");
 			holder = document.querySelector("#cal_holder");
-			setClassAndWaitForTransition(calendar,'','opacity').then(function () {
-				console.log('transition calendar');
+			
+			/*setClassAndWaitForTransition(calendar,'off','visibility').then(function () {
+				console.log('transition calendar off');
 				//calendarOn.style.opacity = 0;
-				//calendar.style.transform =    "perspective(700px) rotateX(0deg) rotateY(90deg) rotateZ(90deg)"; 
-				setClassAndWaitForTransition(holder,'','opacity').then(function () {
-					console.log('transition holder');
+				*/
+			/*calendar.style.transform =    
+				"perspective(700px) rotateY(0deg) translateY(50px) translateX(50px)  scale(0.35)";*/
+				setClassAndWaitForTransition(calendar,'','opacity').then(function () {
+					console.log('transition calendar');
+					setClassAndWaitForTransition(holder,'','opacity').then(function () {
+						
+						console.log('transition holder');
+					});
 				});
-	        });
+				
+				//calendar.style.transform =    "perspective(700px) rotateX(0deg) rotateY(90deg) rotateZ(90deg)"; 
+				
+	      // });
 		}
 		function bindEvents() {
 			document.getElementById('canvas-final').addEventListener('click', function(e) {
@@ -1120,8 +1126,8 @@ define({
 						//event.fire ('hidden','clearScreen');
 						//canvasBackground.context.clearRect(0, 0, canvasBackground.context.canvas.width, canvasBackground.context.canvas.height);
 						/**@todo */
-						clear();
-						//canvasContent.context.clearRect(0, 0, canvasContent.canvas.width, canvasContent.canvas.height);
+						//clear();
+						canvasContent.context.clearRect(0, 0, canvasContent.canvas.width, canvasContent.canvas.height);
 						canvasDrawer.setOpacity(0);
 						stopSensors();
 					}
@@ -1161,32 +1167,10 @@ define({
 		 * @memberof views/canvas
 		 * @public
 		 */
-		function checkHR() {
-//			console.error('checkHR');
-			hrIntervalStop = window.setInterval(function() {
-				//console.error('hrIntervalStop loop');
-//				console.error(heartRate.getData().rate);
-				if (heartRate.getData().rate !== null) {
-					window.clearInterval(hrInterval);
-					window.clearInterval(hrIntervalStop);
-					heartRate.stop();
-					doNotMkHR = false;
-					mkHR();
 
-				} else {
-					doNotMkHR = true;
-				}
-			}, 5000);
-		}
 		function mkHR() {
-			window.clearInterval(hrIntervalStop);
-//			console.error('mkHR');
 			hrInterval = window.setInterval(function() {
-//				console.error('hrInterval loop');
-				//if (!doNotMkHR) {
-					heartRate.start();
-					//checkHR();
-				//}
+				heartRate.start();
 
 			}, intervals.heartRate);
 		}
@@ -1198,21 +1182,15 @@ define({
 		function loopLocation(){
 			locationInterval = window.setInterval(function() {
 				locationModel.start();
-				/*window.setTimeout(function() {
-					locationModel.stop();
-				}, 30000 // stop checking after 30 seconds
-				);*/
-			}, intervals.location // check every 2 min
+				
+			}, intervals.location // check every 10 min
 			);
 		}
 		
 		
 		
 		function clear(){
-			/*canvasParticles.context.globalAlpha=0.05;
-			canvasParticles.context.fillStyle='#000000';
-			canvasParticles.context.fillRect(0, 0, canvasParticles.canvas.width, canvasParticles.canvas.height);
-			canvasParticles.context.globalAlpha=1;*/
+			
 			  
 			  canvasContent.context.globalAlpha=0.05;
 			  
@@ -1220,7 +1198,7 @@ define({
 			  canvasContent.context.fillRect(0, 0, canvasContent.canvas.width, canvasContent.canvas.height);
 			  canvasContent.context.globalAlpha=1;
 			  
-			//canvasContent.context.clearRect(0, 0, canvasContent.canvas.width, canvasContent.canvas.height);
+			
 			}
 		function popolate(num,effect) {
 			  for (var i = 0; i < num; i++) {
@@ -1376,14 +1354,6 @@ define({
 				event.fire('filterEvents',e);
 			},300000
 			);	
-			
-			//calendarModel.accessCalendars(['gmail']);
-			
-			//wShape= new Shape(center.x - (watchRadius * 0.70), center.y + (watchRadius * 0.06), 250, 70);
-		/*	setInterval(
-					  function(){
-						  doFlame();
-					  }, frequency)	;*/
 			
 			
 			popolate(max_particles,effect);

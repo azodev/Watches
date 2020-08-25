@@ -24,11 +24,8 @@
     <feature name="http://tizen.org/feature/network.net_proxy"/>
     <icon src="icon.png"/>
     <name>ParticlesWatch</name>
-    <tizen:privilege name="http://tizen.org/privilege/calendar.read"/>
-    <tizen:privilege name="http://tizen.org/privilege/calendar.write"/>
     <tizen:privilege name="http://tizen.org/privilege/push"/>
     <tizen:privilege name="http://tizen.org/privilege/unlimitedstorage"/>
-    <tizen:privilege name="http://tizen.org/privilege/application.info"/>
     <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
     <tizen:privilege name="http://tizen.org/privilege/notification"/>
     <tizen:privilege name="http://tizen.org/privilege/filesystem.read"/>

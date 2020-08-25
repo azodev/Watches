@@ -94,24 +94,24 @@ html, body {
     overflow:hidden;
 }
 #calendar{
-	position: relative;
+	position: absolute;
 	width: 290px;
   	height: 260px;
     padding: 10px; /* mind the gap */
     z-index: 11;
     opacity:0;
     margin-left: 35px ; 
-    margin-top: 55px;
+    margin-top: 50px;
     /*transition: opacity 1s ease, transform 1s ease;*/
     transition-property: opacity, transform;
 	transition-duration: 0.5s;
-	transition-timing-function: linear;
-    visibility: hidden;
+	transition-timing-function: ease-out;
+    /*visibility: hidden;*/
   --aug-border: 2px;
   --aug-inset: 4px;
   --aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
  /* --aug-inset-bg: radial-gradient(circle, rgba(29,29,29,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%);*/
-  --aug-inset-bg: radial-gradient(  at top right,      var(--color1),      transparent 90%    ),    radial-gradient(      farthest-side at top left,      var(--color2),      transparent 90%    ),    0 0/72px 72px repeating-radial-gradient(#FFFFFF,      #000000 1px,      transparent 1px,      transparent 13px    ), #000011 ;  
+  --aug-inset-bg: radial-gradient(  at top right,      var(--color1),      transparent 90%    ),    radial-gradient(      farthest-side at top left,      var(--color2),      transparent 90%    ),    0 0/72px 72px repeating-radial-gradient(var(--color1),      #000000 1px,      transparent 1px,      transparent 13px    ), #000011 ;  
   --aug-inset-opacity: 0.9;  
   --aug-b-width: 60%;
   --aug-t-width: 60%;
@@ -121,29 +121,29 @@ html, body {
   --aug-tl: 20px;
   --aug-br: 20px;
   --aug-tr: 20px; 
-   /*transform-origin: 100px 50%;*/
-    transform: perspective(700px) rotateY(0deg) ; 
-    
+    transform: perspective(700px) rotateY(0deg) translateY(50px) translateX(50px)  scale(0.35) ;  
+     
    scroll-behavior: smooth;
     
     /*transform: perspective(700px) rotateY(0deg); */
 }
 
+#calendar.off {
+	transform: perspective(700px) rotateY(0deg) translateY(50px) translateX(50px) scale(0.35); 
+	visibility: hidden;
+	opacity:0.5;
+}
 
 #calendar.on {
-	top:0px;
+	/*top:0px;
 	left:0px;
-	
-
+	*/
+transition-duration: 0.5s;
 	position: absolute;
-	transition-property: opacity, transform;
-	transition-duration: 0.5s;
-	transition-timing-function: linear;
-	transform: perspective(700px) rotateY(0deg); 
+	transform: perspective(700px) rotateY(0deg) ; 
 	opacity:1;
 	  --aug-inset-opacity: 0.8;
-	    
-	visibility: visible;
+	/*visibility: visible;*/
 }
 
 #up, #down{
@@ -186,7 +186,7 @@ html, body {
 	padding: 5px;
 	margin: 5px auto;
 	--aug-inset: 3px;
-	--aug-inset-bg: rgba(0, 0, 0, 0.25);
+	--aug-inset-bg: rgba(0, 0, 0, 0.15);
 	--aug-border: 2px;
 	--aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
 	background-color:transparent; 

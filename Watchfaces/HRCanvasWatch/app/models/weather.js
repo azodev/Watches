@@ -418,7 +418,7 @@ define({
 					onPositionFound(true);
 				},
 				'models.weather.found' : updateForecastP,
-				'models.location.distanceChange' : onDistanceChange,
+				//'models.location.distanceChange' : onDistanceChange,
 				'views.main.updateWeather':onUpdateTriggered,
 				'views.radial.update': function(e) {
 					console.log('weatherUpdateTriggered');
