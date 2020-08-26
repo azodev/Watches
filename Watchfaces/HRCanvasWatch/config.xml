@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="http://yourdomain/HRCanvasWatch" version="1.0.0" viewmodes="maximized">
-    <tizen:application id="oDqP7yY88t.HRCanvasWatch" package="oDqP7yY88t" required_version="3.0" ambient_support="enable"/>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="https://www.anthony-zorzetto.fr/ParticlesWatch" version="1.0.0" height="360" width="360" viewmodes="fullscreen">
+    <access origin="https://api.openweathermap.org" subdomains="false"></access>
+    <access origin="https://cloud.anthony-zorzetto.fr" subdomains="false"></access>
+    <tizen:application id="EjC5Z9GjZ7.ParticlesWatch" package="EjC5Z9GjZ7" required_version="3.0" ambient_support="enable"/>
+    <author>AZO_Watches</author>
     <tizen:category name="http://tizen.org/category/wearable_clock"/>
     <content src="index.html"/>
     <feature name="tizen.org/feature/humanactivitymonitor"/>
@@ -13,9 +16,17 @@
     <feature name="tizen.org/feature/location.batch"/>
     <feature name="tizen.org/feature/screen.size.normal.360.360"/>
     <feature name="tizen.org/feature/sensor.accelerometer"/>
-    <feature name="tizen.org/feature/sensor.gravity"/>
+    <feature name="http://tizen.org/feature/location.gps"/>
+    <feature name="http://tizen.org/feature/sensor.heart_rate_monitor"/>
+    <feature name="http://tizen.org/feature/sensor.pedometer"/>
+    <feature name="http://tizen.org/feature/web.service"/>
+    <feature name="http://tizen.org/feature/network.internet"/>
+    <feature name="http://tizen.org/feature/network.net_proxy"/>
     <icon src="icon.png"/>
-    <name>HRCanvasWatch</name>
+    <name>ParticlesWatch</name>
+    <tizen:privilege name="http://tizen.org/privilege/push"/>
+    <tizen:privilege name="http://tizen.org/privilege/unlimitedstorage"/>
+    <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
     <tizen:privilege name="http://tizen.org/privilege/notification"/>
     <tizen:privilege name="http://tizen.org/privilege/filesystem.read"/>
     <tizen:privilege name="http://tizen.org/privilege/filesystem.write"/>
@@ -25,5 +36,5 @@
     <tizen:privilege name="http://tizen.org/privilege/location"/>
     <tizen:privilege name="http://tizen.org/privilege/healthinfo"/>
     <tizen:profile name="wearable"/>
-    <tizen:setting background-support="disable" encryption="disable" hwkey-event="enable"/>
+    <tizen:setting background-support="disable" encryption="enable" hwkey-event="enable"/>
 </widget>

@@ -1,0 +1,130 @@
+div.menuHolder {
+    user-select: none;
+    -moz-user-select: none;
+    position: absolute;
+    margin: 0px;
+    top:10px;
+    left:10px;
+    /*background-image: radial-gradient(180px at 0px 0px , #000000 0%, #000000 14px, rgba(0, 0, 0, 0.3) 18px, rgba(0, 0, 0, 0) 19px);*/
+    /*opacity:0.9;*/
+    z-index:10;
+    display:none;
+    font-family: FutureNow;
+    font-size:28px;
+    /*transform: perspective(3000px) rotateY(0deg) rotateX(0deg);*/
+    
+}
+
+svg.icons {
+    display: none;
+}
+
+svg.menu {
+    position: absolute;
+    overflow: visible;
+    transition: 0.2s;
+    z-index:11;
+    opacity:0.95;
+    transition-timing-function: ease-out; 
+    
+    
+}
+
+svg.menu.inner {
+    transform: translateY(-140px) scale(0.16) rotate(0deg);
+    opacity: 0;
+    visibility: hidden; 
+}
+svg.menu.innerbis {
+    transform:  scale(0.66) rotate(-30deg);
+    opacity: 0;
+    visibility: hidden; 
+}
+
+svg.menu.outer {
+    transform: scale(1.5) rotate(30deg);
+    opacity: 0;
+    visibility: hidden;
+}
+svg.menu > g.sector {
+	
+}
+svg.menu > g > path {
+    /*fill: #1E2E3A;*/
+    opacity:0.95;
+    box-shadow: -7px 6px 15px #333;
+}
+
+svg.menu > g.sector > path {
+    cursor: pointer; 
+    transition: 0.1s; 
+    
+}
+
+svg.menu > g.sector > text,
+svg.menu > g.sector > use {
+    cursor: pointer;
+    fill: white;
+    text-shadow: 1px 1px 0 #000000A0;
+}
+/*
+svg.menu > g.sector:hover > path {
+    fill: #F9A602D0	;
+    transition: fill 0.1s ease;
+	
+}
+
+svg.menu > g.sector.selected > path {
+    fill: #F9A602D0;
+    fill: #009900D0 !important;
+    fill: #32CD32D0 !important;
+    
+}
+*/
+svg.menu > g > path.ice {
+    fill: #1E2E3A;
+    transition: fill 0.1s ease;
+}
+svg.menu > g > path.selected.ice {
+	fill: #096EB5;
+	transition: fill 0.1s ease;
+}
+svg.menu > g > path.metal {
+	fill: rgb(99,100,103);
+	transition: fill 0.1s ease;
+}
+svg.menu > g > path.selected.metal {
+	fill: rgb(190,190,190);
+	transition: fill 0.1s ease;
+}
+svg.menu > g > path.fire {
+	fill: #B23E01;
+	transition: fill 0.1s ease;
+}
+svg.menu > g > path.selected.fire {
+	fill: #db7e1a;
+	transition: fill 0.1s ease;
+}
+svg.menu > g > path.hisakura {
+	fill: #9c6c81;
+	transition: fill 0.1s ease;
+}
+svg.menu > g > path.selected.hisakura {
+	fill: #ed77aa;
+	transition: fill 0.1s ease;
+}
+svg.menu > g.center:hover > circle {
+    fill: #F9A602D0;
+}
+
+svg.menu > g.center > circle {
+    cursor: pointer;
+    fill: #0F171D;
+    opacity:0.9;
+}
+
+svg.menu > g.center > text,
+svg.menu > g.center > use {
+    cursor: pointer;
+    fill: white;
+}

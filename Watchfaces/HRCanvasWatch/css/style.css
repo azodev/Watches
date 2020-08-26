@@ -1,35 +1,294 @@
+* {
+  outline: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+:root {
+	--color1: rgb(38,55,180); 
+	--color2: rgb(192,221,243);
+}
+img {
+  border: 0;
+  /* 1 */
+
+  -ms-interpolation-mode: bicubic;
+  /* 2 */
+
+}
+/*
+ * Corrects overflow displayed oddly in IE 9.
+ */
+svg:not(:root) {
+  overflow: hidden;
+}
 html, body {
     width: 100%;
     height: 100%;
     margin: 0;
     overflow-y: hidden;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    display:block;
 }
 
 #container {
     display: -webkit-flex;
     -webkit-align-items: center;
     width: 100%;
-    height: 100%
-}
-
-#canvas-layout {
+    height: 100%;
+    position: absolute;
+    z-index:1;
+} 
+#canvas-particles {
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 2;
+    z-index: 1;
+}
+#canvas-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
 
 #canvas-content {
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 2;
+/*    -webkit-transform3d: translate(0,0,0);
+    -moz-transform3d: translate(0,0,0);
+    transform3d: translate(0,0,0);*/
 }
-.particles-js-canvas-el{
-	position: absolute;
+#canvas-final {
+    position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 2;
+    z-index: 3;
+}
+#cal_holder{
+	position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    visibility:  hidden;
+    transition: opacity 0.1s ;
+    opacity:0.1;
+    user-select: none;
+    -moz-user-select: none;
+    font-family: 'FutureNow';
+}
+#cal_holder.on {
+	width: 100%;
+    height: 100%;
+	position: absolute;
+	visibility:  visible;
+	transition: opacity 0.1s ;
+	transition:0.1s;
+	opacity: 1;
+}
+#overflower{
+	width: 100%;
+    height: 100%;
+    overflow:hidden;
+}
+#calendar{
+	position: absolute;
+	width: 290px;
+  	height: 260px;
+    padding: 10px; /* mind the gap */
+    z-index: 11;
+    opacity:0;
+    margin-left: 35px ; 
+    margin-top: 50px;
+    /*transition: opacity 1s ease, transform 1s ease;*/
+    transition-property: opacity, transform;
+	transition-duration: 0.5s;
+	transition-timing-function: ease-out;
+    /*visibility: hidden;*/
+  --aug-border: 2px;
+  --aug-inset: 4px;
+  --aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
+ /* --aug-inset-bg: radial-gradient(circle, rgba(29,29,29,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%);*/
+  --aug-inset-bg: radial-gradient(  at top right,      var(--color1),      transparent 90%    ),    radial-gradient(      farthest-side at top left,      var(--color2),      transparent 90%    ),    0 0/72px 72px repeating-radial-gradient(var(--color1),      #000000 1px,      transparent 1px,      transparent 13px    ), #000011 ;  
+  --aug-inset-opacity: 0.9;  
+  --aug-b-width: 60%;
+  --aug-t-width: 60%;
+  --aug-b-height: 5px;
+  --aug-t-height: 5px;
+  --aug-bl: 20px;
+  --aug-tl: 20px;
+  --aug-br: 20px;
+  --aug-tr: 20px; 
+    transform: perspective(700px) rotateY(0deg) translateY(50px) translateX(50px)  scale(0.35) ;  
+     
+   scroll-behavior: smooth;
+    
+    /*transform: perspective(700px) rotateY(0deg); */
+}
+
+#calendar.off {
+	transform: perspective(700px) rotateY(0deg) translateY(50px) translateX(50px) scale(0.35); 
+	visibility: hidden;
+	opacity:0.5;
+}
+
+#calendar.on {
+	/*top:0px;
+	left:0px;
+	*/
+transition-duration: 0.5s;
+	position: absolute;
+	transform: perspective(700px) rotateY(0deg) ; 
+	opacity:1;
+	  --aug-inset-opacity: 0.8;
+	/*visibility: visible;*/
+}
+
+#up, #down{
+	
+  position: absolute;
+	margin-left: 140px;
+  
+  width: 80px;
+  height: 40px;
+  padding: 10px;
+  font-size: 25px;
+  text-align:center;
+  white-space: nowrap;
+  background: #13242c;
+  --aug-border: 1px;
+  --aug-border-bg: #5da1c6;
+  --aug-tl: 10px;
+  --aug-tr: 10px;
+  --aug-bl: 10px;
+  --aug-br: 10px;
+  text-shadow: 0 0 20px #fefcfe;
+  z-index:10;
+  opacity:0;
+
+}
+#up {
+	top:7px;
+}
+#down{
+ 	bottom:7px;
+}
+#down.off, #up.down {
+	opacity:0;
+
+}
+
+#calendar .event {
+
+	position: relative;
+	padding: 5px;
+	margin: 5px auto;
+	--aug-inset: 3px;
+	--aug-inset-bg: rgba(0, 0, 0, 0.15);
+	--aug-border: 2px;
+	--aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
+	background-color:transparent; 
+	--aug-tl: 5px;
+	--aug-br: 5px;
+	--aug-bl: 10px;
+	--aug-tr: 10px;
+	z-index:12;
+	min-height: 40px;
+	width: 95%;
+	color:white;
+	transition: --aug-inset-bg 0.2s ease, color 0.2s ease; 
+}
+
+
+
+
+
+#calendar .event.click {
+    /*background-color: white;*/
+    color:black;
+    --aug-inset-bg: rgba(255, 255, 255, 0.50);
+	transition: --aug-inset-bg 0.2s ease, color 0.2s ease;  
+}
+.dates {
+	height: 33px;
+	width: 50px;
+	font-size:15px; 
+	top: 3px;
+	left:5px;
+	color: #ffffff;
+	text-align:center;
+	position:absolute;
+	z-index:12;
+	padding: 5px;
+	--aug-inset: 2px;
+	--aug-inset-bg: rgba(0, 0, 0, 0.25);
+	--aug-border: 2px;
+	--aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
+	--aug-tl: 5px;
+	--aug-br: 5px;
+	--aug-bl: 5px;
+	--aug-tr: 5px;
+	
+}
+
+
+
+
+.dates.fd{
+	--aug-inset-bg: linear-gradient(to right, var(--color1), var(--color2));
+} 
+.dates span{
+	position:relative;
+	width : 40px;
+	height : 13px;
+	
+	float:left;
+} 
+.event .title { 
+	min-height: 18px;
+	width: 185px;
+	position: relative;
+	margin-top: 0px;
+	margin-left:55px;
+	font-size:15px;
+	/*text-shadow: 0 0 10px cyan;*/
+}
+.event .location {
+	min-height: 15px;
+	width: 185px;
+	position: relative;
+	margin-top: 0px;
+	margin-left:55px;
+	font-size:13px;
+}
+#calendar .day{
+  /*background-color: rgba(0,255,255, 0.53);*/
+  text-shadow: 0 0 10px #000;
+  color: #ffffff;
+  height: 22px;
+  width: 50%;
+  margin:5px 5px 5px 2.5%;
+  position: relative;
+  /*left: 25px;
+  bottom: 20px;*/
+  --aug-tl: 5px;
+  --aug-br: 3px;
+  --aug-bl: 5px;
+  --aug-tr: 5px;
+  --aug-inset-bg:  var(--color1);
+  font-size: 15px;
+  text-align: right;
+  padding-top: 5px;
+  padding-right:10px;
+	
+}
+#calendar .day_events  > .event{
+	margin-top: -5px;
+}
+#calendar .day_events  > .event ~ .event {
+	margin-top: 5px;
 }
 @font-face {
     font-family: 'artill_clean_icons';
@@ -43,11 +302,12 @@ html, body {
     src: url('../data/FutureNow.ttf');
 }
 
+/*
 @font-face {
     font-family: 'KillTheNoise';
     src: url('../data/KillTheNoise.otf');
 }
-
+*/
 @media (-tizen-geometric-shape: circle) {
 
 
