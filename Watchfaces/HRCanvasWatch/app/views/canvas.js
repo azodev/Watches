@@ -409,10 +409,10 @@ define({
 			if (radialmenu.getOpen()){ 
 				deg.x = (gravCenter.y - 190)*1.2;
 				deg.y = (gravCenter.x - 180)*1.2;
-				if (deg.x <= -30 ) deg.x = -30;
-				if (deg.x >= 30 ) deg.x = 30;
-				if (deg.y <= -20 ) deg.y = -30;
-				if (deg.y >= 30 ) deg.y = 30;
+				if (deg.x <= -15 ) deg.x = -15;
+				if (deg.x >= 15 ) deg.x = 15;
+				if (deg.y <= -15 ) deg.y = -15;
+				if (deg.y >= 15 ) deg.y = 15;
 				
 				elem = document.querySelector("div.menuHolder"); 
 				elem.style.transform =
