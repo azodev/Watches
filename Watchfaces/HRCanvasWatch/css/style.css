@@ -73,7 +73,9 @@ html, body {
     height: 100%;
     z-index: 10;
     visibility:  hidden;
-    transition: opacity 0.1s ;
+    transition-property: opacity;
+	transition-duration: 0.05s;
+	transition-timing-function: linear;
     opacity:0.1;
     user-select: none;
     -moz-user-select: none;
@@ -84,8 +86,6 @@ html, body {
     height: 100%;
 	position: absolute;
 	visibility:  visible;
-	transition: opacity 0.1s ;
-	transition:0.1s;
 	opacity: 1;
 }
 #overflower{
@@ -99,18 +99,15 @@ html, body {
   	height: 260px;
     padding: 10px; /* mind the gap */
     z-index: 11;
-    opacity:0;
+
     margin-left: 35px ; 
     margin-top: 50px;
     /*transition: opacity 1s ease, transform 1s ease;*/
-    transition-property: opacity, transform;
-	transition-duration: 0.5s;
-	transition-timing-function: ease-out;
+    
     /*visibility: hidden;*/
   --aug-border: 2px;
   --aug-inset: 4px;
   --aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
- /* --aug-inset-bg: radial-gradient(circle, rgba(29,29,29,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%);*/
   --aug-inset-bg: radial-gradient(  at top right,      var(--color1),      transparent 90%    ),    radial-gradient(      farthest-side at top left,      var(--color2),      transparent 90%    ),    0 0/72px 72px repeating-radial-gradient(var(--color1),      #000000 1px,      transparent 1px,      transparent 13px    ), #000011 ;  
   --aug-inset-opacity: 0.9;  
   --aug-b-width: 60%;
@@ -121,7 +118,6 @@ html, body {
   --aug-tl: 20px;
   --aug-br: 20px;
   --aug-tr: 20px; 
-    transform: perspective(700px) rotateY(0deg) translateY(50px) translateX(50px)  scale(0.35) ;  
      
    scroll-behavior: smooth;
     
@@ -129,21 +125,22 @@ html, body {
 }
 
 #calendar.off {
-	transform: perspective(700px) rotateY(0deg) translateY(50px) translateX(50px) scale(0.35); 
-	visibility: hidden;
-	opacity:0.5;
+	
+	transform: perspective(700px) rotateY(0deg) translateY(50px) translateX(60px) scale(0.35); 
+	opacity:0;
+	transition-property: opacity, transform;
+	transition-duration: 0.2s;
+	transition-timing-function: linear;
+
 }
 
 #calendar.on {
-	/*top:0px;
-	left:0px;
-	*/
-transition-duration: 0.5s;
-	position: absolute;
+	
 	transform: perspective(700px) rotateY(0deg) ; 
+	transition-property: opacity, transform;
+	transition-duration: 0.2s;
+	transition-timing-function: linear;
 	opacity:1;
-	  --aug-inset-opacity: 0.8;
-	/*visibility: visible;*/
 }
 
 #up, #down{

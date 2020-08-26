@@ -61,6 +61,7 @@ define({
 		var now = Math.round(Date.now() / 1000);
 		var weatherFound = false,forecastFound = false,hour;
 		var DEFAULT_ICON = '*';
+		var forecasts = [], vForecasts = [];
 
 		/**
 		 * Starts weather.
@@ -304,8 +305,11 @@ define({
 							) ? true : false;
 					
 					forecastInform.list[i].day = day;
+					vForecasts.push(new vForecast(forecastInform.list[i]));
 				}
 				forecastInform.lastWeatherCallDate = now;
+				console.log(vForecasts);
+				buildDaysForecasts();
 				//console.debug(forecastInform);
 				// Gets weather string from information
 				forecastFound = true;
@@ -351,10 +355,18 @@ define({
 										) ? true : false;
 								
 								forecastInform.list[i].day = day;
+								vForecasts.push(new vForecast(forecastInform.list[i]));
 							}
 							forecastInform.lastWeatherCallDate = now;
+							console.log(vForecasts);
+							buildDaysForecasts();
+							 
+							
 							//console.debug(forecastInform);
 							// Gets weather string from information
+							
+							
+							
 							forecastFound = true;
 							event.fire('forecast_found', forecastInform);
 							console.log('Update forecast: Found');
@@ -401,6 +413,38 @@ define({
 		function getForecast (){
 			return forecastInform;
 		}
+		
+		function buildDaysForecasts(){
+			forecasts = [];
+			let z = 0
+			vForecasts.forEach(function(fo){
+				if (forecasts.map(function(o) { return o.date; }).indexOf(formatDate(fo.date)) == -1){
+					forecasts.push(new ForecastDay(formatDate(fo.date),[]));
+					
+				}
+				
+				for ( z= 0 ; z< forecasts.length; z++){
+					if (forecasts[z].date == formatDate(fo.date) ){
+						forecasts[z].forecasts.push(fo);
+					}
+				}
+			});
+			console.log(forecasts);
+		}
+		function formatDate(date) {
+	        let month = '' + (date.getMonth() + 1);
+	        let day = '' + date.getDate();
+	        let year = date.getFullYear();
+
+		    if (month.length < 2) 
+		        month = '0' + month;
+		    if (day.length < 2) 
+		        day = '0' + day;
+	
+		    return [year, month, day].join('-');
+		}
+		
+		
 		/**
 		 * Registers event listeners.
 		 * 

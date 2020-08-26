@@ -163,6 +163,7 @@ define({
 		var heartRateDisplayed=true;
 		var holder = document.querySelector("#widget_holder");
 		var calendar = document.querySelector("#calendar");
+		var calendarOn = null;
 		
 		var up = document.getElementById ('up');
 		var down = document.getElementById ('down');
@@ -250,7 +251,6 @@ define({
 					console.log('transition holder');
 					holder.setAttribute('class', 'on');
 					
-					changeRootColors(theme);
 					setClassAndWaitForTransition(calendar,'on','opacity').then(function () {
 						console.log('transition calendar');
 						
@@ -261,6 +261,7 @@ define({
 		            
 		            
 		        });
+				
 				
 			  	
 			}
@@ -421,7 +422,7 @@ define({
 				
 				  
 			}
-			if (widgetFullScreenDiplayed ===true){
+			if (widgetFullScreenDiplayed ==true){
 				deg.x = (gravCenter.y - 190)*1;
 				deg.y = (gravCenter.x - 180)*1;
 				if (deg.x <= -20 ) deg.x = -20;
@@ -429,12 +430,13 @@ define({
 				if (deg.y <= -20 ) deg.y = -20; 
 				if (deg.y >= 20 ) deg.y = 20; 
 				//document.querySelector("#calendar.on").style.opacity=1;
-				let calendarOn = document.querySelector("div#calendar");
+				//calendar = document.querySelector("#calendar.on");
 				//if (calendarOn.style.opacity < 1) calendarOn.style.opacity = 1;
-				
+				if (calendarOn == null) calendarOn = document.querySelector("#calendar.on");
 				calendarOn.style.transform =    
 					"perspective(700px) rotateX(" + -deg.x + "deg) " +    
 					" rotateY(" + deg.y + "deg)";
+					
 					
 				
 			}
@@ -545,14 +547,14 @@ define({
 				if (miniWeatherDisplayed){
 					
 					canvasDrawer.roundRectShadows(canvasContent.context, wShape,10, {r:10,g:10,b:10,a:0.7},5);
-					canvasDrawer.roundRect(canvasContent.context, wShape,10, true, false, null, "rgba(5, 5, 5,0.7)");
+					canvasDrawer.roundRect(canvasContent.context, wShape,10, true, false, null, "rgba(8, 8, 8,0.7)");
 					drawWeather(forecastDisplayed);
 				}
 				
 				
 				if (miniCalendarDisplayed) {
 					canvasDrawer.roundRectShadows(canvasContent.context, calendarShape,10, {r:10,g:10,b:10,a:0.7},5);
-					canvasDrawer.roundRect(canvasContent.context, calendarShape,10, true, false, null, "rgba(5, 5, 5,0.7)");
+					canvasDrawer.roundRect(canvasContent.context, calendarShape,10, true, false, null, "rgba(8, 8, 8,0.7)");
 					canvasDrawer.renderText(canvasContent.context, 'Events', calendarShape.getCoords().x+50, calendarShape.getCoords().y+20, 25, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'center',
@@ -1032,15 +1034,52 @@ define({
 				console.log('transition calendar off');
 				//calendarOn.style.opacity = 0;
 				*/
-			document.querySelector("#calendar").style.transform =    
-				"perspective(700px) rotateY(0deg) translateY(50px) translateX(50px)  scale(0.35)";
+			
+			
+			if (document.querySelector("#calendar.off") != null)	document.querySelector("#calendar.off").style.transform =    
+				"perspective(700px) rotateY(0deg) translateY(50px) translateX(60px)  scale(0.35)";
+				
 			if (document.querySelector("#calendar.on") != null)	document.querySelector("#calendar.on").style.transform =    
-				"perspective(700px) rotateY(0deg) translateY(50px) translateX(50px)  scale(0.35)";
-				setClassAndWaitForTransition(calendar,'','opacity').then(function () {
+				"perspective(700px) rotateY(0deg) translateY(50px)  translateX(60px)  scale(0.35)";
+			
+			
+			
+			
+				setClassAndWaitForTransition(calendar,'off','opacity').then(function () {
 					console.log('transition calendar');
+					/*let sheet  = document.styleSheets[1];
+ 					sheet.deleteRule(13);
+					sheet.insertRule("#calendar {  " +
+							"width: 290px; " +
+							"height: 260px; padding: 10px; z-index: 11; opacity: 0; margin-left: 35px; margin-top: 50px; " +
+							"transition-property: opacity, transform; " +
+							"transition-duration: 0,5s; " +
+							"transition-timing-function: ease-out; " +
+							"--aug-border: 2px; " +
+							"--aug-inset: 4px; " +
+							"--aug-border-bg: linear-gradient(to right, var(--color1), var(--color2)); --aug-inset-bg: radial-gradient( at top right, var(--color1), transparent 90% ), radial-gradient( farthest-side at top left, var(--color2), transparent 90% ), 0 0/72px 72px repeating-radial-gradient(var(--color1), #000000 1px, transparent 1px, transparent 13px ), #000011 ; " +
+							"--aug-inset-opacity: 0.9; " +
+							"--aug-b-width: 60%; " +
+							"--aug-t-width: 60%; " +
+							"--aug-b-height: 5px; " +
+							"--aug-t-height: 5px; " +
+							"--aug-bl: 20px; " +
+							"--aug-tl: 20px; " +
+							"--aug-br: 20px; " +
+							"--aug-tr: 20px; " +
+							" }",13);
+					sheet.deleteRule(15); 
+					sheet.insertRule("#calendar.on {  transform: perspective(700px) rotateY(0deg); opacity: 1; }",15); 
+					*/
+					/*if (document.querySelector("#calendar.on") != null)	document.querySelector("#calendar.on").style.transform =    
+						"perspective(700px) rotateY(0deg) translateY(50px)  translateX(50px)  scale(0.35)";
+						*/
+					calendarOn = null;
 					setClassAndWaitForTransition(holder,'','opacity').then(function () {
-						
+						calendar.setAttribute('class', 'off');
 						console.log('transition holder');
+						
+						if (document.querySelector("#calendar.on") != null)	document.querySelector("#calendar.on").style.transform = 	"perspective(700px) rotateY(0deg) ";
 					});
 				});
 				
