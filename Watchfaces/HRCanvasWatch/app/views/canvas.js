@@ -161,7 +161,7 @@ define({
 		var baroDisplayed = true;
 		var timeDisplayed = true;
 		var heartRateDisplayed=true;
-		var holder = document.querySelector("#cal_holder");
+		var holder = document.querySelector("#widget_holder");
 		var calendar = document.querySelector("#calendar");
 		
 		var up = document.getElementById ('up');
@@ -1026,7 +1026,7 @@ define({
 		function closeCalendarMenu(){
 			widgetFullScreenDiplayed = false;
 			calendar = document.querySelector("#calendar");
-			holder = document.querySelector("#cal_holder");
+			holder = document.querySelector("#widget_holder");
 			
 			/*setClassAndWaitForTransition(calendar,'off','visibility').then(function () {
 				console.log('transition calendar off');
