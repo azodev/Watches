@@ -431,10 +431,10 @@ define({
 				//document.querySelector("#calendar.on").style.opacity=1;
 				let calendarOn = document.querySelector("div#calendar");
 				//if (calendarOn.style.opacity < 1) calendarOn.style.opacity = 1;
-				/*
+				
 				calendarOn.style.transform =    
 					"perspective(700px) rotateX(" + -deg.x + "deg) " +    
-					" rotateY(" + deg.y + "deg)";*/
+					" rotateY(" + deg.y + "deg)";
 					
 				
 			}
@@ -1024,7 +1024,7 @@ define({
 			*/
 		}
 		function closeCalendarMenu(){
-			//widgetFullScreenDiplayed = false;
+			widgetFullScreenDiplayed = false;
 			calendar = document.querySelector("#calendar");
 			holder = document.querySelector("#cal_holder");
 			
@@ -1032,8 +1032,10 @@ define({
 				console.log('transition calendar off');
 				//calendarOn.style.opacity = 0;
 				*/
-			/*calendar.style.transform =    
-				"perspective(700px) rotateY(0deg) translateY(50px) translateX(50px)  scale(0.35)";*/
+			document.querySelector("#calendar").style.transform =    
+				"perspective(700px) rotateY(0deg) translateY(50px) translateX(50px)  scale(0.35)";
+			if (document.querySelector("#calendar.on") != null)	document.querySelector("#calendar.on").style.transform =    
+				"perspective(700px) rotateY(0deg) translateY(50px) translateX(50px)  scale(0.35)";
 				setClassAndWaitForTransition(calendar,'','opacity').then(function () {
 					console.log('transition calendar');
 					setClassAndWaitForTransition(holder,'','opacity').then(function () {
