@@ -195,6 +195,7 @@ html, body {
 	min-height: 40px;
 	width: 97%;
 	color:white;
+	
 	transition: --aug-inset-bg 0.2s ease, color 0.2s ease; 
 }
 
@@ -206,7 +207,8 @@ html, body {
     /*background-color: white;*/
     color:black;
     --aug-inset-bg: rgba(255, 255, 255, 0.50);
-	transition: --aug-inset-bg 0.2s ease, color 0.2s ease;  
+    background:  rgba(255, 255, 255, 0.50);
+	transition: --aug-inset-bg 0.2s ease, color 0.2s ease, background 0.2 ease;  
 }
 .dates {
 	height: 33px;
