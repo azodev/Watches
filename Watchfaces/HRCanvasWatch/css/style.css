@@ -193,7 +193,7 @@ html, body {
 	--aug-tr: 10px;
 	z-index:12;
 	min-height: 40px;
-	width: 95%;
+	width: 97%;
 	color:white;
 	transition: --aug-inset-bg 0.2s ease, color 0.2s ease; 
 }
@@ -212,7 +212,7 @@ html, body {
 	height: 33px;
 	width: 50px;
 	font-size:15px; 
-	top: 3px;
+	top: 5px;
 	left:5px;
 	color: #ffffff;
 	text-align:center;
@@ -245,20 +245,20 @@ html, body {
 } 
 .event .title { 
 	min-height: 18px;
-	width: 185px;
+	width: 195px;
 	position: relative;
 	margin-top: 0px;
 	margin-left:55px;
-	font-size:15px;
+	font-size:16px;
 	/*text-shadow: 0 0 10px cyan;*/
 }
 .event .location {
 	min-height: 15px;
 	width: 185px;
 	position: relative;
-	margin-top: 0px;
+	margin-top: 2px;
 	margin-left:55px;
-	font-size:13px;
+	font-size:14px;
 }
 #calendar .day{
   /*background-color: rgba(0,255,255, 0.53);*/
@@ -266,7 +266,7 @@ html, body {
   color: #ffffff;
   height: 22px;
   width: 50%;
-  margin:5px 5px 5px 2.5%;
+  margin:5px 5px 5px 1.5%;
   position: relative;
   /*left: 25px;
   bottom: 20px;*/

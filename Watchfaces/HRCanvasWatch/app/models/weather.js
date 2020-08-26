@@ -120,7 +120,6 @@ define({
 				return DEFAULT_ICON;
 			}
 			if (mapping.map[id]) {
-				
 				if (!dayNightBool) {
 					if (mapping.map[id+'n']){
 						return mapping.map[id+'n'];
@@ -131,7 +130,6 @@ define({
 			} else {
 				return DEFAULT_ICON;
 			}
-
 		}
 		/**
 		 * Sets sensor change listener.
@@ -305,7 +303,7 @@ define({
 							) ? true : false;
 					
 					forecastInform.list[i].day = day;
-					vForecasts.push(new vForecast(forecastInform.list[i]));
+					vForecasts.push(new vForecast(forecastInform.list[i],mapping));
 				}
 				forecastInform.lastWeatherCallDate = now;
 				console.log(vForecasts);
@@ -425,7 +423,13 @@ define({
 				
 				for ( z= 0 ; z< forecasts.length; z++){
 					if (forecasts[z].date == formatDate(fo.date) ){
-						forecasts[z].forecasts.push(fo);
+						if (formatDate(fo.date) == formatDate(new Date())){
+							forecasts[z].forecasts.push(fo);
+						}
+						else if (fo.date.getHours() >= 6 && fo.date.getHours()<= 22){
+							forecasts[z].forecasts.push(fo);
+						}
+						
 					}
 				}
 			});
