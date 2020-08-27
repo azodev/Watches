@@ -963,8 +963,9 @@ define({
 			return widget_holder;
 			
 		}
-		function clearWidgetHtml(contentNode){
-			let widget_holder = document.getElementById('widget_holder');
+		function clearWidgetHtml(widget_holder,contentNode){
+			console.log(widget_holder);
+			console.log(contentNode);
 			widget_holder.removeChild(contentNode);
 			
 		}

@@ -1044,38 +1044,40 @@ define({
 			*/
 		}
 		function closeCalendarMenu(){
-			widgetFullScreenDiplayed = false;
-			calendar = document.querySelector("#calendar");
-			holder = document.querySelector("#widget_holder");
-			
-			/*setClassAndWaitForTransition(calendar,'off','visibility').then(function () {
-				console.log('transition calendar off');
-				//calendarOn.style.opacity = 0;
-				*/
-			
-			
-			
-			if (document.querySelector("#calendar.on") != null)	document.querySelector("#calendar.on").style.transform =    
-				"perspective(700px) rotateY(0deg) translateY(50px)  translateX(60px)  scale(0.35)";
-			
-			
-			if (calendar !== null){
-				setClassAndWaitForTransition(calendar,'off','opacity').then(function () {
-					console.log('transition calendar');
+			if (widgetFullScreenDiplayed){
 					
-					calendarOn = null;
-					setClassAndWaitForTransition(holder,'','opacity').then(function () {
-						calendar.setAttribute('class', 'off');
-						console.log('transition holder');
+				
+				widgetFullScreenDiplayed = false;
+				
+				calendar = document.querySelector("#calendar");
+				holder = document.querySelector("#widget_holder");
+				
+				/*setClassAndWaitForTransition(calendar,'off','visibility').then(function () {
+					console.log('transition calendar off');
+					//calendarOn.style.opacity = 0;
+					*/
+				
+				
+				
+				if (document.querySelector("#calendar.on") != null)	document.querySelector("#calendar.on").style.transform =    
+					"perspective(700px) rotateY(0deg) translateY(50px)  translateX(60px)  scale(0.35)";
+				
+				
+					setClassAndWaitForTransition(calendar,'off','opacity').then(function () {
+						console.log('transition calendar');
 						
-						//if (document.querySelector("#calendar.on") != null)	document.querySelector("#calendar.on").style.transform = 	"perspective(700px) rotateY(0deg) ";
-						
-						canvasDrawer.clearWidgetHtml(calendar);
-						
+						calendarOn = null;
+						setClassAndWaitForTransition(holder,'','opacity').then(function () {
+							//calendar.setAttribute('class', 'off');
+							console.log('transition holder');
+							
+							//if (document.querySelector("#calendar.on") != null)	document.querySelector("#calendar.on").style.transform = 	"perspective(700px) rotateY(0deg) ";
+							
+							canvasDrawer.clearWidgetHtml(holder,calendar);
+							
+						});
 					});
-				});
 			}
-			
 				
 				
 				//calendar.style.transform =    "perspective(700px) rotateX(0deg) rotateY(90deg) rotateZ(90deg)"; 
