@@ -70,7 +70,7 @@ class DayEvents {
 			day_events.appendChild(event);
 		}
 		
-		document.getElementById('overflower').appendChild(day_events);
+		return day_events;
 		
 	}
 	

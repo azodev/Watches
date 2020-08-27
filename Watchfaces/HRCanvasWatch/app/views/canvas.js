@@ -246,10 +246,17 @@ define({
 			else if (calendarShape.isInSurface(clickPos,0) && !forecastDisplayed && !radialmenu.getOpen() ){
 				console.log('Click fade');
 				canvasDrawer.startFade();
+				calendar = calendarModel.getCalendarHtml();
+				holder = canvasDrawer.processWidgetHtml(calendar);
 				
 				setClassAndWaitForTransition(holder,'on','opacity').then(function () {
 					console.log('transition holder');
 					holder.setAttribute('class', 'on');
+					
+					
+					
+					
+					
 					
 					setClassAndWaitForTransition(calendar,'on','opacity').then(function () {
 						console.log('transition calendar');
@@ -257,6 +264,8 @@ define({
 						calendar.setAttribute('class', 'on');
 						holder.setAttribute('class', 'on');  
 						widgetFullScreenDiplayed = true;
+						
+						setCloseWidgetAction(calendar,closeCalendarMenu);
 					});
 		            
 		            
@@ -269,6 +278,15 @@ define({
 				
 				tizen.application.launch("com.samsung.shealth", null,null);
 			}
+			
+		}
+		function setCloseWidgetAction (node,closeF){
+			node.addEventListener('click', function(e) {
+				 if (e.target !== this && e.target != document.querySelector("#overflower"))
+					    return;
+				canvasDrawer.startShow();
+				closeF();
+			}); 
 			
 		}
 		function triggerShowWatch(){
@@ -1036,52 +1054,29 @@ define({
 				*/
 			
 			
-			if (document.querySelector("#calendar.off") != null)	document.querySelector("#calendar.off").style.transform =    
-				"perspective(700px) rotateY(0deg) translateY(50px) translateX(60px)  scale(0.35)";
-				
+			
 			if (document.querySelector("#calendar.on") != null)	document.querySelector("#calendar.on").style.transform =    
 				"perspective(700px) rotateY(0deg) translateY(50px)  translateX(60px)  scale(0.35)";
 			
 			
-			
-			
+			if (calendar !== null){
 				setClassAndWaitForTransition(calendar,'off','opacity').then(function () {
 					console.log('transition calendar');
-					/*let sheet  = document.styleSheets[1];
- 					sheet.deleteRule(13);
-					sheet.insertRule("#calendar {  " +
-							"width: 290px; " +
-							"height: 260px; padding: 10px; z-index: 11; opacity: 0; margin-left: 35px; margin-top: 50px; " +
-							"transition-property: opacity, transform; " +
-							"transition-duration: 0,5s; " +
-							"transition-timing-function: ease-out; " +
-							"--aug-border: 2px; " +
-							"--aug-inset: 4px; " +
-							"--aug-border-bg: linear-gradient(to right, var(--color1), var(--color2)); --aug-inset-bg: radial-gradient( at top right, var(--color1), transparent 90% ), radial-gradient( farthest-side at top left, var(--color2), transparent 90% ), 0 0/72px 72px repeating-radial-gradient(var(--color1), #000000 1px, transparent 1px, transparent 13px ), #000011 ; " +
-							"--aug-inset-opacity: 0.9; " +
-							"--aug-b-width: 60%; " +
-							"--aug-t-width: 60%; " +
-							"--aug-b-height: 5px; " +
-							"--aug-t-height: 5px; " +
-							"--aug-bl: 20px; " +
-							"--aug-tl: 20px; " +
-							"--aug-br: 20px; " +
-							"--aug-tr: 20px; " +
-							" }",13);
-					sheet.deleteRule(15); 
-					sheet.insertRule("#calendar.on {  transform: perspective(700px) rotateY(0deg); opacity: 1; }",15); 
-					*/
-					/*if (document.querySelector("#calendar.on") != null)	document.querySelector("#calendar.on").style.transform =    
-						"perspective(700px) rotateY(0deg) translateY(50px)  translateX(50px)  scale(0.35)";
-						*/
+					
 					calendarOn = null;
 					setClassAndWaitForTransition(holder,'','opacity').then(function () {
 						calendar.setAttribute('class', 'off');
 						console.log('transition holder');
 						
-						if (document.querySelector("#calendar.on") != null)	document.querySelector("#calendar.on").style.transform = 	"perspective(700px) rotateY(0deg) ";
+						//if (document.querySelector("#calendar.on") != null)	document.querySelector("#calendar.on").style.transform = 	"perspective(700px) rotateY(0deg) ";
+						
+						canvasDrawer.clearWidgetHtml(calendar);
+						
 					});
 				});
+			}
+			
+				
 				
 				//calendar.style.transform =    "perspective(700px) rotateX(0deg) rotateY(90deg) rotateZ(90deg)"; 
 				
@@ -1092,28 +1087,7 @@ define({
 				handleClick(this,e);
 			});
 			
-			up = document.getElementById ('up');
-			down = document.getElementById ('down');
-			calendar.addEventListener('click', function(e) {
-				 if (e.target !== this && e.target != document.querySelector("#overflower"))
-					    return;
-				canvasDrawer.startShow();
-				closeCalendarMenu();
-			}); 
 			
-			up.addEventListener('click', function(e) {
-				console.log('up'); 
-				calendarY = document.getElementById ('overflower').scrollTop-80;
-				console.log(document.getElementById ('overflower').scrollTop);
-				//document.getElementById ('overflower').scrollTop = calendarY;
-				canvasDrawer.scrollTop(document.getElementById ('overflower'),-100,500); 
-			});
-			down.addEventListener('click', function(e) {
-				console.log('down');
-				calendarY = document.getElementById ('overflower').scrollTop+80;
-				//document.getElementById ('overflower').scrollTop = calendarY+80;
-				canvasDrawer.scrollTop(document.getElementById ('overflower'),100,500); 
-			});
 			
 			window.addEventListener("timetick", function (){
 				console.log('timetick');
@@ -1121,7 +1095,21 @@ define({
 					drawAmbientWatch();
 				}
 			});
-
+			up = document.getElementById ('up');
+			down = document.getElementById ('down');
+			
+			
+			up.addEventListener('click', function(e) {
+				console.log('up'); 
+				calendarY = document.getElementById ('overflower').scrollTop-80;
+				console.log(document.getElementById ('overflower').scrollTop);
+				canvasDrawer.scrollTop(document.getElementById ('overflower'),-100,500); 
+			});
+			down.addEventListener('click', function(e) {
+				console.log('down');
+				calendarY = document.getElementById ('overflower').scrollTop+80;
+				canvasDrawer.scrollTop(document.getElementById ('overflower'),100,500); 
+			});
 			window.addEventListener("ambientmodechanged", function(e) {
 				console.log('ambientmodechanged event');
 				if (e.detail.ambientMode === true) {

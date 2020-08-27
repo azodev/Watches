@@ -94,11 +94,24 @@ define({
 				}
 			});
 		}
-		function fillCalendar(){
-			document.getElementById('overflower').innerHTML = '';
+		function getCalendarHtml(){
+			//document.getElementById('overflower').innerHTML = '';
+			
+			
+			let calendar = document.createElement('div');
+			let overflower = document.createElement('div');
+			calendar.setAttribute ('id','calendar');
+			calendar.className = 'off';
+			calendar.setAttribute('augmented-ui', 'tl-clip tr-clip bl-clip br-clip b-clip-x t-clip-x exe');
+			overflower.setAttribute ('id','overflower');
+			
+			
+			
 			myEvents.forEach(function(ev){
-				ev.processHtml();
+				overflower.appendChild( ev.processHtml());
 			});
+			calendar.appendChild(overflower);
+			return calendar;
 		}
 
 		
@@ -279,7 +292,7 @@ define({
 		function handleFilterForFinishedEvents(){
 			vEvents = vEvents.filter (filterFinishedVEvents);
 			buildDaysEvents();
-			fillCalendar();
+			//fillCalendar();
 			document.querySelectorAll("#calendar .event").forEach(function (element){
 				console.log('event onclick creation');
 				element.addEventListener('click', function(e) {
@@ -307,7 +320,8 @@ define({
 			getVEvents : getVEvents,
 			accessCalendars : accessCalendars,
 			hasVEvents : hasVEvents,
-			formatDate : formatDate
+			formatDate : formatDate,
+			getCalendarHtml:getCalendarHtml
 			
 		};
 	}

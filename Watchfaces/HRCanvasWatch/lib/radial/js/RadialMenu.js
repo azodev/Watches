@@ -29,8 +29,7 @@ function RadialMenu(params) {
     self.addIconSymbols();
 
     self.currentMenu = null;
-    document.addEventListener('wheel', self.onMouseWheel.bind(self));
-    document.addEventListener('keydown', self.onKeyDown.bind(self));
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

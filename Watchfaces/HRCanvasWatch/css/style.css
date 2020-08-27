@@ -129,8 +129,8 @@ html, body {
 	transform: perspective(700px) rotateY(0deg) translateY(50px) translateX(60px) scale(0.35); 
 	opacity:0;
 	transition-property: opacity, transform;
-	transition-duration: 0.2s;
-	transition-timing-function: linear;
+	transition-duration: 0.5s;
+	transition-timing-function: ease-in;
 
 }
 
@@ -138,8 +138,8 @@ html, body {
 	
 	transform: perspective(700px) rotateY(0deg) ; 
 	transition-property: opacity, transform;
-	transition-duration: 0.2s;
-	transition-timing-function: linear;
+	transition-duration: 0.5s;
+	transition-timing-function: ease-in;
 	opacity:1;
 }
 
@@ -155,12 +155,6 @@ html, body {
   text-align:center;
   white-space: nowrap;
   background: #13242c;
-  --aug-border: 1px;
-  --aug-border-bg: #5da1c6;
-  --aug-tl: 10px;
-  --aug-tr: 10px;
-  --aug-bl: 10px;
-  --aug-br: 10px;
   text-shadow: 0 0 20px #fefcfe;
   z-index:10;
   opacity:0;

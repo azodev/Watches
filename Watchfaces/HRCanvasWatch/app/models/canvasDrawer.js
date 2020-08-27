@@ -953,6 +953,21 @@ define({
 		    }
 		    window.requestAnimationFrame(step);
 		}
+		function processWidgetHtml(content){
+			
+			let down = document.getElementById('down');
+			
+			let widget_holder = document.getElementById('widget_holder');
+			widget_holder.insertBefore(content,down);
+			
+			return widget_holder;
+			
+		}
+		function clearWidgetHtml(contentNode){
+			let widget_holder = document.getElementById('widget_holder');
+			widget_holder.removeChild(contentNode);
+			
+		}
 		return {
 			init : init,
 			renderCircle : renderCircle,
@@ -984,7 +999,9 @@ define({
 			setClassAndWaitForTransition:setClassAndWaitForTransition,
 			scrollTop:scrollTop,
 			createCanvas:createCanvas,
-			maskCanvas:maskCanvas
+			maskCanvas:maskCanvas,
+			processWidgetHtml:processWidgetHtml,
+			clearWidgetHtml:clearWidgetHtml
 		};
 	}
 });
