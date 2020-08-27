@@ -1430,6 +1430,7 @@ define({
 			}
 			setDefaultVariables();
 			changeParticlesColor(theme);
+			changeRootColors(theme);
 			
 			const loader = new Promise((resolve, reject)=> {
 			
