@@ -311,10 +311,11 @@ define({
 				
 				for ( z= 0 ; z< forecasts.length; z++){
 					if (forecasts[z].date == formatDate(fo.date) ){
-						if (formatDate(fo.date) == formatDate(new Date())){
+						/*if (formatDate(fo.date) == formatDate(new Date()) ){
 							forecasts[z].forecasts.push(fo);
 						}
-						else if (fo.date.getHours() >= 6 && fo.date.getHours()<= 22){
+						else */
+						if (fo.date.getHours() >= 8 && fo.date.getHours()<= 22){
 							forecasts[z].forecasts.push(fo);
 						}
 						
@@ -335,7 +336,24 @@ define({
 	
 		    return [year, month, day].join('-');
 		}
-		
+		function getWeatherHtml(){
+			//document.getElementById('overflower').innerHTML = '';
+			
+			
+			let weather = document.createElement('div');
+			let overflower = document.createElement('div');
+			weather.setAttribute ('id','weather');
+			weather.className = 'off';
+			weather.setAttribute('augmented-ui', 'tl-clip tr-clip bl-clip br-clip b-clip-x t-clip-x l-clip-y r-clip-y exe');
+			overflower.setAttribute ('id','overflower');
+			
+			forecasts.forEach(function(ev){
+				overflower.appendChild( ev.processHtml());
+			});
+			
+			weather.appendChild(overflower);
+			return weather;
+		}
 		
 		/**
 		 * Registers event listeners.
@@ -381,7 +399,8 @@ define({
 			setChangeListener : setChangeListener,
 			isWeatherFound : isWeatherFound,
 			isForecastFound: isForecastFound,
-			getForecast: getForecast
+			getForecast: getForecast,
+			getWeatherHtml:getWeatherHtml
 		};
 	}
 

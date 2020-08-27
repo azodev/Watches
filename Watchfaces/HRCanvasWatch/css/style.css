@@ -5,7 +5,7 @@
   box-sizing: border-box;
 }
 :root {
-	--color1: rgb(38,55,180); 
+	--color1: rgb(24,82,129); 
 	--color2: rgb(192,221,243);
 }
 img {
@@ -57,9 +57,7 @@ html, body {
     width: 100%;
     height: 100%;
     z-index: 2;
-/*    -webkit-transform3d: translate(0,0,0);
-    -moz-transform3d: translate(0,0,0);
-    transform3d: translate(0,0,0);*/
+
 }
 #canvas-final {
     position: absolute;
@@ -93,7 +91,7 @@ html, body {
     height: 100%;
     overflow:hidden;
 }
-#calendar{
+#calendar, #weather{
 	position: absolute;
 	width: 290px;
   	height: 260px;
@@ -113,6 +111,12 @@ html, body {
   --aug-t-width: 60%;
   --aug-b-height: 5px;
   --aug-t-height: 5px;
+  
+  --aug-l-height: 60%;
+  --aug-r-height: 60%;
+  --aug-l-width: 3px;
+  --aug-r-width: 3px;
+  
   --aug-bl: 20px;
   --aug-tl: 20px;
   --aug-br: 20px;
@@ -123,7 +127,7 @@ html, body {
     /*transform: perspective(700px) rotateY(0deg); */
 }
 
-#calendar.off {
+#calendar.off, #weather.off {
 	
 	transform: perspective(700px) rotateY(0deg) translateY(50px) translateX(60px) scale(0.35); 
 	opacity:0;
@@ -132,8 +136,11 @@ html, body {
 	transition-timing-function: ease-in;
 
 }
+ #weather.off {
+ 	transform: perspective(700px) rotateY(0deg) translateY(50px) translateX(-60px) scale(0.35); 
+ }
 
-#calendar.on {
+#calendar.on, #weather.on {
 	
 	transform: perspective(700px) rotateY(0deg) ; 
 	transition-property: opacity, transform;
@@ -192,9 +199,62 @@ html, body {
 	transition: --aug-inset-bg 0.2s ease, color 0.2s ease; 
 }
 
+#weather .forecast {
 
-
-
+	position: relative;
+	padding: 5px;
+	margin: 5px auto;
+	--aug-inset: 3px;
+	--aug-border: 2px;
+	--aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
+	background-color:transparent; 
+	--aug-tl: 5px;
+	--aug-br: 5px;
+	--aug-bl: 10px;
+	--aug-tr: 10px;
+	z-index:12;
+	min-height: 83px;
+	width: 97%;
+	color:white;
+	overflow:hidden;
+	transition: --aug-inset-bg 0.2s ease, color 0.2s ease; 
+}
+#weather .forecast .block {
+	padding: 3px;
+	position: relative;
+	float:left;
+	margin: 2px 2px;
+	height: 70px;
+	width: 46px;
+	--aug-tl: 5px;
+	--aug-br: 5px;
+	--aug-bl: 5px;
+	--aug-tr: 5px;
+	--aug-inset: 2px;
+	--aug-inset-bg: rgba(0, 0, 0, 0.30);
+	--aug-border: 1px;
+	--aug-border-bg: linear-gradient(to right, var(--color2), var(--color1)); 
+	background-color:transparent; 
+	text-align:center;
+}
+#weather .forecast .block .hour, #weather .forecast .block .temp {
+	position: relative;
+	width: 40px;
+	height: 5px;
+	font-size:16px;
+	line-height:16px;
+	font-family:FutureNow;
+	color:#FFFFFF;
+}
+#weather .forecast .block .icon {
+	position: relative;
+	width: 40px;
+	height: 42px;
+	font-size:38px;
+	line-height:38px;
+	font-family: artill_clean_icons;
+	color: #FFFFFF;
+}
 
 #calendar .event.click {
     /*background-color: white;*/
@@ -255,7 +315,7 @@ html, body {
 	margin-left:55px;
 	font-size:14px;
 }
-#calendar .day{
+#calendar .day, #weather .day{
   /*background-color: rgba(0,255,255, 0.53);*/
   text-shadow: 0 0 10px #000;
   color: #ffffff;
@@ -282,6 +342,13 @@ html, body {
 #calendar .day_events  > .event ~ .event {
 	margin-top: 5px;
 }
+#weather .day_weather  > .forecast{
+	margin-top: -5px;
+}
+#weather .day_weather  > .forecast ~ .forecast {
+	margin-top: 5px;
+}
+
 @font-face {
     font-family: 'artill_clean_icons';
     src: url('../data/artill_clean_icons.otf');

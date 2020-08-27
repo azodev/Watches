@@ -163,8 +163,8 @@ define({
 		var heartRateDisplayed=true;
 		var holder = document.querySelector("#widget_holder");
 		var calendar = document.querySelector("#calendar");
-		var calendarOn = null;
-		
+		var widgetOn = null;
+		var widgetId = '';
 		var up = document.getElementById ('up');
 		var down = document.getElementById ('down');
 		var calendarY = 0;
@@ -182,15 +182,58 @@ define({
 			} else {
 				
 			}*/
+			if (canvas.getAttribute("data-dblclick") == null) {
+				canvas.setAttribute("data-dblclick", 1);
+                setTimeout(function () {
+                    if (canvas.getAttribute("data-dblclick") == 1) {
+                        console.log('-----------> single <-----------');
+                        handleSingleClick(canvas,ev);
+                    }
+                    canvas.removeAttribute("data-dblclick");
+                }, 300);
+            } else {
+            	canvas.removeAttribute("data-dblclick");
+            	console.log('-----------> double <-----------');
+            	handleDoubleClick(canvas,ev);
+            }
 			lastClickTimeStamp = currentClickTimeStamp;
-			handleSingleClick(canvas,ev);
+			
 		}
 
-		/*function handleDoubleClick(canvas,ev) {
-			
+		function handleDoubleClick(canvas,ev) {
+			clickPos = getMousePosition(canvas,ev);
 			console.log('handleDoubleClick');
+			if (wShape.isInSurface(clickPos,0) && !radialmenu.getOpen()  && weatherModel.isForecastFound() && !widgetFullScreenDiplayed){
+				canvasDrawer.startFade();
+				let weather = weatherModel.getWeatherHtml();
+				holder = canvasDrawer.processWidgetHtml(weather);
+				
+				console.log('weather opening');
+				
+				
+				setClassAndWaitForTransition(holder,'on','opacity').then(function () {
+					console.log('transition holder');
+					//holder.setAttribute('class', 'on');
+					
+					
+					setClassAndWaitForTransition(weather,'on','opacity').then(function () {
+						console.log('transition weather');
+						
+						//calendar.setAttribute('class', 'on');
+						//holder.setAttribute('class', 'on');  
+						widgetId = "#weather";
+						setTimeout(function(){
+							widgetFullScreenDiplayed = true;
+						},100);
+						
+						setCloseWidgetAction(weather,closeWidget,'#weather');
+					});
+		            
+		            
+		        });
+			}
 			
-		}*/
+		}
 		function changeRootColors(theme){
 			console.log(theme);
 			let sheet  = document.styleSheets[1];
@@ -211,7 +254,7 @@ define({
 			case 'ice':
 				//sheet.deleteRule(1);
 				//sheet.insertRule(":root{--color1:blue;--color2:cyan;}",1); 
-				document.querySelector(":root").style.setProperty('--color1', 'rgb(38,55,180)');
+				document.querySelector(":root").style.setProperty('--color1', 'rgb(24,82,129)');
 				document.querySelector(":root").style.setProperty('--color2', 'rgb(192,221,243)');
 				break;
 			default:
@@ -233,8 +276,8 @@ define({
 				
 				radialmenu.setOpen();
 			}
-			else if (wShape.isInSurface(clickPos,0) && !radialmenu.getOpen()  ){
-				
+			else if (wShape.isInSurface(clickPos,0) && !radialmenu.getOpen()  && weatherModel.isForecastFound()){
+				 
 				if (forecastMode){
 					forecastDisplayed = false;
 				}
@@ -243,12 +286,35 @@ define({
 				}
 				animateWeatherSection();
 			}
-			else if (calendarShape.isInSurface(clickPos,0) && !forecastDisplayed && !radialmenu.getOpen() ){
+			else if (calendarShape.isInSurface(clickPos,0) && !forecastDisplayed && !radialmenu.getOpen() && !widgetFullScreenDiplayed){
 				console.log('Click fade');
 				canvasDrawer.startFade();
 				calendar = calendarModel.getCalendarHtml();
 				holder = canvasDrawer.processWidgetHtml(calendar);
 				
+				
+				
+				
+				setClassAndWaitForTransition(holder,'on','opacity').then(function () {
+					console.log('transition holder');
+					//holder.setAttribute('class', 'on');
+					
+					
+					setClassAndWaitForTransition(calendar,'on','opacity').then(function () {
+						console.log('transition calendar');
+						
+						//calendar.setAttribute('class', 'on');
+						//holder.setAttribute('class', 'on');
+						widgetId = "#calendar";
+						setTimeout(function(){
+							widgetFullScreenDiplayed = true;
+						},100);
+						
+						setCloseWidgetAction(calendar,closeWidget,'#calendar');
+					});
+		            
+		            
+		        });
 				document.querySelectorAll("#calendar .event").forEach(function (element){
 					element.addEventListener('click', function(e) {
 						console.log('click event');
@@ -261,41 +327,24 @@ define({
 				});
 				
 				
-				setClassAndWaitForTransition(holder,'on','opacity').then(function () {
-					console.log('transition holder');
-					//holder.setAttribute('class', 'on');
-					
-					
-					setClassAndWaitForTransition(calendar,'on','opacity').then(function () {
-						console.log('transition calendar');
-						
-						//calendar.setAttribute('class', 'on');
-						//holder.setAttribute('class', 'on');  
-						setTimeout(function(){
-							widgetFullScreenDiplayed = true;
-						},100);
-						
-						setCloseWidgetAction(calendar,closeCalendarMenu);
-					});
-		            
-		            
-		        });
-				
-				
 			  	
 			}
 			else if (hrShape.isInSurface(clickPos,5) && !radialmenu.getOpen()  ){
 				
 				tizen.application.launch("com.samsung.shealth", null,null);
+				
+				
 			}
 			
 		}
-		function setCloseWidgetAction (node,closeF){
+		function setCloseWidgetAction (node,closeF,itemId){
 			node.addEventListener('click', function(e) {
 				 if (e.target !== this && e.target != document.querySelector("#overflower"))
 					    return;
 				canvasDrawer.startShow();
-				closeF();
+				widgetId = null;
+				closeF(itemId);
+				
 			}); 
 			
 		}
@@ -460,8 +509,8 @@ define({
 				//document.querySelector("#calendar.on").style.opacity=1;
 				//calendar = document.querySelector("#calendar.on");
 				//if (calendarOn.style.opacity < 1) calendarOn.style.opacity = 1;
-				if (calendarOn == null) calendarOn = document.querySelector("#calendar.on");
-				calendarOn.style.transform =    
+				if (widgetOn == null && widgetId !=null) widgetOn = document.querySelector(widgetId+".on");
+				widgetOn.style.transform =    
 					"perspective(700px) rotateX(" + -deg.x + "deg) " +    
 					" rotateY(" + deg.y + "deg)";
 					
@@ -1094,6 +1143,44 @@ define({
 				
 	      // });
 		}
+		function closeWidget(itemId){
+			if (widgetFullScreenDiplayed){
+					
+				
+				widgetFullScreenDiplayed = false;
+				
+				let item = document.querySelector(itemId);
+				holder = document.querySelector("#widget_holder");
+				
+				
+				if (document.querySelector(itemId+".on") != null)	{
+					if (itemId == '#calendar'){
+						document.querySelector(itemId+".on").style.transform =    "perspective(700px) rotateY(0deg) translateY(50px)  translateX(60px)  scale(0.35)";
+					}
+					else if (itemId == '#weather'){
+						document.querySelector(itemId+".on").style.transform =    "perspective(700px) rotateY(0deg) translateY(50px)  translateX(-60px)  scale(0.35)";
+					}
+					
+				}
+					
+				
+				
+					setClassAndWaitForTransition(item,'off','opacity').then(function () {
+						console.log('transition widget');
+						
+						widgetOn = null;
+						setClassAndWaitForTransition(holder,'','opacity').then(function () {
+							//calendar.setAttribute('class', 'off');
+							console.log('transition holder');
+							
+							//if (document.querySelector("#calendar.on") != null)	document.querySelector("#calendar.on").style.transform = 	"perspective(700px) rotateY(0deg) ";
+							
+							canvasDrawer.clearWidgetHtml(holder,item);
+							
+						});
+					});
+			}
+		}
 		function bindEvents() {
 			document.getElementById('canvas-final').addEventListener('click', function(e) {
 				handleClick(this,e);
@@ -1129,7 +1216,7 @@ define({
 					if (radialmenu.getOpen()){
 						radialmenu.closeMenu();
 					}
-					closeCalendarMenu();
+					closeWidget(widgetId);
 					activateMode("Ambient");
 				} else {
 					// Rendering normal case
@@ -1149,7 +1236,7 @@ define({
 						if (radialmenu.getOpen()){
 							radialmenu.closeMenu();
 						}
-						closeCalendarMenu();
+						closeWidget(widgetId);
 						activateMode("Ambient");
 						
 					} else {
@@ -1162,7 +1249,7 @@ define({
 					if (radialmenu.getOpen()){
 						radialmenu.closeMenu();
 					}
-					closeCalendarMenu();
+					closeWidget(widgetId);
 					if (isAmbientMode !== true) {
 						//event.fire ('hidden','clearScreen');
 						//canvasBackground.context.clearRect(0, 0, canvasBackground.context.canvas.width, canvasBackground.context.canvas.height);

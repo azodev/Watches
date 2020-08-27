@@ -20,57 +20,27 @@ class ForecastDay {
 	}
 	processHtml(){
 		let i = 0;
-		let day_events = document.createElement('div');
-		day_events.className = 'day_events';
+		let block;
+		let day_weather = document.createElement('div');
+		day_weather.className = 'day_weather';
 		let day = document.createElement('div');
-		let event = null;
-		let dates = null;
-		let start =null;
-		let end = null;
-		let title= null, location = null;
+		let forecast = null;
 		day.className = 'day';
 		day.setAttribute('augmented-ui', 'tl-clip tr-clip exe');
 		day.innerHTML  = this.getDateToString();
-		day_events.appendChild(day);
-		for (i = 0 ; i< this.events.length ; i++){
-			event = document.createElement('div');
-			event.className = 'event';
-			if (i==0){
-				event.setAttribute('augmented-ui', 'tr-clip br-round bl-clip  exe');
-			}
-			else {
-				event.setAttribute('augmented-ui', 'tl-round tr-clip  bl-clip br-round exe');
-			}
-			dates =document.createElement('div');
-			dates.className = (this.events[i].isFullDay())?'dates fd':'dates';
-			dates.setAttribute('augmented-ui', 'tl-round tr-clip  bl-clip br-round exe');
-			if (!this.events[i].isFullDay()){
-				start = document.createElement('span');
-				start.className = 'start';
-				start.innerHTML =  this.events[i].getTimefromDate(this.events[i].startDate);
-				end = document.createElement('span');
-				end.className = 'end'; 
-				end.innerHTML =  this.events[i].getTimefromDate(this.events[i].endDate);
-				dates.appendChild(start);
-				dates.appendChild(end);
-			}
-			
-			
-			title = document.createElement('div');
-			title.className = 'title';
-			title.innerHTML = this.events[i].title;
-			location = document.createElement('div');
-			location.className = 'location';
-			location.innerHTML = (this.events[i].location != null)?this.events[i].location:'';
-			
-			
-			event.appendChild(dates);
-			event.appendChild(title);
-			event.appendChild(location);
-			day_events.appendChild(event);
-		}
+		day_weather.appendChild(day);
+		forecast = document.createElement('div');
+		forecast.className = 'forecast';
+		forecast.setAttribute('augmented-ui', 'tr-clip br-round bl-clip  exe');
 		
-		//document.getElementById('overflower').appendChild(day_events);
+		
+		for (i = 0 ; i< this.forecasts.length ; i++){
+			block = this.forecasts[i].processHtml();
+			forecast.appendChild(block);
+		}
+		day_weather.appendChild(forecast);
+		return day_weather;
+		
 		
 	}
 	

@@ -13,9 +13,6 @@ class vForecast {
 		return this.date;
 	}
 	getMapping(id, dayNightBool) {
-		if (!weatherFound){
-			return DEFAULT_ICON;
-		}
 		if (this.mapping.map[id]) {
 			if (!dayNightBool) {
 				if (this.mapping.map[id+'n']){
@@ -27,6 +24,26 @@ class vForecast {
 		} else {
 			return DEFAULT_ICON;
 		}
+	}
+	processHtml(){
+		let block =document.createElement('div');
+		block.className = 'block';
+		let hour = document.createElement('div');
+		hour.className = 'hour';
+		let icon = document.createElement('div');
+		icon.className = 'icon';
+		let temp = document.createElement('div');
+		temp.className = 'temp';
+		
+		hour.innerHTML =  this.date.getHours()+'h';
+		icon.innerHTML = this.getMapping(this.weather.id, this.day);
+		temp.innerHTML = Math.round(this.main.temp) + "°";
+		block.appendChild(hour);
+		block.appendChild(icon);
+		block.appendChild(temp);
+		block.setAttribute('augmented-ui', 'tl-clip tr-clip  bl-clip br-clip exe');
+		
+		return block;
 	}
 
 }
