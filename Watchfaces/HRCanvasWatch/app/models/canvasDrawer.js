@@ -964,8 +964,6 @@ define({
 			
 		}
 		function clearWidgetHtml(widget_holder,contentNode){
-			console.log(widget_holder);
-			console.log(contentNode);
 			widget_holder.removeChild(contentNode);
 			
 		}
