@@ -163,8 +163,9 @@ define({
 				event.fire ('error','error onDistanceChange');
 			}
 		}
-		function onUpdateTriggered (e){
+		function onUpdateTriggered (){
 			coords = locationModel.getData();
+			
 			if (locationModel.getPositionAquiered() === true){
 				if (coords !== 'undefined' && coords.latitude !== null) {
 					doUpdate();
@@ -188,58 +189,9 @@ define({
 				}
 			}
 			console.log('doUpdate');
-			//updateWeather();
 			updateWeatherP();
 		}  
-		/**
-		 * Updates weather icon, status and text.
-		 * 
-		 * @public
-		 */
-		function updateWeather() {
-			/**
-			 * xmlHttp - XMLHttpRequest object for get information about weather
-			 */
-
-			xmlHttp = new XMLHttpRequest();
-
-			xmlHttp.overrideMimeType("application/json");
-			xmlHttp.onreadystatechange = function() {
-				if (this.readyState === XMLHttpRequest.DONE) {
-					if (this.status === 0 || this.status === 200) {
-						if (xmlHttp.responseText) {
-							// Parses responseText to JSON
-							weatherInform = JSON.parse(this.responseText);
-
-							now = Math.round(Date.now() / 1000);
-							
-							day = (now >= weatherInform.sys.sunrise && now <= weatherInform.sys.sunset) ? true : false;
-							// Gets icon code from information
-							weatherInform.day = day;
-							weatherInform.lastWeatherCallDate = now;
-							//console.debug(weatherInform);
-							// Gets weather string from information
-							weatherFound = true;
-							event.fire('found', weatherInform);
-							console.log('Update Weather: Found');
-						} else {
-							console.error("Status de la réponse: %d (%s)", this.status, this.statusText);
-							event.fire ('error',"Status de la réponse: "+this.statusText);
-						}
-					}
-					else {
-						console.error('Update Weather: error');
-						event.fire ('error',"Status de la réponse: "+this.statusText +"  " +this.status);
-					}
-				}
-
-			};
-			url = API_URL_WEATHER + outArray.join('&');
-			xmlHttp.open("GET", url, true);
-
-			xmlHttp.send(null);
-			console.log('weather request done');
-		}
+		
 		async function fetchWeather() {
 			url = API_URL_WEATHER + outArray.join('&');
 			let response = await fetch(url);
@@ -267,6 +219,7 @@ define({
 				// Gets weather string from information
 				weatherFound = true;
 				event.fire('found', weatherInform);
+				updateForecastP();
 				console.log('Update Weather: Found');
 				  
 				}).catch(e => {
@@ -287,7 +240,7 @@ define({
 		function updateForecastP(){
 			fetchForecast().then((json) => {
 				forecastInform = json;
-				
+				vForecasts= [];
 				//day = (now >= forecastInform.sys.sunrise && now <= forecastInform.sys.sunset) ? true : false;
 				// Gets icon code from information
 				//weatherInform.day = day;
@@ -322,72 +275,7 @@ define({
 		
 		
 		
-		function updateForecast() {
-			/**
-			 * xmlHttp - XMLHttpRequest object for get information about weather
-			 */
-
-			xmlHttp = new XMLHttpRequest();
-
-			xmlHttp.overrideMimeType("application/json");
-			xmlHttp.onreadystatechange = function() {
-				if (this.readyState === XMLHttpRequest.DONE) {
-					if (this.status === 0 || this.status === 200) {
-						if (xmlHttp.responseText) {
-							// Parses responseText to JSON
-							forecastInform = JSON.parse(this.responseText);
-
-							
-							//day = (now >= forecastInform.sys.sunrise && now <= forecastInform.sys.sunset) ? true : false;
-							// Gets icon code from information
-							//weatherInform.day = day;
-							
-							var sunriseHour = dateHelper.roundMinutes(new Date( weatherInform.sys.sunrise*1000)).getHours();
-							var sunsetHour = dateHelper.roundMinutes(new Date( weatherInform.sys.sunset*1000)).getHours();
-							for (var i = 0; i < forecastInform.list.length ; i++ ){
-								hour = new Date( forecastInform.list[i].dt * 1000).getHours();
-								
-								day = (
-										hour >= sunriseHour
-										&& hour < sunsetHour
-										) ? true : false;
-								
-								forecastInform.list[i].day = day;
-								vForecasts.push(new vForecast(forecastInform.list[i]));
-							}
-							forecastInform.lastWeatherCallDate = now;
-							console.log(vForecasts);
-							buildDaysForecasts();
-							 
-							
-							//console.debug(forecastInform);
-							// Gets weather string from information
-							
-							
-							
-							forecastFound = true;
-							event.fire('forecast_found', forecastInform);
-							console.log('Update forecast: Found');
-						} else {
-							console.error("Status de la réponse: "+this.status+" "+this.statusText );
-							event.fire ('error',"Status de la réponse forcast: "+this.statusText +"  " +this.status);
-						}
-					}
-					else {
-						console.error('Update forecast: error');
-						event.fire ('error',"Status de la réponse forcast2: "+this.statusText +"  " +this.status);
-					}
-				}
-
-			};
-			// event.fire('error', API_URL_WEATHER+outArray.join('&'));
-			// console.error(API_URL_WEATHER+outArray.join('&'));
-			url = API_URL_FORECAST + outArray.join('&');
-			xmlHttp.open("GET", url, true);
-
-			xmlHttp.send(null);
-			console.log('forecast request done');
-		}
+		
 
 		/**
 		 * Update weather and air pollution information. If can't get location
@@ -465,12 +353,15 @@ define({
 				'models.location.found' : function() {
 					onPositionFound(true);
 				},
-				'models.weather.found' : updateForecastP,
+				//'models.weather.found' : updateForecastP,
 				//'models.location.distanceChange' : onDistanceChange,
-				'views.main.updateWeather':onUpdateTriggered,
+				'views.canvas.updateWeather': function(e) {
+					console.log('auto weatherUpdateTriggered');
+					onUpdateTriggered();
+				},
 				'views.radial.update': function(e) {
 					console.log('weatherUpdateTriggered');
-					onUpdateTriggered(e);
+					onUpdateTriggered();
 				}
 			});
 
@@ -483,7 +374,6 @@ define({
 		return {
 			init : init,
 			start : start,
-			updateWeather : updateWeather,
 			getWeatherIcon : getWeatherIcon,
 			getWeatherText : getWeatherText,
 			getMapping : getMapping,

@@ -108,7 +108,7 @@ define({
 
 		var pressure = 0;
 		var altitude = 0;
-		var locationInterval = null, pedometerInterval = null, hrInterval = null, weatherInterval = null, hrIntervalStop = null, pressureInterval = null;
+		var locationInterval = null, pedometerInterval = null, hrInterval = null, weatherInterval = null, hrIntervalStop = null, pressureInterval = null, updateEvents =null, filterEvents = null;
 		var errorMsg = '';
 		var animTimeout, animRequest;
 		
@@ -249,21 +249,31 @@ define({
 				calendar = calendarModel.getCalendarHtml();
 				holder = canvasDrawer.processWidgetHtml(calendar);
 				
+				document.querySelectorAll("#calendar .event").forEach(function (element){
+					element.addEventListener('click', function(e) {
+						console.log('click event');
+						setClassAndWaitForTransition(element,'event click','color').then(function () {
+							console.log('transition event');
+							element.setAttribute('class', 'event');
+						});
+							
+					});
+				});
+				
+				
 				setClassAndWaitForTransition(holder,'on','opacity').then(function () {
 					console.log('transition holder');
-					holder.setAttribute('class', 'on');
-					
-					
-					
-					
+					//holder.setAttribute('class', 'on');
 					
 					
 					setClassAndWaitForTransition(calendar,'on','opacity').then(function () {
 						console.log('transition calendar');
 						
-						calendar.setAttribute('class', 'on');
-						holder.setAttribute('class', 'on');  
-						widgetFullScreenDiplayed = true;
+						//calendar.setAttribute('class', 'on');
+						//holder.setAttribute('class', 'on');  
+						setTimeout(function(){
+							widgetFullScreenDiplayed = true;
+						},100);
 						
 						setCloseWidgetAction(calendar,closeCalendarMenu);
 					});
@@ -1381,9 +1391,14 @@ define({
 			},intervals.weather
 			);	
 			
-			window.setInterval(function(e) {
+			filterEvents = window.setInterval(function(e) {
 				event.fire('filterEvents',e);
 			},300000
+			);	
+			updateEvents = window.setInterval(function(e) {
+				let curDate = new Date();
+				if (curDate.getHours() >= 7 && curDate.getHours() <= 22) 	event.fire('updateEvents',e);
+			},600000
 			);	
 			
 			

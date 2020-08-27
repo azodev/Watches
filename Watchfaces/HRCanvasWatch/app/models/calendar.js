@@ -54,7 +54,6 @@ define({
 		var totalCall;
 		var e, dup;
 		var BreakException = {};
-		var credentials= window.btoa('anthony:DoubleSMB01.');
 		var myEvents = [];
 		var template = {'day':null,'events':null};
 		/**
@@ -110,6 +109,9 @@ define({
 			myEvents.forEach(function(ev){
 				overflower.appendChild( ev.processHtml());
 			});
+			
+			
+			
 			calendar.appendChild(overflower);
 			return calendar;
 		}
@@ -123,9 +125,9 @@ define({
 		 */
 		function bindEvents() {
 			event.on({
-				'views.radial.update' : function() {
-					accessCalendars();
-				},
+				'views.radial.update' : accessCalendars,
+					
+				'views.canvas.updateEvents' : accessCalendars,
 				'views.canvas.filterEvents' : handleFilterForFinishedEvents
 			});
 		}
@@ -143,7 +145,7 @@ define({
 		function accessCalendars(){
 			
 			nowDate = new Date();
-			
+			console.log('Fetch calendars');
 			doPromise('alten').then( function (){
 				doPromise('gmail').then(function(){
 					handleFilterForFinishedEvents();
@@ -180,48 +182,7 @@ define({
 			
 			
 		}
-		/*function fetchNextCloudCalendar(){
-			now = Date.now()/1000 ;
-			start = Math.round((now-3600)+y); //Math.round((now - 86400));
-			//console.log(start);
-			end = Math.round((now + 86400)+y);
-
-			let uri = 'https://cloud.anthony-zorzetto.fr/remote.php/dav/calendars/anthony/gmail?export&accept=jcal&expand=1&start='+start+'&end='+end+'&rand='+Math.random();
-            
-            let h = new Headers();
-            h.append('Accept', 'application/json');
-            let encoded = window.btoa('anthony:DoubleSMB01.');
-            let auth = 'Basic ' + encoded;
-            h.append('Authorization', auth );
-            console.log( auth );
-            
-            let req = new Request(uri, {
-                method: 'GET',
-                headers: h,
-                credentials: 'include'
-            });
-            //credentials: 'same-origin'
-            
-            fetch(req)
-            .then( (response)=>{
-                if(response.ok){
-                    return response.json();
-                }else{
-                	console.log(response);
-                    throw new Error('BAD HTTP stuff');
-                }
-            })
-            .then( (jsonData) =>{
-                console.log(jsonData);
-               
-            })
-            .catch( (err) =>{
-                console.log('ERROR:', err.message);
-            });
-			
-			
-		}
-		*/
+		
 		function wasRequestSuccessful(status) {
 			return status >= 200 && status < 300;
 		}
@@ -290,20 +251,11 @@ define({
 			
 		}
 		function handleFilterForFinishedEvents(){
+			console.log('Filter events');
 			vEvents = vEvents.filter (filterFinishedVEvents);
 			buildDaysEvents();
 			//fillCalendar();
-			document.querySelectorAll("#calendar .event").forEach(function (element){
-				console.log('event onclick creation');
-				element.addEventListener('click', function(e) {
-					console.log('click event');
-					setClassAndWaitForTransition(element,'event click','color').then(function () {
-						console.log('transition event');
-						element.setAttribute('class', 'event');
-					});
-						
-				});
-			});
+			
 		}
  
 		function filterFinishedVEvents(event){ 

@@ -102,9 +102,8 @@ html, body {
 
     margin-left: 35px ; 
     margin-top: 50px;
-    /*transition: opacity 1s ease, transform 1s ease;*/
     
-    /*visibility: hidden;*/
+    
   --aug-border: 2px;
   --aug-inset: 4px;
   --aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
@@ -118,7 +117,7 @@ html, body {
   --aug-tl: 20px;
   --aug-br: 20px;
   --aug-tr: 20px; 
-     
+     will-change: transform;
    scroll-behavior: smooth;
     
     /*transform: perspective(700px) rotateY(0deg); */
@@ -129,7 +128,7 @@ html, body {
 	transform: perspective(700px) rotateY(0deg) translateY(50px) translateX(60px) scale(0.35); 
 	opacity:0;
 	transition-property: opacity, transform;
-	transition-duration: 0.5s;
+	transition-duration: 0.3s; 
 	transition-timing-function: ease-in;
 
 }
@@ -138,7 +137,7 @@ html, body {
 	
 	transform: perspective(700px) rotateY(0deg) ; 
 	transition-property: opacity, transform;
-	transition-duration: 0.5s;
+	transition-duration: 0.3s;
 	transition-timing-function: ease-in;
 	opacity:1;
 }

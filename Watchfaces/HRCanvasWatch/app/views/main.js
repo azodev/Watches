@@ -166,7 +166,7 @@ define({
 						content : message.detail,
 						images: {
 					        /* Path to the notification icon */
-					        iconPath: '/icon.png'
+					        iconPath: './icon.png'
 					    }
 					};
 					// Creates notification object.

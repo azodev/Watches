@@ -256,7 +256,7 @@ define({
         	setTimeout(function(){
 	        	svgMenu.darkenButton(item.id,item.id);
 	        	closeMenu();
-        	},200);
+        	},100);
         }
         function closeMenu(){
         	isOpen = false;
