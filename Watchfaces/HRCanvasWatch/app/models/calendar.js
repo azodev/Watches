@@ -286,10 +286,6 @@ define({
 			}
 			
 			if (ts-old_timestampF >=  intervalF ){
-				console.log(old_timestampF);
-				console.log(ts);
-				console.log(ts-old_timestampF);
-				console.log(intervalF);
 				old_timestampF = ts;
 				
 				handleFilterForFinishedEvents();
