@@ -109,6 +109,7 @@ define({
         	var altitude = null;
         	var temperature = 20;
         	var isEnable = false;
+        	var old_timestamp = null, interval, navStart = performance.timing.navigationStart;
         	
         
         
@@ -298,6 +299,11 @@ define({
         	if (!isEnable) start();
         	
         }
+        
+        function handleUpdate(timestamp){
+			
+		}
+        
         /**
          * Initializes module.
          *
@@ -343,7 +349,19 @@ define({
                 }
             }
         }
-
+        function setIntervalUpdate(i){
+			interval = i;
+		}
+		function handleUpdate(ts){
+			if (old_timestamp == null){
+				old_timestamp = ts;
+			}
+			
+			if (ts-old_timestamp >=  interval ){
+				old_timestamp = ts;
+				start();
+			}
+		}
         return {
             init: init,
             start: start,
@@ -354,7 +372,9 @@ define({
             getAverageSensorValue: getAverageSensorValue,
             getSensorValue: getSensorValue,
             setOptions: setOptions,
-            getAltitude: getAltitude
+            getAltitude: getAltitude,
+            setIntervalUpdate:setIntervalUpdate,
+			handleUpdate:handleUpdate
         };
     }
 

@@ -74,43 +74,11 @@ define({
 		var newDir, newFile;
 
 		var notification, notificationDict;
-/*
-		const CLICK_INTERVAL = 500;
-		var lastClickTimeStamp = null, currentClickTimeStamp = null;
-		function handleClick(ev) {
-			currentClickTimeStamp = Date.now();
-			if (lastClickTimeStamp !== null && currentClickTimeStamp - lastClickTimeStamp <= CLICK_INTERVAL) {
-				handleDoubleClick(ev);
-			} else {
-				handleSingleClick(ev);
-			}
-			lastClickTimeStamp = currentClickTimeStamp;
-		}
-
-		function handleDoubleClick(ev) {
-
-			triggerCanvasDoubleClick(ev);
-		}
-		function handleSingleClick(ev) {
-			console.log('handleSingleClick');
-		}
-		function triggerCanvasDoubleClick(e) {
-			event.fire('triggerCanvasDoubleClick', e);
-		}
-*/
 		function bindEvents() {
-			// alertElement.addEventListener('popuphide', onPopupHide);
-			// alertOk.addEventListener('click', onOkClick);
-			/*
-			document.getElementById('canvas-layout').addEventListener('click', function() {
-				handleClick(this);
-			});*/
 			window.addEventListener('mousedown', function(e) {
 		        e.preventDefault();            
 		    })
 			event.on({
-				//'models.location.error' : postNotification,
-				// 'models.location.found': postNotification,
 				'models.location.distanceChange' : postNotification,
 				'models.location.log' : postNotification,
 				'models.motion.error' : postNotification,
@@ -118,6 +86,7 @@ define({
 				'views.canvas.log' : postNotification,
 				'models.weather.log' : postNotification,
 				'models.weather.error' : postNotification,
+				'models.calendar.log' : postNotification,
 				'models.calendar.error' : postNotification
 
 			});
@@ -129,48 +98,19 @@ define({
 		 * 
 		 * @private
 		 */
-		function onPopupHide(ev) {
-			// app.exit();
-		}
-		/**
-		 * Shows alert popup.
-		 * 
-		 * @private
-		 * @param {string}
-		 *            message Message.
-		 */
-		function openAlert(message) {
-
-			if (message && message.detail && message.detail !== 1) {
-				write('\n' + message.detail);
-				// alertMessage.innerHTML = 'Alerte';
-			} else {
-				// alertMessage.innerHTML = '';
-			}
-			// tau.openPopup(alertElement);
-		}
-		/**
-		 * Handles click event on OK button.
-		 * 
-		 * @private
-		 */
-		function onOkClick(ev) {
-			// tau.closePopup();
-		}
 		function postNotification(message) {
 
 			try {
 				if (message && message.detail && message.detail !== 1) {
 					// Sets notification dictionary.
+					let date = new Date();
+					
+					
 					notificationDict = {
-						content : message.detail,
-						images: {
-					        /* Path to the notification icon */
-					        iconPath: './icon.png'
-					    }
+						content : message.detail+"\n"+date.toLocaleString('fr-FR', { timeZone: 'Europe/Paris' }),
 					};
 					// Creates notification object.
-					notification = new tizen.UserNotification("SIMPLE", "AZO Watch", notificationDict);
+					notification = new tizen.UserNotification("SIMPLE", "Particles", notificationDict);
 
 					// Posts notification.
 					tizen.notification.post(notification);
@@ -187,35 +127,7 @@ define({
 		 * @public
 		 */
 		function init() {
-			alertElement = document.getElementById('alert');
-			alertMessage = document.getElementById('alert-message');
-			alertOk = document.getElementById('alert-ok');
 			bindEvents();
-			// console.error(tizen.systeminfo.getCapabilities() );
-			/*var readPrivilege = "http://tizen.org/privilege/calendar.read";
-	        console.log("permission:" + JSON.stringify(tizen.ppm.checkPermission(readPrivilege)));
-	        if (tizen.ppm.checkPermission(readPrivilege) != "PPM_ALLOW") {
-	        	console.log("requesting permission");
-	        	  tizen.ppm.requestPermission(readPrivilege, readRPSuccess, readRPError);
-	    	} else {
-	    	  console.log("already allowed!");
-	    	}*/
-		}
-		function readRPSuccess(){
-			tizen.account.getAccounts(getAccountsSuccess, function(err){console.log(err)});
-		}
-		function readRPError(e){
-			 console.log(e);
-		}
-		function getAccountsSuccess(accounts) {
-		    var account = accounts[0];
-		    console.log(accounts);
-		    if (account) {
-		        /* New calendar can be created and added */
-		        myCalendar = new tizen.Calendar(account.id, 'remote calendar', 'TASK');
-		        tizen.calendar.addCalendar(myCalendar);
-		        console.log('New calendar created with ID=' + myCalendar.id);
-		    }
 		}
 		return {
 			init : init

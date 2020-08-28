@@ -56,6 +56,7 @@ define({
 		var BreakException = {};
 		var myEvents = [];
 		var template = {'day':null,'events':null};
+		var old_timestampF = null, old_timestampU = null, intervalF, intervalU, navStart = performance.timing.navigationStart;
 		/**
 		 * Returns last received motion data.
 		 * 
@@ -142,6 +143,7 @@ define({
 			
 			nowDate = new Date();
 			console.log('Fetch calendars');
+			event.fire('log','Fetch calendars');
 			doPromise('alten').then( function (){
 				doPromise('gmail').then(function(){
 					handleFilterForFinishedEvents();
@@ -183,7 +185,7 @@ define({
 			return status >= 200 && status < 300;
 		}
 		function doPromise(name){
-			let p1 = new Promise((resolve, reject) => {
+			let p1 = new Promise(function(resolve, reject)  {
 				
 				now = Date.now()/1000 ;
 				start = Math.round((now-3600)); //Math.round((now - 86400));
@@ -195,7 +197,7 @@ define({
 
 
 				
-				xhr.onreadystatechange = () => {
+				xhr.onreadystatechange =function () {
 					if (xhr.readyState !== 4) {
 						return;
 					}
@@ -219,9 +221,9 @@ define({
 					resolve(xhr.responseText);
 				};
 
-				xhr.onerror = () => reject('error');
+				xhr.onerror = function () {reject('error')};
 
-				xhr.onabort = () => reject('aborted');
+				xhr.onabort =function () {reject('aborted')};
 				xhr.send();
 			});
 			p1.then(handleResponse)
@@ -247,18 +249,48 @@ define({
 			
 		}
 		function handleFilterForFinishedEvents(){
-			console.log('Filter events');
-			vEvents = vEvents.filter (filterFinishedVEvents);
-			buildDaysEvents();
+			if (vEvents.length > 0){
+				console.log('Filter events');
+				event.fire('log','Filter events');
+				vEvents = vEvents.filter (filterFinishedVEvents);
+				buildDaysEvents();
+			}
+			
 			//fillCalendar();
 			
 		}
- 
+		function setIntervalUpdate(i){
+			intervalU = i;
+		}
+		function setIntervalFilter(i){
+			intervalF = i; 
+		}
+		function handleUpdate(ts){
+			if (old_timestampU == null){
+				old_timestampU = ts;
+			}
+			
+			if (ts-old_timestampU >=  intervalU ){
+				old_timestampU = ts;
+				let curDate = new Date();
+				if (curDate.getHours() >= 7 && curDate.getHours() <= 22) 	accessCalendars();
+			}
+			
+			
+		}
+		function handleFilter(ts){
+			if (old_timestampF == null){
+				old_timestampF = ts;
+			}
+			
+			if (ts-old_timestampF >=  intervalF ){
+				old_timestampF = ts;
+				handleFilterForFinishedEvents();
+			}
+			
+		}
 		function filterFinishedVEvents(event){ 
 			return   (nowDate <= event.endDate);
-		}
-		function createHtml(){
-			
 		}
 		function someCallback(e){
 			console.log(e);
@@ -269,7 +301,11 @@ define({
 			accessCalendars : accessCalendars,
 			hasVEvents : hasVEvents,
 			formatDate : formatDate,
-			getCalendarHtml:getCalendarHtml
+			getCalendarHtml:getCalendarHtml,
+			setIntervalUpdate:setIntervalUpdate,
+			setIntervalFilter:setIntervalFilter,
+			handleUpdate:handleUpdate,
+			handleFilter:handleFilter
 			
 		};
 	}

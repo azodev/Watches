@@ -232,8 +232,8 @@ html, body {
 	--aug-tr: 5px;
 	--aug-inset: 2px;
 	--aug-inset-bg: rgba(0, 0, 0, 0.30);
-	--aug-border: 1px;
-	--aug-border-bg: linear-gradient(to right, var(--color2), var(--color1)); 
+	/*--aug-border: 1px;
+	--aug-border-bg: linear-gradient(to right, var(--color2), var(--color1));*/ 
 	background-color:transparent; 
 	text-align:center;
 }
@@ -253,6 +253,18 @@ html, body {
 	font-size:38px;
 	line-height:38px;
 	font-family: artill_clean_icons;
+	color: #FFFFFF;
+}
+.lastcall{
+	width:90%;
+	position:relative;
+	
+	height: 16px;
+	margin: 5px 5%;
+	text-align:right;
+	font-size:16px;
+	line-height:16px;
+	font-family:FutureNow;
 	color: #FFFFFF;
 }
 

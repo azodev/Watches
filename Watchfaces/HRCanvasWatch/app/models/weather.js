@@ -62,6 +62,7 @@ define({
 		var weatherFound = false,forecastFound = false,hour;
 		var DEFAULT_ICON = '*';
 		var forecasts = [], vForecasts = [];
+		var old_timestamp= null, interval, navStart = performance.timing.navigationStart;
 
 		/**
 		 * Starts weather.
@@ -163,15 +164,17 @@ define({
 				event.fire ('error','error onDistanceChange');
 			}
 		}
-		function onUpdateTriggered (){
+		function onUpdateTriggered (message){
 			coords = locationModel.getData();
 			
 			if (locationModel.getPositionAquiered() === true){
 				if (coords !== 'undefined' && coords.latitude !== null) {
 					doUpdate();
+					event.fire('log', message);
 				} else {
 					console.error('error : W Cannot decode position');
 					//event.fire ('error','error onUpdateTriggered');
+					event.fire('log', 'error : W Cannot decode position');
 				}
 			}
 			
@@ -200,8 +203,6 @@ define({
 			    throw new Error('HTTP error! status: '+response.status);
 			  } else {
 				  return await response.json();
-			    c
-			   
 			  }
 		}
 		function updateWeatherP(){
@@ -224,6 +225,7 @@ define({
 				  
 				}).catch(e => {
 					console.log('There has been a problem with your fetch operation: ' + e.message);
+					event.fire('log', 'There has been a problem with your fetch w operation: ' + e.message);
 			});
 		}
 		async function fetchForecast() {
@@ -238,7 +240,7 @@ define({
 			  }
 		}
 		function updateForecastP(){
-			fetchForecast().then((json) => {
+			fetchForecast().then( function (json) {
 				forecastInform = json;
 				vForecasts= [];
 				//day = (now >= forecastInform.sys.sunrise && now <= forecastInform.sys.sunset) ? true : false;
@@ -258,8 +260,7 @@ define({
 					forecastInform.list[i].day = day;
 					vForecasts.push(new vForecast(forecastInform.list[i],mapping));
 				}
-				forecastInform.lastWeatherCallDate = now;
-				console.log(vForecasts);
+				forecastInform.lastWeatherCallDate = new Date();
 				buildDaysForecasts();
 				//console.debug(forecastInform);
 				// Gets weather string from information
@@ -267,9 +268,10 @@ define({
 				event.fire('forecast_found', forecastInform);
 				console.log('Update forecast: Found');
 				  
-				}).catch(e => {
-					console.error('Update forecast: error');
+				}).catch(function (e)  {
 					console.log('There has been a problem with your fetch operation: ' + e.message);
+					event.fire('log', 'There has been a problem with your fetch f operation: ' + e.message);
+					
 			});
 		}
 		
@@ -302,7 +304,8 @@ define({
 		
 		function buildDaysForecasts(){
 			forecasts = [];
-			let z = 0
+			let z = 0;
+			let date = new Date();
 			vForecasts.forEach(function(fo){
 				if (forecasts.map(function(o) { return o.date; }).indexOf(formatDate(fo.date)) == -1){
 					forecasts.push(new ForecastDay(formatDate(fo.date),[]));
@@ -311,10 +314,12 @@ define({
 				
 				for ( z= 0 ; z< forecasts.length; z++){
 					if (forecasts[z].date == formatDate(fo.date) ){
-						/*if (formatDate(fo.date) == formatDate(new Date()) ){
-							forecasts[z].forecasts.push(fo);
+						if (formatDate(fo.date) == formatDate(date) ){
+							if (fo.date.getHours() >= Math.max(date.getHours(),8) && fo.date.getHours()<= 23){
+								forecasts[z].forecasts.push(fo);
+							}
 						}
-						else */
+						else 
 						if (fo.date.getHours() >= 8 && fo.date.getHours()<= 22){
 							forecasts[z].forecasts.push(fo);
 						}
@@ -322,7 +327,6 @@ define({
 					}
 				}
 			});
-			console.log(forecasts);
 		}
 		function formatDate(date) {
 	        let month = '' + (date.getMonth() + 1);
@@ -345,8 +349,12 @@ define({
 			weather.setAttribute ('id','weather');
 			weather.className = 'off';
 			weather.setAttribute('augmented-ui', 'tl-clip tr-clip bl-clip br-clip b-clip-x t-clip-x l-clip-y r-clip-y exe');
-			overflower.setAttribute ('id','overflower');
+			overflower.setAttribute ('id','overflower');   //forecastInform.lastWeatherCallDate
+			let lastcall = document.createElement('div');
+			lastcall.className = 'lastcall';
+			lastcall.innerHTML = forecastInform.lastWeatherCallDate.toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
 			
+			overflower.appendChild(lastcall);
 			forecasts.forEach(function(ev){
 				overflower.appendChild( ev.processHtml());
 			});
@@ -375,11 +383,12 @@ define({
 				//'models.location.distanceChange' : onDistanceChange,
 				'views.canvas.updateWeather': function(e) {
 					console.log('auto weatherUpdateTriggered');
-					onUpdateTriggered();
+					
+					onUpdateTriggered('auto weatherUpdateTriggered');
 				},
 				'views.radial.update': function(e) {
 					console.log('weatherUpdateTriggered');
-					onUpdateTriggered();
+					onUpdateTriggered('radial weatherUpdateTriggered');
 				}
 			});
 
@@ -387,6 +396,20 @@ define({
 		function init() {
 			bindEvents();
 			decodeMapping();
+		}
+		function setIntervalUpdate(i){
+			interval = i;
+		}
+		function handleUpdate(ts){
+			if (old_timestamp == null){
+				old_timestamp = ts;
+			}
+			
+			if (ts-old_timestamp >=  interval ){
+				old_timestamp = ts;
+				onUpdateTriggered();
+			}
+			
 		}
 
 		return {
@@ -400,7 +423,10 @@ define({
 			isWeatherFound : isWeatherFound,
 			isForecastFound: isForecastFound,
 			getForecast: getForecast,
-			getWeatherHtml:getWeatherHtml
+			getWeatherHtml:getWeatherHtml,
+			onUpdateTriggered:onUpdateTriggered,
+			setIntervalUpdate:setIntervalUpdate,
+			handleUpdate:handleUpdate
 		};
 	}
 

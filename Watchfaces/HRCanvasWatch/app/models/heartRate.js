@@ -77,6 +77,7 @@ define({
 		};
 		var started = false;
 		var found = false;
+		var  old_timestamp= null, interval, navStart = performance.timing.navigationStart;
 		/**
 		 * Sets heart rate and time values received from sensor. Returns heart
 		 * rate data.
@@ -236,12 +237,28 @@ define({
 			heartRateSensor = (tizen && tizen.humanactivitymonitor) || (window.webapis && window.webapis.motion) || null;
 
 		}
+		function setIntervalUpdate(i){
+			interval = i;
+		}
+		function handleUpdate(ts){
+			if (old_timestamp == null){
+				old_timestamp = ts;
+			}
+			
+			if (ts-old_timestamp >=  interval ){
+				old_timestamp = ts;
+				start();
+			}
+			
+		}
 
 		return {
 			init : init,
 			start : start,
 			stop : stop,
-			getData : getData
+			getData : getData,
+			setIntervalUpdate:setIntervalUpdate,
+			handleUpdate:handleUpdate
 		};
 	}
 });

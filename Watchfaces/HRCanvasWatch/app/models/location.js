@@ -83,6 +83,7 @@ define({
 		};
 		var fallbackSensor =false;
 		var running = false;
+		var old_timestamp= null, interval, navStart = performance.timing.navigationStart;
 		/**
 		 * Returns last received motion data.
 		 * 
@@ -281,9 +282,21 @@ define({
 			event.on({
 				'views.radial.update' : triggerLocationUpdate
 			});
-
 		}
-
+		function setIntervalUpdate(i){
+			interval = i;
+		}
+		function handleUpdate(ts){
+			if (old_timestamp == null){
+				old_timestamp = ts;
+			}
+			
+			if (ts-old_timestamp >=  interval ){
+				old_timestamp = ts;
+				start();
+			}
+			
+		}
 		/**
 		 * Initializes the module.
 		 * 
@@ -304,7 +317,9 @@ define({
 			stop : stop,
 			getPositionAquiered : getPositionAquiered,
 			getData : getData,
-			setOptions : setOptions
+			setOptions : setOptions,
+			setIntervalUpdate:setIntervalUpdate,
+			handleUpdate:handleUpdate
 		};
 	}
 });

@@ -128,7 +128,9 @@ define({
 			location : 600000,
 			heartRate : 10000,
 			weather : 3600000,
-			pressure : 60000
+			pressure : 60000,
+			updateEvents: 60000,
+			filterEvents: 30000
 		};
 		var grd,grdAmbiant, i, j, startTime, now, then, elapsed, sinceStart, frame = 0, currentFps, isAmbientMode, rotate = false;
 		var motion = null;
@@ -177,11 +179,7 @@ define({
 		function handleClick(canvas,ev) {
 			navigator.vibrate(0);
 			currentClickTimeStamp = Date.now();
-			/*if (lastClickTimeStamp !== null && currentClickTimeStamp - lastClickTimeStamp <= CLICK_INTERVAL) {
-				handleDoubleClick(canvas,ev);
-			} else {
-				
-			}*/
+
 			if (canvas.getAttribute("data-dblclick") == null) {
 				canvas.setAttribute("data-dblclick", 1);
                 setTimeout(function () {
@@ -225,6 +223,15 @@ define({
 						setTimeout(function(){
 							widgetFullScreenDiplayed = true;
 						},100);
+						
+						document.querySelector('.lastcall').addEventListener('click', function(e) {
+							 if (e.target !== this && e.target != document.querySelector("#overflower"))
+								    return;
+							canvasDrawer.startShow();
+							widgetId = null;
+							closeF('#weather');
+							
+						});
 						
 						setCloseWidgetAction(weather,closeWidget,'#weather');
 					});
@@ -286,7 +293,7 @@ define({
 				}
 				animateWeatherSection();
 			}
-			else if (calendarShape.isInSurface(clickPos,0) && !forecastDisplayed && !radialmenu.getOpen() && !widgetFullScreenDiplayed){
+			else if (calendarShape.isInSurface(clickPos,0) && !forecastDisplayed && !radialmenu.getOpen() && !widgetFullScreenDiplayed && calendarModel.hasVEvents()){
 				console.log('Click fade');
 				canvasDrawer.startFade();
 				calendar = calendarModel.getCalendarHtml();
@@ -470,11 +477,12 @@ define({
 			isAmbientMode = false;
 			getDate();
 			now = Date.now();
+			 handleIntervalsUpdate(timeStamp);
 			
-			secondsPassed = (timeStamp - oldTimeStamp) / 1000;
+			secondsPassed = (timeStamp - oldTimeStamp) /1000 ;/// 1000;
 		    oldTimeStamp = timeStamp;
-		    
-		    handleWeatherSectionAnimation();
+		   
+		    handleWeatherSectionAnimation(); 
 		    handleWatchFadingAnimation();
 		    handleWatchShowingAnimation();
 
@@ -904,31 +912,6 @@ define({
 			heartRateFound = bool.detail;
 		}
 
-		/**
-		 * Handles models.pressure.start event.
-		 * 
-		 * @private
-		 */
-		function onSensorStart() {
-			// showCalibrationMonit();
-		}
-
-		/**
-		 * Handles models.pressure.error event.
-		 * 
-		 * @private
-		 * @param {object}
-		 *            data
-		 */
-		function onSensorError(data) {
-			var type = data.detail.type;
-			/*
-			 * if (type === 'notavailable') {
-			 * openAlert(SENSOR_NOT_AVAILABLE_MSG); } else if (type ===
-			 * 'notsupported') { openAlert(SENSOR_NOT_SUPPORTED_MSG); } else {
-			 * openAlert(SENSOR_UNKNOWN_ERROR_MSG); }
-			 */
-		}
 
 		/**
 		 * Handles models.pressure.change event.
@@ -1182,7 +1165,7 @@ define({
 			}
 		}
 		function bindEvents() {
-			document.getElementById('canvas-final').addEventListener('click', function(e) {
+			document.getElementById('canvas-content').addEventListener('click', function(e) {
 				handleClick(this,e);
 			});
 			
@@ -1192,6 +1175,9 @@ define({
 				console.log('timetick');
 				if (isAmbientMode) {
 					drawAmbientWatch();
+				}
+				else{
+					
 				}
 			});
 			up = document.getElementById ('up');
@@ -1246,6 +1232,7 @@ define({
 					}
 				}
 				else {
+					console.log('hide');
 					if (radialmenu.getOpen()){
 						radialmenu.closeMenu();
 					}
@@ -1273,8 +1260,6 @@ define({
 				'models.heartRate.HRFound' : onHeartRateFound,
 				'models.location.change' : onLocationDataChange,
 				'models.location.found' : onLocationPositionAquiered,
-				'models.pressure.start' : onSensorStart,
-				'models.pressure.error' : onSensorError,
 				'models.pressure.change' : onPressureChange,
 				'models.motion.change' : onMotionChange,
 				'models.motion.error' : onMotionError,
@@ -1295,9 +1280,10 @@ define({
 		 * @memberof views/canvas
 		 * @public
 		 */
-
+		
 		function mkHR() {
-			hrInterval = window.setInterval(function() {
+			heartRate.start();
+			hrInterval = setInterval(function() {
 				heartRate.start();
 
 			}, intervals.heartRate);
@@ -1308,7 +1294,7 @@ define({
 			
 		}
 		function loopLocation(){
-			locationInterval = window.setInterval(function() {
+			locationInterval = setInterval(function() {
 				locationModel.start();
 				
 			}, intervals.location // check every 10 min
@@ -1397,7 +1383,7 @@ define({
 				  time_to_recreate = true;
 				}, max_time);
 			
-		}
+		} 
 		function changeEffect(ev){
 			effect = ev.detail;
 			time_to_recreate = false;
@@ -1409,6 +1395,23 @@ define({
 				}, max_time);
 			
 			
+		}
+		function handleIntervalsUpdate(timeStamp){
+			weatherModel.handleUpdate(timeStamp);
+			heartRate.handleUpdate(timeStamp);
+			locationModel.handleUpdate(timeStamp);
+			pressureSensor.handleUpdate(timeStamp);
+			calendarModel.handleUpdate(timeStamp);
+			calendarModel.handleFilter(timeStamp);
+			
+		}
+		function setIntervalOnModels(){
+			weatherModel.setIntervalUpdate(intervals.weather); //
+			heartRate.setIntervalUpdate(intervals.heartRate);
+			locationModel.setIntervalUpdate(intervals.location);
+			pressureSensor.setIntervalUpdate(intervals.pressure);
+			calendarModel.setIntervalUpdate(intervals.updateEvents);
+			calendarModel.setIntervalFilter(intervals.filterEvents);
 		}
 		function init() {
 			nextMove = 1000 / fps;
@@ -1432,62 +1435,55 @@ define({
 			changeParticlesColor(theme);
 			changeRootColors(theme);
 			
-			const loader = new Promise((resolve, reject)=> {
+			setIntervalOnModels();
 			
 			//pedometerSensor.start();
-				mkHR();
-				mkLocation();
-				
-				if (motionSensor.isAvailable()) {
-					motionSensor.setOptions({
-						sampleInterval : 10,
-						maxBatchCount : 1000
-					});
-					motionSensor.setChangeListener();
-					motionSensor.start();
-				}
-				if (pressureSensor.isAvailable()) {
-					/*pressureSensor.setOptions({
-						sampleInterval : 1000,
-						maxBatchCount : intervals.pressure
-					});
-					pressureSensor.setChangeListener();*/
-					pressureSensor.start();
-				}
-				sysInfo.checkBattery();
-				calendarModel.accessCalendars();
-				
-				
-				
-				resolve('loaded');
-				  
-			});
-			loader.then (function (resolve){
-				backendLoaded = true;
-				
-				canvasDrawer.startShow(); 
-			});
+			heartRate.start();//mkHR();
+			locationModel.start();
+			//mkLocation();
 			
+			if (motionSensor.isAvailable()) {
+				motionSensor.setOptions({
+					sampleInterval : 10,
+					maxBatchCount : 1000
+				});
+				motionSensor.setChangeListener();
+				motionSensor.start();
+			}
+			if (pressureSensor.isAvailable()) {
+				/*pressureSensor.setOptions({
+					sampleInterval : 1000,
+					maxBatchCount : intervals.pressure
+				});
+				pressureSensor.setChangeListener();*/
+				pressureSensor.start();
+			}
+			sysInfo.checkBattery();
+			calendarModel.accessCalendars(); 
 			
-			pressureInterval = window.setInterval(function(e) {
+			backendLoaded = true;
+				
+			canvasDrawer.startShow(); 
+			
+			//weatherModel.onUpdateTriggered('auto weather interval');
+			/*	
+			pressureInterval = setInterval(function(e) {
 				pressureSensor.start();
 			},intervals.pressure
 			);
-			
-			weatherInterval = window.setInterval(function(e) {
-				event.fire('updateWeather',e);
-			},intervals.weather
-			);	
-			
-			filterEvents = window.setInterval(function(e) {
+			*/
+				
+			/*
+			filterEvents = setInterval(function(e) {
 				event.fire('filterEvents',e);
-			},300000
+			},30000//300000
 			);	
-			updateEvents = window.setInterval(function(e) {
+			updateEvents = setInterval(function(e) {
 				let curDate = new Date();
 				if (curDate.getHours() >= 7 && curDate.getHours() <= 22) 	event.fire('updateEvents',e);
-			},600000
+			},60000//600000
 			);	
+			*/
 			
 			
 			popolate(max_particles,effect);
