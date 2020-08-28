@@ -223,17 +223,17 @@ define({
 						setTimeout(function(){
 							widgetFullScreenDiplayed = true;
 						},100);
-						
+						/*
 						document.querySelector('.lastcall').addEventListener('click', function(e) {
 							 if (e.target !== this && e.target != document.querySelector("#overflower"))
 								    return;
 							canvasDrawer.startShow();
 							widgetId = null;
-							closeF('#weather');
+							closeWidget('#weather');
 							
-						});
-						
-						setCloseWidgetAction(weather,closeWidget,'#weather');
+						});*/
+						setCloseWidgetAction(document.querySelector('.lastcall'),closeWidget,'#weather');  
+						setCloseWidgetAction(weather,closeWidget,'#weather'); 
 					});
 		            
 		            

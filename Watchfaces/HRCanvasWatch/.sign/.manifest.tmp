@@ -38,8 +38,8 @@ app/helpers/shape.js__DEL__Z5GzO+8UT7CqhmLz8ZpiGalRsOZyCZx4LDr9XjNoflCgGE+EQeGjB
 hUx1JHzUoQ==
 app/helpers/text.js__DEL__7Su2DjBUPZ5ORMOTCSnaPJPIRyMZyIuKGhKcTVkH/MDH2H+iUmFpVE8T4MRhd/aOX3Ky+ilc+S4q
 uoowPhkRgQ==
-app/models/calendar.js__DEL__r1t90ZTgVG0vfXnvzYrjpSk8xcqiMmwdy9ziOxe8CEHsYj9TtfkrVjIrzhEOu9aARTCUV3vPC1lm
-/5WVLzNw8Q==
+app/models/calendar.js__DEL__zH9xo35Agub4PV3uWCjINnC6j0oZrjdprXNRynVKQ6F5cfpwjZKbfmSNUnnIRud2XK0h2G4Bv3rB
+vQBWq/r1eA==
 app/models/calories.js__DEL__z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGl
 ODJ6+SfaPg==
 app/models/canvasDrawer.js__DEL__iqCjnpDBL62TRCGLS+raiMpd7w3DqWQCyKwm25pcGH9Uonj375G3cFuP865UjAgbjTUrsnpFtZcq
@@ -60,8 +60,8 @@ app/models/weather.js__DEL__d7ZQWvggO+GvWMtK4OoJcwHaGijR0H7q5MMqZ0ji0bklRTtlnfBA
 WuG1uqsEOw==
 app/tau-config.js__DEL__4uO/1Gq8a3/K23CMOEYjwuGm2wiKcxaToAFNBAwm4x4qZfKY9WXFuZMVHqowYbMzKBuIHRt/Gju+
 7AAC7BcJIw==
-app/views/canvas.js__DEL__uPgIdBw4d9wcWsrPdiSXFx4az9/ZzXa4i20O49DTAclDgp+RkqDaMED16S4c5wnNb53uwlVhViX4
-xz8GXEQMow==
+app/views/canvas.js__DEL__F1anaMjACXo0IIoal4sdyv4HhH6c3dRBBX4oucWn1ISPhpmDac24/BPNHvjubWcEmTkRW6nQ90Zf
+lzyS0TSETQ==
 app/views/init.js__DEL__LVuK5g7WotAFrCgZAMNnprcXc75a0AVl0ry9BnaKSEyMsmarmc2oCjPLFGIS5OnCoAc5qCYIp/iT
 3lvGUd+HoQ==
 app/views/main.js__DEL__f/NBJT8ujaSJqLbjltXfb68EIrns/IpcA2H+Eff0yN+DewgN0hqBl4ZQxANUK7No1Z11ss7OEg8A
@@ -350,5 +350,5 @@ output.txt__DEL__z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuw
 ODJ6+SfaPg==
 version.txt__DEL__jJtvGOhH+xRt5nb2nvtEt+HGe/PG0CnhcMjO6XKTjHZEjeAZ5yuYeNEv9jXlGeLwx2zOOKSyvcob
 EviMmoUiyw==
-author-signature.xml__DEL__MBza2MA33FaEkxjz7aVJ82bRbpjkV5HEp8pp3MTwwtx8jB9VhnNhCQ9BlDBSSLy/WKMeXVEGLsvK
-QCr5lBelhg==
+author-signature.xml__DEL__Oqr82EmZcbbbeuabrQtQgXNr3sroeKPvgKH1D/sY2jBqX2R44LE0kLJouNbyWJRZXXCrlDz2qAls
+30qR+oaVxg==

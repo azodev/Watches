@@ -271,7 +271,9 @@ define({
 			}
 			
 			if (ts-old_timestampU >=  intervalU ){
+				
 				old_timestampU = ts;
+				
 				let curDate = new Date();
 				if (curDate.getHours() >= 7 && curDate.getHours() <= 22) 	accessCalendars();
 			}
@@ -284,7 +286,12 @@ define({
 			}
 			
 			if (ts-old_timestampF >=  intervalF ){
+				console.log(old_timestampF);
+				console.log(ts);
+				console.log(ts-old_timestampF);
+				console.log(intervalF);
 				old_timestampF = ts;
+				
 				handleFilterForFinishedEvents();
 			}
 			
