@@ -45,7 +45,7 @@ class vForecast {
 		block.appendChild(hour);
 		block.appendChild(icon);
 		block.appendChild(temp);
-		block.setAttribute('augmented-ui', 'tl-clip tr-clip  bl-clip br-clip exe');
+		block.setAttribute('data-augmented-ui', 'tl-clip tr-clip  bl-clip br-clip inlay');
 		block.setAttribute('block-id', this.dt);
 		
 		return block;
@@ -66,7 +66,7 @@ class vForecast {
 		block.appendChild(hour);
 		block.appendChild(icon);
 		block.appendChild(temp);
-		block.setAttribute('augmented-ui', 'tl-clip tr-clip  bl-clip br-clip exe');
+		block.setAttribute('data-augmented-ui', 'tl-clip tr-clip  bl-clip br-clip inlay');
 		
 		return block;
 	}

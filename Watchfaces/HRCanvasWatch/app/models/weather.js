@@ -364,8 +364,10 @@ define({
 			*/
 			weather.setAttribute ('id','weather');
 			weather.className = 'off';
-			weather.setAttribute('augmented-ui', 'tl-clip tr-clip bl-clip br-clip b-clip-x t-clip-x l-clip-y r-clip-y exe');
+			weather.setAttribute('data-augmented-ui', 'tl-clip tr-clip bl-clip br-clip b-clip-x t-clip-x l-clip-y r-clip-y both');
 			overflower.setAttribute ('id','overflower');   //forecastInform.lastWeatherCallDate
+			overflower.setAttribute('data-augmented-ui-reset','');
+			
 			let lastcall = document.createElement('div');
 			lastcall.className = 'lastcall';
 			lastcall.innerHTML = forecastInform.lastWeatherCallDate.toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
@@ -375,6 +377,9 @@ define({
 				overflower.appendChild( ev.processHtml());
 			});
 			
+			let border = document.createElement('div');
+			border.setAttribute('data-augmented-ui-border','');
+			weather.appendChild(border);
 			weather.appendChild(overflower);
 			return weather;
 		}

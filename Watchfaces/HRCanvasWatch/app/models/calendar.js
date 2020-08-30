@@ -102,7 +102,7 @@ define({
 			let overflower = document.createElement('div');
 			calendar.setAttribute ('id','calendar');
 			calendar.className = 'off';
-			calendar.setAttribute('augmented-ui', 'tl-clip tr-clip bl-clip br-clip b-clip-x t-clip-x l-clip-y r-clip-y exe');
+			calendar.setAttribute('data-augmented-ui', 'both tl-clip tr-clip bl-clip br-clip b-clip-x t-clip-x l-clip-y r-clip-y');
 			overflower.setAttribute ('id','overflower');
 			
 			myEvents.forEach(function(ev){
