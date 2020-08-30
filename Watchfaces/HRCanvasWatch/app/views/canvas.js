@@ -179,22 +179,24 @@ define({
 		function handleClick(canvas,ev) {
 			navigator.vibrate(0);
 			currentClickTimeStamp = Date.now();
-
-			if (canvas.getAttribute("data-dblclick") == null) {
-				canvas.setAttribute("data-dblclick", 1);
-                setTimeout(function () {
-                    if (canvas.getAttribute("data-dblclick") == 1) {
-                        console.log('-----------> single <-----------');
-                        handleSingleClick(canvas,ev);
-                    }
-                    canvas.removeAttribute("data-dblclick");
-                }, 300);
-            } else {
-            	canvas.removeAttribute("data-dblclick");
-            	console.log('-----------> double <-----------');
-            	handleDoubleClick(canvas,ev);
-            }
-			lastClickTimeStamp = currentClickTimeStamp;
+			if (!isAmbientMode){
+				if (canvas.getAttribute("data-dblclick") == null) {
+					canvas.setAttribute("data-dblclick", 1);
+	                setTimeout(function () {
+	                    if (canvas.getAttribute("data-dblclick") == 1) {
+	                        console.log('-----------> single <-----------');
+	                        handleSingleClick(canvas,ev);
+	                    }
+	                    canvas.removeAttribute("data-dblclick");
+	                }, 300);
+	            } else {
+	            	canvas.removeAttribute("data-dblclick");
+	            	console.log('-----------> double <-----------');
+	            	handleDoubleClick(canvas,ev);
+	            }
+				lastClickTimeStamp = currentClickTimeStamp;
+			}
+			
 			
 		}
 
@@ -992,7 +994,10 @@ define({
 			});
 			if (heartRateFound && heartRate.getData().rate !== null) {
 				
-				canvasDrawer.renderCircle(canvasContent.context, new Circle(center.x,center.y + (watchRadius * 0.60),45), grdAmbiant,false,true,2,false);
+				canvasDrawer.renderCircle(canvasContent.context, new Circle(center.x,center.y + (watchRadius * 0.60),45), "#000000","rgba(30, 30, 30,0.7)",false,1.5,false);
+				
+				
+				//canvasDrawer.renderCircle(canvasContent.context, new Circle(center.x,center.y + (watchRadius * 0.60),45), grdAmbiant,false,true,2,false);
 
 				
 				canvasDrawer.renderText(canvasContent.context, heartRate.getData().rate, center.x, center.y + (watchRadius * 0.60), 30, grdAmbiant, {
