@@ -79,14 +79,14 @@ define({
 		        e.preventDefault();            
 		    })
 			event.on({
-				'models.location.distanceChange' : postNotification,
-				'models.location.log' : postNotification,
+				//'models.location.distanceChange' : postNotification,
+				//'models.location.log' : postNotification,
 				'models.motion.error' : postNotification,
 				'models.pedometer.error' : postNotification,
-				'views.canvas.log' : postNotification,
-				'models.weather.log' : postNotification,
+				//'views.canvas.log' : postNotification,
+				//'models.weather.log' : postNotification,
 				'models.weather.error' : postNotification,
-				'models.calendar.log' : postNotification,
+				//'models.calendar.log' : postNotification,
 				'models.calendar.error' : postNotification
 
 			});

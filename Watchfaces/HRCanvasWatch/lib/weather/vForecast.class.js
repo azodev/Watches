@@ -1,9 +1,13 @@
 class vForecast {
 	constructor(array,mapping){
+		this.id = array['dt'];
 		this.date = new Date(array['dt']*1000);
 		this.main = array['main'];
 		this.weather = array['weather'][0];
 		this.wind = array['wind'];
+		this.cloud = array['cloud'];
+		this.rain = array['rain'];
+		this.snow = array['snow'];
 		this.day = array['day'];
 		this.mapping = mapping;
 	}
@@ -26,6 +30,27 @@ class vForecast {
 		}
 	}
 	processHtml(){
+		let block =document.createElement('div');
+		block.className = 'block';
+		let hour = document.createElement('div');
+		hour.className = 'hour';
+		let icon = document.createElement('div');
+		icon.className = 'icon';
+		let temp = document.createElement('div');
+		temp.className = 'temp';
+		
+		hour.innerHTML =  this.date.getHours()+'h';
+		icon.innerHTML = this.getMapping(this.weather.id, this.day);
+		temp.innerHTML = Math.round(this.main.temp) + "°";
+		block.appendChild(hour);
+		block.appendChild(icon);
+		block.appendChild(temp);
+		block.setAttribute('augmented-ui', 'tl-clip tr-clip  bl-clip br-clip exe');
+		block.setAttribute('block-id', this.dt);
+		
+		return block;
+	}
+	processHtmlDetails(){
 		let block =document.createElement('div');
 		block.className = 'block';
 		let hour = document.createElement('div');

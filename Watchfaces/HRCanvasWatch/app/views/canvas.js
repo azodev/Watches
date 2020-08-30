@@ -123,20 +123,20 @@ define({
 			minute : null,
 			second : null,
 			date : null
-		};
+		}; 
 		var intervals = {
 			location : 600000,
 			heartRate : 10000,
-			weather : 3600000,
+			weather : 3600000,//3600000,
 			pressure : 60000,
-			updateEvents: 60000,
-			filterEvents: 30000
+			updateEvents: 600000,
+			filterEvents: 300000//300000
 		};
 		var grd,grdAmbiant, i, j, startTime, now, then, elapsed, sinceStart, frame = 0, currentFps, isAmbientMode, rotate = false;
 		var motion = null;
 		var motionFromGyro = {accelerationIncludingGravity : {x:null,y:null}}; 
 		
-		var max_particles = 600;
+		var max_particles = 500;
 		var particles = [];
 		var flames = [];
 		var frequency = 3;
@@ -238,6 +238,24 @@ define({
 		            
 		            
 		        });
+				document.querySelectorAll("#weather div.block").forEach(function (element){
+					element.addEventListener('click', function(e) {
+						
+						console.log('click weather');
+						setClassAndWaitForTransition(element,'block click','color').then(function () {
+							console.log('transition weather');
+							
+							setClassAndWaitForTransition(element,'block','color').then(function () {
+								let ov = document.querySelector("#overflower");
+								setClassAndWaitForTransition(ov,'off','transform').then(function () {
+									ov.innerHTML = "";
+								});
+								
+							});
+						});
+							
+					});
+				});
 			}
 			
 		}
@@ -280,7 +298,6 @@ define({
 			if (appDrawerShape.isInSurface(clickPos,10)){
 				canvasDrawer.startFade();
 				openRadialMenu(ev);
-				
 				radialmenu.setOpen();
 			}
 			else if (wShape.isInSurface(clickPos,0) && !radialmenu.getOpen()  && weatherModel.isForecastFound()){
@@ -328,6 +345,7 @@ define({
 						setClassAndWaitForTransition(element,'event click','color').then(function () {
 							console.log('transition event');
 							element.setAttribute('class', 'event');
+							
 						});
 							
 					});
@@ -381,14 +399,14 @@ define({
 		function handleWeatherSectionAnimation(){
 			if (wShape.isAnimating()){
 				if (!forecastMode){
-					wShape.growRight(secondsPassed,100,250,0.2);
+					wShape.growRight(secondsPassed,100,250,0.3);
 					if (!wShape.isAnimating()){
 						toogleForecastMode();
 						forecastDisplayed = true;
 					}
 				}
 				else {
-					wShape.shrinkRight(secondsPassed,250,100,0.2);
+					wShape.shrinkRight(secondsPassed,250,100,0.3);
 					
 					if (!wShape.isAnimating()){
 						miniCalendarDisplayed = true;
@@ -477,7 +495,7 @@ define({
 			isAmbientMode = false;
 			getDate();
 			now = Date.now();
-			 handleIntervalsUpdate(timeStamp);
+			handleIntervalsUpdate(now);
 			
 			secondsPassed = (timeStamp - oldTimeStamp) /1000 ;/// 1000;
 		    oldTimeStamp = timeStamp;

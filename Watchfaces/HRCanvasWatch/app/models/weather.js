@@ -259,6 +259,10 @@ define({
 					
 					forecastInform.list[i].day = day;
 					vForecasts.push(new vForecast(forecastInform.list[i],mapping));
+					if (i==0){
+						event.fire('triggerPressureSea',forecastInform.list[i]);
+					}
+					
 				}
 				forecastInform.lastWeatherCallDate = new Date();
 				buildDaysForecasts();
@@ -314,10 +318,11 @@ define({
 				
 				for ( z= 0 ; z< forecasts.length; z++){
 					if (forecasts[z].date == formatDate(fo.date) ){
-						if (formatDate(fo.date) == formatDate(date) ){
-							if (fo.date.getHours() >= Math.max(date.getHours(),8) && fo.date.getHours()<= 23){
+						
+						if (formatDate(fo.date) == formatDate(date) ){ 
+							//if (fo.date.getHours() >= Math.max(date.getHours(),8) && fo.date.getHours()<= 23){
 								forecasts[z].forecasts.push(fo);
-							}
+							//}
 						}
 						else 
 						if (fo.date.getHours() >= 8 && fo.date.getHours()<= 22){
@@ -325,8 +330,14 @@ define({
 						}
 						
 					}
+					
 				}
 			});
+			if(forecasts[0].forecasts.length>= 5){
+				forecasts[0].forecasts = forecasts[0].forecasts.slice(0,5);
+			}
+			
+			
 		}
 		function formatDate(date) {
 	        let month = '' + (date.getMonth() + 1);
@@ -346,6 +357,11 @@ define({
 			
 			let weather = document.createElement('div');
 			let overflower = document.createElement('div');
+			/*
+			let overflower_content = document.createElement('div');
+			overflower_content.setAttribute ('id','overflower_content'); 
+			overflower.appendChild(overflower_content);
+			*/
 			weather.setAttribute ('id','weather');
 			weather.className = 'off';
 			weather.setAttribute('augmented-ui', 'tl-clip tr-clip bl-clip br-clip b-clip-x t-clip-x l-clip-y r-clip-y exe');
@@ -407,7 +423,7 @@ define({
 			
 			if (ts-old_timestamp >=  interval ){
 				old_timestamp = ts;
-				onUpdateTriggered();
+				onUpdateTriggered('auto weatherUpdateTriggered');
 			}
 			
 		}

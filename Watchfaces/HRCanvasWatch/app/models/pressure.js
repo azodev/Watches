@@ -104,7 +104,9 @@ define({
     			maxBatchCount : 5000
     		};
         	var weatherInformation = null;
-        	var refferencePressure = 1013.25;
+        	var refferencePressure = null;
+        	var refferencePressureSea = null;
+        	var temp_kf  = 1.7;
         	var text = '';
         	var altitude = null;
         	var temperature = 20;
@@ -171,14 +173,140 @@ define({
         function updateAltitudeValue(){
         	//reference = 1007;
 			//altitude = -8727 * Math.log(averagePressure / refferencePressure);
-        	altitude = ((Math.pow(refferencePressure/averagePressure,1/5.257)-1)*(temperature+273.15)/0.0065);
-			if (altitude === '-0') {
+        	console.log(refferencePressure);
+        	console.log(refferencePressureSea);
+        	console.log(averagePressure);
+        	console.log(currentPressure);
+        	
+        	if (refferencePressure != null) altitude = ((Math.pow(refferencePressure/averagePressure,1/5.257)-1)*(temperature+273.15)/0.0065);
+        	if (refferencePressureSea != null) altitude = altcalc(refferencePressureSea*100, temperature+273.15, currentPressure*100);
+			if (altitude === '-0' ||  altitude == null) {
 				altitude = '0';
-			}
+			} 
         }
         function getAltitude(){
         	return altitude;
         }
+        
+        function altcalc(a, k, i) {
+            if ((a / i) < (101325 / 22632.1)) {
+                var d = -0.0065;
+                var e = 0;
+                var j = Math.pow((i / a), (R * d) / (g * M));
+                return e + ((k * ((1 / j) - 1)) / d)
+            } else {
+                if ((a / i) < (101325 / 5474.89)) {
+                    var e = 11000;
+                    var b = k - 71.5;
+                    var f = (R * b * (Math.log(i / a))) / ((-g) * M);
+                    var l = 101325;
+                    var c = 22632.1;
+                    var h = ((R * b * (Math.log(l / c))) / ((-g) * M)) + e;
+                    return h + f
+                }
+            }
+            return NaN
+        }
+        function noChange(a) {
+            return a
+        }
+        var M = 0.0289644;
+        var g = 9.80665;
+        var R = 8.31432;
+        var p_default = 101325;
+        var t_default = 288.15;
+        
+        function convertUnits(a, c, b) {
+            b = b == null ? "standard" : b;
+            return unitConversions[c][b](a)
+        }
+        var unitConversions = {
+            F: {
+                F: noChange,
+                C: function(a) {
+                    return ((a - 32) * 5) / 9
+                },
+                K: function(a) {
+                    return (a - 32) / 1.8 + 273.15
+                },
+                standard: function(a) {
+                    return (a - 32) / 1.8 + 273.15
+                }
+            },
+            C: {
+                F: function(a) {
+                    return (a * 1.8) + 32
+                },
+                C: noChange,
+                K: function(a) {
+                    return a + 273.15
+                },
+                standard: function(a) {
+                    return a + 273.15
+                }
+            },
+            K: {
+                F: function(a) {
+                    return (a * 1.8) - 459.67
+                },
+                C: function(a) {
+                    return a - 273.15
+                },
+                K: noChange,
+                standard: noChange
+            },
+            ft: {
+                m: function(a) {
+                    return a * 0.3048
+                },
+                ft: noChange,
+                standard: function(a) {
+                    return a * 0.3048
+                }
+            },
+            m: {
+                m: noChange,
+                ft: function(a) {
+                    return a * 3.2808
+                },
+                standard: noChange
+            },
+            Pa: {
+                Pa: noChange,
+                psi: function(a) {
+                    return a / 6894.75729
+                },
+                atm: function(a) {
+                    return a / 101325
+                },
+                standard: noChange
+            },
+            psi: {
+                Pa: function(a) {
+                    return a * 6894.75729
+                },
+                psi: noChange,
+                atm: function(a) {
+                    return a / 14.6959488
+                },
+                standard: function(a) {
+                    return a * 6894.75729
+                }
+            },
+            atm: {
+                Pa: function(a) {
+                    return a * 101325
+                },
+                psi: function(a) {
+                    return a * 14.6959488
+                },
+                atm: noChange,
+                standard: function(a) {
+                    return a * 101325
+                }
+            }
+        };
+        
 
         /**
          * Performs action on sensor change.
@@ -237,8 +365,14 @@ define({
         function setOptions(options){
         	options = options;
         }
-        function setReferencePressure(reff){
-        	refferencePressure = reff; 
+        function setReferencePressure(main){
+        	refferencePressure = main.pressure;
+        	//refferencePressureSea = main.sea_level;
+        	//temp_kf = main.temp_kf
+        }
+        function setReferencePressureSea(main){
+        	refferencePressureSea = main.sea_level;
+        	temp_kf = main.temp_kf;
         }
         function setTemperature(t){
         	temperature = t;
@@ -291,8 +425,15 @@ define({
         function onWeatherFound(weatherInfo){
         	if (weatherInfo.detail) {
         		weatherInformation = weatherInfo.detail;
-        		setReferencePressure (weatherInformation.main.pressure);
+        		setReferencePressure (weatherInformation.main);
         		setTemperature (weatherInformation.main.temp);
+        	}
+        	triggerUpdate();
+        }
+        function triggerPressureSea(weatherInfo){
+        	if (weatherInfo.detail) {
+        		let main = weatherInfo.detail.main;
+        		setReferencePressureSea(main);
         	}
         }
         function triggerUpdate(){
@@ -322,7 +463,9 @@ define({
 			event.on({ 
 				'models.location.found': onPositionFound,
 				'models.weather.found': onWeatherFound,
+				'models.weather.triggerPressureSea' : triggerPressureSea,
 				'views.radial.update' : triggerUpdate
+				
 				});
 			 
 		}

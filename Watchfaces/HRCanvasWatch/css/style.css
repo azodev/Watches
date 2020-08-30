@@ -86,11 +86,8 @@ html, body {
 	visibility:  visible;
 	opacity: 1;
 }
-#overflower{
-	width: 100%;
-    height: 100%;
-    overflow:hidden;
-}
+
+
 #calendar, #weather{
 	position: absolute;
 	width: 290px;
@@ -121,7 +118,7 @@ html, body {
   --aug-tl: 20px;
   --aug-br: 20px;
   --aug-tr: 20px; 
-     will-change: transform;
+   /*will-change: transform;*/
    scroll-behavior: smooth;
     
     /*transform: perspective(700px) rotateY(0deg); */
@@ -147,6 +144,20 @@ html, body {
 	transition-duration: 0.3s;
 	transition-timing-function: ease-in;
 	opacity:1;
+}
+#overflower{
+	position: relative;
+	width: 100%;
+    height: 100%;
+    overflow:hidden;
+    transition-property: opacity, transform;
+	transition-duration: 0.1s;
+	transition-timing-function: ease-in;
+}
+
+#overflower.off{
+	transform:  scale(0.35);
+	/*height: 240px;*/
 }
 
 #up, #down{
@@ -196,7 +207,7 @@ html, body {
 	width: 97%;
 	color:white;
 	
-	transition: --aug-inset-bg 0.2s ease, color 0.2s ease; 
+	transition: --aug-inset-bg 0.2s ease, color 0.2s ease, background 0.2s ease; 
 }
 
 #weather .forecast {
@@ -219,7 +230,7 @@ html, body {
 	overflow:hidden;
 	transition: --aug-inset-bg 0.2s ease, color 0.2s ease; 
 }
-#weather .forecast .block {
+#weather  div.block {
 	padding: 3px;
 	position: relative;
 	float:left;
@@ -236,6 +247,7 @@ html, body {
 	--aug-border-bg: linear-gradient(to right, var(--color2), var(--color1));*/ 
 	background-color:transparent; 
 	text-align:center;
+	transition: color 0.5s ease, background 0.5s ease; 
 }
 #weather .forecast .block .hour, #weather .forecast .block .temp {
 	position: relative;
@@ -273,7 +285,14 @@ html, body {
     color:black;
     --aug-inset-bg: rgba(255, 255, 255, 0.50);
     background:  rgba(255, 255, 255, 0.50);
-	transition: --aug-inset-bg 0.2s ease, color 0.2s ease, background 0.2 ease;  
+	transition: --aug-inset-bg 0.2s ease, color 0.2s ease, background 0.2s ease;  
+}
+#weather div.block.click {
+    /*background-color: white;*/
+    color:black;
+    --aug-inset-bg: rgba(255, 255, 255, 0.50);
+    background:  rgba(255, 255, 255, 0.50);
+	transition: color 0.5s ease, background 0.5s ease; 
 }
 .dates {
 	height: 33px;
@@ -342,7 +361,7 @@ html, body {
   --aug-bl: 5px;
   --aug-tr: 5px;
   --aug-inset-bg:  var(--color1);
-  font-size: 15px;
+  font-size: 15px; 
   text-align: right;
   padding-top: 5px;
   padding-right:10px;
