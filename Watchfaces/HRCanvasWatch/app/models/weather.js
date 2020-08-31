@@ -256,7 +256,7 @@ define({
 							hour >= sunriseHour
 							&& hour < sunsetHour
 							) ? true : false;
-					
+					forecastInform.list[i].city = weatherInform.name;
 					forecastInform.list[i].day = day;
 					vForecasts.push(new vForecast(forecastInform.list[i],mapping));
 					if (i==0){
@@ -359,7 +359,7 @@ define({
 			let overflower = document.createElement('div');
 			let overflowerBack = document.createElement('div');
 			overflowerBack.setAttribute ('id','overflower-back');
-			overflowerBack.innerHTML = 'Lorem lipsum';
+			//overflowerBack.innerHTML = 'Lorem lipsum';
 			/*
 			let overflower_content = document.createElement('div');
 			overflower_content.setAttribute ('id','overflower_content'); 
@@ -383,6 +383,17 @@ define({
 			weather.appendChild(overflower);
 			weather.appendChild(overflowerBack);
 			return weather;
+		}
+		function getElementDetails(id){
+			let block = null;
+			vForecasts.forEach(function(fo){
+				
+				if (fo.id == id) {
+					console.log(fo.id);
+					block=  fo.processHtmlDetails();
+				}
+			});
+			return block;
 		}
 		
 		/**
@@ -448,7 +459,8 @@ define({
 			getWeatherHtml:getWeatherHtml,
 			onUpdateTriggered:onUpdateTriggered,
 			setIntervalUpdate:setIntervalUpdate,
-			handleUpdate:handleUpdate
+			handleUpdate:handleUpdate,
+			getElementDetails:getElementDetails
 		};
 	}
 

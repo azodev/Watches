@@ -268,17 +268,11 @@ define({
 									console.log('flipped');
 									flipping=false;
 									flipped = true; 
+									let ov = document.querySelector("#overflower-back");
+									console.log(element.getAttribute('block-id'));
+									let block = weatherModel.getElementDetails(element.getAttribute('block-id'));
+									ov.appendChild(block);
 								});
-								
-									
-								
-								
-								
-								/*
-								setTimeout(function(){
-									
-								},50);
-								*/
 								
 							});
 						});
@@ -393,8 +387,26 @@ define({
 		}
 		function setCloseWidgetAction (node,closeF,itemId){
 			node.addEventListener('click', function(e) {
-				 if (e.target !== this && e.target != document.querySelector("#overflower") &&  e.target != document.querySelector("#overflower-back"))
+				 if (		e.target !== this 
+						 && e.target != document.querySelector("#overflower") 
+						 && e.target != document.querySelector("#overflower-back")
+						 && e.target != document.querySelector("#overflower-back .block")
+						 && e.target != document.querySelector("#overflower-back .block .hour") 
+						 )
 					    return;
+				 
+				 if (	   e.target == document.querySelector("#overflower-back") 
+						&& e.target == document.querySelector("#overflower-back .block") 
+						&& e.target == document.querySelector("#overflower-back .block .hour") 
+				 ){
+					 flipping=true;
+					 setClassAndWaitForTransition(document.getElementById('weather'),'on','transform').then(function () {
+							console.log('flipped');
+							flipping=false;
+							flipped = false; 
+						});
+					 return;
+				 }
 				canvasDrawer.startShow();
 				widgetId = null;
 				closeF(itemId);
@@ -609,10 +621,10 @@ define({
 						/*widgetOn.style.transform =    
 							"perspective(700px) rotateX(" + -deg.x + "deg) " +    
 							" rotateY(" + deg.y + "deg)";*/
-						document.querySelector(":root").style.setProperty('--degx',  -deg.x + "deg");
+					/*	document.querySelector(":root").style.setProperty('--degx',  -deg.x + "deg");
 						document.querySelector(":root").style.setProperty('--degy',   deg.y + "deg");
 						document.querySelector(":root").style.setProperty('--degxFlipped',    deg.x + "deg");
-						document.querySelector(":root").style.setProperty('--degyFlipped',   (deg.y+180) + "deg");
+						document.querySelector(":root").style.setProperty('--degyFlipped',   (deg.y+180) + "deg");*/
 					}
 					else {
 						if ( flipped){

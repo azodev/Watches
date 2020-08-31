@@ -26,7 +26,7 @@ class ForecastDay {
 		let day = document.createElement('div');
 		let forecast = null;
 		day.className = 'day';
-		day.setAttribute('data-augmented-ui', 'tl-clip tr-clip inlay');
+		day.setAttribute('data-augmented-ui', 'tl-clip tr-clip both');
 		day.innerHTML  = this.getDateToString();
 		day_weather.appendChild(day);
 		forecast = document.createElement('div');

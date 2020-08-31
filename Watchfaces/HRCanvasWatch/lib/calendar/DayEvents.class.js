@@ -29,7 +29,7 @@ class DayEvents {
 		let end = null;
 		let title= null, location = null;
 		day.className = 'day';
-		day.setAttribute('data-augmented-ui', 'tl-clip tr-clip inlay');
+		day.setAttribute('data-augmented-ui', 'tl-clip tr-clip both');
 		day.innerHTML  = this.getDateToString();
 		day_events.appendChild(day);
 		for (i = 0 ; i< this.events.length ; i++){

@@ -132,14 +132,14 @@ html, body {
 	transform: perspective(700px) rotateY(var(--degy)) rotateX(var(--degx)) translateY(50px) translateX(60px) scale(0.35); 
 	opacity:0;
 	transition-property: opacity, transform;
-	transition-duration: 0.3s; 
+	transition-duration: 0.3s;  
 	transition-timing-function: ease-in;
 
 }
 #calendar.flip, #weather.flip {
 	transform: perspective(700px) rotateY(var(--degyFlipped)) rotateX(var(--degxFlipped)); 
 	transition-property: transform;
-	transition-duration: 0.3s;
+	transition-duration: 0.4s;
 	transition-timing-function: ease-in;
 	transform-style: preserve-3d;
 	opacity:1; 
@@ -171,12 +171,12 @@ html, body {
 	position: absolute;
 	top: 0;
 	left: 0;
-	margin: 3.5%;
+	margin: 5% 3.5% 6% 3.5%;
 	width:93%;
-	height:93%;
+	height:89%;
 }
 #overflower {
-	z-index: 11; 
+	z-index: 12; 
 	/* for firefox 31 */
 	transform: rotateY(0deg) ;
 }
@@ -199,6 +199,55 @@ html, body {
 
     overflow:hidden;
 
+}
+
+#overflower-back .block{
+	  --aug-border-all: 1px;
+  --aug-inlay-all: 2px;
+  --aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
+  --aug-inlay-bg: rgba(0, 0, 0, 0.10) ;  
+  --aug-inlay-opacity: 0.9;  
+  --aug-bl: 5px;
+  --aug-tl: 5px;
+  --aug-br: 5px;
+  --aug-tr: 5px; 
+  margin:1%;
+  width:98%;
+  height:60px;
+  padding:5px; 
+  color:#FFFFFF;
+  z-index: 11;
+  
+}
+#overflower-back .block .header{
+	width:100%;
+  height:100%;
+  font-family:FutureNow;
+  vertical-align: middle;
+  position: relative;
+}
+#overflower-back .block .header .city{
+	font-size:20px;
+	width:20%;
+	text-align:left;
+	vertical-align: top;
+}
+#overflower-back .block .header .city-value{
+	font-size:16px;
+	width:auto;
+	text-align:left;
+}
+#overflower-back .block .header .date{
+	width:60%;
+	font-size:16px;
+	text-align: right;
+	vertical-align: top;
+}
+#overflower-back .block .header .hour{
+	font-size:35px;
+	width:20%;
+	text-align: right;
+	vertical-align: top;
 }
 
 #overflower.off{
@@ -239,9 +288,9 @@ html, body {
 	position: relative;
 	padding: 5px;
 	margin: 5px auto;
-	--aug-inlay-all: 3px;
+	--aug-inlay-all: 2px;
 	--aug-inlay-bg: rgba(0, 0, 0, 0.15);
-	--aug-border-all: 2px;
+	--aug-border-all: 1px;
 	--aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
 	background-color:transparent; 
 	--aug-tl: 5px;
@@ -259,11 +308,11 @@ html, body {
 #weather .forecast {
 
 	position: relative;
-	padding: 5px;
+	padding: 3px 5px;
 	margin: 5px auto;
-	--aug-inlay-all: 3px;
+	--aug-inlay-all: 1px;
 	--aug-inlay-bg: rgba(0, 0, 0, 0);
-	--aug-border-all: 2px;
+	--aug-border-all: 1px;
 	--aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
 	background-color:transparent; 
 	--aug-tl: 5px;
@@ -271,13 +320,13 @@ html, body {
 	--aug-bl: 10px;
 	--aug-tr: 10px;
 	z-index:12;
-	min-height: 83px;
+	min-height: 81px;
 	width: 97%;
 	color:white;
 	overflow:hidden;
 	transition: --aug-inset-bg 0.2s ease, color 0.2s ease; 
 }
-#weather  div.block {
+#weather .forecast  div.block {
 	padding: 3px;
 	position: relative;
 	float:left;
@@ -288,13 +337,14 @@ html, body {
 	--aug-br: 5px;
 	--aug-bl: 5px;
 	--aug-tr: 5px;
-	--aug-inlay-all: 2px;
+	--aug-inlay-all: 0px;
 	--aug-inlay-bg: rgba(0, 0, 0, 0.30);
 	/*--aug-border: 1px;
 	--aug-border-bg: linear-gradient(to right, var(--color2), var(--color1));*/ 
 	background-color:transparent; 
 	text-align:center;
-	transition: color 0.5s ease, background 0.5s ease; 
+	transition: color 0.2s ease, background 0.2s ease; 
+	color:#FFFFFF;
 }
 #weather .forecast .block .hour, #weather .forecast .block .temp {
 	position: relative;
@@ -303,7 +353,7 @@ html, body {
 	font-size:16px;
 	line-height:16px;
 	font-family:FutureNow;
-	color:#FFFFFF;
+	
 }
 #weather .forecast .block .icon {
 	position: relative;
@@ -312,14 +362,13 @@ html, body {
 	font-size:38px;
 	line-height:38px;
 	font-family: artill_clean_icons;
-	color: #FFFFFF;
 }
 .lastcall{
 	width:90%;
 	position:relative;
 	
 	height: 16px;
-	margin: 5px 5%;
+	margin: 0px 5%;
 	text-align:right;
 	font-size:16px;
 	line-height:16px;
@@ -339,7 +388,7 @@ html, body {
     color:black;
     --aug-inlay-bg: rgba(255, 255, 255, 0.50);
     background:  rgba(255, 255, 255, 0.50);
-	transition: color 0.5s ease, background 0.5s ease; 
+	transition: color 0.2s ease, background 0.2s ease; 
 }
 .dates {
 	height: 33px;
@@ -352,9 +401,9 @@ html, body {
 	position:absolute;
 	z-index:12;
 	padding: 5px;
-	--aug-inlay-all: 2px;
+	--aug-inlay-all: 1px;
 	--aug-inlay-bg: rgba(0, 0, 0, 0.25);
-	--aug-border-all: 2px;
+	--aug-border-all: 1px;
 	--aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
 	--aug-tl: 5px;
 	--aug-br: 5px;
@@ -407,7 +456,9 @@ html, body {
   --aug-br: 3px;
   --aug-bl: 5px;
   --aug-tr: 5px;
-  --aug-inlay-all: 1px;
+  --aug-inlay-all: 0px;
+  --aug-border-all: 1px;
+  --aug-border-bg:  var(--color1);
   --aug-inlay-bg:  var(--color1);
   font-size: 15px; 
   text-align: right;
