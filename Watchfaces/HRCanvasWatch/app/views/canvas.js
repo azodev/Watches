@@ -170,7 +170,9 @@ define({
 		var up = document.getElementById ('up');
 		var down = document.getElementById ('down');
 		var calendarY = 0;
-		
+		var flipping = false;
+		var flipped = false;
+		var widgetFlipped = null;
 		var wCoords=null;
 		var theme = 'ice';
 		var effect = 'attraction';
@@ -222,6 +224,7 @@ define({
 						//calendar.setAttribute('class', 'on');
 						//holder.setAttribute('class', 'on');  
 						widgetId = "#weather";
+						widgetOn = document.querySelector(widgetId+".on");
 						setTimeout(function(){
 							widgetFullScreenDiplayed = true;
 						},100);
@@ -248,10 +251,34 @@ define({
 							console.log('transition weather');
 							
 							setClassAndWaitForTransition(element,'block','color').then(function () {
-								let ov = document.querySelector("#overflower");
+								/*let ov = document.querySelector("#overflower");
 								setClassAndWaitForTransition(ov,'off','transform').then(function () {
 									ov.innerHTML = "";
+								});*/
+								console.log('flip');
+								flipping = true; 
+								/*
+								let split  = document.querySelector('#weather.on').style.transform.split(' ');
+								console.log(split);
+								split[2]= 'rotateY(0deg)';
+								console.log(split.join(' '));
+								document.querySelector('#weather.on').style.transform =    split.join(' ');
+								*/
+								setClassAndWaitForTransition(document.getElementById('weather'),'flip','transform').then(function () {
+									console.log('flipped');
+									flipping=false;
+									flipped = true; 
 								});
+								
+									
+								
+								
+								
+								/*
+								setTimeout(function(){
+									
+								},50);
+								*/
 								
 							});
 						});
@@ -366,7 +393,7 @@ define({
 		}
 		function setCloseWidgetAction (node,closeF,itemId){
 			node.addEventListener('click', function(e) {
-				 if (e.target !== this && e.target != document.querySelector("#overflower"))
+				 if (e.target !== this && e.target != document.querySelector("#overflower") &&  e.target != document.querySelector("#overflower-back"))
 					    return;
 				canvasDrawer.startShow();
 				widgetId = null;
@@ -374,6 +401,44 @@ define({
 				
 			}); 
 			
+		}
+		function closeWidget(itemId){
+			if (widgetFullScreenDiplayed){
+					
+				
+				widgetFullScreenDiplayed = false;
+				holder = document.querySelector("#widget_holder");
+				let item = document.querySelector(itemId);
+				
+				
+				/*
+				if (document.querySelector(itemId+".on") != null)	{
+					if (itemId == '#calendar'){
+						document.querySelector(itemId+".on").style.transform =    "perspective(700px) rotateY(0deg) translateY(50px)  translateX(60px)  scale(0.35)";
+					}
+					else if (itemId == '#weather'){
+						document.querySelector(itemId+".on").style.transform =    "perspective(700px) rotateY(0deg) translateY(50px)  translateX(-60px)  scale(0.35)";
+					}
+					
+				}
+					
+				*/
+				
+					setClassAndWaitForTransition(item,'off','opacity').then(function () {
+						console.log('transition widget');
+						
+						widgetOn = null;
+						flipped = false;
+						setClassAndWaitForTransition(holder,'','opacity').then(function () {
+							//calendar.setAttribute('class', 'off');
+							console.log('transition holder');
+							
+							
+							canvasDrawer.clearWidgetHtml(holder,item);
+							
+						});
+					});
+			}
 		}
 		function triggerShowWatch(){
 			
@@ -520,11 +585,12 @@ define({
 				if (deg.y <= -15 ) deg.y = -15;
 				if (deg.y >= 15 ) deg.y = 15;
 				
-				elem = document.querySelector("div.menuHolder"); 
+				/*elem = document.querySelector("div.menuHolder"); 
 				elem.style.transform =
 				    "perspective(700px) rotateX(" + -deg.x + "deg) " + 
-				    " rotateY(" + deg.y + "deg)";
-				
+				    " rotateY(" + deg.y + "deg)";*/
+				document.querySelector(":root").style.setProperty('--degx',  -deg.x + "deg");
+				document.querySelector(":root").style.setProperty('--degy',   deg.y + "deg");
 				  
 			}
 			if (widgetFullScreenDiplayed ==true){
@@ -537,10 +603,29 @@ define({
 				//document.querySelector("#calendar.on").style.opacity=1;
 				//calendar = document.querySelector("#calendar.on");
 				//if (calendarOn.style.opacity < 1) calendarOn.style.opacity = 1;
-				if (widgetOn == null && widgetId !=null) widgetOn = document.querySelector(widgetId+".on");
-				widgetOn.style.transform =    
-					"perspective(700px) rotateX(" + -deg.x + "deg) " +    
-					" rotateY(" + deg.y + "deg)";
+				if (widgetId !=null   ) {
+					widgetOn = document.querySelector(widgetId+".on");
+					if (!flipping && flipped == false){
+						/*widgetOn.style.transform =    
+							"perspective(700px) rotateX(" + -deg.x + "deg) " +    
+							" rotateY(" + deg.y + "deg)";*/
+						document.querySelector(":root").style.setProperty('--degx',  -deg.x + "deg");
+						document.querySelector(":root").style.setProperty('--degy',   deg.y + "deg");
+						document.querySelector(":root").style.setProperty('--degyFlipped',   (deg.y+180) + "deg");
+					}
+					else {
+						if ( flipped){
+							/*widgetFlipped.style.transform =    
+								"perspective(700px) rotateX(" + -deg.x + "deg) " +    
+								" rotateY(" + deg.y+180 + "deg)";*/
+								document.querySelector(":root").style.setProperty('--degx',  deg.x + "deg");
+								document.querySelector(":root").style.setProperty('--degy',   deg.y + "deg");
+								document.querySelector(":root").style.setProperty('--degyFlipped',   (deg.y+180) + "deg");
+						}
+					}
+				}
+				
+				
 					
 					
 				
@@ -1108,85 +1193,8 @@ define({
 			}
 			*/
 		}
-		function closeCalendarMenu(){
-			if (widgetFullScreenDiplayed){
-					
-				
-				widgetFullScreenDiplayed = false;
-				
-				calendar = document.querySelector("#calendar");
-				holder = document.querySelector("#widget_holder");
-				
-				/*setClassAndWaitForTransition(calendar,'off','visibility').then(function () {
-					console.log('transition calendar off');
-					//calendarOn.style.opacity = 0;
-					*/
-				
-				
-				
-				if (document.querySelector("#calendar.on") != null)	document.querySelector("#calendar.on").style.transform =    
-					"perspective(700px) rotateY(0deg) translateY(50px)  translateX(60px)  scale(0.35)";
-				
-				
-					setClassAndWaitForTransition(calendar,'off','opacity').then(function () {
-						console.log('transition calendar');
-						
-						calendarOn = null;
-						setClassAndWaitForTransition(holder,'','opacity').then(function () {
-							//calendar.setAttribute('class', 'off');
-							console.log('transition holder');
-							
-							//if (document.querySelector("#calendar.on") != null)	document.querySelector("#calendar.on").style.transform = 	"perspective(700px) rotateY(0deg) ";
-							
-							canvasDrawer.clearWidgetHtml(holder,calendar);
-							
-						});
-					});
-			}
-				
-				
-				//calendar.style.transform =    "perspective(700px) rotateX(0deg) rotateY(90deg) rotateZ(90deg)"; 
-				
-	      // });
-		}
-		function closeWidget(itemId){
-			if (widgetFullScreenDiplayed){
-					
-				
-				widgetFullScreenDiplayed = false;
-				
-				let item = document.querySelector(itemId);
-				holder = document.querySelector("#widget_holder");
-				
-				
-				if (document.querySelector(itemId+".on") != null)	{
-					if (itemId == '#calendar'){
-						document.querySelector(itemId+".on").style.transform =    "perspective(700px) rotateY(0deg) translateY(50px)  translateX(60px)  scale(0.35)";
-					}
-					else if (itemId == '#weather'){
-						document.querySelector(itemId+".on").style.transform =    "perspective(700px) rotateY(0deg) translateY(50px)  translateX(-60px)  scale(0.35)";
-					}
-					
-				}
-					
-				
-				
-					setClassAndWaitForTransition(item,'off','opacity').then(function () {
-						console.log('transition widget');
-						
-						widgetOn = null;
-						setClassAndWaitForTransition(holder,'','opacity').then(function () {
-							//calendar.setAttribute('class', 'off');
-							console.log('transition holder');
-							
-							//if (document.querySelector("#calendar.on") != null)	document.querySelector("#calendar.on").style.transform = 	"perspective(700px) rotateY(0deg) ";
-							
-							canvasDrawer.clearWidgetHtml(holder,item);
-							
-						});
-					});
-			}
-		}
+		
+		
 		function bindEvents() {
 			document.getElementById('canvas-content').addEventListener('click', function(e) {
 				handleClick(this,e);

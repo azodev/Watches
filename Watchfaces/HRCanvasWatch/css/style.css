@@ -7,6 +7,9 @@
 :root {
 	--color1: rgb(24,82,129); 
 	--color2: rgb(192,221,243);
+	--degx: 0deg;
+	--degy: 0deg;
+	--degyFlipped: 180deg;
 }
 img {
   border: 0;
@@ -119,40 +122,82 @@ html, body {
   --aug-br: 20px;
   --aug-tr: 20px; 
    /*will-change: transform;*/
-   scroll-behavior: smooth;
-    
+   transform-style: preserve-3d; 
     /*transform: perspective(700px) rotateY(0deg); */
 }
 
 #calendar.off, #weather.off {
 	
-	transform: perspective(700px) rotateY(0deg) translateY(50px) translateX(60px) scale(0.35); 
+	transform: perspective(700px) rotateY(var(--degy)) rotateX(var(--degx)) translateY(50px) translateX(60px) scale(0.35); 
 	opacity:0;
 	transition-property: opacity, transform;
 	transition-duration: 0.3s; 
 	transition-timing-function: ease-in;
 
 }
- #weather.off {
- 	transform: perspective(700px) rotateY(0deg) translateY(50px) translateX(-60px) scale(0.35); 
- }
+#calendar.flip, #weather.flip {
+	transform: perspective(700px) rotateY(var(--degyFlipped)) rotateX(var(--degx)); 
+	transition-property: transform;
+	transition-duration: 0.3s;
+	transition-timing-function: ease-in;
+	transform-style: preserve-3d;
+	opacity:1; 
+	position: absolute;
+}
 
+ #weather.off {
+ 	transform: perspective(700px) rotateY(var(--degy)) rotateX(var(--degx)) translateY(50px) translateX(-60px) scale(0.35); 
+ }
+#weather.reset {
+ 	transform: perspective(700px) rotateY(var(--degy)) rotateX(var(--degx)); 
+ 	transition-property: transform;
+	transition-duration: 0.1s;
+	transition-timing-function: ease-in;
+	transform-style: preserve-3d;
+	opacity:1; 
+	position: absolute;
+ }
 #calendar.on, #weather.on {
 	
-	transform: perspective(700px) rotateY(0deg) ; 
+	transform: perspective(700px) rotateY(var(--degy)) rotateX(var(--degx)); 
 	transition-property: opacity, transform;
 	transition-duration: 0.3s;
 	transition-timing-function: ease-in;
 	opacity:1;
 }
+#overflower, #overflower-back {
+	backface-visibility: hidden; 
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 3.5%;
+	width:93%;
+	height:93%;
+}
+#overflower {
+	z-index: 11; 
+	/* for firefox 31 */
+	transform: rotateY(0deg) ;
+}
+
+/* back, initially hidden pane */
+#overflower-back {
+	z-index: 11;
+	transform: rotateY(180deg) ;
+}
+
+
 #overflower{
-	position: relative;
-	width: 100%;
-    height: 100%;
+	position: absolute;
+
     overflow:hidden;
-    transition-property: opacity, transform;
-	transition-duration: 0.1s;
-	transition-timing-function: ease-in;
+
+}
+#overflower-back{
+	position: absolute;
+
+    overflow:hidden;
+
 }
 
 #overflower.off{

@@ -357,12 +357,15 @@ define({
 			
 			let weather = document.createElement('div');
 			let overflower = document.createElement('div');
+			let overflowerBack = document.createElement('div');
+			overflowerBack.setAttribute ('id','overflower-back');
+			overflowerBack.innerHTML = 'Lorem lipsum';
 			/*
 			let overflower_content = document.createElement('div');
 			overflower_content.setAttribute ('id','overflower_content'); 
 			overflower.appendChild(overflower_content);
 			*/
-			weather.setAttribute ('id','weather');
+			weather.setAttribute ('id','weather'); 
 			weather.className = 'off';
 			weather.setAttribute('data-augmented-ui', 'tl-clip tr-clip bl-clip br-clip b-clip-x t-clip-x l-clip-y r-clip-y both');
 			overflower.setAttribute ('id','overflower');   //forecastInform.lastWeatherCallDate
@@ -377,10 +380,8 @@ define({
 				overflower.appendChild( ev.processHtml());
 			});
 			
-			let border = document.createElement('div');
-			border.setAttribute('data-augmented-ui-border','');
-			weather.appendChild(border);
 			weather.appendChild(overflower);
+			weather.appendChild(overflowerBack);
 			return weather;
 		}
 		

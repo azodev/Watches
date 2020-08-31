@@ -100,16 +100,19 @@ define({
 			
 			let calendar = document.createElement('div');
 			let overflower = document.createElement('div');
+			overflower.setAttribute ('id','overflower');
+			
+			
 			calendar.setAttribute ('id','calendar');
 			calendar.className = 'off';
 			calendar.setAttribute('data-augmented-ui', 'both tl-clip tr-clip bl-clip br-clip b-clip-x t-clip-x l-clip-y r-clip-y');
-			overflower.setAttribute ('id','overflower');
 			
 			myEvents.forEach(function(ev){
 				overflower.appendChild( ev.processHtml());
 			});
 			
 			calendar.appendChild(overflower);
+			
 			return calendar;
 		}
 
