@@ -227,7 +227,7 @@ define({
 						widgetOn = document.querySelector(widgetId+".on");
 						setTimeout(function(){
 							widgetFullScreenDiplayed = true;
-						},100);
+						},50);
 						/*
 						document.querySelector('.lastcall').addEventListener('click', function(e) {
 							 if (e.target !== this && e.target != document.querySelector("#overflower"))
@@ -611,6 +611,7 @@ define({
 							" rotateY(" + deg.y + "deg)";*/
 						document.querySelector(":root").style.setProperty('--degx',  -deg.x + "deg");
 						document.querySelector(":root").style.setProperty('--degy',   deg.y + "deg");
+						document.querySelector(":root").style.setProperty('--degxFlipped',    deg.x + "deg");
 						document.querySelector(":root").style.setProperty('--degyFlipped',   (deg.y+180) + "deg");
 					}
 					else {
@@ -618,8 +619,9 @@ define({
 							/*widgetFlipped.style.transform =    
 								"perspective(700px) rotateX(" + -deg.x + "deg) " +    
 								" rotateY(" + deg.y+180 + "deg)";*/
-								document.querySelector(":root").style.setProperty('--degx',  deg.x + "deg");
+								document.querySelector(":root").style.setProperty('--degx',  -deg.x + "deg");
 								document.querySelector(":root").style.setProperty('--degy',   deg.y + "deg");
+								document.querySelector(":root").style.setProperty('--degxFlipped',    deg.x + "deg");
 								document.querySelector(":root").style.setProperty('--degyFlipped',   (deg.y+180) + "deg");
 						}
 					}

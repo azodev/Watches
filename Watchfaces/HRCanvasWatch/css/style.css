@@ -9,6 +9,7 @@
 	--color2: rgb(192,221,243);
 	--degx: 0deg;
 	--degy: 0deg;
+	--degxFlipped: 0deg;
 	--degyFlipped: 180deg;
 }
 img {
@@ -136,7 +137,7 @@ html, body {
 
 }
 #calendar.flip, #weather.flip {
-	transform: perspective(700px) rotateY(var(--degyFlipped)) rotateX(var(--degx)); 
+	transform: perspective(700px) rotateY(var(--degyFlipped)) rotateX(var(--degxFlipped)); 
 	transition-property: transform;
 	transition-duration: 0.3s;
 	transition-timing-function: ease-in;

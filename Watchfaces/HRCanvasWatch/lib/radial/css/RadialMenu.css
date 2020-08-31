@@ -11,7 +11,7 @@ div.menuHolder {
     display:none;
     font-family: FutureNow;
     font-size:28px;
-    /*transform: perspective(3000px) rotateY(0deg) rotateX(0deg);*/
+    transform: perspective(700px) rotateY(var(--degy)) rotateX(var(--degx));
     
 }
 
