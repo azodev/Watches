@@ -122,8 +122,8 @@ html, body {
   --aug-tl: 20px;
   --aug-br: 20px;
   --aug-tr: 20px; 
-   /*will-change: transform;*/
-   transform-style: preserve-3d; 
+   will-change: transform;
+  /* transform-style: preserve-3d;*/ 
     /*transform: perspective(700px) rotateY(0deg); */
 }
 
