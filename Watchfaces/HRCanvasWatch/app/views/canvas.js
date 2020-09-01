@@ -1223,14 +1223,14 @@ define({
 			
 			up.addEventListener('click', function(e) {
 				console.log('up'); 
-				calendarY = document.getElementById ('overflower').scrollTop-80;
+				calendarY = document.getElementById ('overflower').scrollTop-220;
 				console.log(document.getElementById ('overflower').scrollTop);
-				canvasDrawer.scrollTop(document.getElementById ('overflower'),-100,500); 
+				canvasDrawer.scrollTop(document.getElementById ('overflower'),-220,500); 
 			});
 			down.addEventListener('click', function(e) {
 				console.log('down');
-				calendarY = document.getElementById ('overflower').scrollTop+80;
-				canvasDrawer.scrollTop(document.getElementById ('overflower'),100,500); 
+				calendarY = document.getElementById ('overflower').scrollTop+220;
+				canvasDrawer.scrollTop(document.getElementById ('overflower'),220,500); 
 			});
 			window.addEventListener("ambientmodechanged", function(e) {
 				console.log('ambientmodechanged event');
