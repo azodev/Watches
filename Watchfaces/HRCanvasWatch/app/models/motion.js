@@ -125,7 +125,7 @@ define({
 		 * @fires models.motion.start
 		 */
 		function onSensorStartSuccess() {
-			e.fire('start');
+			//e.fire('start');
 			isEnable = true;
 		}
 

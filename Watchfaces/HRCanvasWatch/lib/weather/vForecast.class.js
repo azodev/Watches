@@ -83,6 +83,88 @@ class vForecast {
 	    
 	   
 	    block.appendChild(header);
+	    
+	    
+	    let middle =document.createElement('table');
+	    middle.className = 'middle';
+	    row = middle.insertRow();
+	    cell = row.insertCell();
+	    cell.className = 'title';
+	    text = document.createTextNode('Temperature:');
+	    cell.appendChild(text);
+	    
+	    cell = row.insertCell();
+	    cell.className = 'value';
+	    text = document.createTextNode(Math.round(this.main.temp)+"°");
+	    cell.appendChild(text);
+	    
+	    cell = row.insertCell();
+	    cell.className = 'title';
+	    text = document.createTextNode('Pressure:');
+	    cell.appendChild(text);
+	    
+	    cell = row.insertCell();
+	    cell.className = 'value';
+	    text = document.createTextNode(this.main.pressure);
+	    cell.appendChild(text);
+	    
+	    //2nd
+	    row = middle.insertRow();
+	    cell = row.insertCell();
+	    cell.className = 'title';
+	    text = document.createTextNode('Temp. min:');
+	    cell.appendChild(text);
+	    
+	    cell = row.insertCell();
+	    cell.className = 'value';
+	    text = document.createTextNode(Math.round(this.main.temp_min)+"°");
+	    cell.appendChild(text);
+	    
+	    cell = row.insertCell();
+	    cell.className = 'title'; 
+	    text = document.createTextNode('Pres. Sea:');
+	    cell.appendChild(text);
+	    
+	    cell = row.insertCell();
+	    cell.className = 'value';
+	    text = document.createTextNode(this.main.sea_level);
+	    cell.appendChild(text);
+	    
+	    
+	    
+	    row = middle.insertRow();
+	    cell = row.insertCell();
+	    cell.className = 'title';
+	    text = document.createTextNode('Temp. max:');
+	    cell.appendChild(text);
+	    
+	    cell = row.insertCell();
+	    cell.className = 'value';
+	    text = document.createTextNode(Math.round(this.main.temp_max)+"°");
+	    cell.appendChild(text);
+	    
+	    cell = row.insertCell();
+	    cell.className = 'title';
+	    text = document.createTextNode('Humidity:');
+	    cell.appendChild(text);
+	    
+	    cell = row.insertCell();
+	    cell.className = 'value';
+	    text = document.createTextNode(this.main.humidity+"%");
+	    cell.appendChild(text);
+	    
+	    block.appendChild(middle);
+	    
+	    let bottom =document.createElement('table');
+	    bottom.className = 'bottom';
+
+	    row = bottom.insertRow();
+	    cell = row.insertCell();
+	    cell.className = 'icon';
+	    text = document.createTextNode(this.getMapping(this.weather.id, this.day));
+	    cell.appendChild(text);
+	    
+	    block.appendChild(bottom);
 		block.setAttribute('augmented-ui', 'tl-clip tr-clip  bl-clip br-clip exe');
 		//console.log(block);
 		return block;

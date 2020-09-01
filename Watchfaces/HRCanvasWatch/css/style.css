@@ -205,7 +205,7 @@ html, body {
   --aug-tr: 5px; 
   margin:1%;
   width:98%;
-  height:60px;
+  min-height:60px;
   padding:5px; 
   color:#FFFFFF;
   z-index: 11;
@@ -213,33 +213,79 @@ html, body {
 }
 #overflower-back .block .header{
   width:100%;
-  height:100%;
+  height:60px;
   font-family:FutureNow;
   vertical-align: middle;
   position: relative;
+}
+.header td{
+}
+
+#overflower-back .block .middle{
+  width:100%;
+  height: 60px;
+  font-family:FutureNow;
+  vertical-align: middle;
+  position: relative;
+  margin-top:10px;
+}
+#overflower-back .block .bottom{
+  width:100%;
+  height:80px;
+  font-family:FutureNow;
+  vertical-align: middle;
+  position: relative;
+  margin-top:5px;
+  margin-bottom:5px;
+  vertical-align: top;
+}
+#overflower-back .block .bottom .icon{
+	font-size:80px;
+	font-family: artill_clean_icons;
+	height:75px;
+	
+	line-height: 20px;
+	vertical-align: middle;
+	
+}
+
+#overflower-back .block .middle .title{
+	font-size:15px;
+	width:36%;
+	text-align: right;
+	vertical-align: middle;
+	line-height: 15px;
+}
+#overflower-back .block .middle .value{
+	font-size:15px;
+	width:14%;
+	text-align: right;
+	vertical-align: middle;
+	line-height: 15px;
 }
 #overflower-back .block .header .city{
 	font-size:20px;
 	width:20%;
 	text-align:left;
-	vertical-align: top;
+	vertical-align: middle;
 }
 #overflower-back .block .header .city-value{
 	font-size:16px;
 	width:auto;
 	text-align:left;
+	vertical-align: middle;
 }
 #overflower-back .block .header .date{
 	width:60%;
 	font-size:16px;
 	text-align: right;
-	vertical-align: top;
+	vertical-align: middle;
 }
 #overflower-back .block .header .hour{
 	font-size:35px;
 	width:20%;
 	text-align: right;
-	vertical-align: top;
+	vertical-align: middle;
 }
 
 #overflower.off{
@@ -323,7 +369,7 @@ html, body {
 	position: relative;
 	float:left;
 	margin: 2px 2px;
-	height: 70px;
+	min-height: 70px;
 	width: 46px;
 	--aug-tl: 5px;
 	--aug-br: 5px;

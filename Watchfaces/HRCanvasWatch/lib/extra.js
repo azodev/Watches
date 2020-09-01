@@ -6,7 +6,6 @@ function setClassAndWaitForTransition(node, newClass, prop) {
 				resolve();
 			}
 		}
-		console.log(node);
 		node.addEventListener('transitionend', handler);
 		node.setAttribute('class', newClass);
 	});

@@ -243,6 +243,7 @@ define({
 						setClassAndWaitForTransition(element,'block click','color').then(function () {
 							console.log('transition weather');
 							let ov = document.querySelector("#overflower-back");
+							ov.innerHTML = '';
 							let block = weatherModel.getElementDetails(element.getAttribute('block-id'));
 							ov.appendChild(block);
 							setClassAndWaitForTransition(element,'block','color').then(function () {
@@ -253,9 +254,12 @@ define({
 
 								setClassAndWaitForTransition(document.getElementById('weather'),'flip','transform').then(function () {
 									console.log('flipped');
-									flipping=false;
-									flipped = true; 
-									setFlipBackWidgetAction(document.querySelector('#overflower-back'),'.overflower-back');
+									setTimeout(function (){
+										flipping=false;
+										flipped = true; 
+										setFlipBackWidgetAction(document.querySelector('#overflower-back'),'.overflower-back'); 
+									}, 50)
+									
 								});
 								
 							});
@@ -352,7 +356,9 @@ define({
 						setClassAndWaitForTransition(element,'event click','color').then(function () {
 							console.log('transition event');
 							element.setAttribute('class', 'event');
-							
+							canvasDrawer.startShow();
+							widgetId = null;
+							closeWidget('#calendar');
 						});
 							
 					});
@@ -371,45 +377,36 @@ define({
 		}
 		function setFlipBackWidgetAction(node,className){
 			node.addEventListener('click', function(e) {
-				if (	   e.target == document.querySelector("#overflower-back") 
+				let ovb = document.querySelector("#overflower-back");
+				if (	   e.target == ovb
+						|| hasSomeParentTheClass(e.target, 'overflower-back')
+						
 				 ){
 					 flipping=true;
 					 console.log('flipper');
-					 setClassAndWaitForTransition(document.getElementById('weather'),'on','transform').then(function () {
-							console.log('flipped'); 
-							flipping=false;
-							flipped = false; 
-							node.innerHTML = '';
-						});
-					 return;
+					 
+					 setTimeout(function (){
+						 let weather = document.getElementById('weather');
+						 setClassAndWaitForTransition(weather,'on','transform').then(function () {
+								console.log('flipped'); 
+								flipping=false;
+								flipped = false; 
+								while (ovb.firstChild) {
+									ovb.removeChild(ovb.lastChild);
+								  }
+								//node.innerHTML = '';
+							});
+						 return;
+						 
+						 
+					 },50);
+					 
 				 }
 			});
 		}
 		function setCloseWidgetAction (node,closeF,itemId){
 			node.addEventListener('click', function(e) {
-				
-				/*if (hasSomeParentTheClass(e.target),'overflower-back'){
-					 flipping=true;
-					 console.log('flipper');
-					 setClassAndWaitForTransition(document.getElementById('weather'),'on','transform').then(function () {
-							console.log('flipped'); 
-							flipping=false;
-							flipped = false; 
-						});
-					 return;
-				}*/
-				/*if (hasSomeParentTheClass(e.target),'overflower'){
-					canvasDrawer.startShow();
-					widgetId = null;
-					closeF(itemId); 
-					return ;
-				}*/
-				
-				console.log(e.target);
-				
-				
-				
-				if (		e.target !== this 
+					if (		e.target !== this 
 						 && e.target != document.querySelector("#overflower") 
 						 )
 					    return;
@@ -1477,53 +1474,26 @@ define({
 			
 			setIntervalOnModels();
 			
-			//pedometerSensor.start();
 			heartRate.start();//mkHR();
 			locationModel.start();
-			//mkLocation();
 			
 			if (motionSensor.isAvailable()) {
 				motionSensor.setOptions({
-					sampleInterval : 10,
+					sampleInterval : 100,
 					maxBatchCount : 1000
 				});
 				motionSensor.setChangeListener();
 				motionSensor.start();
 			}
-			if (pressureSensor.isAvailable()) {
-				/*pressureSensor.setOptions({
-					sampleInterval : 1000,
-					maxBatchCount : intervals.pressure
-				});
-				pressureSensor.setChangeListener();*/
-				pressureSensor.start();
-			}
+
+			pressureSensor.start();
 			sysInfo.checkBattery();
 			calendarModel.accessCalendars(); 
 			
 			backendLoaded = true;
 				
 			canvasDrawer.startShow(); 
-			
-			//weatherModel.onUpdateTriggered('auto weather interval');
-			/*	
-			pressureInterval = setInterval(function(e) {
-				pressureSensor.start();
-			},intervals.pressure
-			);
-			*/
-				
-			/*
-			filterEvents = setInterval(function(e) {
-				event.fire('filterEvents',e);
-			},30000//300000
-			);	
-			updateEvents = setInterval(function(e) {
-				let curDate = new Date();
-				if (curDate.getHours() >= 7 && curDate.getHours() <= 22) 	event.fire('updateEvents',e);
-			},60000//600000
-			);	
-			*/
+
 			
 			
 			popolate(max_particles,effect);
