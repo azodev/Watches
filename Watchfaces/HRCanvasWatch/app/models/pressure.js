@@ -173,10 +173,6 @@ define({
         function updateAltitudeValue(){
         	//reference = 1007;
 			//altitude = -8727 * Math.log(averagePressure / refferencePressure);
-        	console.log(refferencePressure);
-        	console.log(refferencePressureSea);
-        	console.log(averagePressure);
-        	console.log(currentPressure);
         	
         	if (refferencePressure != null) altitude = ((Math.pow(refferencePressure/averagePressure,1/5.257)-1)*(temperature+273.15)/0.0065);
         	if (refferencePressureSea != null) altitude = altcalc(refferencePressureSea*100, temperature+273.15, currentPressure*100);

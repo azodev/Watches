@@ -359,6 +359,7 @@ define({
 			let overflower = document.createElement('div');
 			let overflowerBack = document.createElement('div');
 			overflowerBack.setAttribute ('id','overflower-back');
+			overflowerBack.className = 'overflower-back';
 			//overflowerBack.innerHTML = 'Lorem lipsum';
 			/*
 			let overflower_content = document.createElement('div');
@@ -367,9 +368,10 @@ define({
 			*/
 			weather.setAttribute ('id','weather'); 
 			weather.className = 'off';
-			weather.setAttribute('data-augmented-ui', 'tl-clip tr-clip bl-clip br-clip b-clip-x t-clip-x l-clip-y r-clip-y both');
-			overflower.setAttribute ('id','overflower');   //forecastInform.lastWeatherCallDate
-			overflower.setAttribute('data-augmented-ui-reset','');
+			weather.setAttribute('augmented-ui', 'tl-clip tr-clip bl-clip br-clip b-clip-x t-clip-x l-clip-y r-clip-y exe');
+			overflower.setAttribute ('id','overflower');   
+			overflower.className='overflower';
+			//overflower.setAttribute('augmented-ui-reset','');
 			
 			let lastcall = document.createElement('div');
 			lastcall.className = 'lastcall';

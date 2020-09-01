@@ -26,12 +26,12 @@ class ForecastDay {
 		let day = document.createElement('div');
 		let forecast = null;
 		day.className = 'day';
-		day.setAttribute('data-augmented-ui', 'tl-clip tr-clip both');
+		day.setAttribute('augmented-ui', 'tl-clip tr-clip exe');
 		day.innerHTML  = this.getDateToString();
 		day_weather.appendChild(day);
 		forecast = document.createElement('div');
 		forecast.className = 'forecast';
-		forecast.setAttribute('data-augmented-ui', 'tr-clip br-round bl-clip both');
+		forecast.setAttribute('augmented-ui', 'tr-clip br-round bl-clip exe');
 		
 		
 		for (i = 0 ; i< this.forecasts.length ; i++){

@@ -29,21 +29,21 @@ class DayEvents {
 		let end = null;
 		let title= null, location = null;
 		day.className = 'day';
-		day.setAttribute('data-augmented-ui', 'tl-clip tr-clip both');
+		day.setAttribute('augmented-ui', 'tl-clip tr-clip exe');
 		day.innerHTML  = this.getDateToString();
 		day_events.appendChild(day);
 		for (i = 0 ; i< this.events.length ; i++){
 			event = document.createElement('div');
 			event.className = 'event';
 			if (i==0){
-				event.setAttribute('data-augmented-ui', 'tr-clip br-round bl-clip both');
+				event.setAttribute('augmented-ui', 'tr-clip br-round bl-clip exe');
 			}
 			else {
-				event.setAttribute('data-augmented-ui', 'tl-round tr-clip  bl-clip br-round both');
+				event.setAttribute('augmented-ui', 'tl-round tr-clip  bl-clip br-round exe');
 			}
 			dates =document.createElement('div');
 			dates.className = (this.events[i].isFullDay())?'dates fd':'dates';
-			dates.setAttribute('data-augmented-ui', 'tl-round tr-clip  bl-clip br-round both');
+			dates.setAttribute('augmented-ui', 'tl-round tr-clip  bl-clip br-round exe');
 			if (!this.events[i].isFullDay()){
 				start = document.createElement('span');
 				start.className = 'start';

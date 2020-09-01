@@ -228,17 +228,10 @@ define({
 						setTimeout(function(){
 							widgetFullScreenDiplayed = true;
 						},50);
-						/*
-						document.querySelector('.lastcall').addEventListener('click', function(e) {
-							 if (e.target !== this && e.target != document.querySelector("#overflower"))
-								    return;
-							canvasDrawer.startShow();
-							widgetId = null;
-							closeWidget('#weather');
-							
-						});*/
+
 						setCloseWidgetAction(document.querySelector('.lastcall'),closeWidget,'#weather');  
-						setCloseWidgetAction(weather,closeWidget,'#weather'); 
+						setCloseWidgetAction(document.querySelector('.overflower'),closeWidget,'#weather'); 
+						  
 					});
 		            
 		            
@@ -249,29 +242,20 @@ define({
 						console.log('click weather');
 						setClassAndWaitForTransition(element,'block click','color').then(function () {
 							console.log('transition weather');
-							
+							let ov = document.querySelector("#overflower-back");
+							let block = weatherModel.getElementDetails(element.getAttribute('block-id'));
+							ov.appendChild(block);
 							setClassAndWaitForTransition(element,'block','color').then(function () {
-								/*let ov = document.querySelector("#overflower");
-								setClassAndWaitForTransition(ov,'off','transform').then(function () {
-									ov.innerHTML = "";
-								});*/
+
+								
 								console.log('flip');
 								flipping = true; 
-								/*
-								let split  = document.querySelector('#weather.on').style.transform.split(' ');
-								console.log(split);
-								split[2]= 'rotateY(0deg)';
-								console.log(split.join(' '));
-								document.querySelector('#weather.on').style.transform =    split.join(' ');
-								*/
+
 								setClassAndWaitForTransition(document.getElementById('weather'),'flip','transform').then(function () {
 									console.log('flipped');
 									flipping=false;
 									flipped = true; 
-									let ov = document.querySelector("#overflower-back");
-									console.log(element.getAttribute('block-id'));
-									let block = weatherModel.getElementDetails(element.getAttribute('block-id'));
-									ov.appendChild(block);
+									setFlipBackWidgetAction(document.querySelector('#overflower-back'),'.overflower-back');
 								});
 								
 							});
@@ -385,32 +369,55 @@ define({
 			}
 			
 		}
-		function setCloseWidgetAction (node,closeF,itemId){
+		function setFlipBackWidgetAction(node,className){
 			node.addEventListener('click', function(e) {
-				 if (		e.target !== this 
-						 && e.target != document.querySelector("#overflower") 
-						 && e.target != document.querySelector("#overflower-back")
-						 && e.target != document.querySelector("#overflower-back .block")
-						 && e.target != document.querySelector("#overflower-back .block .hour") 
-						 )
-					    return;
-				 
-				 if (	   e.target == document.querySelector("#overflower-back") 
-						&& e.target == document.querySelector("#overflower-back .block") 
-						&& e.target == document.querySelector("#overflower-back .block .hour") 
+				if (	   e.target == document.querySelector("#overflower-back") 
 				 ){
 					 flipping=true;
+					 console.log('flipper');
 					 setClassAndWaitForTransition(document.getElementById('weather'),'on','transform').then(function () {
-							console.log('flipped');
+							console.log('flipped'); 
+							flipping=false;
+							flipped = false; 
+							node.innerHTML = '';
+						});
+					 return;
+				 }
+			});
+		}
+		function setCloseWidgetAction (node,closeF,itemId){
+			node.addEventListener('click', function(e) {
+				
+				/*if (hasSomeParentTheClass(e.target),'overflower-back'){
+					 flipping=true;
+					 console.log('flipper');
+					 setClassAndWaitForTransition(document.getElementById('weather'),'on','transform').then(function () {
+							console.log('flipped'); 
 							flipping=false;
 							flipped = false; 
 						});
 					 return;
-				 }
+				}*/
+				/*if (hasSomeParentTheClass(e.target),'overflower'){
+					canvasDrawer.startShow();
+					widgetId = null;
+					closeF(itemId); 
+					return ;
+				}*/
+				
+				console.log(e.target);
+				
+				
+				
+				if (		e.target !== this 
+						 && e.target != document.querySelector("#overflower") 
+						 )
+					    return;
+				 
+				 
 				canvasDrawer.startShow();
 				widgetId = null;
 				closeF(itemId);
-				
 			}); 
 			
 		}
@@ -422,19 +429,7 @@ define({
 				holder = document.querySelector("#widget_holder");
 				let item = document.querySelector(itemId);
 				
-				
-				/*
-				if (document.querySelector(itemId+".on") != null)	{
-					if (itemId == '#calendar'){
-						document.querySelector(itemId+".on").style.transform =    "perspective(700px) rotateY(0deg) translateY(50px)  translateX(60px)  scale(0.35)";
-					}
-					else if (itemId == '#weather'){
-						document.querySelector(itemId+".on").style.transform =    "perspective(700px) rotateY(0deg) translateY(50px)  translateX(-60px)  scale(0.35)";
-					}
-					
-				}
-					
-				*/
+
 				
 					setClassAndWaitForTransition(item,'off','opacity').then(function () {
 						console.log('transition widget');
@@ -621,10 +616,10 @@ define({
 						/*widgetOn.style.transform =    
 							"perspective(700px) rotateX(" + -deg.x + "deg) " +    
 							" rotateY(" + deg.y + "deg)";*/
-					/*	document.querySelector(":root").style.setProperty('--degx',  -deg.x + "deg");
+						document.querySelector(":root").style.setProperty('--degx',  -deg.x + "deg");
 						document.querySelector(":root").style.setProperty('--degy',   deg.y + "deg");
 						document.querySelector(":root").style.setProperty('--degxFlipped',    deg.x + "deg");
-						document.querySelector(":root").style.setProperty('--degyFlipped',   (deg.y+180) + "deg");*/
+						document.querySelector(":root").style.setProperty('--degyFlipped',   (deg.y+180) + "deg");
 					}
 					else {
 						if ( flipped){

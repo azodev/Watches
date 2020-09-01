@@ -103,27 +103,27 @@ html, body {
     margin-top: 50px;
     
     
-  --aug-border-all: 2px;
-  --aug-inlay-all: 4px;
+  --aug-border: 2px;
+  --aug-inset: 4px;
   --aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
-  --aug-inlay-bg: radial-gradient(  at top right,      var(--color1),      transparent 90%    ),    radial-gradient(      farthest-side at top left,      var(--color2),      transparent 90%    ),    0 0/72px 72px repeating-radial-gradient(var(--color1),      #000000 1px,      transparent 1px,      transparent 13px    ), #000011 ;  
-  --aug-inlay-opacity: 0.9;  
-  --aug-b-extend1: 60%; 
-  --aug-t-extend1: 60%; 
-  --aug-b: 5px;
-  --aug-t: 5px;
+  --aug-inset-bg: radial-gradient(  at top right,      var(--color1),      transparent 90%    ),    radial-gradient(      farthest-side at top left,      var(--color2),      transparent 90%    ),    0 0/72px 72px repeating-radial-gradient(var(--color1),      #000000 1px,      transparent 1px,      transparent 13px    ), #000011 ;  
+  --aug-inset-opacity: 0.9;  
+  --aug-b-width: 60%;
+  --aug-t-width: 60%;
+  --aug-b-height: 5px;
+  --aug-t-height: 5px;
   
-  --aug-l-extend1: 60%;
-  --aug-r-extend1: 60%;
-  --aug-l: 3px;
-  --aug-r: 3px;
+  --aug-l-height: 60%;
+  --aug-r-height: 60%;
+  --aug-l-width: 3px;
+  --aug-r-width: 3px;
   
   --aug-bl: 20px;
   --aug-tl: 20px;
   --aug-br: 20px;
   --aug-tr: 20px; 
    will-change: transform;
-  /* transform-style: preserve-3d;*/ 
+   transform-style: preserve-3d;
     /*transform: perspective(700px) rotateY(0deg); */
 }
 
@@ -149,15 +149,7 @@ html, body {
  #weather.off {
  	transform: perspective(700px) rotateY(var(--degy)) rotateX(var(--degx)) translateY(50px) translateX(-60px) scale(0.35); 
  }
-#weather.reset {
- 	transform: perspective(700px) rotateY(var(--degy)) rotateX(var(--degx)); 
- 	transition-property: transform;
-	transition-duration: 0.1s;
-	transition-timing-function: ease-in;
-	transform-style: preserve-3d;
-	opacity:1; 
-	position: absolute;
- }
+
 #calendar.on, #weather.on {
 	
 	transform: perspective(700px) rotateY(var(--degy)) rotateX(var(--degx)); 
@@ -202,11 +194,11 @@ html, body {
 }
 
 #overflower-back .block{
-	  --aug-border-all: 1px;
-  --aug-inlay-all: 2px;
+  --aug-border: 1px;
   --aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
-  --aug-inlay-bg: rgba(0, 0, 0, 0.10) ;  
-  --aug-inlay-opacity: 0.9;  
+  --aug-inset: 2px;
+  --aug-inset-bg: rgba(0, 0, 0, 0.10) ;  
+  --aug-inset-opacity: 0.9;  
   --aug-bl: 5px;
   --aug-tl: 5px;
   --aug-br: 5px;
@@ -220,7 +212,7 @@ html, body {
   
 }
 #overflower-back .block .header{
-	width:100%;
+  width:100%;
   height:100%;
   font-family:FutureNow;
   vertical-align: middle;
@@ -288,9 +280,9 @@ html, body {
 	position: relative;
 	padding: 5px;
 	margin: 5px auto;
-	--aug-inlay-all: 2px;
-	--aug-inlay-bg: rgba(0, 0, 0, 0.15);
-	--aug-border-all: 1px;
+	--aug-inset: 2px;
+	--aug-inset-bg: rgba(0, 0, 0, 0.15);
+	--aug-border: 1px;
 	--aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
 	background-color:transparent; 
 	--aug-tl: 5px;
@@ -310,9 +302,9 @@ html, body {
 	position: relative;
 	padding: 3px 5px;
 	margin: 5px auto;
-	--aug-inlay-all: 1px;
-	--aug-inlay-bg: rgba(0, 0, 0, 0);
-	--aug-border-all: 1px;
+	--aug-inset: 1px;
+	--aug-inset-bg: rgba(0, 0, 0, 0);
+	--aug-border: 1px;
 	--aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
 	background-color:transparent; 
 	--aug-tl: 5px;
@@ -337,10 +329,9 @@ html, body {
 	--aug-br: 5px;
 	--aug-bl: 5px;
 	--aug-tr: 5px;
-	--aug-inlay-all: 0px;
-	--aug-inlay-bg: rgba(0, 0, 0, 0.30);
-	/*--aug-border: 1px;
-	--aug-border-bg: linear-gradient(to right, var(--color2), var(--color1));*/ 
+	--aug-inset: 0px;
+	--aug-inset-bg: rgba(0, 0, 0, 0.30);
+	
 	background-color:transparent; 
 	text-align:center;
 	transition: color 0.2s ease, background 0.2s ease; 
@@ -379,14 +370,14 @@ html, body {
 #calendar .event.click {
     /*background-color: white;*/
     color:black;
-    --aug-inlay-bg: rgba(255, 255, 255, 0.50);
+    --aug-inset-bg: rgba(255, 255, 255, 0.50);
     background:  rgba(255, 255, 255, 0.50);
 	transition: --aug-inset-bg 0.2s ease, color 0.2s ease, background 0.2s ease;  
 }
 #weather div.block.click {
     /*background-color: white;*/
     color:black;
-    --aug-inlay-bg: rgba(255, 255, 255, 0.50);
+    --aug-inset-bg: rgba(255, 255, 255, 0.50);
     background:  rgba(255, 255, 255, 0.50);
 	transition: color 0.2s ease, background 0.2s ease; 
 }
@@ -401,9 +392,9 @@ html, body {
 	position:absolute;
 	z-index:12;
 	padding: 5px;
-	--aug-inlay-all: 1px;
-	--aug-inlay-bg: rgba(0, 0, 0, 0.25);
-	--aug-border-all: 1px;
+	--aug-inset: 1px;
+	--aug-inset-bg: rgba(0, 0, 0, 0.25);
+	--aug-border: 1px;
 	--aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
 	--aug-tl: 5px;
 	--aug-br: 5px;
@@ -456,10 +447,10 @@ html, body {
   --aug-br: 3px;
   --aug-bl: 5px;
   --aug-tr: 5px;
-  --aug-inlay-all: 0px;
-  --aug-border-all: 1px;
+  --aug-inset: 0px;
+  --aug-border: 1px;
   --aug-border-bg:  var(--color1);
-  --aug-inlay-bg:  var(--color1);
+  --aug-inset-bg:  var(--color1);
   font-size: 15px; 
   text-align: right;
   padding-top: 5px;

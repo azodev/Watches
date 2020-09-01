@@ -6,6 +6,7 @@ function setClassAndWaitForTransition(node, newClass, prop) {
 				resolve();
 			}
 		}
+		console.log(node);
 		node.addEventListener('transitionend', handler);
 		node.setAttribute('class', newClass);
 	});
@@ -33,4 +34,8 @@ function fancyTimeFormat(time)
     	ret += "" + mins;
     }
     return ret;
+}
+function hasSomeParentTheClass(element, classname) {
+    if (element.className != null && element.classList.length >0 && element.classList.contains(classname)) return true;
+    return element.parentNode && hasSomeParentTheClass(element.parentNode, classname);
 }
