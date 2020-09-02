@@ -144,6 +144,7 @@ define({
 		var max_time = frequency * max_particles;
 		var time_to_recreate = false;
 		var gravCenter = {x:180, y:180};
+		var gravCenterDiff = {x:0, y:0};
 		var clickPos = null;
 		var radialButton = null;
 		var drawTicks = false;
@@ -580,9 +581,10 @@ define({
 				canvasDrawer.processMotion(motionFromGyro,canvasContent.context);
 			}
 			gravCenter = canvasDrawer.getRadialGradientCoords();
-			
+			gravCenter.x = gravCenter.x-gravCenterDiff.x;
+			gravCenter.y = gravCenter.y-gravCenterDiff.y;
 			if (radialmenu.getOpen()){ 
-				deg.x = (gravCenter.y - 190)*1.2;
+				deg.x = (gravCenter.y - 180)*1.2;
 				deg.y = (gravCenter.x - 180)*1.2;
 				if (deg.x <= -15 ) deg.x = -15;
 				if (deg.x >= 15 ) deg.x = 15;
@@ -598,8 +600,8 @@ define({
 				  
 			}
 			if (widgetFullScreenDiplayed ==true){
-				deg.x = (gravCenter.y - 190)*1;
-				deg.y = (gravCenter.x - 180)*1;
+				deg.x = (gravCenter.y - 180)*1.2;
+				deg.y = (gravCenter.x - 180)*1.2;
 				if (deg.x <= -20 ) deg.x = -20;
 				if (deg.x >= 20 ) deg.x = 20;
 				if (deg.y <= -20 ) deg.y = -20; 
@@ -1164,7 +1166,12 @@ define({
 				/*animRequest = window.requestAnimationFrame(function() {
 					drawWatchContent();
 				});
+				
 */				
+				//gravCenter = {x:180,y:180};
+				
+				gravCenter = canvasDrawer.getRadialGradientCoords();
+				gravCenterDiff = {x:gravCenter.x -180, y: gravCenter.y-180};
 				animRequest = requestAnimationFrame(drawWatchContent);
 				break;
 			default:

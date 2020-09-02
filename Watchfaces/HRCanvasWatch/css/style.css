@@ -81,7 +81,8 @@ html, body {
     opacity:0.1;
     user-select: none;
     -moz-user-select: none;
-    font-family: 'FutureNow';
+    font-family: 'Syncopate';
+    font-weight: bold;
 }
 #widget_holder.on {
 	width: 100%;
@@ -214,7 +215,6 @@ html, body {
 #overflower-back .block .header{
   width:100%;
   height:60px;
-  font-family:FutureNow;
   vertical-align: middle;
   position: relative;
 }
@@ -224,7 +224,6 @@ html, body {
 #overflower-back .block .middle{
   width:100%;
   height: 60px;
-  font-family:FutureNow;
   vertical-align: middle;
   position: relative;
   margin-top:10px;
@@ -232,7 +231,6 @@ html, body {
 #overflower-back .block .bottom{
   width:100%;
   height:80px;
-  font-family:FutureNow;
   vertical-align: middle;
   position: relative;
   margin-top:5px;
@@ -243,46 +241,46 @@ html, body {
 	font-size:80px;
 	font-family: artill_clean_icons;
 	height:75px;
-	
+	font-weight: normal;
 	line-height: 20px;
 	vertical-align: middle;
 	
 }
 
 #overflower-back .block .middle .title{
-	font-size:15px;
+	font-size:11px;
 	width:36%;
 	text-align: right;
 	vertical-align: middle;
-	line-height: 15px;
+	line-height: 11px;
 }
 #overflower-back .block .middle .value{
-	font-size:15px;
+	font-size:11px;
 	width:14%;
 	text-align: right;
 	vertical-align: middle;
-	line-height: 15px;
-}
+	line-height: 11px;
+} 
 #overflower-back .block .header .city{
-	font-size:20px;
+	font-size:15px;
 	width:20%;
 	text-align:left;
 	vertical-align: middle;
 }
 #overflower-back .block .header .city-value{
-	font-size:16px;
+	font-size:11px;
 	width:auto;
 	text-align:left;
 	vertical-align: middle;
 }
 #overflower-back .block .header .date{
 	width:60%;
-	font-size:16px;
+	font-size:11px;
 	text-align: right;
 	vertical-align: middle;
 }
 #overflower-back .block .header .hour{
-	font-size:35px;
+	font-size:25px;
 	width:20%;
 	text-align: right;
 	vertical-align: middle;
@@ -291,7 +289,7 @@ html, body {
 #overflower.off{
 	transform:  scale(0.35);
 	/*height: 240px;*/
-}
+} 
 
 #up, #down{
 	
@@ -387,9 +385,9 @@ html, body {
 	position: relative;
 	width: 40px;
 	height: 5px;
-	font-size:16px;
-	line-height:16px;
-	font-family:FutureNow;
+	font-size:12px;
+	line-height:15px;
+	font-family: Syncopate;
 	
 }
 #weather .forecast .block .icon {
@@ -397,6 +395,7 @@ html, body {
 	width: 40px;
 	height: 42px;
 	font-size:38px;
+	font-weight: normal;
 	line-height:38px;
 	font-family: artill_clean_icons;
 }
@@ -407,9 +406,9 @@ html, body {
 	height: 16px;
 	margin: 0px 5%;
 	text-align:right;
-	font-size:16px;
-	line-height:16px;
-	font-family:FutureNow;
+	font-size:12px;
+	line-height:14px;
+	font-family: Syncopate;
 	color: #FFFFFF;
 }
 
@@ -429,8 +428,8 @@ html, body {
 }
 .dates {
 	height: 33px;
-	width: 50px;
-	font-size:15px; 
+	width: 53px;
+	font-size:11px; 
 	top: 5px;
 	left:5px;
 	color: #ffffff;
@@ -438,6 +437,7 @@ html, body {
 	position:absolute;
 	z-index:12;
 	padding: 5px;
+	
 	--aug-inset: 1px;
 	--aug-inset-bg: rgba(0, 0, 0, 0.25);
 	--aug-border: 1px;
@@ -459,25 +459,25 @@ html, body {
 	position:relative;
 	width : 40px;
 	height : 13px;
-	
+	text-align:center;
 	float:left;
 } 
 .event .title { 
 	min-height: 18px;
-	width: 195px;
+	width: 193px;
 	position: relative;
-	margin-top: 0px;
-	margin-left:55px;
-	font-size:16px;
+	margin-top: 3px;
+	margin-left:57px;
+	font-size:12px;
 	/*text-shadow: 0 0 10px cyan;*/
 }
 .event .location {
 	min-height: 15px;
-	width: 185px;
+	width: 193px;
 	position: relative;
 	margin-top: 2px;
-	margin-left:55px;
-	font-size:14px;
+	margin-left:57px;
+	font-size:10px;
 }
 #calendar .day, #weather .day{
   /*background-color: rgba(0,255,255, 0.53);*/
@@ -485,7 +485,7 @@ html, body {
   color: #ffffff;
   height: 22px;
   width: 50%;
-  margin:5px 5px 5px 1.5%;
+  margin:6px 5px 5px 1.5%;
   position: relative;
   /*left: 25px;
   bottom: 20px;*/
@@ -497,23 +497,23 @@ html, body {
   --aug-border: 1px;
   --aug-border-bg:  var(--color1);
   --aug-inset-bg:  var(--color1);
-  font-size: 15px; 
+  font-size: 11px; 
   text-align: right;
-  padding-top: 5px;
+  padding-top: 6px;
   padding-right:10px;
 	
 }
 #calendar .day_events  > .event{
-	margin-top: -5px;
+	margin-top: -6px;
 }
 #calendar .day_events  > .event ~ .event {
-	margin-top: 5px;
+	margin-top: 6px;
 }
 #weather .day_weather  > .forecast{
-	margin-top: -5px;
+	margin-top: -6px;
 }
 #weather .day_weather  > .forecast ~ .forecast {
-	margin-top: 5px;
+	margin-top: 6px;
 }
 
 @font-face {
@@ -526,6 +526,14 @@ html, body {
 @font-face {
     font-family: 'FutureNow';
     src: url('../data/FutureNow.ttf');
+}
+
+@font-face {
+  font-family: 'Syncopate';
+  font-style: normal;
+  font-weight: 400;
+  src:  url('../data/Syncopate.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 /*
