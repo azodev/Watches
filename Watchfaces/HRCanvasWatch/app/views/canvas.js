@@ -301,7 +301,7 @@ define({
 				break;		
 			case 'ice':
 				//sheet.deleteRule(1);
-				//sheet.insertRule(":root{--color1:blue;--color2:cyan;}",1); 
+				//sheet.insertRule(":root{--color1:blue;--color2:cyan;}",1);  
 				document.querySelector(":root").style.setProperty('--color1', 'rgb(24,82,129)');
 				document.querySelector(":root").style.setProperty('--color2', 'rgb(192,221,243)');
 				break;
@@ -601,8 +601,8 @@ define({
 				elem.style.transform =
 				    "perspective(700px) rotateX(" + -deg.x + "deg) " + 
 				    " rotateY(" + deg.y + "deg)";*/
-				document.querySelector(":root").style.setProperty('--degx',  -deg.x + "deg");
-				document.querySelector(":root").style.setProperty('--degy',   deg.y + "deg");
+				document.querySelector("div.menuHolder").style.setProperty('--degx',  -deg.x + "deg");
+				document.querySelector("div.menuHolder").style.setProperty('--degy',   deg.y + "deg");
 				  
 			}
 			if (widgetFullScreenDiplayed ==true){
@@ -621,20 +621,20 @@ define({
 						/*widgetOn.style.transform =    
 							"perspective(700px) rotateX(" + -deg.x + "deg) " +    
 							" rotateY(" + deg.y + "deg)";*/
-					/*	document.querySelector(":root").style.setProperty('--degx',  -deg.x + "deg");
-						document.querySelector(":root").style.setProperty('--degy',   deg.y + "deg");
-						document.querySelector(":root").style.setProperty('--degxFlipped',    deg.x + "deg");
-						document.querySelector(":root").style.setProperty('--degyFlipped',   (deg.y+180) + "deg");*/
+						document.querySelector(widgetId).style.setProperty('--degx',  -deg.x + "deg");
+						document.querySelector(widgetId).style.setProperty('--degy',   deg.y + "deg");
+						document.querySelector(widgetId).style.setProperty('--degxFlipped',    deg.x + "deg");
+						document.querySelector(widgetId).style.setProperty('--degyFlipped',   (deg.y+180) + "deg");
 					}
 					else {
 						if ( flipped){
 							/*widgetFlipped.style.transform =    
 								"perspective(700px) rotateX(" + -deg.x + "deg) " +    
 								" rotateY(" + deg.y+180 + "deg)";*/
-								document.querySelector(":root").style.setProperty('--degx',  -deg.x + "deg");
-								document.querySelector(":root").style.setProperty('--degy',   deg.y + "deg");
-								document.querySelector(":root").style.setProperty('--degxFlipped',    deg.x + "deg");
-								document.querySelector(":root").style.setProperty('--degyFlipped',   (deg.y+180) + "deg");
+								document.querySelector(widgetId).style.setProperty('--degx',  -deg.x + "deg");
+								document.querySelector(widgetId).style.setProperty('--degy',   deg.y + "deg");
+								document.querySelector(widgetId).style.setProperty('--degxFlipped',    deg.x + "deg");
+								document.querySelector(widgetId).style.setProperty('--degyFlipped',   (deg.y+180) + "deg");
 						}
 					}
 				}

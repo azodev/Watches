@@ -123,12 +123,17 @@ html, body {
   --aug-br: 20px;
   --aug-tr: 20px; 
    will-change: transform;
+   --degx: 0deg;
+	--degy: 0deg;
+	--degxFlipped: 0deg;
+	--degyFlipped: 180deg;
   /* transform-style: preserve-3d;*/ 
     /*transform: perspective(700px) rotateY(0deg); */
 }
 
 #calendar.off, #weather.off {
-	
+	--color1: rgb(24,82,129); 
+	--color2: rgb(192,221,243);
 	transform: perspective(700px) rotateY(var(--degy)) rotateX(var(--degx)) translateY(50px) translateX(60px) scale(0.35); 
 	opacity:0;
 	transition-property: opacity, transform;
@@ -284,7 +289,8 @@ html, body {
 }
 
 #calendar .event {
-
+	--color1: rgb(24,82,129); 
+	--color2: rgb(192,221,243);
 	position: relative;
 	padding: 5px;
 	margin: 5px auto;
@@ -310,6 +316,8 @@ html, body {
 	position: relative;
 	padding: 3px 5px;
 	margin: 5px auto;
+	--color1: rgb(24,82,129); 
+	--color2: rgb(192,221,243);
 	--aug-inlay-all: 1px;
 	--aug-inlay-bg: rgba(0, 0, 0, 0);
 	--aug-border-all: 1px;
@@ -391,6 +399,8 @@ html, body {
 	transition: color 0.2s ease, background 0.2s ease; 
 }
 .dates {
+		--color1: rgb(24,82,129); 
+	--color2: rgb(192,221,243);
 	height: 33px;
 	width: 50px;
 	font-size:15px; 
@@ -416,6 +426,8 @@ html, body {
 
 
 .dates.fd{
+		--color1: rgb(24,82,129); 
+	--color2: rgb(192,221,243);
 	--aug-inset-bg: linear-gradient(to right, var(--color1), var(--color2));
 } 
 .dates span{
@@ -443,6 +455,8 @@ html, body {
 	font-size:14px;
 }
 #calendar .day, #weather .day{
+		--color1: rgb(24,82,129); 
+	--color2: rgb(192,221,243);
   /*background-color: rgba(0,255,255, 0.53);*/
   text-shadow: 0 0 10px #000;
   color: #ffffff;
