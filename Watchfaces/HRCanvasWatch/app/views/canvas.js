@@ -1179,8 +1179,11 @@ define({
 				
 */				
 				//gravCenter = {x:180,y:180};
-				gravCenter = canvasDrawer.getGravityCenter(motionFromGyro);
-				gravCenterDiff = {x:gravCenter.x -180, y: gravCenter.y-180};
+				setTimeout(function (e){
+					gravCenter = canvasDrawer.getGravityCenter(motionFromGyro);
+					gravCenterDiff = {x:gravCenter.x -180, y: gravCenter.y-180};
+				}, 500);
+				
 				animRequest = requestAnimationFrame(drawWatchContent);
 				break;
 			default:
