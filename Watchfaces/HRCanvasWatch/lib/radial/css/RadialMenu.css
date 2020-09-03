@@ -12,7 +12,8 @@ div.menuHolder {
     font-family: FutureNow;
     font-size:28px;
     transform: perspective(700px) rotateY(var(--degy)) rotateX(var(--degx));
-    
+    backface-visibility: hidden; 
+	-webkit-backface-visibility: hidden;
 }
 
 svg.icons {
@@ -26,7 +27,8 @@ svg.menu {
     z-index:11;
     opacity:0.95;
     transition-timing-function: ease-out; 
-    
+    backface-visibility: hidden; 
+	-webkit-backface-visibility: hidden;
     
 }
 
