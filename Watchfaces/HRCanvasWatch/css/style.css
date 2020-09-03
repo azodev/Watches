@@ -125,8 +125,7 @@ html, body {
   --aug-tr: 20px; 
    will-change: transform;
    transform-style: preserve-3d;
-   backface-visibility: hidden; 
-	-webkit-backface-visibility: hidden;
+
     /*transform: perspective(700px) rotateY(0deg); */
 }
 
