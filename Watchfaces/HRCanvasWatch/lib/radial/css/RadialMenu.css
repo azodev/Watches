@@ -14,6 +14,7 @@ div.menuHolder {
     transform: perspective(700px) rotateY(var(--degy)) rotateX(var(--degx));
     backface-visibility: hidden; 
 	-webkit-backface-visibility: hidden;
+	transform-style: preserve-3d;
 }
 
 svg.icons {
@@ -29,7 +30,7 @@ svg.menu {
     transition-timing-function: ease-out; 
     backface-visibility: hidden; 
 	-webkit-backface-visibility: hidden;
-    
+    transform-style: preserve-3d;
 }
 
 svg.menu.inner {
