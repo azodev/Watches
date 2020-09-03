@@ -580,7 +580,8 @@ define({
 			if (motion !== null) 		{
 				canvasDrawer.processMotion(motionFromGyro,canvasContent.context);
 			}
-			gravCenter = canvasDrawer.getRadialGradientCoords();
+			gravCenter = canvasDrawer.getGravityCenter(motionFromGyro);
+			
 			gravCenter.x = gravCenter.x-gravCenterDiff.x;
 			gravCenter.y = gravCenter.y-gravCenterDiff.y;
 			if (radialmenu.getOpen()){ 
@@ -1169,8 +1170,7 @@ define({
 				
 */				
 				//gravCenter = {x:180,y:180};
-				
-				gravCenter = canvasDrawer.getRadialGradientCoords();
+				gravCenter = canvasDrawer.getGravityCenter(motionFromGyro);
 				gravCenterDiff = {x:gravCenter.x -180, y: gravCenter.y-180};
 				animRequest = requestAnimationFrame(drawWatchContent);
 				break;
@@ -1497,11 +1497,13 @@ define({
 			sysInfo.checkBattery();
 			calendarModel.accessCalendars(); 
 			
-			backendLoaded = true;
+			backendLoaded = true; 
 				
 			canvasDrawer.startShow(); 
 
 			
+			gravCenter = canvasDrawer.getGravityCenter(motionFromGyro);
+			gravCenterDiff = {x:gravCenter.x -180, y: gravCenter.y-180};
 			
 			popolate(max_particles,effect);
 			

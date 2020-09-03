@@ -59,6 +59,10 @@ define({
 			x : 180,
 			y : 180
 		};
+		var gravityCenter = {
+				x : 180,
+				y : 180
+			};
 		var radialGradientCoords = {
 			x : 180,
 			y : 180
@@ -759,6 +763,11 @@ define({
 			//console.log('x: '+motionAcceleration.x+' y: '+motionAcceleration.y);
 			return radialGradientCoords;
 		}
+		function getGravityCenter(motionAcceleration){
+			gravityCenter.x = Math.round(radialGradientCoordsD.x + (motionAcceleration.accelerationIncludingGravity.x * 4));
+			gravityCenter.y = Math.round(radialGradientCoordsD.y - (motionAcceleration.accelerationIncludingGravity.y * 4));
+			return gravityCenter;
+		}
 		function resetRadialGradientPosition(){
 			radialGradientCoords = radialGradientCoordsD;
 		}
@@ -1000,7 +1009,8 @@ define({
 			createCanvas:createCanvas,
 			maskCanvas:maskCanvas,
 			processWidgetHtml:processWidgetHtml,
-			clearWidgetHtml:clearWidgetHtml
+			clearWidgetHtml:clearWidgetHtml,
+			getGravityCenter:getGravityCenter
 		};
 	}
 });
