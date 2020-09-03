@@ -118,6 +118,7 @@ define({
 		var isEnable = false;
 		var initialValue = 0;
 		var elem  = null;
+		var found = false;
 		/**
 		 * Performs action on start sensor success.
 		 * 
@@ -197,8 +198,10 @@ define({
 				z : SensorAccelerationData.z
 			};
 			updateAverageMotion(currentMotion);
-
-			e.fire('change', getSensorValueAvg());
+			if (!found){
+				found = true;
+			}
+			//e.fire('change', getSensorValueAvg());
 		}
 		function setCurrentMotionValue(data) {
 			currentMotion.accelerationIncludingGravity.x = data.x;
@@ -225,6 +228,9 @@ define({
 		}
 		function isStarted() {
 			return isEnable;
+		}
+		function isMotionFound(){
+			return found;
 		}
 		/**
 		 * Sets sensor change listener.
@@ -324,7 +330,8 @@ define({
 			setChangeListener : setChangeListener,
 			getSensorValue : getSensorValue,
 			getSensorValueAvg : getSensorValueAvg,
-			setOptions : setOptions
+			setOptions : setOptions,
+			isMotionFound: isMotionFound
 		};
 	}
 

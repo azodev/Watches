@@ -134,6 +134,7 @@ define({
 		};
 		var grd,grdAmbiant, i, j, startTime, now, then, elapsed, sinceStart, frame = 0, currentFps, isAmbientMode, rotate = false;
 		var motion = null;
+		var motionFound = false;
 		var motionFromGyro = {accelerationIncludingGravity : {x:null,y:null}}; 
 		
 		var max_particles = 500;
@@ -577,6 +578,7 @@ define({
 		    handleWatchShowingAnimation();
 
 			date = datetime.getDate();
+			onMotionChangeNew();
 			if (motion !== null) 		{
 				canvasDrawer.processMotion(motionFromGyro,canvasContent.context);
 			}
@@ -587,10 +589,10 @@ define({
 			if (radialmenu.getOpen()){ 
 				deg.x = (gravCenter.y - 180)*1.2;
 				deg.y = (gravCenter.x - 180)*1.2;
-				if (deg.x <= -15 ) deg.x = -15;
-				if (deg.x >= 15 ) deg.x = 15;
-				if (deg.y <= -15 ) deg.y = -15;
-				if (deg.y >= 15 ) deg.y = 15;
+				if (deg.x <= -20 ) deg.x = -20;
+				if (deg.x >= 20 ) deg.x = 20;
+				if (deg.y <= -20 ) deg.y = -20;
+				if (deg.y >= 20 ) deg.y = 20;
 				
 				/*elem = document.querySelector("div.menuHolder"); 
 				elem.style.transform =
@@ -1128,9 +1130,16 @@ define({
 			motion = motionFromGyro;
 		}
 		function onMotionChangeNew(){
+			if (motionSensor.isMotionFound()){
+				motionFromGyro.accelerationIncludingGravity = motionSensor.getSensorValueAvg().accelerationIncludingGravity;
+				motion = motionFromGyro;
+				if (!motionFound){
+					motionFound = true;
+					gravCenter = canvasDrawer.getGravityCenter(motionFromGyro);
+					gravCenterDiff = {x:gravCenter.x -180, y: gravCenter.y-180};
+				}
+			}
 			
-			motionFromGyro.accelerationIncludingGravity = motionSensor.getSensorValueAvg().accelerationIncludingGravity;
-			motion = motionFromGyro;
 		}
 		
 		function activateMode(type) {
@@ -1305,7 +1314,7 @@ define({
 				'models.location.change' : onLocationDataChange,
 				'models.location.found' : onLocationPositionAquiered,
 				'models.pressure.change' : onPressureChange,
-				'models.motion.change' : onMotionChange,
+				//'models.motion.change' : onMotionChange,
 				'models.motion.error' : onMotionError,
 				'views.radial.changeTheme' : changeTheme,
 				'views.radial.changeEffect' : changeEffect,
@@ -1502,8 +1511,6 @@ define({
 			canvasDrawer.startShow(); 
 
 			
-			gravCenter = canvasDrawer.getGravityCenter(motionFromGyro);
-			gravCenterDiff = {x:gravCenter.x -180, y: gravCenter.y-180};
 			
 			popolate(max_particles,effect);
 			
