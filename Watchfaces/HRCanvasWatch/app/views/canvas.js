@@ -207,7 +207,113 @@ define({
 		function handleDoubleClick(canvas,ev) {
 			clickPos = getMousePosition(canvas,ev);
 			console.log('handleDoubleClick');
-			if (wShape.isInSurface(clickPos,0) && !radialmenu.getOpen()  && weatherModel.isForecastFound() && !widgetFullScreenDiplayed){
+			if (wShape.isInSurface(clickPos,0) && !radialmenu.getOpen()  && weatherModel.isForecastFound()){
+				 
+				if (forecastMode){
+					forecastDisplayed = false;
+				}
+				else {
+					miniCalendarDisplayed= false;
+				}
+				animateWeatherSection();
+			}
+			
+		}
+		function changeRootColors(theme){
+			console.log(theme);
+			let sheet  = document.styleSheets[1];
+			
+			switch (theme) {
+			case 'fire':
+				//sheet.deleteRule(1);
+				//sheet.insertRule(":root{--color1:rgb(255,150,53);--color2:rgb(249,234,194);}",1);
+				document.querySelector(":root").style.setProperty('--color1', 'rgb(255,150,53)');
+				document.querySelector(":root").style.setProperty('--color2', 'rgb(249,234,194)');
+				break;
+			case 'hisakura':
+				//sheet.deleteRule(1);
+				//sheet.insertRule(":root{--color1:rgb(229,72,72);--color2:rgb(251,232,232);}",1);
+				document.querySelector(":root").style.setProperty('--color1', 'rgb(229,72,72)');
+				document.querySelector(":root").style.setProperty('--color2', 'rgb(251,232,232)');
+				break;		
+			case 'ice':
+				//sheet.deleteRule(1);
+				//sheet.insertRule(":root{--color1:blue;--color2:cyan;}",1); 
+				document.querySelector(":root").style.setProperty('--color1', 'rgb(24,82,129)');
+				document.querySelector(":root").style.setProperty('--color2', 'rgb(192,221,243)');
+				break;
+			default:
+				//sheet.deleteRule(1);
+				//sheet.insertRule(":root{--color1:blue;--color2:cyan;}",1); 
+				document.querySelector(":root").style.setProperty('--color1', 'rgb(149,149,149)');
+				document.querySelector(":root").style.setProperty('--color2', 'rgb(244,244,244)');
+				break;
+			}
+		}
+		function handleSingleClick(canvas,ev) {
+			console.log('handleSingleClick');
+			clickPos = getMousePosition(canvas,ev);
+			
+			console.log(clickPos);
+			if (appDrawerShape.isInSurface(clickPos,10)){
+				canvasDrawer.startFade();
+				openRadialMenu(ev);
+				radialmenu.setOpen();
+			}
+			
+			else if (calendarShape.isInSurface(clickPos,0) && !forecastDisplayed && !radialmenu.getOpen() && !widgetFullScreenDiplayed && calendarModel.hasVEvents()){
+				console.log('Click fade');
+				canvasDrawer.startFade();
+				calendar = calendarModel.getCalendarHtml();
+				holder = canvasDrawer.processWidgetHtml(calendar);
+				
+				
+				
+				
+				setClassAndWaitForTransition(holder,'on','opacity').then(function () {
+					console.log('transition holder');
+					//holder.setAttribute('class', 'on');
+					
+					
+					setClassAndWaitForTransition(calendar,'on','opacity').then(function () {
+						console.log('transition calendar');
+						
+						//calendar.setAttribute('class', 'on');
+						//holder.setAttribute('class', 'on');
+						widgetId = "#calendar";
+						setTimeout(function(){
+							widgetFullScreenDiplayed = true;
+						},100);
+						
+						setCloseWidgetAction(calendar,closeWidget,'#calendar');
+					});
+		            
+		            
+		        });
+				document.querySelectorAll("#calendar .event").forEach(function (element){
+					element.addEventListener('click', function(e) {
+						console.log('click event');
+						setClassAndWaitForTransition(element,'event click','color').then(function () {
+							console.log('transition event');
+							element.setAttribute('class', 'event');
+							canvasDrawer.startShow();
+							widgetId = null;
+							closeWidget('#calendar');
+						});
+							
+					});
+				});
+				
+				
+			  	
+			}
+			else if (hrShape.isInSurface(clickPos,5) && !radialmenu.getOpen()  ){
+				
+				tizen.application.launch("com.samsung.shealth", null,null);
+				
+				
+			}
+			else if (wShape.isInSurface(clickPos,0) && !radialmenu.getOpen()  && weatherModel.isForecastFound() && !widgetFullScreenDiplayed){
 				canvasDrawer.startFade();
 				let weather = weatherModel.getWeatherHtml();
 				holder = canvasDrawer.processWidgetHtml(weather);
@@ -269,111 +375,6 @@ define({
 							
 					});
 				});
-			}
-			
-		}
-		function changeRootColors(theme){
-			console.log(theme);
-			let sheet  = document.styleSheets[1];
-			
-			switch (theme) {
-			case 'fire':
-				//sheet.deleteRule(1);
-				//sheet.insertRule(":root{--color1:rgb(255,150,53);--color2:rgb(249,234,194);}",1);
-				document.querySelector(":root").style.setProperty('--color1', 'rgb(255,150,53)');
-				document.querySelector(":root").style.setProperty('--color2', 'rgb(249,234,194)');
-				break;
-			case 'hisakura':
-				//sheet.deleteRule(1);
-				//sheet.insertRule(":root{--color1:rgb(229,72,72);--color2:rgb(251,232,232);}",1);
-				document.querySelector(":root").style.setProperty('--color1', 'rgb(229,72,72)');
-				document.querySelector(":root").style.setProperty('--color2', 'rgb(251,232,232)');
-				break;		
-			case 'ice':
-				//sheet.deleteRule(1);
-				//sheet.insertRule(":root{--color1:blue;--color2:cyan;}",1); 
-				document.querySelector(":root").style.setProperty('--color1', 'rgb(24,82,129)');
-				document.querySelector(":root").style.setProperty('--color2', 'rgb(192,221,243)');
-				break;
-			default:
-				//sheet.deleteRule(1);
-				//sheet.insertRule(":root{--color1:blue;--color2:cyan;}",1); 
-				document.querySelector(":root").style.setProperty('--color1', 'rgb(149,149,149)');
-				document.querySelector(":root").style.setProperty('--color2', 'rgb(244,244,244)');
-				break;
-			}
-		}
-		function handleSingleClick(canvas,ev) {
-			console.log('handleSingleClick');
-			clickPos = getMousePosition(canvas,ev);
-			
-			console.log(clickPos);
-			if (appDrawerShape.isInSurface(clickPos,10)){
-				canvasDrawer.startFade();
-				openRadialMenu(ev);
-				radialmenu.setOpen();
-			}
-			else if (wShape.isInSurface(clickPos,0) && !radialmenu.getOpen()  && weatherModel.isForecastFound()){
-				 
-				if (forecastMode){
-					forecastDisplayed = false;
-				}
-				else {
-					miniCalendarDisplayed= false;
-				}
-				animateWeatherSection();
-			}
-			else if (calendarShape.isInSurface(clickPos,0) && !forecastDisplayed && !radialmenu.getOpen() && !widgetFullScreenDiplayed && calendarModel.hasVEvents()){
-				console.log('Click fade');
-				canvasDrawer.startFade();
-				calendar = calendarModel.getCalendarHtml();
-				holder = canvasDrawer.processWidgetHtml(calendar);
-				
-				
-				
-				
-				setClassAndWaitForTransition(holder,'on','opacity').then(function () {
-					console.log('transition holder');
-					//holder.setAttribute('class', 'on');
-					
-					
-					setClassAndWaitForTransition(calendar,'on','opacity').then(function () {
-						console.log('transition calendar');
-						
-						//calendar.setAttribute('class', 'on');
-						//holder.setAttribute('class', 'on');
-						widgetId = "#calendar";
-						setTimeout(function(){
-							widgetFullScreenDiplayed = true;
-						},100);
-						
-						setCloseWidgetAction(calendar,closeWidget,'#calendar');
-					});
-		            
-		            
-		        });
-				document.querySelectorAll("#calendar .event").forEach(function (element){
-					element.addEventListener('click', function(e) {
-						console.log('click event');
-						setClassAndWaitForTransition(element,'event click','color').then(function () {
-							console.log('transition event');
-							element.setAttribute('class', 'event');
-							canvasDrawer.startShow();
-							widgetId = null;
-							closeWidget('#calendar');
-						});
-							
-					});
-				});
-				
-				
-			  	
-			}
-			else if (hrShape.isInSurface(clickPos,5) && !radialmenu.getOpen()  ){
-				
-				tizen.application.launch("com.samsung.shealth", null,null);
-				
-				
 			}
 			
 		}

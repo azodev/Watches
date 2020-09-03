@@ -103,11 +103,15 @@ html, body {
     margin-left: 35px ; 
     margin-top: 50px;
     
-    
+     
   --aug-border: 2px;
   --aug-inset: 4px;
   --aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
-  --aug-inset-bg: radial-gradient(  at top right,      var(--color1),      transparent 90%    ),    radial-gradient(      farthest-side at top left,      var(--color2),      transparent 90%    ),    0 0/72px 72px repeating-radial-gradient(var(--color1),      #000000 1px,      transparent 1px,      transparent 13px    ), #000011 ;  
+    --aug-inset-bg: 	radial-gradient(  at top right,      var(--color1),      transparent 90%    ),    
+  					radial-gradient(      farthest-side at top left,      var(--color2),      transparent 90%    ),    
+  					0 0/72px 72px repeating-radial-gradient(var(--color1),      rgb(0,0,0) 1px,      rgb(0,0,0) 1px,      transparent 13px    ),
+  					0 0/144px 144px repeating-radial-gradient(var(--color1),      rgb(0,0,0) 1px,      rgb(0,0,0) 1px,      transparent 26px    ),
+  					#000011 ;   
   --aug-inset-opacity: 0.9;  
   --aug-b-width: 60%;
   --aug-t-width: 60%;
