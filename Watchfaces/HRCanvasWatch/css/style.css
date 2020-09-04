@@ -107,11 +107,7 @@ html, body {
   --aug-border: 2px;
   --aug-inset: 4px;
   --aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
-    --aug-inset-bg: 	radial-gradient(  at top right,      var(--color1),      transparent 90%    ),    
-  					radial-gradient(      farthest-side at top left,      var(--color2),      transparent 90%    ),    
-  					0 0/72px 72px repeating-radial-gradient(var(--color1),      rgb(0,0,0) 1px,      rgb(0,0,0) 1px,      transparent 13px    ),
-  					0 0/144px 144px repeating-radial-gradient(var(--color1),      rgb(0,0,0) 1px,      rgb(0,0,0) 1px,      transparent 26px    ),
-  					#000011 ;   
+  --aug-inset-bg: radial-gradient(  at top right,      var(--color1),      transparent 90%    ),    radial-gradient(      farthest-side at top left,      var(--color2),      transparent 90%    ),    0 0/72px 72px repeating-radial-gradient(var(--color1),      #000000 1px,      transparent 1px,      transparent 13px    ), #000011 ;  
   --aug-inset-opacity: 0.9;  
   --aug-b-width: 60%;
   --aug-t-width: 60%;
@@ -129,7 +125,6 @@ html, body {
   --aug-tr: 20px; 
    will-change: transform;
    transform-style: preserve-3d;
-
     /*transform: perspective(700px) rotateY(0deg); */
 }
 
@@ -166,7 +161,6 @@ html, body {
 }
 #overflower, #overflower-back {
 	backface-visibility: hidden; 
-	-webkit-backface-visibility: hidden;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -204,8 +198,8 @@ html, body {
   --aug-border: 1px;
   --aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
   --aug-inset: 2px;
-  --aug-inset-bg: rgba(0, 0, 0, 0.10) ;  
-  --aug-inset-opacity: 0.9;  
+  --aug-inset-bg: rgba(0, 0, 0, 0.15) ;  
+  /*--aug-inset-opacity: 0.9;*/  
   --aug-bl: 5px;
   --aug-tl: 5px;
   --aug-br: 5px;
@@ -331,7 +325,7 @@ html, body {
 	padding: 5px;
 	margin: 5px auto;
 	--aug-inset: 2px;
-	--aug-inset-bg: rgba(0, 0, 0, 0.15);
+	--aug-inset-bg: rgba(0, 0, 0, 0.3);
 	--aug-border: 1px;
 	--aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
 	background-color:transparent; 
@@ -353,7 +347,7 @@ html, body {
 	padding: 3px 5px;
 	margin: 5px auto;
 	--aug-inset: 1px;
-	--aug-inset-bg: rgba(0, 0, 0, 0);
+	--aug-inset-bg: rgba(0, 0, 0, .1);
 	--aug-border: 1px;
 	--aug-border-bg: linear-gradient(to right, var(--color1), var(--color2));
 	background-color:transparent; 
@@ -380,9 +374,8 @@ html, body {
 	--aug-bl: 5px;
 	--aug-tr: 5px;
 	--aug-inset: 0px;
-	--aug-inset-bg: rgba(0, 0, 0, 0.30);
+	--aug-inset-bg: rgba(0, 0, 0, 0.45);
 	
-	background-color:transparent; 
 	text-align:center;
 	transition: color 0.2s ease, background 0.2s ease; 
 	color:#FFFFFF;
