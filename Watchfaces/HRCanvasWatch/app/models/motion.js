@@ -201,7 +201,7 @@ define({
 			if (!found){
 				found = true;
 			}
-			//e.fire('change', getSensorValueAvg());
+			e.fire('change', getSensorValueAvg());
 		}
 		function setCurrentMotionValue(data) {
 			currentMotion.accelerationIncludingGravity.x = data.x;

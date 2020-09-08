@@ -178,6 +178,7 @@ define({
 		var wCoords=null;
 		var theme = 'ice';
 		var effect = 'attraction';
+		var noEvents = false;
 		
 		
 		function handleClick(canvas,ev) {
@@ -209,15 +210,49 @@ define({
 			console.log('handleDoubleClick');
 			if (wShape.isInSurface(clickPos,0) && !radialmenu.getOpen()  && weatherModel.isForecastFound()){
 				 
-				if (forecastMode){
-					forecastDisplayed = false;
-				}
-				else {
-					miniCalendarDisplayed= false;
-				}
-				animateWeatherSection();
+				handleWeatherClick();
 			}
 			
+		}
+		function handleWeatherClick(){
+			if (forecastMode){
+				forecastDisplayed = false;
+			}
+			else {
+				miniCalendarDisplayed= false;
+			}
+			animateWeatherSection();
+		}
+		function animateWeatherSection(){
+			//weatherSectionAnimating = true;
+			wShape.animate();
+		}
+		function handleWeatherSectionAnimation(){
+			if (wShape.isAnimating()){
+				if (!forecastMode){
+					wShape.growRight(secondsPassed,100,250,0.3);
+					if (!wShape.isAnimating()){
+						toogleForecastMode();
+						forecastDisplayed = true;
+					}
+				}
+				else {
+					wShape.shrinkRight(secondsPassed,250,100,0.3);
+					
+					if (!wShape.isAnimating()){
+						miniCalendarDisplayed = true;
+						toogleForecastMode();
+					}
+				}
+			}
+		}
+		function toogleForecastMode(){
+			if  (!forecastMode){
+				forecastMode = true;
+			}
+			else {
+				forecastMode = false;
+			}
 		}
 		function changeRootColors(theme){
 			console.log(theme);
@@ -225,28 +260,20 @@ define({
 			
 			switch (theme) {
 			case 'fire':
-				//sheet.deleteRule(1);
-				//sheet.insertRule(":root{--color1:rgb(255,150,53);--color2:rgb(249,234,194);}",1);
-				document.querySelector(":root").style.setProperty('--color1', 'rgb(255,150,53)');
-				document.querySelector(":root").style.setProperty('--color2', 'rgb(249,234,194)');
+				document.querySelector(widgetId).style.setProperty('--color1', 'rgb(255,150,53)');
+				document.querySelector(widgetId).style.setProperty('--color2', 'rgb(249,234,194)');
 				break;
 			case 'hisakura':
-				//sheet.deleteRule(1);
-				//sheet.insertRule(":root{--color1:rgb(229,72,72);--color2:rgb(251,232,232);}",1);
-				document.querySelector(":root").style.setProperty('--color1', 'rgb(229,72,72)');
-				document.querySelector(":root").style.setProperty('--color2', 'rgb(251,232,232)');
+				document.querySelector(widgetId).style.setProperty('--color1', 'rgb(229,72,72)');
+				document.querySelector(widgetId).style.setProperty('--color2', 'rgb(251,232,232)');
 				break;		
 			case 'ice':
-				//sheet.deleteRule(1);
-				//sheet.insertRule(":root{--color1:blue;--color2:cyan;}",1); 
-				document.querySelector(":root").style.setProperty('--color1', 'rgb(24,82,129)');
-				document.querySelector(":root").style.setProperty('--color2', 'rgb(192,221,243)');
+				document.querySelector(widgetId).style.setProperty('--color1', 'rgb(24,82,129)');
+				document.querySelector(widgetId).style.setProperty('--color2', 'rgb(192,221,243)');
 				break;
 			default:
-				//sheet.deleteRule(1);
-				//sheet.insertRule(":root{--color1:blue;--color2:cyan;}",1); 
-				document.querySelector(":root").style.setProperty('--color1', 'rgb(149,149,149)');
-				document.querySelector(":root").style.setProperty('--color2', 'rgb(244,244,244)');
+				document.querySelector(widgetId).style.setProperty('--color1', 'rgb(149,149,149)');
+				document.querySelector(widgetId).style.setProperty('--color2', 'rgb(244,244,244)');
 				break;
 			}
 		}
@@ -269,18 +296,18 @@ define({
 				
 				
 				
-				
 				setClassAndWaitForTransition(holder,'on','opacity').then(function () {
 					console.log('transition holder');
 					//holder.setAttribute('class', 'on');
-					
+					widgetId = "#calendar";
+					changeRootColors(theme);
 					
 					setClassAndWaitForTransition(calendar,'on','opacity').then(function () {
 						console.log('transition calendar');
 						
 						//calendar.setAttribute('class', 'on');
 						//holder.setAttribute('class', 'on');
-						widgetId = "#calendar";
+						
 						setTimeout(function(){
 							widgetFullScreenDiplayed = true;
 						},100);
@@ -303,15 +330,9 @@ define({
 							
 					});
 				});
-				
-				
-			  	
 			}
 			else if (hrShape.isInSurface(clickPos,5) && !radialmenu.getOpen()  ){
-				
 				tizen.application.launch("com.samsung.shealth", null,null);
-				
-				
 			}
 			else if (wShape.isInSurface(clickPos,0) && !radialmenu.getOpen()  && weatherModel.isForecastFound() && !widgetFullScreenDiplayed){
 				canvasDrawer.startFade();
@@ -324,14 +345,15 @@ define({
 				setClassAndWaitForTransition(holder,'on','opacity').then(function () {
 					console.log('transition holder');
 					//holder.setAttribute('class', 'on');
-					
+					widgetId = "#weather";
+					changeRootColors(theme);
 					
 					setClassAndWaitForTransition(weather,'on','opacity').then(function () {
 						console.log('transition weather');
 						
 						//calendar.setAttribute('class', 'on');
 						//holder.setAttribute('class', 'on');  
-						widgetId = "#weather";
+						
 						widgetOn = document.querySelector(widgetId+".on");
 						setTimeout(function(){
 							widgetFullScreenDiplayed = true;
@@ -383,11 +405,9 @@ define({
 				let ovb = document.querySelector("#overflower-back");
 				if (	   e.target == ovb
 						|| hasSomeParentTheClass(e.target, 'overflower-back')
-						
 				 ){
 					 flipping=true;
 					 console.log('flipper');
-					 
 					 setTimeout(function (){
 						 let weather = document.getElementById('weather');
 						 setClassAndWaitForTransition(weather,'on','transform').then(function () {
@@ -400,10 +420,7 @@ define({
 								//node.innerHTML = '';
 							});
 						 return;
-						 
-						 
 					 },50);
-					 
 				 }
 			});
 		}
@@ -451,10 +468,7 @@ define({
 			
 			canvasDrawer.startShow();
 		}
-		function animateWeatherSection(){
-			//weatherSectionAnimating = true;
-			wShape.animate();
-		}
+		
 		function handleWatchFadingAnimation(){
 			if (canvasDrawer.isFading()){
 				canvasDrawer.fade(secondsPassed,0.5);
@@ -470,35 +484,8 @@ define({
 			}
 			
 		}
-		function handleWeatherSectionAnimation(){
-			if (wShape.isAnimating()){
-				if (!forecastMode){
-					wShape.growRight(secondsPassed,100,250,0.3);
-					if (!wShape.isAnimating()){
-						toogleForecastMode();
-						forecastDisplayed = true;
-					}
-				}
-				else {
-					wShape.shrinkRight(secondsPassed,250,100,0.3);
-					
-					if (!wShape.isAnimating()){
-						miniCalendarDisplayed = true;
-						toogleForecastMode();
-					}
-				}
-			}
-			
-			
-		}
-		function toogleForecastMode(){
-			if  (!forecastMode){
-				forecastMode = true;
-			}
-			else {
-				forecastMode = false;
-			}
-		}
+		
+		
 		function openRadialMenu(ev) {
 			
 			radialmenu.getMenu().open();
@@ -579,69 +566,14 @@ define({
 		    handleWatchShowingAnimation();
 
 			date = datetime.getDate();
-			onMotionChangeNew();
-			if (motion !== null) 		{
-				canvasDrawer.processMotion(motionFromGyro,canvasContent.context);
-			}
-			gravCenter = canvasDrawer.getGravityCenter(motionFromGyro);
+			//onMotionChangeNew();
 			
-			gravCenter.x = gravCenter.x-gravCenterDiff.x;
-			gravCenter.y = gravCenter.y-gravCenterDiff.y;
-			if (radialmenu.getOpen()){ 
-				deg.x = (gravCenter.y - 180)*1.2;
-				deg.y = (gravCenter.x - 180)*1.2;
-				if (deg.x <= -20 ) deg.x = -20;
-				if (deg.x >= 20 ) deg.x = 20;
-				if (deg.y <= -20 ) deg.y = -20;
-				if (deg.y >= 20 ) deg.y = 20;
-				
-				/*elem = document.querySelector("div.menuHolder"); 
-				elem.style.transform =
-				    "perspective(700px) rotateX(" + -deg.x + "deg) " + 
-				    " rotateY(" + deg.y + "deg)";*/
-				document.querySelector(":root").style.setProperty('--degx',  -deg.x + "deg");
-				document.querySelector(":root").style.setProperty('--degy',   deg.y + "deg");
-				  
-			}
-			if (widgetFullScreenDiplayed ==true){
-				deg.x = (gravCenter.y - 180)*1.2;
-				deg.y = (gravCenter.x - 180)*1.2;
-				if (deg.x <= -20 ) deg.x = -20;
-				if (deg.x >= 20 ) deg.x = 20;
-				if (deg.y <= -20 ) deg.y = -20; 
-				if (deg.y >= 20 ) deg.y = 20; 
-				//document.querySelector("#calendar.on").style.opacity=1;
-				//calendar = document.querySelector("#calendar.on");
-				//if (calendarOn.style.opacity < 1) calendarOn.style.opacity = 1;
-				if (widgetId !=null   ) {
-					widgetOn = document.querySelector(widgetId+".on");
-					if (!flipping && flipped == false){
-						/*widgetOn.style.transform =    
-							"perspective(700px) rotateX(" + -deg.x + "deg) " +    
-							" rotateY(" + deg.y + "deg)";*/
-						document.querySelector(":root").style.setProperty('--degx',  -deg.x + "deg");
-						document.querySelector(":root").style.setProperty('--degy',   deg.y + "deg");
-						document.querySelector(":root").style.setProperty('--degxFlipped',    deg.x + "deg");
-						document.querySelector(":root").style.setProperty('--degyFlipped',   (deg.y+180) + "deg");
-					}
-					else {
-						if ( flipped){
-							/*widgetFlipped.style.transform =    
-								"perspective(700px) rotateX(" + -deg.x + "deg) " +    
-								" rotateY(" + deg.y+180 + "deg)";*/
-								document.querySelector(":root").style.setProperty('--degx',  -deg.x + "deg");
-								document.querySelector(":root").style.setProperty('--degy',   deg.y + "deg");
-								document.querySelector(":root").style.setProperty('--degxFlipped',    deg.x + "deg");
-								document.querySelector(":root").style.setProperty('--degyFlipped',   (deg.y+180) + "deg");
-						}
-					}
-				}
 				
 				
 					
 					
 				
-			}
+			
 			if (!isAmbientMode){
 				particles = particles.filter(function (p) {
 					
@@ -1129,6 +1061,72 @@ define({
 			//motionFromGyro.accelerationIncludingGravity = getSensorValueAvg();
 			motionFromGyro.accelerationIncludingGravity = SensorAccelerationData.detail.accelerationIncludingGravity;
 			motion = motionFromGyro;
+			
+			if (motion !== null) 		{
+				canvasDrawer.processMotion(motionFromGyro,canvasContent.context);
+			}
+			gravCenter = canvasDrawer.getGravityCenter(motionFromGyro);
+			
+			gravCenter.x = gravCenter.x-gravCenterDiff.x;
+			gravCenter.y = gravCenter.y-gravCenterDiff.y;
+			if (!isAmbientMode){
+				if (radialmenu.getOpen()){ 
+					deg.x = (gravCenter.y - 180)*1.2;
+					deg.y = (gravCenter.x - 180)*1.2;
+					if (deg.x <= -20 ) deg.x = -20;
+					if (deg.x >= 20 ) deg.x = 20;
+					if (deg.y <= -20 ) deg.y = -20;
+					if (deg.y >= 20 ) deg.y = 20;
+					
+					/*elem = document.querySelector("div.menuHolder"); 
+					elem.style.transform =
+					    "perspective(700px) rotateX(" + -deg.x + "deg) " + 
+					    " rotateY(" + deg.y + "deg)";*/
+					document.querySelector("div.menuHolder").style.setProperty('--degx',  -deg.x + "deg");
+					document.querySelector("div.menuHolder").style.setProperty('--degy',   deg.y + "deg");
+					  
+				}
+				if (widgetFullScreenDiplayed ==true){
+					deg.x = (gravCenter.y - 180)*1.2;
+					deg.y = (gravCenter.x - 180)*1.2;
+					if (deg.x <= -20 ) deg.x = -20;
+					if (deg.x >= 20 ) deg.x = 20;
+					if (deg.y <= -20 ) deg.y = -20; 
+					if (deg.y >= 20 ) deg.y = 20; 
+					//document.querySelector("#calendar.on").style.opacity=1;
+					//calendar = document.querySelector("#calendar.on");
+					//if (calendarOn.style.opacity < 1) calendarOn.style.opacity = 1;
+					if (widgetId !=null   ) {
+						let widget = document.querySelector(widgetId);
+						widgetOn = document.querySelector(widgetId+".on");
+						if (!flipping && flipped == false){
+							/*widgetOn.style.transform =    
+								"perspective(700px) rotateX(" + -deg.x + "deg) " +    
+								" rotateY(" + deg.y + "deg)";*/
+							
+							widget.style.setProperty('--degx',  -deg.x + "deg");
+							widget.style.setProperty('--degy',   deg.y + "deg");
+							widget.style.setProperty('--degxFlipped',    deg.x + "deg");
+							widget.style.setProperty('--degyFlipped',   (deg.y+180) + "deg");
+						}
+						else {
+							if ( flipped){
+								/*widgetFlipped.style.transform =    
+									"perspective(700px) rotateX(" + -deg.x + "deg) " +    
+									" rotateY(" + deg.y+180 + "deg)";*/
+									widget.style.setProperty('--degx',  -deg.x + "deg");
+									widget.style.setProperty('--degy',   deg.y + "deg");
+									widget.style.setProperty('--degxFlipped',    deg.x + "deg");
+									widget.style.setProperty('--degyFlipped',   (deg.y+180) + "deg");
+							}
+						}
+					}
+				
+				}
+			}
+			
+			
+			
 		}
 		function onMotionChangeNew(){
 			if (motionSensor.isMotionFound()){
@@ -1280,7 +1278,7 @@ define({
 							radialmenu.closeMenu();
 						}
 						closeWidget(widgetId);
-						activateMode("Ambient");
+						activateMode("Ambient"); 
 						
 					} else {
 						// Rendering normal case
@@ -1318,17 +1316,41 @@ define({
 				'models.location.change' : onLocationDataChange,
 				'models.location.found' : onLocationPositionAquiered,
 				'models.pressure.change' : onPressureChange,
-				//'models.motion.change' : onMotionChange,
+				'models.motion.change' : onMotionChange,
 				'models.motion.error' : onMotionError,
 				'views.radial.changeTheme' : changeTheme,
 				'views.radial.changeEffect' : changeEffect,
 				'views.radial.close' : triggerShowWatch,
 				'RadialMenu.closing' : triggerShowWatch,
 				//'models.pedometer.change' : onPedometerDataChange,
-				'models.weather.found' : onWeatherFound
+				'models.weather.found' : onWeatherFound, 
+				'models.weather.forecast_found' : onForecastFound, 
+				'models.calendar.hasEvent' : onCalendarChange 
 			});
 			sysInfo.listenBatteryLowState();
 			sysInfo.listenBatteryChange();
+		}
+		function onCalendarChange(ev){
+			if (ev.detail  && forecastMode){
+				handleWeatherClick();
+			}
+			else {
+				
+			}
+			/*
+			if (forecastMode){
+				forecastDisplayed = false;
+			}
+			else {
+				miniCalendarDisplayed= false;
+			}
+			animateWeatherSection();
+			*/
+			
+			
+		}
+		function onForecastFound(){
+			if (!calendarModel.hasVEvents()) handleWeatherClick();
 		}
 
 		/**
@@ -1431,7 +1453,7 @@ define({
 			//time_to_recreate = true;
 			theme = ev.detail;
 			grdAmbiant = canvasDrawer.getAmbiantGradient(canvasContent.context);
-			changeRootColors(ev.detail);
+			
 			particles = [];
 			time_to_recreate = false;
 			popolate(max_particles,effect);
@@ -1490,7 +1512,7 @@ define({
 			}
 			setDefaultVariables();
 			changeParticlesColor(theme);
-			changeRootColors(theme);
+			
 			
 			setIntervalOnModels();
 			

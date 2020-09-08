@@ -11,10 +11,13 @@ div.menuHolder {
     display:none;
     font-family: FutureNow;
     font-size:28px;
+    --degx: 0deg; 
+	--degy: 0deg;
     transform: perspective(700px) rotateY(var(--degy)) rotateX(var(--degx));
     backface-visibility: hidden; 
 	-webkit-backface-visibility: hidden;
 	transform-style: preserve-3d;
+	
 }
 
 svg.icons {

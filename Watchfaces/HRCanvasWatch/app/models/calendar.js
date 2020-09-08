@@ -144,7 +144,7 @@ define({
 		}
 		
 		function accessCalendars(){
-			
+			vEvents =[];
 			nowDate = new Date();
 			console.log('Fetch calendars');
 			event.fire('log','Fetch calendars');
@@ -259,7 +259,10 @@ define({
 				vEvents = vEvents.filter (filterFinishedVEvents);
 				buildDaysEvents();
 			}
-			
+			if (vEvents.length > 0 ) {
+				event.fire('hasEvent',true);
+			}
+			else event.fire('hasEvent',false);
 			//fillCalendar();
 			
 		}
