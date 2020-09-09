@@ -581,8 +581,10 @@ define({
 					return p.move();
 				});
 				if (time_to_recreate) {
-				    if (particles.length < init_num) {popolate((init_num-particles.length)/2,effect);}
-				  }
+				    if (particles.length < max_particles) {
+				    	popolate(Math.round((max_particles-particles.length)/10),effect);
+				    }
+				}
 				  
 			}
 			clear();
@@ -1540,9 +1542,9 @@ define({
 			
 			popolate(max_particles,effect);
 			
-			setTimeout(function () {
+			//setTimeout(function () {
 				  time_to_recreate = true;
-				}, max_time);
+				//}, max_time);
 			
 			animRequest = window.requestAnimationFrame(drawWatchContent);
 
