@@ -433,7 +433,13 @@ define({
         	}
         }
         function triggerUpdate(){
-        	if (!isEnable) start();
+        	if (!isEnable) {
+        		start();
+        	}else {
+        		stop();
+        		start();
+        	}
+        	
         	
         }
         
