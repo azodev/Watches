@@ -144,20 +144,29 @@ define({
 		}
 		
 		function accessCalendars(){
-			vEvents =[];
+			
 			nowDate = new Date();
 			console.log('Fetch calendars');
 			event.fire('log','Fetch calendars');
-			doPromise('alten').then( function (){
-				doPromise('gmail').then(function(){
+			doPromise('alten').then( function (res){
+				vEvents =[];
+				handleResponse(res);
+				doPromise('gmail').then(function(res){
+					handleResponse(res);
 					handleFilterForFinishedEvents();
 					
-				});
-			}
+				}).catch(
+					// Promesse rejetée
 					
-			);
-			
-			
+						function(message) {
+							console.log(message);
+						});
+			}).catch(
+					// Promesse rejetée
+					
+						function(message) {
+							console.log(message);
+						});
 			
 		}
 		function isDuplicate (vEvent, vEvents){
@@ -230,14 +239,7 @@ define({
 				xhr.onabort =function () {reject('aborted')};
 				xhr.send();
 			});
-			p1.then(handleResponse)
 			
-			.catch(
-					// Promesse rejetée
-					
-						function(message) {
-							console.log(message);
-						});
 			return p1;
 		}
 		
