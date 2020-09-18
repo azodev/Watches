@@ -139,8 +139,7 @@ define({
 		
 		var max_particles = 500;
 		var particles = [];
-		var flames = [];
-		var frequency = 3;
+		var frequency = 5;
 		var init_num = max_particles;
 		var max_time = frequency * max_particles;
 		var time_to_recreate = false;
@@ -1420,18 +1419,7 @@ define({
 			  }
 			  return particles.length;
 			}
-		function doFlame() {
-			  flames.push(  
-					  new Flame(canvasParticles.context, 
-					  { 
-						  x: 360 / 2,
-						  y: 360 / 2 
-					  }
-			  ));
-
-
-			  return flames.length;
-			}
+		
 		function changeParticlesColor(theme){
 			switch ( theme){
 				case 'fire':
@@ -1542,9 +1530,9 @@ define({
 			
 			popolate(max_particles,effect);
 			
-			//setTimeout(function () {
+			setTimeout(function () {
 				  time_to_recreate = true;
-				//}, max_time);
+				}, max_time);
 			
 			animRequest = window.requestAnimationFrame(drawWatchContent);
 
