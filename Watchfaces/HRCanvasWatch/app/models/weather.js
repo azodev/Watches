@@ -206,27 +206,29 @@ define({
 			  }
 		}
 		function updateWeatherP(){
-			fetchWeather().then((json) => {
-				
-				weatherInform = json;
-
-				now = Math.round(Date.now() / 1000);
-				
-				day = (now >= weatherInform.sys.sunrise && now <= weatherInform.sys.sunset) ? true : false;
-				// Gets icon code from information
-				weatherInform.day = day;
-				weatherInform.lastWeatherCallDate = now;
-				//console.debug(weatherInform);
-				// Gets weather string from information
-				weatherFound = true;
-				event.fire('found', weatherInform);
-				updateForecastP();
-				console.log('Update Weather: Found');
-				  
-				}).catch(e => {
-					console.log('There has been a problem with your fetch operation: ' + e.message);
-					event.fire('log', 'There has been a problem with your fetch w operation: ' + e.message);
-			});
+			if (navigator.onLine){
+				fetchWeather().then((json) => {
+					
+					weatherInform = json;
+	
+					now = Math.round(Date.now() / 1000);
+					
+					day = (now >= weatherInform.sys.sunrise && now <= weatherInform.sys.sunset) ? true : false;
+					// Gets icon code from information
+					weatherInform.day = day;
+					weatherInform.lastWeatherCallDate = now;
+					//console.debug(weatherInform);
+					// Gets weather string from information
+					weatherFound = true;
+					event.fire('found', weatherInform);
+					updateForecastP();
+					console.log('Update Weather: Found');
+					  
+					}).catch(e => {
+						console.log('There has been a problem with your fetch operation: ' + e.message);
+						event.fire('log', 'There has been a problem with your fetch w operation: ' + e.message);
+				});
+			}
 		}
 		async function fetchForecast() {
 			url = API_URL_FORECAST + outArray.join('&');
@@ -240,43 +242,45 @@ define({
 			  }
 		}
 		function updateForecastP(){
-			fetchForecast().then( function (json) {
-				forecastInform = json;
-				vForecasts= [];
-				//day = (now >= forecastInform.sys.sunrise && now <= forecastInform.sys.sunset) ? true : false;
-				// Gets icon code from information
-				//weatherInform.day = day;
-				
-				let sunriseHour = dateHelper.roundMinutes(new Date( weatherInform.sys.sunrise*1000)).getHours();
-				let sunsetHour = dateHelper.roundMinutes(new Date( weatherInform.sys.sunset*1000)).getHours();
-				for (let i = 0; i < forecastInform.list.length ; i++ ){
-					hour = new Date( forecastInform.list[i].dt * 1000).getHours();
+			if (navigator.onLine){
+				fetchForecast().then( function (json) {
+					forecastInform = json;
+					vForecasts= [];
+					//day = (now >= forecastInform.sys.sunrise && now <= forecastInform.sys.sunset) ? true : false;
+					// Gets icon code from information
+					//weatherInform.day = day;
 					
-					day = (
-							hour >= sunriseHour
-							&& hour < sunsetHour
-							) ? true : false;
-					forecastInform.list[i].city = weatherInform.name;
-					forecastInform.list[i].day = day;
-					vForecasts.push(new vForecast(forecastInform.list[i],mapping));
-					if (i==0){
-						event.fire('triggerPressureSea',forecastInform.list[i]);
+					let sunriseHour = dateHelper.roundMinutes(new Date( weatherInform.sys.sunrise*1000)).getHours();
+					let sunsetHour = dateHelper.roundMinutes(new Date( weatherInform.sys.sunset*1000)).getHours();
+					for (let i = 0; i < forecastInform.list.length ; i++ ){
+						hour = new Date( forecastInform.list[i].dt * 1000).getHours();
+						
+						day = (
+								hour >= sunriseHour
+								&& hour < sunsetHour
+								) ? true : false;
+						forecastInform.list[i].city = weatherInform.name;
+						forecastInform.list[i].day = day;
+						vForecasts.push(new vForecast(forecastInform.list[i],mapping));
+						if (i==0){
+							event.fire('triggerPressureSea',forecastInform.list[i]);
+						}
+						
 					}
-					
-				}
-				forecastInform.lastWeatherCallDate = new Date();
-				buildDaysForecasts();
-				//console.debug(forecastInform);
-				// Gets weather string from information
-				forecastFound = true;
-				event.fire('forecast_found', forecastInform);
-				console.log('Update forecast: Found');
-				  
-				}).catch(function (e)  {
-					console.log('There has been a problem with your fetch operation: ' + e.message);
-					event.fire('log', 'There has been a problem with your fetch f operation: ' + e.message);
-					
-			});
+					forecastInform.lastWeatherCallDate = new Date();
+					buildDaysForecasts();
+					//console.debug(forecastInform);
+					// Gets weather string from information
+					forecastFound = true;
+					event.fire('forecast_found', forecastInform);
+					console.log('Update forecast: Found');
+					  
+					}).catch(function (e)  {
+						console.log('There has been a problem with your fetch operation: ' + e.message);
+						event.fire('log', 'There has been a problem with your fetch f operation: ' + e.message);
+						
+				});
+			}
 		}
 		
 		
