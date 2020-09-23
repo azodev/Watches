@@ -116,28 +116,7 @@ define({
         
         
         
-        /**
-         * Performs action on start sensor success.
-         *
-         * @private
-         * @fires models.pressure.start
-         */
-        function onSensorStartSuccess() {
-        	setChangeListener();
-            isEnable = true;
-        }
-
-        /**
-         * Performs action on start sensor error.
-         *
-         * @private
-         * @param {Error} e
-         * @fires models.pressure.error
-         */
-        function onSensorStartError(e) {
-            console.error('Pressure sensor start error: ', e);
-            e.fire('error', e);
-        }
+        
 
         /**
          * Updates the average pressure value.
@@ -303,7 +282,29 @@ define({
             }
         };
         
+        /**
+         * Performs action on start sensor success.
+         *
+         * @private
+         * @fires models.pressure.start
+         */
+        function onSensorStartSuccess() {
+        	//setChangeListener();
+        	pressureSensor.getPressureSensorData(onSensorChange);
+            isEnable = true;
+        }
 
+        /**
+         * Performs action on start sensor error.
+         *
+         * @private
+         * @param {Error} e
+         * @fires models.pressure.error
+         */
+        function onSensorStartError(e) {
+            console.error('Pressure sensor start error: ', e);
+            e.fire('error', e);
+        }
         /**
          * Performs action on sensor change.
          *
@@ -330,6 +331,7 @@ define({
          */
         function start() {
             pressureSensor.start(onSensorStartSuccess, onSensorStartError);
+        	
             console.log( 'start pressure sensor');
             
         }
@@ -481,10 +483,8 @@ define({
                 e.fire('error', {type: 'notavailable'});
             } else {
                 try {
-                    pressureSensor = sensorService
-                        .getDefaultSensor(SENSOR_TYPE);
-                    pressureSensor
-                        .getPressureSensorData(setCurrentPressureValue);
+                    pressureSensor = sensorService.getDefaultSensor(SENSOR_TYPE);
+                    pressureSensor.getPressureSensorData(onSensorChange);
                 } catch (error) {
                     if (error.type === ERROR_TYPE_NOT_SUPPORTED) {
                         e.fire('error', {type: 'notsupported'});

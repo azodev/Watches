@@ -128,7 +128,7 @@ define({
 			location : 600000,
 			heartRate : 10000,
 			weather : 3600000,//3600000,
-			pressure : 60000,
+			pressure : 600000,
 			updateEvents: 600000,
 			filterEvents: 300000//300000
 		};
