@@ -148,7 +148,7 @@ define({
 			nowDate = new Date();
 			console.log('Fetch calendars');
 			event.fire('log','Fetch calendars');
-			doPromise('alten').then( function (res){
+			/*doPromise('alten').then( function (res){
 				vEvents =[];
 				handleResponse(res);
 				doPromise('gmail').then(function(res){
@@ -167,7 +167,12 @@ define({
 						function(message) {
 							console.log(message);
 						});
-			
+			*/
+			doFetch().then((res)=> {
+					handleFilterForFinishedEvents();	
+			}).catch(e => {
+				console.log('Error fetching gmail '+e.message);
+			});
 		}
 		function isDuplicate (vEvent, vEvents){
 			dup = false;
@@ -242,6 +247,45 @@ define({
 			
 			return p1;
 		}
+		
+		
+		function doFetch(){
+			if (navigator.onLine){
+				let fetch = fetchCalendar('alten').then((json) => {
+					
+					handleJson(json);
+					return   fetchCalendar('gmail');
+				}).then((json) => {
+					
+					handleJson(json);
+					
+				});
+				return fetch;
+			}
+		}
+		
+		async function fetchCalendar(name) {
+			let url = 'https://cloud.anthony-zorzetto.fr/clrs/'+name+'.json';
+			let response = await fetch(url);
+			
+			  if (!response.ok) {
+			    throw new Error('HTTP error! status: '+response.status);
+			  } else {
+				  return await response.json();
+			   
+			  }
+		}
+		
+		function handleJson(json){
+			calendar = json[2];
+			for (i=0;i<calendar.length;i++){
+				e = new vEvent(calendar[i]);
+				if (!isDuplicate(e,vEvents)) vEvents.push (e);
+				vEvents.sort(function (a,b){return a.startDate - b.startDate});
+			}
+			
+		}
+		
 		
 		function handleResponse(responseText){
 			console.log('calendar');

@@ -80,7 +80,7 @@ define({
 			apiParams.lat = latitude;
 			apiParams.lon = longitude;
 		}
-		function decodeMapping() {
+		/*function decodeMapping() {
 			xmlHttp = new XMLHttpRequest();
 			xmlHttp.overrideMimeType("application/json");
 			xmlHttp.onreadystatechange = function() {
@@ -96,26 +96,46 @@ define({
 			};
 			xmlHttp.open("GET", MAPPING_FILE, true);
 			xmlHttp.send(null);
-			/*
-			xmlHttp = new XMLHttpRequest();
-			xmlHttp.open('GET', MAPPING_FILE);
-			xmlHttp.onreadystatechange = function (data) {
-			    if(xmlHttp.readyState == 4){
-			      if(xmlHttp.status == 200){
-			    	  mapping = JSON.parse(data.currentTarget.response);
-			      }else{
-			        console.error('Error pJS - XMLHttpRequest status: '+xmlHttp.status);
-			        console.error('Error pJS - File config not found');
-			      }
+			
+		}*/
+		
+		
+		async function  fetchMapping(url) {
+			  return new Promise(function(resolve, reject) {
+			    var xhr = new XMLHttpRequest();
+			    xhr.onload = function() {
+			      resolve(xhr.responseText);
 			    }
-			  };
-			  xmlHttp.send();
-			
-			*/
-			
-			
-			
+			    xhr.onerror = function() { 
+			      reject(new TypeError('Local request failed'));
+			    }
+			    xhr.open('GET', url);
+			    xhr.send(null);
+			  });
 		}
+
+		function decodeMapping(){
+			let fetch = fetchMapping(MAPPING_FILE).then((response) => {
+				console.log(response);
+				mapping = JSON.parse(response);
+				
+			}).catch(e => {
+				console.log('There has been a problem with mapping decode: ' + e.message);
+			});
+		}
+		
+		/*async function fetchMapping() {
+			let response = await fetch(MAPPING_FILE);
+			
+			  if (!response.ok) {
+			    throw new Error('FILE error! status: '+response.status);
+			  } else {
+				  return await response.json();
+			   
+			  }
+		}*/
+		
+		
 		function getMapping(id, dayNightBool) {
 			if (!weatherFound){
 				return DEFAULT_ICON;
