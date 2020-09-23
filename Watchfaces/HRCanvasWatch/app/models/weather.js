@@ -132,15 +132,7 @@ define({
 				return DEFAULT_ICON;
 			}
 		}
-		/**
-		 * Sets sensor change listener.
-		 * 
-		 * @memberof models/pressure
-		 * @public
-		 */
-		function setChangeListener() {
-
-		}
+		
 
 		function onPositionFound() {
 			
@@ -458,7 +450,6 @@ define({
 			getWeatherText : getWeatherText,
 			getMapping : getMapping,
 			setPosition : setPosition,
-			setChangeListener : setChangeListener,
 			isWeatherFound : isWeatherFound,
 			isForecastFound: isForecastFound,
 			getForecast: getForecast,
