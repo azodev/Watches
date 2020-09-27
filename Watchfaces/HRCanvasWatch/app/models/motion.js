@@ -207,7 +207,6 @@ define({
 			currentMotion.accelerationIncludingGravity.x = data.x;
 			currentMotion.accelerationIncludingGravity.y = data.y;
 			currentMotion.accelerationIncludingGravity.z = data.z;
-			//updateAverageMotion(currentMotion);
 		}
 
 		/**
@@ -241,11 +240,8 @@ define({
 		function setChangeListener() {
 			try {
 				motionSensor.setChangeListener(onSensorChange, options.sampleInterval, options.maxBatchCount);
-				//gyroscopeSensor.setChangeListener(onGetSuccessCB, options.sampleInterval, options.maxBatchCount);
-				//gyroscopeSensor.getGyroscopeSensorData(onGetSuccessCB, onerrorCB);
 			} catch (e) {
 				motionSensor.setChangeListener(onSensorChange);
-				//gyroscopeSensor.setChangeListener(onGetSuccessCB);
 			}
 
 			//

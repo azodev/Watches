@@ -160,7 +160,7 @@ define({
 		var secondsPassed = 0;
 		var oldTimeStamp = 0;
 		var miniCalendarDisplayed = true, miniWeatherDisplayed= true;
-		var widgetFullScreenDiplayed = false, backendLoaded = false; 
+		var widgetFullScreenDiplayed = false; 
 		var baroDisplayed = true;
 		var timeDisplayed = true;
 		var heartRateDisplayed=true;
@@ -475,9 +475,6 @@ define({
 		function handleWatchShowingAnimation(){
 			if (canvasDrawer.isShowing()){
 				canvasDrawer.show(secondsPassed,0.5);
-				if (!canvasDrawer.isShowing()){
-					//backendLoaded = true;
-				}
 			}
 			
 		}
@@ -595,7 +592,6 @@ define({
 			
 				
 			
-			if (backendLoaded){
 				canvasDrawer.renderCircleShadows(canvasContent.context, appDrawerShape, {r:15,g:15,b:15,a:0.7},5);
 				canvasDrawer.renderCircle(canvasContent.context, appDrawerShape, "#000000","rgba(10, 10, 10,0.7)",false,2,false);
 				canvasDrawer.roundRect(canvasContent.context, aShape1, 3, false, true, null, "rgba(0, 0, 0,0.8)");
@@ -719,7 +715,6 @@ define({
 							
 					});
 				}
-			}
 			
 
 			//displayFps();
@@ -1454,7 +1449,6 @@ define({
 			sysInfo.checkBattery();
 			calendarModel.accessCalendars(); 
 			
-			backendLoaded = true; 
 				
 			canvasDrawer.startShow(); 
 
