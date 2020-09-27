@@ -1418,7 +1418,7 @@ define({
 			nextMove = 1000 / fps;
 			then = Date.now();
 			startTime = then;
-			bindEvents();
+			bindEvents(); 
 			
 			if (tizen.preference.exists('theme')) {
 				theme = tizen.preference.getValue('theme');
