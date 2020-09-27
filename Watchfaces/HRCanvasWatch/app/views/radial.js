@@ -188,7 +188,7 @@ define({
                 	});
                 	svgMenu.highlightButton(item.id,'selected '+svgMenu.getTheme());//('fill', '#F9A602D0');
                 	
-                    console.log('You have clicked:', item.id, item.title);
+                    //console.log('You have clicked:', item.id, item.title);
                     if (item.id == 'update'){
                     	event.fire('update',true);
                     	closeMenuProperly(item);
@@ -206,28 +206,7 @@ define({
                     	tizen.preference.setValue('effect', item.id);
                     	closeMenuProperly(item);
                     }
-                    else if (item.id == 'events'){
-                    	 
-                    	/*var app = tizen.application.getCurrentApplication();*/
-                    	var appControl = new tizen.ApplicationControl("com.samsung.w-calendar2.appcontrol.daily")  ;
-                    	var appControlReplyCallback = {
-                    		     // callee sent a reply
-                    		     onsuccess: function(data) {
-                    		         console.log(data);
-                    		     },
-                    		     // callee returned failure
-                    		     onfailure: function() {
-                    		         console.log('The launch application control failed');
-                    		     }
-                    		 };
-                    	  tizen.application.launchAppControl(
-                    			 appControl,
-                    		     'com.samsung.w-calendar2',
-                    		     function() {console.log("launch application control succeed"); },
-                    		     function(e) {console.log("launch application control failed. reason: " + e.message); },
-                    		     appControlReplyCallback );
-                    	  closeMenuProperly(item);     
-                    }
+                    
                     else if (item.id == 'timer'){
                     	tizen.application.launch("com.samsung.timer-wc1", onsuccess,onfail);
                     	closeMenuProperly(item);
@@ -280,9 +259,9 @@ define({
         }
         function onListInstalledApps(appsInfo) {
 			var appId = null;
-			console.log(appsInfo);
+			//console.log(appsInfo);
 			for (var i = 0; i<appsInfo.length; i++ ){
-				console.log(appsInfo[i].id);
+				//console.log(appsInfo[i].id);
 			}
 		}
         function getMenu (){

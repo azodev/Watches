@@ -140,7 +140,7 @@ define({
 		 */
 		function onSensorStartError(e) {
 			console.error('Motion sensor start error: ', e);
-			e.fire('error', e);
+			//e.fire('error', e);
 		}
 
 		/**
@@ -177,7 +177,7 @@ define({
 				}
 				return averageMotion;
 			} catch (exept) {
-				e.fire('error', exept.message);
+				//e.fire('error', exept.message);
 				averageMotion = currentMotion;
 			}
 
@@ -218,7 +218,7 @@ define({
 		 */
 		function start() {
 			motionSensor.start(onSensorStartSuccess, onSensorStartError);
-			console.log('start motion sensor');
+			//console.log('start motion sensor');
 
 		}
 		function stop() {

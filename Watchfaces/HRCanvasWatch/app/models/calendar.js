@@ -50,6 +50,7 @@ define({
 		var start, now, end,month,day,year,nowDate;
 		var vEvents =[];
 		var hasEvents = false;
+		var lengthDaily = 0;
 		var calendarNames = [];
 		var totalCall;
 		var e, dup;
@@ -146,28 +147,9 @@ define({
 		function accessCalendars(){
 			
 			nowDate = new Date();
-			console.log('Fetch calendars');
-			event.fire('log','Fetch calendars');
-			/*doPromise('alten').then( function (res){
-				vEvents =[];
-				handleResponse(res);
-				doPromise('gmail').then(function(res){
-					handleResponse(res);
-					handleFilterForFinishedEvents();
-					
-				}).catch(
-					// Promesse rejetée
-					
-						function(message) {
-							console.log(message);
-						});
-			}).catch(
-					// Promesse rejetée
-					
-						function(message) {
-							console.log(message);
-						});
-			*/
+			//console.log('Fetch calendars');
+			//event.fire('log','Fetch calendars');
+
 			doFetch().then((res)=> {
 					handleFilterForFinishedEvents();	
 			}).catch(e => {
@@ -189,7 +171,10 @@ define({
 			return dup;
 		}
 		function hasVEvents(){
-			return (vEvents.length> 0)?true:false;
+			return (lengthDaily> 0)?true:false;
+		}
+		function getNbEvents(){
+			return lengthDaily;
 		}
 		/* Defines the event success callback. */
 		
@@ -287,25 +272,16 @@ define({
 		}
 		
 		
-		function handleResponse(responseText){
-			console.log('calendar');
-			json = JSON.parse(responseText);
-			calendar = json[2];
-			for (i=0;i<calendar.length;i++){
-				e = new vEvent(calendar[i]);
-				if (!isDuplicate(e,vEvents)) vEvents.push (e);
-				vEvents.sort(function (a,b){return a.startDate - b.startDate});
-			}
-			
-		}
+
 		function handleFilterForFinishedEvents(){
 			if (vEvents.length > 0){
-				console.log('Filter events');
-				event.fire('log','Filter events');
+				//console.log('Filter events');
+				//event.fire('log','Filter events');
 				vEvents = vEvents.filter (filterFinishedVEvents);
 				buildDaysEvents();
 			}
-			if (vEvents.length > 0 ) {
+			lengthDaily = vEvents.length;
+			if (lengthDaily > 0 ) {
 				event.fire('hasEvent',true);
 			}
 			else event.fire('hasEvent',false);
@@ -356,6 +332,7 @@ define({
 			getVEvents : getVEvents,
 			accessCalendars : accessCalendars,
 			hasVEvents : hasVEvents,
+			getNbEvents : getNbEvents,
 			formatDate : formatDate,
 			getCalendarHtml:getCalendarHtml,
 			setIntervalUpdate:setIntervalUpdate,

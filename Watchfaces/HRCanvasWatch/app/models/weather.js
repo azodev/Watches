@@ -116,7 +116,6 @@ define({
 
 		function decodeMapping(){
 			let fetch = fetchMapping(MAPPING_FILE).then((response) => {
-				console.log(response);
 				mapping = JSON.parse(response);
 				
 			}).catch(e => {
@@ -157,7 +156,7 @@ define({
 		function onPositionFound() {
 			
 			coords = locationModel.getData();
-			console.log('onPositionFound');
+			//console.log('onPositionFound');
 			//event.fire ('log','onPositionFound');
 			if (coords !== 'undefined') {
 				doUpdate();
@@ -172,8 +171,8 @@ define({
 				console.log('onDistanceChange update');
 				doUpdate();
 			} else {
-				console.error('error : W Cannot decode position');
-				event.fire ('error','error onDistanceChange');
+				//console.error('error : W Cannot decode position');
+				//event.fire ('error','error onDistanceChange');
 			}
 		}
 		function onUpdateTriggered (message){
@@ -182,11 +181,11 @@ define({
 			if (locationModel.getPositionAquiered() === true){
 				if (coords !== 'undefined' && coords.latitude !== null) {
 					doUpdate();
-					event.fire('log', message);
+					//event.fire('log', message);
 				} else {
 					console.error('error : W Cannot decode position');
 					//event.fire ('error','error onUpdateTriggered');
-					event.fire('log', 'error : W Cannot decode position');
+					//event.fire('log', 'error : W Cannot decode position');
 				}
 			}
 			
@@ -203,7 +202,7 @@ define({
 					outArray.push(key + '=' + encodeURIComponent(apiParams[key]));
 				}
 			}
-			console.log('doUpdate');
+			//console.log('doUpdate');
 			updateWeatherP();
 		}  
 		
@@ -234,11 +233,11 @@ define({
 					weatherFound = true;
 					event.fire('found', weatherInform);
 					updateForecastP();
-					console.log('Update Weather: Found');
+					//console.log('Update Weather: Found');
 					  
 					}).catch(e => {
-						console.log('There has been a problem with your fetch operation: ' + e.message);
-						event.fire('log', 'There has been a problem with your fetch w operation: ' + e.message);
+						console.error('There has been a problem with your fetch operation: ' + e.message);
+						//event.fire('log', 'There has been a problem with your fetch w operation: ' + e.message);
 				});
 			}
 		}
@@ -285,11 +284,11 @@ define({
 					// Gets weather string from information
 					forecastFound = true;
 					event.fire('forecast_found', forecastInform);
-					console.log('Update forecast: Found');
+					//console.log('Update forecast: Found');
 					  
 					}).catch(function (e)  {
-						console.log('There has been a problem with your fetch operation: ' + e.message);
-						event.fire('log', 'There has been a problem with your fetch f operation: ' + e.message);
+						console.error('There has been a problem with your fetch operation: ' + e.message);
+						//event.fire('log', 'There has been a problem with your fetch f operation: ' + e.message);
 						
 				});
 			}

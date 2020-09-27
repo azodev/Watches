@@ -178,7 +178,7 @@ define({
 			}*/
 			
 			doStart().then(function (){
-				console.log('promise ok');
+				//console.log('promise ok');
 			}).catch(function (){
 				console.log('promise error');
 			});
@@ -190,7 +190,7 @@ define({
 				started = true;
 				
 				resetData();
-				console.log('Starting HR Sensor');
+				//console.log('Starting HR Sensor');
 				await heartRateSensor.start(CONTEXT_TYPE, handleHeartRateInfo, function onError(error) {
 					console.error('error: ', error.message);
 					// event.fire('HRFound', false);
@@ -205,7 +205,7 @@ define({
 		 * @public
 		 */
 		function stop() {
-			console.log('Stop HR Sensor function');
+			//console.log('Stop HR Sensor function');
 			if (started){
 				heartRateSensor.stop(CONTEXT_TYPE);
 //				console.error('Stopping HR Sensor');

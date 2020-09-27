@@ -182,7 +182,7 @@ define({
 				if (!positionAquiered){
 					positionAquiered = true;
 					event.fire('found', positionAquiered);
-					event.fire('log', 'positionAquiered fallback');
+					//event.fire('log', 'positionAquiered fallback');
 				}
 				
 				console.log('Location succcess in fallback');
@@ -237,7 +237,7 @@ define({
 
 		function start() {
 			//resetData();
-			console.log( 'start location sensor');
+			//console.log( 'start location sensor');
 
 			if (!running) {
 				locationWatcher = navigator.geolocation.watchPosition(successCallback, errorCallback, options);
@@ -256,7 +256,7 @@ define({
 		function stop() {
 			
 			
-			console.log( 'stop location sensor');
+			//console.log( 'stop location sensor');
 			if (locationWatcher !== null) {
 				navigator.geolocation.clearWatch(locationWatcher);
 				locationWatcher = null;

@@ -332,13 +332,13 @@ define({
         function start() {
             pressureSensor.start(onSensorStartSuccess, onSensorStartError);
         	
-            console.log( 'start pressure sensor');
+            //console.log( 'start pressure sensor');
             
         }
         function stop(){
         	pressureSensor.stop();
         	isEnable = false;
-        	console.log( 'stop pressure sensor');
+        	//console.log( 'stop pressure sensor');
         }
         function isStarted(){
         	return isEnable;

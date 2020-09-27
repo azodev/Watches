@@ -104,7 +104,7 @@ define({
 			fading = true;
 			timePassed = 0;
 			watchOpacity = 1;
-			console.log('Start fade');
+			//console.log('Start fade');
 			
 		} 
 		function isFading(){
@@ -126,7 +126,7 @@ define({
 			showing = true;
 			timePassed = 0;
 			watchOpacity = 0;
-			console.log('Start show');
+			//console.log('Start show');
 			
 		} 
 		function isShowing(){

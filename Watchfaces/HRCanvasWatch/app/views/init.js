@@ -55,7 +55,7 @@ define({
          * @fires views.init.window.resize
          */
         function onWindowResize() {
-            event.fire('window.resize', { height: window.innerHeight });
+            //event.fire('window.resize', { height: window.innerHeight });
         }
 
         /**
@@ -81,7 +81,7 @@ define({
         function bindEvents() {
             //event.on({'core.systeminfo.battery.low': onLowBattery});
             
-            window.addEventListener('resize', onWindowResize);
+            //window.addEventListener('resize', onWindowResize);
             
         }
 

@@ -206,7 +206,7 @@ define({
 
 		function handleDoubleClick(canvas,ev) {
 			clickPos = getMousePosition(canvas,ev);
-			console.log('handleDoubleClick');
+			//console.log('handleDoubleClick');
 			if (wShape.isInSurface(clickPos,0) && !radialmenu.getOpen()  && weatherModel.isForecastFound()){
 				 
 				handleWeatherClick();
@@ -254,8 +254,6 @@ define({
 			}
 		}
 		function changeRootColors(theme){
-			console.log(theme);
-			let sheet  = document.styleSheets[1];
 			
 			switch (theme) {
 			case 'fire':
@@ -277,10 +275,10 @@ define({
 			}
 		}
 		function handleSingleClick(canvas,ev) {
-			console.log('handleSingleClick');
+			//console.log('handleSingleClick');
 			clickPos = getMousePosition(canvas,ev);
 			
-			console.log(clickPos);
+			//console.log(clickPos);
 			if (appDrawerShape.isInSurface(clickPos,10)){
 				canvasDrawer.startFade();
 				openRadialMenu(ev);
@@ -288,7 +286,7 @@ define({
 			}
 			
 			else if (calendarShape.isInSurface(clickPos,0) && !forecastDisplayed && !radialmenu.getOpen() && !widgetFullScreenDiplayed && calendarModel.hasVEvents()){
-				console.log('Click fade');
+				//console.log('Click fade');
 				canvasDrawer.startFade();
 				calendar = calendarModel.getCalendarHtml();
 				holder = canvasDrawer.processWidgetHtml(calendar);
@@ -296,13 +294,13 @@ define({
 				
 				
 				setClassAndWaitForTransition(holder,'on','opacity').then(function () {
-					console.log('transition holder');
+					//console.log('transition holder');
 					//holder.setAttribute('class', 'on');
 					widgetId = "#calendar";
 					changeRootColors(theme);
 					
 					setClassAndWaitForTransition(calendar,'on','opacity').then(function () {
-						console.log('transition calendar');
+						//console.log('transition calendar');
 						
 						//calendar.setAttribute('class', 'on');
 						//holder.setAttribute('class', 'on');
@@ -318,9 +316,9 @@ define({
 		        });
 				document.querySelectorAll("#calendar .event").forEach(function (element){
 					element.addEventListener('click', function(e) {
-						console.log('click event');
+						//console.log('click event');
 						setClassAndWaitForTransition(element,'event click','color').then(function () {
-							console.log('transition event');
+							//console.log('transition event');
 							element.setAttribute('class', 'event');
 							canvasDrawer.startShow();
 							widgetId = null;
@@ -338,17 +336,17 @@ define({
 				let weather = weatherModel.getWeatherHtml();
 				holder = canvasDrawer.processWidgetHtml(weather);
 				
-				console.log('weather opening');
+				//console.log('weather opening');
 				
 				
 				setClassAndWaitForTransition(holder,'on','opacity').then(function () {
-					console.log('transition holder');
+					//console.log('transition holder');
 					//holder.setAttribute('class', 'on');
 					widgetId = "#weather";
 					changeRootColors(theme);
 					
 					setClassAndWaitForTransition(weather,'on','opacity').then(function () {
-						console.log('transition weather');
+						//console.log('transition weather');
 						
 						//calendar.setAttribute('class', 'on');
 						//holder.setAttribute('class', 'on');  
@@ -368,9 +366,9 @@ define({
 				document.querySelectorAll("#weather div.block").forEach(function (element){
 					element.addEventListener('click', function(e) {
 						
-						console.log('click weather');
+						//console.log('click weather');
 						setClassAndWaitForTransition(element,'block click','color').then(function () {
-							console.log('transition weather');
+							//console.log('transition weather');
 							let ov = document.querySelector("#overflower-back");
 							ov.innerHTML = '';
 							let block = weatherModel.getElementDetails(element.getAttribute('block-id'));
@@ -378,11 +376,11 @@ define({
 							setClassAndWaitForTransition(element,'block','color').then(function () {
 
 								
-								console.log('flip');
+								//console.log('flip');
 								flipping = true; 
 
 								setClassAndWaitForTransition(document.getElementById('weather'),'flip','transform').then(function () {
-									console.log('flipped');
+									//console.log('flipped');
 									setTimeout(function (){
 										flipping=false;
 										flipped = true; 
@@ -406,11 +404,11 @@ define({
 						|| hasSomeParentTheClass(e.target, 'overflower-back')
 				 ){
 					 flipping=true;
-					 console.log('flipper');
+					 //console.log('flipper');
 					 setTimeout(function (){
 						 let weather = document.getElementById('weather');
 						 setClassAndWaitForTransition(weather,'on','transform').then(function () {
-								console.log('flipped'); 
+								//console.log('flipped'); 
 								flipping=false;
 								flipped = false; 
 								while (ovb.firstChild) {
@@ -448,13 +446,13 @@ define({
 
 				
 					setClassAndWaitForTransition(item,'off','opacity').then(function () {
-						console.log('transition widget');
+						//console.log('transition widget');
 						
 						widgetOn = null;
 						flipped = false;
 						setClassAndWaitForTransition(holder,'','opacity').then(function () {
 							//calendar.setAttribute('class', 'off');
-							console.log('transition holder');
+							//console.log('transition holder');
 							
 							
 							canvasDrawer.clearWidgetHtml(holder,item);
@@ -502,7 +500,7 @@ define({
 		 * @private
 		 */
 		function drawWatchLayout() {
-			console.log('DrawLayout');
+			//console.log('DrawLayout');
 			// Clear canvas
 			/**@todo */
 			canvasBackground.context.clearRect(0, 0, canvasBackground.canvas.width, canvasBackground.canvas.height);
@@ -574,31 +572,20 @@ define({
 				
 			
 			if (!isAmbientMode){
+				let pl = particles.length;
 				particles = particles.filter(function (p) {
 					
 					p.setPoA(gravCenter); 
 					return p.move();
 				});
 				if (time_to_recreate) {
-				    if (particles.length < max_particles) {
-				    	popolate(Math.round((max_particles-particles.length)/10),effect);
+				    if (pl < max_particles) {
+				    	popolate(Math.round((max_particles-pl)/10),effect);
 				    }
 				}
 				  
 			}
 			clear();
-			
-			  // Recreate particles
-			  
-			  //console.log(particles.length );
-//			  flames = flames.filter(function(p) {
-//				    return p.move();
-//				  });
-			  
-			
-			
-			 
-			
 			
 			
 			
@@ -606,10 +593,7 @@ define({
 			
 			canvasDrawer.renderCircle(canvasContent.context,  new Circle(center.x,center.y,watchRadius -2) ,null,null,true,2,true);
 			
-			  
-
-			
-			
+				
 			
 			if (backendLoaded){
 				canvasDrawer.renderCircleShadows(canvasContent.context, appDrawerShape, {r:15,g:15,b:15,a:0.7},5);
@@ -696,7 +680,7 @@ define({
 							gradient : true, 
 							motion: motion
 					});
-					canvasDrawer.renderText(canvasContent.context, calendarModel.getVEvents().length , calendarShape.getCoords().x+50, calendarShape.getCoords().y+50, 30, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context, calendarModel.getNbEvents() , calendarShape.getCoords().x+50, calendarShape.getCoords().y+50, 30, "#c9c9c9", {
 						font : 'FutureNow',
 						align : 'center'
 					});
@@ -914,7 +898,7 @@ define({
 
 		}
 		function onPedometerDataChange(pedometerInfo) {
-			event.fire ('log','onPedometerDataChange');
+			//event.fire ('log','onPedometerDataChange');
 			pedometerValue = {
 				stepStatus : pedometerInfo.detail.stepStatus,
 				speed : pedometerInfo.detail.speed,
@@ -1008,7 +992,7 @@ define({
 		function drawAmbientWatch(e) {
 			// Import the current time
 			getDate();
-			console.log('ambient');
+			//console.log('ambient');
 			canvasDrawer.setOpacity(1);
 			//canvasBackground.context.clearRect(0, 0, canvasBackground.canvas.width, canvasBackground.canvas.height);
 			/**@todo */
@@ -1154,7 +1138,7 @@ define({
 			switch (type) {
 			case "Ambient":
 				// Normal -> Ambient
-				console.log('activateMode ambiant');
+				//console.log('activateMode ambiant');
 				stopSensors();
 				isAmbientMode = true;
 				drawAmbientWatch(null);
@@ -1168,7 +1152,7 @@ define({
 				startSensors();
 				isAmbientMode = false;
 				
-				console.log('activateMode normal');
+				//console.log('activateMode normal');
 				
 				
 				
@@ -1228,7 +1212,7 @@ define({
 			
 			
 			window.addEventListener("timetick", function (){
-				console.log('timetick');
+				//console.log('timetick');
 				if (isAmbientMode) {
 					drawAmbientWatch();
 				}
@@ -1241,18 +1225,18 @@ define({
 			
 			
 			up.addEventListener('click', function(e) {
-				console.log('up'); 
+				//console.log('up'); 
 				calendarY = document.getElementById ('overflower').scrollTop-220;
-				console.log(document.getElementById ('overflower').scrollTop);
+				//console.log(document.getElementById ('overflower').scrollTop);
 				canvasDrawer.scrollTop(document.getElementById ('overflower'),-220,500); 
 			});
 			down.addEventListener('click', function(e) {
-				console.log('down');
+				//console.log('down');
 				calendarY = document.getElementById ('overflower').scrollTop+220;
 				canvasDrawer.scrollTop(document.getElementById ('overflower'),220,500); 
 			});
 			window.addEventListener("ambientmodechanged", function(e) {
-				console.log('ambientmodechanged event');
+				//console.log('ambientmodechanged event');
 				if (e.detail.ambientMode === true) {
 					// Rendering ambient mode case
 					if (radialmenu.getOpen()){
@@ -1270,7 +1254,7 @@ define({
 			});
 			
 			event.on("visibilitychange", function(e) {
-				console.log('visibilitychange event');
+				//console.log('visibilitychange event');
 				if (!document.hidden) {
 					if (isAmbientMode === true) {
 						// Rendering ambient mode case
@@ -1288,7 +1272,7 @@ define({
 					}
 				}
 				else {
-					console.log('hide');
+					//console.log('hide');
 					if (radialmenu.getOpen()){
 						radialmenu.closeMenu();
 					}

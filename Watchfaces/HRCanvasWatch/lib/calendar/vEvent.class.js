@@ -29,7 +29,6 @@ class vEvent {
 	}
 	isDuplicate ( vEvents){
 		let dup = false;
-		console.log(vEvents);
 		try {
 			if (vEvents.length > 0){
 				vEvents.forEach(function(el){
@@ -41,10 +40,8 @@ class vEvent {
 			
 		}
 		catch (e) {
-			  console.log(e);
 			  dup= true;
 			}
-		console.log('not dup');
 		return dup;
 	}
 	getTitle(){
