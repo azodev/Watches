@@ -184,54 +184,7 @@ define({
 			
 		}
 		
-		function wasRequestSuccessful(status) {
-			return status >= 200 && status < 300;
-		}
-		function doPromise(name){
-			let p1 = new Promise(function(resolve, reject)  {
-				
-				now = Date.now()/1000 ;
-				start = Math.round((now-3600)); //Math.round((now - 86400));
-				//console.log(start);
-				end = Math.round((now + 86400)); 
-				const  xhr = new XMLHttpRequest();
-				xhr.open("GET", 'https://cloud.anthony-zorzetto.fr/clrs/'+name+'.json',true);
 
-
-
-				
-				xhr.onreadystatechange =function () {
-					if (xhr.readyState !== 4) {
-						return;
-					}
-					
-
-					if (!wasRequestSuccessful(xhr.status)) {
-						if (xhr.status >= 400 && xhr.status < 500) {
-							reject(null);
-							return;
-						}
-						if (xhr.status >= 500 && xhr.status < 600) {
-							reject(null);
-							return;
-						}
-
-						reject(null);
-						return;
-					}
-
-					
-					resolve(xhr.responseText);
-				};
-
-				xhr.onerror = function () {reject('error')};
-
-				xhr.onabort =function () {reject('aborted')};
-				xhr.send();
-			});
-			
-			return p1;
-		}
 		
 		
 		function doFetch(){
@@ -248,6 +201,31 @@ define({
 				return fetch;
 			}
 		}
+		
+		function doFetchWithWorker(){ 
+			if (navigator.onLine){
+				
+				let worker = new Worker('lib/workers/calendarWk.js');
+				worker.onmessage = function(e) {
+					if (e.data.output){
+						let json = e.data.output;
+						weatherFound = true;
+						event.fire('found', weatherInform); 
+						updateForecastWithWorker();
+						worker.terminate();
+					}
+				}
+				worker.onerror = function (err){
+					console.error(err);
+				};
+				worker.postMessage({
+		            'url': url
+		        });
+			}
+		}
+		
+		
+		
 		
 		async function fetchCalendar(name) {
 			let url = 'https://cloud.anthony-zorzetto.fr/clrs/'+name+'.json';

@@ -1,15 +1,18 @@
-class vForecast {
+class vForecast  {
 	constructor(array,mapping){
-		this.id = array['dt'];
-		this.date = new Date(array['dt']*1000);
-		this.city = array['city'];
-		this.main = array['main'];
-		this.weather = array['weather'][0];
-		this.wind = array['wind'];
-		this.cloud = array['cloud'];
-		this.rain = array['rain'];
-		this.snow = array['snow'];
-		this.day = array['day'];
+		if (array != null){
+			this.id = array['dt'];
+			this.date = new Date(array['dt']*1000);
+			this.city = array['city'];
+			this.main = array['main'];
+			this.weather = array['weather'][0];
+			this.wind = array['wind'];
+			this.cloud = array['cloud'];
+			this.rain = array['rain'];
+			this.snow = array['snow'];
+			this.day = array['day'];
+		}
+		
 		this.mapping = mapping;
 	}
 	

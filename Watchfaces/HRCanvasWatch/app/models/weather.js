@@ -203,22 +203,36 @@ define({
 				}
 			}
 			//console.log('doUpdate');
-			updateWeatherP();
+			updateWeatherWithWorker();
 		}  
 		
-		async function fetchWeather() {
-			url = API_URL_WEATHER + outArray.join('&');
-			let response = await fetch(url);
-			
-			  if (!response.ok) {
-			    throw new Error('HTTP error! status: '+response.status);
-			  } else {
-				  return await response.json();
-			  }
+		
+		function updateWeatherWithWorker(){
+			if (navigator.onLine){
+				url = API_URL_WEATHER + outArray.join('&');
+				let worker = new Worker('lib/workers/weatherWk.js');
+				worker.onmessage = function(e) {
+					if (e.data.output){
+						weatherInform = e.data.output;
+						weatherFound = true;
+						event.fire('found', weatherInform); 
+						updateForecastWithWorker();
+						worker.terminate();
+					}
+				}
+				worker.onerror = function (err){
+					console.error(err);
+				};
+				worker.postMessage({
+		            'url': url
+		        });
+			}
 		}
+		/*
 		function updateWeatherP(){
 			if (navigator.onLine){
-				fetchWeather().then((json) => {
+				url = API_URL_WEATHER + outArray.join('&');
+				fetchWeather(url).then((json) => {
 					
 					weatherInform = json;
 	
@@ -241,29 +255,57 @@ define({
 				});
 			}
 		}
-		async function fetchForecast() {
-			url = API_URL_FORECAST + outArray.join('&');
+		async function fetchWeather() {
+			
 			let response = await fetch(url);
 			
 			  if (!response.ok) {
 			    throw new Error('HTTP error! status: '+response.status);
 			  } else {
 				  return await response.json();
-			   
 			  }
 		}
+		*/
+		function updateForecastWithWorker(){
+			if (navigator.onLine){
+				url = API_URL_FORECAST + outArray.join('&');
+				let worker = new Worker('lib/workers/forecastWk.js');
+				worker.onmessage = function(e) {
+					if (e.data.output){
+						forecastInform = e.data.output;
+						vForecasts= e.data.vForecasts;
+						event.fire('triggerPressureSea',e.data.first);
+						for (let i =0, vf = vForecasts.length ; i< vf; i++){
+							let target = new vForecast(null,mapping);
+							vForecasts[i] = Object.assign(target, vForecasts[i] );
+						}	
+						buildDaysForecasts();
+						forecastFound = true;
+						event.fire('forecast_found', forecastInform);
+						  
+					}
+				}
+				worker.onerror = function (err){
+					console.error(err);
+				};
+				worker.postMessage({
+		            'url': url,
+		            'weatherInform':weatherInform,
+		            'mapping':mapping
+		        });
+			}
+		}
+		
+		
 		function updateForecastP(){
 			if (navigator.onLine){
 				fetchForecast().then( function (json) {
 					forecastInform = json;
 					vForecasts= [];
-					//day = (now >= forecastInform.sys.sunrise && now <= forecastInform.sys.sunset) ? true : false;
-					// Gets icon code from information
-					//weatherInform.day = day;
 					
 					let sunriseHour = dateHelper.roundMinutes(new Date( weatherInform.sys.sunrise*1000)).getHours();
 					let sunsetHour = dateHelper.roundMinutes(new Date( weatherInform.sys.sunset*1000)).getHours();
-					for (let i = 0; i < forecastInform.list.length ; i++ ){
+					for (let i = 0, fll = forecastInform.list.length; i < fll ; i++ ){
 						hour = new Date( forecastInform.list[i].dt * 1000).getHours();
 						
 						day = (
@@ -280,11 +322,8 @@ define({
 					}
 					forecastInform.lastWeatherCallDate = new Date();
 					buildDaysForecasts();
-					//console.debug(forecastInform);
-					// Gets weather string from information
 					forecastFound = true;
 					event.fire('forecast_found', forecastInform);
-					//console.log('Update forecast: Found');
 					  
 					}).catch(function (e)  {
 						console.error('There has been a problem with your fetch operation: ' + e.message);
@@ -293,7 +332,17 @@ define({
 				});
 			}
 		}
-		
+		async function fetchForecast() {
+			url = API_URL_FORECAST + outArray.join('&');
+			let response = await fetch(url);
+			
+			  if (!response.ok) {
+			    throw new Error('HTTP error! status: '+response.status);
+			  } else {
+				  return await response.json();
+			   
+			  }
+		}
 		
 		
 		
