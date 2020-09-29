@@ -730,10 +730,10 @@ define({
 
 		}
 		function getCoordsForDiagonalGradient(width, height) {
-			var alfa = Math.atan(height / width);
-			var x = Math.sqrt(width * width + height * height) / 2 / (Math.cos(alfa));
-			var z = ((width - x) * Math.cos(alfa)) * Math.sin(Math.PI / 2 - alfa);
-			var w = ((width - x) * Math.cos(alfa)) * Math.cos(Math.PI / 2 - alfa);
+			let alfa = Math.atan(height / width);
+			let x = Math.sqrt(width * width + height * height) / 2 / (Math.cos(alfa));
+			let z = ((width - x) * Math.cos(alfa)) * Math.sin(Math.PI / 2 - alfa);
+			let w = ((width - x) * Math.cos(alfa)) * Math.cos(Math.PI / 2 - alfa);
 			return {
 				x1 : z,
 				y1 : -w,

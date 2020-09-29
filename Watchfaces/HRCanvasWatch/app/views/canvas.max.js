@@ -108,7 +108,6 @@ define({
 
 		var pressure = 0;
 		var altitude = 0;
-		var locationInterval = null, pedometerInterval = null, hrInterval = null, weatherInterval = null, hrIntervalStop = null, pressureInterval = null, updateEvents =null, filterEvents = null;
 		var errorMsg = '';
 		var animTimeout, animRequest;
 		
@@ -132,7 +131,7 @@ define({
 			updateEvents: 600000,
 			filterEvents: 300000//300000
 		};
-		var grd,grdAmbiant, i, j, startTime, now, then, elapsed, sinceStart, frame = 0, currentFps, isAmbientMode, rotate = false;
+		var grd,grdAmbiant, i, j, startTime, now, then, elapsed, sinceStart, frame = 0, currentFps, isAmbientMode;
 		var motion = null;
 		var motionFound = false;
 		var motionFromGyro = {accelerationIncludingGravity : {x:null,y:null}}; 
@@ -148,7 +147,7 @@ define({
 		var clickPos = null;
 		var radialButton = null;
 		var drawTicks = false;
-		var particleColors = ["#694FB9","#6094ee","#3CFBFF"];
+		
 		var deg = {x:0,y:0}; 
 		var elem;
 		const CLICK_INTERVAL = 300;
@@ -165,7 +164,6 @@ define({
 		var timeDisplayed = true;
 		var heartRateDisplayed=true;
 		var holder = document.querySelector("#widget_holder");
-		var calendar = document.querySelector("#calendar");
 		var widgetOn = null;
 		var widgetId = '';
 		var up = document.getElementById ('up');
@@ -175,9 +173,11 @@ define({
 		var flipped = false;
 		var widgetFlipped = null;
 		var wCoords=null;
+		var particleColors = ["#694FB9","#6094ee","#3CFBFF"];
 		var theme = 'ice';
 		var effect = 'attraction';
 		var noEvents = false;
+		var pl = 0;
 		
 		
 		function handleClick(canvas,ev) {
@@ -491,23 +491,7 @@ define({
             let y = event.clientY - rect.top; 
             return {x:x,y:y} ;
         } 
-		/**
-		 * Draws the basic layout of the watch
-		 * 
-		 * @private
-		 */
-		function drawWatchLayout() {
-			//console.log('DrawLayout');
-			// Clear canvas
-			/**@todo */
-			canvasBackground.context.clearRect(0, 0, canvasBackground.canvas.width, canvasBackground.canvas.height);
-			//
-			canvasDrawer.renderText(canvasBackground.context, "AZO WATCH v.1", center.x, center.y - (watchRadius * 0.7), 13, "#c9c9c9", {
-				font : 'FutureNow',
-				align : 'center'
-			});
-			
-		}
+		
 		function displayFps() {
 			elapsed = now - then;
 			if (elapsed > nextMove) {
@@ -569,7 +553,7 @@ define({
 				
 			
 			if (!isAmbientMode){
-				let pl = particles.length;
+				pl = particles.length;
 				particles = particles.filter(function (p) {
 					
 					p.setPoA(gravCenter); 
@@ -789,7 +773,7 @@ define({
 			if (weatherModel.isForecastFound() && forecastDisplayed) {
 				forecastValue = weatherModel.getForecast();
 				forecastIndexX = center.x-18;
-				for (var i = 0; i < 5; i++) {
+				for (let i = 0; i < 5; i++) {
 					forecastHour = new Date(forecastValue.list[i].dt * 1000).getHours();
 					canvasDrawer.renderText(canvasContent.context, forecastHour + "h", forecastIndexX, center.y + (watchRadius * 0.15), 15, "#c9c9c9", {
 						font : 'FutureNow',
