@@ -40,7 +40,7 @@ define({
 		 */
 		var event = e;
 
-
+		
 		var started = false;
 		var found = false;
 		var calendar = null;
@@ -145,16 +145,23 @@ define({
 		}
 		
 		function accessCalendars(){
-			
-			nowDate = new Date();
-			//console.log('Fetch calendars');
-			//event.fire('log','Fetch calendars');
-
-			doFetch().then((res)=> {
-					handleFilterForFinishedEvents();	
-			}).catch(e => {
-				console.log('Error fetching gmail '+e.message);
-			});
+			if (navigator.onLine){
+				nowDate = new Date();
+				//console.log('Fetch calendars');
+				//event.fire('log','Fetch calendars');
+				/*
+				doFetch().then((res)=> {
+						handleFilterForFinishedEvents();	
+				}).catch(e => {
+					console.log('Error fetching gmail '+e.message);
+				});*/
+				let prom =  doFetchWithComlink();
+				
+				prom.finally((e)=>{
+					console.log(e);
+					console.log(vEvents);
+				});
+			}
 		}
 		function isDuplicate (vEvent, vEvents){
 			dup = false;
@@ -188,7 +195,7 @@ define({
 		
 		
 		function doFetch(){
-			if (navigator.onLine){
+			
 				let fetch = fetchCalendar('alten').then((json) => {
 					
 					handleJson(json);
@@ -199,7 +206,70 @@ define({
 					
 				});
 				return fetch;
+		}
+		
+		
+		async function doFetchWithComlink(){
+			let prom = new Promise((resolve, reject) => {
+				const worker = new Worker("lib/workers/calendarCom.js");
+				const fetcher = Comlink.proxy(worker);
+				fetcher.setName('alten');
+				let result = await fetcher.doFetch(Comlink.proxyValue(handleJson2));
+				resolve(result );
+			
+			});
+			return await prom;
+			
+		}
+		
+		
+		
+		async function fetchCalendar(name) {
+			let url = 'https://cloud.anthony-zorzetto.fr/clrs/'+name+'.json';
+			let response = await fetch(url);
+			
+			  if (!response.ok) {
+			    throw new Error('HTTP error! status: '+response.status);
+			  } else {
+				  return await response.json();
+			   
+			  }
+		}
+		
+		function handleJson(json){
+			calendar = json[2];
+			for (i=0;i<calendar.length;i++){
+				e = new vEvent(calendar[i]);
+				if (!isDuplicate(e,vEvents)) vEvents.push (e);
+				vEvents.sort(function (a,b){return a.startDate - b.startDate});
 			}
+			return vEvents;
+		}
+		async function handleJson2(json){
+			calendar = json[2];
+			for (i=0;i<calendar.length;i++){
+				e = new vEvent(calendar[i]);
+				if (!isDuplicate(e,vEvents)) vEvents.push (e);
+				vEvents.sort(function (a,b){return a.startDate - b.startDate});
+			}
+			console.log(vEvents);
+		}
+		
+
+		function handleFilterForFinishedEvents(){
+			if (vEvents.length > 0){
+				//console.log('Filter events');
+				//event.fire('log','Filter events');
+				vEvents = vEvents.filter (filterFinishedVEvents);
+				buildDaysEvents();
+			}
+			lengthDaily = vEvents.length;
+			if (lengthDaily > 0 ) {
+				event.fire('hasEvent',true);
+			}
+			else event.fire('hasEvent',false);
+			//fillCalendar();
+			
 		}
 		
 		function doFetchWithWorker(){ 
@@ -225,47 +295,6 @@ define({
 		}
 		
 		
-		
-		
-		async function fetchCalendar(name) {
-			let url = 'https://cloud.anthony-zorzetto.fr/clrs/'+name+'.json';
-			let response = await fetch(url);
-			
-			  if (!response.ok) {
-			    throw new Error('HTTP error! status: '+response.status);
-			  } else {
-				  return await response.json();
-			   
-			  }
-		}
-		
-		function handleJson(json){
-			calendar = json[2];
-			for (i=0;i<calendar.length;i++){
-				e = new vEvent(calendar[i]);
-				if (!isDuplicate(e,vEvents)) vEvents.push (e);
-				vEvents.sort(function (a,b){return a.startDate - b.startDate});
-			}
-			
-		}
-		
-		
-
-		function handleFilterForFinishedEvents(){
-			if (vEvents.length > 0){
-				//console.log('Filter events');
-				//event.fire('log','Filter events');
-				vEvents = vEvents.filter (filterFinishedVEvents);
-				buildDaysEvents();
-			}
-			lengthDaily = vEvents.length;
-			if (lengthDaily > 0 ) {
-				event.fire('hasEvent',true);
-			}
-			else event.fire('hasEvent',false);
-			//fillCalendar();
-			
-		}
 		function setIntervalUpdate(i){
 			intervalU = i;
 		}

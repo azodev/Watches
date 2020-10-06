@@ -62,7 +62,7 @@ define({
 		 * @private
 		 * @type {SensorService}
 		 */
-		sensorService = null,
+		sensorService = null, sensorWorker = null,
 
 		/**
 		 * Reference to the motion sensor.
@@ -70,8 +70,7 @@ define({
 		 * @private
 		 * @type {MotionSensor}
 		 */
-		motionSensor = null,
-		gyroscopeSensor = null,
+		motionSensor = null, gyroscopeSensor = null,
 
 		/**
 		 * Array of registered motions.
@@ -117,7 +116,7 @@ define({
 		};
 		var isEnable = false;
 		var initialValue = 0;
-		var elem  = null;
+		var elem = null;
 		var found = false;
 		/**
 		 * Performs action on start sensor success.
@@ -126,7 +125,7 @@ define({
 		 * @fires models.motion.start
 		 */
 		function onSensorStartSuccess() {
-			//e.fire('start');
+			// e.fire('start');
 			isEnable = true;
 		}
 
@@ -140,7 +139,7 @@ define({
 		 */
 		function onSensorStartError(e) {
 			console.error('Motion sensor start error: ', e);
-			//e.fire('error', e);
+			// e.fire('error', e);
 		}
 
 		/**
@@ -161,13 +160,13 @@ define({
 					// nothing to shift yet, recalculate whole average
 					averageMotion.accelerationIncludingGravity.x = previousMotions.reduce(function(accumulator, currentValue) {
 						return accumulator + currentValue.x;
-					},initialValue) / len;
+					}, initialValue) / len;
 					averageMotion.accelerationIncludingGravity.y = previousMotions.reduce(function(accumulator, currentValue) {
 						return accumulator + currentValue.y;
-					},initialValue) / len;
+					}, initialValue) / len;
 					averageMotion.accelerationIncludingGravity.z = previousMotions.reduce(function(accumulator, currentValue) {
 						return accumulator + currentValue.z;
-					},initialValue) / len;
+					}, initialValue) / len;
 				} else {
 					// add the new item and subtract the one shifted out
 					firstElement = previousMotions.shift();
@@ -177,7 +176,7 @@ define({
 				}
 				return averageMotion;
 			} catch (exept) {
-				//e.fire('error', exept.message);
+				// e.fire('error', exept.message);
 				averageMotion = currentMotion;
 			}
 
@@ -191,14 +190,14 @@ define({
 		 *            data
 		 */
 		function onSensorChange(SensorAccelerationData) {
-			
+
 			currentMotion.accelerationIncludingGravity = {
 				x : SensorAccelerationData.x,
 				y : SensorAccelerationData.y,
 				z : SensorAccelerationData.z
 			};
 			updateAverageMotion(currentMotion);
-			if (!found){
+			if (!found) {
 				found = true;
 			}
 			e.fire('change', getSensorValueAvg());
@@ -207,7 +206,6 @@ define({
 			currentMotion.accelerationIncludingGravity.x = data.x;
 			currentMotion.accelerationIncludingGravity.y = data.y;
 			currentMotion.accelerationIncludingGravity.z = data.z;
-			//updateAverageMotion(currentMotion);
 		}
 
 		/**
@@ -218,18 +216,18 @@ define({
 		 */
 		function start() {
 			motionSensor.start(onSensorStartSuccess, onSensorStartError);
-			//console.log('start motion sensor');
+			// console.log('start motion sensor');
 
 		}
 		function stop() {
 			motionSensor.stop();
 			isEnable = false;
-			//e.fire('reset', true);
+			// e.fire('reset', true);
 		}
 		function isStarted() {
 			return isEnable;
 		}
-		function isMotionFound(){
+		function isMotionFound() {
 			return found;
 		}
 		/**
@@ -239,15 +237,12 @@ define({
 		 * @public
 		 */
 		function setChangeListener() {
-			try {
+		/*	try {
 				motionSensor.setChangeListener(onSensorChange, options.sampleInterval, options.maxBatchCount);
-				//gyroscopeSensor.setChangeListener(onGetSuccessCB, options.sampleInterval, options.maxBatchCount);
-				//gyroscopeSensor.getGyroscopeSensorData(onGetSuccessCB, onerrorCB);
 			} catch (e) {
 				motionSensor.setChangeListener(onSensorChange);
-				//gyroscopeSensor.setChangeListener(onGetSuccessCB);
 			}
-
+*/
 			//
 		}
 		function setOptions(options) {
@@ -290,36 +285,18 @@ define({
 		}
 		function init() {
 			bindEvents();
-			sensorService = tizen.sensorservice || (window.webapis && window.webapis.sensorservice) || null;
-			if (!sensorService) {
-				event.fire('error', {
-					type : 'notavailable'
-				});
-			} 
-			else {
-				try {
-					motionSensor = sensorService.getDefaultSensor(SENSOR_TYPE);
-					motionSensor.getMotionSensorData(setCurrentMotionValue);
-				} 
-				catch (error) {
-					if (error.type === ERROR_TYPE_NOT_SUPPORTED) {
-						event.fire('error', {
-							type : 'notsupported'
-						});
-					} 
-					else {
-						event.fire('error', {
-							type : 'unknown'
-						});
-					}
-				}
-			}
-			elem = document.querySelector("div.menuHolder"); 
-		
 
-			
+			sensorWorker = new SharedWorker('lib/workers/motionSWk.js');
+
+			sensorWorker.port.postMessage({message:'INIT',options: options});
+			sensorWorker.port.onerror = function (e){
+				console.error(e);
+			}
+			sensorWorker.port.onmessage = function(e) {
+				console.log(e.data);
+			}
+
 		}
-		
 
 		return {
 			init : init,
@@ -331,7 +308,7 @@ define({
 			getSensorValue : getSensorValue,
 			getSensorValueAvg : getSensorValueAvg,
 			setOptions : setOptions,
-			isMotionFound: isMotionFound
+			isMotionFound : isMotionFound
 		};
 	}
 
