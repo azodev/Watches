@@ -918,6 +918,7 @@ define({
 		}
 		function changeTheme(ev){
 			theme = ev.detail;
+			console.log(theme);
 		}
 		
 		function bindEvents() {

@@ -154,8 +154,8 @@ define({
 		const CLICK_INTERVAL = 300;
 		var lastClickTimeStamp = null, currentClickTimeStamp = null;
 		
-		var forecastDisplayed = false; 
-		var forecastMode = false; 
+		var forecastDisplayed = true; 
+		var forecastMode = true; 
 		var wShape , aShape1, aShape2, aShape3, aShape4,appDrawerShape, calendarShape, hrShape; 
 		var secondsPassed = 0;
 		var oldTimeStamp = 0;
@@ -577,7 +577,7 @@ define({
 				});
 				if (time_to_recreate) {
 				    if (pl < max_particles) {
-				    	popolate(Math.round((max_particles-pl)/10),effect);
+				    	popolate(100,effect);
 				    }
 				}
 				  
@@ -1279,7 +1279,7 @@ define({
 		}
 		function onForecastFound(){
 			//if (!calendarModel.hasVEvents()) handleWeatherClick();
-			handleWeatherClick();
+			//handleWeatherClick();
 		}
 
 		/**
@@ -1324,26 +1324,26 @@ define({
 			}
 		function popolate(num,effect) {
 			  for (var i = 0; i < num; i++) {
-			    setTimeout(
-			    function (x) {
-			      return function () {
+			    //setTimeout(
+			    //function (x) {
+			      //return function () {
 			        // Add particle
-			    	if (effect == 'attraction'){
-			    		particles.push(new Particle(canvasContent.context,particleColors));
-			    	}  
-			    	else if (effect == 'flower'){
-			    		particles.push(new Flower(canvasContent.context,particleColors));
-			    	}
-			    	else if (effect == 'lightspeed'){
-			    		particles.push(new LightSpeed(canvasContent.context,particleColors));
-			    	}
-			    	else {
-			    		particles.push(new ParticleAlien(canvasContent.context,particleColors));
-			    	}
-			        
-			      };
-			    }(i),
-			    frequency * i);
+			    	 if (!isAmbientMode){
+				    	if (effect == 'attraction'){
+				    		particles.push(new Particle(canvasContent.context,particleColors));
+				    	}  
+				    	else if (effect == 'flower'){
+				    		particles.push(new Flower(canvasContent.context,particleColors));
+				    	}
+				    	else if (effect == 'lightspeed'){
+				    		particles.push(new LightSpeed(canvasContent.context,particleColors));
+				    	}
+				    	else {
+				    		particles.push(new ParticleAlien(canvasContent.context,particleColors));
+				    	}
+			    	 }
+			    //  };
+			    //}(i), frequency * i);
 			  }
 			  return particles.length;
 			}
@@ -1374,7 +1374,7 @@ define({
 			
 			particles = [];
 			time_to_recreate = false;
-			popolate(max_particles,effect);
+			popolate(100,effect);
 			
 			setTimeout(function () {
 				  time_to_recreate = true;
@@ -1386,7 +1386,7 @@ define({
 			time_to_recreate = false;
 			
 			particles = [];
-			popolate(max_particles,effect);
+			popolate(100,effect);
 			setTimeout(function () {
 				  time_to_recreate = true;
 				}, max_time);
@@ -1434,7 +1434,7 @@ define({
 			
 			canvasDrawer.startShow(); 
 
-			popolate(max_particles,effect);
+			popolate(100,effect);
 			
 			setTimeout(function () {
 				  time_to_recreate = true;
