@@ -1,32 +1,1472 @@
-define({name:"views/canvas",requires:"core/event core/systeminfo views/radial helpers/date helpers/text models/motion models/settings models/canvasDrawer models/heartRate models/location models/pressure models/weather models/pedometer models/calendar".split(" "),def:function(t){var l;function Qa(a,f){navigator.vibrate(0);Date.now();x||(null==a.getAttribute("data-dblclick")?(a.setAttribute("data-dblclick",1),setTimeout(function(){1==a.getAttribute("data-dblclick")&&(console.log("-----------\x3e single <-----------"),
-Ra(a,f));a.removeAttribute("data-dblclick")},300)):(a.removeAttribute("data-dblclick"),console.log("-----------\x3e double <-----------"),E=qa(a,f),v.isInSurface(E,0)&&!q.getOpen()&&u.isForecastFound()&&ea()))}function ea(){y?L=!1:fa=!1;v.animate()}function ra(a){switch(a){case "fire":document.querySelector(g).style.setProperty("--color1","rgb(255,150,53)");document.querySelector(g).style.setProperty("--color2","rgb(249,234,194)");break;case "hisakura":document.querySelector(g).style.setProperty("--color1",
-"rgb(229,72,72)");document.querySelector(g).style.setProperty("--color2","rgb(251,232,232)");break;case "ice":document.querySelector(g).style.setProperty("--color1","rgb(24,82,129)");document.querySelector(g).style.setProperty("--color2","rgb(192,221,243)");break;default:document.querySelector(g).style.setProperty("--color1","rgb(149,149,149)"),document.querySelector(g).style.setProperty("--color2","rgb(244,244,244)")}}function Ra(a,f){E=qa(a,f);if(X.isInSurface(E,10))c.startFade(),Sa(f),q.setOpen();
-else if(C.isInSurface(E,0)&&!L&&!q.getOpen()&&!F&&B.hasVEvents())c.startFade(),Y=B.getCalendarHtml(),G=c.processWidgetHtml(Y),setClassAndWaitForTransition(G,"on","opacity").then(function(){g="#calendar";ra(M);setClassAndWaitForTransition(Y,"on","opacity").then(function(){setTimeout(function(){F=!0},100);ha(Y,H,"#calendar")})}),document.querySelectorAll("#calendar .event").forEach(function(h){h.addEventListener("click",function(ia){setClassAndWaitForTransition(h,"event click","color").then(function(){h.setAttribute("class",
-"event");c.startShow();g=null;H("#calendar")})})});else if(Z.isInSurface(E,5)&&!q.getOpen())tizen.application.launch("com.samsung.shealth",null,null);else if(v.isInSurface(E,0)&&!q.getOpen()&&u.isForecastFound()&&!F){c.startFade();var n=u.getWeatherHtml();G=c.processWidgetHtml(n);setClassAndWaitForTransition(G,"on","opacity").then(function(){g="#weather";ra(M);setClassAndWaitForTransition(n,"on","opacity").then(function(){document.querySelector(g+".on");setTimeout(function(){F=!0},50);ha(document.querySelector(".lastcall"),
-H,"#weather");ha(document.querySelector(".overflower"),H,"#weather")})});document.querySelectorAll("#weather div.block").forEach(function(h){h.addEventListener("click",function(ia){setClassAndWaitForTransition(h,"block click","color").then(function(){var sa=document.querySelector("#overflower-back");sa.innerHTML="";var Ta=u.getElementDetails(h.getAttribute("block-id"));sa.appendChild(Ta);setClassAndWaitForTransition(h,"block","color").then(function(){Q=!0;setClassAndWaitForTransition(document.getElementById("weather"),
-"flip","transform").then(function(){setTimeout(function(){Q=!1;R=!0;Ua(document.querySelector("#overflower-back"),".overflower-back")},50)})})})})})}}function Ua(a,f){a.addEventListener("click",function(n){var h=document.querySelector("#overflower-back");if(n.target==h||hasSomeParentTheClass(n.target,"overflower-back"))Q=!0,setTimeout(function(){var ia=document.getElementById("weather");setClassAndWaitForTransition(ia,"on","transform").then(function(){for(R=Q=!1;h.firstChild;)h.removeChild(h.lastChild)})},
-50)})}function ha(a,f,n){a.addEventListener("click",function(h){if(h.target===this||h.target==document.querySelector("#overflower"))c.startShow(),g=null,f(n)})}function H(a){if(F){F=!1;G=document.querySelector("#widget_holder");var f=document.querySelector(a);setClassAndWaitForTransition(f,"off","opacity").then(function(){R=!1;setClassAndWaitForTransition(G,"","opacity").then(function(){c.clearWidgetHtml(G,f)})})}}function ta(){c.startShow()}function Sa(a){q.getMenu().open();ja.fire("openRadialMenu",
-a)}function qa(a,f){var n=a.getBoundingClientRect();return{x:f.clientX-n.left,y:f.clientY-n.top}}function ua(){w=new Date;va=w.getHours();wa=w.getMinutes();xa=w.getSeconds();I.hour=va;I.minute=wa;I.second=xa;I.date=ya}function ka(a){x=!1;ua();za=Date.now();Va(za);S=(a-Aa)/1E3;Aa=a;v.isAnimating()&&(y?(v.shrinkRight(S,250,100,.3),v.isAnimating()||(fa=!0,y=y?!1:!0)):(v.growRight(S,100,250,.3),v.isAnimating()||(y=y?!1:!0,L=!0)));c.isFading()&&c.fade(S,.5);c.isShowing()&&c.show(S,.5);ya=w.getDate();x||
-(a=z.length,z=z.filter(function(f){f.setPoA(r);return f.move()}),N&&500>a&&aa(Math.round((500-a)/10),J));d.context.globalAlpha=.05;d.context.fillStyle="#000000";d.context.fillRect(0,0,d.canvas.width,d.canvas.height);d.context.globalAlpha=1;c.renderBackground(d.context,d.canvas.width,d.canvas.height,"black",{gradient:!0,motion:k});c.renderCircle(d.context,new Circle(b.x,b.y,e-2),null,null,!0,2,!0);c.renderCircleShadows(d.context,X,{r:15,g:15,b:15,a:.7},5);c.renderCircle(d.context,X,"#000000","rgba(10, 10, 10,0.7)",
-!1,2,!1);c.roundRect(d.context,Ba,3,!1,!0,null,"rgba(0, 0, 0,0.8)");c.roundRect(d.context,Ca,3,!1,!0,null,"rgba(0, 0, 0,0.8)");c.roundRect(d.context,Da,3,!1,!0,null,"rgba(0, 0, 0,0.8)");c.roundRect(d.context,Ea,3,!1,!0,null,"rgba(0, 0, 0,0.8)");c.roundRect(d.context,new Shape(b.x-112,b.y-63,85,58),10,!0,!1,null,"rgba(5, 5, 5,0.7)");c.renderTextGradient(d.context,"Altitude",b.x-.19*e,b.y-.3*e,16,"#c9c9c9",{font:"FutureNow",align:"right",gradient:!0,motion:k});c.renderText(d.context,Fa,b.x-.19*e,b.y-
-.23*e,16,"#c9c9c9",{font:"FutureNow",align:"right"});c.renderTextGradient(d.context,"Pressure",b.x-.19*e,b.y-.16*e,16,"#c9c9c9",{font:"FutureNow",align:"right",gradient:!0,motion:k});c.renderText(d.context,Ga,b.x-.19*e,b.y-.09*e,16,"#c9c9c9",{font:"FutureNow",align:"right"});c.renderText(d.context,Math.round(Ha)+"%",b.x+94,b.y-.4*e,17,"#c9c9c9",{font:"FutureNow",align:"center",gradient:!0,motion:k});c.renderText(d.context,w.getDate()+"/"+(w.getMonth()+1)+"/"+w.getFullYear(),b.x+108,b.y-50,25,"#c9c9c9",
-{font:"FutureNow",align:"right",gradient:!0,motion:k});c.renderTimeBis(d.context,I,b.x+33,b.y-23,53,"#c9c9c9",{gradient:!0,motion:k,stroke:!1});c.renderText(d.context,I.second,b.x+138,b.y-16,25,"#c9c9c9",{font:"FutureNow",align:"center",gradient:!0,motion:k});c.roundRectShadows(d.context,v,10,{r:10,g:10,b:10,a:.7},5);c.roundRect(d.context,v,10,!0,!1,null,"rgba(8, 8, 8,0.7)");Wa(L);fa&&(c.roundRectShadows(d.context,C,10,{r:10,g:10,b:10,a:.7},5),c.roundRect(d.context,C,10,!0,!1,null,"rgba(8, 8, 8,0.7)"),
-c.renderText(d.context,"Events",C.getCoords().x+50,C.getCoords().y+20,25,"#c9c9c9",{font:"FutureNow",align:"center",gradient:!0,motion:k}),c.renderText(d.context,B.getNbEvents(),C.getCoords().x+50,C.getCoords().y+50,30,"#c9c9c9",{font:"FutureNow",align:"center"}));c.renderCircleShadows(d.context,Z,{r:15,g:15,b:15,a:.7},5);c.renderCircle(d.context,Z,"#000000","rgba(10, 10, 10,0.7)",!1,1.5,!1);la&&null!==K.getData().rate?c.renderText(d.context,K.getData().rate,b.x,b.y+.67*e,25,"#c9c9c9",{font:"FutureNow",
-align:"center",gradient:!0,motion:k}):c.renderText(d.context,"-",b.x,b.y+.67*e,25,"#c9c9c9",{font:"FutureNow",align:"center",gradient:!0,motion:k});!0===Ia.getActive()&&c.renderText(d.context,Ia.getData().accumulativeTotalStepCount,b.x-.3*e,b.y+.6*e,22,"#c9c9c9",{font:"FutureNow",align:"center",gradient:!0,motion:k});T=requestAnimationFrame(ka)}function Wa(){m=y?{text1:{x:b.x-.38*e,y:b.y+.15*e,size:15},temp:{x:b.x-.38*e,y:b.y+.24*e,size:16},city:{x:b.x-.65*e,y:b.y+.33*e,size:12},text2:{x:b.x-.67*
-e,y:b.y+.4*e,size:13},icon:{x:b.x-.58*e,y:b.y+.14*e,size:52}}:{text1:{x:b.x-.31*e,y:b.y+.16*e,size:21},temp:{x:b.x-.3*e,y:b.y+.28*e,size:22},city:{x:b.x-.65*e,y:b.y+.33*e,size:12},text2:{x:b.x-.67*e,y:b.y+.39*e,size:18},icon:{x:b.x-.56*e,y:b.y+.14*e,size:62}};u.isWeatherFound()?(ma=u.getMapping(O.weather[0].id,O.day),c.renderText(d.context,"Temp",m.text1.x,m.text1.y,m.text1.size,"#c9c9c9",{font:"FutureNow",align:"center",gradient:!0,motion:k}),c.renderText(d.context,parseFloat(O.main.temp).toFixed(1)+
-"\u00b0",m.temp.x,m.temp.y,m.temp.size,"#c9c9c9",{font:"FutureNow",align:"center"}),y&&c.renderTextGradient(d.context,P.truncateBis(O.name,12,"..."),m.city.x,m.city.y,m.city.size,"#c9c9c9",{font:"FutureNow",align:"left",gradient:!0}),c.renderText(d.context,P.truncateBis(O.weather[0].main,y?12:8,"..."),m.text2.x,m.text2.y,m.text2.size,"#c9c9c9",{font:"FutureNow",align:"left",gradient:!0,motion:k})):ma=u.getMapping();c.renderText(d.context,ma,m.icon.x,m.icon.y,m.icon.size,"#c9c9c9",{font:"artill_clean_icons",
-align:"center",gradient:!0,motion:k});if(u.isForecastFound()&&L){U=u.getForecast();V=b.x-18;for(var a=0;5>a;a++)Ja=(new Date(1E3*U.list[a].dt)).getHours(),c.renderText(d.context,Ja+"h",V,b.y+.15*e,15,"#c9c9c9",{font:"FutureNow",align:"center"}),c.renderText(d.context,u.getMapping(U.list[a].weather[0].id,U.list[a].day),V,b.y+.22*e,31,"#c9c9c9",{font:"artill_clean_icons",align:"center",gradient:!0,motion:k}),c.renderText(d.context,~~U.list[a].main.temp+"\u00b0",V+3,b.y+.37*e,15,"#c9c9c9",{font:"FutureNow",
-align:"center"}),V+=30}}function Xa(a){}function Ya(a){"undefined"!==typeof a.detail.latitude&&ba.getData()}function Za(a){}function $a(){}function ab(){}function bb(){}function cb(a){Ha=100*a.detail}function db(a){la=a.detail}function eb(a){Ga=parseFloat(a.detail.average).toFixed(0);Fa=parseFloat(a.detail.altitude).toFixed(1)}function fb(a){"undefined"!==typeof a.detail.weather&&(O=a.detail)}function Ka(a){ua();c.setOpacity(1);d.context.clearRect(0,0,d.canvas.width,d.canvas.height);c.renderTimeBis(d.context,
-I,b.x-20+P.getRandomInt(-10,10),b.y+P.getRandomInt(-10,10),100,ca,{align:"center"});c.renderText(d.context,w.getDate()+"/"+(w.getMonth()+1)+"/"+w.getFullYear(),b.x+10+P.getRandomInt(-10,10),b.y-80+P.getRandomInt(-10,20),25,"#c9c9c9",{font:"FutureNow",align:"center",gradient:!0});la&&null!==K.getData().rate&&(c.renderCircle(d.context,new Circle(b.x,b.y+.6*e,45),"#000000","rgba(30, 30, 30,0.7)",!1,1.5,!1),c.renderText(d.context,K.getData().rate,b.x,b.y+.6*e,30,ca,{font:"FutureNow",align:"center"}))}
-function gb(a){console.error(a.detail.type)}function hb(a){W.accelerationIncludingGravity=a.detail.accelerationIncludingGravity;k=W;null!==k&&c.processMotion(W,d.context);r=c.getGravityCenter(W);r.x-=na.x;r.y-=na.y;x||(q.getOpen()&&(l=1.2*(r.y-180),p=1.2*(r.x-180),-20>=l&&(l=-20),20<=l&&(l=20),-20>=p&&(p=-20),20<=p&&(p=20),document.querySelector("div.menuHolder").style.setProperty("--degx",-l+"deg"),document.querySelector("div.menuHolder").style.setProperty("--degy",p+"deg")),1!=F||(l=1.2*(r.y-180),
-p=1.2*(r.x-180),-20>=l&&(l=-20),20<=l&&(l=20),-20>=p&&(p=-20),20<=p&&(p=20),null==g))||((a=document.querySelector(g),document.querySelector(g+".on"),Q||0!=R)?R&&(a.style.setProperty("--degx",-l+"deg"),a.style.setProperty("--degy",p+"deg"),a.style.setProperty("--degxFlipped",l+"deg"),a.style.setProperty("--degyFlipped",p+180+"deg")):(a.style.setProperty("--degx",-l+"deg"),a.style.setProperty("--degy",p+"deg"),a.style.setProperty("--degxFlipped",l+"deg"),a.style.setProperty("--degyFlipped",p+180+"deg")))}
-function da(a){La&&window.clearTimeout(La);T&&window.cancelAnimationFrame(T);switch(a){case "Ambient":Ma();x=!0;Ka(null);break;case "Normal":Date.now(),A.isAvailable()&&!A.isStarted()&&A.start(),x=!1,setTimeout(function(f){r=c.getGravityCenter(W);na={x:r.x-180,y:r.y-180}},500),T=requestAnimationFrame(ka)}}function Ma(){A.isAvailable()&&A.isStarted()&&A.stop()}function ib(){document.getElementById("canvas-content").addEventListener("click",function(a){Qa(this,a)});window.addEventListener("timetick",
-function(){x&&Ka()});Na=document.getElementById("up");Oa=document.getElementById("down");Na.addEventListener("click",function(a){document.getElementById("overflower");c.scrollTop(document.getElementById("overflower"),-220,500)});Oa.addEventListener("click",function(a){document.getElementById("overflower");c.scrollTop(document.getElementById("overflower"),220,500)});window.addEventListener("ambientmodechanged",function(a){!0===a.detail.ambientMode?(q.getOpen()&&q.closeMenu(),H(g),da("Ambient")):(da("Normal"),
-c.startShow())});ja.on("visibilitychange",function(a){document.hidden?(q.getOpen()&&q.closeMenu(),H(g),!0!==x?(d.context.clearRect(0,0,d.canvas.width,d.canvas.height),c.setOpacity(0),Ma()):c.setOpacity(1)):!0===x?(q.getOpen()&&q.closeMenu(),H(g),da("Ambient")):(c.startShow(),da("Normal"))});ja.on({"core.systeminfo.battery.low":$a,"core.systeminfo.battery.isCharging":ab,"core.systeminfo.battery.notCharging":bb,"core.systeminfo.battery.change":cb,"models.heartRate.change":Xa,"models.heartRate.HRFound":db,
-"models.location.change":Ya,"models.location.found":Za,"models.pressure.change":eb,"models.motion.change":hb,"models.motion.error":gb,"views.radial.changeTheme":jb,"views.radial.changeEffect":kb,"views.radial.close":ta,"RadialMenu.closing":ta,"models.weather.found":fb,"models.weather.forecast_found":lb,"models.calendar.hasEvent":mb});oa.listenBatteryLowState();oa.listenBatteryChange()}function mb(a){a.detail&&y&&ea()}function lb(){B.hasVEvents()||ea()}function aa(a,f){for(var n=0;n<a;n++)setTimeout(function(h){return function(){"attraction"==
-f?z.push(new Particle(d.context,D)):"flower"==f?z.push(new Flower(d.context,D)):"lightspeed"==f?z.push(new LightSpeed(d.context,D)):z.push(new ParticleAlien(d.context,D))}}(n),5*n);return z.length}function Pa(a){switch(a){case "fire":D=["#ff5a02","#f8b500","#f9eac2"];break;case "hisakura":D=["#ff5151","#fc7b7b","#f9d9d9"];break;case "ice":D=["#694FB9","#6094ee","#3CFBFF"];break;default:D=["rgb(149,149,149)","rgb(190,190,190)","rgb(244,244,244)"]}}function jb(a){Pa(a.detail);M=a.detail;ca=c.getAmbiantGradient(d.context);
-z=[];N=!1;aa(500,J);setTimeout(function(){N=!0},2500)}function kb(a){J=a.detail;N=!1;z=[];aa(500,J);setTimeout(function(){N=!0},2500)}function Va(a){u.handleUpdate(a);K.handleUpdate(a);ba.handleUpdate(a);pa.handleUpdate(a);B.handleUpdate(a);B.handleFilter(a)}var P=t.helpers.text,ja=t.core.event,K=t.models.heartRate,pa=t.models.pressure,A=t.models.motion,Ia=t.models.pedometer,ba=t.models.location,u=t.models.weather,B=t.models.calendar,q=t.views.radial,c=t.models.canvasDrawer,oa=t.core.systeminfo,d,
-b,e,V,Ja,la=!1,Ha=0,Ga=0,Fa=0,La,T,w,va,wa,xa,ya,O,U,ma,I={hour:null,minute:null,second:null,date:null},ca,za,x,k=null,W={accelerationIncludingGravity:{x:null,y:null}},z=[],N=!1,r={x:180,y:180},na={x:0,y:0},E=null,D=["#694FB9","#6094ee","#3CFBFF"];var p=l=0;var L=!1,y=!1,v,Ba,Ca,Da,Ea,X,C,Z,S=0,Aa=0,fa=!0,F=!1,G=document.querySelector("#widget_holder"),Y=document.querySelector("#calendar"),g="",Na=document.getElementById("up"),Oa=document.getElementById("down"),Q=!1,R=!1,m=null,M="ice",J="attraction";
-return{init:function(){Date.now();ib();tizen.preference.exists("theme")?M=tizen.preference.getValue("theme"):tizen.preference.setValue("theme",M);tizen.preference.exists("effect")?J=tizen.preference.getValue("effect"):tizen.preference.setValue("effect",J);d=c.createCanvas({id:"canvas-content",width:360,height:360});b={x:document.body.clientWidth/2,y:document.body.clientHeight/2};e=d.canvas.width/2;c.center=b;c.watchRadius=e;ca=c.getAmbiantGradient(d.context);x=!1;v=L?new Shape(b.x-126,b.y+.06*e,250,
-70):new Shape(b.x-126,b.y+.06*e,100,70);C=new Shape(b.x+26,b.y+.06*e,100,70);Ba=new Shape(b.x-16,b.y-116,13,13);Ca=new Shape(b.x+3,b.y-116,13,13);Da=new Shape(b.x-16,b.y-134,13,13);Ea=new Shape(b.x+3,b.y-134,13,13);X=new Circle(b.x,b.y-119,28);Z=new Circle(b.x,b.y+.67*e,28);Pa(M);u.setIntervalUpdate(36E5);K.setIntervalUpdate(1E4);ba.setIntervalUpdate(6E5);pa.setIntervalUpdate(6E5);B.setIntervalUpdate(6E5);B.setIntervalFilter(3E5);K.start();ba.start();A.isAvailable()&&(A.setOptions({sampleInterval:100,
-maxBatchCount:1E3}),A.setChangeListener(),A.start());pa.start();oa.checkBattery();B.accessCalendars();c.startShow();aa(500,J);setTimeout(function(){N=!0},2500);T=window.requestAnimationFrame(ka)}}}});
+/*
+ * Copyright (c) 2015 Samsung Electronics Co., Ltd. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*global define, document, window*/
+
+/**
+ * Canvas view module.
+ * 
+ * @module views/canvas
+ * @requires {@link core/event}
+ * @requires {@link helpers/date}
+ * @requires {@link helpers/text}
+ * @requires {@link models/settings}
+ * @requires {@link models/canvasDrawer}
+ * @requires {@link models/heartRate}
+ * @requires {@link models/pressure}
+ * @requires {@link models/motion}
+ * @requires {@link models/location}
+ * @requires {@link models/weather}
+ * @requires {@link core/systeminfo}
+ * @requires {@link models/calendar}
+ * @namespace views/canvas
+ * @memberof views
+ */
+
+define({
+	name : 'views/canvas',
+	requires : [ 'core/event',
+	             'core/systeminfo', 
+	             'views/radial', 
+	             'helpers/date', 
+	             'helpers/text',  
+	             'models/motion',
+	             'models/settings', 
+	             'models/canvasDrawer', 
+	             'models/heartRate', 
+	             'models/location', 
+	             'models/pressure', 
+	             'models/weather'] ,
+	             /*'models/pedometer',
+	             'models/calendar' ],*/
+	def : function viewsPageCanvas(req) {
+		'use strict';
+
+		/**
+		 * Settings module.
+		 * 
+		 * @private
+		 * @type {Module}
+		 */
+		var settings = req.models.settings;
+		/**
+		 * Core event module object.
+		 * 
+		 * @memberof views/canvas
+		 * @private
+		 * @type {Module}
+		 */
+		var dateHelper = req.helpers.date;
+		var textHelper = req.helpers.text;
+		var event = req.core.event;
+		var heartRate = req.models.heartRate;
+		var pressureSensor = req.models.pressure;
+		var motionSensor = req.models.motion;
+		var pedometerSensor = req.models.pedometer;
+		var locationModel = req.models.location;
+		var weatherModel = req.models.weather;
+		//var calendarModel = req.models.calendar;
+		var radialmenu = req.views.radial;
+		var gravSensor  = null;
+
+		var canvasDrawer = req.models.canvasDrawer;
+		var sysInfo = req.core.systeminfo;
+		var canvasBackground, canvasParticles, canvasContent, canvasFinal,  center, watchRadius, forecastIndexX, forecastHour;
+		var hearRateValue = 0;
+		var locationValue = {
+			latitude : 'Loading',
+			longitude : '',
+			timestamp : '',
+			date : ''
+		};
+		var pedometerValue = {
+			stepStatus : null,
+			speed : null,
+			walkingFrequency : null,
+			accumulativeTotalStepCount : 0,
+			cumulativeCalorie : null,
+			cumulativeTotalStepCount : null
+		};
+		var locationPositionAquiered = false, doNotMkHR = false;
+		var heartRateFound = false;
+		var batteryLevel = 0;
+		var reference;
+		var text;
+
+		var pressure = 0;
+		var altitude = 0;
+		var locationInterval = null, pedometerInterval = null, hrInterval = null, weatherInterval = null, hrIntervalStop = null, pressureInterval = null, updateEvents =null, filterEvents = null;
+		var errorMsg = '';
+		var animTimeout, animRequest;
+		
+		var nextMove, datetime, hour, minute, second, date;
+		var weatherValue, forecastValue;
+		var weatherFound = false;
+		var weatherIcon;
+		// var weatherImg = new Image();
+		var fps = 25;
+		var dateArray = {
+			hour : null,
+			minute : null,
+			second : null,
+			date : null
+		}; 
+		var intervals = {
+			location : 600000,
+			heartRate : 10000,
+			weather : 3600000,//3600000,
+			pressure : 600000,
+			updateEvents: 600000,
+			filterEvents: 300000//300000
+		};
+		var grd,grdAmbiant, i, j, startTime, now, then, elapsed, sinceStart, frame = 0, currentFps, isAmbientMode, rotate = false;
+		var motion = null;
+		var motionFound = false;
+		var motionFromGyro = {accelerationIncludingGravity : {x:null,y:null}}; 
+		
+		var max_particles = 500;
+		var particles = [];
+		var frequency = 5;
+		var init_num = max_particles;
+		var max_time = frequency * max_particles;
+		var time_to_recreate = false;
+		var gravCenter = {x:180, y:180};
+		var gravCenterDiff = {x:0, y:0};
+		var clickPos = null;
+		var radialButton = null;
+		var drawTicks = false;
+		var particleColors = ["#694FB9","#6094ee","#3CFBFF"];
+		var deg = {x:0,y:0}; 
+		var elem;
+		const CLICK_INTERVAL = 300;
+		var lastClickTimeStamp = null, currentClickTimeStamp = null;
+		
+		var forecastDisplayed = false; 
+		var forecastMode = false; 
+		var wShape , aShape1, aShape2, aShape3, aShape4,appDrawerShape, calendarShape, hrShape; 
+		var secondsPassed = 0;
+		var oldTimeStamp = 0;
+		var miniCalendarDisplayed = false, miniWeatherDisplayed= true;
+		var widgetFullScreenDiplayed = false; 
+		var baroDisplayed = true;
+		var timeDisplayed = true;
+		var heartRateDisplayed=true;
+		var holder = document.querySelector("#widget_holder");
+		var calendar = document.querySelector("#calendar");
+		var widgetOn = null;
+		var widgetId = '';
+		var up = document.getElementById ('up');
+		var down = document.getElementById ('down');
+		var calendarY = 0;
+		var flipping = false;
+		var flipped = false;
+		var widgetFlipped = null;
+		var wCoords=null;
+		var theme = 'ice';
+		var effect = 'attraction';
+		var noEvents = false;
+		
+		
+		function handleClick(canvas,ev) {
+			navigator.vibrate(0);
+			currentClickTimeStamp = Date.now();
+			if (!isAmbientMode){
+				if (canvas.getAttribute("data-dblclick") == null) {
+					canvas.setAttribute("data-dblclick", 1);
+	                setTimeout(function () {
+	                    if (canvas.getAttribute("data-dblclick") == 1) {
+	                        console.log('-----------> single <-----------');
+	                        handleSingleClick(canvas,ev);
+	                    }
+	                    canvas.removeAttribute("data-dblclick");
+	                }, 300);
+	            } else {
+	            	canvas.removeAttribute("data-dblclick");
+	            	console.log('-----------> double <-----------');
+	            	handleDoubleClick(canvas,ev);
+	            }
+				lastClickTimeStamp = currentClickTimeStamp;
+			}
+			
+			
+		}
+
+		function handleDoubleClick(canvas,ev) {
+			clickPos = getMousePosition(canvas,ev);
+			//console.log('handleDoubleClick');
+			if (wShape.isInSurface(clickPos,0) && !radialmenu.getOpen()  && weatherModel.isForecastFound()){
+				 
+				handleWeatherClick();
+			}
+			
+		}
+		function handleWeatherClick(){
+			if (forecastMode){
+				forecastDisplayed = false;
+			}
+			else {
+				miniCalendarDisplayed= false;
+			}
+			animateWeatherSection();
+		}
+		function animateWeatherSection(){
+			//weatherSectionAnimating = true;
+			wShape.animate();
+		}
+		function handleWeatherSectionAnimation(){
+			if (wShape.isAnimating()){
+				if (!forecastMode){
+					wShape.growRight(secondsPassed,100,250,0.3);
+					if (!wShape.isAnimating()){
+						toogleForecastMode();
+						forecastDisplayed = true;
+					}
+				}
+				else {
+					wShape.shrinkRight(secondsPassed,250,100,0.3);
+					
+					if (!wShape.isAnimating()){
+						//miniCalendarDisplayed = true;
+						toogleForecastMode();
+					}
+				}
+			}
+		}
+		function toogleForecastMode(){
+			if  (!forecastMode){
+				forecastMode = true;
+			}
+			else {
+				forecastMode = false;
+			}
+		}
+		function changeRootColors(theme){
+			
+			switch (theme) {
+			case 'fire':
+				document.querySelector(widgetId).style.setProperty('--color1', 'rgb(255,150,53)');
+				document.querySelector(widgetId).style.setProperty('--color2', 'rgb(249,234,194)');
+				break;
+			case 'hisakura':
+				document.querySelector(widgetId).style.setProperty('--color1', 'rgb(229,72,72)');
+				document.querySelector(widgetId).style.setProperty('--color2', 'rgb(251,232,232)');
+				break;		
+			case 'ice':
+				document.querySelector(widgetId).style.setProperty('--color1', 'rgb(24,82,129)');
+				document.querySelector(widgetId).style.setProperty('--color2', 'rgb(192,221,243)');
+				break;
+			default:
+				document.querySelector(widgetId).style.setProperty('--color1', 'rgb(149,149,149)');
+				document.querySelector(widgetId).style.setProperty('--color2', 'rgb(244,244,244)');
+				break;
+			}
+		}
+		function handleSingleClick(canvas,ev) {
+			//console.log('handleSingleClick');
+			clickPos = getMousePosition(canvas,ev);
+			
+			//console.log(clickPos);
+			if (appDrawerShape.isInSurface(clickPos,10)){
+				canvasDrawer.startFade();
+				openRadialMenu(ev);
+				radialmenu.setOpen();
+			}
+			
+			else if (calendarShape.isInSurface(clickPos,0) && !forecastDisplayed && !radialmenu.getOpen() && !widgetFullScreenDiplayed && calendarModel.hasVEvents()){
+				//console.log('Click fade');
+				canvasDrawer.startFade();
+				calendar = calendarModel.getCalendarHtml();
+				holder = canvasDrawer.processWidgetHtml(calendar);
+				
+				
+				
+				setClassAndWaitForTransition(holder,'on','opacity').then(function () {
+					//console.log('transition holder');
+					//holder.setAttribute('class', 'on');
+					widgetId = "#calendar";
+					changeRootColors(theme);
+					
+					setClassAndWaitForTransition(calendar,'on','opacity').then(function () {
+						//console.log('transition calendar');
+						
+						//calendar.setAttribute('class', 'on');
+						//holder.setAttribute('class', 'on');
+						
+						setTimeout(function(){
+							widgetFullScreenDiplayed = true;
+						},100);
+						
+						setCloseWidgetAction(calendar,closeWidget,'#calendar');
+					});
+		            
+		            
+		        });
+				document.querySelectorAll("#calendar .event").forEach(function (element){
+					element.addEventListener('click', function(e) {
+						//console.log('click event');
+						setClassAndWaitForTransition(element,'event click','color').then(function () {
+							//console.log('transition event');
+							element.setAttribute('class', 'event');
+							canvasDrawer.startShow();
+							widgetId = null;
+							closeWidget('#calendar');
+						});
+							
+					});
+				});
+			}
+			else if (hrShape.isInSurface(clickPos,5) && !radialmenu.getOpen()  ){
+				tizen.application.launch("com.samsung.shealth", null,null);
+			}
+			else if (wShape.isInSurface(clickPos,0) && !radialmenu.getOpen()  && weatherModel.isForecastFound() && !widgetFullScreenDiplayed){
+				canvasDrawer.startFade();
+				let weather = weatherModel.getWeatherHtml();
+				holder = canvasDrawer.processWidgetHtml(weather);
+				
+				//console.log('weather opening');
+				
+				
+				setClassAndWaitForTransition(holder,'on','opacity').then(function () {
+					//console.log('transition holder');
+					//holder.setAttribute('class', 'on');
+					widgetId = "#weather";
+					changeRootColors(theme);
+					
+					setClassAndWaitForTransition(weather,'on','opacity').then(function () {
+						//console.log('transition weather');
+						
+						//calendar.setAttribute('class', 'on');
+						//holder.setAttribute('class', 'on');  
+						
+						widgetOn = document.querySelector(widgetId+".on");
+						setTimeout(function(){
+							widgetFullScreenDiplayed = true;
+						},50);
+
+						setCloseWidgetAction(document.querySelector('.lastcall'),closeWidget,'#weather');  
+						setCloseWidgetAction(document.querySelector('.overflower'),closeWidget,'#weather'); 
+						  
+					});
+		            
+		            
+		        });
+				document.querySelectorAll("#weather div.block").forEach(function (element){
+					element.addEventListener('click', function(e) {
+						
+						//console.log('click weather');
+						setClassAndWaitForTransition(element,'block click','color').then(function () {
+							//console.log('transition weather');
+							let ov = document.querySelector("#overflower-back");
+							ov.innerHTML = '';
+							let block = weatherModel.getElementDetails(element.getAttribute('block-id'));
+							ov.appendChild(block);
+							setClassAndWaitForTransition(element,'block','color').then(function () {
+
+								
+								//console.log('flip');
+								flipping = true; 
+
+								setClassAndWaitForTransition(document.getElementById('weather'),'flip','transform').then(function () {
+									//console.log('flipped');
+									setTimeout(function (){
+										flipping=false;
+										flipped = true; 
+										setFlipBackWidgetAction(document.querySelector('#overflower-back'),'.overflower-back'); 
+									}, 50)
+									
+								});
+								
+							});
+						});
+							
+					});
+				});
+			}
+			
+		}
+		function setFlipBackWidgetAction(node,className){
+			node.addEventListener('click', function(e) {
+				let ovb = document.querySelector("#overflower-back");
+				if (	   e.target == ovb
+						|| hasSomeParentTheClass(e.target, 'overflower-back')
+				 ){
+					 flipping=true;
+					 //console.log('flipper');
+					 setTimeout(function (){
+						 let weather = document.getElementById('weather');
+						 setClassAndWaitForTransition(weather,'on','transform').then(function () {
+								//console.log('flipped'); 
+								flipping=false;
+								flipped = false; 
+								while (ovb.firstChild) {
+									ovb.removeChild(ovb.lastChild);
+								  }
+								//node.innerHTML = '';
+							});
+						 return;
+					 },50);
+				 }
+			});
+		}
+		function setCloseWidgetAction (node,closeF,itemId){
+			node.addEventListener('click', function(e) {
+					if (		e.target !== this 
+						 && e.target != document.querySelector("#overflower") 
+						 )
+					    return;
+				 
+				 
+				canvasDrawer.startShow();
+				widgetId = null;
+				closeF(itemId);
+			}); 
+			
+		}
+		function closeWidget(itemId){
+			if (widgetFullScreenDiplayed){
+					
+				
+				widgetFullScreenDiplayed = false;
+				holder = document.querySelector("#widget_holder");
+				let item = document.querySelector(itemId);
+				
+
+				
+					setClassAndWaitForTransition(item,'off','opacity').then(function () {
+						//console.log('transition widget');
+						
+						widgetOn = null;
+						flipped = false;
+						setClassAndWaitForTransition(holder,'','opacity').then(function () {
+							//calendar.setAttribute('class', 'off');
+							//console.log('transition holder');
+							
+							
+							canvasDrawer.clearWidgetHtml(holder,item);
+							
+						});
+					});
+			}
+		}
+		function triggerShowWatch(){
+			
+			canvasDrawer.startShow();
+		}
+		
+		function handleWatchFadingAnimation(){
+			if (canvasDrawer.isFading()){
+				canvasDrawer.fade(secondsPassed,0.5);
+			}
+			
+		}
+		function handleWatchShowingAnimation(){
+			if (canvasDrawer.isShowing()){
+				canvasDrawer.show(secondsPassed,0.5);
+			}
+			
+		}
+		
+		
+		function openRadialMenu(ev) {
+			
+			radialmenu.getMenu().open();
+			event.fire('openRadialMenu', ev);
+		}
+		function getMousePosition(canvas, event) { 
+            let rect = canvas.getBoundingClientRect(); 
+            let x = event.clientX - rect.left; 
+            let y = event.clientY - rect.top; 
+            return {x:x,y:y} ;
+        } 
+		/**
+		 * Draws the basic layout of the watch
+		 * 
+		 * @private
+		 */
+		function drawWatchLayout() {
+			//console.log('DrawLayout');
+			// Clear canvas
+			/**@todo */
+			canvasBackground.context.clearRect(0, 0, canvasBackground.canvas.width, canvasBackground.canvas.height);
+			//
+			canvasDrawer.renderText(canvasBackground.context, "AZO WATCH v.1", center.x, center.y - (watchRadius * 0.7), 13, "#c9c9c9", {
+				font : 'FutureNow',
+				align : 'center'
+			});
+			
+		}
+		function displayFps() {
+			elapsed = now - then;
+			if (elapsed > nextMove) {
+
+				// Get ready for next frame by setting then=now, but...
+				// Also, adjust for fpsInterval not being multiple of 16.67
+				then = now - (elapsed % nextMove);
+
+				// draw stuff here
+
+				// TESTING...Report #seconds since start and achieved fps.
+				sinceStart = now - startTime;
+				currentFps = Math.round(1000 / (sinceStart / ++frame) * 100) / 100;
+
+				// $results.text("Elapsed time= " + Math.round(sinceStart / 1000
+				// * 100) / 100 + " secs @ " + currentFps + " fps.");  currentFps
+				canvasDrawer.renderText(canvasContent.context, particles.length, center.x, center.y - (watchRadius * 0.45), 15, "#c9c9c9", {
+					font : 'FutureNow',
+					align : 'center'
+				});
+			}
+		}
+		function getDate() {
+			datetime = new Date();
+			
+			hour = datetime.getHours();
+			minute = datetime.getMinutes();
+			second = datetime.getSeconds();
+			dateArray.hour = hour;
+			dateArray.minute = minute;
+			dateArray.second = second;
+			dateArray.date = date;
+		}
+		/**
+		 * Draws the content of the watch
+		 * 
+		 * @private
+		 */
+		function drawWatchContent(timeStamp) {
+			isAmbientMode = false;
+			getDate();
+			now = Date.now();
+			handleIntervalsUpdate(now);
+			
+			secondsPassed = (timeStamp - oldTimeStamp) /1000 ;/// 1000;
+		    oldTimeStamp = timeStamp;
+		   
+		    handleWeatherSectionAnimation(); 
+		    handleWatchFadingAnimation();
+		    handleWatchShowingAnimation();
+
+			date = datetime.getDate();
+			//onMotionChangeNew();
+			
+				
+				
+					
+					
+				
+			
+			if (!isAmbientMode){
+				let pl = particles.length;
+				particles = particles.filter(function (p) {
+					
+					p.setPoA(gravCenter); 
+					return p.move();
+				});
+				if (time_to_recreate) {
+				    if (pl < max_particles) {
+				    	popolate(Math.round((max_particles-pl)/10),effect);
+				    }
+				}
+				  
+			}
+			clear();
+			
+			
+			
+			canvasDrawer.renderBackground(canvasContent.context,canvasContent.canvas.width, canvasContent.canvas.height, "black",{gradient:true,motion:motion});
+			
+			canvasDrawer.renderCircle(canvasContent.context,  new Circle(center.x,center.y,watchRadius -2) ,null,null,true,2,true);
+			
+				
+			
+				canvasDrawer.renderCircleShadows(canvasContent.context, appDrawerShape, {r:15,g:15,b:15,a:0.7},5);
+				canvasDrawer.renderCircle(canvasContent.context, appDrawerShape, "#000000","rgba(10, 10, 10,0.7)",false,2,false);
+				canvasDrawer.roundRect(canvasContent.context, aShape1, 3, false, true, null, "rgba(0, 0, 0,0.8)");
+				canvasDrawer.roundRect(canvasContent.context, aShape2, 3, false, true, null, "rgba(0, 0, 0,0.8)");
+				canvasDrawer.roundRect(canvasContent.context, aShape3, 3, false, true, null, "rgba(0, 0, 0,0.8)");
+				canvasDrawer.roundRect(canvasContent.context, aShape4, 3, false, true, null, "rgba(0, 0, 0,0.8)");
+				if (baroDisplayed){
+					
+					canvasDrawer.roundRect(canvasContent.context, new Shape(center.x - 112, center.y - 63, 85, 58) ,10, true, false, null, "rgba(5, 5, 5,0.7)"); // 232
+					
+					canvasDrawer.renderTextGradient(canvasContent.context, 'Altitude', center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.30), 16, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'right',
+						gradient : true,
+						motion: motion
+					});
+					canvasDrawer.renderText(canvasContent.context, altitude, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.23), 16, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'right'
+					});
+					canvasDrawer.renderTextGradient(canvasContent.context, 'Pressure', center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.16), 16, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'right',
+						gradient : true,
+						motion: motion 
+					});
+
+					canvasDrawer.renderText(canvasContent.context, pressure, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.09), 16, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'right'
+					});
+				}
+				
+				
+				if (timeDisplayed){
+					// Battery
+					canvasDrawer.renderText(canvasContent.context, Math.round(batteryLevel) + '%', center.x+94, center.y - (watchRadius * 0.4), 17, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'center',
+						gradient : true,
+						motion: motion
+					});
+					canvasDrawer.renderText(canvasContent.context,datetime.getDate()+"/"+(datetime.getMonth()+1)+"/"+datetime.getFullYear(), center.x + 108, center.y - 50, 25, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'right',
+						gradient : true,
+						motion: motion
+						
+					});
+					//canvasDrawer.renderTimeBisShadows (canvasContent.context, dateArray, center.x + 33, center.y - 23, 53, {r:40,g:40,b:40,a:0.9},5);
+					canvasDrawer.renderTimeBis(canvasContent.context, dateArray, center.x + 33, center.y - 23, 53, "#c9c9c9", {
+						gradient : true,
+						motion: motion,
+						stroke:false
+						
+					});
+					canvasDrawer.renderText(canvasContent.context, dateArray.second, center.x + 138, center.y - 16, 25, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'center',
+						gradient : true,
+						motion: motion
+						
+					});
+				}
+				
+				
+				
+				if (miniWeatherDisplayed){
+					
+					canvasDrawer.roundRectShadows(canvasContent.context, wShape,10, {r:10,g:10,b:10,a:0.7},5);
+					canvasDrawer.roundRect(canvasContent.context, wShape,10, true, false, null, "rgba(8, 8, 8,0.7)");
+					drawWeather(forecastDisplayed);
+				}
+				
+				
+				if (miniCalendarDisplayed) {
+					canvasDrawer.roundRectShadows(canvasContent.context, calendarShape,10, {r:10,g:10,b:10,a:0.7},5);
+					canvasDrawer.roundRect(canvasContent.context, calendarShape,10, true, false, null, "rgba(8, 8, 8,0.7)");
+					canvasDrawer.renderText(canvasContent.context, 'Events', calendarShape.getCoords().x+50, calendarShape.getCoords().y+20, 25, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'center',
+							gradient : true, 
+							motion: motion
+					});
+					canvasDrawer.renderText(canvasContent.context, calendarModel.getNbEvents() , calendarShape.getCoords().x+50, calendarShape.getCoords().y+50, 30, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'center'
+					});
+					
+				}
+				canvasDrawer.renderCircleShadows(canvasContent.context, hrShape, {r:15,g:15,b:15,a:0.7},5);
+				canvasDrawer.renderCircle(canvasContent.context, hrShape, "#000000","rgba(10, 10, 10,0.7)",false,1.5,false);
+				if (heartRateDisplayed &&  heartRateFound && heartRate.getData().rate !== null) {
+					
+					
+					canvasDrawer.renderText(canvasContent.context, heartRate.getData().rate, center.x , center.y + (watchRadius * 0.67), 25, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'center',
+						gradient : true,
+						motion: motion
+							
+					});
+
+				}
+				else {
+					canvasDrawer.renderText(canvasContent.context, '-', center.x , center.y + (watchRadius * 0.67), 25, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'center',
+						gradient : true,
+						motion: motion
+							
+					});
+				}
+				
+				/*if (pedometerSensor.getActive() === true){
+					canvasDrawer.renderText(canvasContent.context, pedometerSensor.getData().accumulativeTotalStepCount, center.x - (watchRadius * 0.3), center.y + (watchRadius * 0.6), 22, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'center',
+						gradient : true,
+						motion: motion
+							
+					});
+				}*/
+			
+
+			//displayFps();
+			
+			animRequest = requestAnimationFrame(drawWatchContent);
+			
+	
+
+		}
+		
+		
+		
+		
+		function drawWeather() {
+			if (forecastMode){
+				wCoords = { text1 : {x:center.x - (watchRadius * 0.38),y:center.y + (watchRadius * 0.15),size: 15},
+						   temp : {x:center.x - (watchRadius * 0.38),y:center.y + (watchRadius * 0.24),size: 16},
+						   city : {x:center.x - (watchRadius * 0.65),y:center.y + (watchRadius * 0.33),size: 12},
+						   text2: {x:center.x - (watchRadius * 0.67),y:center.y + (watchRadius * 0.40),size: 13},
+						   icon : {x:center.x - (watchRadius * 0.58),y:center.y + (watchRadius * 0.14),size: 52}
+				};
+			}
+			else {
+				wCoords = { text1 : {x:center.x - (watchRadius * 0.31),y:center.y + (watchRadius * 0.16),size: 21},
+						   temp : {x:center.x - (watchRadius * 0.30),y:center.y + (watchRadius * 0.28),size: 22},
+						   city : {x:center.x - (watchRadius * 0.65),y:center.y + (watchRadius * 0.33),size: 12},
+						   text2: {x:center.x - (watchRadius * 0.67),y:center.y + (watchRadius * 0.39),size: 18},
+						   icon : {x:center.x - (watchRadius * 0.56),y:center.y + (watchRadius * 0.14),size: 62}
+				};
+			}
+			if (weatherModel.isWeatherFound()) {
+
+				weatherIcon = weatherModel.getMapping(weatherValue.weather[0].id, weatherValue.day);
+				
+				canvasDrawer.renderText(canvasContent.context, 'Temp', wCoords.text1.x, wCoords.text1.y, wCoords.text1.size, "#c9c9c9", {
+					font : 'FutureNow',
+					align : 'center',
+						gradient : true,
+						motion: motion
+				});
+				canvasDrawer.renderText(canvasContent.context, roundCoord(weatherValue.main.temp, 1) + "°", wCoords.temp.x, wCoords.temp.y, wCoords.temp.size, "#c9c9c9", {
+					font : 'FutureNow',
+					align : 'center'
+				});
+				if (forecastMode){
+					//city weatherValue.name
+					canvasDrawer.renderTextGradient(canvasContent.context, textHelper.truncateBis(weatherValue.name, 12, '...'), wCoords.city.x, wCoords.city.y, wCoords.city.size, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'left',
+						gradient : true
+					});
+				}
+				
+				canvasDrawer.renderText(canvasContent.context, textHelper.truncateBis(weatherValue.weather[0].main, (!forecastMode)?8:12,'...'), wCoords.text2.x, wCoords.text2.y, wCoords.text2.size, "#c9c9c9", {
+					font : 'FutureNow',
+					align : 'left',
+					gradient : true,
+					motion: motion
+				});
+
+			} else {
+				weatherIcon = weatherModel.getMapping();
+			}
+
+			canvasDrawer.renderText(canvasContent.context, weatherIcon, wCoords.icon.x,wCoords.icon.y, wCoords.icon.size, "#c9c9c9", {
+				font : 'artill_clean_icons',
+				align : 'center',
+					gradient : true,
+					motion: motion
+			});
+
+			if (weatherModel.isForecastFound() && forecastDisplayed) {
+				forecastValue = weatherModel.getForecast();
+				forecastIndexX = center.x-18;
+				for (var i = 0; i < 5; i++) {
+					forecastHour = new Date(forecastValue.list[i].dt * 1000).getHours();
+					canvasDrawer.renderText(canvasContent.context, forecastHour + "h", forecastIndexX, center.y + (watchRadius * 0.15), 15, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'center'
+					});
+					canvasDrawer.renderText(canvasContent.context, weatherModel.getMapping(forecastValue.list[i].weather[0].id, forecastValue.list[i].day), forecastIndexX, center.y + (watchRadius * 0.22), 31,
+							"#c9c9c9", {
+								font : 'artill_clean_icons',
+								align : 'center',gradient : true,
+								motion: motion
+							});
+					canvasDrawer.renderText(canvasContent.context, ~~(forecastValue.list[i].main.temp) + "°", forecastIndexX + 3, center.y + (watchRadius * 0.37), 15, "#c9c9c9", {
+						font : 'FutureNow',
+						align : 'center'
+					});
+					forecastIndexX = forecastIndexX + 30;
+				}
+			}
+			
+
+		}
+
+		function roundCoord(coord, digit) {
+			return parseFloat(coord).toFixed(digit);
+		}
+		/**
+		 * Set default variables
+		 * 
+		 * @private
+		 */
+		function setDefaultVariables() {
+			//canvasParticles = canvasDrawer.createCanvas({id:'canvas-particles',width:360,height:360});
+			canvasContent = canvasDrawer.createCanvas({id:'canvas-content',width:360,height:360});
+			
+			center = {
+				x : document.body.clientWidth / 2,
+				y : document.body.clientHeight / 2
+			};
+
+			watchRadius = canvasContent.canvas.width / 2;
+			canvasDrawer.center = center;
+			canvasDrawer.watchRadius = watchRadius;
+			grdAmbiant = canvasDrawer.getAmbiantGradient(canvasContent.context);
+			//grdAmbiant = canvasContent.context.createLinearGradient(0, 0, watchRadius * 2, 0);
+			
+			isAmbientMode = false;
+			//grdAmbiant.addColorStop(0, "#69d7db");
+			//grdAmbiant.addColorStop(1, "#203fc9");
+			if (forecastDisplayed){
+				wShape= new Shape(center.x - 126, center.y + (watchRadius * 0.06), 250, 70);
+			}
+			else {
+				wShape= new Shape(center.x - 126, center.y + (watchRadius * 0.06), 100, 70);
+			}
+			calendarShape = new Shape(center.x + 26, center.y + (watchRadius * 0.06), 100, 70);
+			
+			aShape1= new Shape(center.x - 16, center.y - 116 , 13, 13);
+			aShape2= new Shape(center.x + 3, center.y - 116, 13, 13);
+			aShape3= new Shape(center.x - 16, center.y - 134, 13, 13);
+			aShape4= new Shape(center.x + 3, center.y - 134, 13, 13); 
+			//drawWatchLayout();
+
+			appDrawerShape = new Circle(center.x,center.y-119,28);
+			hrShape = new Circle(center.x,center.y + (watchRadius * 0.67),28);
+		}
+
+		/**
+		 * Handles 'models.heartRate.change' event.
+		 * 
+		 * @memberof views/main
+		 * @private
+		 * @param {object}
+		 *            heartRateInfo
+		 */
+		function onHeartRateDataChange(heartRateInfo) {
+
+			hearRateValue = heartRateInfo.detail.rate;
+
+		}
+		function onPedometerDataChange(pedometerInfo) {
+			//event.fire ('log','onPedometerDataChange');
+			pedometerValue = {
+				stepStatus : pedometerInfo.detail.stepStatus,
+				speed : pedometerInfo.detail.speed,
+				walkingFrequency : pedometerInfo.detail.walkingFrequency,
+				accumulativeTotalStepCount : pedometerInfo.detail.accumulativeTotalStepCount,
+				cumulativeCalorie : pedometerInfo.detail.cumulativeCalorie,
+				cumulativeTotalStepCount : pedometerInfo.detail.cumulativeTotalStepCount
+			};
+		}
+		/**
+		 * Handles 'models.heartRate.change' event.
+		 * 
+		 * @memberof views/main
+		 * @private
+		 * @param {object}
+		 *            heartRateInfo
+		 */
+		function onLocationDataChange(locationInfo) {
+			if (typeof (locationInfo.detail.latitude) !== 'undefined') {
+				locationValue = locationModel.getData();
+			}
+			// errorMsg = location.detail.errorMsg;
+
+		}
+		function onLocationPositionAquiered(data) {
+			if (typeof (data.detail) !== 'undefined') {
+				locationPositionAquiered = true;
+			}
+		}
+		function onLowBattery() {
+			// do something if battery < 4%
+			// exit();
+		}
+		function onBatteryIsCharging() {
+			// do something when battery is Charging
+		}
+		function onBatteryNotCharging() {
+			// do something when battery is not Charging
+		}
+		function onBatteryChange(batteryInfo) {
+			// do something if battery value change
+			batteryLevel = batteryInfo.detail * 100;
+		}
+		function onHeartRateFound(bool) {
+			heartRateFound = bool.detail;
+		}
+
+
+		/**
+		 * Handles models.pressure.change event.
+		 * 
+		 * @private
+		 * @param {Event}
+		 *            ev
+		 */
+		function onPressureChange(ev) {
+			updatePressureValue(ev.detail.average);
+
+			updateAltitudeValue(ev.detail.altitude);
+		}
+
+		function onWeatherFound(event) {
+			if (typeof (event.detail.weather) !== 'undefined') {
+				weatherValue = event.detail;
+				weatherFound = true;
+			}
+		}
+		/**
+		 * Updates current pressure value.
+		 * 
+		 * @private
+		 * @param {number}
+		 *            value
+		 */
+		function updatePressureValue(value) {
+			pressure = parseFloat(value).toFixed(0);
+		}
+
+		/**
+		 * Updates altitude value.
+		 * 
+		 * @private
+		 * @param {number}
+		 *            value
+		 */
+		function updateAltitudeValue(value) {
+			// reference = settings.get('pressure');
+			altitude = parseFloat(value).toFixed(1);
+		}
+
+		function drawAmbientWatch(e) {
+			// Import the current time
+			getDate();
+			//console.log('ambient');
+			canvasDrawer.setOpacity(1);
+			//canvasBackground.context.clearRect(0, 0, canvasBackground.canvas.width, canvasBackground.canvas.height);
+			/**@todo */
+			//clear();
+			canvasContent.context.clearRect(0, 0, canvasContent.canvas.width, canvasContent.canvas.height);
+			canvasDrawer.renderTimeBis(canvasContent.context, dateArray, center.x - 20 +textHelper.getRandomInt(-10,10), center.y+ textHelper.getRandomInt(-10,10), 100, grdAmbiant,{
+				align : 'center'
+			});
+			canvasDrawer.renderText(canvasContent.context,datetime.getDate()+"/"+(datetime.getMonth()+1)+"/"+datetime.getFullYear(), center.x +10 + textHelper.getRandomInt(-10,10), center.y - 80+ textHelper.getRandomInt(-10,20), 25, "#c9c9c9", {
+				font : 'FutureNow',
+				align : 'center',
+				gradient : true
+			});
+			if (heartRateFound && heartRate.getData().rate !== null) {
+				
+				canvasDrawer.renderCircle(canvasContent.context, new Circle(center.x,center.y + (watchRadius * 0.60),45), "#000000","rgba(30, 30, 30,0.7)",false,1.5,false);
+	
+				canvasDrawer.renderText(canvasContent.context, heartRate.getData().rate, center.x, center.y + (watchRadius * 0.60), 30, grdAmbiant, {
+					font : 'FutureNow',
+					align : 'center'
+				});
+			}
+			/*animRequest = window.requestAnimationFrame(function() {
+				drawAmbientWatch(null);
+			});*/
+
+		}
+
+
+		/**
+		 * Registers event listeners.
+		 * 
+		 * @memberof views/canvas
+		 * @private
+		 */
+		function onDeviceMotion(event) {
+			if (!isAmbientMode) 			{
+				motion = event;
+				
+			}
+		}
+		function onMotionError(event){
+			console.error(event.detail.type);
+		}
+		function onMotionChange(SensorAccelerationData){
+			//console.log(SensorAccelerationData.detail);
+			//motionFromGyro.accelerationIncludingGravity = getSensorValueAvg();
+			motionFromGyro.accelerationIncludingGravity = SensorAccelerationData.detail.accelerationIncludingGravity;
+			motion = motionFromGyro;
+			
+			if (motion !== null) 		{
+				canvasDrawer.processMotion(motionFromGyro,canvasContent.context);
+			}
+			gravCenter = canvasDrawer.getGravityCenter(motionFromGyro);
+			
+			gravCenter.x = gravCenter.x-gravCenterDiff.x;
+			gravCenter.y = gravCenter.y-gravCenterDiff.y;
+			if (!isAmbientMode){
+				if (radialmenu.getOpen()){ 
+					deg.x = (gravCenter.y - 180)*1.2;
+					deg.y = (gravCenter.x - 180)*1.2;
+					if (deg.x <= -20 ) deg.x = -20;
+					if (deg.x >= 20 ) deg.x = 20;
+					if (deg.y <= -20 ) deg.y = -20;
+					if (deg.y >= 20 ) deg.y = 20;
+					
+					document.querySelector("div.menuHolder").style.setProperty('--degx',  -deg.x + "deg");
+					document.querySelector("div.menuHolder").style.setProperty('--degy',   deg.y + "deg");
+					  
+				}
+				if (widgetFullScreenDiplayed ==true){
+					deg.x = (gravCenter.y - 180)*1.2;
+					deg.y = (gravCenter.x - 180)*1.2;
+					if (deg.x <= -20 ) deg.x = -20;
+					if (deg.x >= 20 ) deg.x = 20;
+					if (deg.y <= -20 ) deg.y = -20; 
+					if (deg.y >= 20 ) deg.y = 20; 
+					//document.querySelector("#calendar.on").style.opacity=1;
+					//calendar = document.querySelector("#calendar.on");
+					//if (calendarOn.style.opacity < 1) calendarOn.style.opacity = 1;
+					if (widgetId !=null   ) {
+						let widget = document.querySelector(widgetId);
+						widgetOn = document.querySelector(widgetId+".on");
+						if (!flipping && flipped == false){
+							widget.style.setProperty('--degx',  -deg.x + "deg");
+							widget.style.setProperty('--degy',   deg.y + "deg");
+							widget.style.setProperty('--degxFlipped',    deg.x + "deg");
+							widget.style.setProperty('--degyFlipped',   (deg.y+180) + "deg");
+						}
+						else {
+							if ( flipped){
+									widget.style.setProperty('--degx',  -deg.x + "deg");
+									widget.style.setProperty('--degy',   deg.y + "deg");
+									widget.style.setProperty('--degxFlipped',    deg.x + "deg");
+									widget.style.setProperty('--degyFlipped',   (deg.y+180) + "deg");
+							}
+						}
+					}
+				}
+			}
+		}
+		function onMotionChangeNew(){
+			if (motionSensor.isMotionFound()){
+				motionFromGyro.accelerationIncludingGravity = motionSensor.getSensorValueAvg().accelerationIncludingGravity;
+				motion = motionFromGyro;
+				if (!motionFound){
+					motionFound = true;
+					gravCenter = canvasDrawer.getGravityCenter(motionFromGyro);
+					gravCenterDiff = {x:gravCenter.x -180, y: gravCenter.y-180};
+				}
+			}
+			
+		}
+		
+		function activateMode(type) {
+			// Stop the animation before mode changing
+			if (animTimeout) {
+				window.clearTimeout(animTimeout);
+			}
+			if (animRequest) {
+				window.cancelAnimationFrame(animRequest);
+			}
+
+			switch (type) {
+			case "Ambient":
+				// Normal -> Ambient
+				//console.log('activateMode ambiant');
+				stopSensors();
+				isAmbientMode = true;
+				drawAmbientWatch(null);
+				
+				break;
+			case "Normal":
+				// Ambient -> Normal
+				then = Date.now();
+				startTime = then;
+				frame = 0;
+				startSensors();
+				isAmbientMode = false;
+				
+				//console.log('activateMode normal');
+				
+				
+				
+				//drawWatchLayout();
+				/*animRequest = window.requestAnimationFrame(function() {
+					drawWatchContent();
+				});
+				
+*/				
+				//gravCenter = {x:180,y:180};
+				setTimeout(function (e){
+					gravCenter = canvasDrawer.getGravityCenter(motionFromGyro);
+					gravCenterDiff = {x:gravCenter.x -180, y: gravCenter.y-180};
+				}, 500);
+				
+				animRequest = requestAnimationFrame(drawWatchContent);
+				break;
+			default:
+				break;
+			}
+		}
+		
+		function startSensors(){
+			
+			if (motionSensor.isAvailable() && !motionSensor.isStarted()) {
+				motionSensor.start();
+			}
+			/*
+				if (pressureSensor.isAvailable() && !pressureSensor.isStarted()) {
+					pressureSensor.start();
+					pressureInterval = window.setInterval(function(e) {
+						pressureSensor.start();
+					},intervals.pressure
+					);
+				}
+			*/
+			
+		}
+		function stopSensors(){
+			if (motionSensor.isAvailable() && motionSensor.isStarted()) {
+				motionSensor.stop();
+			}
+			/*
+			if (pressureSensor.isAvailable() && pressureSensor.isStarted()) {
+				pressureSensor.stop();
+				window.clearInterval(pressureInterval);
+			}
+			*/
+		}
+		
+		
+		function bindEvents() {
+			document.getElementById('canvas-content').addEventListener('click', function(e) {
+				handleClick(this,e);
+			});
+			
+			
+			
+			window.addEventListener("timetick", function (){
+				//console.log('timetick');
+				if (isAmbientMode) {
+					drawAmbientWatch();
+				}
+				else{
+					
+				}
+			});
+			up = document.getElementById ('up');
+			down = document.getElementById ('down');
+			
+			
+			up.addEventListener('click', function(e) {
+				//console.log('up'); 
+				calendarY = document.getElementById ('overflower').scrollTop-220;
+				//console.log(document.getElementById ('overflower').scrollTop);
+				canvasDrawer.scrollTop(document.getElementById ('overflower'),-220,500); 
+			});
+			down.addEventListener('click', function(e) {
+				//console.log('down');
+				calendarY = document.getElementById ('overflower').scrollTop+220;
+				canvasDrawer.scrollTop(document.getElementById ('overflower'),220,500); 
+			});
+			window.addEventListener("ambientmodechanged", function(e) {
+				//console.log('ambientmodechanged event');
+				if (e.detail.ambientMode === true) {
+					// Rendering ambient mode case
+					if (radialmenu.getOpen()){
+						radialmenu.closeMenu();
+					}
+					closeWidget(widgetId);
+					activateMode("Ambient");
+				} else {
+					// Rendering normal case
+					
+					activateMode("Normal");
+					canvasDrawer.startShow(); 
+
+				}
+			});
+			
+			event.on("visibilitychange", function(e) {
+				//console.log('visibilitychange event');
+				if (!document.hidden) {
+					if (isAmbientMode === true) {
+						// Rendering ambient mode case
+						
+						if (radialmenu.getOpen()){
+							radialmenu.closeMenu();
+						}
+						closeWidget(widgetId);
+						activateMode("Ambient"); 
+						
+					} else {
+						// Rendering normal case
+						canvasDrawer.startShow(); 
+						activateMode("Normal"); 
+					}
+				}
+				else {
+					//console.log('hide');
+					if (radialmenu.getOpen()){
+						radialmenu.closeMenu();
+					}
+					closeWidget(widgetId);
+					if (isAmbientMode !== true) {
+						//event.fire ('hidden','clearScreen');
+						//canvasBackground.context.clearRect(0, 0, canvasBackground.context.canvas.width, canvasBackground.context.canvas.height);
+						/**@todo */
+						//clear();
+						canvasContent.context.clearRect(0, 0, canvasContent.canvas.width, canvasContent.canvas.height);
+						canvasDrawer.setOpacity(0);
+						stopSensors();
+					}
+					else {
+						canvasDrawer.setOpacity(1);
+					}
+				}
+			});
+			event.on({
+				'core.systeminfo.battery.low' : onLowBattery,
+				'core.systeminfo.battery.isCharging' : onBatteryIsCharging,
+				'core.systeminfo.battery.notCharging' : onBatteryNotCharging,
+				'core.systeminfo.battery.change' : onBatteryChange,
+				'models.heartRate.change' : onHeartRateDataChange,
+				'models.heartRate.HRFound' : onHeartRateFound,
+				'models.location.change' : onLocationDataChange,
+				'models.location.found' : onLocationPositionAquiered,
+				'models.pressure.change' : onPressureChange,
+				'models.motion.change' : onMotionChange,
+				'models.motion.error' : onMotionError,
+				'views.radial.changeTheme' : changeTheme,
+				'views.radial.changeEffect' : changeEffect,
+				'views.radial.close' : triggerShowWatch,
+				'RadialMenu.closing' : triggerShowWatch,
+				//'models.pedometer.change' : onPedometerDataChange,
+				'models.weather.found' : onWeatherFound, 
+				'models.weather.forecast_found' : onForecastFound, 
+				'models.calendar.hasEvent' : onCalendarChange 
+			});
+			sysInfo.listenBatteryLowState();
+			sysInfo.listenBatteryChange();
+		}
+		function onCalendarChange(ev){
+			if (ev.detail  && forecastMode){
+				handleWeatherClick();
+			}
+			else {
+				
+			}
+			
+		}
+		function onForecastFound(){
+			//if (!calendarModel.hasVEvents()) handleWeatherClick();
+			handleWeatherClick();
+		}
+
+		/**
+		 * Initializes module.
+		 * 
+		 * @memberof views/canvas
+		 * @public
+		 */
+		
+		function mkHR() {
+			heartRate.start();
+			hrInterval = setInterval(function() {
+				heartRate.start();
+
+			}, intervals.heartRate);
+		}
+		function mkLocation() {
+			locationModel.start();
+			loopLocation();
+			
+		}
+		function loopLocation(){
+			locationInterval = setInterval(function() {
+				locationModel.start();
+				
+			}, intervals.location // check every 10 min
+			);
+		}
+		
+		
+		
+		function clear(){
+			
+			  
+			  canvasContent.context.globalAlpha=0.05;
+			  
+			  canvasContent.context.fillStyle='#000000'; 
+			  canvasContent.context.fillRect(0, 0, canvasContent.canvas.width, canvasContent.canvas.height);
+			  canvasContent.context.globalAlpha=1;
+			  
+			
+			}
+		function popolate(num,effect) {
+			  for (var i = 0; i < num; i++) {
+			    setTimeout(
+			    function (x) {
+			      return function () {
+			        // Add particle
+			    	if (effect == 'attraction'){
+			    		particles.push(new Particle(canvasContent.context,particleColors));
+			    	}  
+			    	else if (effect == 'flower'){
+			    		particles.push(new Flower(canvasContent.context,particleColors));
+			    	}
+			    	else if (effect == 'lightspeed'){
+			    		particles.push(new LightSpeed(canvasContent.context,particleColors));
+			    	}
+			    	else {
+			    		particles.push(new ParticleAlien(canvasContent.context,particleColors));
+			    	}
+			        
+			      };
+			    }(i),
+			    frequency * i);
+			  }
+			  return particles.length;
+			}
+		
+		function changeParticlesColor(theme){
+			switch ( theme){
+				case 'fire':
+					particleColors = ["#ff5a02","#f8b500","#f9eac2"];
+				    break;
+				case 'hisakura':
+					particleColors = ["#ff5151","#fc7b7b","#f9d9d9"];
+				    break;
+				case 'ice':
+					particleColors = ["#694FB9","#6094ee","#3CFBFF"];
+				  	break;
+				  default:
+						particleColors = ["rgb(149,149,149)","rgb(190,190,190)","rgb(244,244,244)"];
+					  	break;
+				}
+			
+		}
+		function changeTheme(ev){
+			changeParticlesColor(ev.detail);
+			
+			//time_to_recreate = true;
+			theme = ev.detail;
+			grdAmbiant = canvasDrawer.getAmbiantGradient(canvasContent.context);
+			
+			particles = [];
+			time_to_recreate = false;
+			popolate(max_particles,effect);
+			
+			setTimeout(function () {
+				  time_to_recreate = true;
+				}, max_time);
+			
+		} 
+		function changeEffect(ev){
+			effect = ev.detail;
+			time_to_recreate = false;
+			
+			particles = [];
+			popolate(max_particles,effect);
+			setTimeout(function () {
+				  time_to_recreate = true;
+				}, max_time);
+			
+			
+		}
+		function handleIntervalsUpdate(timeStamp){
+			weatherModel.handleUpdate(timeStamp);
+			heartRate.handleUpdate(timeStamp);
+			locationModel.handleUpdate(timeStamp);
+			pressureSensor.handleUpdate(timeStamp);
+			//calendarModel.handleUpdate(timeStamp);
+			//calendarModel.handleFilter(timeStamp);
+			
+		}
+		function setIntervalOnModels(){
+			weatherModel.setIntervalUpdate(intervals.weather); //
+			heartRate.setIntervalUpdate(intervals.heartRate);
+			locationModel.setIntervalUpdate(intervals.location);
+			pressureSensor.setIntervalUpdate(intervals.pressure);
+			//calendarModel.setIntervalUpdate(intervals.updateEvents);
+			//calendarModel.setIntervalFilter(intervals.filterEvents);
+		}
+		function init() {
+			nextMove = 1000 / fps;
+			then = Date.now();
+			startTime = then;
+			bindEvents(); 
+			
+			if (tizen.preference.exists('theme')) {
+				theme = tizen.preference.getValue('theme');
+			}
+			else {
+				tizen.preference.setValue('theme',theme);
+			}
+			if (tizen.preference.exists('effect')) {
+				effect = tizen.preference.getValue('effect');
+			}
+			else{
+				tizen.preference.setValue('effect',effect);
+			}
+			setDefaultVariables();
+			changeParticlesColor(theme);
+			
+			
+			canvasDrawer.startShow(); 
+
+			popolate(max_particles,effect);
+			
+			setTimeout(function () {
+				  time_to_recreate = true;
+				}, max_time);
+			
+			heartRate.start();//mkHR();
+			locationModel.start();
+			
+			if (motionSensor.isAvailable()) {
+				motionSensor.setOptions({
+					sampleInterval : 100,
+					maxBatchCount : 1000
+				});
+				motionSensor.setChangeListener();
+				motionSensor.start();
+			}
+
+			pressureSensor.start();
+			sysInfo.checkBattery();
+			//calendarModel.accessCalendars(); 
+			
+				
+
+			setIntervalOnModels();
+			
+			animRequest = window.requestAnimationFrame(drawWatchContent);
+
+		}
+		
+		return {
+			init : init
+		};
+	}
+
+});

@@ -1,20 +1,1016 @@
-define({name:"models/canvasDrawer",requires:["core/event","core/storage/idb"],def:function(ea){function T(a,b,c,d,g,f,e){a.save();a.beginPath();a.lineWidth=f;null!==h&&null==c&&(c=h);e||(a.globalAlpha=n);a.arc(b.getCenter().x,b.getCenter().y,b.getRadius(),0,2*Math.PI);null!==d&&(a.fillStyle=d,a.fill());g&&(a.strokeStyle=c,a.stroke());a.closePath();a.restore()}function U(a,b,c,d,g,f,e,p){a.save();"undefined"===typeof g&&(g=!0);"undefined"===typeof c&&(c=5);if("number"===typeof c)c={tl:c,tr:c,br:c,
-bl:c};else{p={tl:0,tr:0,br:0,bl:0};for(var r in p)c[r]=c[r]||p[r]}a.beginPath();a.globalAlpha=n;a.moveTo(b.getX()+c.tl,b.getY());a.lineTo(b.getX()+b.getWidth()-c.tr,b.getY());a.quadraticCurveTo(b.getX()+b.getWidth(),b.getY(),b.getX()+b.getWidth(),b.getY()+c.tr);a.lineTo(b.getX()+b.getWidth(),b.getY()+b.getHeight()-c.br);a.quadraticCurveTo(b.getX()+b.getWidth(),b.getY()+b.getHeight(),b.getX()+b.getWidth()-c.br,b.getY()+b.getHeight());a.lineTo(b.getX()+c.bl,b.getY()+b.getHeight());a.quadraticCurveTo(b.getX(),
-b.getY()+b.getHeight(),b.getX(),b.getY()+b.getHeight()-c.bl);a.lineTo(b.getX(),b.getY()+c.tl);a.quadraticCurveTo(b.getX(),b.getY(),b.getX()+c.tl,b.getY());a.closePath();d&&(a.fillStyle=e,a.fill());null!==h&&null==f&&(f=h);g&&(a.strokeStyle=f,a.stroke());a.restore()}function V(a,b,c,d,g,f,e){"undefined"!==typeof e?("undefined"!==typeof e.font&&(u=e.font),"undefined"!==typeof e.align&&(x=e.align),"undefined"!==typeof e.stroke&&(D=e.stroke),"undefined"!==typeof e.gradient&&(L=e.gradient)):(u="FutureNow",
-e={},L=D=!1);k=0;a.save();a.beginPath();a.font=g+'px "'+u+'"';a.textAlign="right";a.textBaseline="middle";L&&M(a,f,e);a.globalAlpha=n;k+=c;l=b.hour;D?(a.strokeStyle=f,a.strokeText(l,k,d)):a.fillText(l,k,d);a.textAlign="center";l=":";k+=.25*g;D?(a.strokeStyle=f,a.strokeText(l,k,d)):a.fillText(l,k,d);a.textAlign="center";l=10>b.minute?"0"+b.minute:b.minute;k+=.8*g;D?(a.strokeStyle=f,a.strokeText(l,k,d)):a.fillText(l,k,d);a.closePath();a.restore()}function fa(){C=E}function M(a,b,c){a.fillStyle="undefined"!==
-typeof c.gradient?h:b}function W(a){t=a.detail}var ha=ea.core.event,F,N,O,X,Y,Z,aa,l,u,x,G=0,ba,k=0,L=null,h=null,n=1,H=!1,I=!1,D=!1,v=null;v=null;var E={x:180,y:180},P={x:180,y:180},C={x:180,y:180},ca,da,y,z,q,A=0,J=0,K=0,B=0,Q,R,S=0,t="ice",m=null,w=0;return{init:function(){ha.on({"views.radial.changeTheme":W,"models.motion.reset":fa});tizen.preference.exists("theme")&&(t=tizen.preference.getValue("theme"))},renderCircle:T,renderCircleShadows:function(a,b,c,d){var g;for(g=1;g<=d;g++){var f=c.a-
-g/d*c.a;0<=f&&(f="rgba("+c.r+","+c.g+","+c.b+","+f+")",T(a,new Circle(b.getCenter().x,b.getCenter().y,b.getRadius()+g),f,null,!0,1))}},renderNeedle:function(a,b,c,d,g,f){F=a.canvas.width/2;N=a.canvas.width/2;O=a.canvas.height/2;X=F*Math.cos(b)*c;Y=F*Math.sin(b)*c;Z=F*Math.cos(b)*d;aa=F*Math.sin(b)*d;a.save();a.beginPath();a.lineWidth=g;null===h&&(h=a.createLinearGradient(0,0,360,360),h.addColorStop(0,"rgb(30,87,153)"),h.addColorStop(.3,"rgb(41,137,216)"),h.addColorStop(.6,"rgb(32,124,202)"),h.addColorStop(1,
-"rgb(125,185,232)"));a.strokeStyle=h;a.moveTo(N+X,O+Y);a.lineTo(N+Z,O+aa);a.stroke();a.closePath();a.restore()},renderText:function(a,b,c,d,g,f,e){"undefined"!==typeof e?("undefined"!==typeof e.font&&(u=e.font),"undefined"!==typeof e.align&&(x=e.align),"undefined"!==typeof e.rotate&&G++):(u="Courier",x="center",e={});a.save();a.font=g+'px "'+u+'"';a.textAlign=x;a.textBaseline="middle";M(a,f,e);a.globalAlpha=n;a.fillText(b,c,d);a.restore()},renderImage:function(a,b,c,d){b.onload=function(){a.save();
-a.drawImage(b,c,d);a.restore()}},renderWeather:function(a,b,c,d,g,f){a.save();a.beginPath();a.font=g+"px artill_clean_icons";a.textAlign="center";a.textBaseline="middle";a.fillStyle=f;a.fillText(b,c,d);a.globalAlpha=n;a.closePath();a.restore()},renderTime:function(a,b,c,d,g,f,e){k=0;a.save();a.beginPath();a.font=g+'px "FutureNow"';a.textAlign="right";a.textBaseline="middle";a.fillStyle=f;k+=c;l=b.hour;a.fillText(l,k,d);a.closePath();a.beginPath();a.textAlign="center";l=":";k+=g/2;a.fillText(l,k,d);
-a.closePath();a.beginPath();a.textAlign="center";l=10>b.minute?"0"+b.minute:b.minute;k+=g;a.fillText(l,k,d);a.closePath();a.beginPath();a.textAlign="center";l=":";k+=g;a.fillText(l,k,d);a.beginPath();a.textAlign="center";l=10>b.second?"0"+b.second:b.second;k+=g;a.fillText(l,k,d);a.closePath();a.restore()},renderTimeBis:V,renderTimeBisShadows:function(a,b,c,d,g,f,e){var p=1;for(p;p<=e;p++){var r=f.a-p/e*f.a;r="rgba("+f.r+","+f.g+","+f.b+","+r+")";V(a,b,c-p,d-p,g+(p+1),r,{stroke:!0})}},roundRect:U,
-roundRectShadows:function(a,b,c,d,g){var f;for(f=1;f<=g;f++){var e=d.a-f/g*d.a;e="rgba("+d.r+","+d.g+","+d.b+","+e+")";U(a,new Shape(b.getX()-f,b.getY()-f,b.getWidth()+2*f,b.getHeight()+2*f),c,!1,!0,e)}},drawPulse:function(a,b,c,d,g){a.save();a.beginPath();ba=c-15*Math.abs(Math.cos(2*G)*Math.sin(4*G));a.arc(b.x,b.y,ba,0,2*Math.PI,!1);a.closePath();a.fillStyle="#006699";a.fill();a.restore();G+=Math.PI/180},renderTextGradient:function(a,b,c,d,g,f,e){"undefined"!==typeof e?("undefined"!==typeof e.font&&
-(u=e.font),"undefined"!==typeof e.align&&(x=e.align),"undefined"!==typeof e.rotate&&G++):(u="Courier",x="center",e={});a.save();a.font=g+'px "'+u+'"';M(a,f,e);a.globalAlpha=n;a.textAlign=x;a.textBaseline="middle";a.fillText(b,c,d);a.restore()},renderBackground:function(a,b,c,d,g){a.save();a.beginPath();a.fillStyle="undefined"!==typeof g.gradient?v:d;a.closePath();a.fillRect(0,0,b,c);a.restore()},processMotion:function(a,b){var c=a.accelerationIncludingGravity;ca=1E3*-c.x;da=1E3*c.y;S=Math.atan2(da,
-ca)+Math.PI/2;Q=180*Math.cos(S);R=180*Math.sin(S);c=a.accelerationIncludingGravity;C.x=Math.min(Math.round(E.x+4*c.x),250);C.y=Math.min(Math.round(E.y-4*c.y),250)+30;v=b.createRadialGradient(C.x,C.y,0,180,180,180);v.addColorStop(0,"rgba(0, 0, 0,1)");v.addColorStop(.3,"rgba(0, 0, 0,0.3)");v.addColorStop(.83,"rgba(0,0,0,0.4)");v.addColorStop(.91,"rgba(5,5,5,1)");v.addColorStop(.98,"rgba(40,40,40,1)");h=b.createLinearGradient(180-Q,360-R,180+Q,360+R);"ice"==t?(h.addColorStop(1,"rgb(38,55,180)"),h.addColorStop(.6,
-"rgb(41,137,216)"),h.addColorStop(.3,"rgb(22,114,185)"),h.addColorStop(0,"rgb(192,221,243)")):"fire"==t?(h.addColorStop(1,"rgb(255,90,2)"),h.addColorStop(.6,"rgb(255,150,53)"),h.addColorStop(.3,"rgb(248,181,0)"),h.addColorStop(0,"rgb(249,234,194)")):"hisakura"==t?(h.addColorStop(1,"rgb(229,72,72)"),h.addColorStop(.6,"rgb(252,123,123)"),h.addColorStop(.3,"rgb(254,144,144)"),h.addColorStop(0,"rgb(251,232,232)")):"metal"==t&&(h.addColorStop(1,"rgb(101,101,107)"),h.addColorStop(.6,"rgb(149,149,149)"),
-h.addColorStop(.3,"rgb(190,190,190)"),h.addColorStop(0,"rgb(244,244,244)"))},renderGrid:function(a,b,c,d){a.save();z=y=0;a.lineWidth=c;a.strokeStyle="rgba(70, 70, 70,0.2)";for(q=30;360>q;q+=30)y=q,null!==d.motion&&(A=6*-d.motion.accelerationIncludingGravity.x,J=180-6*d.motion.accelerationIncludingGravity.y),A=180>q?q/100*A:(360-q)/100*A,a.translate(y,z),a.beginPath(),a.moveTo(-3,0),a.quadraticCurveTo(~~A+3,~~J,-3,360),a.stroke(),a.beginPath(),a.moveTo(0,0),a.quadraticCurveTo(~~A,~~J,0,360),a.stroke(),
-a.beginPath(),a.moveTo(3,0),a.quadraticCurveTo(~~A-3,~~J,3,360),a.stroke(),a.translate(-y,-z);z=y=0;for(q=30;360>q;q+=30)z=q,null!==d.motion&&(K=180-6*d.motion.accelerationIncludingGravity.x,B=6*-d.motion.accelerationIncludingGravity.y),B=180>=q?q/100*B:(360-q)/100*B,a.translate(y,z),a.beginPath(),a.moveTo(0,-3),a.quadraticCurveTo(~~K,~~B+3,360,-3),a.stroke(),a.beginPath(),a.moveTo(0,0),a.quadraticCurveTo(~~K,~~B,360,0),a.stroke(),a.beginPath(),a.moveTo(0,-3),a.quadraticCurveTo(~~K,~~B-3,360,3),a.stroke(),
-a.translate(-y,-z);a.restore()},getRadialGradientCoords:function(){return C},changeTheme:W,getAmbiantGradient:function(a){m=a.createLinearGradient(0,0,360,0);"ice"==t?(m.addColorStop(1,"rgb(38,55,180)"),m.addColorStop(.6,"rgb(68,106,255)"),m.addColorStop(.3,"rgb(145,214,242)"),m.addColorStop(0,"rgb(154,231,244)")):"fire"==t?(m.addColorStop(1,"rgb(255,90,2)"),m.addColorStop(.6,"rgb(255,150,53)"),m.addColorStop(.3,"rgb(248,181,0)"),m.addColorStop(0,"rgb(249,234,194)")):"hisakura"==t?(m.addColorStop(1,
-"rgb(229,72,72)"),m.addColorStop(.6,"rgb(252,123,123)"),m.addColorStop(.3,"rgb(254,144,144)"),m.addColorStop(0,"rgb(251,232,232)")):"metal"==t&&(m.addColorStop(1,"rgb(101,101,107)"),m.addColorStop(.6,"rgb(149,149,149)"),m.addColorStop(.3,"rgb(190,190,190)"),m.addColorStop(0,"rgb(244,244,244)"));return m},setOpacity:function(a){n=a},startFade:function(){H=!0;w=0;n=1},fade:function(a,b){!0===H&&(w+=a,n=1-w/b,0>=n&&(H=!1,w=n=0))},isFading:function(){return H},startShow:function(){I=!0;n=w=0},show:function(a,
-b){!0===I&&(w+=a,n=w/b,1<=n&&(I=!1,n=1,w=0))},isShowing:function(){return I},setClassAndWaitForTransition:setClassAndWaitForTransition,scrollTop:function(a,b,c){function d(r){if(null!==p){e+=Math.PI*(r-p)/c;if(e>=Math.PI)return a.scrollTop=g+b;a.scrollTop=g+f-f*Math.cos(e)}p=r;window.requestAnimationFrame(d)}var g=a.scrollTop;console.log(a.scrollTop);console.log(b);var f=b/2,e=0,p=null;window.requestAnimationFrame(d)},createCanvas:function(a){var b=document.getElementById(a.id);b.width=a.width;b.height=
-a.height;a=b.getContext("2d");return{canvas:b,context:a}},maskCanvas:function(a,b,c){c.context.drawImage(b.canvas,0,0,b.canvas.width,b.canvas.height);c.context.globalCompositeOperation="source-atop";c.context.drawImage(a.canvas,0,0);b=a.context;a=a.canvas;b.filter="blur(2px)";b.drawImage(a,0,0);b.filter="none"},processWidgetHtml:function(a){var b=document.getElementById("down"),c=document.getElementById("widget_holder");c.insertBefore(a,b);return c},clearWidgetHtml:function(a,b){a.removeChild(b)},
-getGravityCenter:function(a){P.x=Math.round(E.x+4*a.accelerationIncludingGravity.x);P.y=Math.round(E.y-4*a.accelerationIncludingGravity.y);return P}}}});
+/*
+ * Copyright (c) 2015 Samsung Electronics Co., Ltd. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* global define, console, window, tizen */
+
+/**
+ * Heart Rate Monitor module.
+ * 
+ * @module models/canvasDrawer
+ * @requires {@link core/event}
+ * @requires {@link core/storage/idb}
+ * @namespace models/canvasDrawer
+ * @memberof models/canvasDrawer
+ */
+
+define({
+	name : 'models/canvasDrawer',
+	requires : [ 'core/event', 'core/storage/idb' ],
+	def : function modelsCanvasDrawer(req) {
+		'use strict';
+
+		var center, event = req.core.event;
+		var radius, centerX, centerY, dxi, dyi, dxf, dyf, textdate, font, align, angle = 0, radiusArc, 
+		indexX = 0, rotate = false, gradient = null, gradientLinear = null, doGradient = false, gridGradient = null , watchOpacity = 1, animating = false, fading = false,showing = false,stroke = false;
+		var radialGradient = null;
+		var coords = {
+			x : 0,
+			y : 0
+		};
+		var gradientCoordsD = {
+			x1 : 360,
+			y1 : 360,
+			x2 : 0,
+			y2 : 0
+		};
+		var gradientCoords = {
+			x1 : 360,
+			y1 : 360,
+			x2 : 0,
+			y2 : 0
+		};
+		var linearGoldenGrd = null;
+		var radialGradient = null;
+
+		var radialGradientCoordsD = {
+			x : 180,
+			y : 180
+		};
+		var gravityCenter = {
+				x : 180,
+				y : 180
+			};
+		var radialGradientCoords = {
+			x : 180,
+			y : 180
+		};
+		var dx, dy, x, y, i;
+		var center1 = {
+			x : 0,
+			y : 0
+		};
+		var center2 = {
+			x : 0,
+			y : 0
+		};
+		var gx, gy, cx, cy ;
+		var gradientAngle = 0;
+		const
+		maxLength = Math.sqrt(360 * 360 + 360 * 360);
+		var opacity = false;
+		var theme= 'ice';
+		var grdAmbiant = null;
+		var timePassed = 0;
+		var shadow = false;
+
+		/**
+		 * Renders a circle with specific center, radius, and color
+		 * 
+		 * @public
+		 * @param {object}
+		 *            context - the context for the circle to be placed in
+		 * @param {number}
+		 *            radius - the radius of the circle
+		 * @param {string}
+		 *            color - the color of the circle
+		 */
+		function setOpacity(opacity){
+			watchOpacity = opacity;
+		}
+		function startFade(){
+			fading = true;
+			timePassed = 0;
+			watchOpacity = 1;
+			//console.log('Start fade');
+			
+		} 
+		function isFading(){
+			return fading;
+		}
+		function fade(secondsPassed, duration ){
+			if (fading === true){
+				//secondsPassed = Math.min(secondsPassed, 0.1);
+				timePassed += secondsPassed;
+				setOpacity(1- ( timePassed/duration));
+				if (watchOpacity <= 0) {
+					fading = false;
+					watchOpacity = 0;
+					timePassed = 0;
+				}
+			}
+		}
+		function startShow(){
+			showing = true;
+			timePassed = 0;
+			watchOpacity = 0;
+			//console.log('Start show');
+			
+		} 
+		function isShowing(){
+			return showing;
+		}
+		function show(secondsPassed, duration ){
+			if (showing === true){
+				//secondsPassed = Math.min(secondsPassed, 0.1);
+				timePassed += secondsPassed;
+				setOpacity( ( timePassed/duration));
+				if (watchOpacity >= 1) {
+					showing = false;
+					watchOpacity = 1;
+					timePassed = 0;
+				}
+			}
+		}
+		
+		function renderGrid(context, color, width, options) {
+			context.save();
+
+			x = 0;
+			y = 0;
+			context.lineWidth = width;
+			
+			context.strokeStyle = "rgba(70, 70, 70,0.2)";
+
+			for (i = 30; i < 360; i = i + 30) {
+				x = i;
+
+				if (options.motion !== null) {
+					center1.x = -options.motion.accelerationIncludingGravity.x * 6;
+					center1.y = 180 - (options.motion.accelerationIncludingGravity.y) * 6;
+				}
+				if (i < 180) {
+					center1.x = center1.x * (i / 100)   ; //+( i*5/180);
+					// center1.y = center1.y * (i/100);
+				} else {
+					center1.x = center1.x * ((360 - i) / 100);
+					// center1.y = center1.y * ((360- i)/100) ;
+				}
+				// a = curve verticale a = curve /2 ; b = position du centre
+				// courbe ; c et d x et y du endpoint
+				context.translate(x, y);
+				context.beginPath();
+				context.moveTo(-3, 0);
+				context.quadraticCurveTo(~~center1.x + 3, ~~center1.y, -3, 360);
+				context.stroke();
+				/*context.beginPath();
+				context.moveTo(-1, 0);
+				context.quadraticCurveTo(~~center1.x + 1, ~~center1.y, -1, 360);
+				context.stroke();*/
+				context.beginPath();
+				context.moveTo(0, 0);
+				context.quadraticCurveTo(~~center1.x, ~~center1.y, 0, 360);
+				context.stroke();
+				/*context.beginPath();
+				context.moveTo(1, 0);
+				context.quadraticCurveTo(~~center1.x - 1, ~~center1.y, 1, 360);
+				context.stroke();*/
+				context.beginPath();
+				context.moveTo(3, 0);
+				context.quadraticCurveTo(~~center1.x - 3, ~~center1.y, 3, 360);
+				context.stroke();
+				context.translate(-x, -y);
+			}
+			x = 0;
+			y = 0;
+			for (i = 30; i < 360; i = i + 30) {
+				y = i;
+
+				// a = position du centre courbe ; b = curve horizontale b =
+				// curve /2; c et d x et y du endpoint
+				if (options.motion !== null) {
+					center2.x = 180 - (options.motion.accelerationIncludingGravity.x) * 6;
+					center2.y = -options.motion.accelerationIncludingGravity.y * 6 ;
+				}
+
+				if (i <= 180) {
+					// center2.x = center2.x * (i/100) ;
+					center2.y = center2.y * ((i) / 100);
+				} else {
+					// center2.x = center2.x * ((360- i)/100) ;
+					center2.y = center2.y * ((360 - (i)) / 100);
+				}
+				context.translate(x, y);
+				context.beginPath();
+				context.moveTo(0, -3);
+				context.quadraticCurveTo(~~center2.x, ~~center2.y + 3, 360, -3);
+				context.stroke();
+				/*context.beginPath();
+				context.moveTo(0, -1);
+				context.quadraticCurveTo(~~center2.x, ~~center2.y + 1, 360, -1);
+				context.stroke();*/
+				context.beginPath();
+				context.moveTo(0, 0);
+				context.quadraticCurveTo(~~center2.x, ~~center2.y, 360, 0);
+				context.stroke();
+				/*context.beginPath();
+				context.moveTo(0, -1);
+				context.quadraticCurveTo(~~center2.x, ~~center2.y - 1, 360, 1);
+				context.stroke();*/
+				context.beginPath();
+				context.moveTo(0, -3);
+				context.quadraticCurveTo(~~center2.x, ~~center2.y - 3, 360, 3);
+				context.stroke();
+				context.translate(-x, -y);
+			}
+			// context.closePath();
+			context.restore();
+
+		}
+		function renderCircle(context, CircleShape, color, fillColor, stroke, width, exclude) {
+			context.save();
+			context.beginPath();
+			context.lineWidth = width;
+			if (gradientLinear !== null && color == null) {
+				color = gradientLinear;
+			}
+			if (typeof exclude === 'undefined') {
+				let exclude = false;
+			}
+			/*
+			context.shadowOffsetX = 0;
+			context.shadowOffsetY = 0;
+			context.shadowColor = "rgb(150, 150, 150)";
+
+			context.shadowBlur = 5;
+			*/
+			
+			
+			if (!exclude){
+				context.globalAlpha = watchOpacity;
+			}
+			
+			if (shadow){
+				context.shadowColor = "rgb(50, 50, 50)";
+				context.shadowBlur = 10;
+			}
+			
+			context.arc(CircleShape.getCenter().x, CircleShape.getCenter().y, CircleShape.getRadius(), 0, 2 * Math.PI);
+			if (fillColor !== null){
+				context.fillStyle = fillColor;
+			    context.fill();
+			}
+			if (stroke){
+				context.strokeStyle = color;
+				context.stroke();
+			}
+			context.closePath();
+			
+			
+			
+			
+			context.restore();
+		}
+		
+		function renderCircleShadows(context, CircleShape,  strokeColor, offset){
+			let i =1;
+			let color;
+			let alpha =strokeColor.a;
+			for (i=1; i <= offset; i++){
+				alpha = (strokeColor.a - (i/offset)*strokeColor.a);
+				if (alpha >= 0){
+					color = 'rgba('+strokeColor.r+','+strokeColor.g+','+strokeColor.b+','+alpha+')';
+					renderCircle(context, new Circle(CircleShape.getCenter().x,CircleShape.getCenter().y,CircleShape.getRadius()+i), color,null,true,1);
+				}
+			}
+			
+		}
+		function createCanvas(properties) {
+			  let canvas = document.getElementById(properties.id);
+			  canvas.width = properties.width;
+			  canvas.height = properties.height;
+			  let context = canvas.getContext('2d');
+			  return {
+			    canvas: canvas,
+			    context: context 
+			    };
+
+		}
+		function maskCanvas(c1,c2,c3) {
+			  c3.context.drawImage(c2.canvas, 0, 0, c2.canvas.width, c2.canvas.height);
+			  c3.context.globalCompositeOperation = 'source-atop';
+			  c3.context.drawImage(c1.canvas, 0, 0);
+			  blur(c1.context, c1.canvas, 2);
+			}
+		function blur(ctx, canvas, amt) {
+			  ctx.filter = 'blur('+amt+'px)';
+			  ctx.drawImage(canvas, 0, 0);
+			  ctx.filter = 'none';
+			}
+		function renderBackground(context, width, height, color, options) {
+			context.save();
+			context.beginPath();
+			doRadialGradientOrColor(context, color, options);
+			context.closePath();
+			context.fillRect(0, 0, width, height);
+			context.restore();
+
+		}
+		function drawPulse(context, center, radius, color, hr) {
+
+			// color in the background
+			if (hr === null) {
+				hr = 100;
+			}
+			// draw the circle
+			context.save();
+			context.beginPath();
+			// radiusArc = radius * Math.abs(Math.cos(angle));
+			radiusArc = radius - 15 * Math.abs(Math.cos(angle * 2) * Math.sin(angle * 4));
+			context.arc(center.x, center.y, radiusArc, 0, Math.PI * 2, false);
+			context.closePath();
+
+			// color in the circle
+			context.fillStyle = "#006699";
+			context.fill();
+			context.restore();
+			angle += Math.PI / 180;
+		}
+
+		/**
+		 * Draws a rounded rectangle using the current state of the canvas. If
+		 * you omit the last three params, it will draw a rectangle outline with
+		 * a 5 pixel border radius
+		 * 
+		 * @param {CanvasRenderingContext2D}
+		 *            ctx
+		 * @param {Number}
+		 *            x The top left x coordinate
+		 * @param {Number}
+		 *            y The top left y coordinate
+		 * @param {Number}
+		 *            width The width of the rectangle
+		 * @param {Number}
+		 *            height The height of the rectangle
+		 * @param {Number}
+		 *            [radius = 5] The corner radius; It can also be an object
+		 *            to specify different radii for corners
+		 * @param {Number}
+		 *            [radius.tl = 0] Top left
+		 * @param {Number}
+		 *            [radius.tr = 0] Top right
+		 * @param {Number}
+		 *            [radius.br = 0] Bottom right
+		 * @param {Number}
+		 *            [radius.bl = 0] Bottom left
+		 * @param {Boolean}
+		 *            [fill = false] Whether to fill the rectangle.
+		 * @param {Boolean}
+		 *            [stroke = true] Whether to stroke the rectangle.
+		 */
+		function roundRect(context, shape, radius, fill, stroke, strokeColor, fillColor,alpha) {
+			context.save();
+			if (typeof stroke === 'undefined') {
+				stroke = true;
+			}
+			if (typeof alpha === 'undefined') {
+				alpha = 1;
+			}
+			if (typeof radius === 'undefined') {
+				radius = 5;
+			}
+			if (typeof radius === 'number') {
+				radius = {
+					tl : radius,
+					tr : radius,
+					br : radius,
+					bl : radius
+				};
+			} else {
+				var defaultRadius = {
+					tl : 0,
+					tr : 0,
+					br : 0,
+					bl : 0
+				};
+				for ( var side in defaultRadius) {
+					radius[side] = radius[side] || defaultRadius[side];
+				}
+			}
+			context.beginPath();
+			context.globalAlpha = watchOpacity;
+			if (shadow){
+				context.shadowColor = "rgb(50, 50, 50)";
+				context.shadowBlur = 10;
+			}
+			
+			context.moveTo(shape.getX() + radius.tl, shape.getY());
+			context.lineTo(shape.getX() +  shape.getWidth() - radius.tr, shape.getY());
+			context.quadraticCurveTo(shape.getX() + shape.getWidth(), shape.getY(), shape.getX() + shape.getWidth(), shape.getY() + radius.tr);
+			context.lineTo(shape.getX() + shape.getWidth(), shape.getY() + shape.getHeight() - radius.br);
+			context.quadraticCurveTo(shape.getX() + shape.getWidth(), shape.getY() + shape.getHeight(), shape.getX() + shape.getWidth() - radius.br, shape.getY() + shape.getHeight());
+			context.lineTo(shape.getX() + radius.bl, shape.getY() + shape.getHeight());
+			context.quadraticCurveTo(shape.getX(), shape.getY() + shape.getHeight(), shape.getX(), shape.getY() + shape.getHeight() - radius.bl);
+			context.lineTo(shape.getX(), shape.getY() + radius.tl);
+			context.quadraticCurveTo(shape.getX(), shape.getY(), shape.getX() + radius.tl, shape.getY());
+			context.closePath();
+			if (fill) {
+				context.fillStyle = fillColor;
+				context.fill();
+			}
+			if (gradientLinear !== null && strokeColor == null) {
+				strokeColor = gradientLinear;
+				//context.globalAlpha = alpha;
+			}
+			
+			/*if (alpha !== null && alpha <= watchOpacity){
+				context.globalAlpha = alpha;
+			}*/
+			if (stroke) {
+				context.strokeStyle = strokeColor;
+				context.stroke();
+			}
+			
+			context.restore();
+		}
+		function roundRectShadows(context, shape, radius,   strokeColor, offset){
+			let i =1;
+			let color;
+			let alpha =strokeColor.a;
+			for (i=1; i <= offset; i++){
+				alpha = (strokeColor.a - (i/offset)*strokeColor.a);
+				color = 'rgba('+strokeColor.r+','+strokeColor.g+','+strokeColor.b+','+alpha+')';
+				roundRect(context, new Shape(shape.getX()-i,shape.getY()-i,shape.getWidth()+(i*2),shape.getHeight()+(i*2)), radius, false, true , color);
+			}
+			
+		}
+		
+
+		/**
+		 * Renders a needle with specific center, angle, start point, end point,
+		 * width and color
+		 * 
+		 * @public
+		 * @param {object}
+		 *            context - the context for the needle to be placed in
+		 * @param {number}
+		 *            angle - the angle of the needle (0 ~ 360)
+		 * @param {number}
+		 *            startPoint - the start point of the needle (-1.0 ~ 1.0)
+		 * @param {number}
+		 *            startPoint - the end point of the needle (-1.0 ~ 1.0)
+		 * @param {number}
+		 *            width - the width of the needle
+		 * @param {string}
+		 *            color - the color of the needle
+		 */
+		function renderNeedle(context, angle, startPoint, endPoint, width, color) {
+			radius = context.canvas.width / 2;
+			centerX = context.canvas.width / 2;
+			centerY = context.canvas.height / 2;
+			dxi = radius * Math.cos(angle) * startPoint;
+			dyi = radius * Math.sin(angle) * startPoint;
+			dxf = radius * Math.cos(angle) * endPoint;
+			dyf = radius * Math.sin(angle) * endPoint;
+
+			context.save();
+			context.beginPath();
+			context.lineWidth = width;
+			if (gradientLinear === null) {
+				gradientLinear = context.createLinearGradient(0, 0, 360, 360);
+				//gradientLinear.addColorStop(0, "rgb(255, 210, 49)");
+				//gradientLinear.addColorStop(1, "rgb(255, 153, 51)");
+				
+				gradientLinear.addColorStop(0, "rgb(30,87,153)");
+				gradientLinear.addColorStop(0.3, "rgb(41,137,216)");
+				gradientLinear.addColorStop(0.6, "rgb(32,124,202)");
+				gradientLinear.addColorStop(1, "rgb(125,185,232)");
+			}
+
+			context.strokeStyle = gradientLinear;
+			context.moveTo(centerX + dxi, centerY + dyi);
+			context.lineTo(centerX + dxf, centerY + dyf);
+			context.stroke();
+			context.closePath();
+			context.restore();
+		}
+
+		/**
+		 * Renders text at a specific center, radius, and color
+		 * 
+		 * @public
+		 * @param {object}
+		 *            context - the context for the text to be placed in
+		 * @param {string}
+		 *            text - the text to be placed
+		 * @param {number}
+		 *            x - the x-coordinate of the text
+		 * @param {number}
+		 *            y - the y-coordinate of the text
+		 * @param {number}
+		 *            textSize - the size of the text in pixel
+		 * @param {string}
+		 *            color - the color of the text
+		 */
+		function renderText(context, text, x, y, textSize, color, options) {
+			if (typeof options !== 'undefined') {
+				if (typeof options.font !== 'undefined') {
+					font = options.font;
+				}
+				if (typeof options.align !== 'undefined') {
+					align = options.align;
+				}
+				if (typeof options.rotate !== 'undefined') {
+					rotate = true;
+					angle++;
+				}
+
+			} else {
+				font = 'Courier';
+				align = "center";
+				options = {};
+			}
+			context.save();
+			// context.beginPath();
+			context.font = textSize + 'px "' + font + '"';
+			// context.font = textSize + 'px "Cybrpnuk2"';
+
+			context.textAlign = align;
+			context.textBaseline = "middle";
+			doGradientOrColor(context, color, options);
+			context.globalAlpha = watchOpacity;
+			context.fillText(text, x, y);
+			// context.closePath();
+			context.restore();
+		}
+		function renderTextGradient(context, text, x, y, textSize, color, options) {
+			if (typeof options !== 'undefined') {
+				if (typeof options.font !== 'undefined') {
+					font = options.font;
+				}
+				if (typeof options.align !== 'undefined') {
+					align = options.align;
+				}
+
+				if (typeof options.rotate !== 'undefined') {
+					rotate = true;
+					angle++;
+				}
+
+			} else {
+				font = 'Courier';
+				align = "center";
+				options = {};
+			}
+			context.save();
+
+			context.font = textSize + 'px "' + font + '"';
+			doGradientOrColor(context, color, options);
+			context.globalAlpha = watchOpacity;
+			context.textAlign = align;
+			context.textBaseline = "middle";
+			context.fillText(text, x, y);
+			context.restore();
+		}
+		function renderTime(context, date, x, y, textSize, color, options) {
+			indexX = 0;
+			context.save();
+			context.beginPath();
+			context.font = textSize + 'px "FutureNow"';
+			context.textAlign = "right";
+			context.textBaseline = "middle";
+			context.fillStyle = color;
+
+			indexX += x;
+			textdate = date.hour;
+			context.fillText(textdate, indexX, y);
+
+			context.closePath();
+			context.beginPath();
+			context.textAlign = "center";
+
+			textdate = ':';
+			indexX += textSize / 2;
+			context.fillText(textdate, indexX, y);
+
+			context.closePath();
+			context.beginPath();
+			context.textAlign = "center";
+			textdate = (date.minute < 10) ? '0' + date.minute : date.minute;
+			indexX += textSize;
+			context.fillText(textdate, indexX, y);
+			context.closePath();
+			context.beginPath();
+			context.textAlign = "center";
+			textdate = ':';
+			indexX += textSize;
+			context.fillText(textdate, indexX, y); // -(textSize/12)
+			context.beginPath();
+			context.textAlign = "center";
+			textdate = (date.second < 10) ? '0' + date.second : date.second;
+			indexX += textSize;
+			context.fillText(textdate, indexX, y);
+			context.closePath();
+			context.restore();
+		}
+		function renderTimeBis(context, date, x, y, textSize, color, options) {
+			if (typeof options !== 'undefined') {
+				if (typeof options.font !== 'undefined') {
+					font = options.font;
+				}
+				if (typeof options.align !== 'undefined') {
+					align = options.align;
+				}
+				if (typeof options.stroke !== 'undefined') {
+					stroke = options.stroke;
+				}
+				if (typeof options.gradient !== 'undefined') {
+					gradient = options.gradient;
+				}
+			} else {
+				font = 'FutureNow';
+				options = {};
+				stroke = false;
+				gradient = false; 
+			}
+			indexX = 0;
+			context.save();
+			context.beginPath();
+			context.font = textSize + 'px "' + font + '"';
+			context.textAlign = "right";
+			context.textBaseline = "middle";
+			
+			if (gradient) doGradientOrColor(context, color, options);
+			context.globalAlpha = watchOpacity;
+			
+			indexX += x;
+			textdate = date.hour;
+			if (stroke){
+				context.strokeStyle = color;
+				context.strokeText(textdate, indexX, y);
+			}
+			else {
+				context.fillText(textdate, indexX, y);
+			}
+			
+
+			context.textAlign = "center";
+			textdate = ':';
+			indexX += (textSize * 0.25);
+			if (stroke){
+				context.strokeStyle = color;
+				context.strokeText(textdate, indexX, y);
+			}
+			else {
+				context.fillText(textdate, indexX, y);
+			}
+
+			context.textAlign = "center";
+			textdate = (date.minute < 10) ? '0' + date.minute : date.minute;
+			indexX += textSize * 0.8;
+			if (stroke){
+				context.strokeStyle = color;
+				context.strokeText(textdate, indexX, y);
+			}
+			else {
+				context.fillText(textdate, indexX, y);
+			}
+			
+			context.closePath();
+			
+			context.restore();
+		}
+		function renderTimeBisShadows(context, date, x, y, textSize, strokeColor, offset){
+			let i = 1;
+			let color;
+			let alpha =strokeColor.a;
+			for (i; i <=offset; i++){
+				alpha = (strokeColor.a - (i/offset)*strokeColor.a);
+				color = 'rgba('+strokeColor.r+','+strokeColor.g+','+strokeColor.b+','+alpha+')';
+				
+				renderTimeBis(context, date, x-i, y - i, textSize+ (i+1), color, {
+					stroke: true
+				});
+				
+			}
+			
+		}
+		
+		
+		
+		function renderWeather(context, text, x, y, textSize, color) {
+			context.save();
+			context.beginPath();
+			context.font = textSize + "px artill_clean_icons";
+			context.textAlign = "center";
+			context.textBaseline = "middle";
+			context.fillStyle = color;
+			context.fillText(text, x, y);
+			context.globalAlpha = watchOpacity;
+			context.closePath();
+			context.restore();
+		}
+		function calculateShadowOffset(motionAcceleration) {
+			coords.x = motionAcceleration.x;
+			coords.y = motionAcceleration.y;
+			// console.log(Math.cos(motionAcceleration.x/motionAcceleration.y));
+			return coords;
+
+		}
+		function getCoordsForDiagonalGradient(width, height) {
+			var alfa = Math.atan(height / width);
+			var x = Math.sqrt(width * width + height * height) / 2 / (Math.cos(alfa));
+			var z = ((width - x) * Math.cos(alfa)) * Math.sin(Math.PI / 2 - alfa);
+			var w = ((width - x) * Math.cos(alfa)) * Math.cos(Math.PI / 2 - alfa);
+			return {
+				x1 : z,
+				y1 : -w,
+				x2 : width - z,
+				y2 : w + height
+			};
+		}
+		function calculateGradientPosition(motionAcceleration) {
+			dx = -motionAcceleration.x *1000;
+			dy = motionAcceleration.y *1000;
+			gradientAngle = Math.atan2(dy, dx) + Math.PI /2; //
+			//console.log(gradientAngle);
+			//gradientCoords.x1 = (360 / 2) + Math.cos(gradientAngle) * maxLength * 0.5;
+			//gradientCoords.y1 = (360 / 2) + Math.sin(gradientAngle) * maxLength * 0.5;
+			// the end of the gradient subtracted from the center
+			//gradientCoords.x2 = (360 / 2) - Math.cos(gradientAngle) * maxLength * 0.5;
+			//gradientCoords.y2 = (360 / 2) - Math.sin(gradientAngle) * maxLength * 0.5;
+			gx = (360 / 2) * Math.cos(gradientAngle);
+			gy = (360 / 2) * Math.sin(gradientAngle);
+			cx = 360 / 2;
+			cy = 360;
+			return gradientCoords;
+		}
+		function calculateRadialGradientPosition(motionAcceleration) {
+			radialGradientCoords.x = Math.min(Math.round(radialGradientCoordsD.x + (motionAcceleration.x * 4)),250);
+			radialGradientCoords.y = Math.min(Math.round(radialGradientCoordsD.y - ((motionAcceleration.y) * 4)),250)+30;
+			//console.log('x: '+motionAcceleration.x+' y: '+motionAcceleration.y);
+			return radialGradientCoords;
+		}
+		function getGravityCenter(motionAcceleration){
+			gravityCenter.x = Math.round(radialGradientCoordsD.x + (motionAcceleration.accelerationIncludingGravity.x * 4));
+			gravityCenter.y = Math.round(radialGradientCoordsD.y - (motionAcceleration.accelerationIncludingGravity.y * 4));
+			return gravityCenter;
+		}
+		function resetRadialGradientPosition(){
+			radialGradientCoords = radialGradientCoordsD;
+		}
+		function processMotion(motionAcceleration, context) {
+			// console.log(motionAcceleration);
+			//calculateShadowOffset(motionAcceleration.accelerationIncludingGravity);
+			calculateGradientPosition(motionAcceleration.accelerationIncludingGravity);
+			calculateRadialGradientPosition(motionAcceleration.accelerationIncludingGravity);
+			
+			radialGradient = context.createRadialGradient(radialGradientCoords.x, radialGradientCoords.y, 0.000, 180.000, 180.000, 180.000);
+			radialGradient.addColorStop(0.000, 'rgba(0, 0, 0,1)');
+			radialGradient.addColorStop(0.300, 'rgba(0, 0, 0,0.3)');
+			//radialGradient.addColorStop(0.755, 'rgba(0,0,0,0.4)');
+			radialGradient.addColorStop(0.83, 'rgba(0,0,0,0.4)');
+			radialGradient.addColorStop(0.91, 'rgba(5,5,5,1)');
+			radialGradient.addColorStop(0.98, 'rgba(40,40,40,1)'); 
+			
+			gradientLinear = context.createLinearGradient(cx - gx, cy - gy, cx + gx, cy + gy);
+			
+			if (theme== 'ice'){
+				//radialGradient.addColorStop(0.98, 'rgba(20,15,90,1)'); 
+				gradientLinear.addColorStop(1, "rgb(38,55,180)");
+				gradientLinear.addColorStop(0.6, "rgb(41,137,216)");
+				gradientLinear.addColorStop(0.3, "rgb(22,114,185)");
+				gradientLinear.addColorStop(0, "rgb(192,221,243)");
+			}
+			else if (theme== 'fire'){
+				//radialGradient.addColorStop(0.98, 'rgba(100,50,2,1)'); 
+				gradientLinear.addColorStop(1, "rgb(255,90,2)");
+				gradientLinear.addColorStop(0.6, "rgb(255,150,53)");
+				gradientLinear.addColorStop(0.3, "rgb(248,181,0)");
+				gradientLinear.addColorStop(0, "rgb(249,234,194)");
+			}
+			else if (theme== 'hisakura') {
+				//radialGradient.addColorStop(0.98, 'rgba(100,35,35,1)'); 
+				gradientLinear.addColorStop(1, "rgb(229,72,72)");
+				gradientLinear.addColorStop(0.6, "rgb(252,123,123)");
+				gradientLinear.addColorStop(0.3, "rgb(254,144,144)");
+				gradientLinear.addColorStop(0, "rgb(251,232,232)");
+			}
+			else if (theme== 'metal') {
+				//radialGradient.addColorStop(0.98, 'rgba(100,35,35,1)'); 
+				gradientLinear.addColorStop(1, "rgb(101,101,107)");
+				gradientLinear.addColorStop(0.6, "rgb(149,149,149)");
+				gradientLinear.addColorStop(0.3, "rgb(190,190,190)");
+				gradientLinear.addColorStop(0, "rgb(244,244,244)");
+			}
+			
+		}
+		
+		function getAmbiantGradient(ctxContent){
+			
+			grdAmbiant = ctxContent.createLinearGradient(0, 0, 360, 0);
+			if (theme== 'ice'){
+				grdAmbiant.addColorStop(1, "rgb(38,55,180)");
+				grdAmbiant.addColorStop(0.6, "rgb(68,106,255)");
+				grdAmbiant.addColorStop(0.3, "rgb(145,214,242)");
+				grdAmbiant.addColorStop(0, "rgb(154,231,244)");
+			}
+			else if (theme== 'fire'){
+				grdAmbiant.addColorStop(1, "rgb(255,90,2)");
+				grdAmbiant.addColorStop(0.6, "rgb(255,150,53)");
+				grdAmbiant.addColorStop(0.3, "rgb(248,181,0)");
+				grdAmbiant.addColorStop(0, "rgb(249,234,194)");
+			}
+			else if (theme== 'hisakura') {
+				grdAmbiant.addColorStop(1, "rgb(229,72,72)");
+				grdAmbiant.addColorStop(0.6, "rgb(252,123,123)");
+				grdAmbiant.addColorStop(0.3, "rgb(254,144,144)");
+				grdAmbiant.addColorStop(0, "rgb(251,232,232)"); 
+			}
+			else if (theme== 'metal') {
+				//radialGradient.addColorStop(0.98, 'rgba(100,35,35,1)'); 
+				grdAmbiant.addColorStop(1, "rgb(101,101,107)");
+				grdAmbiant.addColorStop(0.6, "rgb(149,149,149)");
+				grdAmbiant.addColorStop(0.3, "rgb(190,190,190)");
+				grdAmbiant.addColorStop(0, "rgb(244,244,244)");
+			}
+			return grdAmbiant;
+		}
+		
+		
+		function doRadialGradientOrColor(context, color, options) {
+			if (typeof options.gradient !== 'undefined') {
+				context.fillStyle = radialGradient;
+			} else {
+				context.fillStyle = color;
+			}
+		}
+
+		function doGradientOrColor(context, color, options) {
+			if (typeof options.motion !== 'undefined') {
+				if (options.motion !== null) {
+//					context.shadowOffsetX = coords.x * -0.4;
+//					context.shadowOffsetY = -coords.y * 0.4;
+				}
+			} else {
+//				context.shadowOffsetX = 0;
+//				context.shadowOffsetY = 0;
+			}
+			
+			if (typeof options.gradient !== 'undefined') {
+				//context.shadowColor = "rgb(150, 150, 150)";
+
+				//context.shadowBlur = 10;
+
+				context.fillStyle = gradientLinear;
+			} else {
+				context.fillStyle = color;
+			}
+		}
+		/**
+		 * Renders text at a specific center, radius, and color
+		 * 
+		 * @public
+		 * @param {object}
+		 *            context - the context for the text to be placed in
+		 * @param {image}
+		 *            iamge - the img obj
+		 * @param {number}
+		 *            x - the x-coordinate of the text
+		 * @param {number}
+		 *            y - the y-coordinate of the text
+		 */
+		function renderImage(context, img, x, y) {
+
+			img.onload = function() {
+				context.save();
+				context.drawImage(img, x, y);
+				context.restore();
+			};
+
+		}
+		/**
+		 * Initializes the module.
+		 * 
+		 * @memberof models/canvasDrawer
+		 * @public
+		 */
+		function getRadialGradientCoords(){
+			return radialGradientCoords;
+		}
+		function init() {
+			bindEvents();
+			if (tizen.preference.exists('theme')) {
+				theme = tizen.preference.getValue('theme');
+			}
+		}
+		function changeTheme(ev){
+			theme = ev.detail;
+		}
+		
+		function bindEvents() {
+			event.on({
+				'views.radial.changeTheme' : changeTheme,
+				'models.motion.reset': resetRadialGradientPosition
+			});
+
+		}
+		function easeInOutQuad(t){
+			t/=0.5;
+			if(t<1)return t*t/2;
+			t--;
+			return (t*(t-2)-1)/2;
+		}
+		function scrollTop (elem,size,duration) {
+		    // cancel if already on tope
+			const init_scroll = elem.scrollTop;
+		    //if (init_scroll > size) return;
+		    console.log(elem.scrollTop);
+		    console.log(size);
+		    
+		    const cosParameter =  size /2;
+		    let scrollCount = 0, oldTimestamp = null;
+		    let prev = 0;
+		    function step (newTimestamp) {
+		        if (oldTimestamp !== null) {
+		            // if duration is 0 scrollCount will be Infinity
+		            scrollCount += Math.PI * (newTimestamp - oldTimestamp) / duration;
+		             
+		            if (scrollCount >= Math.PI) return elem.scrollTop = init_scroll+size;
+		            //if (prev >=  init_scroll-size - cosParameter * Math.cos(scrollCount))  return false;
+		            
+		            elem.scrollTop = init_scroll+cosParameter - cosParameter * Math.cos(scrollCount);
+		            //
+		            prev = elem.scrollTop;
+		            //console.log(cosParameter - cosParameter * Math.cos(scrollCount));
+		            //console.log(elem.scrollTop);
+		        }
+		        oldTimestamp = newTimestamp;
+		        window.requestAnimationFrame(step);
+		    }
+		    window.requestAnimationFrame(step);
+		}
+		function processWidgetHtml(content){
+			
+			let down = document.getElementById('down');
+			
+			let widget_holder = document.getElementById('widget_holder');
+			widget_holder.insertBefore(content,down);
+			
+			return widget_holder;
+			
+		}
+		function clearWidgetHtml(widget_holder,contentNode){
+			widget_holder.removeChild(contentNode);
+			
+		}
+		return {
+			init : init,
+			renderCircle : renderCircle,
+			renderCircleShadows : renderCircleShadows ,
+			renderNeedle : renderNeedle,
+			renderText : renderText,
+			renderImage : renderImage,
+			renderWeather : renderWeather,
+			renderTime : renderTime,
+			renderTimeBis : renderTimeBis,
+			renderTimeBisShadows:renderTimeBisShadows,
+			roundRect : roundRect,
+			roundRectShadows:roundRectShadows,
+			drawPulse : drawPulse,
+			renderTextGradient : renderTextGradient,
+			renderBackground : renderBackground,
+			processMotion : processMotion,
+			renderGrid : renderGrid,
+			getRadialGradientCoords : getRadialGradientCoords,
+			changeTheme:changeTheme,
+			getAmbiantGradient:getAmbiantGradient,
+			setOpacity:setOpacity,
+			startFade:startFade,
+			fade:fade,
+			isFading:isFading,
+			startShow:startShow,
+			show:show,
+			isShowing:isShowing,
+			setClassAndWaitForTransition:setClassAndWaitForTransition,
+			scrollTop:scrollTop,
+			createCanvas:createCanvas,
+			maskCanvas:maskCanvas,
+			processWidgetHtml:processWidgetHtml,
+			clearWidgetHtml:clearWidgetHtml,
+			getGravityCenter:getGravityCenter
+		};
+	}
+});
