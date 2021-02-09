@@ -520,11 +520,11 @@ define({
 
 				// TESTING...Report #seconds since start and achieved fps.
 				sinceStart = now - startTime;
-				currentFps = Math.round(1000 / (sinceStart / ++frame) * 100) / 100;
+				currentFps = Math.round((1000 / (sinceStart / ++frame) * 100) / 100);
 
 				// $results.text("Elapsed time= " + Math.round(sinceStart / 1000
-				// * 100) / 100 + " secs @ " + currentFps + " fps.");  currentFps
-				canvasDrawer.renderText(canvasContent.context, particles.length, center.x, center.y - (watchRadius * 0.45), 15, "#c9c9c9", {
+				// * 100) / 100 + " secs @ " + currentFps + " fps.");  currentFps 
+				canvasDrawer.renderText(canvasContent.context, particles.length+" - "+currentFps+" fps", center.x, center.y - (watchRadius * 0.45), 15, "#c9c9c9", {
 					font : 'FutureNow',
 					align : 'center'
 				});
@@ -570,6 +570,7 @@ define({
 			
 			if (!isAmbientMode){
 				let pl = particles.length;
+				let to_add = 100;
 				particles = particles.filter(function (p) {
 					
 					p.setPoA(gravCenter); 
@@ -577,7 +578,10 @@ define({
 				});
 				if (time_to_recreate) {
 				    if (pl < max_particles) {
-				    	popolate(100,effect);
+				    	if (max_particles-pl < to_add){
+				    		to_add = max_particles-pl;
+				    	}
+				    	popolate(to_add,effect);
 				    }
 				}
 				  
@@ -717,7 +721,7 @@ define({
 				}*/
 			
 
-			//displayFps();
+			displayFps();
 			
 			animRequest = requestAnimationFrame(drawWatchContent);
 			

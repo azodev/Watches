@@ -368,17 +368,19 @@ html, body {
 	margin: 2px 2px;
 	min-height: 70px;
 	width: 46px;
-	--aug-tl: 5px;
+	--aug-tl: 5px; 
 	--aug-br: 5px;
 	--aug-bl: 5px;
 	--aug-tr: 5px;
 	--aug-inset: 0px;
 	--aug-inset-bg: rgba(0, 0, 0, 0.45);
-	
+	background:rgba(0, 0, 0, 0.45);
 	text-align:center;
 	transition: color 0.2s ease, background 0.2s ease; 
 	color:#FFFFFF;
+	border-radius:5px;
 }
+
 #weather .forecast .block .hour, #weather .forecast .block .temp {
 	position: relative;
 	width: 40px;
