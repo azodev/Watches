@@ -30,19 +30,37 @@ define({
         'views/init'
     ],
     def: function appInit() {
-        'use strict';
+        'use strict'; 
 
         console.log('app::def');
 
         /**
          * Initializes App module.
-         *
-         * @memberof app
-         * @public
+         *   
+         * @memberof app   
+         * @public 
          */
         function init() {
-            console.log('app::init');
-          
+            console.log('app::init'); 
+            var currentLanguage = null;
+            var defaultLenguage = "en";
+            var supportedLanguages = ["en", "fr", "ru", "de", "it", "ja"];
+
+	        tizen.systeminfo.getPropertyValue("LOCALE", function(locale) {
+                var tmp = locale.language.substring(0,2); 
+                if(supportedLanguages.indexOf(tmp) > -1) {
+                       currentLanguage = tmp;
+                } else {
+                       currentLanguage = defaultLanguage;
+                }
+                
+                $.getJSON("/locales/"+currentLanguage+".json", function(json) {
+                    localStrings = json;
+                    console.log(localStrings);
+                    
+                });
+	        	
+	        });
         }
 
         return {
