@@ -455,7 +455,7 @@ define({
 			vForecasts.forEach(function(fo){
 				
 				if (fo.id == id) {
-					console.log(fo.id);
+					
 					block=  fo.processHtmlDetails();
 				}
 			});

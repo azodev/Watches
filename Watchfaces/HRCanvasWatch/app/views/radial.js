@@ -66,6 +66,7 @@ define({
          */
         function init() {
             // bind events to page elements
+        	tizen.application.getAppsInfo(onListInstalledApps, null);
             bindEvents();
             menuItems = [
                              /*{
@@ -154,10 +155,16 @@ define({
                                  title: 'Update',
                                  icon: '#update'
                              },
-                             {
+                            /* {
                                  id   : 'exercise',
                                  title: 'GymRun',
                                  icon: '#exercise'
+                             },*/
+                             
+                             {
+                            	id: 'chronometer',
+                            	title: 'Stopwatch',
+                            	icon: '#chronometer'
                              },
                              {
                                  id   : 'timer',
@@ -215,10 +222,14 @@ define({
                     	tizen.application.launch("com.samsung.alti-barometer", onsuccess,onfail);
                     	closeMenuProperly(item);	  
                     }
-                    else if (item.id == 'exercise'){
-                    	tizen.application.launch("GymRunWear.TizenCompanionApp", onsuccess,onfail);
+                    else if (item.id == 'chronometer'){
+                    	tizen.application.launch("com.samsung.stopwatch-wc1", onsuccess,onfail);
                     	closeMenuProperly(item);	  
                     }
+                    /*else if (item.id == 'exercise'){
+                    	tizen.application.launch("GymRunWear.TizenCompanionApp", onsuccess,onfail);
+                    	closeMenuProperly(item);	  
+                    }*/
                     else if (item.id == 'params'){
                     	tizen.application.launch("com.samsung.clocksetting", onsuccess,onfail);
                     	closeMenuProperly(item); 
@@ -257,12 +268,17 @@ define({
         function onfail(e){
         	console.error(e);
         }
-        function onListInstalledApps(appsInfo) {
-			var appId = null;
-			//console.log(appsInfo);
-			for (var i = 0; i<appsInfo.length; i++ ){
-				//console.log(appsInfo[i].id);
-			}
+        function onListInstalledApps(applications) {
+        	var appInfo;
+            for (var i = 0; i < applications.length; i++) {
+        	appInfo = applications[i];
+        	//console.log('Application ID: ' + appInfo.id);
+        	//console.log('Icon Path: ' + appInfo.iconPath);
+        	if (appInfo.show && appInfo.name != '')
+        	console.log('Name: ' + appInfo.name);
+        	//console.log('Version: ' + appInfo.version);
+        	//console.log('Show: ' + appInfo.show);
+            }
 		}
         function getMenu (){
         	return svgMenu;

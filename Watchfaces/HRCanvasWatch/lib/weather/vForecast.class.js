@@ -35,7 +35,7 @@ class vForecast  {
 	}
 	processHtml(){
 		let block =document.createElement('div');
-		block.className = 'block';
+		block.className = 't';
 		let hour = document.createElement('div');
 		hour.className = 'hour';
 		let icon = document.createElement('div');

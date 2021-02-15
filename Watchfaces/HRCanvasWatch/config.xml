@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="https://www.azo-dev.com/watches/Particles" version="1.0.0" height="360" width="360" viewmodes="fullscreen">
+<widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="https://watches.azo-dev.com/watches/Particles" version="1.0.0" height="360" width="360" viewmodes="fullscreen">
     <access origin="https://api.openweathermap.org" subdomains="false"></access>
-    <access origin="https://cloud.anthony-zorzetto.fr" subdomains="false"></access>
     <tizen:application id="EjC5Z9GjZ7.ParticlesWatch" package="EjC5Z9GjZ7" required_version="3.0" ambient_support="enable"/>
-    <author>AZO_DEV</author>
+    <author href="https://watches.azo-dev.com" email="anthony@azo-dev.com">AZO_DEV</author>
     <tizen:category name="http://tizen.org/category/wearable_clock"/>
     <content src="index.html"/>
     <feature name="tizen.org/feature/humanactivitymonitor"/>
@@ -12,26 +11,20 @@
     <feature name="tizen.org/feature/screen.shape.circle"/>
     <feature name="tizen.org/feature/sensor.barometer"/>
     <feature name="tizen.org/feature/sensor.heart_rate_monitor"/>
-    <feature name="tizen.org/feature/sensor.pedometer"/>
     <feature name="tizen.org/feature/location.batch"/>
     <feature name="tizen.org/feature/screen.size.normal.360.360"/>
     <feature name="tizen.org/feature/sensor.accelerometer"/>
     <feature name="http://tizen.org/feature/location.gps"/>
     <feature name="http://tizen.org/feature/sensor.heart_rate_monitor"/>
-    <feature name="http://tizen.org/feature/sensor.pedometer"/>
-    <feature name="http://tizen.org/feature/web.service"/>
     <feature name="http://tizen.org/feature/network.internet"/>
     <feature name="http://tizen.org/feature/network.net_proxy"/>
     <icon src="icon.png"/>
     <name>Particles</name>
     <tizen:privilege name="http://tizen.org/privilege/power"/>
-    <tizen:privilege name="http://tizen.org/privilege/content.read"/>
     <tizen:privilege name="http://tizen.org/privilege/push"/>
     <tizen:privilege name="http://tizen.org/privilege/unlimitedstorage"/>
     <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
     <tizen:privilege name="http://tizen.org/privilege/notification"/>
-    <tizen:privilege name="http://tizen.org/privilege/filesystem.read"/>
-    <tizen:privilege name="http://tizen.org/privilege/filesystem.write"/>
     <tizen:privilege name="http://tizen.org/privilege/alarm"/>
     <tizen:privilege name="http://tizen.org/privilege/system"/>
     <tizen:privilege name="http://tizen.org/privilege/internet"/>

@@ -721,7 +721,7 @@ define({
 				}*/
 			
 
-			displayFps();
+			//displayFps();
 			
 			animRequest = requestAnimationFrame(drawWatchContent);
 			
@@ -1028,8 +1028,8 @@ define({
 			gravCenter.y = gravCenter.y-gravCenterDiff.y;
 			if (!isAmbientMode){
 				if (radialmenu.getOpen()){ 
-					deg.x = (gravCenter.y - 180)*1.2;
-					deg.y = (gravCenter.x - 180)*1.2;
+					deg.x = (gravCenter.y - 180)*2;
+					deg.y = (gravCenter.x - 180)*2;
 					if (deg.x <= -20 ) deg.x = -20;
 					if (deg.x >= 20 ) deg.x = 20;
 					if (deg.y <= -20 ) deg.y = -20;
@@ -1040,8 +1040,8 @@ define({
 					  
 				}
 				if (widgetFullScreenDiplayed ==true){
-					deg.x = (gravCenter.y - 180)*1.2;
-					deg.y = (gravCenter.x - 180)*1.2;
+					deg.x = (gravCenter.y - 180)*2;
+					deg.y = (gravCenter.x - 180)*2;
 					if (deg.x <= -20 ) deg.x = -20;
 					if (deg.x >= 20 ) deg.x = 20;
 					if (deg.y <= -20 ) deg.y = -20; 
@@ -1164,6 +1164,7 @@ define({
 		function bindEvents() {
 			document.getElementById('canvas-content').addEventListener('click', function(e) {
 				handleClick(this,e);
+				return false;
 			});
 			
 			
@@ -1186,11 +1187,13 @@ define({
 				calendarY = document.getElementById ('overflower').scrollTop-220;
 				//console.log(document.getElementById ('overflower').scrollTop);
 				canvasDrawer.scrollTop(document.getElementById ('overflower'),-220,500); 
+				return false;
 			});
 			down.addEventListener('click', function(e) {
 				//console.log('down');
 				calendarY = document.getElementById ('overflower').scrollTop+220;
 				canvasDrawer.scrollTop(document.getElementById ('overflower'),220,500); 
+				return false;
 			});
 			window.addEventListener("ambientmodechanged", function(e) {
 				//console.log('ambientmodechanged event');
