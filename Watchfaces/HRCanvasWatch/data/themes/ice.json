@@ -1,0 +1,13 @@
+{
+  "name": "ice",
+  "particle_colors": [ "#694FB9",  "#6094ee", "#3CFBFF"],
+  "effect": "attraction",
+  "root_colors": [  "rgb(24,82,129)",  "rgb(192,221,243)"],
+  "gradient": [ 	"rgb(38,55,180)", 
+  				"rgb(41,137,216)",
+  				"rgb(22,114,185)",
+  				"rgb(192,221,243)"
+  				]
+	
+
+}

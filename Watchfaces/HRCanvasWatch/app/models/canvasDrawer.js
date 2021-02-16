@@ -81,10 +81,11 @@ define({
 		const
 		maxLength = Math.sqrt(360 * 360 + 360 * 360);
 		var opacity = false;
-		var theme= 'ice';
+		//var theme= 'ice';
 		var grdAmbiant = null;
 		var timePassed = 0;
 		var shadow = false;
+		var themeData = {"gradient": [ 	"rgb(255,90,2)", "rgb(255,150,53)",		"rgb(248,181,0)","rgb(249,234,194)"	]};
 
 		/**
 		 * Renders a circle with specific center, radius, and color
@@ -787,65 +788,25 @@ define({
 			
 			gradientLinear = context.createLinearGradient(cx - gx, cy - gy, cx + gx, cy + gy);
 			
-			if (theme== 'ice'){
-				//radialGradient.addColorStop(0.98, 'rgba(20,15,90,1)'); 
-				gradientLinear.addColorStop(1, "rgb(38,55,180)");
-				gradientLinear.addColorStop(0.6, "rgb(41,137,216)");
-				gradientLinear.addColorStop(0.3, "rgb(22,114,185)");
-				gradientLinear.addColorStop(0, "rgb(192,221,243)");
-			}
-			else if (theme== 'fire'){
-				//radialGradient.addColorStop(0.98, 'rgba(100,50,2,1)'); 
-				gradientLinear.addColorStop(1, "rgb(255,90,2)");
-				gradientLinear.addColorStop(0.6, "rgb(255,150,53)");
-				gradientLinear.addColorStop(0.3, "rgb(248,181,0)");
-				gradientLinear.addColorStop(0, "rgb(249,234,194)");
-			}
-			else if (theme== 'hisakura') {
-				//radialGradient.addColorStop(0.98, 'rgba(100,35,35,1)'); 
-				gradientLinear.addColorStop(1, "rgb(229,72,72)");
-				gradientLinear.addColorStop(0.6, "rgb(252,123,123)");
-				gradientLinear.addColorStop(0.3, "rgb(254,144,144)");
-				gradientLinear.addColorStop(0, "rgb(251,232,232)");
-			}
-			else if (theme== 'metal') {
-				//radialGradient.addColorStop(0.98, 'rgba(100,35,35,1)'); 
-				gradientLinear.addColorStop(1, "rgb(101,101,107)");
-				gradientLinear.addColorStop(0.6, "rgb(149,149,149)");
-				gradientLinear.addColorStop(0.3, "rgb(190,190,190)");
-				gradientLinear.addColorStop(0, "rgb(244,244,244)");
-			}
+			
+			//radialGradient.addColorStop(0.98, 'rgba(20,15,90,1)'); 
+			gradientLinear.addColorStop(1,   themeData.gradient[0]);
+			gradientLinear.addColorStop(0.6, themeData.gradient[1]);
+			gradientLinear.addColorStop(0.3, themeData.gradient[2]);
+			gradientLinear.addColorStop(0,   themeData.gradient[3]);
+			
 			
 		}
 		
 		function getAmbiantGradient(ctxContent){
-			
+			//setThemeData(themeData);
 			grdAmbiant = ctxContent.createLinearGradient(0, 0, 360, 0);
-			if (theme== 'ice'){
-				grdAmbiant.addColorStop(1, "rgb(38,55,180)");
-				grdAmbiant.addColorStop(0.6, "rgb(68,106,255)");
-				grdAmbiant.addColorStop(0.3, "rgb(145,214,242)");
-				grdAmbiant.addColorStop(0, "rgb(154,231,244)");
-			}
-			else if (theme== 'fire'){
-				grdAmbiant.addColorStop(1, "rgb(255,90,2)");
-				grdAmbiant.addColorStop(0.6, "rgb(255,150,53)");
-				grdAmbiant.addColorStop(0.3, "rgb(248,181,0)");
-				grdAmbiant.addColorStop(0, "rgb(249,234,194)");
-			}
-			else if (theme== 'hisakura') {
-				grdAmbiant.addColorStop(1, "rgb(229,72,72)");
-				grdAmbiant.addColorStop(0.6, "rgb(252,123,123)");
-				grdAmbiant.addColorStop(0.3, "rgb(254,144,144)");
-				grdAmbiant.addColorStop(0, "rgb(251,232,232)"); 
-			}
-			else if (theme== 'metal') {
-				//radialGradient.addColorStop(0.98, 'rgba(100,35,35,1)'); 
-				grdAmbiant.addColorStop(1, "rgb(101,101,107)");
-				grdAmbiant.addColorStop(0.6, "rgb(149,149,149)");
-				grdAmbiant.addColorStop(0.3, "rgb(190,190,190)");
-				grdAmbiant.addColorStop(0, "rgb(244,244,244)");
-			}
+			
+			grdAmbiant.addColorStop(1,   themeData.gradient[0]);
+			grdAmbiant.addColorStop(0.6, themeData.gradient[1]);
+			grdAmbiant.addColorStop(0.3, themeData.gradient[2]);
+			grdAmbiant.addColorStop(0,   themeData.gradient[3]);
+			
 			return grdAmbiant;
 		}
 		
@@ -912,18 +873,21 @@ define({
 		}
 		function init() {
 			bindEvents();
-			if (tizen.preference.exists('theme')) {
-				theme = tizen.preference.getValue('theme');
-			}
+			//if (tizen.preference.exists('theme')) {
+				//theme = tizen.preference.getValue('theme');
+			//}
 		}
 		function changeTheme(ev){
 			theme = ev.detail;
 			console.log(theme);
 		}
-		
+		function setThemeData(themeData){
+			
+			themeData = themeData;
+		}
 		function bindEvents() {
 			event.on({
-				'views.radial.changeTheme' : changeTheme,
+				//'views.radial.changeTheme' : changeTheme,
 				'models.motion.reset': resetRadialGradientPosition
 			});
 
@@ -1011,7 +975,8 @@ define({
 			maskCanvas:maskCanvas,
 			processWidgetHtml:processWidgetHtml,
 			clearWidgetHtml:clearWidgetHtml,
-			getGravityCenter:getGravityCenter
+			getGravityCenter:getGravityCenter,
+			setThemeData: setThemeData
 		};
 	}
 });

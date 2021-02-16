@@ -1,0 +1,8 @@
+{
+  "name": "metal",
+  "particle_colors": ["#959595", "#bebebe","#f4f4f4"],
+  "effect": "lightspeed",
+  "root_colors": [  "rgb(149,149,149)", "rgb(244,244,244)"],
+  "gradient": [ 	"rgb(101,101,107)", "rgb(149,149,149)",	"rgb(190,190,190)",	"rgb(244,244,244)"]
+
+}

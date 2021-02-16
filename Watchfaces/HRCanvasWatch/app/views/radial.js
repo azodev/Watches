@@ -87,7 +87,7 @@ define({
                                      
                                      {
                                          id: 'colors',
-                                         title: 'Colors...',
+                                         title: 'Themes...',
                                          icon: '#colors',
                                          items: [
                                              
@@ -204,13 +204,13 @@ define({
                     else if (item.id == 'fire' || item.id == 'hisakura' || item.id == 'ice' || item.id == 'metal'){
                     	changeTheme(item.id);
                     	svgMenu.setTheme(item.id);
-                    	tizen.preference.setValue('theme', item.id);
+                    	//tizen.preference.setValue('theme', item.id);
                     	event.fire('changeTheme',item.id);
                     	closeMenuProperly(item);
                     }
                     else if (item.id == 'attraction' || item.id == 'repulsion' || item.id == 'flower' || item.id == 'lightspeed' ){
                     	event.fire('changeEffect',item.id);
-                    	tizen.preference.setValue('effect', item.id);
+                    	//tizen.preference.setValue('effect', item.id);
                     	closeMenuProperly(item);
                     }
                     

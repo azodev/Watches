@@ -1,0 +1,9 @@
+{
+  "name": "fire",
+  "particle_colors": [ "#ff5a02", "#f8b500", "#f9eac2"],
+  "effect": "repulsion",
+  "root_colors": [  "rgb(255,150,53)", "rgb(249,234,194)"],
+  "gradient": [ 	"rgb(255,90,2)", "rgb(255,150,53)",		"rgb(248,181,0)","rgb(249,234,194)"	]
+  					
+  
+}

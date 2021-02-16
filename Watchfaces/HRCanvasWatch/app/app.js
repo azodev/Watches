@@ -53,12 +53,12 @@ define({
                 } else {
                        currentLanguage = defaultLanguage;
                 }
-                
-                $.getJSON("/locales/"+currentLanguage+".json", function(json) {
+                console.log(currentLanguage);
+                /*$.getJSON("/locales/"+currentLanguage+".json", function(json) {
                     localStrings = json;
                     console.log(localStrings);
                     
-                });
+                });*/
 	        	
 	        });
         }

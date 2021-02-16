@@ -44,7 +44,7 @@ define({
 	             'helpers/date', 
 	             'helpers/text',  
 	             'models/motion',
-	             'models/settings', 
+	             //'models/settings', 
 	             'models/canvasDrawer', 
 	             'models/heartRate', 
 	             'models/location', 
@@ -178,6 +178,7 @@ define({
 		var theme = 'ice';
 		var effect = 'attraction';
 		var noEvents = false;
+		var themeData = {};
 		
 		
 		function handleClick(canvas,ev) {
@@ -253,26 +254,10 @@ define({
 				forecastMode = false;
 			}
 		}
-		function changeRootColors(theme){
+		function changeRootColors(themeData){
 			
-			switch (theme) {
-			case 'fire':
-				document.querySelector(widgetId).style.setProperty('--color1', 'rgb(255,150,53)');
-				document.querySelector(widgetId).style.setProperty('--color2', 'rgb(249,234,194)');
-				break;
-			case 'hisakura':
-				document.querySelector(widgetId).style.setProperty('--color1', 'rgb(229,72,72)');
-				document.querySelector(widgetId).style.setProperty('--color2', 'rgb(251,232,232)');
-				break;		
-			case 'ice':
-				document.querySelector(widgetId).style.setProperty('--color1', 'rgb(24,82,129)');
-				document.querySelector(widgetId).style.setProperty('--color2', 'rgb(192,221,243)');
-				break;
-			default:
-				document.querySelector(widgetId).style.setProperty('--color1', 'rgb(149,149,149)');
-				document.querySelector(widgetId).style.setProperty('--color2', 'rgb(244,244,244)');
-				break;
-			}
+				document.querySelector(widgetId).style.setProperty('--color1', themeData.root_colors[0]);
+				document.querySelector(widgetId).style.setProperty('--color2', themeData.root_colors[1]);
 		}
 		function handleSingleClick(canvas,ev) {
 			//console.log('handleSingleClick');
@@ -297,7 +282,7 @@ define({
 					//console.log('transition holder');
 					//holder.setAttribute('class', 'on');
 					widgetId = "#calendar";
-					changeRootColors(theme);
+					changeRootColors(themeData);
 					
 					setClassAndWaitForTransition(calendar,'on','opacity').then(function () {
 						//console.log('transition calendar');
@@ -343,7 +328,7 @@ define({
 					//console.log('transition holder');
 					//holder.setAttribute('class', 'on');
 					widgetId = "#weather";
-					changeRootColors(theme);
+					changeRootColors(themeData);
 					
 					setClassAndWaitForTransition(weather,'on','opacity').then(function () {
 						//console.log('transition weather');
@@ -1355,8 +1340,9 @@ define({
 			  return particles.length;
 			}
 		
-		function changeParticlesColor(theme){
-			switch ( theme){
+		function changeParticlesColor(themeData){
+			particleColors = themeData.particle_colors;
+			/*switch ( theme){
 				case 'fire':
 					particleColors = ["#ff5a02","#f8b500","#f9eac2"];
 				    break;
@@ -1369,23 +1355,31 @@ define({
 				  default:
 						particleColors = ["rgb(149,149,149)","rgb(190,190,190)","rgb(244,244,244)"];
 					  	break;
-				}
+				}*/
 			
 		}
 		function changeTheme(ev){
-			changeParticlesColor(ev.detail);
+			
 			
 			//time_to_recreate = true;
-			theme = ev.detail;
-			grdAmbiant = canvasDrawer.getAmbiantGradient(canvasContent.context);
 			
-			particles = [];
-			time_to_recreate = false;
-			popolate(100,effect);
 			
-			setTimeout(function () {
-				  time_to_recreate = true;
-				}, max_time);
+			
+			
+			let loader = loadTheme(ev.detail).then((themeData) => {
+				theme = ev.detail;
+				changeParticlesColor(themeData);
+				grdAmbiant = canvasDrawer.getAmbiantGradient(canvasContent.context);
+				effect = themeData.effect;
+				particles = [];
+				time_to_recreate = false;
+				popolate(100,effect);
+				
+				setTimeout(function () {
+					  time_to_recreate = true;
+					}, max_time);
+			});
+			
 			
 		} 
 		function changeEffect(ev){
@@ -1436,20 +1430,17 @@ define({
 				tizen.preference.setValue('effect',effect);
 			}
 			setDefaultVariables();
-			changeParticlesColor(theme);
 			
 			
-			canvasDrawer.startShow(); 
-
-			popolate(100,effect);
 			
-			setTimeout(function () {
-				  time_to_recreate = true;
-				}, max_time);
 			
+			
+			
+			
+			//changeParticlesColor(theme);
 			heartRate.start();//mkHR();
 			locationModel.start();
-			
+			setIntervalOnModels();
 			if (motionSensor.isAvailable()) {
 				motionSensor.setOptions({
 					sampleInterval : 100,
@@ -1461,14 +1452,55 @@ define({
 
 			pressureSensor.start();
 			sysInfo.checkBattery();
+			
+			
+			let loader = loadTheme(theme).then((themeData) => {
+				changeParticlesColor(themeData);
+				popolate(100,themeData.effect);
+				setTimeout(function () {
+					  time_to_recreate = true;
+					}, max_time);
+				
+				canvasDrawer.startShow(); 
+				animRequest = window.requestAnimationFrame(drawWatchContent);
+			});
+			
+			
+			
+			
+			
 			//calendarModel.accessCalendars(); 
 			
 				
 
-			setIntervalOnModels();
 			
-			animRequest = window.requestAnimationFrame(drawWatchContent);
+			
+			
 
+		}
+		async function loadTheme(theme){
+			return new Promise(function(resolve, reject) {
+				let worker = new Worker('lib/workers/jSonReaderWK.js');
+				worker.onmessage = function(e) {
+					if (e){
+						themeData  = e.data.json;
+						
+						
+						
+						resolve(themeData);
+					}
+					
+				}
+				worker.onerror = function (err){
+					 reject(new TypeError('Theme loading failed'));
+				};
+				
+				let uri = "../../data/themes/"+theme+".json";
+				//console.log(uri);
+				worker.postMessage({
+		            'url': uri
+		        });
+			  });
 		}
 		
 		return {

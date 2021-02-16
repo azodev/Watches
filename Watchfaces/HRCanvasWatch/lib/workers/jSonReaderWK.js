@@ -4,12 +4,12 @@ onmessage = function(e) {
 
     fetchJson(url).then((json) => {
 		
-		output = json;
+		output = JSON.parse(json);
 
 		
 		
 		postMessage({
-	        'output': output
+	        'json': output
 	    });
 		
 
@@ -22,7 +22,7 @@ onmessage = function(e) {
 
 
 
-
+/*
 
 async function fetchJson(url) {
 	
@@ -33,4 +33,17 @@ async function fetchJson(url) {
 	  } else {
 		  return await response.json();
 	  }
+}*/
+async function  fetchJson(url) {
+	  return new Promise(function(resolve, reject) {
+	    var xhr = new XMLHttpRequest();
+	    xhr.onload = function() {
+	      resolve(xhr.responseText, {status: xhr.status});
+	    }
+	    xhr.onerror = function() { 
+	      reject(new TypeError('Local request failed'));
+	    }
+	    xhr.open('GET', url);
+	    xhr.send(null);
+	  });
 }
