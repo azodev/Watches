@@ -19,8 +19,8 @@ RNcfCoyBfg==</DigestValue>
 </Reference>
 <Reference URI="app%2Fapp.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>jHi2l0h5J2lqsVtgvVqBIVTFcj64fZewDdk2zazYBWZftIlXbKhqXmzABDeO4zXUQ4kC51mh9EQJ
-hIjJeaDR3A==</DigestValue>
+<DigestValue>jBLlbAx/lSK94csfE0IyyMjwN9eZJNKaMnuJ5ZGeOFLysN6j2xci49m57Oc+wfOgnFnf2rBleVM7
+A2qZl/Qr9w==</DigestValue>
 </Reference>
 <Reference URI="app%2Fcore%2F.gitignore">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -354,8 +354,8 @@ wEGRh78jfA==</DigestValue>
 </Reference>
 <Reference URI="lib%2Fworkers%2FcalendarWk.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>F3dmjzXfo8zmIecGnVwcB343YDqEsF1zPWzDr+8Ieqj9RiQ5p5EmeRgFXYVmHdD/Z7ge4k/PbJnN
-ymWg6+SW7g==</DigestValue>
+<DigestValue>l9IyGhzdU3s/mZXg+q8sXEB2mRVagEIH2zFxi+GfY0vnk3SBZGurSZpxJfGixmtPPzDZbIhftm4F
+b2PHQu2RUA==</DigestValue>
 </Reference>
 <Reference URI="lib%2Fworkers%2FforecastWk.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -402,11 +402,11 @@ QY10fG1EWQ==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-PAvQBuoiKKJhv0OJN9571VukWZv6DgwUKniADjbLdXt7RJXjuDPL79p0FeHzpsKJp6uGV91MbTxU
-iSziNBftZHrI4jNXS6HDevpeou4tZ0nI0Qw8NciOH+n816rijdjMRvTg2jHPNNz1mmeccHO82SPS
-ujGxwy+tq7FEz2UhfaphsCsFk7Sv47wPpFDq8Rr6ZDx+62s9RgsmJVbB5tUPj10tdeDjo3sD29LH
-ZXOOBm2KEByJZlspMWdslwF6fVMwmpw62Hbj9vtFlusEg2Ji/7gSxPEH+RDtCmpdcAtuthBWvdfP
-3l654BegYZypvjQlGE+aUdcQjXLo9CSl/Lyl8Q==
+sXXAtn3/PGU16LlvIjXljenoymp+Vp+RIEUJtJBMpsWiReXVXobTOp/J65fqHH00/2lq6EaOp4O4
+MBkn66nKb8AJGQ4kd6m07wi5Dq6SsPjO77Y2ne1k/PcPxDh5TTLd2bP+9YYDkjS/OaRKJjFue9bm
++Og4H3ZcpZCuWPVKT/OvxQqDcgQt0/NgP23NgkfJPWCafUU/vrMWXyV1vK9bfsFeM7Mw2od4CPPI
+wHiK4UY/OPG/W+Y8GSQQ5Ho+lZJmhLbEkvNXErpQSjAK6kneFGdavfoDc/rtDKMOwUjfVzHb+l7H
+ZoSH8xGYTuu+bSRdNrCXyD7MAeRQPHVN7c+LzQ==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

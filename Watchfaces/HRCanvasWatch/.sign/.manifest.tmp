@@ -4,8 +4,8 @@ LICENSE.APLv2__DEL__mPa3m3ePewoVQVvXUMOooJfWUFEctOyBFRiOEVxHBT/nAPV4iVwJcFHJvD37
 IYiE+G6Q6A==
 NOTICE__DEL__PKJ6amrlawESpHPaQtps/BYuGeC3Uhkc84vog9melXb1Vqca76AFokwlnkYACLPbn6lO0MsYKU6D
 RNcfCoyBfg==
-app/app.js__DEL__jHi2l0h5J2lqsVtgvVqBIVTFcj64fZewDdk2zazYBWZftIlXbKhqXmzABDeO4zXUQ4kC51mh9EQJ
-hIjJeaDR3A==
+app/app.js__DEL__jBLlbAx/lSK94csfE0IyyMjwN9eZJNKaMnuJ5ZGeOFLysN6j2xci49m57Oc+wfOgnFnf2rBleVM7
+A2qZl/Qr9w==
 app/core/.gitignore__DEL__qxanDT+4AhE2N7vt3zco4LmdclvnsiZzylX72YHVSg+OTNYTqqAr6BELjG/+Jn0GX6S0duWVv8BT
 3nyWmRfwCA==
 app/core/.jscsrc__DEL__PFsleygtmY8QgXz5oUOUJYWMDQRtaJ9UGuVMsyAPDo5dkPM2HkOBQelxPnRYZfwNJ5xH+cvyBIfv
@@ -138,8 +138,8 @@ lib/weather/ForecastDay.class.js__DEL__WNAf2ru72M0hsCovqWQ+wv4quUAXGIR29uhPBgdMi
 G5I1ihnPEw==
 lib/weather/vForecast.class.js__DEL__HTszinq0FcACF36yXCcNPYMzZaeEufLWnvkDWvZkjGhPArOh5/YI6L/QcOWPmMPL0PW7VWa5DB86
 wEGRh78jfA==
-lib/workers/calendarWk.js__DEL__F3dmjzXfo8zmIecGnVwcB343YDqEsF1zPWzDr+8Ieqj9RiQ5p5EmeRgFXYVmHdD/Z7ge4k/PbJnN
-ymWg6+SW7g==
+lib/workers/calendarWk.js__DEL__l9IyGhzdU3s/mZXg+q8sXEB2mRVagEIH2zFxi+GfY0vnk3SBZGurSZpxJfGixmtPPzDZbIhftm4F
+b2PHQu2RUA==
 lib/workers/forecastWk.js__DEL__zgEnQhmw5cdPkucC/K7lLQ5ThtRIiX4iJ6RuZCxpVJfeG8bl2ND0k/8aMFArRQjAQabXx7QApTjg
 Wz0ocxRCgA==
 lib/workers/popolateWk.js__DEL__z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGl
@@ -154,5 +154,5 @@ output.txt__DEL__z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuw
 ODJ6+SfaPg==
 version.txt__DEL__jJtvGOhH+xRt5nb2nvtEt+HGe/PG0CnhcMjO6XKTjHZEjeAZ5yuYeNEv9jXlGeLwx2zOOKSyvcob
 EviMmoUiyw==
-author-signature.xml__DEL__/OXSRy4tRNUb7Uew5f7n76sk2u1PL8ClzHVQODHYqkszfthISQDXGIVAVongUCC18ta4LWnw2yRK
-CjUIBLSJ/Q==
+author-signature.xml__DEL__3TY2C1XrdEg3t0DquKViQydbAjlU1bldPR84/Md59uj4cIBYXV1jyIgzAvpM6/bgsNk30wxTh/du
+4FI/5HWHvg==

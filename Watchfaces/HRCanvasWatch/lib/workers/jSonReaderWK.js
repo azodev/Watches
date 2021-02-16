@@ -1,11 +1,13 @@
 onmessage = function(e) {
-    var name = e.data.name;
+    var url = e.data.url;
     var output;
 
-    fetchCalendar(name).then((json) => {
+    fetchJson(url).then((json) => {
 		
 		output = json;
 
+		
+		
 		postMessage({
 	        'output': output
 	    });
@@ -22,14 +24,13 @@ onmessage = function(e) {
 
 
 
-async function fetchCalendar(name) {
-	let url = '';
+async function fetchJson(url) {
+	
 	let response = await fetch(url);
 	
 	  if (!response.ok) {
 	    throw new Error('HTTP error! status: '+response.status);
 	  } else {
 		  return await response.json();
-	   
 	  }
 }
