@@ -555,7 +555,7 @@ define({
 			
 			if (!isAmbientMode){
 				let pl = particles.length;
-				let to_add = 100;
+				let to_add = 10;
 				particles = particles.filter(function (p) {
 					
 					p.setPoA(gravCenter); 
@@ -1369,11 +1369,12 @@ define({
 			let loader = loadTheme(ev.detail).then((themeData) => {
 				theme = ev.detail;
 				changeParticlesColor(themeData);
+				canvasDrawer.setThemeData(themeData);
 				grdAmbiant = canvasDrawer.getAmbiantGradient(canvasContent.context);
 				effect = themeData.effect;
 				particles = [];
 				time_to_recreate = false;
-				popolate(100,effect);
+				popolate(10,effect);
 				
 				setTimeout(function () {
 					  time_to_recreate = true;
@@ -1456,7 +1457,9 @@ define({
 			
 			let loader = loadTheme(theme).then((themeData) => {
 				changeParticlesColor(themeData);
-				popolate(100,themeData.effect);
+				canvasDrawer.setThemeData(themeData);
+				grdAmbiant = canvasDrawer.getAmbiantGradient(canvasContent.context);
+				popolate(10,themeData.effect);
 				setTimeout(function () {
 					  time_to_recreate = true;
 					}, max_time);

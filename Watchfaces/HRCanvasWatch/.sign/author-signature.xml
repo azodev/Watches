@@ -109,8 +109,8 @@ ODJ6+SfaPg==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2FcanvasDrawer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>rjWpSwm9MVovFL8BOWQlLUnYFihfO7HxUGTR9Fd3qf4zhIPR6DESSnu1MuN4i1hL0VpQOmt2Pmpx
-oTOiBgd6RA==</DigestValue>
+<DigestValue>IXyQnhs9g2tYVXGP9HiQFq8yNCB5YMz7y9uRh0pm7thxA+bfjPyDQVD/qH2+K/8CjZ9iSJ+Jj5sV
+o11IQouytg==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2FheartRate.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -154,8 +154,8 @@ unZSTOSNIg==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Fcanvas.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>nb5dbSe6C3RnxVJhNzVUy4HCK05oVno82gnLoxvMR0/kqzPBqTr+8w1hB+f0zz2A9V44TP8VzaV8
-CsjePIC0nA==</DigestValue>
+<DigestValue>HDXSNafbdbWohx5SyDGEWoSxbTc4MhyhOVd5sm4GTOwdleD3zhiJaSmy9xQ62wKpKHHs4XpD99c5
+wV7MZeTGrA==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Finit.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -174,8 +174,8 @@ Q0RHISebsQ==</DigestValue>
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>RLzwTZ7/78wJog8RKzbgj7AzLi4/JWe8zzigGT8NNlWqGikzoEI2AwP3912UgJfPBVL+HE3QytLM
-6zkDkmBiAg==</DigestValue>
+<DigestValue>toSayV+uqOUxIyUfp0QgbRZkl+GJt56SegDMT0m4SVaM4JfpOE3w7Rw9CjRd738NrgNGTM7e6x9r
+7Emfdj2gfg==</DigestValue>
 </Reference>
 <Reference URI="css%2Faugmented.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -369,8 +369,8 @@ G5I1ihnPEw==</DigestValue>
 </Reference>
 <Reference URI="lib%2Fweather%2FvForecast.class.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>HTszinq0FcACF36yXCcNPYMzZaeEufLWnvkDWvZkjGhPArOh5/YI6L/QcOWPmMPL0PW7VWa5DB86
-wEGRh78jfA==</DigestValue>
+<DigestValue>BMnzDxo1YH6dxXjkr+ki9CzWPXj9bIJ0L7t3Z1jDvnZPNqY0GkQ9PQflQQG/yNqu+hIArBOgCF9m
+3O9KAPBgwQ==</DigestValue>
 </Reference>
 <Reference URI="lib%2Fworkers%2FcalendarWk.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -427,11 +427,11 @@ QY10fG1EWQ==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-UZ3h8g5mr9DKV03Qfgbxnj1ajB1VClAocJ+kRHjH3KhA/SipWpKmFX2k6QbkIhmJ6dTbz7Hp/De0
-TZs7QGX/Bx4RTTd7kWIp2ryfNpLqe6zChLsBmbeMizc3tmI/ees4KBxMgZlgc08wYEbX5MRWFU7G
-3pz72SIYqYDVzrN6M1XOnKbZB/T2jYvhLHUfSH2lR0GnqB64TpUhS5p6DnW5PMDZlYqKdFICck0h
-0deFx8wIvaT119kZ4DVDIVrGPiyy6Kzg873HfT/19eLDgC5RrQGJDTTF1jAFRAdFDjTYLTPyLt8m
-2lcUlLWLv1kyG5omZDIko2S3vzp79MvjPlCLRg==
+rVbv/XLZafBILJf6AHhEQV0sjwIiWQLCkc9OgGurHtaSDpjHdxvmMNCVqRmidEK/0m7oTpzCuXmx
+WRTkuEXx99UxA32aVa/Zoct1aoZ8QYpMACXxadxmoisj/T//pPYYEtxKKtD5WiMR1slu2efaSvnk
+uNStDQw4DXIilHfnC0Vmvtv2TrLuR3zuwJA7n11EsaLB9TSsPJ2DRpwGLy43K4bfkJ+oxlZz+VUd
+BGWYL3ArArnyNFbBtUUpb++Jkrm9QBogA9ZZ7IAhue3qBo1nCeRWSaPDhwmSMmPwlFRpS1Fa2wZs
+xbG0R1WKLAyba2JBr4RcwUmZX/g4Gx8cYuu9uQ==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

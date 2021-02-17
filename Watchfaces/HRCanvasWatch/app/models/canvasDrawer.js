@@ -28,11 +28,11 @@
 
 define({
 	name : 'models/canvasDrawer',
-	requires : [ 'core/event', 'core/storage/idb' ],
+	requires : [ 'core/event' ],
 	def : function modelsCanvasDrawer(req) {
 		'use strict';
 
-		var center, event = req.core.event;
+		var center, event = req;
 		var radius, centerX, centerY, dxi, dyi, dxf, dyf, textdate, font, align, angle = 0, radiusArc, 
 		indexX = 0, rotate = false, gradient = null, gradientLinear = null, doGradient = false, gridGradient = null , watchOpacity = 1, animating = false, fading = false,showing = false,stroke = false;
 		var radialGradient = null;
@@ -881,9 +881,9 @@ define({
 			theme = ev.detail;
 			console.log(theme);
 		}
-		function setThemeData(themeData){
+		function setThemeData(td){
 			
-			themeData = themeData;
+			themeData = td;
 		}
 		function bindEvents() {
 			event.on({

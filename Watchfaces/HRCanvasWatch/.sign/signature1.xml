@@ -109,8 +109,8 @@ ODJ6+SfaPg==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2FcanvasDrawer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>rjWpSwm9MVovFL8BOWQlLUnYFihfO7HxUGTR9Fd3qf4zhIPR6DESSnu1MuN4i1hL0VpQOmt2Pmpx
-oTOiBgd6RA==</DigestValue>
+<DigestValue>IXyQnhs9g2tYVXGP9HiQFq8yNCB5YMz7y9uRh0pm7thxA+bfjPyDQVD/qH2+K/8CjZ9iSJ+Jj5sV
+o11IQouytg==</DigestValue>
 </Reference>
 <Reference URI="app%2Fmodels%2FheartRate.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -154,8 +154,8 @@ unZSTOSNIg==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Fcanvas.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>nb5dbSe6C3RnxVJhNzVUy4HCK05oVno82gnLoxvMR0/kqzPBqTr+8w1hB+f0zz2A9V44TP8VzaV8
-CsjePIC0nA==</DigestValue>
+<DigestValue>HDXSNafbdbWohx5SyDGEWoSxbTc4MhyhOVd5sm4GTOwdleD3zhiJaSmy9xQ62wKpKHHs4XpD99c5
+wV7MZeTGrA==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Finit.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -174,13 +174,13 @@ Q0RHISebsQ==</DigestValue>
 </Reference>
 <Reference URI="author-signature.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>a68Ybqhn/yQKLq98A2GYX17wEo9FOPlCGKPw5g4OoA+ZU0Vstetgm1VzPAurEaNvjotwJjzOvBJT
-aF2dV0Qzog==</DigestValue>
+<DigestValue>qyzJqRHlFNbTjNdevf3TbMd+adJDm0z+ewTqQifYVpQIZwdwBLDSUXAImlv7wN89U1GVGzru1loR
+m0giAJGCWA==</DigestValue>
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>RLzwTZ7/78wJog8RKzbgj7AzLi4/JWe8zzigGT8NNlWqGikzoEI2AwP3912UgJfPBVL+HE3QytLM
-6zkDkmBiAg==</DigestValue>
+<DigestValue>toSayV+uqOUxIyUfp0QgbRZkl+GJt56SegDMT0m4SVaM4JfpOE3w7Rw9CjRd738NrgNGTM7e6x9r
+7Emfdj2gfg==</DigestValue>
 </Reference>
 <Reference URI="css%2Faugmented.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -374,8 +374,8 @@ G5I1ihnPEw==</DigestValue>
 </Reference>
 <Reference URI="lib%2Fweather%2FvForecast.class.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>HTszinq0FcACF36yXCcNPYMzZaeEufLWnvkDWvZkjGhPArOh5/YI6L/QcOWPmMPL0PW7VWa5DB86
-wEGRh78jfA==</DigestValue>
+<DigestValue>BMnzDxo1YH6dxXjkr+ki9CzWPXj9bIJ0L7t3Z1jDvnZPNqY0GkQ9PQflQQG/yNqu+hIArBOgCF9m
+3O9KAPBgwQ==</DigestValue>
 </Reference>
 <Reference URI="lib%2Fworkers%2FcalendarWk.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -432,11 +432,11 @@ GyvKX9Snig==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-cZD7c09ftxZxc7kD5/NblvwfTF9WFhQKRtkgPFkWDIs1H47lFGYCzAVU+hmecmWbEsXDyD+5NPLe
-mZoMuawrlu9Iu3HY9Z1gQ5+CkG3jj/13YZ/8X5cUoi4eJKPpvtRl0aOJLaVRfw1E1gP+7aSBHB1D
-8ghqqklBp9ZyfpQ1q4RsQSAY8TMrRIq91n+5ETdqSZxb6bleSzEVmG04ZLJbNUfshPVbea6eQy9O
-eQ8vXqgx8oEmbDRJ55LoMAqCAq666CCIDQLyiS+eWrCnBtqwLZn6OfjSVbYpwY6gjdTPObhGPvRT
-h7WzKShVopJjUD3NUpbZrAmqdBcYnDAf5oKOjg==
+d0Ev6oFZz2+F4a9sylOHIq4Dd4h0U3Ga3MlGVq/HEQ5CoMTCJBPOcGlWgKVnBb0VQ6ssnVu3xrtj
+WLcujPA6+vssqLbPiVI2O1AP4GqC7F1RfCTEpwXHHMGabDcJFetIaJlxVaAhV/rEs68pv/gpX4zS
+hr+RZKd/l1Sys3GNGNkYkJvPaQbekH6GW4lcGMIBY/Mssq1INEPuW3VrAKA4tdma3RHjXFmkD4QJ
+B578TyUedTQIWgO8m5oqypaxyb9xh5weNSrZVHR7VFaHjX39ymjUBeHvDmMeOjEhamFGfufaQJbG
+1aCS3kcYsEREtVCyI5FA2uGt+AW5Sdt+QR8SXg==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

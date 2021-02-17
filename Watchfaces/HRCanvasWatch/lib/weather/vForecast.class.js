@@ -31,7 +31,7 @@ class vForecast  {
 
 		} else {
 			return DEFAULT_ICON;
-		}
+		} 
 	}
 	processHtml(){
 		let block =document.createElement('div');

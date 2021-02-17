@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="https://watches.azo-dev.com/watches/Particles" version="1.0.0" height="360" width="360" viewmodes="fullscreen">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="https://watches.azo-dev.com/watches/Particles" version="1.0.0" height="360" width="360" viewmodes="fullscreen">
     <access origin="https://api.openweathermap.org" subdomains="false"></access>
-    <tizen:application id="EjC5Z9GjZ7.ParticlesWatch" package="EjC5Z9GjZ7" required_version="3.0" ambient_support="enable"/>
+    <tizen:application id="sdF4mq27wB.Particles" package="sdF4mq27wB" required_version="3.0" ambient_support="enable"/>
     <author href="https://watches.azo-dev.com" email="anthony@azo-dev.com">AZO_DEV</author>
     <tizen:category name="http://tizen.org/category/wearable_clock"/>
     <content src="index.html"/>
