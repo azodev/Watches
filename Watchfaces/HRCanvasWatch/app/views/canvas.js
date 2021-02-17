@@ -179,6 +179,7 @@ define({
 		var effect = 'attraction';
 		var noEvents = false;
 		var themeData = {};
+		var themeLoaderWk = null;
 		
 		
 		function handleClick(canvas,ev) {
@@ -555,10 +556,10 @@ define({
 			
 			if (!isAmbientMode){
 				let pl = particles.length;
-				let to_add = 10;
+				let to_add = textHelper.getRandomInt(10,100);
 				particles = particles.filter(function (p) {
 					
-					p.setPoA(gravCenter); 
+					p.setPoA(gravCenter);  
 					return p.move();
 				});
 				if (time_to_recreate) {
@@ -1360,21 +1361,16 @@ define({
 		}
 		function changeTheme(ev){
 			
-			
-			//time_to_recreate = true;
-			
-			
-			
-			
 			let loader = loadTheme(ev.detail).then((themeData) => {
 				theme = ev.detail;
 				changeParticlesColor(themeData);
 				canvasDrawer.setThemeData(themeData);
 				grdAmbiant = canvasDrawer.getAmbiantGradient(canvasContent.context);
+				themeLoaderWk.terminate();
 				effect = themeData.effect;
 				particles = [];
 				time_to_recreate = false;
-				popolate(10,effect);
+				popolate(textHelper.getRandomInt(50,100),effect);
 				
 				setTimeout(function () {
 					  time_to_recreate = true;
@@ -1459,11 +1455,11 @@ define({
 				changeParticlesColor(themeData);
 				canvasDrawer.setThemeData(themeData);
 				grdAmbiant = canvasDrawer.getAmbiantGradient(canvasContent.context);
-				popolate(10,themeData.effect);
+				popolate(100,themeData.effect);
 				setTimeout(function () {
 					  time_to_recreate = true;
 					}, max_time);
-				
+				themeLoaderWk.terminate();
 				canvasDrawer.startShow(); 
 				animRequest = window.requestAnimationFrame(drawWatchContent);
 			});
@@ -1483,8 +1479,8 @@ define({
 		}
 		async function loadTheme(theme){
 			return new Promise(function(resolve, reject) {
-				let worker = new Worker('lib/workers/jSonReaderWK.js');
-				worker.onmessage = function(e) {
+				themeLoaderWk = new Worker('lib/workers/jSonReaderWK.js');
+				themeLoaderWk.onmessage = function(e) {
 					if (e){
 						themeData  = e.data.json;
 						
@@ -1494,13 +1490,13 @@ define({
 					}
 					
 				}
-				worker.onerror = function (err){
+				themeLoaderWk.onerror = function (err){
 					 reject(new TypeError('Theme loading failed'));
 				};
 				
 				let uri = "../../data/themes/"+theme+".json";
 				//console.log(uri);
-				worker.postMessage({
+				themeLoaderWk.postMessage({
 		            'url': uri
 		        });
 			  });
