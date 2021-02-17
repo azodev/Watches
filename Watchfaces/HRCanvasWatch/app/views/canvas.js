@@ -180,6 +180,7 @@ define({
 		var noEvents = false;
 		var themeData = {};
 		var themeLoaderWk = null;
+		var map = new Map([['LightSpeed', LightSpeed],['Particle', Particle],['Flower', Flower],['ParticleAlien', ParticleAlien]]);;
 		
 		
 		function handleClick(canvas,ev) {
@@ -1321,7 +1322,17 @@ define({
 			    //function (x) {
 			      //return function () {
 			        // Add particle
+				     
 			    	 if (!isAmbientMode){
+			    		 
+			    		 
+			    		 //particles.push();
+			    		 //let foo = themeData.effectClass;
+			    		 particles.push(new (map.get(themeData.effectClass))(canvasContent.context,themeData.particle_colors));
+			    		 //let classe = (Function('return new ' + themeData.effectClass))(canvasContent.context, particleColors);
+			    		 //particles.push(classe);
+			    		 //new this[classNameString]();
+			    		 /*
 				    	if (effect == 'attraction'){
 				    		particles.push(new Particle(canvasContent.context,particleColors));
 				    	}  
@@ -1334,6 +1345,7 @@ define({
 				    	else {
 				    		particles.push(new ParticleAlien(canvasContent.context,particleColors));
 				    	}
+				    	*/
 			    	 }
 			    //  };
 			    //}(i), frequency * i);
@@ -1428,13 +1440,6 @@ define({
 			}
 			setDefaultVariables();
 			
-			
-			
-			
-			
-			
-			
-			//changeParticlesColor(theme);
 			heartRate.start();//mkHR();
 			locationModel.start();
 			setIntervalOnModels();
@@ -1464,17 +1469,6 @@ define({
 				animRequest = window.requestAnimationFrame(drawWatchContent);
 			});
 			
-			
-			
-			
-			
-			//calendarModel.accessCalendars(); 
-			
-				
-
-			
-			
-			
 
 		}
 		async function loadTheme(theme){
@@ -1483,19 +1477,14 @@ define({
 				themeLoaderWk.onmessage = function(e) {
 					if (e){
 						themeData  = e.data.json;
-						
-						
-						
+						//map = new Map([[themeData.effectClass, themeData.effectClass]]);
 						resolve(themeData);
 					}
-					
 				}
 				themeLoaderWk.onerror = function (err){
 					 reject(new TypeError('Theme loading failed'));
 				};
-				
 				let uri = "../../data/themes/"+theme+".json";
-				//console.log(uri);
 				themeLoaderWk.postMessage({
 		            'url': uri
 		        });
