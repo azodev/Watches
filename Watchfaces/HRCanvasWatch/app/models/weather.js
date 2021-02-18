@@ -71,7 +71,7 @@ define({
 		 * @public
 		 */
 		function start() {
-			console.log('start weather module');
+			//console.log('start weather module');
 		}
 		function stop() {
 
@@ -168,7 +168,7 @@ define({
 		function onDistanceChange(){
 			coords = locationModel.getData();
 			if (coords !== 'undefined') {
-				console.log('onDistanceChange update');
+				//console.log('onDistanceChange update');
 				doUpdate();
 			} else {
 				//console.error('error : W Cannot decode position');

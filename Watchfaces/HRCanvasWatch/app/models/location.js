@@ -161,7 +161,7 @@ define({
 				event.fire('found', positionAquiered);
 				//event.fire('log', 'positionAquiered');
 			}
-			console.log('Location succcess');
+			//console.log('Location succcess');
 			event.fire('change', getData());
 			stop();
 		}
@@ -185,7 +185,7 @@ define({
 					//event.fire('log', 'positionAquiered fallback');
 				}
 				
-				console.log('Location succcess in fallback');
+				//console.log('Location succcess in fallback');
 				event.fire('change', getData());
 				stop();
 			}

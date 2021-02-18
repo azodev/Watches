@@ -32,7 +32,7 @@ define({
     def: function appInit() {
         'use strict'; 
 
-        console.log('app::def');
+        //console.log('app::def');
 
         /**
          * Initializes App module.
@@ -41,7 +41,7 @@ define({
          * @public 
          */
         function init() {
-            console.log('app::init'); 
+            //console.log('app::init'); 
             var currentLanguage = null;
             var defaultLenguage = "en";
             var supportedLanguages = ["en", "fr", "ru", "de", "it", "ja"];
@@ -53,7 +53,7 @@ define({
                 } else {
                        currentLanguage = defaultLanguage;
                 }
-                console.log(currentLanguage);
+                //console.log(currentLanguage);
                 /*$.getJSON("/locales/"+currentLanguage+".json", function(json) {
                     localStrings = json;
                     console.log(localStrings);

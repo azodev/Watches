@@ -254,7 +254,7 @@ define({
         }
         function onsuccess() {
         	
-   	     	console.log("The application has launched successfully");
+   	     	//console.log("The application has launched successfully");
    	 	}
         function setOpen(){
         	isOpen = true;
@@ -275,7 +275,7 @@ define({
         	//console.log('Application ID: ' + appInfo.id);
         	//console.log('Icon Path: ' + appInfo.iconPath);
         	if (appInfo.show && appInfo.name != '')
-        	console.log('Name: ' + appInfo.name);
+        		//console.log('Name: ' + appInfo.name);
         	//console.log('Version: ' + appInfo.version);
         	//console.log('Show: ' + appInfo.show);
             }

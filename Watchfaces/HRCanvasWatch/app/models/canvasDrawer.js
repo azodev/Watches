@@ -879,7 +879,7 @@ define({
 		}
 		function changeTheme(ev){
 			theme = ev.detail;
-			console.log(theme);
+			//console.log(theme);
 		}
 		function setThemeData(td){
 			
@@ -902,8 +902,8 @@ define({
 		    // cancel if already on tope
 			const init_scroll = elem.scrollTop;
 		    //if (init_scroll > size) return;
-		    console.log(elem.scrollTop);
-		    console.log(size);
+		    //console.log(elem.scrollTop);
+		    //console.log(size);
 		    
 		    const cosParameter =  size /2;
 		    let scrollCount = 0, oldTimestamp = null;

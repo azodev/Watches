@@ -191,14 +191,14 @@ define({
 					canvas.setAttribute("data-dblclick", 1);
 	                setTimeout(function () {
 	                    if (canvas.getAttribute("data-dblclick") == 1) {
-	                        console.log('-----------> single <-----------');
+	                        //console.log('-----------> single <-----------');
 	                        handleSingleClick(canvas,ev);
 	                    }
 	                    canvas.removeAttribute("data-dblclick");
 	                }, 300);
 	            } else {
 	            	canvas.removeAttribute("data-dblclick");
-	            	console.log('-----------> double <-----------');
+	            	//console.log('-----------> double <-----------');
 	            	handleDoubleClick(canvas,ev);
 	            }
 				lastClickTimeStamp = currentClickTimeStamp;
