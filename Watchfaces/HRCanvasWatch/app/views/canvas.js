@@ -257,9 +257,9 @@ define({
 			}
 		}
 		function changeRootColors(themeData){
-			
-				document.querySelector(widgetId).style.setProperty('--color1', themeData.root_colors[0]);
-				document.querySelector(widgetId).style.setProperty('--color2', themeData.root_colors[1]);
+			    let widgetStyle = document.querySelector(widgetId).style;
+			    widgetStyle.setProperty('--color1', themeData.root_colors[0]);
+			    widgetStyle.setProperty('--color2', themeData.root_colors[1]);
 		}
 		function handleSingleClick(canvas,ev) {
 			//console.log('handleSingleClick');
@@ -777,7 +777,7 @@ define({
 					motion: motion
 			});
 
-			if (weatherModel.isForecastFound() && forecastDisplayed) {
+			if (weatherModel.isWeatherFound() && weatherModel.isForecastFound() && forecastDisplayed) {
 				forecastValue = weatherModel.getForecast();
 				forecastIndexX = center.x-18;
 				for (var i = 0; i < 5; i++) {
@@ -1017,22 +1017,22 @@ define({
 				if (radialmenu.getOpen()){ 
 					deg.x = (gravCenter.y - 180)*2;
 					deg.y = (gravCenter.x - 180)*2;
-					if (deg.x <= -20 ) deg.x = -20;
-					if (deg.x >= 20 ) deg.x = 20;
-					if (deg.y <= -20 ) deg.y = -20;
-					if (deg.y >= 20 ) deg.y = 20;
-					
-					document.querySelector("div.menuHolder").style.setProperty('--degx',  -deg.x + "deg");
-					document.querySelector("div.menuHolder").style.setProperty('--degy',   deg.y + "deg");
+					if (deg.x <= -40 ) deg.x = -40;
+					if (deg.x >= 40 ) deg.x = 40;
+					if (deg.y <= -40 ) deg.y = -40;
+					if (deg.y >= 40 ) deg.y = 40;
+					let menuHolderStyle = document.querySelector("div.menuHolder").style;
+					menuHolderStyle.setProperty('--degx',  -deg.x + "deg");
+					menuHolderStyle.setProperty('--degy',   deg.y + "deg");
 					  
 				}
 				if (widgetFullScreenDiplayed ==true){
 					deg.x = (gravCenter.y - 180)*2;
 					deg.y = (gravCenter.x - 180)*2;
-					if (deg.x <= -20 ) deg.x = -20;
-					if (deg.x >= 20 ) deg.x = 20;
-					if (deg.y <= -20 ) deg.y = -20; 
-					if (deg.y >= 20 ) deg.y = 20; 
+					if (deg.x <= -40 ) deg.x = -40;
+					if (deg.x >= 40 ) deg.x = 40;
+					if (deg.y <= -40 ) deg.y = -40; 
+					if (deg.y >= 40 ) deg.y = 40; 
 					//document.querySelector("#calendar.on").style.opacity=1;
 					//calendar = document.querySelector("#calendar.on");
 					//if (calendarOn.style.opacity < 1) calendarOn.style.opacity = 1;
