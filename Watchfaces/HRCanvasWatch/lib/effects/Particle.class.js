@@ -15,10 +15,10 @@ class Particle {
 	    }
 	    else {
 	    	this.colors = colors;
-	    }
+	    } 
 	    	
 	    */
-	    this.colors = colors;
+	    this.colors = colors; 
 	    /*
 	    if (Math.random() > 0.5) {
 	      this.x = 360 * Math.random();

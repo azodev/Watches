@@ -765,8 +765,8 @@ define({
 			return radialGradientCoords;
 		}
 		function getGravityCenter(motionAcceleration){
-			gravityCenter.x = Math.round(radialGradientCoordsD.x + (motionAcceleration.accelerationIncludingGravity.x * 4));
-			gravityCenter.y = Math.round(radialGradientCoordsD.y - (motionAcceleration.accelerationIncludingGravity.y * 4));
+			gravityCenter.x = Math.round(radialGradientCoordsD.x + (motionAcceleration.accelerationIncludingGravity.x * 12));
+			gravityCenter.y = Math.round(radialGradientCoordsD.y - (motionAcceleration.accelerationIncludingGravity.y * 12));
 			return gravityCenter;
 		}
 		function resetRadialGradientPosition(){

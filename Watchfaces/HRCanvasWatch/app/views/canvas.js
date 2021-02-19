@@ -137,7 +137,7 @@ define({
 		var motionFound = false;
 		var motionFromGyro = {accelerationIncludingGravity : {x:null,y:null}}; 
 		
-		var max_particles = 500;
+		var max_particles = 400;
 		var particles = [];
 		var frequency = 5;
 		var init_num = max_particles;
@@ -180,7 +180,7 @@ define({
 		var noEvents = false;
 		var themeData = {};
 		var themeLoaderWk = null;
-		var map = new Map([['LightSpeed', LightSpeed],['Particle', Particle],['Flower', Flower],['ParticleAlien', ParticleAlien]]);;
+		var map = new Map([['lightspeed', LightSpeed],['attraction', Particle],['flower', Flower],['repulsion', ParticleAlien]]);;
 		
 		
 		function handleClick(canvas,ev) {
@@ -559,16 +559,15 @@ define({
 				let pl = particles.length;
 				let to_add = textHelper.getRandomInt(10,100);
 				particles = particles.filter(function (p) {
-					
-					p.setPoA(gravCenter);  
+					p.setPoA(gravCenter);   
 					return p.move();
-				});
+				}); 
 				if (time_to_recreate) {
 				    if (pl < max_particles) {
 				    	if (max_particles-pl < to_add){
 				    		to_add = max_particles-pl;
 				    	}
-				    	popolate(to_add,effect);
+				    	popolate(to_add,effect); 
 				    }
 				}
 				  
@@ -1316,7 +1315,7 @@ define({
 			  
 			
 			}
-		function popolate(num,effect) {
+		function popolate(num,eff) {
 			  for (var i = 0; i < num; i++) {
 			    //setTimeout(
 			    //function (x) {
@@ -1328,7 +1327,7 @@ define({
 			    		 
 			    		 //particles.push();
 			    		 //let foo = themeData.effectClass;
-			    		 particles.push(new (map.get(themeData.effectClass))(canvasContent.context,themeData.particle_colors));
+			    		 particles.push(new (map.get(eff))(canvasContent.context,themeData.particle_colors));
 			    		 //let classe = (Function('return new ' + themeData.effectClass))(canvasContent.context, particleColors);
 			    		 //particles.push(classe);
 			    		 //new this[classNameString]();
@@ -1383,7 +1382,7 @@ define({
 				particles = [];
 				time_to_recreate = false;
 				popolate(textHelper.getRandomInt(50,100),effect);
-				
+				 
 				setTimeout(function () {
 					  time_to_recreate = true;
 					}, max_time);
@@ -1477,6 +1476,7 @@ define({
 				themeLoaderWk.onmessage = function(e) {
 					if (e){
 						themeData  = e.data.json;
+						tizen.preference.setValue('theme',themeData.name);
 						//map = new Map([[themeData.effectClass, themeData.effectClass]]);
 						resolve(themeData);
 					}
