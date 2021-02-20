@@ -49,8 +49,8 @@ class Particle {
 	    this.radius = this.radius*1.2;
 	  }
 	  setPoA(coords){
-		  this.point_of_attraction.x = coords.x;
-		  this.point_of_attraction.y = coords.y;
+		  this.point_of_attraction.x = coords.x*20;
+		  this.point_of_attraction.y = coords.y*20;
 	  }
 	  calculateDistance(v1, v2) {
 	    let x = Math.abs(v1.x - v2.x);

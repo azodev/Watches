@@ -42,8 +42,8 @@ app/models/calendar.js__DEL__lBZates39f2W6QuGdg6iVnT+VQ3sCjHpQwEJB9wwUv2ydANhFwv
 2cRzMlRZ7g==
 app/models/calories.js__DEL__z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGl
 ODJ6+SfaPg==
-app/models/canvasDrawer.js__DEL__OLFDf8QESgbPFA6YX42sIcPy0n5PllRAVUTaGdkMKdJID1Gnwu6bnqvOQzlzCodzX68TKzpBTieo
-wZoeHoahXw==
+app/models/canvasDrawer.js__DEL__C6vduGzoCxe+tBwAPRdwU8LFlWEhuV2XAedSHTFNcmmjwW9BIxU5oVlMlFVJdBtffxBO4SHrwWSq
+dUz9SbOd5w==
 app/models/heartRate.js__DEL__9/yQAodfUrAJ3FryRlsRWEoTSMHa00hvH707wNx02XHEW5VANYD7sWphj3daXf2j+Qk0QXnKvpFe
 xW5lCxp9Mg==
 app/models/location.js__DEL__zn4q4a4EFEaLxdZ/RlXGdzAql03MO/Q153O7cB7GTszJumKBVmuqPrwMj5i1WNamDvYPYOpeDU9p
@@ -122,8 +122,8 @@ lib/effects/Flower.class.js__DEL__RV4qC9Of3DLrGG91JdSKvPIEAdY8jIn8VaNWq8O0/a9OFM
 muQ/ic9Y9w==
 lib/effects/LightSpeed.class.js__DEL__++yOiQ8O6aQqlOHs2stP83/Gzz1VMaQi8ZiQDm5qoC2ho/4BUvvpBN26wE+mnItkS81KVIOiuEKg
 wat/p3lalA==
-lib/effects/Particle.class.js__DEL__GknkffpqV9ZsAxWMfQIn3swWrYmQU+8GFFpemeUFF+i7oXR7oJrq/Zp8MlvmPmBvzQdOlnOiirZz
-Hsp3wZ+93Q==
+lib/effects/Particle.class.js__DEL__ss6VUgMW31JZO+YxUwRhny8yG9gr2YRqt4X9EF7UE5Y30gZtW4Plj3BFkW3EMy0E6jNGG4OPk7/t
+r9Ne7bUT5A==
 lib/effects/ParticleAlien.class.js__DEL__Mu2TVGpo+Tb6fhWAmr2Jt5bFPYmR95qhNl3ofJZ+0RGt3pei4m8dWtzQctiy6AkKDWf685L9KFKT
 bPJlynw3Lg==
 lib/effects/ParticleEngine.class.js__DEL__A+0qsSIurdcJnJqDsNzijrR2lJTZz/cSXHHWAIifuQkhLWNq4t4rJzs+Wmo9dXzbTkg146HXtWIr
@@ -944,5 +944,5 @@ output.txt__DEL__z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuw
 ODJ6+SfaPg==
 version.txt__DEL__jJtvGOhH+xRt5nb2nvtEt+HGe/PG0CnhcMjO6XKTjHZEjeAZ5yuYeNEv9jXlGeLwx2zOOKSyvcob
 EviMmoUiyw==
-author-signature.xml__DEL__x814P20pmMa/NBDc1GDQrUDqQ9Xs3qfj8tZR+p98vo/7UMeortp+EQp5ka450bY57DWYh9PUrAqa
-Lb+eo+AuDw==
+author-signature.xml__DEL__5F9Q3c/rQb1kCoR+tCj5Hw49z+ipBGhzRQ7veTdiGDhrR6Qmt0CW5OkEPa/Cg1OsQ/YwqMmc5iMt
+LuDmc4XNQQ==
