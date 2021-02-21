@@ -18,8 +18,10 @@
     <feature name="http://tizen.org/feature/sensor.heart_rate_monitor"/>
     <feature name="http://tizen.org/feature/network.internet"/>
     <feature name="http://tizen.org/feature/network.net_proxy"/>
+    <feature name="http://tizen.org/feature/input.rotating_bezel"/>
     <icon src="icon.png"/>
     <name>Particles</name>
+    <tizen:privilege name="http://tizen.org/privilege/ime"/>
     <tizen:privilege name="http://tizen.org/privilege/power"/>
     <tizen:privilege name="http://tizen.org/privilege/push"/>
     <tizen:privilege name="http://tizen.org/privilege/unlimitedstorage"/>

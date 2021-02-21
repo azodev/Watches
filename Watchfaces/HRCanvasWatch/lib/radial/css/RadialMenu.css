@@ -37,7 +37,7 @@ svg.menu {
 }
 
 svg.menu.inner {
-    transform: translateY(-140px) scale(0.16) rotate(0deg);
+    transform: translateY(-140px) translateX(40px) scale(0.16) rotate(0deg);
     opacity: 0;
     visibility: hidden; 
 }

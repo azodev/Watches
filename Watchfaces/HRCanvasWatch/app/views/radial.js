@@ -54,7 +54,23 @@ define({
             	   svgMenu.close();
                }
            });*/
-            
+           
+           window.addEventListener('tizenhwkey', function (ev) {
+        	   console.log(ev.keyName);
+               if (ev.keyName === 'back') {
+                   var page = document.getElementsByClassName('ui-page-active')[0],
+                       pageid = page ? page.id : '';
+                   if (pageid === 'settings-page') {
+                       //tizen.application.getCurrentApplication().exit();
+                	   console.log('back key press settings');
+                	   page.classList.toggle('ui-page-active');
+                   } else {
+                       //window.history.back();
+                   }
+                   return false;
+               }
+           });
+             
         }
 
         /**
@@ -171,6 +187,53 @@ define({
                                  title: 'Timer',
                                  icon: '#timer'
                              },
+                             {
+                                 id   : 'apps',
+                                 title: 'Apps...',
+                                 icon: '#app',
+                                 items: [
+                                         
+                                         {
+                                             id: 'set_apps',
+                                             icon: '#set_apps',
+                                             title: 'Set Apps'
+                                         },
+                                         {
+                                             id: 'App1',
+                                             icon: '#App1',
+                                             title: 'App1'
+                                         }
+                                         ,
+                                         {
+                                             id: 'App2',
+                                             icon: '#App2',
+                                             title: 'App2'
+                                         },
+                                         {
+                                             id: 'App3',
+                                             icon: '#App3',
+                                             title: 'App3'
+                                         }
+                                         ,
+                                         {
+                                             id: 'App4',
+                                             icon: '#App4',
+                                             title: 'App4'
+                                         }
+                                         ,
+                                         {
+                                             id: 'App5',
+                                             icon: '#App5',
+                                             title: 'App5'
+                                         }
+                                         ,
+                                         {
+                                             id: 'App6',
+                                             icon: '#App6',
+                                             title: 'App6'
+                                         }
+                                     ]
+                             },
                              /*{
                                  id   : 'altitude',
                                  title: 'Altitude',
@@ -212,7 +275,7 @@ define({
                     	event.fire('changeEffect',item.id);
                     	//tizen.preference.setValue('effect', item.id);
                     	closeMenuProperly(item);
-                    }
+                    } 
                     
                     else if (item.id == 'timer'){
                     	tizen.application.launch("com.samsung.timer-wc1", onsuccess,onfail);
@@ -233,6 +296,11 @@ define({
                     else if (item.id == 'params'){
                     	tizen.application.launch("com.samsung.clocksetting", onsuccess,onfail);
                     	closeMenuProperly(item); 
+                    }
+                    else if (item.id == 'set_apps'){
+                    	//tizen.application.launch("com.samsung.stopwatch-wc1", onsuccess,onfail);
+                    	//closeMenuProperly(item);	  
+                    	tau.changePage('#settings-page');
                     }
                     
                 }

@@ -3,13 +3,15 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="HR Canvas Watch" />
-    <title>HR Canvas Watch</title>
-    <!--  link rel="preload" as="font" href="/data/Syncopate.woff2" type="font/woff2" crossorigin="anonymous"/-->
-    <!--  link rel="stylesheet" type="text/css" href="css/aug-core.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/border-inlay-mixins.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/region-mixins.min.css" /-->
+    <title>Particles</title>
+    
+    <link href="lib/tau/wearable/theme/default/tau.css" rel="stylesheet" />
+ 	<link href="lib/tau/wearable/theme/default/tau.circle.css" media="all and (-tizen-geometric-shape: circle)" rel="stylesheet" /> 
+	<link href="lib/tau/css/style.css" rel="stylesheet" />
+	<link href="lib/tau/css/style.circle.css" media="all and (-tizen-geometric-shape: circle)" rel="stylesheet" />
+    
     <link rel="stylesheet" type="text/css" href="css/augmented.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" /> 
     <link rel="stylesheet" href="lib/radial/css/main.css">
@@ -25,22 +27,59 @@
     <script src="lib/calendar/vEvent.class.js"></script>
     <script src="lib/calendar/DayEvents.class.js"></script>
     <script src="lib/weather/vForecast.class.js"></script>
-    <script src="lib/weather/ForecastDay.class.js"></script>
+    <script src="lib/weather/ForecastDay.class.js"></script> 
     <script src="lib/extra.js"></script>
-    
+    <script src="lib/tau/wearable/js/tau.min.js"></script>
+    <script src="lib/circle-helper.js"></script>
 </head>
 
 <body>
-    <div id="container">
-        	<canvas id="canvas-content"></canvas>
-        	<div id="widget_holder">
-        		<div id="up">UP</div>
-        		
-        		 <div id="down">DOWN</div>
-        	</div>
+	<div class="ui-page ui-page-active ui-fixed" id="main-page">
+	    <div class="ui-content" id="container">
+	        	<canvas id="canvas-content"></canvas>
+	        	<div id="widget_holder">
+	        		<div id="up">UP</div>
+	        		
+	        		 <div id="down">DOWN</div>
+	        	</div>
+	    </div>
     </div>
-    
-    
+    <div class="ui-page" id="settings-page" >
+		<header class="ui-header">
+			<h2 class="ui-title">
+				UI Components
+			</h2>
+		</header>
+		<div class="ui-content">
+			<ul class="ui-listview">
+				<li>
+					<a href="contents/navigationelements/index.html">
+						Navigation elements
+					</a>
+				</li>
+				<li>
+					<a href="contents/presentation-views/index.html">
+						Presentation Views
+					</a>
+				</li>
+				<li>
+					<a href="contents/user-inputs-elements/index.html">
+						User Inputs Elements
+					</a>
+				</li>
+				<li>
+					<a href="contents/assistviews/index.html">
+						Assist Views
+					</a>
+				</li>
+				<li>
+					<a href="contents/etc/index.html">
+						Etc
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
     
      <!--  script src="./lib/web/index.js" ></script-->
     <script src="./app/core/core.js" data-main="./app/app.js" ></script>
