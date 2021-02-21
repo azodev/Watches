@@ -274,7 +274,10 @@ define({
         	appInfo = applications[i];
         	//console.log('Application ID: ' + appInfo.id);
         	//console.log('Icon Path: ' + appInfo.iconPath);
-        	if (appInfo.show && appInfo.name != ''){}
+        	//if (appInfo.show && appInfo.name != ''){
+        		console.log('Application ID: ' + appInfo.id);
+        		console.log('Name: ' + appInfo.name);
+        	//}
         		//console.log('Name: ' + appInfo.name);
         	//console.log('Version: ' + appInfo.version);
         	//console.log('Show: ' + appInfo.show);
