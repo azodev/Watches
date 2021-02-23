@@ -267,7 +267,7 @@ define({
 			
 			//console.log(clickPos);
 			if (appDrawerShape.isInSurface(clickPos,10)){
-				resetGravCenter ();
+				resetGravCenter (10);
 				canvasDrawer.startFade();
 				openRadialMenu(ev);
 				radialmenu.setOpen();
@@ -275,7 +275,7 @@ define({
 			
 			else if (calendarShape.isInSurface(clickPos,0) && !forecastDisplayed && !radialmenu.getOpen() && !widgetFullScreenDiplayed && calendarModel.hasVEvents()){
 				//console.log('Click fade');
-				resetGravCenter ();
+				resetGravCenter (10);
 				canvasDrawer.startFade();
 				calendar = calendarModel.getCalendarHtml();
 				holder = canvasDrawer.processWidgetHtml(calendar);
@@ -321,7 +321,7 @@ define({
 				tizen.application.launch("com.samsung.shealth", null,null);
 			}
 			else if (wShape.isInSurface(clickPos,0) && !radialmenu.getOpen()  && weatherModel.isForecastFound() && !widgetFullScreenDiplayed){
-				resetGravCenter ();
+				resetGravCenter (10);
 				canvasDrawer.startFade();
 				let weather = weatherModel.getWeatherHtml();
 				holder = canvasDrawer.processWidgetHtml(weather);
@@ -1109,7 +1109,7 @@ define({
 				
 */				
 				//gravCenter = {x:180,y:180};
-				resetGravCenter ();
+				resetGravCenter (500);
 				
 				animRequest = requestAnimationFrame(drawWatchContent);
 				break;
@@ -1117,11 +1117,12 @@ define({
 				break;
 			}
 		}
-		function resetGravCenter (){
+		function resetGravCenter (timer){
+			
 			setTimeout(function (e){
 				gravCenter = canvasDrawer.getGravityCenter(motionFromGyro);
 				gravCenterDiff = {x:gravCenter.x -180, y: gravCenter.y-180};
-			}, 500);
+			}, timer);
 		}
 		
 		function startSensors(){

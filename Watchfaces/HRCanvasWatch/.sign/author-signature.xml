@@ -159,8 +159,8 @@ EibOzpLsVQ==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Fcanvas.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>pAkClCvSz5lTv7KYgLvvhJOUgkjhp/PpMWwnwZ9Hc0I0OnfsGBp34BFHi8suJxt+puZE0fHt0Pt0
-seawJwXI5A==</DigestValue>
+<DigestValue>4pffiM+7WorT5RFfIUPmOG6KMUUxhuBDxrXyE56tTFKj3Dbui5+EriEnRNR6vKWXsvrmHlOEBvly
+j4/w1mIT9g==</DigestValue>
 </Reference>
 <Reference URI="app%2Fviews%2Finit.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -2362,6 +2362,11 @@ cf+f91LigQ==</DigestValue>
 <DigestValue>z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGl
 ODJ6+SfaPg==</DigestValue>
 </Reference>
+<Reference URI="res%2FApp2.wgt">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
+<DigestValue>gv9MoRfWZk595iOLs54LoLqS7Q28n5dKh5qfozGlqr7ZEss6bBXqVDdDFg7T6IZPu4GljFo0ZH7n
+UaQpeVC4bQ==</DigestValue>
+</Reference>
 <Reference URI="version.txt">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
 <DigestValue>jJtvGOhH+xRt5nb2nvtEt+HGe/PG0CnhcMjO6XKTjHZEjeAZ5yuYeNEv9jXlGeLwx2zOOKSyvcob
@@ -2377,11 +2382,11 @@ QY10fG1EWQ==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-GQ/kCsvyCIF7sHKdtAs1NBvtAqg0m98gJxiOWBopzApTrhwIO7EXh9sdLzsmnLZr7LxGJGH2KfV3
-hczPc/c9I6dnEgdAdT072XYMhz7jfFTsbZzzfy+7K94b3hTZsGkPvPKvcGPj2OvsUlEQ99H2F78c
-MCcHrtlMmGtADXzEHkAjIA21e97ZI2ag1hDSnloArUnFV352NoG4k5K5tI6c1tFl2BdJv7f3cC7r
-7IGAY28XFdcQucannKeG7RagMXP8UoxLDe34nmDYX+euXPGgd98et9yW+9N51u0rfIKerupiequD
-v6pw++lEa05mIKNymLbZSCqwWDqYaG2iVkpzqw==
+dMUjSH6g7GNyLZGHyVI7ZhD13fb6H0GJvq33Cxsj7g7s0CqXCiYjzEoTTOKreGMlHsw4mAUs4cTl
+FEGihge9o8JRNL1diybM9R9DKd5+IkdvRYxu3K/tVsWiGjXIfceLfjzgyOZ1V7xFBlk2apkq6mrI
+BRUXsSjJjOhNR8lm1QamMWJT0iI5jDSPFR2G3UdIou0zU7+6zhGt/1yN7NRmFuMTGaJym2HlkrDP
+Tm1CwFLkDOSwW9St7mLgMA2fON16OWhTRhMIsYQfQ+ZfoDcx2ZI8GQPEkIjK5lOHlkEetf2eLZko
+42rNyLnn0L6bzGE0ZCprK4EnEOuewuHu43P47A==
 </SignatureValue>
 <KeyInfo>
 <X509Data>
