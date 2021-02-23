@@ -12,7 +12,6 @@
     <feature name="tizen.org/feature/sensor.barometer"/>
     <feature name="tizen.org/feature/sensor.heart_rate_monitor"/>
     <feature name="tizen.org/feature/location.batch"/>
-    <feature name="tizen.org/feature/screen.size.normal.360.360"/>
     <feature name="tizen.org/feature/sensor.accelerometer"/>
     <feature name="http://tizen.org/feature/location.gps"/>
     <feature name="http://tizen.org/feature/sensor.heart_rate_monitor"/>
