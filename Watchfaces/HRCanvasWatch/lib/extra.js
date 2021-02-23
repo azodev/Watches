@@ -38,3 +38,13 @@ function hasSomeParentTheClass(element, classname) {
     if (element.className != null && element.classList.length >0 && element.classList.contains(classname)) return true;
     return element.parentNode && hasSomeParentTheClass(element.parentNode, classname);
 }
+function showDropdownApp() {
+	var event;
+    event = document.createEvent('MouseEvents');
+    console.log('test');
+    var element = document.getElementById('testme');
+    event.initMouseEvent('mousedown', true, true, window);
+    //event.initMouseEvent("click", true, true, window, 0, 0, 0, 80, 20, false, false, false, false, 0, null);
+    element.dispatchEvent(event);
+    //document.body.dispatchEvent(element);
+}

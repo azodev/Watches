@@ -226,16 +226,14 @@ define({
                     	tizen.application.launch("com.samsung.stopwatch-wc1", onsuccess,onfail);
                     	closeMenuProperly(item);	  
                     }
-                    /*else if (item.id == 'exercise'){
-                    	tizen.application.launch("GymRunWear.TizenCompanionApp", onsuccess,onfail);
-                    	closeMenuProperly(item);	  
-                    }*/
                     else if (item.id == 'params'){
-                    	tizen.application.launch("com.samsung.clocksetting", onsuccess,onfail);
-                    	closeMenuProperly(item); 
+                    	//tizen.application.launch("com.samsung.clocksetting", onsuccess,onfail);
+                    	//closeMenuProperly(item);
+                    	//document.getElementById('container').style.setProperty('display','none');
+                    	//showDropdownApp();
                     }
                     
-                }
+                } 
             });
             if (tizen.preference.exists('theme')) {
 				theme = tizen.preference.getValue('theme');
@@ -275,8 +273,8 @@ define({
         	//console.log('Application ID: ' + appInfo.id);
         	//console.log('Icon Path: ' + appInfo.iconPath);
         	//if (appInfo.show && appInfo.name != ''){
-        		console.log('Application ID: ' + appInfo.id);
-        		console.log('Name: ' + appInfo.name);
+        //		console.log('Application ID: ' + appInfo.id);
+        //		console.log('Name: ' + appInfo.name);
         	//}
         		//console.log('Name: ' + appInfo.name);
         	//console.log('Version: ' + appInfo.version);

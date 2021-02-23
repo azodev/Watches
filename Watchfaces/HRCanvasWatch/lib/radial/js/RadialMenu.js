@@ -31,7 +31,10 @@ function RadialMenu(params) {
     self.currentMenu = null;
 
 }
-
+RadialMenu.prototype.setMenuItems = function (mItems) {
+	self.menuItems = mItems;
+	
+};
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 RadialMenu.prototype.open = function () {
     var self = this;
@@ -607,9 +610,9 @@ RadialMenu.resolveLoopIndex = function (index, length) {
         index = index - length;
     }
     if (index < length) {
-        return index;
+        return index; 
     } else {
-        return null;
+        return null; 
     }
 };
 

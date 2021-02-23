@@ -75,9 +75,9 @@ define({
 
 		var notification, notificationDict;
 		function bindEvents() {
-			window.addEventListener('mousedown', function(e) {
+			/*window.addEventListener('mousedown', function(e) {
 		        e.preventDefault();            
-		    })
+		    })*/
 			event.on({
 				//'models.location.distanceChange' : postNotification,
 				//'models.location.log' : postNotification,
