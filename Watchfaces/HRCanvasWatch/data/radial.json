@@ -1,0 +1,124 @@
+{
+  "items": [
+    {
+      "id": "settings",
+      "title": "Settings...",
+      "icon": "#settings",
+      "items": [
+        {
+          "id": "colors",
+          "title": "Themes...",
+          "icon": "#colors",
+          "items": [
+            {
+              "id": "ice",
+              "icon": "#ice",
+              "title": "Ice"
+            },
+            {
+              "id": "fire",
+              "icon": "#fire",
+              "title": "Fire"
+            },
+            {
+              "id": "hisakura",
+              "icon": "#hisakura",
+              "title": "Hisakura"
+            },
+            {
+              "id": "metal",
+              "icon": "#metal",
+              "title": "Metal"
+            }
+          ]
+        },
+        {
+          "id": "effects",
+          "title": "Effects...",
+          "icon": "#effects",
+          "items": [
+            {
+              "id": "attraction",
+              "icon": "#attraction",
+              "title": "BlackHole"
+            },
+            {
+              "id": "repulsion",
+              "icon": "#repulsion",
+              "title": "Repulsion"
+            },
+            {
+              "id": "flower",
+              "icon": "#flower",
+              "title": "Flower"
+            },
+            {
+              "id": "lightspeed",
+              "icon": "#lightspeed",
+              "title": "LightSpeed"
+            }
+          ]
+        },
+        {
+          "id": "params",
+          "icon": "#params",
+          "title": "Settings"
+        }
+      ]
+    },
+    {
+      "id": "update",
+      "title": "Update",
+      "icon": "#update"
+    },
+    {
+      "id": "chronometer",
+      "title": "Stopwatch",
+      "icon": "#chronometer",
+      "appid": "com.samsung.stopwatch-wc1"
+    },
+    {
+      "id": "timer",
+      "title": "Timer",
+      "icon": "#timer",
+      "appid": "com.samsung.timer-wc1"
+    },
+    {
+      "id": "shortcuts",
+      "title": "Apps...",
+      "icon": "#applist",
+      "items": [
+            {
+              "id": "dummy1",
+              "icon": "#applist",
+              "title": "App 1"
+            },
+            {
+              "id": "dummy2",
+              "icon": "#applist",
+              "title": "App 2"
+            },
+            {
+              "id": "dummy3",
+              "icon": "#applist",
+              "title": "App 3"
+            },
+            {
+              "id": "dummy4",
+              "icon": "#applist",
+              "title": "App 4"
+            },
+            {
+              "id": "dummy5",
+              "icon": "#applist",
+              "title": "App 5"
+            },
+            {
+              "id": "dummy6",
+              "icon": "#applist",
+              "title": "App 6"
+            }
+          ]
+    }
+  ]
+}

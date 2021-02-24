@@ -1,0 +1,1 @@
+define({name:"helpers/shape",def:function helpersShape(){var b;var a={x:null,y:null};var d={width:null,y:null};function e(){return a;}function c(h,i){a.x=h;a.y=i;}function g(i,h){d.width=i;d.height=h;}function f(){return d;}return{getPosition:e,truncateBis:truncateBis,getRandomInt:getRandomInt};}});

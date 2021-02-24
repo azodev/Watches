@@ -334,7 +334,7 @@ define({
 					//holder.setAttribute('class', 'on');
 					widgetId = "#weather";
 					changeRootColors(themeData);
-					
+					//document.addEventListener('touchmove', function(e) {e.preventDefault();}, true);
 					setClassAndWaitForTransition(weather,'on','opacity').then(function () {
 						//console.log('transition weather');
 						

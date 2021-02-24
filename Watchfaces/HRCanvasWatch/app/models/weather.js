@@ -191,19 +191,21 @@ define({
 			
 		}
 		function doUpdate(){
-			weatherFound = false;
-			setPosition(coords.latitude, coords.longitude);
-			if (coords.longitude > 80000) {
-				setPosition(48.810603, 2.206042);
-			}
-			outArray = [];
-			for ( var key in apiParams) {
-				if (apiParams.hasOwnProperty(key)) {
-					outArray.push(key + '=' + encodeURIComponent(apiParams[key]));
+			if (navigator.onLine){
+				weatherFound = false;
+				setPosition(coords.latitude, coords.longitude);
+				if (coords.longitude > 80000) {
+					setPosition(48.810603, 2.206042);
 				}
+				outArray = [];
+				for ( var key in apiParams) {
+					if (apiParams.hasOwnProperty(key)) {
+						outArray.push(key + '=' + encodeURIComponent(apiParams[key]));
+					}
+				}
+				//console.log('doUpdate');
+				updateWeatherWithWorker();
 			}
-			//console.log('doUpdate');
-			updateWeatherWithWorker();
 		}  
 		
 		
