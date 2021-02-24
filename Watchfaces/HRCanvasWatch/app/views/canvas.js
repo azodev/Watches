@@ -1252,6 +1252,8 @@ define({
 						radialmenu.closeMenu();
 					}
 					closeWidget(widgetId);
+					let settingsPage =  document.getElementById('settings');
+					settingsPage.setAttribute('class', 'hide');
 					activateMode("Ambient");
 				} else {
 					// Rendering normal case
@@ -1272,6 +1274,8 @@ define({
 							radialmenu.closeMenu();
 						}
 						closeWidget(widgetId);
+						let settingsPage =  document.getElementById('settings');
+						settingsPage.setAttribute('class', 'hide');
 						activateMode("Ambient"); 
 						
 					} else {
@@ -1286,6 +1290,8 @@ define({
 						radialmenu.closeMenu();
 					}
 					closeWidget(widgetId);
+					let settingsPage =  document.getElementById('settings');
+					settingsPage.setAttribute('class', 'hide');
 					if (isAmbientMode !== true) {
 						//event.fire ('hidden','clearScreen');
 						//canvasBackground.context.clearRect(0, 0, canvasBackground.context.canvas.width, canvasBackground.context.canvas.height);
@@ -1315,6 +1321,7 @@ define({
 				'views.radial.changeTheme' : changeTheme,
 				'views.radial.changeEffect' : changeEffect,
 				'views.radial.close' : triggerShowWatch,
+				'views.radial.openSettings' : openSettings,
 				'RadialMenu.closing' : triggerShowWatch,
 				//'models.pedometer.change' : onPedometerDataChange,
 				'models.weather.found' : onWeatherFound, 
@@ -1332,6 +1339,38 @@ define({
 				
 			}
 			
+		}
+		function openSettings(){
+			let container = document.getElementById('container');
+        	let settingsPage = document.getElementById('settings');
+        	
+        	setClassAndWaitForTransition(container,'off','opacity').then(function () {
+        		container.setAttribute('class', 'hide');
+        		settingsPage.setAttribute('class', 'off'); 
+        		setTimeout(function(){
+        			setClassAndWaitForTransition(settingsPage,'on','opacity').then(function () {
+        				console.log('ok1');
+        				let handler = function(e) {
+        					e.preventDefault();
+        					console.log('ok2');
+                			setClassAndWaitForTransition(settingsPage,'off','opacity').then(function () {
+                				
+                				container.setAttribute('class', 'off'); 
+                				settingsPage.setAttribute('class', 'hide');
+                				setTimeout(function(){
+                					setClassAndWaitForTransition(container,'on','opacity').then(function () {
+                    					container.setAttribute('class', 'on'); 
+                    					
+                    				});
+                				},50);
+                				
+                				settingsPage.removeEventListener('click',handler);
+                			});
+                		};
+        				settingsPage.addEventListener('click', handler);
+        			});
+        		},50);
+        	});
 		}
 		function onForecastFound(){
 			//if (!calendarModel.hasVEvents()) handleWeatherClick();

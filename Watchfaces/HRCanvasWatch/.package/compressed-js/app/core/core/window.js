@@ -1,1 +1,0 @@
-define({name:"core/window",def:function coreWindow(){return window;}});

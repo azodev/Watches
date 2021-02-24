@@ -122,41 +122,9 @@ define({
                         else if (item.id == 'params'){
                         	//tizen.application.launch("com.samsung.clocksetting", onsuccess,onfail);
                         	//closeMenuProperly(item);
+                        	event.fire('openSettings', true);
                         	
-                        	let container = document.getElementById('container');
-                        	let settingsPage = document.getElementById('settings');
                         	
-                        	setClassAndWaitForTransition(container,'off','opacity').then(function () {
-                        		container.setAttribute('class', 'hide');
-                        		settingsPage.setAttribute('class', 'off'); 
-                        		setTimeout(function(){
-                        			setClassAndWaitForTransition(settingsPage,'on','opacity').then(function () {
-                        				console.log('ok1');
-                        				let handler = function(e) {
-                        					e.preventDefault();
-                        					console.log('ok2');
-                                			setClassAndWaitForTransition(settingsPage,'off','opacity').then(function () {
-                                				
-                                				//container.setAttribute('class', 'off'); 
-                                				setClassAndWaitForTransition(container,'off','opacity').then(function () {
-                                					container.setAttribute('class', 'on'); 
-                                					settingsPage.setAttribute('class', 'hide');
-                                				});
-                                				settingsPage.removeEventListener('click',handler);
-                                			});
-                                		};
-                        				settingsPage.addEventListener('click', handler);
-                        			});
-                        		},50);
-                        		/*
-                        		
-                        			
-                        			
-                        		*/
-                        		
-                        	});
-                        	
-                        	//showDropdownApp();
                         }
                         
                     } 

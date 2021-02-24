@@ -1,1 +1,0 @@
-define({name:"core/tizen",requires:["core/window"],def:function coreTizen(a){return a.tizen;}});

@@ -1,1 +1,0 @@
-define({name:"views/init",requires:["core/event","views/main"],def:function viewsPageInit(c){var b=c.core.event;function d(){}function a(){}function f(){}function e(){f();}return{init:e};}});

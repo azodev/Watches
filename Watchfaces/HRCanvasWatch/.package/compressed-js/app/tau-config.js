@@ -1,1 +1,0 @@
-document.addEventListener("tauinit",function onTauInit(){tau.setConfig("pageTransition","none");tau.setConfig("popupTransition","none");tau.setConfig("enablePageScroll",false);});

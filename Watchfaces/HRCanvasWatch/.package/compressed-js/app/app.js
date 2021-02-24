@@ -1,1 +1,0 @@
-define({name:"app",requires:["views/init"],def:function appInit(){function a(){var c=null;var d="en";var b=["en","fr","ru","de","it","ja"];tizen.systeminfo.getPropertyValue("LOCALE",function(e){var f=e.language.substring(0,2);if(b.indexOf(f)>-1){c=f;}else{c=defaultLanguage;}});}return{init:a};}});
