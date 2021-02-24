@@ -11,12 +11,12 @@ function RadialMenu(params) {
 
     self.size      = params.size    || DEFAULT_SIZE;
     self.onClick   = params.onClick || null;
-    self.menuItems = params.menuItems ? params.menuItems : [{id: 'one', title: 'One'}, {id: 'two', title: 'Two'}];
+    //self.menuItems = params.menuItems ? params.menuItems : [{id: 'one', title: 'One'}, {id: 'two', title: 'Two'}];
 
     self.radius      = 50;
     self.innerRadius = self.radius * 0.4;
     self.sectorSpace = self.radius * 0.06;
-    self.sectorCount = Math.max(self.menuItems.length, MIN_SECTORS);
+   
     self.closeOnClick = params.closeOnClick !== undefined ? !!params.closeOnClick : false;
 
     self.scale       = 1;
@@ -32,7 +32,9 @@ function RadialMenu(params) {
 
 }
 RadialMenu.prototype.setMenuItems = function (mItems) {
+	var self = this;
 	self.menuItems = mItems;
+	 self.sectorCount = Math.max(self.menuItems.length, MIN_SECTORS);
 	
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

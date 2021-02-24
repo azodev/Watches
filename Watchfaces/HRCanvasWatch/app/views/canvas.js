@@ -167,6 +167,7 @@ define({
 		var holder = document.querySelector("#widget_holder");
 		var calendar = document.querySelector("#calendar");
 		var widgetOn = null;
+		var widgetOpened = false;
 		var widgetId = '';
 		var up = document.getElementById ('up');
 		var down = document.getElementById ('down');
@@ -180,7 +181,9 @@ define({
 		var noEvents = false;
 		var themeData = {};
 		var themeLoaderWk = null;
-		var map = new Map([['lightspeed', LightSpeed],['attraction', Particle],['flower', Flower],['repulsion', ParticleAlien]]);;
+		var map = new Map([['lightspeed', LightSpeed],['attraction', Particle],['flower', Flower],['repulsion', ParticleAlien]]);
+		var startY = 0;
+		
 		
 		
 		function handleClick(canvas,ev) {
@@ -334,13 +337,13 @@ define({
 					//holder.setAttribute('class', 'on');
 					widgetId = "#weather";
 					changeRootColors(themeData);
-					//document.addEventListener('touchmove', function(e) {e.preventDefault();}, true);
+					
 					setClassAndWaitForTransition(weather,'on','opacity').then(function () {
 						//console.log('transition weather');
 						
 						//calendar.setAttribute('class', 'on');
 						//holder.setAttribute('class', 'on');  
-						
+						widgetOpened = true;
 						widgetOn = document.querySelector(widgetId+".on");
 						setTimeout(function(){
 							widgetFullScreenDiplayed = true;
@@ -439,6 +442,9 @@ define({
 						//console.log('transition widget');
 						
 						widgetOn = null;
+						widgetOpened = false;
+						calendarY = 0;
+						startY = 0;
 						flipped = false;
 						setClassAndWaitForTransition(holder,'','opacity').then(function () {
 							//calendar.setAttribute('class', 'off');
@@ -1188,6 +1194,56 @@ define({
 				canvasDrawer.scrollTop(document.getElementById ('overflower'),220,500); 
 				return false;
 			});
+			
+			
+			document.addEventListener('touchmove', function(e) {
+				
+				//
+				if (widgetOpened  && !flipped){
+					//calendarY = 0;
+					console.log('move');
+					//document.getElementById ('overflower').scrollTop = 0;
+					let overflower = document.getElementById ('overflower');
+					/*console.log('scroltop: '+overflower.scrollTop);
+					console.log('calendarY: '+calendarY);
+					console.log('startY: '+startY);
+					console.log('screenY: '+e.touches[0].screenY);
+					console.log('offsetY: '+(e.touches[0].screenY-startY));
+
+					console.log(e);
+					*/
+					calendarY =  (startY - e.touches[0].screenY < 0)? 0 : startY - e.touches[0].screenY;
+					calendarY = (calendarY > overflower.scrollHeight)?overflower.scrollHeight : calendarY;
+					overflower.scrollTop =calendarY ;
+				}
+				 
+				//e.preventDefault();
+				}, true);
+			document.addEventListener('touchstart', function(e) {
+				if (widgetOpened  && !flipped){
+					//console.log('--------start');
+					//let overflower = document.getElementById ('overflower');
+					//console.log('scroltop: '+overflower.scrollTop);
+					//console.log('calendarY: '+calendarY);
+					//console.log(e);
+					startY = e.touches[0].screenY+calendarY;
+					//console.log('startY: '+startY);
+					//e.preventDefault();
+					}
+				}, true);
+				
+			/*document.addEventListener('touchend', function(e) {
+				if (widgetOpened  && !flipped){
+					//console.log('end--------------');
+					//let overflower = document.getElementById ('overflower');
+
+					//console.log(e);
+					//e.preventDefault();
+				}
+				}, true);
+			*/
+			
+			
 			window.addEventListener("ambientmodechanged", function(e) {
 				//console.log('ambientmodechanged event');
 				if (e.detail.ambientMode === true) {
@@ -1324,37 +1380,15 @@ define({
 			}
 		function popolate(num,eff) {
 			  for (var i = 0; i < num; i++) {
-			    //setTimeout(
-			    //function (x) {
-			      //return function () {
-			        // Add particle
+
 				     
 			    	 if (!isAmbientMode){
 			    		 
-			    		 
-			    		 //particles.push();
-			    		 //let foo = themeData.effectClass;
+
 			    		 particles.push(new (map.get(eff))(canvasContent.context,themeData.particle_colors));
-			    		 //let classe = (Function('return new ' + themeData.effectClass))(canvasContent.context, particleColors);
-			    		 //particles.push(classe);
-			    		 //new this[classNameString]();
-			    		 /*
-				    	if (effect == 'attraction'){
-				    		particles.push(new Particle(canvasContent.context,particleColors));
-				    	}  
-				    	else if (effect == 'flower'){
-				    		particles.push(new Flower(canvasContent.context,particleColors));
-				    	}
-				    	else if (effect == 'lightspeed'){
-				    		particles.push(new LightSpeed(canvasContent.context,particleColors));
-				    	}
-				    	else {
-				    		particles.push(new ParticleAlien(canvasContent.context,particleColors));
-				    	}
-				    	*/
+
 			    	 }
-			    //  };
-			    //}(i), frequency * i);
+
 			  }
 			  return particles.length;
 			}
@@ -1473,6 +1507,7 @@ define({
 				themeLoaderWk.terminate();
 				canvasDrawer.startShow(); 
 				animRequest = window.requestAnimationFrame(drawWatchContent);
+				document.querySelector('#splash-page').style.setProperty('display','none');
 			});
 			
 
