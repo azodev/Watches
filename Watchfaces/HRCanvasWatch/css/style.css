@@ -30,10 +30,7 @@ html, body {
     display:block;
     background-color:#000000;
 }
-select#testme{
-	 
-	margin:25% 50%;
-}
+
 #splash-page{
 	display: -webkit-flex;
     -webkit-align-items: center;
@@ -54,11 +51,12 @@ select#testme{
     left:0px;
     border-radius:50%;
     position: absolute;
+    
 }
 #settings.on{
-	display: -webkit-flex;
+	display: block;
     opacity:1;
-    background-color: #FFFFFF;
+    background-color: #000000;
     transform: scale(1); 
 	transition-property: opacity, transform;
 	transition-duration: 0.3s;  
@@ -66,7 +64,7 @@ select#testme{
 }
 #settings.off {
 	transform: scale(1.2); 
-	display: -webkit-flex;
+	display: block;
     opacity:0.5;
 	transition-property: opacity, transform;
 	transition-duration: 0.03s;  
@@ -81,6 +79,77 @@ select#testme{
 	transition-duration: 0.03s;  
 	transition-timing-function: ease-in;
 }
+
+#settings .ui-header {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  height: 4.75rem;
+  line-height: 20px;
+  background-color: transparent;
+  text-align: center;
+  margin-top: 0rem;
+}
+
+
+
+
+
+#settings .ui-header.ui-header-2-lines {
+  height: 7.75rem;
+  margin-top: 1.5625rem;
+}
+#settings .ui-header .ui-title {
+  color: #008cff;
+  margin: 0.875rem 4rem 1.5625rem;
+  padding-left: 0;
+  padding-right: 0;
+  font-size: 20px;
+  -webkit-mask-image: none;
+          mask-image: none;
+}
+#settings .ui-content {
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1rem;
+  padding-left:3.5rem;
+  padding-right:0.5rem;
+}
+#settings .ui-content .app-line {
+	
+	width:250px;
+	height: 2rem;
+	vertical-align:middle;
+}
+.divider{
+	border-bottom:1px dotted #FFFFFF;
+	width:230px;
+	height: 2px;
+	margin-left:0.5rem;
+	vertical-align:middle;
+	margin-bottom: 3px;
+}
+#settings .ui-content select.app-selector {
+	background-color: #FFFFFF;
+	color:#FFFFFF; 
+	width:30px;
+	height: 30px;
+	border-radius:3px;
+}
+#settings .ui-content .app-label {
+	margin-left:10px;
+	width:210px;
+	height: 30px;
+	color: #FFFFFF;
+}
+
+
 #container {
     
     -webkit-align-items: center;

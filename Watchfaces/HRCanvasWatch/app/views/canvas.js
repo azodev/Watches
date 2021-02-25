@@ -183,6 +183,8 @@ define({
 		var themeLoaderWk = null;
 		var map = new Map([['lightspeed', LightSpeed],['attraction', Particle],['flower', Flower],['repulsion', ParticleAlien]]);
 		var startY = 0;
+		var containerOn = true;
+		var settingsOn = false;
 		
 		
 		
@@ -592,14 +594,15 @@ define({
 				
 			
 				canvasDrawer.renderCircleShadows(canvasContent.context, appDrawerShape, {r:15,g:15,b:15,a:0.7},5);
-				canvasDrawer.renderCircle(canvasContent.context, appDrawerShape, "#000000","rgba(10, 10, 10,0.7)",false,2,false);
-				canvasDrawer.roundRect(canvasContent.context, aShape1, 3, false, true, null, "rgba(0, 0, 0,0.8)");
-				canvasDrawer.roundRect(canvasContent.context, aShape2, 3, false, true, null, "rgba(0, 0, 0,0.8)");
-				canvasDrawer.roundRect(canvasContent.context, aShape3, 3, false, true, null, "rgba(0, 0, 0,0.8)");
-				canvasDrawer.roundRect(canvasContent.context, aShape4, 3, false, true, null, "rgba(0, 0, 0,0.8)");
+				canvasDrawer.renderCircle(canvasContent.context, appDrawerShape, "#000000",false,false,2,false);
+				canvasDrawer.roundRect(canvasContent.context, aShape1, 3, false, true, null, "rgba(0, 0, 0,0.1)");
+				canvasDrawer.roundRect(canvasContent.context, aShape2, 3, false, true, null, "rgba(0, 0, 0,0.1)");
+				canvasDrawer.roundRect(canvasContent.context, aShape3, 3, false, true, null, "rgba(0, 0, 0,0.1)");
+				canvasDrawer.roundRect(canvasContent.context, aShape4, 3, false, true, null, "rgba(0, 0, 0,0.1)");
+				
 				if (baroDisplayed){
 					
-					canvasDrawer.roundRect(canvasContent.context, new Shape(center.x - 112, center.y - 63, 85, 58) ,10, true, false, null, "rgba(5, 5, 5,0.7)"); // 232
+					canvasDrawer.roundRect(canvasContent.context, new Shape(center.x - 112, center.y - 63, 85, 58) ,10, true, false, null, "rgba(5, 5, 5, 0.7)"); // 232
 					
 					canvasDrawer.renderTextGradient(canvasContent.context, 'Altitude', center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.30), 16, "#c9c9c9", {
 						font : 'FutureNow',
@@ -1252,8 +1255,7 @@ define({
 						radialmenu.closeMenu();
 					}
 					closeWidget(widgetId);
-					let settingsPage =  document.getElementById('settings');
-					settingsPage.setAttribute('class', 'hide');
+					closeSettings();
 					activateMode("Ambient");
 				} else {
 					// Rendering normal case
@@ -1274,8 +1276,7 @@ define({
 							radialmenu.closeMenu();
 						}
 						closeWidget(widgetId);
-						let settingsPage =  document.getElementById('settings');
-						settingsPage.setAttribute('class', 'hide');
+						closeSettings();
 						activateMode("Ambient"); 
 						
 					} else {
@@ -1290,8 +1291,7 @@ define({
 						radialmenu.closeMenu();
 					}
 					closeWidget(widgetId);
-					let settingsPage =  document.getElementById('settings');
-					settingsPage.setAttribute('class', 'hide');
+					closeSettings();
 					if (isAmbientMode !== true) {
 						//event.fire ('hidden','clearScreen');
 						//canvasBackground.context.clearRect(0, 0, canvasBackground.context.canvas.width, canvasBackground.context.canvas.height);
@@ -1343,34 +1343,46 @@ define({
 		function openSettings(){
 			let container = document.getElementById('container');
         	let settingsPage = document.getElementById('settings');
+        	let settingsPageHeader = document.querySelector('#settings .ui-header');
         	
         	setClassAndWaitForTransition(container,'off','opacity').then(function () {
         		container.setAttribute('class', 'hide');
         		settingsPage.setAttribute('class', 'off'); 
+        		containerOn =false ;
         		setTimeout(function(){
         			setClassAndWaitForTransition(settingsPage,'on','opacity').then(function () {
-        				console.log('ok1');
-        				let handler = function(e) {
-        					e.preventDefault();
-        					console.log('ok2');
-                			setClassAndWaitForTransition(settingsPage,'off','opacity').then(function () {
-                				
-                				container.setAttribute('class', 'off'); 
-                				settingsPage.setAttribute('class', 'hide');
-                				setTimeout(function(){
-                					setClassAndWaitForTransition(container,'on','opacity').then(function () {
-                    					container.setAttribute('class', 'on'); 
-                    					
-                    				});
-                				},50);
-                				
-                				settingsPage.removeEventListener('click',handler);
-                			});
-                		};
-        				settingsPage.addEventListener('click', handler);
+        				
+        				settingsOn =true;
+        				settingsPageHeader.addEventListener('click', closeSettings);
         			});
         		},50);
         	});
+		}
+		function closeSettings(){
+			//e.preventDefault();
+			
+			if (settingsOn || !containerOn){
+				console.log('ok2');
+				let container = document.getElementById('container');
+	        	let settingsPage = document.getElementById('settings');
+	        	let settingsPageHeader = document.querySelector('#settings .ui-header');
+				setClassAndWaitForTransition(settingsPage,'off','opacity').then(function () {
+					
+					container.setAttribute('class', 'off'); 
+					settingsPage.setAttribute('class', 'hide');
+					settingsOn =false;
+					setTimeout(function(){
+						setClassAndWaitForTransition(container,'on','opacity').then(function () {
+	    					container.setAttribute('class', 'on'); 
+	    					containerOn =true ;
+	    					
+	    				});
+					},50);
+					
+					settingsPageHeader.removeEventListener('click',closeSettings);
+				});
+			}
+			
 		}
 		function onForecastFound(){
 			//if (!calendarModel.hasVEvents()) handleWeatherClick();

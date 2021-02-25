@@ -3,7 +3,7 @@
     {
       "id": "settings",
       "title": "Settings...",
-      "icon": "#settings",
+      "icon": "#setup",
       "items": [
         {
           "id": "colors",

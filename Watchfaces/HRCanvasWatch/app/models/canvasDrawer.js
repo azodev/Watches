@@ -85,7 +85,10 @@ define({
 		var grdAmbiant = null;
 		var timePassed = 0;
 		var shadow = false;
-		var themeData = {"gradient": [ 	"rgb(255,90,2)", "rgb(255,150,53)",		"rgb(248,181,0)","rgb(249,234,194)"	]};
+		var themeData = { 
+							"gradient": [ 	"rgb(255,90,2)", "rgb(255,150,53)",		"rgb(248,181,0)","rgb(249,234,194)"	],
+							"radialGradient": [ 	"rgba(0, 0, 0,0.7)", "rgba(0, 0, 0,0.3)",	"rgba(0,0,0,0.4)","rgba(5,5,5,1)","rgba(40,40,40,1)"]
+		};
 
 		/**
 		 * Renders a circle with specific center, radius, and color
@@ -779,12 +782,11 @@ define({
 			calculateRadialGradientPosition(motionAcceleration.accelerationIncludingGravity);
 			
 			radialGradient = context.createRadialGradient(radialGradientCoords.x, radialGradientCoords.y, 0.000, 180.000, 180.000, 180.000);
-			radialGradient.addColorStop(0.000, 'rgba(0, 0, 0,0.7)');
-			radialGradient.addColorStop(0.300, 'rgba(0, 0, 0,0.3)');
-			//radialGradient.addColorStop(0.755, 'rgba(0,0,0,0.4)');
-			radialGradient.addColorStop(0.83, 'rgba(0,0,0,0.4)');
-			radialGradient.addColorStop(0.91, 'rgba(5,5,5,1)');
-			radialGradient.addColorStop(0.98, 'rgba(40,40,40,1)'); 
+			radialGradient.addColorStop(0.000, themeData.radialGradient[0]);
+			radialGradient.addColorStop(0.300, themeData.radialGradient[1]);
+			radialGradient.addColorStop(0.83,  themeData.radialGradient[2]);
+			radialGradient.addColorStop(0.91,  themeData.radialGradient[3]);
+			radialGradient.addColorStop(0.98,  themeData.radialGradient[4]); 
 			
 			gradientLinear = context.createLinearGradient(cx - gx, cy - gy, cx + gx, cy + gy);
 			

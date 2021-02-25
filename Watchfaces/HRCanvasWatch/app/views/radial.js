@@ -171,11 +171,13 @@ define({
             for (var i = 0; i < applications.length; i++) {
         	appInfo = applications[i];
         	//console.log('Application ID: ' + appInfo.id);
-        	//console.log('Icon Path: ' + appInfo.iconPath);
-        	//if (appInfo.show && appInfo.name != ''){
-        //		console.log('Application ID: ' + appInfo.id);
-        //		console.log('Name: ' + appInfo.name);
-        	//}
+        	
+        	if (appInfo.show && appInfo.name != ''){
+        	
+        		console.log('Application ID: ' + appInfo.id);
+        		console.log('Name: ' + appInfo.name);
+        		console.log('Icon Path: ' + appInfo.iconPath);
+        	}
         		//console.log('Name: ' + appInfo.name);
         	//console.log('Version: ' + appInfo.version);
         	//console.log('Show: ' + appInfo.show);
