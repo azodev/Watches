@@ -27,6 +27,8 @@ define({
         var theme = 'ice';
         var isOpen = false;
         var loaderWk;
+        var appsInstalled = [];
+        var shortcuts = [];
         /**
          * Handles resize event.
          *
@@ -67,7 +69,7 @@ define({
          */
         function init() {
             // bind events to page elements
-        	tizen.application.getAppsInfo(onListInstalledApps, null);
+        	
             bindEvents();
             
             let loader = loadMenuItems().then((mi) => {
@@ -122,7 +124,8 @@ define({
                         else if (item.id == 'params'){
                         	//tizen.application.launch("com.samsung.clocksetting", onsuccess,onfail);
                         	//closeMenuProperly(item);
-                        	event.fire('openSettings', true);
+                        	tizen.application.getAppsInfo(onListInstalledApps, null);
+                        	
                         	
                         	
                         }
@@ -167,21 +170,22 @@ define({
         	console.error(e.message);
         }
         function onListInstalledApps(applications) {
-        	var appInfo;
+        	let appInfo;
             for (var i = 0; i < applications.length; i++) {
-        	appInfo = applications[i];
-        	//console.log('Application ID: ' + appInfo.id);
-        	
-        	if (appInfo.show && appInfo.name != ''){
-        	
-        		console.log('Application ID: ' + appInfo.id);
-        		console.log('Name: ' + appInfo.name);
-        		console.log('Icon Path: ' + appInfo.iconPath);
-        	}
-        		//console.log('Name: ' + appInfo.name);
-        	//console.log('Version: ' + appInfo.version);
-        	//console.log('Show: ' + appInfo.show);
+	        	appInfo = applications[i];
+	        	
+	        	if (appInfo.show && appInfo.name != ''){
+	        		appsInstalled.push(appInfo);
+	        		/*console.log('Application ID: ' + appInfo.id);
+	        		console.log('Name: ' + appInfo.name);
+	        		console.log('Icon Path: ' + appInfo.iconPath);*/
+	        	}
+        		
             }
+            appsInstalled= multiSort(appsInstalled, {
+                name: 'asc'
+            });
+            event.fire('openSettings', {'shortcuts':shortcuts,'apps':appsInstalled});
 		}
         function getMenu (){
         	return svgMenu;

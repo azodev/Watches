@@ -1340,7 +1340,7 @@ define({
 			}
 			
 		}
-		function openSettings(){
+		function openSettings(e){
 			let container = document.getElementById('container');
         	let settingsPage = document.getElementById('settings');
         	let settingsPageHeader = document.querySelector('#settings .ui-header');
@@ -1349,6 +1349,7 @@ define({
         		container.setAttribute('class', 'hide');
         		settingsPage.setAttribute('class', 'off'); 
         		containerOn =false ;
+        		populateSettingsHTML(e.detail);
         		setTimeout(function(){
         			setClassAndWaitForTransition(settingsPage,'on','opacity').then(function () {
         				
@@ -1358,10 +1359,45 @@ define({
         		},50);
         	});
 		}
+		function populateSettingsHTML(message){
+			let myParent = document.querySelector('#settings .ui-content');
+			myParent.innerHTML = '';
+			for (let i=1;i<=8;i++){
+				let appline = document.createElement("div");
+				let selectList = document.createElement("select");
+				let label = document.createElement("span");
+				
+				appline.className = 'app-line';
+				selectList.id = 'app'+i;
+				selectList.className = 'app-selector';
+				//selectList.setAttribute('id', 'app'+i);
+				selectList.setAttribute('name', 'app'+i);
+				
+				label.id = 'app-label-'+i;
+				label.className = 'app-label';
+				label.innerHTML = 'Click Button';
+				
+				
+				//console.log(message.apps[0].name);
+				//Create and append the options
+				for (let j = 0; j < message.apps.length; j++) {
+					let option = document.createElement("option");
+				    option.value = message.apps[j].id;
+				    option.text = message.apps[j].name;
+				    option.setAttribute('icon',message.apps[j].iconPath);
+				    selectList.appendChild(option);
+				}
+				appline.appendChild(selectList);
+				appline.appendChild(label);
+				
+				myParent.appendChild(appline);
+			}
+			
+		}
 		function closeSettings(){
 			//e.preventDefault();
 			
-			if (settingsOn || !containerOn){
+			if (settingsOn /*|| !containerOn*/){
 				console.log('ok2');
 				let container = document.getElementById('container');
 	        	let settingsPage = document.getElementById('settings');
