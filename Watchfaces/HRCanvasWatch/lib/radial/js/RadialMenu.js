@@ -418,7 +418,7 @@ RadialMenu.prototype.appendSectorPath = function (startAngleDeg, endAngleDeg, sv
 
     var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     g.setAttribute('transform','translate(' +translate.x + ' ,' + translate.y + ') scale(' + self.scale + ')');
-
+    
     var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.setAttribute('d', self.createSectorCmds(startAngleDeg, endAngleDeg));
     path.setAttribute('class',self.theme);
@@ -431,19 +431,25 @@ RadialMenu.prototype.appendSectorPath = function (startAngleDeg, endAngleDeg, sv
         }
         g.setAttribute('data-id', item.id);
         g.setAttribute('data-index', index);
-
+        
         if (item.title) {
             var text = self.createText(centerPoint.x, centerPoint.y, item.title);
-            if (item.icon) {
+            if (item.icon || item.iconPath) {
                 text.setAttribute('transform', 'translate(0,8)');
-            } else {
+            }
+            /*else if (item.iconPath){
+            	text.setAttribute('transform', 'translate(0,8)');
+            	let Image =  document.createElement("image");
+            	image.setAttribute('xlink:href','file://'+item.iconPath);
+            }*/
+            else {
                 text.setAttribute('transform', 'translate(0,2)');
             }
 
             g.appendChild(text);
         }
 
-        if (item.icon) {
+        if (item.icon || item.iconPath) {
             var use = self.createUseTag(centerPoint.x, centerPoint.y, item.icon);
             if (item.title) {
                 use.setAttribute('transform', 'translate(-5,-8)');
@@ -452,6 +458,19 @@ RadialMenu.prototype.appendSectorPath = function (startAngleDeg, endAngleDeg, sv
             }
 
             g.appendChild(use);
+            if (item.iconPath){
+            	document.querySelector(item.icon+' image').setAttribute('xlink:href', 'file://'+item.iconPath);
+            }
+            /*if (item.iconPath){
+            	let image =  document.createElement("image");
+            	image.setAttribute('xlink:href','file://'+item.iconPath);
+            	image.setAttribute('width','10px');
+            	image.setAttribute('height','10px');
+            	image.setAttribute('x',use.getAttribute('x'));
+            	image.setAttribute('x',use.getAttribute('y'));
+            	image.setAttribute('y','0');
+            	g.appendChild(image);
+            }*/
         }
 
     } else {

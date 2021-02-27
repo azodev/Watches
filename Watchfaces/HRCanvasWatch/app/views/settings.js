@@ -27,7 +27,8 @@ define({
         
         var appsInstalled = [];
         var shortcuts = [];
-        var settingsOn = false;    
+        var settingsOn = false;  
+        var loaderWk;
 
        
 
@@ -64,7 +65,7 @@ define({
         	
             bindEvents();
             
-            let loader = loadMenuItems().then((settings) => {
+            let loader = loadDefaultSettings().then((settings) => {
             	
             });
             
@@ -148,7 +149,7 @@ define({
 				let label = document.createElement("span");
 				
 				appline.className = 'app-line';
-				selectList.id = 'app'+i;
+				selectList.id = 'app_select_'+i;
 				selectList.className = 'app-selector';
 				//selectList.setAttribute('id', 'app'+i);
 				selectList.setAttribute('name', 'app'+i);
