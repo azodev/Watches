@@ -72,13 +72,13 @@
       "icon": "#update"
     },
     {
-      "id": "chronometer",
+      "id": "app1",
       "title": "Stopwatch",
       "icon": "#chronometer",
       "appid": "com.samsung.stopwatch-wc1"
     },
     {
-      "id": "timer",
+      "id": "app2",
       "title": "Timer",
       "icon": "#timer",
       "appid": "com.samsung.timer-wc1"
@@ -89,32 +89,32 @@
       "icon": "#applist",
       "items": [
             {
-              "id": "dummy1",
+              "id": "app3",
               "icon": "#applist",
               "title": "App 1"
             },
             {
-              "id": "dummy2",
+              "id": "app4",
               "icon": "#applist",
               "title": "App 2"
             },
             {
-              "id": "dummy3",
+              "id": "app5",
               "icon": "#applist",
               "title": "App 3"
             },
             {
-              "id": "dummy4",
+              "id": "app6",
               "icon": "#applist",
               "title": "App 4"
             },
             {
-              "id": "dummy5",
+              "id": "app7",
               "icon": "#applist",
               "title": "App 5"
             },
             {
-              "id": "dummy6",
+              "id": "app8",
               "icon": "#applist",
               "title": "App 6"
             }

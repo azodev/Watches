@@ -67,6 +67,11 @@ define({
          * @public
          *
          */
+        function parseMenuItems(mi){
+        	
+        }
+        
+        
         function init() {
             // bind events to page elements
         	
@@ -74,6 +79,8 @@ define({
             
             let loader = loadMenuItems().then((mi) => {
             	menuItems = mi;
+            	parseMenuItems(menuItems);
+            	
             	svgMenu = new RadialMenu({
                     parent      : document.querySelector('#container'),
                     size        : 340,
@@ -124,9 +131,9 @@ define({
                         else if (item.id == 'params'){
                         	//tizen.application.launch("com.samsung.clocksetting", onsuccess,onfail);
                         	//closeMenuProperly(item);
-                        	tizen.application.getAppsInfo(onListInstalledApps, null);
-                        	
-                        	
+                        	//tizen.application.getAppsInfo(onListInstalledApps, null);
+                        	closeMenuProperly(item);
+                        	event.fire('openSettings', true);
                         	
                         }
                         

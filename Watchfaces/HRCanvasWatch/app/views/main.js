@@ -22,14 +22,13 @@
  * @module views/main
  * @requires {@link core/event}
  * @requires {@link views/canvas}
- * @requires {@link views/radial}
  * @namespace views/main
  * @memberof views
  */
 
 define({
 	name : 'views/main',
-	requires : [ 'core/event', 'views/canvas' ],
+	requires : [ 'core/event', 'views/canvas'  ],
 	def : function viewsPageMain(req) {
 		'use strict';
 

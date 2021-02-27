@@ -6,6 +6,8 @@
   "root_colors": [  "rgb(255,150,53)", "rgb(249,234,194)"],
   "gradient": [ 	"rgb(255,90,2)", "rgb(255,150,53)",		"rgb(248,181,0)","rgb(249,234,194)"	],
   "background": "#000000",
-  "radialGradient": [ 	"rgba(0, 0, 0,0.7)", "rgba(0, 0, 0,0.3)",	"rgba(0,0,0,0.4)","rgba(5,5,5,1)","rgba(40,40,40,1)"]					
+  "radialGradient": [ 	"rgba(0, 0, 0,0.7)", "rgba(0, 0, 0,0.3)",	"rgba(0,0,0,0.4)","rgba(5,5,5,1)","rgba(40,40,40,1)"],
+  "complication_bg": "#000000",
+  "complication_shadow" : "-10"						
   
 }
