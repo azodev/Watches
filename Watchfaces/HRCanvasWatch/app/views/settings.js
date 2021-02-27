@@ -38,9 +38,11 @@ define({
          * @private
          */
         function bindEvents() {
-           event.on ({
-        	   //'RadialMenu.closing' : setClose
-           });
+        	event.on({
+				
+				'views.radial.openSettings' : openPage,
+				
+			});
            
             
         }
@@ -61,12 +63,10 @@ define({
             // bind events to page elements
         	
             bindEvents();
-            event.on({
-				
-				'views.radial.openSettings' : openPage,
-				
-			});
-           
+            
+            let loader = loadMenuItems().then((settings) => {
+            	
+            });
             
             
             
@@ -218,7 +218,23 @@ define({
 			}
 			
 		}
-        
+		async function loadDefaultSettings(){
+			return new Promise(function(resolve, reject) {
+				 loaderWk = new Worker('lib/workers/jSonReaderWK.js');
+				loaderWk.onmessage = function(e) {
+					if (e){
+						resolve( e.data.json.items);
+					}
+				}
+				loaderWk.onerror = function (err){
+					 reject(new TypeError('Menu loading failed'));
+				};
+				let uri = "../../data/default_settings.json";
+				loaderWk.postMessage({
+		            'url': uri
+		        });
+			  });
+		}
         
         
         
