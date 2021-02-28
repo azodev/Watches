@@ -27,6 +27,7 @@ define({
         
         var appsInstalled = [];
         var shortcuts = [];
+        var default_settings = [];
         var settingsOn = false;  
         var loaderWk;
 
@@ -66,7 +67,7 @@ define({
             bindEvents();
             
             let loader = loadDefaultSettings().then((settings) => {
-            	
+            	default_settings = setttings;
             });
             
             
@@ -116,7 +117,11 @@ define({
             
 		}
         function openPage(e){
-        	tizen.application.getAppsInfo(onListInstalledApps, null);
+        	let container = document.getElementById('container');
+        	setClassAndWaitForTransition(container,'off','opacity').then(function () {
+        		tizen.application.getAppsInfo(onListInstalledApps, null);
+        	});
+        	
         }
         function openSettings(e){
 			let container = document.getElementById('container');
@@ -124,7 +129,7 @@ define({
         	let settingsPageHeader = document.querySelector('#settings .ui-header');
         	
         	
-        	setClassAndWaitForTransition(container,'off','opacity').then(function () {
+        	//setClassAndWaitForTransition(container,'off','opacity').then(function () {
         		container.setAttribute('class', 'hide');
         		settingsPage.setAttribute('class', 'off'); 
         		populateSettingsHTML();
@@ -135,13 +140,15 @@ define({
         				settingsPageHeader.addEventListener('click', closeSettings);
         			});
         		},50);
-        	});
+        	//});
 		}
 		function populateSettingsHTML(){
 			let myParent = document.querySelector('#settings .ui-content');
 			//let option, appline, selectList, label, optionId, optionName, iconPath;
 			myParent.innerHTML = '';
 			for (let i=1;i<=8;i++){
+				
+				
 				let appline = document.createElement("div");
 				let selectList = document.createElement("select");
 				//selectList.setAttribute('data-native-menu','false');
@@ -187,6 +194,11 @@ define({
 					let iconPath = selectList.options[selectList.selectedIndex].getAttribute('icon');
 					label.innerHTML = optionName;
 				});
+				if (i==2){
+					let divider = document.createElement("div");
+					divider.className = 'divider';
+					myParent.appendChild(divider);
+				}
 			}
 			
 			

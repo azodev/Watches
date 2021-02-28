@@ -1500,7 +1500,7 @@ define({
 				themeLoaderWk.terminate();
 				canvasDrawer.startShow(); 
 				animRequest = window.requestAnimationFrame(drawWatchContent);
-				document.querySelector('#splash-page').style.setProperty('display','none');
+				//document.querySelector('#splash-page').style.setProperty('display','none');
 			});
 			
 

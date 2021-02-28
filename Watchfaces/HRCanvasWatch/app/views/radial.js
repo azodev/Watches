@@ -29,6 +29,7 @@ define({
         var loaderWk;
         var appsInstalled = [];
         var shortcuts = [];
+        
         /**
          * Handles resize event.
          *

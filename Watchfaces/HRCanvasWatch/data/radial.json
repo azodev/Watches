@@ -90,34 +90,34 @@
       "items": [
             {
               "id": "app3",
-              "icon": "#app_svg_1",
+              "icon": "#app_svg_3",
               "iconPath": "/usr/apps/org.tizen.alarm/shared/res/org.tizen.alarm.png",
-              "title": "App 1"
-            },
-            {
-              "id": "app4",
-              "icon": "#app_svg_1",
-              "title": "App 2"
-            },
-            {
-              "id": "app5",
-              "icon": "#app_svg_1",
               "title": "App 3"
             },
             {
-              "id": "app6",
-              "icon": "#app_svg_1",
+              "id": "app4",
+              "icon": "#app_svg_4",
               "title": "App 4"
             },
             {
-              "id": "app7",
-              "icon": "#app_svg_1",
+              "id": "app5",
+              "icon": "#app_svg_5",
               "title": "App 5"
             },
             {
-              "id": "app8",
-              "icon": "#app_svg_1",
+              "id": "app6",
+              "icon": "#app_svg_6",
               "title": "App 6"
+            },
+            {
+              "id": "app7",
+              "icon": "#app_svg_7",
+              "title": "App 7"
+            },
+            {
+              "id": "app8",
+              "icon": "#app_svg_8",
+              "title": "App 8"
             }
           ]
     }

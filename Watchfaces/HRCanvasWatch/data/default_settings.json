@@ -1,16 +1,18 @@
 {
-	"apps": [ 
+	"apps": { "slot_1" :  
+				{
+      				"id": "app1",
+			      	"title": "Stopwatch",
+			      	"icon": "#chronometer",
+			      	"appid": "com.samsung.stopwatch-wc1"
+			      	},
+			  "slot_2" : 
 				{ 
 					"id": "app2",
       				"title": "Timer",
       				"icon": "#timer",
       				"appid": "com.samsung.timer-wc1"
-      				},
-      			{
-      				"id": "app1",
-			      	"title": "Stopwatch",
-			      	"icon": "#chronometer",
-			      	"appid": "com.samsung.stopwatch-wc1"
-			      	}	
-	]
+      				}
+      				
+	}
 }
