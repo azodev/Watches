@@ -28,6 +28,7 @@ define({
         var appsInstalled = [];
         var shortcuts = [];
         var default_settings = [];
+        var current_settings = [];
         var settingsOn = false;  
         var loaderWk;
 
@@ -67,7 +68,18 @@ define({
             bindEvents();
             
             let loader = loadDefaultSettings().then((settings) => {
-            	default_settings = setttings;
+            	default_settings = settings;
+            	if (tizen.preference.exists('settings.particules')) {
+            		
+            		loadSettings();
+            		
+    			}
+            	else {
+            		current_settings = default_settings;
+            		saveSettings();
+            	}
+            	
+            	event.fire('initApps',current_settings.apps);
             });
             
             
@@ -79,7 +91,7 @@ define({
         }
         function closePage(){
         	isOpen = false;
-    		svgMenu.close();
+    		
         }
         function onsuccess() {
         	
@@ -98,11 +110,12 @@ define({
         	console.error(e.message);
         }
         function onListInstalledApps(applications) {
-        	let appInfo;
+        	let appInfo = null;
+        	appsInstalled = [];
             for (var i = 0; i < applications.length; i++) {
 	        	appInfo = applications[i];
 	        	
-	        	if (appInfo.show && appInfo.name != ''){
+	        	if (appInfo.show && appInfo.name != ''){ 
 	        		appsInstalled.push(appInfo);
 	        		/*console.log('Application ID: ' + appInfo.id);
 	        		console.log('Name: ' + appInfo.name);
@@ -118,18 +131,29 @@ define({
 		}
         function openPage(e){
         	let container = document.getElementById('container');
+        	let splash = document.getElementById('splash-page');
         	setClassAndWaitForTransition(container,'off','opacity').then(function () {
-        		tizen.application.getAppsInfo(onListInstalledApps, null);
+        		splash.setAttribute('class', 'off');
+        		setTimeout(function(){
+	        		setClassAndWaitForTransition(splash,'on','opacity').then(function () {
+	        			tizen.application.getAppsInfo(onListInstalledApps, null);
+	        		});
+        		},100);
+        		
+        		//.setAttribute('class', 'on');
+        		
         	});
         	
         }
         function openSettings(e){
 			let container = document.getElementById('container');
         	let settingsPage = document.getElementById('settings');
+        	let splash = document.getElementById('splash-page');
         	let settingsPageHeader = document.querySelector('#settings .ui-header');
         	
         	
         	//setClassAndWaitForTransition(container,'off','opacity').then(function () {
+        		splash.setAttribute('class', 'hide');
         		container.setAttribute('class', 'hide');
         		settingsPage.setAttribute('class', 'off'); 
         		populateSettingsHTML();
@@ -142,8 +166,18 @@ define({
         		},50);
         	//});
 		}
+        function loadSettings(){
+        	current_settings = JSON.parse(tizen.preference.getValue('settings.particules'));
+        }
+        function saveSettings(){
+        	tizen.preference.setValue('settings.particules',JSON.stringify(current_settings));
+        } 
 		function populateSettingsHTML(){
-			let myParent = document.querySelector('#settings .ui-content');
+			let settingsPage = document.querySelector('#settings');
+			let myParent = document.createElement("div"); 
+			myParent.className = 'ui-content';
+				//document.querySelector('#settings .ui-content');
+			//console.log(current_settings);
 			//let option, appline, selectList, label, optionId, optionName, iconPath;
 			myParent.innerHTML = '';
 			for (let i=1;i<=8;i++){
@@ -181,9 +215,18 @@ define({
 				    option.setAttribute('app', appsInstalled[j].id);
 				    option.text = appsInstalled[j].name;
 				    option.setAttribute('icon',appsInstalled[j].iconPath);
+				    if (current_settings.apps && current_settings.apps['slot_'+i] && current_settings.apps['slot_'+i].appid == appsInstalled[j].id ){
+				    	option.setAttribute('selected', "SELECTED");
+				    }
 				    selectList.appendChild(option);
 				}
 				appline.appendChild(selectList);
+				
+				if (current_settings.apps && current_settings.apps['slot_'+i]){
+					label.innerHTML = current_settings.apps['slot_'+i].title;
+				}
+				
+				
 				appline.appendChild(label);
 				
 				myParent.appendChild(appline);
@@ -193,6 +236,20 @@ define({
 					let optionName = selectList.options[selectList.selectedIndex].innerHTML;
 					let iconPath = selectList.options[selectList.selectedIndex].getAttribute('icon');
 					label.innerHTML = optionName;
+					
+					
+					let appArray = {};
+					appArray.id = 'app'+i;
+					appArray.title = optionName;
+					appArray.appid = optionId;
+					appArray.icon = '#app_svg_'+i;
+					appArray.iconPath = iconPath;
+					
+					current_settings.apps['slot_'+i] = appArray;
+					
+					event.fire('reloadApps',current_settings.apps);
+					saveSettings();
+					
 				});
 				if (i==2){
 					let divider = document.createElement("div");
@@ -200,9 +257,10 @@ define({
 					myParent.appendChild(divider);
 				}
 			}
-			
+			settingsPage.appendChild(myParent);
 			
 		}
+		
 		function closeSettings(){
 			//e.preventDefault(); 
 			
@@ -226,7 +284,7 @@ define({
 	    				});
 					},50);
 					settingsPageHeader.removeEventListener('click',closeSettings);
-					
+					settingsPage.removeChild(document.querySelector('#settings .ui-content'));
 				});
 			}
 			
@@ -236,7 +294,8 @@ define({
 				 loaderWk = new Worker('lib/workers/jSonReaderWK.js');
 				loaderWk.onmessage = function(e) {
 					if (e){
-						resolve( e.data.json.items);
+						resolve( e.data.json);
+						loaderWk.terminate();
 					}
 				}
 				loaderWk.onerror = function (err){

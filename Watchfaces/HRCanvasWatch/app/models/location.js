@@ -74,12 +74,12 @@ define({
 		var errorMsg = '';
 		var options = {
 			enableHighAccuracy: true,
-			timeout : 10000,
+			timeout : 5000,
 			maximumAge : 900000
 		};
 		var optionGPS = {
 			sampleInterval : 1000,  //10000
-			callbackInterval : 10000  // 20000
+			callbackInterval : 1000  // 20000
 		};
 		var fallbackSensor =false;
 		var running = false;
@@ -91,6 +91,13 @@ define({
 		 * @private
 		 * @returns {object}
 		 */
+		function loadSettings(){
+			locationData = JSON.parse(tizen.preference.getValue('location.position'));
+			locationDataLastGood = locationData;
+        }
+        function saveSettings(){
+        	tizen.preference.setValue('location.position',JSON.stringify(locationData));
+        } 
 		function getData() {
 
 			return locationData;
@@ -134,8 +141,8 @@ define({
 		function analyzeCoords(coords){
 			if (positionAquiered && 
 					(
-							Math.abs(locationDataLastGood.latitude -  coords.latitude ) >= 0.05 ||
-							Math.abs(locationDataLastGood.longitude -  coords.longitude ) >= 0.05
+							Math.abs(locationDataLastGood.latitude -  coords.latitude ) >= 0.02 ||
+							Math.abs(locationDataLastGood.longitude -  coords.longitude ) >= 0.02
 					))
 			{
 				event.fire('distanceChange', 'distanceChange');
@@ -161,6 +168,7 @@ define({
 				event.fire('found', positionAquiered);
 				//event.fire('log', 'positionAquiered');
 			}
+			saveSettings();
 			//console.log('Location succcess');
 			event.fire('change', getData());
 			stop();
@@ -184,7 +192,7 @@ define({
 					event.fire('found', positionAquiered);
 					//event.fire('log', 'positionAquiered fallback');
 				}
-				
+				saveSettings();
 				//console.log('Location succcess in fallback');
 				event.fire('change', getData());
 				stop();
@@ -198,13 +206,14 @@ define({
 		function doFallback() {
 			//event.fire('error', 'doFallback');
 			console.warn('doFallback');
+			event.fire('error', 'doFallback');
 			fallbackSensor = true;
 			locationSensor.start(CONTEXT_TYPE, succcessFallback, errorFallback, optionGPS);
 		}
 		function errorFallback(err) {
 			errorMsg = err.message;
 			console.error('Location error :'+err.message);
-//			//event.fire('error', err.message);
+//			event.fire('error', err.message);
 			doFallback();
 			//event.fire('change', getDataLastGood());
 		}
@@ -216,13 +225,14 @@ define({
 			case err.TIMEOUT:
 				event.fire('error', err.message);
 				// Quick fallback when no suitable cached position exists.
-				doFallback();
+				
 				//console.error(err.message);
 				break;
 			default:
 				event.fire('error', err.message);
 				console.error(err.message);
 			}
+			doFallback();
 
 			// event.fire('change', getDataLastGood());
 
@@ -304,10 +314,18 @@ define({
 		 * @public
 		 */
 		function init() {
-			bindEvents();
-			resetData();
-
-			locationSensor = (tizen && tizen.humanactivitymonitor) || (window.webapis && window.webapis.motion) || null;
+			bindEvents(); 
+			resetData(); 
+			/*if (tizen.preference.exists('location.position')) {
+        		
+        		loadSettings();
+        		console.log(getData());
+        		positionAquiered = true;
+    			event.fire('found', positionAquiered);
+    			//event.fire('change', getData());
+			}
+			*/
+			locationSensor = tizen.humanactivitymonitor;
 			
 		}
 

@@ -40,10 +40,11 @@ html, body {
 }
 
 #splash-page{
-	display: -webkit-flex;
+	
     -webkit-align-items: center;
     justify-content:center;
     align-items:center;
+    vertical-align:middle;
     width: 100%;
     height: 100%;
     top:0px;
@@ -51,26 +52,63 @@ html, body {
     margin:0;
     padding:0;
     z-index:0;
+
     position: absolute;
     background:#000000;
+    touch-action: manipulation;
    /* background-image: url(/icon.png);
     background-repeat: no-repeat;
-  	background-size: 360px 360px;*/
+  	background-size: 360px 360px;*/ 
+}
+
+#splash-page.on {
+	display: -webkit-flex;
+	transform: scale(1); 
+	opacity:1;
+	transition-property: opacity, transform;
+	transition-duration: 0.3s;  
+	transition-timing-function: ease-in;
+}
+
+#splash-page.off {
+	transform: scale(1.3); 
+	/*display: block;*/
+    opacity:0.5;
+	transition-property: opacity, transform;
+	transition-duration: 0.3s;  
+	transition-timing-function: ease-in;
+}
+
+#splash-page.hide {
+	display:none;
+	transform: scale(1.3); 
+	opacity:0;
+	transition-property: opacity, transform;
+	transition-duration: 0.03s;  
+	transition-timing-function: ease-in;
 }
 #splash-page .loader{
 	position:relative;
 	width: 330px;
 	height: 330px;
-	border: 4px solid rgba(255,255,255,0.2); 
+	margin:15px 15px;
+	
+	color:#FFFFFF;
+	border: 4px solid rgba(200, 200, 200, 0.2); 
 	border-radius:50%;
 	overflow: hidden;
-	box-shadow: -5px -5px 10px rgba(255,255,255,0.2), 
+	box-shadow: -5px -5px 10px rgba(200, 200, 200, 0.2), 
 				 5px 5px 5px rgba(30,30,30,0.1),
-				 inset -5px -5px 10px rgba(255,255,255,0.2), 
-				 inset 5px 5px 5px rgba(0,0,0,0.1);
+				 inset -5px -5px 10px rgba(200, 200, 200, 0.2), 
+				 inset 5px 5px 5px rgba(30, 30, 30,0.1);
 }
-#splash-page .loader::before{
-	content:'';
+#splash-page .loader:before{
+	content:'\00a0 \00a0 LOADING';
+	font-family: 'FutureNow';
+	align-items:center;
+    vertical-align:middle;
+    font-size:60px;
+    line-height:267px;
 	position:absolute;
 	top:25px;
 	left:25px;
@@ -78,19 +116,22 @@ html, body {
 	bottom:25px;
 	background:#000000;
 	border-radius: 50%;
-	border: 4px solid rgba(255,255,255,0.2); 
-	box-shadow:  inset -5px -5px 10px rgba(255,255,255,0.2), 
+	border: 4px solid rgba(200, 200, 200, 0.2); 
+	box-shadow:  inset -5px -5px 10px rgba(200, 200, 200, 0.2), 
 				 inset 5px 5px 5px rgba(30,30,30,0.1);
 }
 #splash-page .loader span {
 	position: absolute;
+	display:block;
 	width:100%;
 	height: 100%;
+	
 	border-radius:50%;
 	background: linear-gradient(#f3ff14, #ffa114, #e83313);
 	z-index: -1;
-	
-	/*filter: blur(20px);*/
+	 /* -webkit-filter: blur(1.3rem);
+          filter: blur(1.3rem);
+*/
 	animation: animate 1s linear infinite;
 }
 @keyframes animate {
@@ -137,7 +178,7 @@ html, body {
 }
 #settings.hide {
 	display: none;
-	transform: scale(1.85); 
+	transform: scale(1.3); 
 	opacity:0;
 	transition-property: opacity, transform;
 	transition-duration: 0.03s;  
@@ -227,6 +268,7 @@ html, body {
     -khtml-user-select  : none;
     -ms-user-select     : none;
     user-select     : none;
+    background-color:#000000;
     
 } 
 #container.on {
@@ -592,7 +634,7 @@ html, body {
 	text-align:center;
 	transition: color 0.2s ease, background 0.2s ease; 
 	color:#FFFFFF;
-	border-radius:5px;
+	/*border-radius:5px;*/
 }
 
 #weather .forecast .block .hour, #weather .forecast .block .temp {

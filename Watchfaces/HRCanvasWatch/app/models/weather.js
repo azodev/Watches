@@ -80,24 +80,7 @@ define({
 			apiParams.lat = latitude;
 			apiParams.lon = longitude;
 		}
-		/*function decodeMapping() {
-			xmlHttp = new XMLHttpRequest();
-			xmlHttp.overrideMimeType("application/json");
-			xmlHttp.onreadystatechange = function() {
-				if (this.readyState === XMLHttpRequest.DONE) {
-					if (xmlHttp.responseText) {
-						// Parses responseText to JSON
-						mapping = JSON.parse(this.responseText);
-
-					} else {
-						console.error("Status de la réponse: %d (%s)", this.status, this.statusText);
-					}
-				}
-			};
-			xmlHttp.open("GET", MAPPING_FILE, true);
-			xmlHttp.send(null);
-			
-		}*/
+		
 		
 		
 		async function  fetchMapping(url) {
@@ -123,16 +106,6 @@ define({
 			});
 		}
 		
-		/*async function fetchMapping() {
-			let response = await fetch(MAPPING_FILE);
-			
-			  if (!response.ok) {
-			    throw new Error('FILE error! status: '+response.status);
-			  } else {
-				  return await response.json();
-			   
-			  }
-		}*/
 		
 		
 		function getMapping(id, dayNightBool) {
@@ -153,7 +126,7 @@ define({
 		}
 		
 
-		function onPositionFound() {
+		function onPositionFound(e) {
 			
 			coords = locationModel.getData();
 			//console.log('onPositionFound');
@@ -162,6 +135,7 @@ define({
 				doUpdate();
 			} else {
 				console.error('error : W Cannot decode position');
+				event.fire ('error','error onPositionFound');
 			}
 
 		}
@@ -172,7 +146,7 @@ define({
 				doUpdate();
 			} else {
 				//console.error('error : W Cannot decode position');
-				//event.fire ('error','error onDistanceChange');
+				event.fire ('error','error onDistanceChange');
 			}
 		}
 		function onUpdateTriggered (message){
@@ -184,7 +158,7 @@ define({
 					//event.fire('log', message);
 				} else {
 					console.error('error : W Cannot decode position');
-					//event.fire ('error','error onUpdateTriggered');
+					event.fire ('error','error onUpdateTriggered');
 					//event.fire('log', 'error : W Cannot decode position');
 				}
 			}
@@ -206,6 +180,9 @@ define({
 				//console.log('doUpdate');
 				updateWeatherWithWorker();
 			}
+			else {
+				event.fire('error', 'Navigator offline');
+			}
 		}  
 		
 		
@@ -224,50 +201,14 @@ define({
 				}
 				worker.onerror = function (err){
 					console.error(err);
+					event.fire('error', 'There has been a problem with your fetch w operation: ' + err.message);
 				};
 				worker.postMessage({
 		            'url': url
 		        });
 			}
 		}
-		/*
-		function updateWeatherP(){
-			if (navigator.onLine){
-				url = API_URL_WEATHER + outArray.join('&');
-				fetchWeather(url).then((json) => {
-					
-					weatherInform = json;
-	
-					now = Math.round(Date.now() / 1000);
-					
-					day = (now >= weatherInform.sys.sunrise && now <= weatherInform.sys.sunset) ? true : false;
-					// Gets icon code from information
-					weatherInform.day = day;
-					weatherInform.lastWeatherCallDate = now;
-					//console.debug(weatherInform);
-					// Gets weather string from information
-					weatherFound = true;
-					event.fire('found', weatherInform);
-					updateForecastP();
-					//console.log('Update Weather: Found');
-					  
-					}).catch(e => {
-						console.error('There has been a problem with your fetch operation: ' + e.message);
-						//event.fire('log', 'There has been a problem with your fetch w operation: ' + e.message);
-				});
-			}
-		}
-		async function fetchWeather() {
-			
-			let response = await fetch(url);
-			
-			  if (!response.ok) {
-			    throw new Error('HTTP error! status: '+response.status);
-			  } else {
-				  return await response.json();
-			  }
-		}
-		*/
+		
 		function updateForecastWithWorker(){
 			if (navigator.onLine){
 				url = API_URL_FORECAST + outArray.join('&');
@@ -284,11 +225,13 @@ define({
 						buildDaysForecasts();
 						forecastFound = true;
 						event.fire('forecast_found', forecastInform);
-						  
+						worker.terminate();  
 					}
 				}
 				worker.onerror = function (err){
 					console.error(err);
+					event.fire('error', 'There has been a problem with your fetch f operation: ' + err.message);
+
 				};
 				worker.postMessage({
 		            'url': url,
@@ -298,7 +241,7 @@ define({
 			}
 		}
 		
-		
+		/*
 		function updateForecastP(){
 			if (navigator.onLine){
 				fetchForecast().then( function (json) {
@@ -329,11 +272,11 @@ define({
 					  
 					}).catch(function (e)  {
 						console.error('There has been a problem with your fetch operation: ' + e.message);
-						//event.fire('log', 'There has been a problem with your fetch f operation: ' + e.message);
+						event.fire('error', 'There has been a problem with your fetch f operation: ' + e.message);
 						
 				});
 			}
-		}
+		}*/
 		async function fetchForecast() {
 			url = API_URL_FORECAST + outArray.join('&');
 			let response = await fetch(url);
@@ -426,12 +369,7 @@ define({
 			let overflowerBack = document.createElement('div');
 			overflowerBack.setAttribute ('id','overflower-back');
 			overflowerBack.className = 'overflower-back';
-			//overflowerBack.innerHTML = 'Lorem lipsum';
-			/*
-			let overflower_content = document.createElement('div');
-			overflower_content.setAttribute ('id','overflower_content'); 
-			overflower.appendChild(overflower_content);
-			*/
+
 			weather.setAttribute ('id','weather'); 
 			weather.className = 'off';
 			weather.setAttribute('augmented-ui', 'tl-clip tr-clip bl-clip br-clip b-clip-x t-clip-x l-clip-y r-clip-y exe');
@@ -477,8 +415,9 @@ define({
 				
 			});
 			event.on({
-				'models.location.found' : function() {
-					onPositionFound(true);
+				'models.location.found' : function(e) {
+					console.log('onPositionFound');
+					onPositionFound(e);
 				},
 				//'models.weather.found' : updateForecastP,
 				//'models.location.distanceChange' : onDistanceChange,

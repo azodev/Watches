@@ -79,7 +79,8 @@ define({
 		    })*/
 			event.on({
 				//'models.location.distanceChange' : postNotification,
-				//'models.location.log' : postNotification,
+				'models.location.error' : postNotification,
+				'models.location.log' : postNotification,
 				'models.motion.error' : postNotification,
 				'models.pedometer.error' : postNotification,
 				//'views.canvas.log' : postNotification,

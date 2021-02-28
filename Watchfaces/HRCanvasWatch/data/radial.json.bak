@@ -70,7 +70,56 @@
       "id": "update",
       "title": "Update",
       "icon": "#update"
+    },
+    {
+      "id": "app1",
+      "title": "Stopwatch",
+      "icon": "#chronometer",
+      "appid": "com.samsung.stopwatch-wc1"
+    },
+    {
+      "id": "app2",
+      "title": "Timer",
+      "icon": "#timer",
+      "appid": "com.samsung.timer-wc1"
+    },
+    {
+      "id": "shortcuts",
+      "title": "Apps...",
+      "icon": "#applist",
+      "items": [
+            {
+              "id": "app3",
+              "icon": "#app_svg_3",
+              "iconPath": "/usr/apps/org.tizen.alarm/shared/res/org.tizen.alarm.png",
+              "title": "App 3"
+            },
+            {
+              "id": "app4",
+              "icon": "#app_svg_4",
+              "title": "App 4"
+            },
+            {
+              "id": "app5",
+              "icon": "#app_svg_5",
+              "title": "App 5"
+            },
+            {
+              "id": "app6",
+              "icon": "#app_svg_6",
+              "title": "App 6"
+            },
+            {
+              "id": "app7",
+              "icon": "#app_svg_7",
+              "title": "App 7"
+            },
+            {
+              "id": "app8",
+              "icon": "#app_svg_8",
+              "title": "App 8"
+            }
+          ]
     }
-    
   ]
 }

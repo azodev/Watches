@@ -22,12 +22,15 @@ define({
          */
         var event = req;
 
-        var svgMenu = null;   
-        var menuItems = null;
+        var svgMenu = null;
+        var defaultMenuItems = [];
+        var menuItems = [];
+        var appsItems = [];
         var theme = 'ice';
         var isOpen = false;
         var loaderWk;
-        var appsInstalled = [];
+        const APP_LIMIT = 4;
+        
         var shortcuts = [];
         
         /**
@@ -51,7 +54,9 @@ define({
          */
         function bindEvents() {
            event.on ({
-        	   'RadialMenu.closing' : setClose
+        	   'RadialMenu.closing' : setClose,
+        	   'views.settings.reloadApps' : reloadApps,
+        	   'views.settings.initApps' : initApps
            });
            /*window.addEventListener('tizenhwkey', function(ev) {
                if (ev.keyName === 'back') {
@@ -68,19 +73,20 @@ define({
          * @public
          *
          */
-        function parseMenuItems(mi){
+        
+        function reloadApps(e){
         	
+        	let mi = processSettings(e);
+        	svgMenu.setMenuItems(defaultMenuItems.concat(mi));
         }
         
         
-        function init() {
-            // bind events to page elements
+        
+        function initApps(e){
         	
-            bindEvents();
-            
-            let loader = loadMenuItems().then((mi) => {
-            	menuItems = mi;
-            	parseMenuItems(menuItems);
+        	let loader = loadMenuItems().then((mi) => {
+            	defaultMenuItems = mi;
+            	mergeMenuItems();
             	
             	svgMenu = new RadialMenu({
                     parent      : document.querySelector('#container'),
@@ -134,6 +140,7 @@ define({
                         	//closeMenuProperly(item);
                         	//tizen.application.getAppsInfo(onListInstalledApps, null);
                         	closeMenuProperly(item);
+                        	
                         	event.fire('openSettings', true);
                         	
                         }
@@ -144,12 +151,93 @@ define({
     				theme = tizen.preference.getValue('theme');
     				svgMenu.setTheme(theme);
     			}
-                svgMenu.setMenuItems(menuItems);
+                //svgMenu.setMenuItems(menuItems);
+                let apps = processSettings(e);
+                svgMenu.setMenuItems(defaultMenuItems.concat(apps));
+                
             });
+        	
+        }
+        
+        function processSettings(e){
+        	if (e.detail) {
+        		let mi = [];
+        		menuItems = defaultMenuItems;
+        		let i;
+        		let apps = e.detail;
+        		let app_limit_crossed = false;
+        		
+        		appsItems = [];
+        		//console.log(apps);
+        		let nb_items = Object.keys(apps).length;
+        		if (nb_items >= APP_LIMIT){
+        			app_limit_crossed = true;
+        		}
+    			let secondLevel = {
+    				      "id": "shortcuts",
+    				      "title": "Apps...",
+    				      "icon": "#applist",
+    				      "items": []};
+    			/*Object.keys(apps).forEach(key => {
+        			appsItems.push(apps.key);
+        			console.log(key);
+        			if (i>2){
+        				secondLevel.items.push(apps.key);
+        			}
+            			
+    				i++;
+    			});*/
+    			
+    			for (i=1 ; i <= nb_items ; i++){
+    				if (apps['slot_'+i].title.length > 12){
+    					apps['slot_'+i].title = apps['slot_'+i].title.substring(0,11)+'...';
+    				}
+        			
+        			if (app_limit_crossed && i>1){
+        				secondLevel.items.push(apps['slot_'+i]);
+        			}
+        			else {
+        				appsItems.push(apps['slot_'+i]);
+        			}
+        			
+        		}
+        		if (nb_items >= APP_LIMIT){
+        			appsItems.push(secondLevel);
+        		}
+        		
+        		
+        		//console.log(appsItems);
+        		//console.log(mi);
+        		
+        		for (i = 0 ; i< appsItems.length ; i++){
+        			mi.push(appsItems[i]);
+        		}
+        		//appsItems.forEach(element => menuItems.push(element));
+        		//console.log(mi);
+        		//svgMenu.setMenuItems(menuItems);
+        		return mi;
+        	} 
+        }
+        
+        function mergeMenuItems(){
+        	menuItems = defaultMenuItems;
+        	//menuItems.items.push();
+        }
+        
+        
+        function init() {
+            // bind events to page elements
+        	
+            bindEvents();
             
             
             
             
+            
+            
+        }
+        function loadMenu(){
+        	
         }
         function closeMenuProperly(item){
         	setTimeout(function(){
@@ -205,6 +293,7 @@ define({
 				loaderWk.onmessage = function(e) {
 					if (e){
 						resolve( e.data.json.items);
+						loaderWk.terminate();
 					}
 				}
 				loaderWk.onerror = function (err){

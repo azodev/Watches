@@ -1030,10 +1030,10 @@ define({
 				if (radialmenu.getOpen()){ 
 					deg.x = (gravCenter.y - 180)*2;
 					deg.y = (gravCenter.x - 180)*2;
-					if (deg.x <= -40 ) deg.x = -40;
-					if (deg.x >= 40 ) deg.x = 40;
-					if (deg.y <= -40 ) deg.y = -40;
-					if (deg.y >= 40 ) deg.y = 40;
+					if (deg.x <= -40 ) deg.x = -30;
+					if (deg.x >= 40 ) deg.x = 30;
+					if (deg.y <= -40 ) deg.y = -30;
+					if (deg.y >= 40 ) deg.y = 30;
 					let menuHolderStyle = document.querySelector("div.menuHolder").style;
 					menuHolderStyle.setProperty('--degx',  -deg.x + "deg");
 					menuHolderStyle.setProperty('--degy',   deg.y + "deg");
@@ -1042,10 +1042,10 @@ define({
 				if (widgetFullScreenDiplayed ==true){
 					deg.x = (gravCenter.y - 180)*2;
 					deg.y = (gravCenter.x - 180)*2;
-					if (deg.x <= -40 ) deg.x = -40;
-					if (deg.x >= 40 ) deg.x = 40;
-					if (deg.y <= -40 ) deg.y = -40; 
-					if (deg.y >= 40 ) deg.y = 40; 
+					if (deg.x <= -40 ) deg.x = -30;
+					if (deg.x >= 40 ) deg.x = 30;
+					if (deg.y <= -40 ) deg.y = -30; 
+					if (deg.y >= 40 ) deg.y = 30; 
 					//document.querySelector("#calendar.on").style.opacity=1;
 					//calendar = document.querySelector("#calendar.on");
 					//if (calendarOn.style.opacity < 1) calendarOn.style.opacity = 1;
@@ -1498,8 +1498,30 @@ define({
 					  time_to_recreate = true;
 					}, max_time);
 				themeLoaderWk.terminate();
-				canvasDrawer.startShow(); 
-				animRequest = window.requestAnimationFrame(drawWatchContent);
+				
+				
+				
+				setTimeout(function (){
+					//document.querySelector('#splash-page').setAttribute('class', 'hide');
+					let splash = document.querySelector('#splash-page');
+					setClassAndWaitForTransition(splash,'off','opacity').then(function () {
+						splash.setAttribute('class', 'hide');
+						//document.querySelector('#container').setAttribute('class', 'on');
+						//canvasDrawer.startShow(); 
+						animRequest = window.requestAnimationFrame(drawWatchContent);
+						
+						
+						
+						setClassAndWaitForTransition(document.querySelector('#container'),'on','opacity').then(function () {
+							canvasDrawer.startShow(); 
+							
+						});
+					});
+					
+					
+					
+					
+				},500);
 				//document.querySelector('#splash-page').style.setProperty('display','none');
 			});
 			
