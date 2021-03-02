@@ -506,7 +506,7 @@ define({
 			/**@todo */
 			canvasBackground.context.clearRect(0, 0, canvasBackground.canvas.width, canvasBackground.canvas.height);
 			//
-			canvasDrawer.renderText(canvasBackground.context, "AZO WATCH v.1", center.x, center.y - (watchRadius * 0.7), 13, "#c9c9c9", {
+			canvasDrawer.renderText(canvasBackground.context, "AZO WATCH v.1", center.x, center.y - (watchRadius * 0.7), 13, themeData.fontcolor, {
 				font : 'FutureNow',
 				align : 'center'
 			});
@@ -528,7 +528,7 @@ define({
 
 				// $results.text("Elapsed time= " + Math.round(sinceStart / 1000
 				// * 100) / 100 + " secs @ " + currentFps + " fps.");  currentFps 
-				canvasDrawer.renderText(canvasContent.context, particles.length+" - "+currentFps+" fps", center.x, center.y - (watchRadius * 0.45), 15, "#c9c9c9", {
+				canvasDrawer.renderText(canvasContent.context, particles.length+" - "+currentFps+" fps", center.x, center.y - (watchRadius * 0.45), 15, themeData.fontcolor, {
 					font : 'FutureNow',
 					align : 'center'
 				});
@@ -599,35 +599,35 @@ define({
 			
 				
 			
-				canvasDrawer.renderCircleShadows(canvasContent.context, appDrawerShape, {r:15,g:15,b:15,a:0.7},5);
-				canvasDrawer.renderCircle(canvasContent.context, appDrawerShape, "#000000",false,false,2,false);
-				canvasDrawer.roundRect(canvasContent.context, aShape1, 3, false, true, null, "rgba(0, 0, 0,0.1)");
-				canvasDrawer.roundRect(canvasContent.context, aShape2, 3, false, true, null, "rgba(0, 0, 0,0.1)");
-				canvasDrawer.roundRect(canvasContent.context, aShape3, 3, false, true, null, "rgba(0, 0, 0,0.1)");
-				canvasDrawer.roundRect(canvasContent.context, aShape4, 3, false, true, null, "rgba(0, 0, 0,0.1)");
+				//canvasDrawer.renderCircleShadows(canvasContent.context, appDrawerShape, {r:100,g:100,b:100,a:0.08},5);
+				canvasDrawer.renderCircle(canvasContent.context, appDrawerShape,  "#000000","rgba(100, 100, 100, 0.08)",false,2,false);
+				canvasDrawer.roundRect(canvasContent.context, aShape1, 3, false, true, null, "rgba(0, 0, 0,0.08)");
+				canvasDrawer.roundRect(canvasContent.context, aShape2, 3, false, true, null, "rgba(0, 0, 0,0.08)");
+				canvasDrawer.roundRect(canvasContent.context, aShape3, 3, false, true, null, "rgba(0, 0, 0,0.08)");
+				canvasDrawer.roundRect(canvasContent.context, aShape4, 3, false, true, null, "rgba(0, 0, 0,0.08)");
 				
 				if (baroDisplayed){
 					
-					canvasDrawer.roundRect(canvasContent.context, new Shape(center.x - 112, center.y - 63, 85, 58) ,10, true, false, null, "rgba(5, 5, 5, 0.7)"); // 232
+					canvasDrawer.roundRect(canvasContent.context, new Shape(center.x - 112, center.y - 63, 85, 58) ,10, true, false, null, "rgba(100, 100, 100, 0.08)"); // 232
 					
-					canvasDrawer.renderTextGradient(canvasContent.context, 'Altitude', center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.30), 16, "#c9c9c9", {
+					canvasDrawer.renderTextGradient(canvasContent.context, 'Altitude', center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.30), 16, themeData.fontcolor, {
 						font : 'FutureNow',
 						align : 'right',
 						gradient : true,
 						motion: motion
 					});
-					canvasDrawer.renderText(canvasContent.context, altitude, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.23), 16, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context, altitude, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.23), 16, themeData.fontcolor, {
 						font : 'FutureNow',
 						align : 'right'
 					});
-					canvasDrawer.renderTextGradient(canvasContent.context, 'Pressure', center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.16), 16, "#c9c9c9", {
+					canvasDrawer.renderTextGradient(canvasContent.context, 'Pressure', center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.16), 16, themeData.fontcolor, {
 						font : 'FutureNow',
 						align : 'right',
 						gradient : true,
 						motion: motion 
 					});
 
-					canvasDrawer.renderText(canvasContent.context, pressure, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.09), 16, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context, pressure, center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.09), 16, themeData.fontcolor, {
 						font : 'FutureNow',
 						align : 'right'
 					});
@@ -636,13 +636,13 @@ define({
 				
 				if (timeDisplayed){
 					// Battery
-					canvasDrawer.renderText(canvasContent.context, Math.round(batteryLevel) + '%', center.x+94, center.y - (watchRadius * 0.4), 17, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context, Math.round(batteryLevel) + '%', center.x+94, center.y - (watchRadius * 0.4), 17, themeData.fontcolor, {
 						font : 'FutureNow',
 						align : 'center',
 						gradient : true,
 						motion: motion
 					});
-					canvasDrawer.renderText(canvasContent.context,datetime.getDate()+"/"+(datetime.getMonth()+1)+"/"+datetime.getFullYear(), center.x + 108, center.y - 50, 25, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context,datetime.getDate()+"/"+(datetime.getMonth()+1)+"/"+datetime.getFullYear(), center.x + 108, center.y - 50, 25, themeData.fontcolor, {
 						font : 'FutureNow',
 						align : 'right',
 						gradient : true,
@@ -650,13 +650,13 @@ define({
 						
 					});
 					//canvasDrawer.renderTimeBisShadows (canvasContent.context, dateArray, center.x + 33, center.y - 23, 53, {r:40,g:40,b:40,a:0.9},5);
-					canvasDrawer.renderTimeBis(canvasContent.context, dateArray, center.x + 33, center.y - 23, 53, "#c9c9c9", {
+					canvasDrawer.renderTimeBis(canvasContent.context, dateArray, center.x + 33, center.y - 23, 53, themeData.fontcolor, {
 						gradient : true,
 						motion: motion,
 						stroke:false
 						
 					});
-					canvasDrawer.renderText(canvasContent.context, dateArray.second, center.x + 138, center.y - 16, 25, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context, dateArray.second, center.x + 138, center.y - 16, 25, themeData.fontcolor, {
 						font : 'FutureNow',
 						align : 'center',
 						gradient : true,
@@ -669,33 +669,33 @@ define({
 				
 				if (miniWeatherDisplayed){
 					
-					canvasDrawer.roundRectShadows(canvasContent.context, wShape,10, {r:10,g:10,b:10,a:0.7},5);
-					canvasDrawer.roundRect(canvasContent.context, wShape,10, true, false, null, "rgba(8, 8, 8,0.7)");
+					//canvasDrawer.roundRectShadows(canvasContent.context, wShape,10, {r:100,g:100,b:100,a:0.1},5);
+					canvasDrawer.roundRect(canvasContent.context, wShape,10, true, false, null, "rgba(100, 100, 100, 0.08)");
 					drawWeather(forecastDisplayed);
 				}
 				
 				
 				if (miniCalendarDisplayed) {
-					canvasDrawer.roundRectShadows(canvasContent.context, calendarShape,10, {r:10,g:10,b:10,a:0.7},5);
-					canvasDrawer.roundRect(canvasContent.context, calendarShape,10, true, false, null, "rgba(8, 8, 8,0.7)");
-					canvasDrawer.renderText(canvasContent.context, 'Events', calendarShape.getCoords().x+50, calendarShape.getCoords().y+20, 25, "#c9c9c9", {
+					//canvasDrawer.roundRectShadows(canvasContent.context, calendarShape,10, {r:100,g:100,b:100,a:0.1},5);
+					canvasDrawer.roundRect(canvasContent.context, calendarShape,10, true, false, null, "rgba(100, 100, 100, 0.08)");
+					canvasDrawer.renderText(canvasContent.context, 'Events', calendarShape.getCoords().x+50, calendarShape.getCoords().y+20, 25, themeData.fontcolor, {
 						font : 'FutureNow',
 						align : 'center',
 							gradient : true, 
 							motion: motion
 					});
-					canvasDrawer.renderText(canvasContent.context, calendarModel.getNbEvents() , calendarShape.getCoords().x+50, calendarShape.getCoords().y+50, 30, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context, calendarModel.getNbEvents() , calendarShape.getCoords().x+50, calendarShape.getCoords().y+50, 30, themeData.fontcolor, {
 						font : 'FutureNow',
 						align : 'center'
 					});
 					
 				}
-				canvasDrawer.renderCircleShadows(canvasContent.context, hrShape, {r:15,g:15,b:15,a:0.7},5);
-				canvasDrawer.renderCircle(canvasContent.context, hrShape, "#000000","rgba(10, 10, 10,0.7)",false,1.5,false);
+				//canvasDrawer.renderCircleShadows(canvasContent.context, hrShape, {r:100,g:100,b:100,a:0.1},5);
+				canvasDrawer.renderCircle(canvasContent.context, hrShape, "#000000","rgba(100, 100, 100, 0.08)",false,1.5,false);
 				if (heartRateDisplayed &&  heartRateFound && heartRate.getData().rate !== null) {
 					
 					
-					canvasDrawer.renderText(canvasContent.context, heartRate.getData().rate, center.x , center.y + (watchRadius * 0.67), 25, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context, heartRate.getData().rate, center.x , center.y + (watchRadius * 0.67), 25, themeData.fontcolor, {
 						font : 'FutureNow',
 						align : 'center',
 						gradient : true,
@@ -705,7 +705,7 @@ define({
 
 				}
 				else {
-					canvasDrawer.renderText(canvasContent.context, '-', center.x , center.y + (watchRadius * 0.67), 25, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context, '-', center.x , center.y + (watchRadius * 0.67), 25, themeData.fontcolor, {
 						font : 'FutureNow',
 						align : 'center',
 						gradient : true,
@@ -757,26 +757,26 @@ define({
 
 				weatherIcon = weatherModel.getMapping(weatherValue.weather[0].id, weatherValue.day);
 				
-				canvasDrawer.renderText(canvasContent.context, 'Temp', wCoords.text1.x, wCoords.text1.y, wCoords.text1.size, "#c9c9c9", {
+				canvasDrawer.renderText(canvasContent.context, 'Temp', wCoords.text1.x, wCoords.text1.y, wCoords.text1.size, themeData.fontcolor, {
 					font : 'FutureNow',
 					align : 'center',
 						gradient : true,
 						motion: motion
 				});
-				canvasDrawer.renderText(canvasContent.context, roundCoord(weatherValue.main.temp, 1) + "°", wCoords.temp.x, wCoords.temp.y, wCoords.temp.size, "#c9c9c9", {
+				canvasDrawer.renderText(canvasContent.context, roundCoord(weatherValue.main.temp, 1) + "°", wCoords.temp.x, wCoords.temp.y, wCoords.temp.size, themeData.fontcolor, {
 					font : 'FutureNow',
 					align : 'center'
 				});
 				if (forecastMode){
 					//city weatherValue.name
-					canvasDrawer.renderTextGradient(canvasContent.context, textHelper.truncateBis(weatherValue.name, 12, '...'), wCoords.city.x, wCoords.city.y, wCoords.city.size, "#c9c9c9", {
+					canvasDrawer.renderTextGradient(canvasContent.context, textHelper.truncateBis(weatherValue.name, 12, '...'), wCoords.city.x, wCoords.city.y, wCoords.city.size, themeData.fontcolor, {
 						font : 'FutureNow',
 						align : 'left',
 						gradient : true
 					});
 				}
 				
-				canvasDrawer.renderText(canvasContent.context, textHelper.truncateBis(weatherValue.weather[0].main, (!forecastMode)?8:12,'...'), wCoords.text2.x, wCoords.text2.y, wCoords.text2.size, "#c9c9c9", {
+				canvasDrawer.renderText(canvasContent.context, textHelper.truncateBis(weatherValue.weather[0].main, (!forecastMode)?8:12,'...'), wCoords.text2.x, wCoords.text2.y, wCoords.text2.size, themeData.fontcolor, {
 					font : 'FutureNow',
 					align : 'left',
 					gradient : true,
@@ -787,7 +787,7 @@ define({
 				weatherIcon = weatherModel.getMapping();
 			}
 
-			canvasDrawer.renderText(canvasContent.context, weatherIcon, wCoords.icon.x,wCoords.icon.y, wCoords.icon.size, "#c9c9c9", {
+			canvasDrawer.renderText(canvasContent.context, weatherIcon, wCoords.icon.x,wCoords.icon.y, wCoords.icon.size, themeData.fontcolor, {
 				font : 'artill_clean_icons',
 				align : 'center',
 					gradient : true,
@@ -799,17 +799,17 @@ define({
 				forecastIndexX = center.x-18;
 				for (var i = 0; i < 5; i++) {
 					forecastHour = new Date(forecastValue.list[i].dt * 1000).getHours();
-					canvasDrawer.renderText(canvasContent.context, forecastHour + "h", forecastIndexX, center.y + (watchRadius * 0.15), 15, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context, forecastHour + "h", forecastIndexX, center.y + (watchRadius * 0.15), 15, themeData.fontcolor, {
 						font : 'FutureNow',
 						align : 'center'
 					});
 					canvasDrawer.renderText(canvasContent.context, weatherModel.getMapping(forecastValue.list[i].weather[0].id, forecastValue.list[i].day), forecastIndexX, center.y + (watchRadius * 0.22), 31,
-							"#c9c9c9", {
+							themeData.fontcolor, {
 								font : 'artill_clean_icons',
 								align : 'center',gradient : true,
 								motion: motion
 							});
-					canvasDrawer.renderText(canvasContent.context, ~~(forecastValue.list[i].main.temp) + "°", forecastIndexX + 3, center.y + (watchRadius * 0.37), 15, "#c9c9c9", {
+					canvasDrawer.renderText(canvasContent.context, ~~(forecastValue.list[i].main.temp) + "°", forecastIndexX + 3, center.y + (watchRadius * 0.37), 15, themeData.fontcolor, {
 						font : 'FutureNow',
 						align : 'center'
 					});
@@ -981,7 +981,7 @@ define({
 			canvasDrawer.renderTimeBis(canvasContent.context, dateArray, center.x - 20 +textHelper.getRandomInt(-10,10), center.y+ textHelper.getRandomInt(-10,10), 100, grdAmbiant,{
 				align : 'center'
 			});
-			canvasDrawer.renderText(canvasContent.context,datetime.getDate()+"/"+(datetime.getMonth()+1)+"/"+datetime.getFullYear(), center.x +10 + textHelper.getRandomInt(-10,10), center.y - 80+ textHelper.getRandomInt(-10,20), 25, "#c9c9c9", {
+			canvasDrawer.renderText(canvasContent.context,datetime.getDate()+"/"+(datetime.getMonth()+1)+"/"+datetime.getFullYear(), center.x +10 + textHelper.getRandomInt(-10,10), center.y - 80+ textHelper.getRandomInt(-10,20), 25, themeData.fontcolor, {
 				font : 'FutureNow',
 				align : 'center',
 				gradient : true
@@ -1538,6 +1538,10 @@ define({
 					if (e){
 						themeData  = e.data.json;
 						tizen.preference.setValue('theme',themeData.name);
+						document.body.style.setProperty('--bg', themeData.background); 
+						document.querySelector('#container').style.setProperty('--bg', themeData.background);
+						document.querySelector('#splash-page').style.setProperty('--bg', themeData.background);
+						document.querySelector('#splash-page').style.setProperty('--fontcolor', themeData.fontcolor);
 						//map = new Map([[themeData.effectClass, themeData.effectClass]]);
 						resolve(themeData);
 					}

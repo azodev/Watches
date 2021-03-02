@@ -6,6 +6,7 @@
   "root_colors": [  "rgb(149,149,149)", "rgb(244,244,244)"],
   "gradient": [ 	"rgb(101,101,107)", "rgb(149,149,149)",	"rgb(190,190,190)",	"rgb(244,244,244)"],
   "background": "#000000",
+  "fontcolor": "#c9c9c9",
   "radialGradient": [ 	"rgba(0, 0, 0,0.7)", "rgba(0, 0, 0,0.3)",	"rgba(0,0,0,0.4)","rgba(5,5,5,1)","rgba(40,40,40,1)"],
   "complication_bg": "#000000",
   "complication_shadow" : "-10"						

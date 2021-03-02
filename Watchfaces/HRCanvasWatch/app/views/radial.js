@@ -109,7 +109,7 @@ define({
                         	closeMenuProperly(item);
                         	
                         }
-                        else if (item.id == 'fire' || item.id == 'hisakura' || item.id == 'ice' || item.id == 'metal'){
+                        else if (item.id == 'fire' || item.id == 'hisakura' || item.id == 'ice' || item.id == 'metal' || item.id == 'custom'){
                         	changeTheme(item.id);
                         	svgMenu.setTheme(item.id);
                         	//tizen.preference.setValue('theme', item.id);

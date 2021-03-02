@@ -95,11 +95,11 @@ svg.menu > g > path.selected.ice {
 	fill: #096EB5;
 	transition: fill 0.1s ease;
 }
-svg.menu > g > path.metal {
+svg.menu > g > path.metal, svg.menu > g > path.custom {
 	fill: rgb(99,100,103);
 	transition: fill 0.1s ease;
 }
-svg.menu > g > path.selected.metal {
+svg.menu > g > path.selected.metal, svg.menu > g > path.selected.custom {
 	fill: rgb(190,190,190);
 	transition: fill 0.1s ease;
 }

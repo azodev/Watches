@@ -29,6 +29,11 @@
               "id": "metal",
               "icon": "#metal",
               "title": "Metal"
+            },
+            {
+              "id": "custom",
+              "icon": "#custom",
+              "title": "Custom"
             }
           ]
         },

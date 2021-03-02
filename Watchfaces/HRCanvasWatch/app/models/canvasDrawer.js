@@ -782,6 +782,7 @@ define({
 			calculateRadialGradientPosition(motionAcceleration.accelerationIncludingGravity);
 			
 			radialGradient = context.createRadialGradient(radialGradientCoords.x, radialGradientCoords.y, 0.000, 180.000, 180.000, 180.000);
+			
 			radialGradient.addColorStop(0.000, themeData.radialGradient[0]);
 			radialGradient.addColorStop(0.300, themeData.radialGradient[1]);
 			radialGradient.addColorStop(0.83,  themeData.radialGradient[2]);
