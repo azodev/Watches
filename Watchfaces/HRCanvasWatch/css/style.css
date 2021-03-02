@@ -52,10 +52,11 @@ html, body {
     margin:0;
     padding:0;
     z-index:0;
-
+	
     position: absolute;
     background:#000000;
     touch-action: manipulation;
+    overflow:hidden;
    /* background-image: url(/icon.png);
     background-repeat: no-repeat;
   	background-size: 360px 360px;*/ 
@@ -101,6 +102,7 @@ html, body {
 				 5px 5px 5px rgba(30,30,30,0.1),
 				 inset -5px -5px 10px rgba(200, 200, 200, 0.2), 
 				 inset 5px 5px 5px rgba(30, 30, 30,0.1);
+	touch-action: manipulation;
 }
 #splash-page .loader:before{
 	content:'\00a0 \00a0 LOADING';
@@ -401,6 +403,12 @@ html, body {
 	opacity:1; 
 	position: absolute;
 }
+#calendar.flipped, #weather.flipped {
+	transform: perspective(700px) rotateY(var(--degyFlipped)) rotateX(var(--degxFlipped)); 
+	transform-style: preserve-3d;
+	opacity:1; 
+	position: absolute;
+}
 
  #weather.off {
  	transform: perspective(700px) rotateY(var(--degy)) rotateX(var(--degx)) translateY(50px) translateX(-60px) scale(0.35); 
@@ -408,10 +416,14 @@ html, body {
 
 #calendar.on, #weather.on {
 	
-	transform: perspective(700px) rotateY(var(--degy)) rotateX(var(--degx)); 
+	transform: perspective(700px) rotateY(0deg) rotateX(0deg); 
 	transition-property: opacity, transform;
 	transition-duration: 0.3s;
 	transition-timing-function: ease-in;
+	opacity:1;
+}
+#calendar.active, #weather.active {
+	transform: perspective(700px) rotateY(var(--degy)) rotateX(var(--degx)); 	
 	opacity:1;
 }
 #overflower, #overflower-back {

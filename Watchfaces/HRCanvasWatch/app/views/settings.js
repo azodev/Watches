@@ -150,7 +150,7 @@ define({
         	let settingsPage = document.getElementById('settings');
         	let splash = document.getElementById('splash-page');
         	let settingsPageHeader = document.querySelector('#settings .ui-header');
-        	
+        	loadSettings();
         	
         	//setClassAndWaitForTransition(container,'off','opacity').then(function () {
         		splash.setAttribute('class', 'hide');
@@ -251,7 +251,7 @@ define({
 					saveSettings();
 					
 				});
-				if (i==2){
+				if (i==1 && Object.keys(current_settings.apps).length >= 4){
 					let divider = document.createElement("div");
 					divider.className = 'divider';
 					myParent.appendChild(divider);
@@ -265,12 +265,12 @@ define({
 			//e.preventDefault(); 
 			
 			if (settingsOn /*|| !containerOn*/){ 
-				console.log('Close settings');
+				//console.log('Close settings');
 				let container = document.getElementById('container');
 	        	let settingsPage = document.getElementById('settings');
 	        	let settingsPageHeader = document.querySelector('#settings .ui-header');
 				setClassAndWaitForTransition(settingsPage,'off','opacity').then(function () {
-					console.log('settings :  off');
+					//console.log('settings :  off');
 					
 					container.setAttribute('class', 'off'); 
 					settingsPage.setAttribute('class', 'hide');
@@ -278,7 +278,7 @@ define({
 					settingsOn =false;
 					setTimeout(function(){
 						setClassAndWaitForTransition(container,'on','opacity').then(function () {
-							console.log('container :  on');
+							//console.log('container :  on');
 	    					container.setAttribute('class', 'on'); 
 
 	    				});

@@ -206,7 +206,7 @@ define({
 		function doFallback() {
 			//event.fire('error', 'doFallback');
 			console.warn('doFallback');
-			event.fire('error', 'doFallback');
+			//event.fire('error', 'doFallback');
 			fallbackSensor = true;
 			locationSensor.start(CONTEXT_TYPE, succcessFallback, errorFallback, optionGPS);
 		}

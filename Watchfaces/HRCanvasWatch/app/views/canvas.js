@@ -279,7 +279,7 @@ define({
 				openRadialMenu(ev);
 				radialmenu.setOpen();
 			}
-			
+			/*
 			else if (calendarShape.isInSurface(clickPos,0) && !forecastDisplayed && !radialmenu.getOpen() && !widgetFullScreenDiplayed && calendarModel.hasVEvents()){
 				//console.log('Click fade');
 				resetGravCenter (10);
@@ -323,7 +323,7 @@ define({
 							
 					});
 				});
-			}
+			}*/
 			else if (hrShape.isInSurface(clickPos,5) && !radialmenu.getOpen()  ){
 				tizen.application.launch("com.samsung.shealth", null,null);
 			}
@@ -347,8 +347,10 @@ define({
 						
 						//calendar.setAttribute('class', 'on');
 						//holder.setAttribute('class', 'on');  
+						document.querySelector(widgetId).setAttribute('class', 'active');  
 						widgetOpened = true;
-						widgetOn = document.querySelector(widgetId+".on");
+						widgetOn = document.querySelector(widgetId+".active");
+						
 						setTimeout(function(){
 							widgetFullScreenDiplayed = true;
 						},50);
@@ -379,6 +381,7 @@ define({
 								setClassAndWaitForTransition(document.getElementById('weather'),'flip','transform').then(function () {
 									//console.log('flipped');
 									setTimeout(function (){
+										document.getElementById('weather').setAttribute('class', 'flipped'); 
 										flipping=false;
 										flipped = true; 
 										setFlipBackWidgetAction(document.querySelector('#overflower-back'),'.overflower-back'); 
@@ -405,7 +408,8 @@ define({
 					 setTimeout(function (){
 						 let weather = document.getElementById('weather');
 						 setClassAndWaitForTransition(weather,'on','transform').then(function () {
-								//console.log('flipped'); 
+								//console.log('flipped');
+							 	weather.setAttribute('class', 'active');
 								flipping=false;
 								flipped = false; 
 								while (ovb.firstChild) {
@@ -1051,7 +1055,7 @@ define({
 					//if (calendarOn.style.opacity < 1) calendarOn.style.opacity = 1;
 					if (widgetId !=null   ) {
 						let widget = document.querySelector(widgetId);
-						widgetOn = document.querySelector(widgetId+".on");
+						widgetOn = document.querySelector(widgetId+".active");
 						if (!flipping && flipped == false){
 							widget.style.setProperty('--degx',  -deg.x + "deg");
 							widget.style.setProperty('--degy',   deg.y + "deg");
