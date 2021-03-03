@@ -81,7 +81,7 @@ define({
 			sampleInterval : 1000,  //10000
 			callbackInterval : 1000  // 20000
 		};
-		var fallbackSensor =false;
+		var tizenSensor =false;
 		var running = false;
 		var old_timestamp= null, interval, navStart = performance.timing.navigationStart;
 		/**
@@ -148,7 +148,7 @@ define({
 				event.fire('distanceChange', 'distanceChange');
 			}
 		}
-		function successCallback(pos) {
+		function successNavigator(pos) {
 			crd = pos.coords;
 			date = new Date(pos.timestamp);
 			locationData = {
@@ -173,7 +173,7 @@ define({
 			event.fire('change', getData());
 			stop();
 		}
-		function succcessFallback(pos) {
+		function succcessTizen(pos) {
 			if (pos.gpsInfo) {
 				crd = pos.gpsInfo[0];
 				date = new Date(pos.timestamp);
@@ -207,10 +207,11 @@ define({
 			//event.fire('error', 'doFallback');
 			console.warn('doFallback');
 			//event.fire('error', 'doFallback');
-			fallbackSensor = true;
-			locationSensor.start(CONTEXT_TYPE, succcessFallback, errorFallback, optionGPS);
+			//tizenSensor = true;
+			locationWatcher = navigator.geolocation.watchPosition(successNavigator, errorNavigator, options);
+			//locationSensor.start(CONTEXT_TYPE, succcessTizen, errorTizen, optionGPS);
 		}
-		function errorFallback(err) {
+		function errorTizen(err) {
 			errorMsg = err.message;
 			console.error('Location error :'+err.message);
 //			event.fire('error', err.message);
@@ -220,7 +221,7 @@ define({
 
 		
 
-		function errorCallback(err) {
+		function errorNavigator(err) {
 			switch (err.code) {
 			case err.TIMEOUT:
 				event.fire('error', err.message);
@@ -232,7 +233,7 @@ define({
 				event.fire('error', err.message);
 				console.error(err.message);
 			}
-			doFallback();
+			//doFallback();
 
 			// event.fire('change', getDataLastGood());
 
@@ -250,7 +251,9 @@ define({
 			//console.log( 'start location sensor');
 
 			if (!running) {
-				locationWatcher = navigator.geolocation.watchPosition(successCallback, errorCallback, options);
+				tizenSensor = true;
+				locationSensor.start(CONTEXT_TYPE, succcessTizen, errorTizen, optionGPS);
+				//locationWatcher = navigator.geolocation.watchPosition(successNavigator, errorNavigator, options);
 			}
 				
 			running = true;
@@ -271,9 +274,9 @@ define({
 				navigator.geolocation.clearWatch(locationWatcher);
 				locationWatcher = null;
 			}
-			if (fallbackSensor){
+			if (tizenSensor){
 				locationSensor.stop(CONTEXT_TYPE);
-				fallbackSensor =false;
+				tizenSensor =false;
 			}
 			running = false;
 		}
