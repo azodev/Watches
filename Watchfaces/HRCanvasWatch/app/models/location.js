@@ -81,6 +81,7 @@ define({
 			sampleInterval : 1000,  //10000
 			callbackInterval : 1000  // 20000
 		};
+<<<<<<< HEAD
 		var tizenSensor =false;
 		var running = false;
 		var old_timestamp= null, interval, navStart = performance.timing.navigationStart;
@@ -277,6 +278,203 @@ define({
 			if (tizenSensor){
 				locationSensor.stop(CONTEXT_TYPE);
 				tizenSensor =false;
+=======
+		var fallbackSensor =false;
+		var running = false;
+		var old_timestamp= null, interval, navStart = performance.timing.navigationStart;
+		/**
+		 * Returns last received motion data.
+		 * 
+		 * @memberof models/location
+		 * @private
+		 * @returns {object}
+		 */
+		function loadSettings(){
+			locationData = JSON.parse(tizen.preference.getValue('location.position'));
+			locationDataLastGood = locationData;
+        }
+        function saveSettings(){
+        	tizen.preference.setValue('location.position',JSON.stringify(locationData));
+        } 
+		function getData() {
+
+			return locationData;
+		}
+		function getPositionAquiered() {
+			return positionAquiered;
+		}
+		function getDataLastGood() {
+
+			return locationDataLastGood;
+		}
+		function setOptions(sampleInterval, callbackInterval) {
+			options = {
+				sampleInterval : sampleInterval,
+				callbackInterval : callbackInterval
+			};
+		}
+		function getOptions() {
+			return options;
+		}
+		/**
+		 * Resets heart rate data.
+		 * 
+		 * @memberof models/location
+		 * @private
+		 */
+		function resetData() {
+			locationData = locationDefault;
+
+		}
+		function getTime(timestamp) {
+
+			date = new Date(timestamp);
+			hours = date.getHours();
+			minutes = "0" + date.getMinutes();
+			seconds = "0" + date.getSeconds();
+
+			formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+			return formattedTime;
+		}
+		function analyzeCoords(coords){
+			if (positionAquiered && 
+					(
+							Math.abs(locationDataLastGood.latitude -  coords.latitude ) >= 0.02 ||
+							Math.abs(locationDataLastGood.longitude -  coords.longitude ) >= 0.02
+					))
+			{
+				event.fire('distanceChange', 'distanceChange');
+			}
+		}
+		function successNavigator(pos) {
+			crd = pos.coords;
+			date = new Date(pos.timestamp);
+			locationData = {
+				latitude : crd.latitude,
+				longitude : crd.longitude,
+				altitude : crd.altitude,
+				heading : crd.heading,
+				speed : crd.speed,
+				timestamp : pos.timestamp,
+				date : getTime(pos.timestamp)
+			};
+			analyzeCoords(crd);
+			locationDataLastGood = locationData;
+			
+			if (!positionAquiered){
+				positionAquiered = true;
+				event.fire('found', positionAquiered);
+				//event.fire('log', 'positionAquiered');
+			}
+			saveSettings();
+			//console.log('Location succcess');
+			event.fire('change', getData());
+			stop();
+		}
+		function succcessTizen(pos) {
+			if (pos.gpsInfo) {
+				crd = pos.gpsInfo[0];
+				date = new Date(pos.timestamp);
+				locationData = {
+					latitude : crd.latitude,
+					longitude : crd.longitude,
+					altitude : crd.altitude,
+					speed : crd.speed,
+					timestamp : crd.timestamp,
+					date : getTime(crd.timestamp)
+				};
+				analyzeCoords(crd);
+				locationDataLastGood = locationData;
+				if (!positionAquiered){
+					positionAquiered = true;
+					event.fire('found', positionAquiered);
+					//event.fire('log', 'positionAquiered fallback');
+				}
+				saveSettings();
+				//console.log('Location succcess in fallback');
+				event.fire('change', getData());
+				stop();
+			}
+			else {
+				console.error('Location fallback gpsInfo issue');
+				event.fire('error', 'gpsInfo issue');
+			}
+			
+		}
+		function doFallback() {
+			//event.fire('error', 'doFallback');
+			console.warn('doFallback');
+			//event.fire('error', 'doFallback');
+			fallbackSensor = true;
+			locationWatcher = navigator.geolocation.watchPosition(successNavigator, errorNavigator, options);
+			//locationSensor.start(CONTEXT_TYPE, succcessTizen, errorTizen, optionGPS);
+		}
+		function errorTizen(err) {
+			errorMsg = err.message;
+			console.error('Location error :'+err.message);
+//			event.fire('error', err.message);
+			doFallback();
+			//event.fire('change', getDataLastGood());
+		}
+
+		
+
+		function errorNavigator(err) {
+			switch (err.code) {
+			case err.TIMEOUT:
+				event.fire('error', err.message);
+				// Quick fallback when no suitable cached position exists.
+				
+				//console.error(err.message);
+				break;
+			default:
+				event.fire('error', err.message);
+				console.error(err.message);
+			}
+			//doFallback();
+
+			// event.fire('change', getDataLastGood());
+
+		}
+
+		/**
+		 * Starts the sensor and registers a change listener.
+		 * 
+		 * @memberof models/location
+		 * @public
+		 */
+
+		function start() {
+			//resetData();
+			//console.log( 'start location sensor');
+
+			if (!running) {
+				locationSensor.start(CONTEXT_TYPE, succcessTizen, errorTizen, optionGPS);
+				//locationWatcher = navigator.geolocation.watchPosition(successNavigator, errorNavigator, options);
+			}
+				
+			running = true;
+
+		}
+
+		/**
+		 * Stops the sensor and unregisters a previously registered listener.
+		 * 
+		 * @memberof models/location
+		 * @public
+		 */
+		function stop() {
+			
+			
+			//console.log( 'stop location sensor');
+			if (locationWatcher !== null) {
+				navigator.geolocation.clearWatch(locationWatcher);
+				locationWatcher = null;
+			}
+			if (fallbackSensor){
+				locationSensor.stop(CONTEXT_TYPE);
+				fallbackSensor =false;
+>>>>>>> refs/remotes/GitHUB/master
 			}
 			running = false;
 		}
