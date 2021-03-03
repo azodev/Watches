@@ -8,7 +8,7 @@
   "background": "#000000",
   "fontcolor": "#c9c9c9",
   "radialGradient": [ 	"rgba(0, 0, 0,0.7)", "rgba(0, 0, 0,0.3)",	"rgba(0,0,0,0.4)","rgba(5,5,5,1)","rgba(40,40,40,1)"],
-  "complication_bg": "#000000",
+  "complication_bg": "rgba(100, 100, 100, 0.08)",
   "complication_shadow" : "-10"						
   
 }

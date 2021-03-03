@@ -600,7 +600,7 @@ define({
 				
 			
 				//canvasDrawer.renderCircleShadows(canvasContent.context, appDrawerShape, {r:100,g:100,b:100,a:0.08},5);
-				canvasDrawer.renderCircle(canvasContent.context, appDrawerShape,  "#000000","rgba(100, 100, 100, 0.08)",false,2,false);
+				canvasDrawer.renderCircle(canvasContent.context, appDrawerShape,  "#000000",themeData.complication_bg,false,2,false);
 				canvasDrawer.roundRect(canvasContent.context, aShape1, 3, false, true, null, "rgba(0, 0, 0,0.08)");
 				canvasDrawer.roundRect(canvasContent.context, aShape2, 3, false, true, null, "rgba(0, 0, 0,0.08)");
 				canvasDrawer.roundRect(canvasContent.context, aShape3, 3, false, true, null, "rgba(0, 0, 0,0.08)");
@@ -608,7 +608,7 @@ define({
 				
 				if (baroDisplayed){
 					
-					canvasDrawer.roundRect(canvasContent.context, new Shape(center.x - 112, center.y - 63, 85, 58) ,10, true, false, null, "rgba(100, 100, 100, 0.08)"); // 232
+					canvasDrawer.roundRect(canvasContent.context, new Shape(center.x - 112, center.y - 63, 85, 58) ,10, true, false, null, themeData.complication_bg); // 232
 					
 					canvasDrawer.renderTextGradient(canvasContent.context, 'Altitude', center.x - (watchRadius * 0.19), center.y - (watchRadius * 0.30), 16, themeData.fontcolor, {
 						font : 'FutureNow',
@@ -670,14 +670,14 @@ define({
 				if (miniWeatherDisplayed){
 					
 					//canvasDrawer.roundRectShadows(canvasContent.context, wShape,10, {r:100,g:100,b:100,a:0.1},5);
-					canvasDrawer.roundRect(canvasContent.context, wShape,10, true, false, null, "rgba(100, 100, 100, 0.08)");
+					canvasDrawer.roundRect(canvasContent.context, wShape,10, true, false, null, themeData.complication_bg);
 					drawWeather(forecastDisplayed);
 				}
 				
 				
 				if (miniCalendarDisplayed) {
 					//canvasDrawer.roundRectShadows(canvasContent.context, calendarShape,10, {r:100,g:100,b:100,a:0.1},5);
-					canvasDrawer.roundRect(canvasContent.context, calendarShape,10, true, false, null, "rgba(100, 100, 100, 0.08)");
+					canvasDrawer.roundRect(canvasContent.context, calendarShape,10, true, false, null, themeData.complication_bg);
 					canvasDrawer.renderText(canvasContent.context, 'Events', calendarShape.getCoords().x+50, calendarShape.getCoords().y+20, 25, themeData.fontcolor, {
 						font : 'FutureNow',
 						align : 'center',
@@ -691,7 +691,7 @@ define({
 					
 				}
 				//canvasDrawer.renderCircleShadows(canvasContent.context, hrShape, {r:100,g:100,b:100,a:0.1},5);
-				canvasDrawer.renderCircle(canvasContent.context, hrShape, "#000000","rgba(100, 100, 100, 0.08)",false,1.5,false);
+				canvasDrawer.renderCircle(canvasContent.context, hrShape, "#000000",themeData.complication_bg,false,1.5,false);
 				if (heartRateDisplayed &&  heartRateFound && heartRate.getData().rate !== null) {
 					
 					
