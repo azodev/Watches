@@ -207,15 +207,15 @@ define({
 			//event.fire('error', 'doFallback');
 			console.warn('doFallback');
 			//event.fire('error', 'doFallback');
-			//tizenSensor = true;
-			locationWatcher = navigator.geolocation.watchPosition(successNavigator, errorNavigator, options);
-			//locationSensor.start(CONTEXT_TYPE, succcessTizen, errorTizen, optionGPS);
+			tizenSensor = true;
+			//locationWatcher = navigator.geolocation.watchPosition(successNavigator, errorNavigator, options);
+			locationSensor.start(CONTEXT_TYPE, succcessTizen, errorTizen, optionGPS);
 		}
 		function errorTizen(err) {
 			errorMsg = err.message;
 			console.error('Location error :'+err.message);
 //			event.fire('error', err.message);
-			doFallback();
+			//doFallback();
 			//event.fire('change', getDataLastGood());
 		}
 
@@ -233,7 +233,7 @@ define({
 				event.fire('error', err.message);
 				console.error(err.message);
 			}
-			//doFallback();
+			doFallback();
 
 			// event.fire('change', getDataLastGood());
 
@@ -251,9 +251,9 @@ define({
 			//console.log( 'start location sensor');
 
 			if (!running) {
-				tizenSensor = true;
-				locationSensor.start(CONTEXT_TYPE, succcessTizen, errorTizen, optionGPS);
-				//locationWatcher = navigator.geolocation.watchPosition(successNavigator, errorNavigator, options);
+				//tizenSensor = true;
+				//locationSensor.start(CONTEXT_TYPE, succcessTizen, errorTizen, optionGPS);
+				locationWatcher = navigator.geolocation.watchPosition(successNavigator, errorNavigator, options);
 			}
 				
 			running = true;
