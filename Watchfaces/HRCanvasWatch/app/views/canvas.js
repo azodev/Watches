@@ -1541,7 +1541,8 @@ define({
 						document.body.style.setProperty('--bg', themeData.background); 
 						document.querySelector('#container').style.setProperty('--bg', themeData.background);
 						document.querySelector('#splash-page').style.setProperty('--bg', themeData.background);
-						document.querySelector('#splash-page').style.setProperty('--fontcolor', themeData.fontcolor);
+						document.querySelector('#splash-page').style.setProperty('--fontcolor', themeData.fontcolor);  
+						document.querySelector('#splash-page .loader span').style.setProperty('--bg', 'linear-gradient('+themeData.gradient.join(', ')+')' ); 
 						//map = new Map([[themeData.effectClass, themeData.effectClass]]);
 						resolve(themeData);
 					}
